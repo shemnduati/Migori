@@ -49,6 +49,11 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                    <router-link to="/application" class="nav-link">
+                                    <button class="btn btn-primary">Apply Now</button>
+                                   </router-link>
+                                </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -74,6 +79,7 @@
 
         <main class="py-4">
             @yield('content')
+            <router-view></router-view>
         </main>
     </div>
 </body>
