@@ -205,6 +205,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link to="/county" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt blue"></i>
+                            <p>
+                                County
+                            </p>
+                        </router-link>
+                    </li>
 
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('logout') }}"
