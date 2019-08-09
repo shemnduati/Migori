@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFamiliesTable extends Migration
+class CreateFamilyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,9 +18,9 @@ class CreateFamiliesTable extends Migration
         	$table->integer('user_id')->index()->nullable();
             $table->string('relationship');
             $table->string('living');
-            $table->decimal('income'8,2);
+            $table->decimal('income',8,2);
             $table->string('birthcert');
-            $table->interger('tel');
+            $table->integer('tel');
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class CreateApplicationsTable extends Migration
             $table->string('bursary_type');
             $table->date('dob');
             $table->string('gender');
-            $table->interger('tel');
+            $table->integer('tel');
             $table->string('institution');
             $table->string('class');
             $table->timestamps();
