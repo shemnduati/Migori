@@ -1,3 +1,5 @@
+import swal from "sweetalert2";
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -7,19 +9,44 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
-
-//v-form
+import moment from 'moment';
 import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;
-Vue.component(HasError.name, HasError);
-Vue.component(AlertError.name, AlertError);
+import uniq from 'lodash/uniq'
+window.uniq = uniq;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+Vue.component('pagination', require('laravel-vue-pagination'));
 
+//sweetalert
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.toast = toast;
+window.Fire =  new Vue();
+
+//VueRouter
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 let routes = [
     { path: '/dashboard', component: require('./components/dashboard.vue').default },
-    { path: '/application', component: require('./components/Application.vue').default },
+    { path: '/users', component: require('./components/users.vue').default },
+    { path: '/county', component: require('./components/County.vue').default },
+    { path: '/ward', component: require('./components/Ward.vue').default },
 ]
+
+Vue.filter('upText', function(text){
+    return text.charAt(0).toUpperCase() + text.slice(1)
+});
+
+Vue.filter('myDate',function(created){
+    return moment(created).format('MMMM Do YYYY');
+});
 const router = new VueRouter({
     mode:'history',
     routes // short for `routes: routes`
@@ -33,9 +60,7 @@ Vue.use(VueProgressBar, {
     height: '3px'
 })
 
-//sweetalert
-import Swal from 'sweetalert2';
-window.Swal = Swal;
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -58,4 +83,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
     router,
+    data:{
+        search:''
+    },
+    methods:{
+        searchit:_.debounce(()=>{
+            Fire.$emit('searching');
+        },1000),
+
+    }
 });

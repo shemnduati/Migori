@@ -17,4 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('kryme','API\WardController@county');
+Route::apiResources(['ward' => 'API\WardController']);
+Route::apiResources(['user'=>'API\UserController']);
+Route::get('findUser','API\UserController@search');
 Route::post('/apply','API\ApplicationController@store');
+Route::apiResources(['county' => 'API\CountyController']);

@@ -7,4 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class County extends Model
 {
     protected $guarded= [];
+
+
+    public function wards()
+    {
+      return $this->hasMany(\App\Ward::class);  
+    }
 }
