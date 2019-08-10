@@ -7,7 +7,7 @@
                 <h3 class="card-title">List of the Counties</h3>
 
                 <div class="card-tools">
-					<button class="btn btn-sm btn-primary" @click="newModal">Add County</button>
+					         <button class="btn btn-sm btn-primary" @click="newModal">Add County</button>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -39,6 +39,7 @@
             <!-- /.card -->
           </div>
         </div>
+        <!-- //Modal -->
         <div class="modal fade" id="addnew" tabindex="-1" role="dialog" aria-labelledby="addnewLabel" aria-hidden="true">
         	<div class="modal-dialog" role="document">
         		<div class="modal-content">
@@ -97,7 +98,7 @@
 					    $('#addnew').modal('hide');
 					    Toast.fire({
 					        type: 'success',
-					        title: 'user created in successfully'
+					        title: 'County created successfully'
 					    });
 					    this.$Progress.finish();
 					})

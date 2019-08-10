@@ -18,6 +18,7 @@ Vue.component(AlertError.name, AlertError)
 let routes = [
     { path: '/dashboard', component: require('./components/dashboard.vue').default },
     { path: '/county', component: require('./components/County.vue').default },
+    { path: '/ward', component: require('./components/Ward.vue').default },
 ]
 const router = new VueRouter({
     mode:'history',

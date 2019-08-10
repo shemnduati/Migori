@@ -38,6 +38,7 @@ class RegisterController extends Controller
     elseif (Auth::check() && Auth::user()->role == 'student') {
         return('/student');
     }
+}
 
     /**
      * Create a new controller instance.
