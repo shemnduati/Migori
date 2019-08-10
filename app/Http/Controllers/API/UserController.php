@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +53,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('isAdmin');
+        $user = User::findorFail($id);
+        $this->validate($request, [
+            'role' => 'required|string|max:191',
+        ]);
+//        $user->update($request->all());
+        $user->role = $request['role'];
+        $user->update();
+        return ['message'=>'user information updated'];
     }
 
     /**
@@ -60,6 +72,21 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('isAdmin');
+        $user = User::findOrFail($id);
+        $user->delete();
+        return ['message'=> 'user deleted'];
+    }
+    public function search(){
+        if ($search = \Request::get('q')) {
+            $users = User::where(function($query) use ($search){
+                $query->where('name','LIKE',"%$search%")
+                    ->orWhere('email','LIKE',"%$search%")
+                    ->orWhere('role','LIKE',"%$search%");
+            })->paginate(20);
+        }else{
+            $users = User::latest()->paginate(10);
+        }
+        return $users;
     }
 }

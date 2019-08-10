@@ -43,9 +43,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- SEARCH FORM -->
 
         <div class="input-group input-group-sm col-md-4">
-            <input class="form-control form-control-navbar"  type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control form-control-navbar"  @keyup="searchit" v-model="search"  type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
-                <button class="btn btn-navbar" >
+                <button class="btn btn-navbar" @click="searchit" >
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -243,7 +243,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-               {{-- <vue-progress-bar></vue-progress-bar>--}}
+                <vue-progress-bar></vue-progress-bar>
                 <router-view></router-view>
                 @yield('content')
             </div><!-- /.container-fluid -->

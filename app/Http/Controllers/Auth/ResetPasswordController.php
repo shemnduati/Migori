@@ -27,14 +27,14 @@ class ResetPasswordController extends Controller
      * @var string
      */
     // protected $redirectTo = '/home';
-    protected function redirectTo( ) {
-    if (Auth::check() && Auth::user()->role == 'admin') {
-        return('/home');
+    protected function redirectTo( )
+    {
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            return ('/home');
+        } elseif (Auth::check() && Auth::user()->role == 'student') {
+            return ('/student');
+        }
     }
-    elseif (Auth::check() && Auth::user()->role == 'student') {
-        return('/student');
-    }
-
     /**
      * Create a new controller instance.
      *
