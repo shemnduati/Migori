@@ -36,6 +36,7 @@ Vue.use(VueRouter)
 let routes = [
     { path: '/dashboard', component: require('./components/dashboard.vue').default },
     { path: '/users', component: require('./components/users.vue').default },
+    { path: '/county', component: require('./components/county.vue').default },
 ]
 Vue.filter('upText', function(text){
     return text.charAt(0).toUpperCase() + text.slice(1)
