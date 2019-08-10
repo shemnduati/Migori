@@ -207,7 +207,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                     <li class="nav-item">
                         <router-link to="/county" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt blue"></i>
+                            <i class="nav-icon fas fa-globe-africa blue"></i>
                             <p>
                                 County
                             </p>
@@ -242,7 +242,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-               {{-- <vue-progress-bar></vue-progress-bar>--}}
+               <vue-progress-bar></vue-progress-bar>
                 <router-view></router-view>
                 @yield('content')
             </div><!-- /.container-fluid -->

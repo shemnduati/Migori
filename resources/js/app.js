@@ -10,6 +10,11 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
+import {Form,HasError,AlertError} from 'vform';
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 let routes = [
     { path: '/dashboard', component: require('./components/dashboard.vue').default },
     { path: '/county', component: require('./components/County.vue').default },
@@ -30,6 +35,19 @@ Vue.use(VueProgressBar, {
 //sweetalert
 import Swal from 'sweetalert2';
 window.Swal = Swal;
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+
+window.Toast = Toast;
+
+
+let Fire = new Vue();
+window.Fire = Fire;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
