@@ -4,9 +4,10 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Ward;
 use App\County;
 
-class CountyController extends Controller
+class WardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +15,18 @@ class CountyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+
+        //$ward = Ward::all();
+        //$county = County::all();
+        //return $ward;
+        //return Ward::all();
+        $ward = Ward::with('county')->get();
+        return $ward;
+
+    }
+
+    public function county()
     {
         return County::all();
     }
@@ -28,10 +41,12 @@ class CountyController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string|max:25|unique:counties',
+            'county_id' => 'required|integer|max:25',
         ]);
-        return County::Create([
+        return Ward::Create([
             'name' => $request['name'],
-        ]);;
+            'county_id' => $request['county_id'],
+        ]);
     }
 
     /**
@@ -55,13 +70,15 @@ class CountyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'name' => 'required|string|max:25,'
+            'name' => 'required|string|max:25',
+            'county_id' => 'required|integer|max:25',
         ]);
-        $county = County::findOrFail($id);
-        $county->update([
+        $ward = Ward::findOrFail($id);
+        $ward->update([
             'name' => $request['name'],
+            'county_id' => $request['county_id'],
         ]);
-        return ['message' => 'county is updated'];
+        return ['message' => 'ward is updated'];
     }
 
     /**
@@ -72,8 +89,8 @@ class CountyController extends Controller
      */
     public function destroy($id)
     {
-        $county = County::findOrFail($id);
+        $ward = Ward::findOrFail($id);
 
-        $county->delete();
+        $ward->delete();
     }
 }

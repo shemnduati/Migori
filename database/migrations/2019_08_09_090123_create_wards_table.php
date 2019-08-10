@@ -15,7 +15,7 @@ class CreateWardsTable extends Migration
     {
         Schema::create('wards', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->index()->nullable();
+            $table->unsignedBigInteger('county_id')->index()->nullable();
             $table->string('name');
             $table->timestamps();
         });
