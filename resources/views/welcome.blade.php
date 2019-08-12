@@ -75,11 +75,10 @@
 
     </head>
     <body>
-        <div class="">
+        <div class="container-fluid">
 
             <div class="content">
-                <router-view></router-view>
-                <div class="grad pb-3">
+                <div class="grad col-md-12 pb-3">
                     <div class="text-center pt-4 baza">
                         <h3 class="font-weight-bold">BURSARY APPLICATION SYSTEM</h3>
                     </div>
@@ -87,7 +86,7 @@
                         <h3 class="font-weight-bolder big"><span class="b">B </span><span class="a">A </span><span class="z">Z </span><span class="x">A</span></h3>
                     </div>
                 </div>
-                <div class="row pl-5">
+                <div class="row pl-5 col-md-12">
                     <div class="row col-md-10 logo">
                         <img src="/img/logo.jpg" alt="">
                         <p class="pt-5 p-1"><span class="logo1">BAZA</span><br><span class="logo2">With you every step</span></p>
