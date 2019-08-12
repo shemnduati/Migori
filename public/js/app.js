@@ -2196,6 +2196,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -63457,75 +63461,80 @@ var render = function() {
             _c("form", [
               _vm.step == 1
                 ? _c("section", [
-                    _c("h3", [_vm._v("Type")]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", { attrs: { for: "type" } }, [
-                          _vm._v("Bursary Type")
-                        ]),
+                    _c("div", { staticClass: "row justify-content-center" }, [
+                      _c("div", { staticClass: "col-sm-6" }, [
+                        _c("h3", [_vm._v("Type")]),
                         _vm._v(" "),
                         _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.type,
-                                expression: "form.type"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("type")
-                            },
-                            attrs: { name: "type", id: "type" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.form,
-                                  "type",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
+                          "div",
+                          { staticClass: "form-group" },
                           [
-                            _c(
-                              "option",
-                              { attrs: { selected: "", value: "" } },
-                              [_vm._v("--Select Status--")]
-                            ),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "CDF" } }, [
-                              _vm._v("CDF")
+                            _c("label", { attrs: { for: "type" } }, [
+                              _vm._v("Bursary Type")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "County" } }, [
-                              _vm._v("County")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "type" }
-                        })
-                      ],
-                      1
-                    )
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.type,
+                                    expression: "form.type"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has("type")
+                                },
+                                attrs: { name: "type", id: "type" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.form,
+                                      "type",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { selected: "", value: "" } },
+                                  [_vm._v("--Select Status--")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "CDF" } }, [
+                                  _vm._v("CDF")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "County" } }, [
+                                  _vm._v("County")
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "type" }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ])
                   ])
                 : _vm._e(),
               _vm._v(" "),
@@ -82214,9 +82223,6 @@ var routes = [{
 }, {
   path: '/subadmin',
   component: __webpack_require__(/*! ./components/subadmin.vue */ "./resources/js/components/subadmin.vue")["default"]
-}, {
-  path: '/application',
-  component: __webpack_require__(/*! ./components/Application.vue */ "./resources/js/components/Application.vue")["default"]
 }];
 Vue.filter('upText', function (text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
@@ -82247,6 +82253,7 @@ Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_5___default.a, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('application', __webpack_require__(/*! ./components/Application.vue */ "./resources/js/components/Application.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

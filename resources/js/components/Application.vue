@@ -9,6 +9,8 @@
                         <form>
 
                             <section v-if="step==1">
+                                <div class="row justify-content-center">
+                                <div class="col-sm-6">
                                 <h3>Type</h3>
                                 <div class="form-group">
                                 <label for="type">Bursary Type</label>
@@ -20,6 +22,8 @@
                                 </select>
                                 <has-error :form="form" field="type"></has-error>
                             </div>
+                            </div>
+                        </div>
                             </section>
 
                             <section v-if="step==2">
