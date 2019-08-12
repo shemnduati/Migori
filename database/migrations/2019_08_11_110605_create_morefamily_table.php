@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGeographicalTable extends Migration
+class CreateMorefamilyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateGeographicalTable extends Migration
      */
     public function up()
     {
-        Schema::create('geographical', function (Blueprint $table) {
+        Schema::create('morefamily', function (Blueprint $table) {
             $table->bigIncrements('id');
-        	$table->integer('user_id')->index();
-            $table->integer('County');
-            $table->integer('Ward');
+            $table->integer('user_id')->index();
+            $table->integer('totalSiblings');
+            $table->integer('schoolSiblings');
+            $table->integer('workingSiblings');
+            $table->string('pFees');
+            $table->string('pFeesRelationship');
             $table->integer('status')->defailt(0);
-            $table->string('Division');
-            $table->string('Location');
-            $table->string('Sublocation');
-            $table->string('Village');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ class CreateGeographicalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('geographical');
+        Schema::dropIfExists('morefamily');
     }
 }
