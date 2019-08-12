@@ -28,6 +28,6 @@ class HomeController extends Controller
 
     public function student()
     {
-        return view('index');
+        return view('welcome');
     }
 }
