@@ -213,7 +213,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-
+                    <li class="nav-item">
+                        <router-link to="/subadmin" class="nav-link">
+                            <i class="nav-icon fas fa-user-plus green"></i>
+                            <p>
+                               Add sub-Admin
+                            </p>
+                        </router-link>
+                    </li>
                     <li class="nav-item">
                         <router-link to="/Information" class="nav-link">
                             <i class="nav-icon fas fa-globe-africa blue"></i>
