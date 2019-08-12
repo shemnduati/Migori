@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\User;
+use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -21,7 +23,35 @@ class UserController extends Controller
     {
         return User::latest()->paginate(10);
     }
+    public function subadmin()
+    {
+     $subs = User::where('role','sub-admin')->get();
+     $parent = array();
 
+     foreach ($subs as $sub){
+         $id = $sub['id'];
+         $name = $sub['name'];
+         $ward_name = Ward::where('id', $sub['ward'])->value('name');
+         $email = $sub['email'];
+         $reg = $sub['created_at'];
+         $role = $sub['role'];
+         $child=array(
+             'id' =>$id,
+            'name'=>$name,
+             'ward'=>$ward_name,
+             'email'=>$email,
+             'reg'=>$reg,
+             'role'=>$role
+         );
+         array_push($parent, $child);
+     }
+
+          return ['parent'=>$parent];
+    }
+    public function wards()
+    {
+        return Ward::all();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -30,7 +60,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users',
+            'ward'=> 'required',
+        ]);
+        return User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'role' => 'sub-admin',
+            'ward' => $request['ward'],
+            'password' => Hash::make(123456789),
+        ]);
     }
 
     /**
@@ -56,11 +97,13 @@ class UserController extends Controller
         $this->authorize('isAdmin');
         $user = User::findorFail($id);
         $this->validate($request, [
-            'role' => 'required|string|max:191',
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'ward'=> 'required',
         ]);
-//        $user->update($request->all());
-        $user->role = $request['role'];
-        $user->update();
+       $user->update($request->all());
+       /* $user->role = $request['role'];
+        $user->update();*/
         return ['message'=>'user information updated'];
     }
 
