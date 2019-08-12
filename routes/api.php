@@ -23,3 +23,6 @@ Route::apiResources(['user'=>'API\UserController']);
 Route::get('findUser','API\UserController@search');
 Route::post('/apply','API\ApplicationController@store');
 Route::apiResources(['county' => 'API\CountyController']);
+Route::get('/getcounties','API\ApplicationController@getCounties');
+Route::get('/getwards','API\ApplicationController@getWards');
+Route::get('/getcountywards/{countyId}','API\ApplicationController@getCountyWards');

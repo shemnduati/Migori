@@ -150,6 +150,14 @@
                                 </div>
                                 <div class="col">
                                   <div class="form-group">
+                                    <label>Telephone</label>
+                                    <input v-model="form.ftelephone" type="tel" name="ftelephone"
+                                        class="form-control" :class="{ 'is-invalid': form.errors.has('ftelephone') }">
+                                    <has-error :form="form" field="ftelephone"></has-error>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                  <div class="form-group">
                                         <label>Income per Year</label>
                                         <input v-model="form.fincome" type="number" name="fincome"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('fincome') }">
@@ -200,6 +208,14 @@
                                 </div>
                                 <div class="col">
                                   <div class="form-group">
+                                    <label>Telephone</label>
+                                    <input v-model="form.mtelephone" type="tel" name="mtelephone"
+                                        class="form-control" :class="{ 'is-invalid': form.errors.has('mtelephone') }">
+                                    <has-error :form="form" field="mtelephone"></has-error>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                  <div class="form-group">
                                         <label>Income per Year</label>
                                         <input v-model="form.mincome" type="number" name="mincome"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('mincome') }">
@@ -246,6 +262,14 @@
                                     <input v-model="form.goccupation" type="text" name="goccupation"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('goccupation') }">
                                     <has-error :form="form" field="goccupation"></has-error>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                  <div class="form-group">
+                                    <label>Telephone</label>
+                                    <input v-model="form.gtelephone" type="tel" name="gtelephone"
+                                        class="form-control" :class="{ 'is-invalid': form.errors.has('gtelephone') }">
+                                    <has-error :form="form" field="gtelephone"></has-error>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -314,11 +338,10 @@
                                 <div class="col">
                                   <div class="form-group">
                                 <label for="county">County</label>
-                                <select v-model="form.county" class="form-control" name="county" id="county"
+                                <select v-model="form.county" @change='getCountyWards()' class="form-control" name="county" id="county"
                                         :class="{ 'is-invalid': form.errors.has('county') }">
-                                    <option selected value="">--Select County--</option>
-                                    <option value="CDF">CDF</option>
-                                    <option value="County">County</option>
+                                    <option selected value="">--Select county--</option>
+                                    <option v-for="count in counties" :key="count.id" :value="count.id">{{ count.name}}</option>
                                 </select>
                                 <has-error :form="form" field="county"></has-error>
                             </div>
@@ -328,9 +351,8 @@
                                 <label for="ward">Ward</label>
                                 <select v-model="form.ward" class="form-control" name="ward" id="ward"
                                         :class="{ 'is-invalid': form.errors.has('ward') }">
-                                    <option selected value="">--Select County--</option>
-                                    <option value="CDF">CDF</option>
-                                    <option value="County">County</option>
+                                    <option selected value="">--Select Ward--</option>
+                                    <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}}</option>
                                 </select>
                                 <has-error :form="form" field="ward"></has-error>
                             </div>
@@ -404,7 +426,7 @@
                                 </div>
                                 <div class="col">
                                   <div class="form-group">
-                                    <label>Class</label>
+                                    <label>Class/Course</label>
                                     <input v-model="form.class" type="text" name="class"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('class') }">
                                     <has-error :form="form" field="class"></has-error>
@@ -421,7 +443,7 @@
                               <div class="form-row">
                                 <div class="col">
                                   <div class="form-group">
-                                        <label>Fees Payable</label>
+                                        <label>Annual Fees</label>
                                         <input v-model="form.payable" type="number" name="payable"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('payable') }">
                                         <has-error :form="form" field="payable"></has-error>
@@ -464,6 +486,8 @@
             return{
                 step:1,
                 totalSteps: 5,
+                counties: {},
+                wards: {},
                 form: new Form({
                     type:'',
                     name: '',
@@ -507,7 +531,10 @@
                     passport: '',
                     fatherId:'',
                     motherId:'',
-                    guardianId:''
+                    guardianId:'',
+                    ftelephone:'',
+                    mtelephone:'',
+                    gtelephone:'',
                 })
             }
         },
@@ -533,38 +560,87 @@
                     })
             },
             getGuardianId(e){
-                console.log('Guardian');
               let file = e.target.files[0];
                 var reader = new FileReader();
-                reader.onloadend = (file) => {
+                if (file['size'] < 2111775) {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg' || file['type']=='application/pdf') {
+                    reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.guardianId = reader.result;
                 }
 
                 reader.readAsDataURL(file);
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Ooops...',
+                    text: 'Only images and pdfs are allowed',
+                })
+            }
+
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Ooops...',
+                    text: 'You are uploading a large file',
+                })
+            }
             },
         
             getFatherId(e){
                 console.log('Father');
               let file = e.target.files[0];
                 var reader = new FileReader();
-                reader.onloadend = (file) => {
+                if (file['size'] < 2111775) {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg' || file['type']=='application/pdf') {
+                    reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.fatherId = reader.result;
                 }
 
                 reader.readAsDataURL(file);
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Ooops...',
+                    text: 'Only images and pdfs are allowed',
+                })
+            }
+
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Ooops...',
+                    text: 'You are uploading a large file',
+                })
+            }
             },
             getMotherId(e){
-                console.log('Mother');
                 let file = e.target.files[0];
                 var reader = new FileReader();
-                reader.onloadend = (file) => {
+                if (file['size'] < 2111775) {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg' || file['type']=='application/pdf') {
+                    reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.motherId = reader.result;
                 }
 
                 reader.readAsDataURL(file);
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Ooops...',
+                    text: 'Only images and pdfs are allowed',
+                })
+            }
+
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Ooops...',
+                    text: 'You are uploading a large file',
+                })
+            }
            },
            nextStep(){
 
@@ -643,6 +719,21 @@
                 }else if (!this.form.fincome) {
                     this.form.errors.set({
                       fincome: 'This field is required'
+                    })
+                    return false;
+                }else if (!this.form.ftelephone) {
+                    this.form.errors.set({
+                      ftelephone: 'This field is required'
+                    })
+                    return false;
+                }else if (!this.form.mtelephone) {
+                    this.form.errors.set({
+                      mtelephone: 'This field is required'
+                    })
+                    return false;
+                }else if (!this.form.gtelephone) {
+                    this.form.errors.set({
+                      gtelephone: 'This field is required'
                     })
                     return false;
                 }else if (!this.form.mname) {
@@ -803,20 +894,50 @@
            prevStep(){
             this.step--;
            },
+           getCounties(){
+              axios.get("api/getcounties").then(({ data }) => ([this.counties = data['counties']]));
+           },
+           getWards(){
+              axios.get("api/getwards").then(({ data }) => ([this.wards = data['wards']]));
+           },
+           getCountyWards(){
+              axios.get("api/getcountywards/" + this.form.county).then(({ data }) => ([this.wards = data['wards']]));
+           },
            getPassport(e){
                 console.log('Passport');
                 let file = e.target.files[0];
                 var reader = new FileReader();
-                reader.onloadend = (file) => {
+                console.log(file);
+
+                if (file['size'] < 2111775) {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg') {
+                    reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.passport = reader.result;
                 }
 
                 reader.readAsDataURL(file);
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Ooops...',
+                    text: 'Only images are allowed',
+                })
+            }
+
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Ooops...',
+                    text: 'You are uploading a large file',
+                })
+            }
+
             },
         },
         created() {
-            console.log('Component mounted.')
+            this.getCounties();
+            this.getWards();
         }
     }
 </script>

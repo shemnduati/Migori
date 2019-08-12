@@ -15,11 +15,13 @@ class CreateFamilyTable extends Migration
     {
         Schema::create('family', function (Blueprint $table) {
         	$table->bigIncrements('id');
-        	$table->integer('user_id')->index()->nullable();
+        	$table->integer('user_id')->index();
+            $table->string('name');
             $table->string('relationship');
             $table->string('living');
+            $table->string('occupation');
             $table->decimal('income',8,2);
-            $table->string('birthcert');
+            $table->string('cert');
             $table->integer('tel');
             $table->timestamps();
         });

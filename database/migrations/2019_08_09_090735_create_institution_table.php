@@ -15,10 +15,11 @@ class CreateInstitutionTable extends Migration
     {
         Schema::create('institution', function (Blueprint $table) {
         	$table->bigIncrements('id');
-        	$table->integer('user_id')->index()->nullable();
+        	$table->integer('user_id')->index();
             $table->string('name');
             $table->string('branch');
-            $table->string('year_of_study');
+            $table->string('class');
+            $table->string('yearofstudy');
             $table->string('fees');
             $table->string('amount_paid');
             $table->string('balance');
