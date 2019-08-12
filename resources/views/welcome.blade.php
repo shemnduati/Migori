@@ -95,7 +95,7 @@
                         @if (Route::has('login'))
                             <div class="top-right links">
                                 @auth
-                                    <a href="/application" class="btn btn px-5">Get Started</a>
+                                    <a href="/apply" class="btn btn px-5">Get Started</a>
                                    {{--  <a href="{{ url('/home') }}">Home</a> --}}
                                 @else
                                     <a href="{{ route('login') }}" class="btn btn px-5">Login</a>
@@ -106,7 +106,9 @@
                                 @endauth
                             </div>
                         @endif
-                        {{-- <button class="btn btn">Get Started</button> --}}
+                        <!-- <a href="{{route('apply')}}">
+                                <button class="btn btn">Get Started</button>
+                        </a> -->
                     </div>
                 </div>
                 <div class="banner d-flex justify-content-center">
