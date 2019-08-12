@@ -2959,37 +2959,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      editMode: false,
-      applications: {},
-      form: new Form({
-        id: '',
-        role: ''
-      })
+      applications: {}
     };
   },
   methods: {
     getApplications: function getApplications() {
       var _this = this;
 
-      axios.get('api/Information').then(function (_ref) {
+      axios.get('api/getapplications').then(function (_ref) {
         var data = _ref.data;
         return [_this.applications = data['applications']];
       });
     }
   },
   created: function created() {
-    var _this2 = this;
-
-    Fire.$on('searching', function () {
-      var query = _this2.$parent.search;
-      axios.get('api/findUser?q=' + query).then(function (data) {
-        _this2.users = data.data;
-      })["catch"](function () {});
-    });
-    this.loadUsers();
-    Fire.$on('AfterCreate', function () {
-      _this2.loadUsers();
-    }); //setInterval(() => this.loadUsers(), 3000);
+    //setInterval(() => this.loadUsers(), 3000);
+    this.getApplications();
   }
 });
 
@@ -66363,7 +66348,21 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(application.gender))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(application.status))]),
+                      _c("td", [
+                        application.status == 0
+                          ? _c("span", [_vm._v("Pending...")])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        application.status == 2
+                          ? _c("span", { staticStyle: { color: "red" } }, [
+                              _vm._v("Rejected")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        application.status == 1
+                          ? _c("span", [_vm._v("Sent")])
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
                       _vm._m(2, true),
                       _vm._v(" "),
@@ -66376,29 +66375,10 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "card-footer" },
-            [
-              _c("pagination", {
-                attrs: { data: _vm.users },
-                on: { "pagination-change-page": _vm.getResults }
-              })
-            ],
-            1
-          )
+          _c("div", { staticClass: "card-footer" })
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("form", {
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          _vm.editMode ? _vm.updateUser() : _vm.createUser()
-        }
-      }
-    })
+    ])
   ])
 }
 var staticRenderFns = [
@@ -66432,7 +66412,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [_c("a", { attrs: { href: "" } }), _vm._v("view")])
+    return _c("td", [
+      _c("a", { attrs: { href: "" } }),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("view")]
+      )
+    ])
   }
 ]
 render._withStripped = true

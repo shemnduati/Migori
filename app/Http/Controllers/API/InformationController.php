@@ -27,6 +27,15 @@ class InformationController extends Controller
 
     }
 
+    public function getApplications()
+    {
+        // return User::latest()->paginate(10);
+        $applications = Application::where('status', 0)->get();
+
+        return ['applications'=>$applications];
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *

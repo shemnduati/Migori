@@ -26,8 +26,12 @@
                                
                                 <td>{{application.name}}</td>
                                 <td>{{application.gender}}</td>
-                                <td>{{application.status}}</td>
-                                <td><a href=""></a>view</td>
+                                <td>
+                                    <span v-if="application.status==0">Pending...</span>
+                                    <span v-if="application.status==2" style="color: red;">Rejected</span>
+                                    <span v-if="application.status==1">Sent</span>
+                               </td>
+                                <td><a href="" ></a><button type="button" class="btn btn-primary">view</button></td>
                                 <td>{{application.bursary_type}}</td>
                               
                             </tr>
@@ -38,7 +42,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="card-footer">
-                        <pagination :data="users" @pagination-change-page="getResults"></pagination>
+                        <!-- <pagination :data="users" @pagination-change-page="getResults"></pagination> -->
                     </div>
                 </div>
                 <!-- /.box -->
@@ -47,11 +51,7 @@
         <!-- Modal -->
        
                     
-                    <form @submit.prevent="editMode ? updateUser() :createUser()">
-                       
-
-                       
-                    </form>
+                   
                
     </div>
 </template>
@@ -60,39 +60,21 @@
     export default {
         data(){
             return{
-                editMode: false,
                 applications :{},
-                form: new Form({
-                    id:'',
-                    role:'',
-                })
 
 
             }
         },
         methods:{
             getApplications(){
-                axios.get('api/Information').then(({ data }) => ([this.applications = data['applications']]));
+                axios.get('api/getapplications').then(({ data }) => ([this.applications = data['applications']]));
             }
         },
 
 
         created() {
-            Fire.$on('searching', ()=>{
-                let query = this.$parent.search;
-                axios.get('api/findUser?q=' + query)
-                    .then((data)=>{
-                        this.users = data.data;
-                    })
-                    .catch(()=>{
-
-                    })
-            })
-            this.loadUsers();
-            Fire.$on('AfterCreate', () =>{
-                this.loadUsers();
-            })
             //setInterval(() => this.loadUsers(), 3000);
+            this.getApplications();
         }
     }
 </script>
