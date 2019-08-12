@@ -26,3 +26,5 @@ Route::apiResources(['county' => 'API\CountyController']);
 Route::get('/getcounties','API\ApplicationController@getCounties');
 Route::get('/getwards','API\ApplicationController@getWards');
 Route::get('/getcountywards/{countyId}','API\ApplicationController@getCountyWards');
+Route::apiResources(['Information'=>'API\InformationController']);
+// Route::get('/getapplications','API\InformationController@getApplications');

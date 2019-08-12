@@ -39,6 +39,7 @@ let routes = [
     { path: '/county', component: require('./components/County.vue').default },
     { path: '/ward', component: require('./components/Ward.vue').default },
     { path: '/application', component: require('./components/Application.vue').default },
+    { path: '/Information', component: require('./components/Information.vue').default },
 ]
 
 Vue.filter('upText', function(text){
