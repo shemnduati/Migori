@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Geographical extends Model
+class MoreFamily extends Model
 {
     protected $guarded= [];
-    protected $table = 'geographical';
+    protected $table = 'morefamily';
 }
