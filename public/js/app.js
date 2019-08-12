@@ -2281,7 +2281,7 @@ __webpack_require__.r(__webpack_exports__);
       var reader = new FileReader();
 
       if (file['size'] < 2111775) {
-        if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['ext'] == 'image/jpeg' || file['type'] == 'application/pdf') {
+        if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg' || file['type'] == 'application/pdf') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
             _this2.form.guardianId = reader.result;
@@ -82829,8 +82829,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

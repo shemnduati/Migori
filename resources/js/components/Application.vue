@@ -563,7 +563,7 @@
               let file = e.target.files[0];
                 var reader = new FileReader();
                 if (file['size'] < 2111775) {
-                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg' || file['type']=='application/pdf') {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['type']=='image/jpeg' || file['type']=='application/pdf') {
                     reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.guardianId = reader.result;
