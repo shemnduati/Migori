@@ -41,6 +41,7 @@ let routes = [
     { path: '/subadmin', component: require('./components/subadmin.vue').default },
     { path: '/application', component: require('./components/Application.vue').default },
     { path: '/Information', component: require('./components/Information.vue').default },
+
 ]
 
 Vue.filter('upText', function(text){
@@ -76,6 +77,7 @@ Vue.use(VueProgressBar, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('application', require('./components/Application.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
