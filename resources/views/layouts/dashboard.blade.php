@@ -204,7 +204,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 Dashboard
                             </p>
                         </router-link>
-                    </li><li class="nav-item">
+                    </li>
+                    <li class="nav-item">
                         <router-link to="/county" class="nav-link">
                             <i class="nav-icon fas fa-globe-africa blue"></i>
                             <p>
@@ -212,7 +213,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-
+                    <li class="nav-item">
+                        <router-link to="/subadmin" class="nav-link">
+                            <i class="nav-icon fas fa-user-plus green"></i>
+                            <p>
+                               Add sub-Admin
+                            </p>
+                        </router-link>
+                    </li>
                     <li class="nav-item">
                         <router-link to="/users" class="nav-link ">
                             <i class="fa fa-users nav-icon indigo"></i>

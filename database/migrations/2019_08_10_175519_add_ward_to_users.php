@@ -15,6 +15,7 @@ class AddWardToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('ward')->nullable();
+          /*  $table->foreign('ward_id')->references('id')->on('wards');*/
         });
     }
 

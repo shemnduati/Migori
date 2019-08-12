@@ -6,7 +6,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">User Table</h3>
-
                         <div class="card-tools">
                         </div>
                     </div>
@@ -28,9 +27,6 @@
                                 <td>{{user.role | upText}}</td>
                                 <td>{{user.created_at | myDate}}</td>
                                 <td>
-                                    <a href="#" @click="editModal(user)" >
-                                        <i class="fa fa-edit teal"></i>
-                                    </a>
                                     <a href="#" @click="deleteUser(user.id)">
                                         <i class="fa fa-trash red"></i>
                                     </a>
@@ -49,40 +45,6 @@
                 <!-- /.box -->
             </div>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="addnew" tabindex="-1" role="dialog" aria-labelledby="addnew" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h5 class="modal-title" v-show="!editMode" id="addnew">Add user</h5>
-                        <h5 class="modal-title" v-show="editMode" id="addnew">Update User info</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form @submit.prevent="editMode ? updateUser() :createUser()">
-                        <div class="modal-body">
-
-                            <div class="form-group">
-                                <select name="type" v-model="form.role" id="type" class="form-control" :class="{ 'is-invalid': form.errors.has('role') }">
-                                    <option value="">Select User Role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="sub-admin">Sub-Admin</option>
-                                    <option value="student">Student</option>
-                                </select>
-                                <has-error :form="form" field="type"></has-error>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button v-show="editMode" type="submit" class="btn btn-primary">Edit</button>
-                            <button v-show="!editMode" type="submit" class="btn btn-primary">Add user</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -90,14 +52,7 @@
     export default {
         data(){
             return{
-                editMode: false,
                 users :{},
-                form: new Form({
-                    id:'',
-                    role:'',
-                })
-
-
             }
         },
         methods:{
@@ -107,35 +62,7 @@
                         this.users = response.data;
                     });
             },
-            updateUser(){
-                this.$Progress.start();
-                this.form.put('api/user/'+this.form.id)
-                    .then(()=>{
-                        $('#addnew').modal('hide');
-                        Swal.fire(
-                            'Edited!',
-                            'User information updated.',
-                            'success'
-                        )
-                        this.$Progress.finish();
-                        Fire.$emit('AfterCreate');
-                    })
-                    .catch(()=>{
-                        this.$Progress.fail();
-                        Swal.fire("Failed to Edit!", "Check if you have permission to Edit.");
-                    })
-            },
-            editModal(user){
-                this.editMode = true;
-                this.form.reset();
-                this.form.fill(user);
-                $('#addnew').modal('show');
-            },
-            newModal(){
-                this.editMode = false;
-                this.form.reset();
-                $('#addnew').modal('show');
-            },
+
             deleteUser(id){
                 Swal.fire({
                     title: 'Are you sure?',
@@ -172,7 +99,6 @@
                     .then(() => {
                         Fire.$emit('AfterCreate');
                         $('#addnew').modal('hide')
-
                         toast.fire({
                             type: 'success',
                             title: 'User Created in successfully'
@@ -180,6 +106,7 @@
                         this.$Progress.finish();
                     })
                     .catch(() => {
+                        Swal.fire("Failed to Create new user!", "There was something wrong.");
                     })
             }
         },

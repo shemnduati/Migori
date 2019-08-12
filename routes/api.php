@@ -23,3 +23,5 @@ Route::get('kryme','API\WardController@county');
 Route::apiResources(['ward' => 'API\WardController']);
 Route::apiResources(['user'=>'API\UserController']);
 Route::get('findUser','API\UserController@search');
+Route::get('wards','API\UserController@wards');
+Route::get('subadmin','API\UserController@subadmin');
