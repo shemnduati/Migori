@@ -22,6 +22,7 @@ class CreateMorefamilyTable extends Migration
             $table->string('pFees');
             $table->string('pFeesRelationship');
             $table->integer('status')->default(0);
+            $table->year('year');
             $table->timestamps();
         });
     }

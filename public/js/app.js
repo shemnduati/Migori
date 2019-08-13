@@ -2269,6 +2269,8 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Successfully'
         });
 
+        _this.form.reset();
+
         _this.$Progress.finish();
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;

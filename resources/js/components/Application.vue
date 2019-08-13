@@ -552,6 +552,7 @@
                             type: 'success',
                             title: 'Successfully'
                         });
+                        this.form.reset();
                         this.$Progress.finish();
                     })
                     .catch(error => {
