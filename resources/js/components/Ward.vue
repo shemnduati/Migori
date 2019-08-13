@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row pt-3">
+        <div class="row pt-3"  v-if="$gate.isAdmin()">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
@@ -54,7 +54,7 @@
                     </div>
                     <form @submit.prevent="editMode ? updateWard() : addWard()">
                     <div class="modal-body">
-                       
+
                         <div class="form-group">
                           <label>Select County</label>
                           <select name="county_id" v-model="form.county_id" class="form-control" :class="{'is-invalid': form.errors.has('county_id')}"  id="county_id">
@@ -120,9 +120,10 @@
                     });
             },
             loadWard(){
-                axios.get("api/ward").then(({data})=>(this.ward = data));
-                axios.get("api/kryme").then(({data})=>(this.kryme = data));
-                
+                if (this.$gate.isAdmin()) {
+                    axios.get("api/ward").then(({data}) => (this.ward = data));
+                    axios.get("api/kryme").then(({data}) => (this.kryme = data));
+                }
             },
             editModal(wards){
                 this.editMode = true;
@@ -172,7 +173,7 @@
                     }
                 })
             },
-            
+
         },
         created() {
             this.loadWard();
@@ -180,6 +181,6 @@
                 this.loadWard();
             });
         },
-        
+
     }
 </script>

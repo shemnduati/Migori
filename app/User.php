@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','ward_id','role'
+        'name', 'email', 'password','ward','role','email_verified_at'
     ];
 
     /**
@@ -37,8 +37,5 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function ward()
-    {
-        return $this->hasOne('App\Ward');
-    }
+
 }

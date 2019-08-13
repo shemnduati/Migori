@@ -18,8 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .grad{
+             background-image: linear-gradient(to right, #ffffe2 , #ffff9f, #ffffe2);
+        }
+    </style>
 </head>
-<body>
+<body class="grad">
     <div id="app">
 
         <main class="py-4">

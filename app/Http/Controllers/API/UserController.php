@@ -7,7 +7,7 @@ use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-
+use Carbon\Carbon;
 class UserController extends Controller
 {
     public function __construct()
@@ -22,6 +22,25 @@ class UserController extends Controller
     public function index()
     {
         return User::latest()->paginate(10);
+    }
+    public function profile()
+    {
+        return auth()->user();
+    }
+    public function updateProfile(Request $request)
+    {
+        $user =  auth()->user();
+        $this->validate($request,[
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'password' => 'sometimes|required|min:6'
+        ]);
+
+        if(!empty($request->password)){
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
+        $user->update($request->all());
+        return ['message' => "Success"];
     }
     public function subadmin()
     {
@@ -71,6 +90,7 @@ class UserController extends Controller
             'role' => 'sub-admin',
             'ward' => $request['ward'],
             'password' => Hash::make(123456789),
+            'email_verified_at'=> Carbon::now(),
         ]);
     }
 
