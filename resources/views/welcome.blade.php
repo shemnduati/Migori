@@ -75,11 +75,10 @@
 
     </head>
     <body>
-        <div class="">
+        <div class="container-fluid">
 
             <div class="content">
-                <router-view></router-view>
-                <div class="grad pb-3">
+                <div class="grad col-md-12 pb-3">
                     <div class="text-center pt-4 baza">
                         <h3 class="font-weight-bold">BURSARY APPLICATION SYSTEM</h3>
                     </div>
@@ -87,7 +86,7 @@
                         <h3 class="font-weight-bolder big"><span class="b">B </span><span class="a">A </span><span class="z">Z </span><span class="x">A</span></h3>
                     </div>
                 </div>
-                <div class="row pl-5">
+                <div class="row pl-5 col-md-12">
                     <div class="row col-md-10 logo">
                         <img src="/img/logo.jpg" alt="">
                         <p class="pt-5 p-1"><span class="logo1">BAZA</span><br><span class="logo2">With you every step</span></p>
@@ -96,20 +95,23 @@
                         @if (Route::has('login'))
                             <div class="top-right links">
                                 @auth
-                                    <a href="/apply" class="btn btn px-5">Get Started</a>
-                                   {{--  <a href="{{ url('/home') }}">Home</a> --}}
+                                    <a href="/apply" class="btn btn mb-2 px-4 pr-2">Get Started</a>
+
+                                    <a class="btn btn px-5" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                                 document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 @else
                                     <a href="{{ route('login') }}" class="btn btn px-5">Login</a>
-
-                                    {{-- @if (Route::has('register'))
-                                        <a href="{{ route('register') }}">Register</a>
-                                    @endif --}}
                                 @endauth
                             </div>
                         @endif
-                        <!-- <a href="{{route('apply')}}">
-                                <button class="btn btn">Get Started</button>
-                        </a> -->
+                        
                     </div>
                 </div>
                 <div class="banner d-flex justify-content-center">

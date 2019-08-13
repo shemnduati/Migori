@@ -1,36 +1,34 @@
 <template>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Application Component</div>
-
+                <div class="card col-md-10">
+                    <div class="card-header">Application Form</div>
                     <div class="card-body">
                         <form>
 
                             <section v-if="step==1">
                                 <div class="row justify-content-center">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 justify-content-center">
                                 <h3>Type</h3>
                                 <div class="form-group">
-                                <label for="type">Bursary Type</label>
-                                <select v-model="form.type" class="form-control" name="type" id="type"
-                                        :class="{ 'is-invalid': form.errors.has('type') }">
-                                    <option selected value="">--Select Status--</option>
-                                    <option value="CDF">CDF</option>
-                                    <option value="County">County</option>
-                                </select>
-                                <has-error :form="form" field="type"></has-error>
+                                    <label for="type">Bursary Type</label>
+                                    <select v-model="form.type" class="form-control" name="type" id="type"
+                                            :class="{ 'is-invalid': form.errors.has('type') }">
+                                        <option selected value="">--Select Status--</option>
+                                        <option value="CDF">CDF</option>
+                                        <option value="County">County</option>
+                                    </select>
+                                    <has-error :form="form" field="type"></has-error>
+                                </div>
+                                </div>
                             </div>
-                            </div>
-                        </div>
                             </section>
 
                             <section v-if="step==2">
                             <h3>PERSONAL DETAILS</h3>
 
-                            <div class="form-row">
-                                <div class="col">
+                            <div class="form-row ">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                     <label>Name</label>
                                     <input v-model="form.name" type="text" name="name"
@@ -38,7 +36,7 @@
                                     <has-error :form="form" field="name"></has-error>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input v-model="form.email" type="email" name="email"
@@ -479,7 +477,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </template>
