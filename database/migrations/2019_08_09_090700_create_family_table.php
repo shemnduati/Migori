@@ -23,7 +23,7 @@ class CreateFamilyTable extends Migration
             $table->decimal('income',8,2);
             $table->string('cert');
             $table->integer('tel');
-            $table->integer('status')->defailt(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

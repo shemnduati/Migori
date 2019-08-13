@@ -18,7 +18,7 @@ class CreateGeographicalTable extends Migration
         	$table->integer('user_id')->index();
             $table->integer('County');
             $table->integer('Ward');
-            $table->integer('status')->defailt(0);
+            $table->integer('status')->default(0);
             $table->string('Division');
             $table->string('Location');
             $table->string('Sublocation');

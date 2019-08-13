@@ -33,6 +33,9 @@ class ApplicationController extends Controller
 
     public function getWards()
     {
+        $apps= Application::where('statu', 0)->where('user_id', Auth::user()->id)->count();
+        return view('layout.dashboard')->with('apps', $apps);
+        
         $wards = Ward::all();
 
         return ['wards'=>$wards];
@@ -65,7 +68,7 @@ class ApplicationController extends Controller
 
             if ($ext == 'pdf') {
                 
-            }elseif ($ext == 'png') {
+            }elseif ($ext == 'png' || $ext == 'jpeg') {
               $passport_name = auth('api')->user()->id.time().'passport'.'.' . explode('/', explode(':', substr($request->passport, 0, strpos($request->passport, ';')))[1])[1];
               \Image::make($request->passport)->save(public_path('uploads/').$passport_name);   
             }
@@ -75,8 +78,14 @@ class ApplicationController extends Controller
             $ext = explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
 
             if ($ext == 'pdf') {
-                
-            }elseif ($ext == 'png') {
+                $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
+                $pdf_decoded = base64_decode ($request->fatherId);
+                $File = file_put_contents($fatherId_name, $pdf_decoded);
+                header('Content-Type: application/pdf');
+
+                // $File->save(public_path('uploads/').$fatherId_name);
+                move_uploaded_file($fatherId_name, public_path('uploads/').$fatherId_name);
+            }elseif ($ext == 'png' || $ext == 'jpeg') {
               $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
               \Image::make($request->fatherId)->save(public_path('uploads/').$fatherId_name);   
             }
@@ -87,7 +96,7 @@ class ApplicationController extends Controller
 
             if ($ext == 'pdf') {
                 
-            }elseif ($ext == 'png') {
+            }elseif ($ext == 'png' || $ext == 'jpeg') {
               $motherId_name = auth('api')->user()->id.time().'motherId'.'.' . explode('/', explode(':', substr($request->motherId, 0, strpos($request->motherId, ';')))[1])[1];
               \Image::make($request->motherId)->save(public_path('uploads/').$motherId_name);   
             }
@@ -98,7 +107,7 @@ class ApplicationController extends Controller
 
             if ($ext == 'pdf') {
                 
-            }elseif ($ext == 'png') {
+            }elseif ($ext == 'png' || $ext == 'jpeg') {
               $guardianId_name = auth('api')->user()->id.time().'guardianId'.'.' . explode('/', explode(':', substr($request->guardianId, 0, strpos($request->guardianId, ';')))[1])[1];
               \Image::make($request->guardianId)->save(public_path('uploads/').$guardianId_name);   
             }

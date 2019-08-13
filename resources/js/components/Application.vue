@@ -9,24 +9,28 @@
                         <form>
 
                             <section v-if="step==1">
+                                <div class="row justify-content-center">
+                                <div class="col-sm-6 justify-content-center">
                                 <h3>Type</h3>
                                 <div class="form-group">
-                                <label for="type">Bursary Type</label>
-                                <select v-model="form.type" class="form-control" name="type" id="type"
-                                        :class="{ 'is-invalid': form.errors.has('type') }">
-                                    <option selected value="">--Select Status--</option>
-                                    <option value="CDF">CDF</option>
-                                    <option value="County">County</option>
-                                </select>
-                                <has-error :form="form" field="type"></has-error>
+                                    <label for="type">Bursary Type</label>
+                                    <select v-model="form.type" class="form-control" name="type" id="type"
+                                            :class="{ 'is-invalid': form.errors.has('type') }">
+                                        <option selected value="">--Select Status--</option>
+                                        <option value="CDF">CDF</option>
+                                        <option value="County">County</option>
+                                    </select>
+                                    <has-error :form="form" field="type"></has-error>
+                                </div>
+                                </div>
                             </div>
                             </section>
 
                             <section v-if="step==2">
                             <h3>PERSONAL DETAILS</h3>
 
-                            <div class="form-row">
-                                <div class="col">
+                            <div class="form-row ">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                     <label>Name</label>
                                     <input v-model="form.name" type="text" name="name"
@@ -34,7 +38,7 @@
                                     <has-error :form="form" field="name"></has-error>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input v-model="form.email" type="email" name="email"
@@ -475,7 +479,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </template>
@@ -563,7 +566,7 @@
               let file = e.target.files[0];
                 var reader = new FileReader();
                 if (file['size'] < 2111775) {
-                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg' || file['type']=='application/pdf') {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['type']=='image/jpeg' || file['type']=='application/pdf') {
                     reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.guardianId = reader.result;
@@ -592,7 +595,7 @@
               let file = e.target.files[0];
                 var reader = new FileReader();
                 if (file['size'] < 2111775) {
-                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg' || file['type']=='application/pdf') {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['type']=='image/jpeg' || file['type']=='application/pdf') {
                     reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.fatherId = reader.result;
@@ -619,7 +622,7 @@
                 let file = e.target.files[0];
                 var reader = new FileReader();
                 if (file['size'] < 2111775) {
-                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg' || file['type']=='application/pdf') {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['type']=='image/jpeg' || file['type']=='application/pdf') {
                     reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.motherId = reader.result;
@@ -910,7 +913,7 @@
                 console.log(file);
 
                 if (file['size'] < 2111775) {
-                if (file['type']=='image/png' || file['type']=='image/jpg' || file['ext']=='image/jpeg') {
+                if (file['type']=='image/png' || file['type']=='image/jpg' || file['type']=='image/jpeg') {
                     reader.onloadend = (file) => {
                     // console.log('Result', reader.result)
                     this.form.passport = reader.result;

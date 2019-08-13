@@ -44,6 +44,9 @@ let routes = [
     { path: '/application', component: require('./components/Application.vue').default },
     { path: '/profile', component: require('./components/profile.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default },
+    { path: '/Information', component: require('./components/Information.vue').default },
+    { path: '/informationview', component: require('./components/Informationview.vue').default }
+
 ]
 
 Vue.filter('upText', function(text){
@@ -83,6 +86,8 @@ Vue.component(
     'not-found',
     require('./components/NotFound.vue').default
 );
+Vue.component('application', require('./components/Application.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
