@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center"  v-if="$gate.isAdmin()">
+        <div class="row justify-content-center"  v-if="$gate.isAdminOrSubadmin()">
             <div class="col-md-12">
                 <div class="row mt-5">
                     <div class="col-lg-3 col-6">
@@ -36,7 +36,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>44</h3>
+                                <h3>{{dash['total_application']}}</h3>
                                 <p>Applications</p>
                             </div>
                             <div class="icon">
@@ -49,7 +49,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger white">
                             <div class="inner">
-                                <h3>165</h3>
+                                <h3>{{dash['total_awarded']}}</h3>
 
                                 <p>Awarded-bursaries</p>
                             </div>
@@ -77,6 +77,9 @@
             loadUsers() {
                 if (this.$gate.isAdmin()) {
                     axios.get("api/dashboard").then(({data}) => ([this.dash = data['data']]));
+                }
+                if (this.$gate.isSubadmin()) {
+                    axios.get("api/dash").then(({data}) => ([this.dash = data['data']]));
                 }
             },
         },

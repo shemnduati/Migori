@@ -23,6 +23,7 @@ Route::apiResources(['user'=>'API\UserController']);
 Route::get('findUser','API\UserController@search');
 Route::apiResources(['dashboard'=>'API\DashboardContoller']);
 Route::put('profile','API\UserController@updateProfile');
+Route::get('dash','API\DashboardContoller@sub');
 Route::get('profile','API\UserController@profile');
 Route::post('/apply','API\ApplicationController@store');
 Route::apiResources(['county' => 'API\CountyController']);
@@ -37,6 +38,8 @@ Route::put('/reject/{applicantId}','API\ApplicationController@reject');
 
 // Route::apiResources(['Information'=>'API\InformationController']);
 Route::get('/getapplications','API\InformationController@getApplications');
+Route::get('/getbusary','API\InformationController@getbusary');
 Route::get('/gettype/{id}','API\InformationController@getType');
+Route::get('/getstatus/{id}','API\InformationController@getstatus');
 Route::get('wards','API\UserController@wards');
 Route::get('subadmin','API\UserController@subadmin');

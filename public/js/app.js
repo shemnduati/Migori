@@ -3001,18 +3001,36 @@ __webpack_require__.r(__webpack_exports__);
     getApplications: function getApplications() {
       var _this = this;
 
-      axios.get('api/getapplications').then(function (_ref) {
-        var data = _ref.data;
-        return [_this.applications = data['applications']];
-      });
+      if (this.$gate.isAdmin()) {
+        axios.get('api/getapplications').then(function (_ref) {
+          var data = _ref.data;
+          return [_this.applications = data['applications']];
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/getbusary').then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this.applications = data['applications']];
+        });
+      }
     },
     getType: function getType() {
       var _this2 = this;
 
-      axios.get('api/gettype/' + this.form.type).then(function (_ref2) {
-        var data = _ref2.data;
-        return [_this2.applications = data['applications']];
-      });
+      if (this.$gate.isAdmin()) {
+        axios.get('api/gettype/' + this.form.type).then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this2.applications = data['applications']];
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/getstatus/' + this.form.type).then(function (_ref4) {
+          var data = _ref4.data;
+          return [_this2.applications = data['applications']];
+        });
+      }
     }
   },
   created: function created() {
@@ -3032,6 +3050,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3270,11 +3290,11 @@ __webpack_require__.r(__webpack_exports__);
         if (result.value) {
           axios.put("/api/accept/" + _this2.applicantId).then(function (response) {
             Fire.$emit('AfterCreate');
-            Swal.fire({
+            Swal.fire(_defineProperty({
               type: 'success',
               title: 'Success',
               text: 'Sent!!'
-            });
+            }, "text", 'Reset Succesful'));
           });
         }
       });
@@ -3282,11 +3302,11 @@ __webpack_require__.r(__webpack_exports__);
     reject: function reject() {
       axios.put("/api/reject/" + this.applicantId).then(function (response) {
         Fire.$emit('AfterCreate');
-        Swal.fire({
+        Swal.fire(_defineProperty({
           type: 'success',
           title: 'Success',
           text: 'Rejected!!'
-        });
+        }, "text", 'Reset Succesful'));
       });
     }
   },
@@ -3768,6 +3788,13 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$gate.isAdmin()) {
         axios.get("api/dashboard").then(function (_ref) {
           var data = _ref.data;
+          return [_this.dash = data['data']];
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/dash").then(function (_ref2) {
+          var data = _ref2.data;
           return [_this.dash = data['data']];
         });
       }
@@ -67613,138 +67640,151 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row mt-5" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [
-              _vm._v("information Table")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
-              _c("form", [
-                _c(
-                  "select",
-                  {
-                    directives: [
+    _vm.$gate.isAdminOrSubadmin()
+      ? _c("div", { staticClass: "row mt-5" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("h3", { staticClass: "card-title" }, [
+                  _vm._v("information Table")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-tools" }, [
+                  _c("form", [
+                    _c(
+                      "select",
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.type,
-                        expression: "form.type"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.form,
-                            "type",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        },
-                        function($event) {
-                          return _vm.getType()
-                        }
-                      ]
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { selected: "", value: "" } }, [
-                      _vm._v("--Sort By--")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("All")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [
-                      _vm._v("Pending")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "3" } }, [_vm._v("Sent")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "4" } }, [
-                      _vm._v("Rejected")
-                    ])
-                  ]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "box-body table-responsive no-padding" }, [
-            _c("table", { staticClass: "table table-hover" }, [
-              _c(
-                "tbody",
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.applications, function(application) {
-                    return _c("tr", { key: application.id }, [
-                      _c("td", [_vm._v(_vm._s(application.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(application.gender))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        application.status == 0
-                          ? _c("span", [_vm._v("Pending...")])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        application.status == 2
-                          ? _c("span", { staticStyle: { color: "red" } }, [
-                              _vm._v("Rejected")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        application.status == 1
-                          ? _c("span", [_vm._v("Sent")])
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-primary",
-                              attrs: {
-                                to: {
-                                  path:
-                                    "/informationview/" + application.user_id
-                                },
-                                type: "button"
-                              }
-                            },
-                            [_vm._v("view")]
-                          )
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.type,
+                            expression: "form.type"
+                          }
                         ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(application.bursary_type))])
-                    ])
-                  })
-                ],
-                2
-              )
+                        staticClass: "form-control",
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "type",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            function($event) {
+                              return _vm.getType()
+                            }
+                          ]
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { selected: "", value: "" } }, [
+                          _vm._v("--Sort By--")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("All")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("Pending")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "3" } }, [
+                          _vm._v("Sent")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "4" } }, [
+                          _vm._v("Rejected")
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "box-body table-responsive no-padding" },
+                [
+                  _c("table", { staticClass: "table table-hover" }, [
+                    _c(
+                      "tbody",
+                      [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _vm._l(_vm.applications, function(application) {
+                          return _c("tr", { key: application.id }, [
+                            _c("td", [_vm._v(_vm._s(application.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(application.gender))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              application.status == 0
+                                ? _c("span", [_vm._v("Pending...")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.status == 2
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "red" } },
+                                    [_vm._v("Rejected")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.status == 1
+                                ? _c("span", [_vm._v("Sent")])
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    attrs: {
+                                      to: {
+                                        path:
+                                          "/informationview/" +
+                                          application.user_id
+                                      },
+                                      type: "button"
+                                    }
+                                  },
+                                  [_vm._v("view")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(application.bursary_type))])
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" })
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-footer" })
+          ])
         ])
-      ])
-    ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -68060,7 +68100,13 @@ var render = function() {
               _vm._m(12),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("img", { attrs: { src: "/uploads/" + this.photo, alt: "" } })
+                _c("img", {
+                  attrs: {
+                    src: "/uploads/" + this.photo,
+                    alt: "",
+                    width: "500px"
+                  }
+                })
               ]),
               _vm._v(" "),
               _vm._m(13)
@@ -71742,7 +71788,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin()
+    _vm.$gate.isAdminOrSubadmin()
       ? _c("div", { staticClass: "row justify-content-center" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "row mt-5" }, [
@@ -71770,9 +71816,29 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c("div", { staticClass: "small-box bg-warning" }, [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.dash["total_application"]))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Applications")])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(3)
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c("div", { staticClass: "small-box bg-danger white" }, [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.dash["total_awarded"]))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Awarded-bursaries")])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ])
+              ])
             ])
           ])
         ])
@@ -71800,36 +71866,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-6" }, [
-      _c("div", { staticClass: "small-box bg-warning" }, [
-        _c("div", { staticClass: "inner" }, [
-          _c("h3", [_vm._v("44")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Applications")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "icon" }, [
-          _c("i", { staticClass: "fas fa-file-signature white" })
-        ])
-      ])
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-file-signature white" })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-6" }, [
-      _c("div", { staticClass: "small-box bg-danger white" }, [
-        _c("div", { staticClass: "inner" }, [
-          _c("h3", [_vm._v("165")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Awarded-bursaries")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "icon" }, [
-          _c("i", { staticClass: "fas fa-award white" })
-        ])
-      ])
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-award white" })
     ])
   }
 ]
@@ -87420,6 +87466,11 @@ function () {
     key: "isStudent",
     value: function isStudent() {
       return this.user.role === 'student';
+    }
+  }, {
+    key: "isAdminOrSubadmin",
+    value: function isAdminOrSubadmin() {
+      return this.user.role === 'admin' || this.user.role === 'sub-admin';
     }
   }]);
 

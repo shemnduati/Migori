@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        @can('isAdmin')
+                        @can('isAdminOrSubadmin')
                         <router-link to="/dashboard" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt blue"></i>
                             <p>
@@ -110,6 +110,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link to="/Information" class="nav-link">
+                            <i class="nav-icon fas fa-globe-africa blue"></i>
+                            <p>
+                                Information
+                            </p>
+                        </router-link>
+                    </li>
+                    @endcan
+                    @can('isAdmin')
                     <li class="nav-item">
                         <router-link to="/county" class="nav-link">
                             <i class="nav-icon fas fa-globe-africa blue"></i>
@@ -126,15 +136,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link to="/Information" class="nav-link">
-                            <i class="nav-icon fas fa-globe-africa blue"></i>
-                            <p>
-                               Information
-                            </p>
-                        </router-link>
-                    </li>
-
 
                     <li class="nav-item">
                         <router-link to="/users" class="nav-link ">
