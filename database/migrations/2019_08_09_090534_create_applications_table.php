@@ -24,7 +24,7 @@ class CreateApplicationsTable extends Migration
             $table->string('bursary_type');
             $table->date('dob');
             $table->string('gender');
-            $table->integer('status')->defailt(0);
+            $table->integer('status')->default(0);
             $table->integer('tel');
             $table->timestamps();
         });

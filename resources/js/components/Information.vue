@@ -31,7 +31,7 @@
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
                                     <span v-if="application.status==1">Sent</span>
                                </td>
-                                <td><a href="" ></a><button type="button" class="btn btn-primary">view</button></td>
+                                <td><router-link to="/informationview" type="button" class="btn btn-primary">view</router-link></td>
                                 <td>{{application.bursary_type}}</td>
                               
                             </tr>

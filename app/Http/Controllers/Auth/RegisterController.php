@@ -39,10 +39,6 @@ class RegisterController extends Controller
             return ('/student');
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> a43110cf73e4e3bce21b4199093f3856bf59c39f
 
     /**
      * Create a new controller instance.
