@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Application;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -34,5 +35,11 @@ class HomeController extends Controller
     public function student()
     {
         return view('welcome');
+    }
+
+    public function apps()
+    {
+        $apps= Application::where('statu', 0)->where('user_id', Auth::user()->id)->count();
+        return view('layout.dashboard')->with('apps', $apps);
     }
 }

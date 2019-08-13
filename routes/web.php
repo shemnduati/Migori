@@ -1,5 +1,8 @@
 <?php
 
+use App\Notifications\ApplicationSent;
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +17,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/dashboard', function() {
+//     $user = User::find(2);
+//     $user->notify(new ApplicationSent);
+//     return redirect('home');
+// 	// foreach ($user as $users) {
+	    
+// 	// }
+// });
 
 Auth::routes();
 Auth::routes(['verify' => true]);
