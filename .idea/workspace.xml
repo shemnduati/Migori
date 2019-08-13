@@ -2,75 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e9c66af-0554-4e99-8386-658148ae74ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/11565683200guardianId.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565683199passport.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565683200fatherId.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565683200guardianId.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565683200motherId.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565710589fatherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565710589passport.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565710590motherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565710591guardianId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711223fatherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711223passport.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711224motherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711225guardianId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711305fatherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711305motherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711305passport.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711306guardianId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711594fatherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711594passport.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711595motherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711596guardianId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711671fatherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711671motherId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711671passport.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/11565711672guardianId.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/accept.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/reject.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Baza.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Baza.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Application.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/County.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/County.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Family.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Family.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Geographical.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Geographical.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/API/ApplicationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/API/ApplicationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Institution.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Institution.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/BursaryEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/BursaryEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/MoreFamily.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/MoreFamily.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Ward.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Ward.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/11565618751fatherId.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/11565619100fatherId.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/11565619185fatherId.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/API/InformationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/API/InformationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/11565618750passport.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/11565619099passport.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/11565619185passport.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565676257fatherId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565676257guardianId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565676257motherId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565676257passport.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565676416fatherId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565676416guardianId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565676416motherId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565676416passport.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565677046fatherId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565677046guardianId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565677046motherId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565677046passport.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565677195fatherId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565677195guardianId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565677195motherId.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/31565677195passport.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Application.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Application.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Information.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Information.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Informationview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Informationview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Notfound.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/NotFound.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -255,7 +192,7 @@
       <workItem from="1565457999664" duration="6523000" />
       <workItem from="1565502979499" duration="24888000" />
       <workItem from="1565591053981" duration="4425000" />
-      <workItem from="1565673392281" duration="33174000" />
+      <workItem from="1565673392281" duration="34305000" />
     </task>
     <servers />
   </component>
