@@ -3258,13 +3258,25 @@ __webpack_require__.r(__webpack_exports__);
       this.photo = passport;
     },
     accept: function accept() {
-      axios.put("/api/accept/" + this.applicantId).then(function (response) {
-        Fire.$emit('AfterCreate');
-        Swal.fire({
-          type: 'success',
-          title: 'Success',
-          text: 'Reset Succesful'
-        });
+      var _this2 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, send it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.put("/api/accept/" + _this2.applicantId).then(function (response) {
+            Fire.$emit('AfterCreate');
+            Swal.fire({
+              type: 'success',
+              title: 'Success',
+              text: 'Sent!!'
+            });
+          });
+        }
       });
     },
     reject: function reject() {
@@ -3273,7 +3285,7 @@ __webpack_require__.r(__webpack_exports__);
         Swal.fire({
           type: 'success',
           title: 'Success',
-          text: 'Reset Succesful'
+          text: 'Rejected!!'
         });
       });
     }

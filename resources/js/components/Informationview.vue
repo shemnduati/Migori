@@ -209,15 +209,25 @@
 				this.photo = passport;
 			},
 			accept(){
-               axios.put("/api/accept/" + this.applicantId).then( response => {
+				Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, send it!'
+                }).then((result) => {
+                	if (result.value) {
+               		axios.put("/api/accept/" + this.applicantId).then( response => {
                     Fire.$emit('AfterCreate');
                     Swal.fire({
                           type: 'success',
                           title: 'Success',
-                          text: 'Reset Succesful',
+                          text: 'Sent!!',
                           
                         })
                 });
+           }
+           })
 			},
 			reject(){
                 axios.put("/api/reject/" + this.applicantId).then( response => {
@@ -225,7 +235,7 @@
                     Swal.fire({
                           type: 'success',
                           title: 'Success',
-                          text: 'Reset Succesful',
+                          text: 'Rejected!!',
                           
                         })
                 });
