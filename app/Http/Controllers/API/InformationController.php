@@ -58,6 +58,27 @@ class InformationController extends Controller
         //
     }
 
+    public function getType($id)
+    {
+        if ($id==1) {
+            $applications = Application::all();
+
+            return ['applications'=>$applications];
+        }elseif ($id==2) {
+            $applications = Application::where('status', 0)->get();
+
+            return ['applications'=>$applications];
+        }elseif ($id==3) {
+            $applications = Application::where('status', 1)->get();
+
+            return ['applications'=>$applications];
+        }elseif ($id==4) {
+            $applications = Application::where('status', 2)->get();
+
+            return ['applications'=>$applications];
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *

@@ -84,19 +84,11 @@ class ApplicationController extends Controller
             if ($ext == 'pdf') {
                 $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
                 $pdf_decoded = base64_decode ($request->fatherId);
-
-                // if (file_put_contents($fatherId_name, $pdf_decoded)) {
-                //     header('Content-Type: application/pdf');
-                //     // $pdf_decoded->move(public_path('uploads/').$fatherId_name);
-                //     move_uploaded_file ( $fatherId_name , public_path('uploads/').$fatherId_name);
-                // }
-
-                $pdf = fopen ('test.pdf','w');
-                fwrite ($pdf,$pdf_decoded);
-                fclose ($pdf);
-                move_uploaded_file ( $pdf , public_path('/uploads/').$fatherId_name);
+                $File = file_put_contents($fatherId_name, $pdf_decoded);
+                header('Content-Type: application/pdf');
 
                 // $File->save(public_path('uploads/').$fatherId_name);
+                move_uploaded_file($fatherId_name, public_path('uploads/').$fatherId_name);
             }elseif ($ext == 'png' || $ext == 'jpeg') {
               $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
               \Image::make($request->fatherId)->save(public_path('uploads/').$fatherId_name);

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5"  v-if="$gate.isSubadmin()">
+        <div class="row mt-5">
 
             <div class="col-md-12">
                 <div class="card">
@@ -8,6 +8,15 @@
                         <h3 class="card-title">information Table</h3>
 
                         <div class="card-tools">
+                            <form>
+                            <select @change="getType()" v-model="form.type" class="form-control">
+                            <option selected value="">--Sort By--</option>
+                            <option value="1">All</option>
+                            <option value="2">Pending</option>
+                            <option value="3">Sent</option>
+                            <option value="4">Rejected</option>
+                        </select>
+                    </form>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -61,15 +70,19 @@
         data(){
             return{
                 applications :{},
+                form: new Form({
+                   type: ''
+                })
 
 
             }
         },
         methods:{
             getApplications(){
-                if (this.$gate.isSubadmin()) {
-                    axios.get('api/getapplications').then(({data}) => ([this.applications = data['applications']]));
-                }
+                axios.get('api/getapplications').then(({ data }) => ([this.applications = data['applications']]));
+            },
+            getType(){
+                axios.get('api/gettype/' + this.form.type).then(({ data }) => ([this.applications = data['applications']]));
             }
         },
 
