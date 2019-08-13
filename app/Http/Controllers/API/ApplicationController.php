@@ -12,6 +12,7 @@ use App\Institution;
 use App\County;
 use App\Ward;
 use App\User;
+use Auth;
 
 class ApplicationController extends Controller
 {
@@ -34,7 +35,7 @@ class ApplicationController extends Controller
 
     public function getWards()
     {
-        $apps= Application::where('statu', 0)->where('user_id', Auth::user()->id)->count();
+        $apps= Application::where('status', 0)->where('user_id', Auth::user()->id)->count();
         return view('layout.dashboard')->with('apps', $apps);
         
         $wards = Ward::all();

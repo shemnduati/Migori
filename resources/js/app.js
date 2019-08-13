@@ -41,9 +41,9 @@ let routes = [
     { path: '/county', component: require('./components/County.vue').default },
     { path: '/ward', component: require('./components/Ward.vue').default },
     { path: '/subadmin', component: require('./components/subadmin.vue').default },
-    { path: '/application', component: require('./components/Application.vue').default },
-    { path: '/profile', component: require('./components/profile.vue').default },
-    { path: '*', component: require('./components/NotFound.vue').default },
+    // { path: '/application', component: require('./components/Application.vue').default },
+    { path: '/profile', component: require('./components/Profile.vue').default },
+    // { path: '*', component: require('./components/NotFound.vue').default },
     { path: '/Information', component: require('./components/Information.vue').default },
     { path: '/informationview/:applicantId', component: require('./components/Informationview.vue').default }
 
