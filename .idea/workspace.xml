@@ -11,6 +11,22 @@
       <change afterPath="$PROJECT_DIR$/public/uploads/11565710589passport.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/uploads/11565710590motherId.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/uploads/11565710591guardianId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711223fatherId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711223passport.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711224motherId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711225guardianId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711305fatherId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711305motherId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711305passport.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711306guardianId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711594fatherId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711594passport.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711595motherId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711596guardianId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711671fatherId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711671motherId.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711671passport.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/11565711672guardianId.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/resources/views/emails/accept.blade.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/resources/views/emails/reject.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Baza.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Baza.iml" afterDir="false" />
@@ -54,6 +70,7 @@
       <change beforePath="$PROJECT_DIR$/resources/js/components/Informationview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Informationview.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Notfound.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/NotFound.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/dashboard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -238,7 +255,7 @@
       <workItem from="1565457999664" duration="6523000" />
       <workItem from="1565502979499" duration="24888000" />
       <workItem from="1565591053981" duration="4425000" />
-      <workItem from="1565673392281" duration="31451000" />
+      <workItem from="1565673392281" duration="33174000" />
     </task>
     <servers />
   </component>

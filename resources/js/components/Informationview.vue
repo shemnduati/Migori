@@ -18,19 +18,19 @@
 			<div class="col-md-8">
 				<div class="row mx-2 pl-3 pt-2 border border-success rounded">
 					<div class="col-md-4">
-						 <p> Official name </p>  
-						 <p> DOB  </p> 
-						 <p> Gender </p>  
-						 <p> Reg/Adm No. </p>  
-						 <p> Tel.  </p> 
-					</div>	
+						 <p> Official name </p>
+						 <p> DOB  </p>
+						 <p> Gender </p>
+						 <p> Reg/Adm No. </p>
+						 <p> Tel.  </p>
+					</div>
 					<div class="col-md-4">
-						 <p> {{application['name']}} </p> 
-						 <p> {{application['dob']}} </p> 
-						 <p> {{application['gender']}} </p> 
-						 <p> {{application['reg_no']}} </p> 
-						 <p> {{application['tel']}} </p> 
-					</div>	
+						 <p> {{application['name']}} </p>
+						 <p> {{application['dob']}} </p>
+						 <p> {{application['gender']}} </p>
+						 <p> {{application['reg_no']}} </p>
+						 <p> {{application['tel']}} </p>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4 pt-5">
@@ -41,7 +41,7 @@
 					<div class="col-md-4">
 						<button @click="launch(application['passport'])" class="btn btn-lg bg-success">View</button>
 					</div>
-				</div>	
+				</div>
 			</div>
 		</div>
 		<div class="row col-md-12">
@@ -59,7 +59,7 @@
 						 <span>Telephone: </span> <span>{{fam['tel']}}</span><br>
 						 <span>Occupation: </span> <span>{{fam['occupation']}}</span><br>
 						 <span>Income per Year: </span> <span>{{fam['income']}}</span><br>
-						 <hr> 
+						 <hr>
 					</div>
 					<div class="col-md-12">
 						<div class="row col-md-12">
@@ -81,7 +81,7 @@
 							 <p>{{morefamily['pFeesRelationship']}}</p>
 							 </div>
 						</div>
-					</div>		
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4 pt-5">
@@ -92,7 +92,7 @@
 					<div class="col-md-4">
 						<button @click="launch(fam.cert)" class="btn btn-lg bg-success">Views</button>
 					</div>
-				</div>	
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -104,22 +104,22 @@
 			<div class="col-md-8">
 				<div class="row mx-2 pl-3 pt-2 border border-success rounded">
 					<div class="col-md-4">
-					     <p>Institution</p>  
-						 <p> Branch </p> 
-						 <p> Year of Study  </p> 
+					     <p>Institution</p>
+						 <p> Branch </p>
+						 <p> Year of Study  </p>
 						 <p>Annual Fees </p>
-						 <p> Amount Paid </p>  
+						 <p> Amount Paid </p>
 						 <p>Outstanding Balance</p>
 
-					</div>	
-					<div class="col-md-4"> 
-						 <p> {{institution['name']}} </p> 
-						 <p> {{institution['branch']}} </p> 
-						 <p> {{institution['yearofstudy']}} </p> 
-						 <p> {{institution['fees']}} </p> 
-						 <p> {{institution['amount_paid']}} </p> 
-						 <p> {{institution['balance']}} </p> 
-					</div>	
+					</div>
+					<div class="col-md-4">
+						 <p> {{institution['name']}} </p>
+						 <p> {{institution['branch']}} </p>
+						 <p> {{institution['yearofstudy']}} </p>
+						 <p> {{institution['fees']}} </p>
+						 <p> {{institution['amount_paid']}} </p>
+						 <p> {{institution['balance']}} </p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -133,22 +133,22 @@
 			<div class="col-md-8">
 				<div class="row mx-2 pl-3 pt-2 border border-success rounded">
 					<div class="col-md-4">
-					     <p>County</p>  
-						 <p> Division </p> 
-						 <p> Location  </p> 
+					     <p>County</p>
+						 <p> Division </p>
+						 <p> Location  </p>
 						 <p>Sub-Location </p>
-						 <p> Ward </p>  
+						 <p> Ward </p>
 						 <p>Village</p>
 
-					</div>	
-					<div class="col-md-4"> 
-						 <p> {{geographical['County']}} </p> 
-						 <p> {{geographical['Division']}} </p> 
-						 <p> {{geographical['Location']}} </p> 
-						 <p> {{geographical['Sublocation']}} </p> 
-						 <p> {{geographical['Ward']}} </p> 
-						 <p> {{geographical['Village']}} </p> 
-					</div>	
+					</div>
+					<div class="col-md-4">
+						 <p> {{geographical['County']}} </p>
+						 <p> {{geographical['Division']}} </p>
+						 <p> {{geographical['Location']}} </p>
+						 <p> {{geographical['Sublocation']}} </p>
+						 <p> {{geographical['Ward']}} </p>
+						 <p> {{geographical['Village']}} </p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -171,7 +171,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img :src="'/uploads/' + this.photo" alt=""> 
+                        <img :src="'/uploads/' + this.photo" alt="" width="500px">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -215,7 +215,7 @@
                           type: 'success',
                           title: 'Success',
                           text: 'Reset Succesful',
-                          
+
                         })
                 });
 			},
@@ -226,7 +226,7 @@
                           type: 'success',
                           title: 'Success',
                           text: 'Reset Succesful',
-                          
+
                         })
                 });
 			}
