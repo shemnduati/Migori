@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5" v-if="$gate.isAdminOrSubadmin()">
 
             <div class="col-md-12">
                 <div class="card">
@@ -79,10 +79,20 @@
         },
         methods:{
             getApplications(){
-                axios.get('api/getapplications').then(({ data }) => ([this.applications = data['applications']]));
+                if (this.$gate.isAdmin()) {
+                    axios.get('api/getapplications').then(({data}) => ([this.applications = data['applications']]));
+                }
+                if (this.$gate.isSubadmin()) {
+                    axios.get('api/getbusary').then(({data}) => ([this.applications = data['applications']]));
+                }
             },
             getType(){
-                axios.get('api/gettype/' + this.form.type).then(({ data }) => ([this.applications = data['applications']]));
+                if (this.$gate.isAdmin()) {
+                    axios.get('api/gettype/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
+                }
+                if (this.$gate.isSubadmin()) {
+                    axios.get('api/getstatus/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
+                }
             }
         },
 

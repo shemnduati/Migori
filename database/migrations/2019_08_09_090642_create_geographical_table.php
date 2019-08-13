@@ -22,6 +22,7 @@ class CreateGeographicalTable extends Migration
             $table->string('Division');
             $table->string('Location');
             $table->string('Sublocation');
+            $table->year('year');
             $table->string('Village');
             $table->timestamps();
         });

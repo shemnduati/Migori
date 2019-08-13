@@ -38,6 +38,8 @@ Route::put('/reject/{applicantId}','API\ApplicationController@reject');
 
 // Route::apiResources(['Information'=>'API\InformationController']);
 Route::get('/getapplications','API\InformationController@getApplications');
+Route::get('/getbusary','API\InformationController@getbusary');
 Route::get('/gettype/{id}','API\InformationController@getType');
+Route::get('/getstatus/{id}','API\InformationController@getstatus');
 Route::get('wards','API\UserController@wards');
 Route::get('subadmin','API\UserController@subadmin');

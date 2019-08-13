@@ -25,7 +25,9 @@ class CreateApplicationsTable extends Migration
             $table->date('dob');
             $table->string('gender');
             $table->integer('status')->default(0);
-            $table->integer('tel');
+            $table->string('tel');
+            $table->year('year');
+            $table->integer('ward_id');
             $table->timestamps();
         });
     }
