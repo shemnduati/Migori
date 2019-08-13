@@ -187,7 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="info">
                     <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                     <p>
-                        <a href="#" class="d-block">{{ Auth::user()->type }}</a>
+                        <a href="#" class="d-block">{{ Auth::user()->role }}</a>
                     </p>
                 </div>
             </div>
@@ -198,6 +198,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
+                        @can('isAdmin')
                         <router-link to="/dashboard" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt blue"></i>
                             <p>
@@ -236,7 +237,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-
+                    @endcan
+                    <li class="nav-item">
+                        <router-link to="/profile" class="nav-link">
+                            <i class="nav-icon fa fa-user orange"></i>
+                            <p>
+                                My Profile
+                            </p>
+                        </router-link>
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

@@ -18,6 +18,8 @@ Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component('pagination', require('laravel-vue-pagination'));
 
+import  Gate from "./Gate";
+Vue.prototype.$gate =  new Gate(window.user);
 //sweetalert
 import Swal from 'sweetalert2';
 window.Swal = Swal;
@@ -40,6 +42,8 @@ let routes = [
     { path: '/ward', component: require('./components/Ward.vue').default },
     { path: '/subadmin', component: require('./components/subadmin.vue').default },
     { path: '/application', component: require('./components/Application.vue').default },
+    { path: '/profile', component: require('./components/profile.vue').default },
+    { path: '*', component: require('./components/NotFound.vue').default },
 ]
 
 Vue.filter('upText', function(text){
@@ -75,7 +79,10 @@ Vue.use(VueProgressBar, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+Vue.component(
+    'not-found',
+    require('./components/NotFound.vue').default
+);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

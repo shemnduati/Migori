@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row pt-3">
+        <div class="row pt-3" v-if="$gate.isAdmin()">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
@@ -107,8 +107,9 @@
 					});
 			},
 			loadCounty(){
-				axios.get("api/county").then(({data})=>(this.county = data));
-				
+                if (this.$gate.isAdmin()) {
+                    axios.get("api/county").then(({data}) => (this.county = data));
+                }
 			},
 			deleteCounty(id){
 				Swal.fire({

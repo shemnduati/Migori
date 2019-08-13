@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5" v-if="$gate.isAdmin()">
 
             <div class="col-md-12">
                 <div class="card">
@@ -75,8 +75,8 @@
                                 <has-error :form="form" field="email"></has-error>
                             </div>
                             <div class="form-group">
-                                <select name="pastor" v-model="form.ward" id="ward" class="form-control" :class="{ 'is-invalid': form.errors.has('ward') }">
-                                    <option value="">Allocate ward to Sub-Admin</option>
+                                <select name="ward" v-model="form.ward" id="ward" class="form-control"   :class="{ 'is-invalid': form.errors.has('ward') }">
+                                  <option value="">Allocate ward to Sub-Admin</option>
                                     <option v-for="ward in wards" :key="ward.id" :value="ward.id">{{ward.name}}</option>
                                 </select>
                                 <has-error :form="form" field="ward"></has-error>
@@ -177,8 +177,10 @@
                 })
             },
             loadUsers(){
+                if (this.$gate.isAdmin()){
                     axios.get("api/subadmin").then(({ data }) => (this.users = data['parent']));
                     axios.get("api/wards").then(({ data }) => (this.wards = data));
+                }
             },
             createUser(){
                 this.$Progress.start();

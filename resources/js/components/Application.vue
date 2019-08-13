@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center"  v-if="$gate.isStudent()">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Application Component</div>
@@ -66,13 +66,13 @@
                                 <div class="col">
                                   <label for="gender">Gender</label><br>
                                 <div class="form-check form-check-inline">
-                                <input v-model="form.gender" class="form-check-input" type="radio" name="gender" id="gender" value="male" 
+                                <input v-model="form.gender" class="form-check-input" type="radio" name="gender" id="gender" value="male"
                                         :class="{ 'is-invalid': form.errors.has('gender') }">
                                 <label class="form-check-label" for="inlineRadio1">Male</label>
                                 <has-error :form="form" field="gender"></has-error>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input v-model="form.gender" class="form-check-input" type="radio" name="gender" id="gender" value="female" 
+                                <input v-model="form.gender" class="form-check-input" type="radio" name="gender" id="gender" value="female"
                                           :class="{ 'is-invalid': form.errors.has('gender') }">
                                 <label class="form-check-label" for="inlineRadio1">Female</label>
                                 <has-error :form="form" field="gender"></has-error>
@@ -120,13 +120,13 @@
                                 <div class="col">
                                     <label for="alive">Alive/Dead</label><br>
                                 <div class="form-check form-check-inline">
-                                <input v-model="form.fliving" class="form-check-input" type="radio" name="fliving" id="fliving" value="Alive" 
+                                <input v-model="form.fliving" class="form-check-input" type="radio" name="fliving" id="fliving" value="Alive"
                                         :class="{ 'is-invalid': form.errors.has('fliving') }">
                                 <label class="form-check-label" for="inlineRadio1">Alive</label>
                                 <has-error :form="form" field="fliving"></has-error>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input v-model="form.fliving" class="form-check-input" type="radio" name="fliving" id="fliving" value="Dead" 
+                                <input v-model="form.fliving" class="form-check-input" type="radio" name="fliving" id="fliving" value="Dead"
                                           :class="{ 'is-invalid': form.errors.has('fliving') }">
                                 <label class="form-check-label" for="inlineRadio1">Dead</label>
                                 <has-error :form="form" field="fliving"></has-error>
@@ -178,13 +178,13 @@
                                 <div class="col">
                                     <label for="alive">Alive/Dead</label><br>
                                 <div class="form-check form-check-inline">
-                                <input v-model="form.mliving" class="form-check-input" type="radio" name="mliving" id="mliving" value="Alive" 
+                                <input v-model="form.mliving" class="form-check-input" type="radio" name="mliving" id="mliving" value="Alive"
                                         :class="{ 'is-invalid': form.errors.has('mliving') }">
                                 <label class="form-check-label" for="inlineRadio1">Alive</label>
                                 <has-error :form="form" field="mliving"></has-error>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input v-model="form.mliving" class="form-check-input" type="radio" name="mliving" id="mliving" value="Dead" 
+                                <input v-model="form.mliving" class="form-check-input" type="radio" name="mliving" id="mliving" value="Dead"
                                           :class="{ 'is-invalid': form.errors.has('mliving') }">
                                 <label class="form-check-label" for="inlineRadio1">Dead</label>
                                 <has-error :form="form" field="mliving"></has-error>
@@ -236,13 +236,13 @@
                                 <div class="col">
                                     <label for="alive">Alive/Dead</label><br>
                                 <div class="form-check form-check-inline">
-                                <input v-model="form.gliving" class="form-check-input" type="radio" name="gliving" id="gliving" value="Alive" 
+                                <input v-model="form.gliving" class="form-check-input" type="radio" name="gliving" id="gliving" value="Alive"
                                         :class="{ 'is-invalid': form.errors.has('gliving') }">
                                 <label class="form-check-label" for="inlineRadio1">Alive</label>
                                 <has-error :form="form" field="gliving"></has-error>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input v-model="form.gliving" class="form-check-input" type="radio" name="gliving" id="gliving" value="Dead" 
+                                <input v-model="form.gliving" class="form-check-input" type="radio" name="gliving" id="gliving" value="Dead"
                                           :class="{ 'is-invalid': form.errors.has('gliving') }">
                                 <label class="form-check-label" for="inlineRadio1">Dead</label>
                                 <has-error :form="form" field="gliving"></has-error>
@@ -467,7 +467,7 @@
                                 </div>
                               </div>
                             </section>
-                            
+
                             <button v-if="step != 1" type="button" class="btn btn-primary" @click.prevent="prevStep">Previous Step</button>
                             <button v-if="step != totalSteps" type="button" class="btn btn-primary" @click.prevent="nextStep">Next Step</button>
                             <button v-if="step == 5" type="button" class="btn btn-success" @click.prevent="sendApplication()">Submit Application</button>
@@ -555,7 +555,7 @@
                           type: 'error',
                           title: 'Error!!',
                           text: error.response.data.msg,
-                          
+
                         })
                     })
             },
@@ -586,7 +586,7 @@
                 })
             }
             },
-        
+
             getFatherId(e){
                 console.log('Father');
               let file = e.target.files[0];
@@ -649,7 +649,7 @@
                     // set(type, 'required');
                     this.form.errors.set({
                       type: 'This field is required'
-      
+
                     })
                     return false;
                 }else{

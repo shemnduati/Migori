@@ -13,8 +13,5 @@ class Ward extends Model
     	return $this->belongsTo(\App\County::class);
     }
 
-    public function user()
-    {
-        return $this->belongsTo(\App\User::class);
-    }
+
 }
