@@ -136,6 +136,15 @@
             </div>
         </div>
 
+        <footer class=" p-3 mx-3">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Your journey to digital transformation starts here
+            </div>
+            <!-- Default to the left -->
+            <strong>Developed by <a href="https://twtechnology.africa">TransOnline Web Technologies</a>.</strong> All rights reserved.
+        </footer>
+
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
