@@ -21,7 +21,7 @@ class CreateMorefamilyTable extends Migration
             $table->integer('workingSiblings');
             $table->string('pFees');
             $table->string('pFeesRelationship');
-            $table->integer('status')->defailt(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

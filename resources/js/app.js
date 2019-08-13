@@ -41,6 +41,7 @@ let routes = [
     { path: '/subadmin', component: require('./components/subadmin.vue').default },
     { path: '/application', component: require('./components/Application.vue').default },
     { path: '/Information', component: require('./components/Information.vue').default },
+    { path: '/informationview/:applicantId', component: require('./components/Informationview.vue').default }
 
 ]
 
