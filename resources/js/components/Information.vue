@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5"  v-if="$gate.isSubadmin()">
 
             <div class="col-md-12">
                 <div class="card">
@@ -14,16 +14,16 @@
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tbody><tr>
-                                
+
                                 <th>Name</th>
                                 <th>Gender</th>
                                 <th>Status</th>
                                 <th>View to Send</th>
                                 <th>Type</th>
-                                
+
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
-                               
+
                                 <td>{{application.name}}</td>
                                 <td>{{application.gender}}</td>
                                 <td>
@@ -33,7 +33,7 @@
                                </td>
                                 <td><router-link to="/informationview" type="button" class="btn btn-primary">view</router-link></td>
                                 <td>{{application.bursary_type}}</td>
-                              
+
                             </tr>
 
 
@@ -49,10 +49,10 @@
             </div>
         </div>
         <!-- Modal -->
-       
-                    
-                   
-               
+
+
+
+
     </div>
 </template>
 
@@ -67,7 +67,9 @@
         },
         methods:{
             getApplications(){
-                axios.get('api/getapplications').then(({ data }) => ([this.applications = data['applications']]));
+                if (this.$gate.isSubadmin()) {
+                    axios.get('api/getapplications').then(({data}) => ([this.applications = data['applications']]));
+                }
             }
         },
 

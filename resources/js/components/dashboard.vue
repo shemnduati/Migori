@@ -36,7 +36,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>44</h3>
+                                <h3>{{dash['total_application']}}</h3>
                                 <p>Applications</p>
                             </div>
                             <div class="icon">
@@ -49,7 +49,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger white">
                             <div class="inner">
-                                <h3>165</h3>
+                                <h3>{{dash['total_awarded']}}</h3>
 
                                 <p>Awarded-bursaries</p>
                             </div>

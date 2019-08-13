@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">
-        <div class="row justify-content-center"  v-if="$gate.isStudent()">
+        <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Application Component</div>
@@ -479,6 +479,7 @@
                         </form>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </template>
