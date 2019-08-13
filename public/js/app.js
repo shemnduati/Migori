@@ -2204,6 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
       totalSteps: 5,
       counties: {},
       wards: {},
+      user: {},
       form: new Form({
         type: '',
         name: '',
@@ -2373,6 +2374,7 @@ __webpack_require__.r(__webpack_exports__);
           return false;
         } else {
           this.step++;
+          return false;
         }
       }
 
@@ -2415,6 +2417,7 @@ __webpack_require__.r(__webpack_exports__);
           return false;
         } else {
           this.step++;
+          return false;
         }
       }
 
@@ -2522,6 +2525,7 @@ __webpack_require__.r(__webpack_exports__);
           return false;
         } else {
           this.step++;
+          return false;
         }
       }
 
@@ -2564,6 +2568,7 @@ __webpack_require__.r(__webpack_exports__);
           return false;
         } else {
           this.step++;
+          return false;
         }
       }
 
@@ -2606,6 +2611,7 @@ __webpack_require__.r(__webpack_exports__);
           return false;
         } else {
           this.step++;
+          return false;
         }
       }
     },
@@ -2666,11 +2672,20 @@ __webpack_require__.r(__webpack_exports__);
           text: 'You are uploading a large file'
         });
       }
+    },
+    getDetails: function getDetails() {
+      var _this9 = this;
+
+      axios.get("api/getdetails").then(function (_ref4) {
+        var data = _ref4.data;
+        return [_this9.user = data['user']];
+      });
     }
   },
   created: function created() {
     this.getCounties();
     this.getWards();
+    this.getDetails();
   }
 });
 
@@ -63644,8 +63659,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.name,
-                                expression: "form.name"
+                                value: (_vm.form.name = _vm.user["name"]),
+                                expression: "form.name = user['name']"
                               }
                             ],
                             staticClass: "form-control",
@@ -63653,13 +63668,19 @@ var render = function() {
                               "is-invalid": _vm.form.errors.has("name")
                             },
                             attrs: { type: "text", name: "name" },
-                            domProps: { value: _vm.form.name },
+                            domProps: {
+                              value: (_vm.form.name = _vm.user["name"])
+                            },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.$set(_vm.form, "name", $event.target.value)
+                                _vm.$set(
+                                  (_vm.form.name = _vm.user),
+                                  "name",
+                                  $event.target.value
+                                )
                               }
                             }
                           }),
@@ -63684,8 +63705,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.email,
-                                expression: "form.email"
+                                value: (_vm.form.email = _vm.user["email"]),
+                                expression: "form.email = user['email']"
                               }
                             ],
                             staticClass: "form-control",
@@ -63693,13 +63714,19 @@ var render = function() {
                               "is-invalid": _vm.form.errors.has("email")
                             },
                             attrs: { type: "email", name: "email" },
-                            domProps: { value: _vm.form.email },
+                            domProps: {
+                              value: (_vm.form.email = _vm.user["email"])
+                            },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.$set(_vm.form, "email", $event.target.value)
+                                _vm.$set(
+                                  (_vm.form.email = _vm.user),
+                                  "email",
+                                  $event.target.value
+                                )
                               }
                             }
                           }),
@@ -83059,8 +83086,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
