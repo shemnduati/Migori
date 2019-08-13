@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center"  v-if="$gate.isAdmin()">
+        <div class="row justify-content-center"  v-if="$gate.isAdminOrSubadmin()">
             <div class="col-md-12">
                 <div class="row mt-5">
                     <div class="col-lg-3 col-6">
@@ -77,6 +77,9 @@
             loadUsers() {
                 if (this.$gate.isAdmin()) {
                     axios.get("api/dashboard").then(({data}) => ([this.dash = data['data']]));
+                }
+                if (this.$gate.isSubadmin()) {
+                    axios.get("api/dash").then(({data}) => ([this.dash = data['data']]));
                 }
             },
         },

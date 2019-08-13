@@ -3757,6 +3757,13 @@ __webpack_require__.r(__webpack_exports__);
           return [_this.dash = data['data']];
         });
       }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/dash").then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this.dash = data['data']];
+        });
+      }
     }
   },
   created: function created() {
@@ -68046,7 +68053,13 @@ var render = function() {
               _vm._m(12),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("img", { attrs: { src: "/uploads/" + this.photo, alt: "" } })
+                _c("img", {
+                  attrs: {
+                    src: "/uploads/" + this.photo,
+                    alt: "",
+                    width: "500px"
+                  }
+                })
               ]),
               _vm._v(" "),
               _vm._m(13)
@@ -71728,7 +71741,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin()
+    _vm.$gate.isAdminOrSubadmin()
       ? _c("div", { staticClass: "row justify-content-center" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "row mt-5" }, [
@@ -71756,9 +71769,29 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c("div", { staticClass: "small-box bg-warning" }, [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.dash["total_application"]))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Applications")])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(3)
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c("div", { staticClass: "small-box bg-danger white" }, [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.dash["total_awarded"]))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Awarded-bursaries")])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ])
+              ])
             ])
           ])
         ])
@@ -71786,36 +71819,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-6" }, [
-      _c("div", { staticClass: "small-box bg-warning" }, [
-        _c("div", { staticClass: "inner" }, [
-          _c("h3", [_vm._v("44")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Applications")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "icon" }, [
-          _c("i", { staticClass: "fas fa-file-signature white" })
-        ])
-      ])
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-file-signature white" })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 col-6" }, [
-      _c("div", { staticClass: "small-box bg-danger white" }, [
-        _c("div", { staticClass: "inner" }, [
-          _c("h3", [_vm._v("165")]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Awarded-bursaries")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "icon" }, [
-          _c("i", { staticClass: "fas fa-award white" })
-        ])
-      ])
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-award white" })
     ])
   }
 ]
@@ -87407,6 +87420,11 @@ function () {
     value: function isStudent() {
       return this.user.role === 'student';
     }
+  }, {
+    key: "isAdminOrSubadmin",
+    value: function isAdminOrSubadmin() {
+      return this.user.role === 'admin' || this.user.role === 'sub-admin';
+    }
   }]);
 
   return Gate;
@@ -88423,8 +88441,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
