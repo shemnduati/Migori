@@ -26,9 +26,15 @@ Route::put('profile','API\UserController@updateProfile');
 Route::get('profile','API\UserController@profile');
 Route::post('/apply','API\ApplicationController@store');
 Route::apiResources(['county' => 'API\CountyController']);
+
 Route::get('/getcounties','API\ApplicationController@getCounties');
 Route::get('/getwards','API\ApplicationController@getWards');
+Route::get('/getdetails','API\ApplicationController@getDetails');
+Route::get('/getappdetails/{applicantId}','API\ApplicationController@show');
 Route::get('/getcountywards/{countyId}','API\ApplicationController@getCountyWards');
+Route::put('/accept/{applicantId}','API\ApplicationController@accept');
+Route::put('/reject/{applicantId}','API\ApplicationController@reject');
+
 // Route::apiResources(['Information'=>'API\InformationController']);
 Route::get('/getapplications','API\InformationController@getApplications');
 Route::get('wards','API\UserController@wards');

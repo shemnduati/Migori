@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Mail\BursaryEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Application;
@@ -11,6 +12,9 @@ use App\Geographical;
 use App\Institution;
 use App\County;
 use App\Ward;
+use App\User;
+use Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
@@ -80,11 +84,19 @@ class ApplicationController extends Controller
             if ($ext == 'pdf') {
                 $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
                 $pdf_decoded = base64_decode ($request->fatherId);
-                $File = file_put_contents($fatherId_name, $pdf_decoded);
-                header('Content-Type: application/pdf');
+
+                // if (file_put_contents($fatherId_name, $pdf_decoded)) {
+                //     header('Content-Type: application/pdf');
+                //     // $pdf_decoded->move(public_path('uploads/').$fatherId_name);
+                //     move_uploaded_file ( $fatherId_name , public_path('uploads/').$fatherId_name);
+                // }
+
+                $pdf = fopen ('test.pdf','w');
+                fwrite ($pdf,$pdf_decoded);
+                fclose ($pdf);
+                move_uploaded_file ( $pdf , public_path('/uploads/').$fatherId_name);
 
                 // $File->save(public_path('uploads/').$fatherId_name);
-                move_uploaded_file($fatherId_name, public_path('uploads/').$fatherId_name);
             }elseif ($ext == 'png' || $ext == 'jpeg') {
               $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
               \Image::make($request->fatherId)->save(public_path('uploads/').$fatherId_name);
@@ -207,9 +219,39 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($applicantId)
     {
-        //
+        $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
+        $family = Family::where('user_id', $applicantId)->where('status', 0)->get();
+        $morefamily = MoreFamily::where('user_id', $applicantId)->where('status', 0)->first();
+        $institution = Institution::where('user_id', $applicantId)->where('status', 0)->first();
+        $geos = Geographical::where('user_id', $applicantId)->where('status', 0)->first();
+
+
+        $County = County::where('id', $geos['County'])->value('name');
+        $Ward = Ward::where('id', $geos['Ward'])->value('name');
+        $Division = $geos['Division'];
+        $Location = $geos['Location'];
+
+        $geographical=array(
+            'County'=>$County,
+            'Ward'=>$Ward,
+            'Division'=>$Division,
+            'Location'=>$Location,
+            'Sublocation'=>$geos['Sublocation'],
+            'Village'=>$geos['Village']
+
+        );
+
+
+        return ['application'=>$application, 'family'=>$family, 'morefamily'=>$morefamily, 'geographical'=>$geographical, 'institution'=>$institution];
+    }
+
+    public function getDetails()
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+
+        return ['user'=>$user];
     }
 
     /**
@@ -219,9 +261,69 @@ class ApplicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function accept($applicantId)
     {
-        //
+        $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
+        $appli = Application::findOrFail($application['id']);
+        $appli->status = 1;
+        $appli->update();
+
+        $family = Family::where('user_id', $applicantId)->where('status', 0)->get();
+        foreach ($family as $fam) {
+            $fami = Family::findOrFail($fam['id']);
+            $fami->status=1;
+            $fami->update();
+        }
+
+        $morefamily = MoreFamily::where('user_id', $applicantId)->where('status', 0)->first();
+        $more=MoreFamily::findOrFail($morefamily['id']);
+        $more->status = 1;
+        $more->update();
+
+        $institution = Institution::where('user_id', $applicantId)->where('status', 0)->first();
+        $insti = Institution::findOrFail($institution['id']);
+        $insti->status=1;
+        $insti->update();
+
+        $geographical = Geographical::where('user_id', $applicantId)->where('status', 0)->first();
+        $geo=Geographical::findOrFail($geographical['id']);
+        $geo->status=1;
+        $geo->update();
+        Mail::to('test@test.com')->send(new ContactFormMail($data));
+
+        return ['success'=>'success'];
+    }
+
+    public function reject($applicantId)
+    {
+        $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
+        $appli = Application::findOrFail($application['id']);
+        $appli->status = 2;
+        $appli->update();
+
+        $family = Family::where('user_id', $applicantId)->where('status', 0)->get();
+        foreach ($family as $fam) {
+            $fami = Family::findOrFail($fam['id']);
+            $fami->status=2;
+            $fami->update();
+        }
+
+        $morefamily = MoreFamily::where('user_id', $applicantId)->where('status', 0)->first();
+        $more=MoreFamily::findOrFail($morefamily['id']);
+        $more->status = 2;
+        $more->update();
+
+        $institution = Institution::where('user_id', $applicantId)->where('status', 0)->first();
+        $insti = Institution::findOrFail($institution['id']);
+        $insti->status=2;
+        $insti->update();
+
+        $geographical = Geographical::where('user_id', $applicantId)->where('status', 0)->first();
+        $geo=Geographical::findOrFail($geographical['id']);
+        $geo->status=2;
+        $geo->update();
+        Mail::to('test@test.com')->send(new BursaryEmail());
+        return ['success'=>'success'];
     }
 
     /**

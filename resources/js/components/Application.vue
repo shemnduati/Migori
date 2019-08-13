@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -33,7 +33,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <label>Name</label>
-                                    <input v-model="form.name" type="text" name="name"
+                                    <input v-model="form.name = info['name']" type="text" name="name"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
                                     <has-error :form="form" field="name"></has-error>
                                     </div>
@@ -41,7 +41,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input v-model="form.email" type="email" name="email"
+                                        <input v-model="form.email = info['email']" type="email" name="email"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
                                         <has-error :form="form" field="email"></has-error>
                                     </div>
@@ -479,9 +479,9 @@
                         </form>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -492,6 +492,7 @@
                 totalSteps: 5,
                 counties: {},
                 wards: {},
+                info: {},
                 form: new Form({
                     type:'',
                     name: '',
@@ -658,6 +659,7 @@
                     return false;
                 }else{
                    this.step++;
+                   return false;
                 }
             }
 
@@ -700,6 +702,7 @@
                     return false;
                 }else{
                     this.step++;
+                    return false;
                 }
             }
 
@@ -808,6 +811,7 @@
                     return false;
                 }else{
                     this.step++;
+                    return false;
                 }
             }
 
@@ -850,6 +854,7 @@
                     return false;
                 }else{
                     this.step++;
+                    return false;
                 }
             }
 
@@ -892,6 +897,7 @@
                     return false;
                 }else{
                     this.step++;
+                    return false;
                 }
             }
            },
@@ -938,10 +944,14 @@
             }
 
             },
+            getDetails(){
+                axios.get("api/getdetails").then(({ data }) => ([this.info = data['user']]));
+            }
         },
         created() {
             this.getCounties();
             this.getWards();
+            this.getDetails();
         }
     }
 </script>
