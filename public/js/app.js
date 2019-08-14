@@ -3000,26 +3000,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editMode: false,
       county: {},
       form: new Form({
-        id: '',
-        name: ''
+        id: ''
+        /*name: '',*/
+
       })
     };
   },
-  created: function created() {
-    var _this = this;
-
-    this.loadCounty();
-    Fire.$on('entry', function () {
-      _this.loadCounty();
-    });
-  },
   methods: {
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/county?page=' + page).then(function (response) {
+        _this.county = response.data;
+      });
+    },
     addCounty: function addCounty() {
       var _this2 = this;
 
@@ -3096,6 +3100,20 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log('I can edit');
     }
+  },
+  created: function created() {
+    var _this6 = this;
+
+    Fire.$on('searching', function () {
+      var query = _this6.$parent.search;
+      axios.get('api/findCounty?q=' + query).then(function (data) {
+        _this6.county = data.data;
+      })["catch"](function () {});
+    });
+    this.loadCounty();
+    Fire.$on('AfterCreate', function () {
+      _this6.loadCounty();
+    }); //setInterval(() => this.loadUsers(), 3000);
   }
 });
 
@@ -3826,6 +3844,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3841,13 +3862,21 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/ward?page=' + page).then(function (response) {
+        _this.ward = response.data;
+      });
+    },
     newModal: function newModal() {
       this.editMode = false;
       this.form.reset();
       $('#addnew').modal('show');
     },
     addWard: function addWard() {
-      var _this = this;
+      var _this2 = this;
 
       this.$Progress.start();
       this.form.post('api/ward').then(function () {
@@ -3858,22 +3887,22 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Ward created successfully'
         });
 
-        _this.$Progress.finish();
+        _this2.$Progress.finish();
       })["catch"](function () {
-        _this.$Progress.fail();
+        _this2.$Progress.fail();
       });
     },
     loadWard: function loadWard() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.$gate.isAdmin()) {
         axios.get("api/ward").then(function (_ref) {
           var data = _ref.data;
-          return _this2.ward = data;
+          return _this3.ward = data;
         });
         axios.get("api/kryme").then(function (_ref2) {
           var data = _ref2.data;
-          return _this2.kryme = data;
+          return _this3.kryme = data;
         });
       }
     },
@@ -3884,23 +3913,23 @@ __webpack_require__.r(__webpack_exports__);
       this.form.fill(wards);
     },
     updateWard: function updateWard() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$Progress.start();
       this.form.put('api/ward/' + this.form.id).then(function () {
         $('#addnew').modal('hide');
         swal('Updated!', 'Your Ward has been updated.', 'success');
 
-        _this3.$Progress.finish();
+        _this4.$Progress.finish();
 
         Fire.$emit('entry');
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this4.$Progress.fail();
       });
       console.log('I can edit');
     },
     deleteWard: function deleteWard(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -3912,7 +3941,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          _this4.form["delete"]("api/ward/" + id).then(function () {
+          _this5.form["delete"]("api/ward/" + id).then(function () {
             swal('Delete!', 'Your file has been deleted.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
@@ -3923,12 +3952,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
-    this.loadWard();
-    Fire.$on('entry', function () {
-      _this5.loadWard();
+    Fire.$on('searching', function () {
+      var query = _this6.$parent.search;
+      axios.get('api/findWard?q=' + query).then(function (data) {
+        _this6.ward = data.data;
+      })["catch"](function () {});
     });
+    this.loadWard();
+    Fire.$on('AfterCreate', function () {
+      _this6.loadWard();
+    }); //setInterval(() => this.loadUsers(), 3000);
   }
 });
 
@@ -4149,12 +4184,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editMode: false,
       users: {},
       wards: {},
+      counties: {},
       form: new Form({
         id: '',
         name: '',
@@ -4241,8 +4287,32 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    createUser: function createUser() {
+    getCounties: function getCounties() {
       var _this5 = this;
+
+      axios.get("api/getcounty").then(function (_ref3) {
+        var data = _ref3.data;
+        return [_this5.counties = data['counties']];
+      });
+    },
+    getWards: function getWards() {
+      var _this6 = this;
+
+      axios.get("api/getward").then(function (_ref4) {
+        var data = _ref4.data;
+        return [_this6.wards = data['wards']];
+      });
+    },
+    getCountyWards: function getCountyWards() {
+      var _this7 = this;
+
+      axios.get("api/getcountyward/" + this.form.county).then(function (_ref5) {
+        var data = _ref5.data;
+        return [_this7.wards = data['wards']];
+      });
+    },
+    createUser: function createUser() {
+      var _this8 = this;
 
       this.$Progress.start();
       this.form.post('api/user').then(function () {
@@ -4253,24 +4323,30 @@ __webpack_require__.r(__webpack_exports__);
           title: 'User Created in successfully'
         });
 
-        _this5.$Progress.finish();
+        _this8.$Progress.finish();
       })["catch"](function () {
         Swal.fire("Failed to Create new user!", "There was something wrong.");
       });
     }
   },
   created: function created() {
-    var _this6 = this;
+    var _this9 = this;
 
     Fire.$on('searching', function () {
-      var query = _this6.$parent.search;
+      var query = _this9.$parent.search;
       axios.get('api/findUser?q=' + query).then(function (data) {
-        _this6.users = data.data;
+        _this9.users = data.data;
       })["catch"](function () {});
     });
     this.loadUsers();
+    this.getCounties();
+    this.getWards();
     Fire.$on('AfterCreate', function () {
-      _this6.loadUsers();
+      _this9.loadUsers();
+
+      _this9.getCounties();
+
+      _this9.getWards();
     }); //setInterval(() => this.loadUsers(), 3000);
   }
 });
@@ -68090,7 +68166,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "tbody",
-                    _vm._l(_vm.county, function(counties) {
+                    _vm._l(_vm.county.data, function(counties) {
                       return _c("tr", { key: _vm.county.id }, [
                         _c("td", [_vm._v(_vm._s(counties.name))]),
                         _vm._v(" "),
@@ -68134,7 +68210,19 @@ var render = function() {
                     0
                   )
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-footer" },
+                [
+                  _c("pagination", {
+                    attrs: { data: _vm.county },
+                    on: { "pagination-change-page": _vm.getResults }
+                  })
+                ],
+                1
+              )
             ])
           ])
         ])
@@ -72238,7 +72326,7 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _c("h3", { staticClass: "card-title" }, [
-                  _vm._v("Responsive Hover Table")
+                  _vm._v("Add wards to each county")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
@@ -72259,7 +72347,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "tbody",
-                    _vm._l(_vm.ward, function(wards) {
+                    _vm._l(_vm.ward.data, function(wards) {
                       return _c("tr", [
                         _c("td", [_vm._v(_vm._s(wards.county.name))]),
                         _vm._v(" "),
@@ -72305,7 +72393,19 @@ var render = function() {
                     0
                   )
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-footer" },
+                [
+                  _c("pagination", {
+                    attrs: { data: _vm.ward },
+                    on: { "pagination-change-page": _vm.getResults }
+                  })
+                ],
+                1
+              )
             ])
           ])
         ])
@@ -72948,6 +73048,88 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
+                        _c("label", { attrs: { for: "county" } }, [
+                          _vm._v("County")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.county,
+                                expression: "form.county"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("county")
+                            },
+                            attrs: { name: "county", id: "county" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "county",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.getCountyWards()
+                                }
+                              ]
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { selected: "", value: "" } },
+                              [_vm._v("--Select county--")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.counties, function(count) {
+                              return _c(
+                                "option",
+                                {
+                                  key: count.id,
+                                  domProps: { value: count.id }
+                                },
+                                [_vm._v(_vm._s(count.name))]
+                              )
+                            })
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "county" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "ward" } }, [
+                          _vm._v("Ward")
+                        ]),
+                        _vm._v(" "),
                         _c(
                           "select",
                           {
@@ -72985,15 +73167,20 @@ var render = function() {
                             }
                           },
                           [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Allocate ward to Sub-Admin")
-                            ]),
+                            _c(
+                              "option",
+                              { attrs: { selected: "", value: "" } },
+                              [_vm._v("--Select Ward--")]
+                            ),
                             _vm._v(" "),
-                            _vm._l(_vm.wards, function(ward) {
+                            _vm._l(_vm.wards, function(wardy) {
                               return _c(
                                 "option",
-                                { key: ward.id, domProps: { value: ward.id } },
-                                [_vm._v(_vm._s(ward.name))]
+                                {
+                                  key: wardy.id,
+                                  domProps: { value: wardy.id }
+                                },
+                                [_vm._v(_vm._s(wardy.name))]
                               )
                             })
                           ],

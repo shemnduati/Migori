@@ -20,7 +20,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="counties in county" :key="county.id">
+                    <tr v-for="counties in county.data" :key="county.id">
                       <td>{{counties.name}}</td>
                       <td>
                       	<a href="#" @click="editModal(counties)">
@@ -35,6 +35,9 @@
                 </table>
               </div>
               <!-- /.card-body -->
+                <div class="card-footer">
+                    <pagination :data="county" @pagination-change-page="getResults"></pagination>
+                </div>
             </div>
             <!-- /.card -->
           </div>
@@ -78,18 +81,19 @@
         editMode:false,
         county:{},
 				form: new Form({
-          id:'',
-					name: '',
+                    id:'',
+					/*name: '',*/
 				})
 			}
 		},
-        created() {
-            this.loadCounty();
-            Fire.$on('entry', () => {
-                this.loadCounty();
-            });
-        },
+
         methods: {
+            getResults(page = 1) {
+                axios.get('api/county?page=' + page)
+                    .then(response => {
+                        this.county = response.data;
+                    });
+            },
 			addCounty(){
 				this.$Progress.start();
 				this.form.post('api/county')
@@ -165,9 +169,23 @@
         console.log('I can edit');
       }
 		},
+        created() {
+            Fire.$on('searching', ()=>{
+                let query = this.$parent.search;
+                axios.get('api/findCounty?q=' + query)
+                    .then((data)=>{
+                        this.county = data.data;
+                    })
+                    .catch(()=>{
+
+                    })
+            })
+            this.loadCounty();
+            Fire.$on('AfterCreate', () =>{
+                this.loadCounty();
+            })
+            //setInterval(() => this.loadUsers(), 3000);
+        }
     }
 </script>
 
-<style>
-
-</style>

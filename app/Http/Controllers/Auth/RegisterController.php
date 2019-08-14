@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-     protected $redirectTo = '/home';
+     protected $redirectTo = '/student';
 
     // protected function redirectTo( )
     // {
@@ -39,6 +39,14 @@ class RegisterController extends Controller
     //         return ('/email/verify');
     //     }
     // }
+//    protected function redirectTo( )
+//    {
+//        if (Auth::check() && Auth::user()->role == 'admin') {
+//            return ('/home');
+//        } elseif (Auth::check() && Auth::user()->role == 'student') {
+//            return ('/student');
+//        }
+//    }
 
     /**
      * Create a new controller instance.

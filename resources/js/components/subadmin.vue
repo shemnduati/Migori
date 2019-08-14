@@ -75,13 +75,23 @@
                                 <has-error :form="form" field="email"></has-error>
                             </div>
                             <div class="form-group">
-                                <select name="ward" v-model="form.ward" id="ward" class="form-control"   :class="{ 'is-invalid': form.errors.has('ward') }">
-                                  <option value="">Allocate ward to Sub-Admin</option>
-                                    <option v-for="ward in wards" :key="ward.id" :value="ward.id">{{ward.name}}</option>
+                                <label for="county">County</label>
+                                <select v-model="form.county" @change='getCountyWards()' class="form-control" name="county" id="county"
+                                        :class="{ 'is-invalid': form.errors.has('county') }">
+                                    <option selected value="">--Select county--</option>
+                                    <option v-for="count in counties" :key="count.id" :value="count.id">{{ count.name}}</option>
+                                </select>
+                                <has-error :form="form" field="county"></has-error>
+                            </div>
+                            <div class="form-group">
+                                <label for="ward">Ward</label>
+                                <select v-model="form.ward" class="form-control" name="ward" id="ward"
+                                        :class="{ 'is-invalid': form.errors.has('ward') }">
+                                    <option selected value="">--Select Ward--</option>
+                                    <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}}</option>
                                 </select>
                                 <has-error :form="form" field="ward"></has-error>
                             </div>
-
                         </div>
 
                         <div class="modal-footer">
@@ -103,6 +113,7 @@
                 editMode: false,
                 users :{},
                 wards:{},
+                counties: {},
                 form: new Form({
                     id:'',
                     name:'',
@@ -182,6 +193,15 @@
                     axios.get("api/wards").then(({ data }) => (this.wards = data));
                 }
             },
+            getCounties(){
+                axios.get("api/getcounty").then(({ data }) => ([this.counties = data['counties']]));
+            },
+            getWards(){
+                axios.get("api/getward").then(({ data }) => ([this.wards = data['wards']]));
+            },
+            getCountyWards(){
+                axios.get("api/getcountyward/" + this.form.county).then(({ data }) => ([this.wards = data['wards']]));
+            },
             createUser(){
                 this.$Progress.start();
                 this.form.post('api/user')
@@ -213,8 +233,12 @@
                     })
             })
             this.loadUsers();
+            this.getCounties();
+            this.getWards();
             Fire.$on('AfterCreate', () =>{
                 this.loadUsers();
+                this.getCounties();
+                this.getWards();
             })
             //setInterval(() => this.loadUsers(), 3000);
         }

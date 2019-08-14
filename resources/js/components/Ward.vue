@@ -4,7 +4,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Responsive Hover Table</h3>
+                <h3 class="card-title">Add wards to each county</h3>
 
                 <div class="card-tools">
                   <button class="btn btn-sm btn-primary" @click="newModal">Add Ward</button>
@@ -21,7 +21,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="wards in ward">
+                    <tr v-for="wards in ward.data">
                       <td>{{wards.county.name}}</td>
                       <td>{{wards.name}}</td>
                       <td>
@@ -37,6 +37,9 @@
                 </table>
               </div>
               <!-- /.card-body -->
+                <div class="card-footer">
+                    <pagination :data="ward" @pagination-change-page="getResults"></pagination>
+                </div>
             </div>
             <!-- /.card -->
           </div>
@@ -98,6 +101,12 @@
             }
         },
         methods: {
+            getResults(page = 1) {
+                axios.get('api/ward?page=' + page)
+                    .then(response => {
+                        this.ward = response.data;
+                    });
+            },
             newModal(){
               this.editMode = false;
               this.form.reset();
@@ -175,11 +184,23 @@
             },
 
         },
+
         created() {
+            Fire.$on('searching', ()=>{
+                let query = this.$parent.search;
+                axios.get('api/findWard?q=' + query)
+                    .then((data)=>{
+                        this.ward = data.data;
+                    })
+                    .catch(()=>{
+
+                    })
+            })
             this.loadWard();
-            Fire.$on('entry', () => {
+            Fire.$on('AfterCreate', () =>{
                 this.loadWard();
-            });
+            })
+            //setInterval(() => this.loadUsers(), 3000);
         },
 
     }
