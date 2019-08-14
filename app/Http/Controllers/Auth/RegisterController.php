@@ -31,6 +31,14 @@ class RegisterController extends Controller
      */
      protected $redirectTo = '/student';
 
+    // protected function redirectTo( )
+    // {
+    //     if (Auth::check() && Auth::user()->role == 'admin') {
+    //         return ('/home');
+    //     } elseif (Auth::check() && Auth::user()->role == 'student') {
+    //         return ('/email/verify');
+    //     }
+    // }
 //    protected function redirectTo( )
 //    {
 //        if (Auth::check() && Auth::user()->role == 'admin') {

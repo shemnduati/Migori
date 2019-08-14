@@ -31,7 +31,7 @@ class InformationController extends Controller
     public function getApplications()
     {
         // return User::latest()->paginate(10);
-        $applications = Application::where('year', date('Y'))->get();
+        $applications = Application::where('year', date('Y'))->whereIn('status', [2,3])->get();
 
         return ['applications'=>$applications];
 
@@ -71,7 +71,7 @@ class InformationController extends Controller
     public function getType($id)
     {
         if ($id==1) {
-            $applications = Application::where('year', date('Y'))->get();
+            $applications = Application::where('year', date('Y'))->whereIn('status', [2,3])->get();
 
             return ['applications'=>$applications];
         }elseif ($id==2) {
@@ -86,8 +86,14 @@ class InformationController extends Controller
             $applications = Application::where('status', 2)->where('year', date('Y'))->get();
 
             return ['applications'=>$applications];
+        }elseif ($id==5) {
+            $applications = Application::where('status', 3)->where('year', date('Y'))->get();
+
+            return ['applications'=>$applications];
         }
-    }public function getstatus($id)
+    }
+
+    public function getstatus($id)
     {
         $ward_id = User::where('id',Auth::user()->id)->value('ward');
         if ($id==1) {

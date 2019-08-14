@@ -29,6 +29,8 @@ Route::get('dash','API\DashboardContoller@sub');
 Route::get('profile','API\UserController@profile');
 Route::post('/apply','API\ApplicationController@store');
 Route::apiResources(['county' => 'API\CountyController']);
+Route::get('status','API\ConfigurationController@getStatus');
+Route::apiResources(['configuration' => 'API\ConfigurationController']);
 
 Route::get('/getcounties','API\ApplicationController@getCounties');
 Route::get('/getwards','API\ApplicationController@getWards');
@@ -37,6 +39,7 @@ Route::get('/getappdetails/{applicantId}','API\ApplicationController@show');
 Route::get('/getcountywards/{countyId}','API\ApplicationController@getCountyWards');
 Route::put('/accept/{applicantId}','API\ApplicationController@accept');
 Route::put('/reject/{applicantId}','API\ApplicationController@reject');
+Route::put('/send/{applicantId}','API\ApplicationController@send');
 
 // Route::apiResources(['Information'=>'API\InformationController']);
 Route::get('/getapplications','API\InformationController@getApplications');

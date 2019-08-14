@@ -155,7 +155,8 @@
 		<hr>
 		<div class="row mb-3">
 			<div class="col-md-6">
-				<button @click="accept()" class="btn btn-success px-5 offset-md-1">Send</button>
+				<button @click="send()" v-if="$gate.isSubadmin()" class="btn btn-success px-5 offset-md-1">Send</button>
+				<button @click="accept()" v-if="($gate.isAdmin()) && (application['status'] != 3)" class="btn btn-success px-5 offset-md-1">Accept</button>
 			</div>
 			<div class="col-md-6">
 				<button @click="reject()" class="btn btn-danger px-5 offset-md-3" >Reject</button>
@@ -171,7 +172,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img :src="'/uploads/' + this.photo" alt="" width="500px">
+                        <img :src="'/uploads/' + this.photo" alt="" style="width: 400px;">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -208,26 +209,29 @@
 				$('#addnew').modal('show');
 				this.photo = passport;
 			},
-			accept(){
-				Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, send it!'
-                }).then((result) => {
-                	if (result.value) {
-               		axios.put("/api/accept/" + this.applicantId).then( response => {
+			send(){
+               		axios.put("/api/send/" + this.applicantId).then( response => {
                     Fire.$emit('AfterCreate');
                     Swal.fire({
                           type: 'success',
                           title: 'Success',
                            text: 'Sent!!',
-                           text: 'Reset Succesful',
+                           text: 'Sent to Admin!',
                         })
+                    this.$router.push('/Information');
                 });
-           }
-           })
+			},
+			accept(){
+               		axios.put("/api/accept/" + this.applicantId).then( response => {
+                    Fire.$emit('AfterCreate');
+                    Swal.fire({
+                          type: 'success',
+                          title: 'Success',
+                           text: 'Accept',
+                           text: 'Accepted!',
+                        })
+                    this.$router.push('/Information');
+                });
 			},
 			reject(){
                 axios.put("/api/reject/" + this.applicantId).then( response => {
@@ -238,6 +242,7 @@
                           text: 'Rejected!!',
                           text: 'Reset Succesful',
                         })
+                    this.$router.push('/Information');
                 });
 			}
 		},

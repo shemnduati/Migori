@@ -69,6 +69,56 @@ class ApplicationController extends Controller
                 ], 422);
         }else {
 
+        $this->validate($request,[
+            'year' => 'required|min:1|max:7',
+            'type'=>'required',
+            'name'=>'required|string',
+            'dob'=>'required|date',
+            'email'=>'required|email',
+            'gender'=>'required',
+            'telephone'=>'required',
+            'regNo'=>'required',
+            'class'=>'required',
+            'idNo'=>'required',
+            'fname'=>'required|string',
+            'fliving'=>'required',
+            'foccupation'=>'required|string',
+            'mname'=>'required|string',
+            'mliving'=>'required',
+            'moccupation'=>'required|string',
+            'gname'=>'required|string',
+            'gliving'=>'required',
+            'goccupation'=>'required|string',
+            'fincome'=>'required',
+            'mincome'=>'required',
+            'gincome'=>'required',
+            'county'=>'required',
+            'ward'=>'required',
+            'constituency'=>'required|string',
+            'location'=>'required|string',
+            'division'=>'required|string',
+            'sublocation'=>'required|string',
+            'village'=>'required|string',
+            'iname'=>'required|string',
+            'branch'=>'required|string',
+            'year'=>'required',
+            'payable'=>'required',
+            'paid'=>'required',
+            'balance'=>'required',
+            'tSiblings'=>'required',
+            'inSchool'=>'required',
+            'sWorking'=>'required',
+            'pFees'=>'required',
+            'pRelationship'=>'required',
+            'passport'=>'required',
+            'fatherId'=>'required',
+            'motherId'=>'required',
+            'guardianId'=>'required',
+            'ftelephone'=>'required',
+            'mtelephone'=>'required',
+            'gtelephone'=>'required',
+        ]);
+
         $passport_name = "";
         $guardianId_name = "";
         $fatherId_name = "";
@@ -275,8 +325,40 @@ class ApplicationController extends Controller
 
     public function accept($applicantId)
     {
-        $email = User::where('id',$applicantId)->value('email');
-        Mail::to( $email)->send(new BursaryEmail());
+        $application = Application::where('user_id', $applicantId)->where('status', 1)->first();
+        $appli = Application::findOrFail($application['id']);
+        $appli->status = 3;
+        $appli->update();
+
+        $family = Family::where('user_id', $applicantId)->where('status', 1)->get();
+        foreach ($family as $fam) {
+            $fami = Family::findOrFail($fam['id']);
+            $fami->status=3;
+            $fami->update();
+        }
+
+        $morefamily = MoreFamily::where('user_id', $applicantId)->where('status', 1)->first();
+        $more=MoreFamily::findOrFail($morefamily['id']);
+        $more->status = 3;
+        $more->update();
+
+        $institution = Institution::where('user_id', $applicantId)->where('status', 1)->first();
+        $insti = Institution::findOrFail($institution['id']);
+        $insti->status=3;
+        $insti->update();
+
+        $geographical = Geographical::where('user_id', $applicantId)->where('status', 1)->first();
+        $geo=Geographical::findOrFail($geographical['id']);
+        $geo->status=3;
+        $geo->update();
+
+        // $email = User::where('id',$applicantId)->value('email');
+        // Mail::to( $email)->send(new BursaryEmail());
+
+    }
+
+    public function send($applicantId)
+    {
         $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
         $appli = Application::findOrFail($application['id']);
         $appli->status = 1;
@@ -303,6 +385,9 @@ class ApplicationController extends Controller
         $geo=Geographical::findOrFail($geographical['id']);
         $geo->status=1;
         $geo->update();
+
+        // $email = User::where('id',$applicantId)->value('email');
+        // Mail::to( $email)->send(new BursaryEmail());
 
     }
 

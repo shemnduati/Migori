@@ -100,7 +100,7 @@
 					.then(()=>{
 					    Fire.$emit('entry');
 					    $('#addnew').modal('hide');
-					    Toast.fire({
+					    toast.fire({
 					        type: 'success',
 					        title: 'County created successfully'
 					    });

@@ -12,9 +12,10 @@
                             <select @change="getType()" v-model="form.type" class="form-control">
                             <option selected value="">--Sort By--</option>
                             <option value="1">All</option>
-                            <option value="2">Pending</option>
-                            <option value="3">Sent</option>
-                            <option value="4">Rejected</option>
+                            <option v-if="$gate.Subadmin" value="2">Pending</option>
+                            <option  value="3">Sent</option>
+                            <option v-if="$gate.Subadmin" value="4">Rejected</option>
+                            <option v-if="$gate.isAdmin" value="5">Approved</option>
                         </select>
                     </form>
                         </div>
@@ -36,9 +37,10 @@
                                 <td>{{application.name}}</td>
                                 <td>{{application.gender}}</td>
                                 <td>
-                                    <span v-if="application.status==0">Pending...</span>
+                                    <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
-                                    <span v-if="application.status==1">Sent</span>
+                                    <span v-if="application.status==1" style="color: blue;">Sent</span>
+                                    <span v-if="application.status==3" style="color: green;">Accepted</span>
                                </td>
                                 <td><router-link :to="{path:'/informationview/'+ application.user_id}" type="button" class="btn btn-primary">view</router-link></td>
                                 <td>{{application.bursary_type}}</td>
