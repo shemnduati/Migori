@@ -23,13 +23,12 @@ Route::get('/', function () {
 //     $user->notify(new ApplicationSent);
 //     return redirect('home');
 // 	// foreach ($user as $users) {
-	    
+
 // 	// }
 // });
 
 Auth::routes();
 Auth::routes(['verify' => true]);
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/apply', 'HomeController@apply')->name('apply');
 Route::get('/student', 'HomeController@student')->name('student');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Application;
+use App\County;
 use App\User;
 use App\Ward;
 use Illuminate\Http\Request;
@@ -66,6 +68,26 @@ class UserController extends Controller
      }
 
           return ['parent'=>$parent];
+    }
+    public function getCounties()
+    {
+        $counties = County::all();
+
+        return ['counties'=>$counties];
+    }
+
+    public function getWards()
+    {
+        $wards = Ward::all();
+
+        return ['wards'=>$wards];
+    }
+
+    public function getCountyWards($countyId)
+    {
+        $wards = Ward::where('county_id', $countyId)->get();
+
+        return ['wards'=>$wards];
     }
     public function wards()
     {

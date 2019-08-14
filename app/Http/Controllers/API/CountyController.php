@@ -15,7 +15,7 @@ class CountyController extends Controller
      */
     public function index()
     {
-        return County::all();
+        return County::latest()->paginate(10);
     }
 
     /**
@@ -75,5 +75,15 @@ class CountyController extends Controller
         $county = County::findOrFail($id);
 
         $county->delete();
+    }
+    public function search(){
+        if ($search = \Request::get('q')) {
+            $users = County::where(function($query) use ($search){
+                $query->where('name','LIKE',"%$search%");
+            })->paginate(20);
+        }else{
+            $users = County::latest()->paginate(10);
+        }
+        return $users;
     }
 }

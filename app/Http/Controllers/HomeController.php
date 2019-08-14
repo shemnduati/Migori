@@ -39,7 +39,7 @@ class HomeController extends Controller
 
     public function apps()
     {
-        $apps= Application::where('statu', 0)->where('user_id', Auth::user()->id)->count();
+        $apps= Application::where('status', 0)->where('user_id', Auth::user()->id)->count();
         return view('layout.dashboard')->with('apps', $apps);
     }
 }
