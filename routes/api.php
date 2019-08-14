@@ -35,6 +35,7 @@ Route::get('/getappdetails/{applicantId}','API\ApplicationController@show');
 Route::get('/getcountywards/{countyId}','API\ApplicationController@getCountyWards');
 Route::put('/accept/{applicantId}','API\ApplicationController@accept');
 Route::put('/reject/{applicantId}','API\ApplicationController@reject');
+Route::put('/send/{applicantId}','API\ApplicationController@send');
 
 // Route::apiResources(['Information'=>'API\InformationController']);
 Route::get('/getapplications','API\InformationController@getApplications');

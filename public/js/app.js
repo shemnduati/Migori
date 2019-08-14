@@ -2288,7 +2288,7 @@ __webpack_require__.r(__webpack_exports__);
       var reader = new FileReader();
 
       if (file['size'] < 2111775) {
-        if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg' || file['type'] == 'application/pdf') {
+        if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
             _this2.form.guardianId = reader.result;
@@ -2318,7 +2318,7 @@ __webpack_require__.r(__webpack_exports__);
       var reader = new FileReader();
 
       if (file['size'] < 2111775) {
-        if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg' || file['type'] == 'application/pdf') {
+        if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
             _this3.form.fatherId = reader.result;
@@ -2347,7 +2347,7 @@ __webpack_require__.r(__webpack_exports__);
       var reader = new FileReader();
 
       if (file['size'] < 2111775) {
-        if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg' || file['type'] == 'application/pdf') {
+        if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
             _this4.form.motherId = reader.result;
@@ -2988,6 +2988,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3236,6 +3238,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3277,29 +3280,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#addnew').modal('show');
       this.photo = passport;
     },
-    accept: function accept() {
+    send: function send() {
       var _this2 = this;
 
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, send it!'
-      }).then(function (result) {
-        if (result.value) {
-          axios.put("/api/accept/" + _this2.applicantId).then(function (response) {
-            Fire.$emit('AfterCreate');
-            Swal.fire(_defineProperty({
-              type: 'success',
-              title: 'Success',
-              text: 'Sent!!'
-            }, "text", 'Reset Succesful'));
-          });
-        }
+      axios.put("/api/send/" + this.applicantId).then(function (response) {
+        Fire.$emit('AfterCreate');
+        Swal.fire(_defineProperty({
+          type: 'success',
+          title: 'Success',
+          text: 'Sent!!'
+        }, "text", 'Sent to Admin!'));
+
+        _this2.$router.push('/Information');
+      });
+    },
+    accept: function accept() {
+      var _this3 = this;
+
+      axios.put("/api/accept/" + this.applicantId).then(function (response) {
+        Fire.$emit('AfterCreate');
+        Swal.fire(_defineProperty({
+          type: 'success',
+          title: 'Success',
+          text: 'Accept'
+        }, "text", 'Accepted!'));
+
+        _this3.$router.push('/Information');
       });
     },
     reject: function reject() {
+      var _this4 = this;
+
       axios.put("/api/reject/" + this.applicantId).then(function (response) {
         Fire.$emit('AfterCreate');
         Swal.fire(_defineProperty({
@@ -3307,6 +3318,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           title: 'Success',
           text: 'Rejected!!'
         }, "text", 'Reset Succesful'));
+
+        _this4.$router.push('/Information');
       });
     }
   },
@@ -67697,17 +67710,27 @@ var render = function() {
                           _vm._v("All")
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "2" } }, [
-                          _vm._v("Pending")
-                        ]),
+                        _vm.$gate.Subadmin
+                          ? _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("Pending")
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "3" } }, [
                           _vm._v("Sent")
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "4" } }, [
-                          _vm._v("Rejected")
-                        ])
+                        _vm.$gate.Subadmin
+                          ? _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("Rejected")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.$gate.isAdmin
+                          ? _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("Approved")
+                            ])
+                          : _vm._e()
                       ]
                     )
                   ])
@@ -67732,7 +67755,11 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [
                               application.status == 0
-                                ? _c("span", [_vm._v("Pending...")])
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "purple" } },
+                                    [_vm._v("Pending...")]
+                                  )
                                 : _vm._e(),
                               _vm._v(" "),
                               application.status == 2
@@ -67744,7 +67771,19 @@ var render = function() {
                                 : _vm._e(),
                               _vm._v(" "),
                               application.status == 1
-                                ? _c("span", [_vm._v("Sent")])
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "blue" } },
+                                    [_vm._v("Sent")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.status == 3
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "green" } },
+                                    [_vm._v("Accepted")]
+                                  )
                                 : _vm._e()
                             ]),
                             _vm._v(" "),
@@ -68049,18 +68088,35 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row mb-3" }, [
       _c("div", { staticClass: "col-md-6" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success px-5 offset-md-1",
-            on: {
-              click: function($event) {
-                return _vm.accept()
-              }
-            }
-          },
-          [_vm._v("Send")]
-        )
+        _vm.$gate.isSubadmin()
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success px-5 offset-md-1",
+                on: {
+                  click: function($event) {
+                    return _vm.send()
+                  }
+                }
+              },
+              [_vm._v("Send")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isAdmin() && _vm.application["status"] != 3
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success px-5 offset-md-1",
+                on: {
+                  click: function($event) {
+                    return _vm.accept()
+                  }
+                }
+              },
+              [_vm._v("Accept")]
+            )
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6" }, [
@@ -68101,11 +68157,8 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("img", {
-                  attrs: {
-                    src: "/uploads/" + this.photo,
-                    alt: "",
-                    width: "500px"
-                  }
+                  staticStyle: { width: "400px" },
+                  attrs: { src: "/uploads/" + this.photo, alt: "" }
                 })
               ]),
               _vm._v(" "),
