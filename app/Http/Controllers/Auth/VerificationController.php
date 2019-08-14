@@ -28,14 +28,8 @@ class VerificationController extends Controller
      */
     // protected $redirectTo = '/home';
 
-    protected function redirectTo( )
-    {
-        if (Auth::check() && Auth::user()->role == 'admin') {
-            return ('/home');
-        } elseif (Auth::check() && Auth::user()->role == 'student') {
-            return ('/student');
-        }
-    }
+   
+        protected $redirectTo = '/email/verify';
 
     /**
      * Create a new controller instance.
