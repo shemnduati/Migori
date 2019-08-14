@@ -27,6 +27,8 @@ Route::get('dash','API\DashboardContoller@sub');
 Route::get('profile','API\UserController@profile');
 Route::post('/apply','API\ApplicationController@store');
 Route::apiResources(['county' => 'API\CountyController']);
+Route::get('status','API\ConfigurationController@getStatus');
+Route::apiResources(['configuration' => 'API\ConfigurationController']);
 
 Route::get('/getcounties','API\ApplicationController@getCounties');
 Route::get('/getwards','API\ApplicationController@getWards');

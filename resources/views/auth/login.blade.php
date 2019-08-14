@@ -124,7 +124,7 @@
                                   
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
-                                        <div class="input-group-text">@</div>
+                                        <div class="input-group-text"><i class="fas fa-user"></i></div>
                                       </div>
                                       <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Username">
                                       @error('name')

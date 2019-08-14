@@ -40,6 +40,7 @@ let routes = [
     { path: '/users', component: require('./components/users.vue').default },
     { path: '/county', component: require('./components/County.vue').default },
     { path: '/ward', component: require('./components/Ward.vue').default },
+    { path: '/configuration', component: require('./components/Configuration.vue').default },
     { path: '/subadmin', component: require('./components/subadmin.vue').default },
     // { path: '/application', component: require('./components/Application.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
