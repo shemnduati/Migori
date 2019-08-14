@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center" v-if="$gate.isStudent">
+        <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" v-if="enable==1">
                     <div class="card-header">Application Component</div>
