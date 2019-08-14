@@ -2277,9 +2277,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.form.post('api/apply').then(function () {
         Fire.$emit('AfterCreate');
-        toast.fire({
+        Swal.fire({
           type: 'success',
-          title: 'Successfully'
+          title: 'Submited!!',
+          text: 'Application Submitted Successfully'
         });
 
         _this.form.reset();
@@ -2999,8 +3000,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3144,6 +3143,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -89361,8 +89362,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/kryme/Documents/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/kryme/Documents/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -561,10 +561,12 @@
                this.form.post('api/apply')
                     .then(() => {
                         Fire.$emit('AfterCreate');
-                        toast.fire({
-                            type: 'success',
-                            title: 'Successfully'
-                        });
+                        Swal.fire({
+                          type: 'success',
+                          title: 'Submited!!',
+                          text: 'Application Submitted Successfully',
+
+                        })
                         this.form.reset();
                         this.$Progress.finish();
                     })
