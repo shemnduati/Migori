@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" v-if="enable==1">
                     <div class="card-header">Application Component</div>
 
                     <div class="card-body">
@@ -479,6 +479,18 @@
                         </form>
                     </div>
                 </div>
+                <div v-if="enable == 0">
+                    <div class="card">
+                      <div class="card-header">
+                        Aplication Form not Available
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Application window closed</h5>
+                        <p class="card-text">The application window has been clossed for now wait until the window is opened</p>
+                        <a href="/" class="btn btn-danger">Go Back Home</a>
+                      </div>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
@@ -493,6 +505,7 @@
                 counties: {},
                 wards: {},
                 info: {},
+                enable:{},
                 form: new Form({
                     type:'',
                     name: '',
@@ -947,12 +960,16 @@
             },
             getDetails(){
                 axios.get("api/getdetails").then(({ data }) => ([this.info = data['user']]));
+            },
+            getStatus(){
+                axios.get("api/status").then(({ data }) => ([this.enable = data['num']]));
             }
         },
         created() {
             this.getCounties();
             this.getWards();
             this.getDetails();
+            this.getStatus();
         }
     }
 </script>

@@ -109,7 +109,7 @@
                     .then(()=>{
                         Fire.$emit('entry');
                         $('#addnew').modal('hide');
-                        Toast.fire({
+                        toast.fire({
                             type: 'success',
                             title: 'Ward created successfully'
                         });
