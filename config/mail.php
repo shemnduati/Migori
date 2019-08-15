@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 465),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'baza@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'baza@gamil.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'support@baza.co.ke'),
+        'name' => env('MAIL_FROM_NAME', 'Verification'),
     ],
 
     /*
