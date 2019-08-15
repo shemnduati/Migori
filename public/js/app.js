@@ -2840,7 +2840,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2877,6 +2876,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$Progress.finish();
       })["catch"](function () {
         _this2.$Progress.fail();
+
+        swal('Failed!', 'An application is currently on Ensure that it is are turned off');
       });
     },
     updateConfiguration: function updateConfiguration() {
@@ -4440,7 +4441,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: {}
+      editMode: false,
+      users: {},
+      form: new Form({
+        id: '',
+        name: '',
+        email: '',
+        phone: '',
+        password: '',
+        type: '',
+        boi: '',
+        photo: ''
+      })
     };
   },
   methods: {
@@ -4452,8 +4464,34 @@ __webpack_require__.r(__webpack_exports__);
         _this.users = response.data;
       });
     },
-    deleteUser: function deleteUser(id) {
+    updateUser: function updateUser() {
       var _this2 = this;
+
+      this.$Progress.start();
+      this.form.put('api/user/' + this.form.id).then(function () {
+        $('#addnew').modal('hide');
+        swal.fire('Edited!', 'User information updated.', 'success');
+
+        _this2.$Progress.finish();
+
+        Fire.$emit('AfterCreate');
+      })["catch"](function () {
+        _this2.$Progress.fail();
+      });
+    },
+    editModal: function editModal(user) {
+      this.editMode = true;
+      this.form.reset();
+      this.form.fill(user);
+      $('#addnew').modal('show');
+    },
+    newModal: function newModal() {
+      this.editMode = false;
+      this.form.reset();
+      $('#addnew').modal('show');
+    },
+    deleteUser: function deleteUser(id) {
+      var _this3 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -4465,32 +4503,27 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         // send the request to the controller
         if (result.value) {
-          _this2.form["delete"]('api/user/' + id).then(function () {
+          _this3.form["delete"]('api/user/' + id).then(function () {
             Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-
-            _this2.$Progress.finish();
-
             Fire.$emit('AfterCreate');
           });
         }
       })["catch"](function () {
-        _this2.$Progress.fail();
-
-        Swal.fire("Failed to Delete!", "There was something wrong.");
+        swal("Failed!", "There was something wrong.", "warning");
       });
     },
     loadUsers: function loadUsers() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.$gate.isAdmin()) {
         axios.get("api/user").then(function (_ref) {
           var data = _ref.data;
-          return _this3.users = data;
+          return _this4.users = data;
         });
       }
     },
     createUser: function createUser() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.$Progress.start();
       this.form.post('api/user').then(function () {
@@ -4501,24 +4534,22 @@ __webpack_require__.r(__webpack_exports__);
           title: 'User Created in successfully'
         });
 
-        _this4.$Progress.finish();
-      })["catch"](function () {
-        Swal.fire("Failed to Create new user!", "There was something wrong.");
-      });
+        _this5.$Progress.finish();
+      })["catch"](function () {});
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     Fire.$on('searching', function () {
-      var query = _this5.$parent.search;
+      var query = _this6.$parent.search;
       axios.get('api/findUser?q=' + query).then(function (data) {
-        _this5.users = data.data;
+        _this6.users = data.data;
       })["catch"](function () {});
     });
     this.loadUsers();
     Fire.$on('AfterCreate', function () {
-      _this5.loadUsers();
+      _this6.loadUsers();
     }); //setInterval(() => this.loadUsers(), 3000);
   }
 });
@@ -88644,7 +88675,7 @@ var routes = [{
 {
   path: '/profile',
   component: __webpack_require__(/*! ./components/Profile.vue */ "./resources/js/components/Profile.vue")["default"]
-}, // { path: '*', component: require('./components/NotFound.vue').default },
+}, //{ path: '*', component: require('./components/NotFound.vue').default },
 {
   path: '/Information',
   component: __webpack_require__(/*! ./components/Information.vue */ "./resources/js/components/Information.vue")["default"]
