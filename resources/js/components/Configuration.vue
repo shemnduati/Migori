@@ -73,7 +73,7 @@
                                 <has-error :form="form" field="status"></has-error>
                             </div>
                         </div>
-                        
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             <button v-show="!editMode" type="submit" class="btn btn-success">Create</button>
@@ -84,7 +84,6 @@
                 </div>
             </div>
             </div>
-        </div>
 </template>
 
 <script>
@@ -121,6 +120,7 @@
                     })
                     .catch(()=>{
                     this.$Progress.fail();
+                        swal('Failed!','An application is currently on Ensure that it is are turned off')
                     });
             },
             updateConfiguration(){
@@ -135,7 +135,7 @@
                     'success'
                     )
                   this.$Progress.finish();
-                  
+
                 })
                 .catch(()=>{
                   this.$Progress.fail();

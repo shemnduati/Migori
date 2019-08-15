@@ -2816,7 +2816,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2853,6 +2852,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$Progress.finish();
       })["catch"](function () {
         _this2.$Progress.fail();
+
+        swal('Failed!', 'An application is currently on Ensure that it is are turned off');
       });
     },
     updateConfiguration: function updateConfiguration() {
