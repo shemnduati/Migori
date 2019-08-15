@@ -37,8 +37,8 @@ class ApplicationController extends Controller
 
     public function getWards()
     {
-        $apps= Application::where('status', 0)->where('user_id', Auth::user()->id)->count();
-        return view('layout.dashboard')->with('apps', $apps);
+//        $apps= Application::where('status', 0)->where('user_id', Auth::user()->id)->count();
+//        return view('layout.dashboard')->with('apps', $apps);
 
         $wards = Ward::all();
 
