@@ -2877,7 +2877,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function () {
         _this2.$Progress.fail();
 
-        swal('Failed!', 'An application is currently on Ensure that it is are turned off');
+        Swal.fire({
+          type: 'error',
+          title: 'Ooops...',
+          text: 'There is an application that is currently running! Ensure you turn it OFF!!'
+        });
       });
     },
     updateConfiguration: function updateConfiguration() {
@@ -68957,7 +68961,7 @@ var render = function() {
           return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
             _c("div", { staticClass: "col-md-8" }, [
               _c("p", { staticClass: "rounded p-2 mt-2 text-center bg-b" }, [
-                _vm._v(_vm._s(fam["relationship"]) + " ID/ Death Cert")
+                _vm._v(_vm._s(fam["relationship"]) + "'s ID/ Death Cert")
               ])
             ]),
             _vm._v(" "),

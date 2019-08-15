@@ -87,7 +87,7 @@
 			<div class="col-md-4 pt-5">
 				<div class="row pt-5" v-for="fam in family" :key="fam.id">
 					<div class="col-md-8">
-						<p class="rounded p-2 mt-2 text-center bg-b">{{fam['relationship']}} ID/ Death Cert</p>
+						<p class="rounded p-2 mt-2 text-center bg-b">{{fam['relationship']}}'s ID/ Death Cert</p>
 					</div>
 					<div class="col-md-4">
 						<button @click="launch(fam.cert)" class="btn btn-lg bg-success">Views</button>
