@@ -2212,6 +2212,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2434,6 +2438,11 @@ __webpack_require__.r(__webpack_exports__);
             regNo: 'This field is required'
           });
           return false;
+        } else if (!this.form.passport) {
+          this.form.errors.set({
+            passport: 'This field is required'
+          });
+          return false;
         } else {
           this.step++;
           return false;
@@ -2540,6 +2549,21 @@ __webpack_require__.r(__webpack_exports__);
         } else if (!this.form.pRelationship) {
           this.form.errors.set({
             pRelationship: 'This field is required'
+          });
+          return false;
+        } else if (!this.form.fatherId) {
+          this.form.errors.set({
+            fatherId: 'This field is required'
+          });
+          return false;
+        } else if (!this.form.motherId) {
+          this.form.errors.set({
+            motherId: 'This field is required'
+          });
+          return false;
+        } else if (!this.form.guardianId) {
+          this.form.errors.set({
+            guardianId: 'This field is required'
           });
           return false;
         } else {
@@ -3294,6 +3318,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -65649,17 +65674,35 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col" }, [
-                            _c("div", { staticClass: "form-group" }, [
-                              _c("label", { attrs: { for: "passport" } }, [
-                                _vm._v("Attach Passport Photo")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                staticClass: "form-control-file",
-                                attrs: { type: "file", id: "passport" },
-                                on: { change: _vm.getPassport }
-                              })
-                            ])
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "passport" } }, [
+                                  _vm._v("Attach Passport Photo")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  staticClass: "form-control-file",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "passport"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "file",
+                                    id: "passport",
+                                    accept: "image/*"
+                                  },
+                                  on: { change: _vm.getPassport }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "passport" }
+                                })
+                              ],
+                              1
+                            )
                           ])
                         ])
                       ])
@@ -65828,17 +65871,35 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col" }, [
-                            _c("div", { staticClass: "form-group" }, [
-                              _c("label", { attrs: { for: "fpassport" } }, [
-                                _vm._v("Attach Father’s ID/Death Cert")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                staticClass: "form-control-file",
-                                attrs: { type: "file", id: "fId" },
-                                on: { change: _vm.getFatherId }
-                              })
-                            ])
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "fpassport" } }, [
+                                  _vm._v("Attach Father’s ID/Death Cert")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  staticClass: "form-control-file",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "fatherId"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "file",
+                                    id: "fId",
+                                    accept: "image/*"
+                                  },
+                                  on: { change: _vm.getFatherId }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "fatherId" }
+                                })
+                              ],
+                              1
+                            )
                           ])
                         ]),
                         _vm._v(" "),
@@ -66144,17 +66205,35 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col" }, [
-                            _c("div", { staticClass: "form-group" }, [
-                              _c("label", { attrs: { for: "mpassport" } }, [
-                                _vm._v("Attach Mother’s ID/Death Cert")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                staticClass: "form-control-file",
-                                attrs: { type: "file", id: "mID" },
-                                on: { change: _vm.getMotherId }
-                              })
-                            ])
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "mpassport" } }, [
+                                  _vm._v("Attach Mother’s ID/Death Cert")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  staticClass: "form-control-file",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "motherId"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "file",
+                                    id: "mID",
+                                    accept: "image/*"
+                                  },
+                                  on: { change: _vm.getMotherId }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "motherId" }
+                                })
+                              ],
+                              1
+                            )
                           ])
                         ]),
                         _vm._v(" "),
@@ -66460,17 +66539,35 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col" }, [
-                            _c("div", { staticClass: "form-group" }, [
-                              _c("label", { attrs: { for: "gpassport" } }, [
-                                _vm._v("Attach Guardian’s ID/Death Cert")
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                staticClass: "form-control-file",
-                                attrs: { type: "file", id: "gId" },
-                                on: { change: _vm.getGuardianId }
-                              })
-                            ])
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "gpassport" } }, [
+                                  _vm._v("Attach Guardian’s ID/Death Cert")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  staticClass: "form-control-file",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "guardianId"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "file",
+                                    id: "gId",
+                                    accept: "image/*"
+                                  },
+                                  on: { change: _vm.getGuardianId }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "guardianId" }
+                                })
+                              ],
+                              1
+                            )
                           ])
                         ]),
                         _vm._v(" "),
@@ -68995,7 +69092,7 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("img", {
                   staticStyle: { width: "400px" },
-                  attrs: { src: "/uploads/" + this.photo, alt: "" }
+                  attrs: { src: this.photo, alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -89549,13 +89646,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> f7972ee66cce9ff114439c33d4a954b02dfbb125
 
 
 /***/ })

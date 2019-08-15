@@ -172,7 +172,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img :src="'/uploads/' + this.photo" alt="" style="width: 400px;">
+                        <!-- <img :src="'/uploads/' + this.photo" alt="" style="width: 400px;"> -->
+                        <img :src="this.photo" alt="" style="width: 400px;">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
