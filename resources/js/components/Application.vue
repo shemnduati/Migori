@@ -954,7 +954,6 @@
               axios.get("api/getcountywards/" + this.form.county).then(({ data }) => ([this.wards = data['wards']]));
            },
            getPassport(e){
-                console.log('Passport');
                 let file = e.target.files[0];
                 var reader = new FileReader();
                 console.log(file);

@@ -155,11 +155,10 @@
 		<hr>
 		<div class="row mb-3">
 			<div class="col-md-6">
-				<button @click="send()" v-if="$gate.isSubadmin()" class="btn btn-success px-5 offset-md-1">Send</button>
-				<button @click="accept()" v-if="($gate.isAdmin()) && (application['status'] != 3)" class="btn btn-success px-5 offset-md-1">Accept</button>
+				<button @click="accept()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-success px-5 offset-md-1">Send</button>
 			</div>
 			<div class="col-md-6">
-				<button @click="reject()" class="btn btn-danger px-5 offset-md-3" >Reject</button>
+				<button @click="reject()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-danger px-5 offset-md-3" >Reject</button>
 			</div>
 		</div>
 		<!-- Modal -->
@@ -241,7 +240,7 @@
                           type: 'success',
                           title: 'Success',
                           text: 'Rejected!!',
-                          text: 'Reset Succesful',
+                          text: 'You rejected the application',
                         })
                     this.$router.push('/Information');
                 });

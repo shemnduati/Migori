@@ -325,31 +325,31 @@ class ApplicationController extends Controller
 
     public function accept($applicantId)
     {
-        $application = Application::where('user_id', $applicantId)->where('status', 1)->first();
+        $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
         $appli = Application::findOrFail($application['id']);
-        $appli->status = 3;
+        $appli->status = 1;
         $appli->update();
 
-        $family = Family::where('user_id', $applicantId)->where('status', 1)->get();
+        $family = Family::where('user_id', $applicantId)->where('status', 0)->get();
         foreach ($family as $fam) {
             $fami = Family::findOrFail($fam['id']);
-            $fami->status=3;
+            $fami->status=1;
             $fami->update();
         }
 
-        $morefamily = MoreFamily::where('user_id', $applicantId)->where('status', 1)->first();
+        $morefamily = MoreFamily::where('user_id', $applicantId)->where('status', 0)->first();
         $more=MoreFamily::findOrFail($morefamily['id']);
-        $more->status = 3;
+        $more->status = 1;
         $more->update();
 
-        $institution = Institution::where('user_id', $applicantId)->where('status', 1)->first();
+        $institution = Institution::where('user_id', $applicantId)->where('status', 0)->first();
         $insti = Institution::findOrFail($institution['id']);
-        $insti->status=3;
+        $insti->status=1;
         $insti->update();
 
-        $geographical = Geographical::where('user_id', $applicantId)->where('status', 1)->first();
+        $geographical = Geographical::where('user_id', $applicantId)->where('status', 0)->first();
         $geo=Geographical::findOrFail($geographical['id']);
-        $geo->status=3;
+        $geo->status=1;
         $geo->update();
 
         // $email = User::where('id',$applicantId)->value('email');

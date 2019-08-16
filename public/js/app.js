@@ -2688,7 +2688,6 @@ __webpack_require__.r(__webpack_exports__);
     getPassport: function getPassport(e) {
       var _this8 = this;
 
-      console.log('Passport');
       var file = e.target.files[0];
       var reader = new FileReader();
       console.log(file);
@@ -3258,7 +3257,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3272,16 +3270,9 @@ __webpack_require__.r(__webpack_exports__);
     getApplications: function getApplications() {
       var _this = this;
 
-      if (this.$gate.isAdmin()) {
-        axios.get('api/getapplications').then(function (_ref) {
-          var data = _ref.data;
-          return [_this.applications = data['applications']];
-        });
-      }
-
       if (this.$gate.isSubadmin()) {
-        axios.get('api/getbusary').then(function (_ref2) {
-          var data = _ref2.data;
+        axios.get('api/getbusary').then(function (_ref) {
+          var data = _ref.data;
           return [_this.applications = data['applications']];
         });
       }
@@ -3290,15 +3281,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (this.$gate.isAdmin()) {
-        axios.get('api/gettype/' + this.form.type).then(function (_ref3) {
-          var data = _ref3.data;
+        axios.get('api/gettype/' + this.form.type).then(function (_ref2) {
+          var data = _ref2.data;
           return [_this2.applications = data['applications']];
         });
       }
 
       if (this.$gate.isSubadmin()) {
-        axios.get('api/getstatus/' + this.form.type).then(function (_ref4) {
-          var data = _ref4.data;
+        axios.get('api/getstatus/' + this.form.type).then(function (_ref3) {
+          var data = _ref3.data;
           return [_this2.applications = data['applications']];
         });
       }
@@ -3323,7 +3314,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -3587,7 +3577,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           type: 'success',
           title: 'Success',
           text: 'Rejected!!'
-        }, "text", 'Reset Succesful'));
+        }, "text", 'You rejected the application'));
 
         _this4.$router.push('/Information');
       });
@@ -68622,13 +68612,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdminOrSubadmin()
+    _vm.$gate.isSubadmin()
       ? _c("div", { staticClass: "row mt-5" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _c("h3", { staticClass: "card-title" }, [
-                  _vm._v("information Table")
+                  _vm._v("Information Table")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
@@ -68679,27 +68669,17 @@ var render = function() {
                           _vm._v("All")
                         ]),
                         _vm._v(" "),
-                        _vm.$gate.Subadmin
-                          ? _c("option", { attrs: { value: "2" } }, [
-                              _vm._v("Pending")
-                            ])
-                          : _vm._e(),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("Pending")
+                        ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "3" } }, [
                           _vm._v("Sent")
                         ]),
                         _vm._v(" "),
-                        _vm.$gate.Subadmin
-                          ? _c("option", { attrs: { value: "4" } }, [
-                              _vm._v("Rejected")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.$gate.isAdmin
-                          ? _c("option", { attrs: { value: "5" } }, [
-                              _vm._v("Approved")
-                            ])
-                          : _vm._e()
+                        _c("option", { attrs: { value: "4" } }, [
+                          _vm._v("Rejected")
+                        ])
                       ]
                     )
                   ])
@@ -69057,22 +69037,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row mb-3" }, [
       _c("div", { staticClass: "col-md-6" }, [
-        _vm.$gate.isSubadmin()
-          ? _c(
-              "button",
-              {
-                staticClass: "btn btn-success px-5 offset-md-1",
-                on: {
-                  click: function($event) {
-                    return _vm.send()
-                  }
-                }
-              },
-              [_vm._v("Send")]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.$gate.isAdmin() && _vm.application["status"] != 3
+        _vm.$gate.isSubadmin() && _vm.application["status"] == 0
           ? _c(
               "button",
               {
@@ -69083,24 +69048,26 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Accept")]
+              [_vm._v("Send")]
             )
           : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger px-5 offset-md-3",
-            on: {
-              click: function($event) {
-                return _vm.reject()
-              }
-            }
-          },
-          [_vm._v("Reject")]
-        )
+        _vm.$gate.isSubadmin() && _vm.application["status"] == 0
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-danger px-5 offset-md-3",
+                on: {
+                  click: function($event) {
+                    return _vm.reject()
+                  }
+                }
+              },
+              [_vm._v("Reject")]
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
