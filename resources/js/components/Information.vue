@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isAdminOrSubadmin()">
+        <div class="row mt-5" v-if="$gate.isSubadmin()">
 
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">information Table</h3>
+                        <h3 class="card-title">Information Table</h3>
 
                         <div class="card-tools">
                             <form>
@@ -36,9 +36,10 @@
                                 <td>{{application.name}}</td>
                                 <td>{{application.gender}}</td>
                                 <td>
-                                    <span v-if="application.status==0">Pending...</span>
+                                    <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
-                                    <span v-if="application.status==1">Sent</span>
+                                    <span v-if="application.status==1" style="color: blue;">Sent</span>
+                                    <span v-if="application.status==3" style="color: green;">Accepted</span>
                                </td>
                                 <td><router-link :to="{path:'/informationview/'+ application.user_id}" type="button" class="btn btn-primary">view</router-link></td>
                                 <td>{{application.bursary_type}}</td>
@@ -79,9 +80,6 @@
         },
         methods:{
             getApplications(){
-                if (this.$gate.isAdmin()) {
-                    axios.get('api/getapplications').then(({data}) => ([this.applications = data['applications']]));
-                }
                 if (this.$gate.isSubadmin()) {
                     axios.get('api/getbusary').then(({data}) => ([this.applications = data['applications']]));
                 }

@@ -21,8 +21,8 @@ class WardController extends Controller
         //$county = County::all();
         //return $ward;
         //return Ward::all();
-        $ward = Ward::with('county')->get();
-        return $ward;
+        return Ward::with('county')->paginate(10);
+
 
     }
 
@@ -92,5 +92,15 @@ class WardController extends Controller
         $ward = Ward::findOrFail($id);
 
         $ward->delete();
+    }
+    public function search(){
+        if ($search = \Request::get('q')) {
+            $users = Ward::with('county')->where(function($query) use ($search){
+                $query->where('name','LIKE',"%$search%");
+            })->paginate(20);
+        }else{
+            $users =  Ward::with('county')->paginate(10);
+        }
+        return $users;
     }
 }

@@ -115,22 +115,24 @@
                     </div>
                 </div>
                 <div class="banner d-flex justify-content-center">
-                    <img class="align-self-center" src="/img/frin.png" alt="">
+                    <img class="align-self-center img-fluid" src="/img/frin.png" alt="">
                 </div>
                 <div class="pt-2">
                     <p class="text-center state">“When you want something, all the universe conspires in helping you achieve it”</p>
                 </div>
                 <div class="row pb-5">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-3"><img src="/img/fone.png" alt="">Bursary made simple</div>
-                    <div class="col-md-2"><img src="/img/secure.png" alt="">Secure and private</div>
-                    <div class="col-md-3 pl-5"><img src="/img/time.png" alt="">Timely and convenient</div>
-                    <div class="col-md-2"></div>
+                    <div class="col-md-2 col-sm-12 pl-5 p-2"></div>
+                    <div class="col-md-3 col-sm-12 pl-5 p-2"><img src="/img/fone.png" alt="">Bursary made simple</div>
+                    <div class="col-md-2 col-sm-12 pl-5 p-2"><img src="/img/secure.png" alt="">Secure and private</div>
+                    <div class="col-md-3 col-sm-12 pl-5 p-2"><img src="/img/time.png" alt="">Timely and convenient</div>
+                    <div class="col-md-2 col-sm-12 pl-5 p-2"></div>
                 </div>
-                <div class="row border border-success bb p-4 rounded mb-5">
-                    <div class="col-md-4"><img src="/img/mentor.png" alt="">Bursary made simple</div>
-                    <div class="col-md-4"><img src="/img/join.png" alt="">Secure and private</div>
-                    <div class="col-md-4 pl-5"><img src="/img/grad.png" alt="">Timely and convenient</div>
+                <div class="row pb-5">
+                    <div class="col-md-2 col-sm-12 pl-5 p-2"></div>
+                    <div class="col-md-3 col-sm-12 pl-5 p-2"><img src="/img/mentor.png" alt="">Find your mentor</div>
+                    <div class="col-md-2 col-sm-12 pl-5 p-2"><img src="/img/join.png" alt="">Join our community</div>
+                    <div class="col-md-3 col-sm-12 pl-5 p-2"><img src="/img/grad.png" alt="">See career guide</div>
+                    <div class="col-md-2 col-sm-12 pl-5 p-2"></div>
                 </div>
                 
             </div>

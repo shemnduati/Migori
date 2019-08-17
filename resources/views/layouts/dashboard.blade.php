@@ -110,9 +110,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    @endcan
+                    @can('isSubadmin')
+                      <li class="nav-item">
                         <router-link to="/Information" class="nav-link">
-                            <i class="nav-icon fas fa-globe-africa blue"></i>
+                            <i class="nav-icon fas fa-clipboard-list green"></i>
                             <p>
                                 Information
                             </p>
@@ -120,6 +122,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                     @endcan
                     @can('isAdmin')
+                        <li class="nav-item">
+                                <router-link to="/configuration" class="nav-link">
+                                    <i class="fas fa-cog"></i>
+                                    <p>
+                                        Configuration
+                                    </p>
+                                </router-link>
+                            </li>
+
                     <li class="nav-item">
                         <router-link to="/county" class="nav-link">
                             <i class="nav-icon fas fa-globe-africa blue"></i>
@@ -128,6 +139,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
+                        </li><li class="nav-item">
+                            <router-link to="/Ward" class="nav-link">
+                                <i class="nav-icon fas fa-map-marker-alt teal"></i>
+                                <p>
+                                    Ward
+                                </p>
+                            </router-link>
+                        </li>
                     <li class="nav-item">
                         <router-link to="/subadmin" class="nav-link">
                             <i class="nav-icon fas fa-user-plus green"></i>
@@ -144,14 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 Users
                             </p>
                         </router-link>
-                    </li><li class="nav-item">
-                        <router-link to="/Ward" class="nav-link">
-                            <i class="nav-icon fas fa-globe-africa blue"></i>
-                            <p>
-                                Ward
-                            </p>
-                        </router-link>
-                    </li>
+
                     @endcan
                     <li class="nav-item">
                         <router-link to="/profile" class="nav-link">
@@ -161,14 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link to="/configuration" class="nav-link">
-                            <i class="fas fa-cog"></i>
-                            <p>
-                                Configuration
-                            </p>
-                        </router-link>
-                    </li>
+
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -220,7 +225,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer">
         <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-               
+
             </div>
             <!-- Default to the left -->
             <strong>Developed by <a href="https://twtechnology.africa">TransOnline Web Technologies</a>.</strong> All rights reserved.
