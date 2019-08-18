@@ -1,21 +1,20 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isAdminOrSubadmin()">
+        <div class="row mt-5" v-if="$gate.isSubadmin()">
 
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">information Table</h3>
+                        <h3 class="card-title">Information Table</h3>
 
                         <div class="card-tools">
                             <form>
                             <select @change="getType()" v-model="form.type" class="form-control">
                             <option selected value="">--Sort By--</option>
                             <option value="1">All</option>
-                            <option v-if="$gate.Subadmin" value="2">Pending</option>
-                            <option  value="3">Sent</option>
-                            <option v-if="$gate.Subadmin" value="4">Rejected</option>
-                            <option v-if="$gate.isAdmin" value="5">Approved</option>
+                            <option value="2">Pending</option>
+                            <option value="3">Sent</option>
+                            <option value="4">Rejected</option>
                         </select>
                     </form>
                         </div>
@@ -81,9 +80,6 @@
         },
         methods:{
             getApplications(){
-                if (this.$gate.isAdmin()) {
-                    axios.get('api/getapplications').then(({data}) => ([this.applications = data['applications']]));
-                }
                 if (this.$gate.isSubadmin()) {
                     axios.get('api/getbusary').then(({data}) => ([this.applications = data['applications']]));
                 }

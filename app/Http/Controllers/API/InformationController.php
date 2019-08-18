@@ -31,7 +31,7 @@ class InformationController extends Controller
     public function getApplications()
     {
         // return User::latest()->paginate(10);
-        $applications = Application::where('year', date('Y'))->whereIn('status', [2,3])->get();
+        $applications = Application::where('year', date('Y'))->whereIn('status', [1,3])->get();
 
         return ['applications'=>$applications];
 
@@ -71,7 +71,7 @@ class InformationController extends Controller
     public function getType($id)
     {
         if ($id==1) {
-            $applications = Application::where('year', date('Y'))->whereIn('status', [2,3])->get();
+            $applications = Application::where('year', date('Y'))->whereIn('status', [1,3])->get();
 
             return ['applications'=>$applications];
         }elseif ($id==2) {

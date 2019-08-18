@@ -120,7 +120,11 @@
                     })
                     .catch(()=>{
                     this.$Progress.fail();
-                        swal('Failed!','An application is currently on Ensure that it is are turned off')
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Ooops...',
+                            text: 'There is an application that is currently running! Ensure you turn it OFF!!',
+                        })
                     });
             },
             updateConfiguration(){
