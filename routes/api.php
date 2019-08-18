@@ -52,3 +52,7 @@ Route::get('counties','API\UserController@counties');
 Route::get('/getcounty','API\UserController@getCounties');
 Route::get('/getward','API\UserController@getWards');
 Route::get('/getcountyward/{countyId}','API\UserController@getCountyWards');
+
+
+// Route::apiResources(['form' => 'API\FormController']);
+Route::get('/form','API\FormController@getDetails');

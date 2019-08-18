@@ -17,6 +17,9 @@ window.uniq = uniq;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component('pagination', require('laravel-vue-pagination'));
+import jsPDF from 'jspdf';
+
+window.jsPDF = jsPDF;
 
 import  Gate from "./Gate";
 Vue.prototype.$gate =  new Gate(window.user);
@@ -48,7 +51,7 @@ let routes = [
     //{ path: '*', component: require('./components/NotFound.vue').default },
     { path: '/Information', component: require('./components/Information.vue').default },
     { path: '/informationview/:applicantId', component: require('./components/Informationview.vue').default },
-    { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
+    // { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
 
 ]
 
@@ -90,6 +93,7 @@ Vue.component(
     require('./components/NotFound.vue').default
 );
 Vue.component('application', require('./components/Application.vue').default);
+Vue.component('verifiedform', require('./components/Verifiedform.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -31,5 +31,6 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/apply', 'HomeController@apply')->name('apply');
+Route::get('/download', 'HomeController@download')->name('download');
 Route::get('/student', 'HomeController@student')->name('student');
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z\d\-/_.]+)?' );
