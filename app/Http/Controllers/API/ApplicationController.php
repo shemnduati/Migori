@@ -391,6 +391,10 @@ class ApplicationController extends Controller
 
     }
 
+    {{ random_int($min, $max) }}
+
+    {{ random_int(10000, 99999)}}
+    
     public function reject($applicantId)
     {
         $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
