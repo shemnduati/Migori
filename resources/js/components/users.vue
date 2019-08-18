@@ -52,7 +52,20 @@
     export default {
         data(){
             return{
+                editMode: false,
                 users :{},
+                form: new Form({
+                    id:'',
+                    name:'',
+                    email: '',
+                    phone: '',
+                    password:'',
+                    type:'',
+                    boi:'',
+                    photo:''
+                })
+
+
             }
         },
         methods:{
@@ -62,7 +75,35 @@
                         this.users = response.data;
                     });
             },
+            updateUser(){
+                this.$Progress.start();
+                this.form.put('api/user/'+this.form.id)
+                    .then(()=>{
+                        $('#addnew').modal('hide');
+                        swal.fire(
+                            'Edited!',
+                            'User information updated.',
+                            'success'
+                        )
+                        this.$Progress.finish();
+                        Fire.$emit('AfterCreate');
+                    })
+                    .catch(()=>{
+                        this.$Progress.fail();
 
+                    })
+            },
+            editModal(user){
+                this.editMode = true;
+                this.form.reset();
+                this.form.fill(user);
+                $('#addnew').modal('show');
+            },
+            newModal(){
+                this.editMode = false;
+                this.form.reset();
+                $('#addnew').modal('show');
+            },
             deleteUser(id){
                 Swal.fire({
                     title: 'Are you sure?',
@@ -70,7 +111,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!',
+                    confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     // send the request to the controller
                     if (result.value) {
@@ -81,19 +122,19 @@
                                 'Your file has been deleted.',
                                 'success'
                             )
-                            this.$Progress.finish();
                             Fire.$emit('AfterCreate');
-                        })
+
+                        });
                     }
                 }).catch(()=>{
-                    this.$Progress.fail();
-                    Swal.fire("Failed to Delete!", "There was something wrong.");
+                    swal("Failed!", "There was something wrong.", "warning");
                 })
             },
             loadUsers(){
-                if (this.$gate.isAdmin()) {
-                    axios.get("api/user").then(({data}) => (this.users = data));
+                if (this.$gate.isAdmin()){
+                    axios.get("api/user").then(({ data }) => (this.users = data));
                 }
+
             },
             createUser(){
                 this.$Progress.start();
@@ -108,7 +149,6 @@
                         this.$Progress.finish();
                     })
                     .catch(() => {
-                        Swal.fire("Failed to Create new user!", "There was something wrong.");
                     })
             }
         },

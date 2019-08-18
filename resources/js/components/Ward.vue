@@ -197,7 +197,7 @@
                     })
             })
             this.loadWard();
-            Fire.$on('AfterCreate', () =>{
+            Fire.$on('entry', () =>{
                 this.loadWard();
             })
             //setInterval(() => this.loadUsers(), 3000);

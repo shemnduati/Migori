@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center" v-if="$gate.isStudent">
+        <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" v-if="enable==1">
                     <div class="card-header">Application Component</div>
@@ -104,7 +104,8 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label for="passport">Attach Passport Photo</label>
-                                    <input type="file" @change="getPassport" class="form-control-file" id="passport">
+                                    <input type="file" @change="getPassport" class="form-control-file" id="passport" accept="image/*" :class="{ 'is-invalid': form.errors.has('passport') }">
+                                    <has-error :form="form" field="passport"></has-error>
                                   </div>
                                 </div>
                             </div>
@@ -139,7 +140,8 @@
                                 <div class="col">
                                     <div class="form-group">
                                     <label for="fpassport">Attach Father’s ID/Death Cert</label>
-                                    <input type="file" @change="getFatherId" class="form-control-file" id="fId">
+                                    <input type="file" @change="getFatherId" class="form-control-file" id="fId" accept="image/*" :class="{ 'is-invalid': form.errors.has('fatherId') }">
+                                    <has-error :form="form" field="fatherId"></has-error>
                                   </div>
                                 </div>
                             </div>
@@ -197,7 +199,8 @@
                                 <div class="col">
                                     <div class="form-group">
                                     <label for="mpassport">Attach Mother’s ID/Death Cert</label>
-                                    <input type="file" @change="getMotherId" class="form-control-file" id="mID">
+                                    <input type="file" @change="getMotherId" class="form-control-file" id="mID" accept="image/*" :class="{ 'is-invalid': form.errors.has('motherId') }">
+                                    <has-error :form="form" field="motherId"></has-error>
                                   </div>
                                 </div>
                             </div>
@@ -255,7 +258,8 @@
                                 <div class="col">
                                     <div class="form-group">
                                     <label for="gpassport">Attach Guardian’s ID/Death Cert</label>
-                                    <input type="file" @change="getGuardianId" class="form-control-file" id="gId">
+                                    <input type="file" @change="getGuardianId" class="form-control-file" id="gId" accept="image/*" :class="{ 'is-invalid': form.errors.has('guardianId') }">
+                                    <has-error :form="form" field="guardianId"></has-error>
                                   </div>
                                 </div>
                             </div>
@@ -716,6 +720,11 @@
                       regNo: 'This field is required'
                     })
                     return false;
+                }else if (!this.form.passport) {
+                    this.form.errors.set({
+                      passport: 'This field is required'
+                    })
+                    return false;
                 }else{
                     this.step++;
                     return false;
@@ -825,6 +834,21 @@
                       pRelationship: 'This field is required'
                     })
                     return false;
+                }else if (!this.form.fatherId) {
+                    this.form.errors.set({
+                      fatherId: 'This field is required'
+                    })
+                    return false;
+                }else if (!this.form.motherId) {
+                    this.form.errors.set({
+                      motherId: 'This field is required'
+                    })
+                    return false;
+                }else if (!this.form.guardianId) {
+                    this.form.errors.set({
+                      guardianId: 'This field is required'
+                    })
+                    return false;
                 }else{
                     this.step++;
                     return false;
@@ -930,7 +954,6 @@
               axios.get("api/getcountywards/" + this.form.county).then(({ data }) => ([this.wards = data['wards']]));
            },
            getPassport(e){
-                console.log('Passport');
                 let file = e.target.files[0];
                 var reader = new FileReader();
                 console.log(file);

@@ -181,7 +181,7 @@
                     })
             })
             this.loadCounty();
-            Fire.$on('AfterCreate', () =>{
+            Fire.$on('entry', () =>{
                 this.loadCounty();
             })
             //setInterval(() => this.loadUsers(), 3000);

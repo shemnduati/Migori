@@ -87,7 +87,7 @@
 			<div class="col-md-4 pt-5">
 				<div class="row pt-5" v-for="fam in family" :key="fam.id">
 					<div class="col-md-8">
-						<p class="rounded p-2 mt-2 text-center bg-b">{{fam['relationship']}} ID/ Death Cert</p>
+						<p class="rounded p-2 mt-2 text-center bg-b">{{fam['relationship']}}'s ID/ Death Cert</p>
 					</div>
 					<div class="col-md-4">
 						<button @click="launch(fam.cert)" class="btn btn-lg bg-success">Views</button>
@@ -155,11 +155,10 @@
 		<hr>
 		<div class="row mb-3">
 			<div class="col-md-6">
-				<button @click="send()" v-if="$gate.isSubadmin()" class="btn btn-success px-5 offset-md-1">Send</button>
-				<button @click="accept()" v-if="($gate.isAdmin()) && (application['status'] != 3)" class="btn btn-success px-5 offset-md-1">Accept</button>
+				<button @click="accept()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-success px-5 offset-md-1">Send</button>
 			</div>
 			<div class="col-md-6">
-				<button @click="reject()" class="btn btn-danger px-5 offset-md-3" >Reject</button>
+				<button @click="reject()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-danger px-5 offset-md-3" >Reject</button>
 			</div>
 		</div>
 		<!-- Modal -->
@@ -172,7 +171,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img :src="'/uploads/' + this.photo" alt="" style="width: 400px;">
+                        <!-- <img :src="'/uploads/' + this.photo" alt="" style="width: 400px;"> -->
+                        <img :src="this.photo" alt="" style="width: 400px;">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -240,7 +240,7 @@
                           type: 'success',
                           title: 'Success',
                           text: 'Rejected!!',
-                          text: 'Reset Succesful',
+                          text: 'You rejected the application',
                         })
                     this.$router.push('/Information');
                 });
