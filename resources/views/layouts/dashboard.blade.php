@@ -110,6 +110,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link to="/verified" class="nav-link">
+                          <i class="nav-icon fas fa-certificate green"></i>
+                            <p>
+                                Verified
+                            </p>
+                        </router-link>
+                    </li>
                     @endcan
                     @can('isSubadmin')
                       <li class="nav-item">
@@ -122,14 +130,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                     @endcan
                     @can('isAdmin')
-                        <li class="nav-item">
-                                <router-link to="/configuration" class="nav-link">
-                                    <i class="fas fa-cog"></i>
-                                    <p>
-                                        Configuration
-                                    </p>
-                                </router-link>
-                            </li>
+
+                    <li class="nav-item">
+                        <router-link to="/configuration" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <p>
+                                Configuration
+                            </p>
+                        </router-link>
+                    </li>
 
                     <li class="nav-item">
                         <router-link to="/county" class="nav-link">
@@ -155,6 +164,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
+
 
                     <li class="nav-item">
                         <router-link to="/users" class="nav-link ">
