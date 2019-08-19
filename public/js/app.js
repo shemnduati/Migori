@@ -4112,7 +4112,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      application: {}
+    };
+  },
+  methods: {
+    getApplications: function getApplications() {
+      var _this = this;
+
+      axios.get("api/getApplication").then(function (_ref) {
+        var data = _ref.data;
+        return [_this.application = data['applications']];
+      });
+    }
+  },
+  created: function created() {
+    this.getApplications();
+  }
+});
 
 /***/ }),
 
@@ -72934,58 +72953,452 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container-fluid" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-sm-2 col-form-label" }, [
+        _vm._v("OFFICIAL NAME")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-4" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.application["name"],
+              expression: "application['name']"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" },
+          domProps: { value: _vm.application["name"] },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.application, "name", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-3 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("REG/ADMISSION NUMBER")]
+      ),
+      _vm._v(" "),
+      _vm._m(4)
+    ]),
+    _vm._v(" "),
+    _vm._m(5),
+    _vm._v(" "),
+    _vm._m(6),
+    _vm._v(" "),
+    _vm._m(7),
+    _vm._v(" "),
+    _vm._m(8),
+    _vm._v(" "),
+    _vm._m(9),
+    _vm._v(" "),
+    _vm._m(10),
+    _vm._v(" "),
+    _vm._m(11),
+    _vm._v(" "),
+    _vm._m(12),
+    _vm._v(" "),
+    _vm._m(13),
+    _vm._v(" "),
+    _vm._m(14),
+    _vm._v(" "),
+    _vm._m(15),
+    _vm._v(" "),
+    _vm._m(16),
+    _vm._v(" "),
+    _vm._m(17),
+    _vm._v(" "),
+    _vm._m(18),
+    _vm._v(" "),
+    _vm._m(19),
+    _vm._v(" "),
+    _vm._m(20),
+    _vm._v(" "),
+    _vm._m(21),
+    _vm._v(" "),
+    _vm._m(22),
+    _vm._v(" "),
+    _vm._m(23),
+    _vm._v(" "),
+    _vm._m(24),
+    _vm._v(" "),
+    _vm._m(25),
+    _vm._v(" "),
+    _vm._m(26)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-fluid" }, [
-      _c("div", { staticClass: "row pt-2" }, [
-        _c("img", {
-          staticClass: "mx-auto d-block",
-          attrs: { src: "/img/kel.png", alt: "" }
+    return _c("div", { staticClass: "row pt-2" }, [
+      _c("img", {
+        staticClass: "mx-auto d-block",
+        attrs: { src: "/img/kel.png", alt: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pt-2" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("h5", [_vm._v("serial no.")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center col-md-4" }, [
+        _c("h5", [_vm._v("county")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-right col-md-4" }, [
+        _c("h5", [_vm._v("type")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row p-2" }, [
+      _c("div", { staticClass: "text-center col-md-12" }, [
+        _c("h5", [_vm._v("Ward")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pb-3" }, [
+      _c("h5", { staticClass: "pl-3" }, [
+        _vm._v(" 1. Applicant's Personal Information")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-3" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", readonly: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("GENDER")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-2" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row pt-2" }, [
-        _c("div", { staticClass: "col-md-4" }, [
-          _c("h5", [_vm._v("serial no.")])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("DOB")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-2" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("ID NO")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-2" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("TELL")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-2" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pb-3" }, [
+      _c("h5", { staticClass: "pl-3" }, [
+        _vm._v(" 2. Geographical Information")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("SUB-COUNTY")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-2" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("WARD")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("DIVISION")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("SUB-LOCATION")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-2" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("LOCATION")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("VILLAGE")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pb-3" }, [
+      _c("h5", { staticClass: "pl-3" }, [_vm._v(" 3. Family Status")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row px-4" }, [
+      _c("table", { staticClass: "table table-bordered" }, [
+        _c("thead", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "col" } }),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("NAME")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("DEAD/ALIVE")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("OCCUPATION")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("TELL")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("INCOME/YEAR")])
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "text-center col-md-4" }, [
-          _c("h5", [_vm._v("county")])
+        _c("tbody", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v("FATHER")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Mark")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Otto")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@mdo")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@mdo")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@mdo")])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v("MOTHER")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Jacob")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Thornton")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@fat")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@fat")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@fat")])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v("GURDIAN")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Jacob")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Thornton")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@fat")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@fat")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("@fat")])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row form-group" }, [
+        _c(
+          "label",
+          {
+            staticClass: "col-sm-3 col-form-label",
+            attrs: { for: "staticEmail" }
+          },
+          [_vm._v("TOTAL NUMBER OF SIBLINGS")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-1" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", readonly: "" }
+          })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "text-right col-md-4" }, [
-          _c("h5", [_vm._v("type")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row p-2" }, [
-        _c("div", { staticClass: "text-center col-md-12" }, [
-          _c("h5", [_vm._v("Ward")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row pb-3" }, [
-        _c("h5", { staticClass: "pl-3" }, [
-          _vm._v(" 1. Applicant's Personal Information")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
         _c(
           "label",
           {
             staticClass: "col-sm-2 col-form-label",
             attrs: { for: "staticEmail" }
           },
-          [_vm._v("OFFICIAL NAME")]
+          [_vm._v("IN SCHOOLS")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
+        _c("div", { staticClass: "col-sm-2" }, [
           _c("input", {
             staticClass: "form-control",
             attrs: { type: "text", readonly: "" }
@@ -72998,387 +73411,7 @@ var staticRenderFns = [
             staticClass: "col-sm-3 col-form-label",
             attrs: { for: "staticEmail" }
           },
-          [_vm._v("REG/ADMISSION NUMBER")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("GENDER")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-2" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("DOB")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-2" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("ID NO")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-2" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("TELL")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-2" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row pb-3" }, [
-        _c("h5", { staticClass: "pl-3" }, [
-          _vm._v(" 2. Geographical Information")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-2 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("SUB-COUNTY")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-2" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("WARD")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("DIVISION")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-2 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("SUB-LOCATION")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-2" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("LOCATION")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("VILLAGE")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row pb-3" }, [
-        _c("h5", { staticClass: "pl-3" }, [_vm._v(" 3. Family Status")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row px-4" }, [
-        _c("table", { staticClass: "table table-bordered" }, [
-          _c("thead", [
-            _c("tr", [
-              _c("th", { attrs: { scope: "col" } }),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("NAME")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("DEAD/ALIVE")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("OCCUPATION")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("TELL")]),
-              _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [_vm._v("INCOME/YEAR")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("th", { attrs: { scope: "row" } }, [_vm._v("FATHER")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Mark")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Otto")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@mdo")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@mdo")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@mdo")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { attrs: { scope: "row" } }, [_vm._v("MOTHER")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Jacob")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Thornton")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@fat")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@fat")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@fat")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { attrs: { scope: "row" } }, [_vm._v("GURDIAN")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Jacob")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Thornton")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@fat")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@fat")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("@fat")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-3 col-form-label",
-              attrs: { for: "staticEmail" }
-            },
-            [_vm._v("TOTAL NUMBER OF SIBLINGS")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-1" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", readonly: "" }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-2 col-form-label",
-              attrs: { for: "staticEmail" }
-            },
-            [_vm._v("IN SCHOOLS")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-2" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", readonly: "" }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-3 col-form-label",
-              attrs: { for: "staticEmail" }
-            },
-            [_vm._v("WORKING/BUSINESS")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-1" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", readonly: "" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-4 col-form-label",
-              attrs: { for: "staticEmail" }
-            },
-            [_vm._v("WHO PAYS YOUR SCHOOL FEES?")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", readonly: "" }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-2 col-form-label",
-              attrs: { for: "staticEmail" }
-            },
-            [_vm._v("RELATIONSHIP")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-2" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", readonly: "" }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row pb-3" }, [
-        _c("h5", { staticClass: "pl-3" }, [
-          _vm._v(" 4. Institution and Fee Details")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-3 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("NAME OF INSTITUTION")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("BRANCH")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("CLASS")]
+          [_vm._v("WORKING/BUSINESS")]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-1" }, [
@@ -73396,10 +73429,10 @@ var staticRenderFns = [
             staticClass: "col-sm-4 col-form-label",
             attrs: { for: "staticEmail" }
           },
-          [_vm._v("WHO PAYS YOUR SCHOOL FEES")]
+          [_vm._v("WHO PAYS YOUR SCHOOL FEES?")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
+        _c("div", { staticClass: "col-sm-4" }, [
           _c("input", {
             staticClass: "form-control",
             attrs: { type: "text", readonly: "" }
@@ -73415,327 +73448,483 @@ var staticRenderFns = [
           [_vm._v("RELATIONSHIP")]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "pl-3" }, [
-          _vm._v(
-            "(Kindly attach fees structure. First year to attach there calling letter duly stamped)"
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "pl-3" }, [
-          _vm._v(
-            "FOR OFFICIAL USE ONLY. (To be filled by head of institution/Bursar/Finacial officer)"
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-4 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("BANK ACCOUNT NUMBER")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-2 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("ACCOUNT NAME")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
+        _c("div", { staticClass: "col-sm-2" }, [
           _c("input", {
             staticClass: "form-control",
             attrs: { type: "text", readonly: "" }
           })
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pb-3" }, [
+      _c("h5", { staticClass: "pl-3" }, [
+        _vm._v(" 4. Institution and Fee Details")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-3 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("NAME OF INSTITUTION")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-3 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("BRANCH")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-9" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("BRANCH")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-5 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("HEAD OF INSTITUTION RECOMMENDATION")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2" }, [
-          _vm._v(
-            "__________________________________________________________________________________"
-          )
-        ])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("CLASS")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-1" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", value: "application.name", readonly: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-4 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("WHO PAYS YOUR SCHOOL FEES")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("NAME")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2" }, [
-          _vm._v("_____________________________________")
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("TELL")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2" }, [
-          _vm._v("______________________________")
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("SIGNATURE")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2 pl-4" }, [
-          _vm._v("______________________________________")
-        ])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("RELATIONSHIP")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row pb-3" }, [
-        _c("h5", { staticClass: "pl-3" }, [
-          _vm._v(" 5. Official Use Only (vetting Committee)")
-        ])
+      _c("p", { staticClass: "pl-3" }, [
+        _vm._v(
+          "(Kindly attach fees structure. First year to attach there calling letter duly stamped)"
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-3 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("RECCOMENDATION")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-3 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("NOT RECOMMENDED")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ])
+      _c("p", { staticClass: "pl-3" }, [
+        _vm._v(
+          "FOR OFFICIAL USE ONLY. (To be filled by head of institution/Bursar/Finacial officer)"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-4 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("BANK ACCOUNT NUMBER")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-2 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("DEFFERED")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-3" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-2 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("COMMENT")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2" }, [
-          _vm._v("____________________________________________")
-        ])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("ACCOUNT NAME")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-3 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("BRANCH")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-9" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-5 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("HEAD OF INSTITUTION RECOMMENDATION")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2" }, [
+        _vm._v(
+          "__________________________________________________________________________________"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("NAME")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2" }, [
+        _vm._v("_____________________________________")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row pb-3" }, [
-        _c("h5", { staticClass: "pl-3" }, [_vm._v(" Bursar Committee")])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("TELL")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2" }, [
+        _vm._v("______________________________")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("Approved")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2" }, [
-          _vm._v("_____________________________________")
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-2 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("Not Approved")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2" }, [
-          _vm._v("______________________________")
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("Deffered")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2 pl-4" }, [
-          _vm._v("___________________________")
-        ])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("SIGNATURE")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2 pl-4" }, [
+        _vm._v("______________________________________")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pb-3" }, [
+      _c("h5", { staticClass: "pl-3" }, [
+        _vm._v(" 5. Official Use Only (vetting Committee)")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-3 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("RECCOMENDATION")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-4 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("Bursar Awarded in Ksh:")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-8" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", readonly: "" }
-          })
-        ])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-3 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("NOT RECOMMENDED")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("DEFFERED")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-3 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("Reasones for Disapproval")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2 pl-4" }, [
-          _vm._v(
-            "___________________________________________________________________________________"
-          )
-        ])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("COMMENT")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2" }, [
+        _vm._v("____________________________________________")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pb-3" }, [
+      _c("h5", { staticClass: "pl-3" }, [_vm._v(" Bursar Committee")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("Approved")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2" }, [
+        _vm._v("_____________________________________")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("Chairperson")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2 pl-4" }, [
-          _vm._v("_____________________________________")
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-3 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("Fund Account Manager")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2" }, [
-          _vm._v("__________________________")
-        ]),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "col-sm-1 col-form-label",
-            attrs: { for: "staticEmail" }
-          },
-          [_vm._v("Date")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "pt-2" }, [_vm._v("____________________")])
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("Not Approved")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2" }, [
+        _vm._v("______________________________")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row form-group d-flex flex-row-reverse" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("Deffered")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2 pl-4" }, [
+        _vm._v("___________________________")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-4 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("Bursar Awarded in Ksh:")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-8" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", readonly: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-3 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("Reasones for Disapproval")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2 pl-4" }, [
+        _vm._v(
+          "___________________________________________________________________________________"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row form-group" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("Chairperson")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2 pl-4" }, [
+        _vm._v("_____________________________________")
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-3 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("Fund Account Manager")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2" }, [_vm._v("__________________________")]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-1 col-form-label",
+          attrs: { for: "staticEmail" }
+        },
+        [_vm._v("Date")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "pt-2" }, [_vm._v("____________________")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "row form-group d-flex flex-row-reverse" },
+      [
         _c("p", { staticClass: "pt-2 pl-4" }, [
           _vm._v("_____________________________________")
         ]),
@@ -73748,8 +73937,8 @@ var staticRenderFns = [
           },
           [_vm._v("Student Signature")]
         )
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -91165,8 +91354,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/kryme/Documents/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/kryme/Documents/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

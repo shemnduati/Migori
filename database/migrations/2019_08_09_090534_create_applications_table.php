@@ -28,6 +28,7 @@ class CreateApplicationsTable extends Migration
             $table->string('tel');
             $table->year('year');
             $table->integer('ward_id');
+            $table->string('serial')->nullable();
             $table->timestamps();
         });
     }

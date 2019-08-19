@@ -23,9 +23,9 @@
         <h5 class="pl-3"> 1. Applicant's Personal Information</h5>
       </div>
       <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label">OFFICIAL NAME</label>
+          <label  class="col-sm-2 col-form-label">OFFICIAL NAME</label>
           <div class="col-sm-4">
-            <input type="text" readonly class="form-control" >
+              <input type="text" v-model="application.name" readonly class="form-control" >
           </div>
           <label for="staticEmail" class="col-sm-3 col-form-label">REG/ADMISSION NUMBER</label>
           <div class="col-sm-3">
@@ -162,7 +162,7 @@
           </div>
           <label for="staticEmail" class="col-sm-1 col-form-label">CLASS</label>
           <div class="col-sm-1">
-            <input type="text" readonly class="form-control" >
+            <input type="text"  value="application.name" readonly class="form-control" >
           </div>
       </div>
       <div class="row form-group">
@@ -266,6 +266,26 @@
 
 <script>
 export default {
+    data() {
+        return {
+            application:{},
+
+
+        }
+
+    },
+
+    methods: {
+        getApplications() {
+            axios.get("api/getApplication" ).then(({ data}) => ([this.application = data['applications']]));
+
+        }
+
+    },
+    created(){
+        this.getApplications();
+
+    }
 }
 </script>
 

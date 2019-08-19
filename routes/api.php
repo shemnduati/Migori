@@ -44,6 +44,7 @@ Route::put('/send/{applicantId}','API\ApplicationController@send');
 // Route::apiResources(['Information'=>'API\InformationController']);
 Route::get('/getapplications','API\InformationController@getApplications');
 Route::get('/getbusary','API\InformationController@getbusary');
+Route::get('/getApplication','API\InformationController@getApplication');
 Route::get('/gettype/{id}','API\InformationController@getType');
 Route::get('/getstatus/{id}','API\InformationController@getstatus');
 Route::get('wards','API\UserController@wards');

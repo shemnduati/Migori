@@ -110,14 +110,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link to="/verified" class="nav-link">
-                          <i class="nav-icon fas fa-certificate green"></i>
-                            <p>
-                                Verified
-                            </p>
-                        </router-link>
-                    </li>
                     @endcan
                     @can('isSubadmin')
                       <li class="nav-item">
@@ -175,6 +167,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </router-link>
 
                     @endcan
+                    <li class="nav-item">
+                        <router-link to="/verifiedform" class="nav-link">
+                            <i class="nav-icon fas fa-certificate green"></i>
+                            <p>
+                                Verified
+                            </p>
+                        </router-link>
+                    </li>
                     <li class="nav-item">
                         <router-link to="/profile" class="nav-link">
                             <i class="nav-icon fa fa-user orange"></i>

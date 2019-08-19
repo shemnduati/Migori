@@ -36,6 +36,14 @@ class InformationController extends Controller
         return ['applications'=>$applications];
 
     }
+    public function getApplication()
+    {
+       $userId = Auth::user()->id;
+        $applications = Application::Where('id',$userId)->where('year', date('Y'))->get();
+
+        return ['applications'=>$applications];
+
+    }
     public function getbusary()
     {
         // return User::latest()->paginate(10);
