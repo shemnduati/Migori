@@ -80350,7 +80350,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "row pt-2" }, [
             _c("div", { staticClass: "col-md-4" }, [
-              _c("h5", [_vm._v(_vm._s(_vm.application.serial))])
+              _c("h5", [_vm._v("serial: " + _vm._s(_vm.application.serial))])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "text-center col-md-4" }, [

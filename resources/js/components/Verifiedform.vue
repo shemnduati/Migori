@@ -12,7 +12,7 @@
     </div>
     <div class="row pt-2">
       <div class="col-md-4">
-        <h5>{{application.serial}}</h5>
+        <h5>serial: {{application.serial}}</h5>
       </div>
       <div class="text-center col-md-4">
         <h5>{{geographical.County}}</h5>
