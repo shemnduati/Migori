@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row justify-content-center" style="margin-bottom: 20px;">
-      <button @click="print()" id="print" type="button" class="btn btn-primary">
+      <button v-if="this.verified == 1" @click="print()" id="print" type="button" class="btn btn-primary">
         <i class="fa fa-print"></i>
         Print
       </button>
@@ -148,11 +148,11 @@
             <input type="text" v-model="institution.name" readonly class="form-control" >
           </div>
           <label for="staticEmail" class="col-sm-1 col-form-label">BRANCH</label>
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <input type="text" v-model="institution.branch" readonly class="form-control" >
           </div>
           <label for="staticEmail" class="col-sm-1 col-form-label">CLASS</label>
-          <div class="col-sm-1">
+          <div class="col-sm-2">
             <input type="text" v-model="institution.class" readonly class="form-control" >
           </div>
       </div>

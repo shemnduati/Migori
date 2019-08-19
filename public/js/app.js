@@ -80312,22 +80312,24 @@ var render = function() {
         staticStyle: { "margin-bottom": "20px" }
       },
       [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { id: "print", type: "button" },
-            on: {
-              click: function($event) {
-                return _vm.print()
-              }
-            }
-          },
-          [
-            _c("i", { staticClass: "fa fa-print" }),
-            _vm._v("\n      Print\n    ")
-          ]
-        )
+        this.verified == 1
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { id: "print", type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.print()
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fa fa-print" }),
+                _vm._v("\n      Print\n    ")
+              ]
+            )
+          : _vm._e()
       ]
     ),
     _vm._v(" "),
@@ -81025,7 +81027,7 @@ var render = function() {
               [_vm._v("BRANCH")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "col-sm-2" }, [
               _c("input", {
                 directives: [
                   {
@@ -81058,7 +81060,7 @@ var render = function() {
               [_vm._v("CLASS")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-1" }, [
+            _c("div", { staticClass: "col-sm-2" }, [
               _c("input", {
                 directives: [
                   {
