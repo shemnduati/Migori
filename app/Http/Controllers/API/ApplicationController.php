@@ -37,8 +37,8 @@ class ApplicationController extends Controller
 
     public function getWards()
     {
-        // $apps= Application::where('status', 0)->where('user_id', Auth::user()->id)->count();
-        // return view('layout.dashboard')->with('apps', $apps);
+        $apps= Application::where('status', 0)->where('user_id', Auth::user()->id)->count();
+        return view('layout.dashboard')->with('apps', $apps);
 
         $wards = Ward::all();
 
@@ -119,68 +119,68 @@ class ApplicationController extends Controller
             'gtelephone'=>'required',
         ]);
 
-        // $passport_name = "";
-        // $guardianId_name = "";
-        // $fatherId_name = "";
-        // $motherId_name = "";
+        $passport_name = "";
+        $guardianId_name = "";
+        $fatherId_name = "";
+        $motherId_name = "";
 
 
-        // if ($request->passport) {
-        //     $ext = explode('/', explode(':', substr($request->passport, 0, strpos($request->passport, ';')))[1])[1];
+        if ($request->passport) {
+            $ext = explode('/', explode(':', substr($request->passport, 0, strpos($request->passport, ';')))[1])[1];
 
-        //     if ($ext == 'pdf') {
+            if ($ext == 'pdf') {
 
-        //     }elseif ($ext == 'png' || $ext == 'jpeg') {
-        //       $passport_name = auth('api')->user()->id.time().'passport'.'.' . explode('/', explode(':', substr($request->passport, 0, strpos($request->passport, ';')))[1])[1];
-        //       \Image::make($request->passport)->save(public_path('uploads/').$passport_name);
-        //     }
-        // }
+            }elseif ($ext == 'png' || $ext == 'jpeg') {
+              $passport_name = auth('api')->user()->id.time().'passport'.'.' . explode('/', explode(':', substr($request->passport, 0, strpos($request->passport, ';')))[1])[1];
+              \Image::make($request->passport)->save(public_path('uploads/').$passport_name);
+            }
+        }
 
-        // if ($request->fatherId) {
-        //     $ext = explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
+        if ($request->fatherId) {
+            $ext = explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
 
-        //     if ($ext == 'pdf') {
-        //         $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
-        //         $pdf_decoded = base64_decode ($request->fatherId);
-        //         $File = file_put_contents($fatherId_name, $pdf_decoded);
-        //         header('Content-Type: application/pdf');
+            if ($ext == 'pdf') {
+                $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
+                $pdf_decoded = base64_decode ($request->fatherId);
+                $File = file_put_contents($fatherId_name, $pdf_decoded);
+                header('Content-Type: application/pdf');
 
-        //         // $File->save(public_path('uploads/').$fatherId_name);
-        //         move_uploaded_file($fatherId_name, public_path('uploads/').$fatherId_name);
-        //     }elseif ($ext == 'png' || $ext == 'jpeg') {
-        //       $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
-        //       \Image::make($request->fatherId)->save(public_path('uploads/').$fatherId_name);
-        //     }
-        // }
+                // $File->save(public_path('uploads/').$fatherId_name);
+                move_uploaded_file($fatherId_name, public_path('uploads/').$fatherId_name);
+            }elseif ($ext == 'png' || $ext == 'jpeg') {
+              $fatherId_name = auth('api')->user()->id.time().'fatherId'.'.' . explode('/', explode(':', substr($request->fatherId, 0, strpos($request->fatherId, ';')))[1])[1];
+              \Image::make($request->fatherId)->save(public_path('uploads/').$fatherId_name);
+            }
+        }
 
-        // if ($request->motherId) {
-        //     $ext = explode('/', explode(':', substr($request->motherId, 0, strpos($request->motherId, ';')))[1])[1];
+        if ($request->motherId) {
+            $ext = explode('/', explode(':', substr($request->motherId, 0, strpos($request->motherId, ';')))[1])[1];
 
-        //     if ($ext == 'pdf') {
+            if ($ext == 'pdf') {
 
-        //     }elseif ($ext == 'png' || $ext == 'jpeg') {
-        //       $motherId_name = auth('api')->user()->id.time().'motherId'.'.' . explode('/', explode(':', substr($request->motherId, 0, strpos($request->motherId, ';')))[1])[1];
-        //       \Image::make($request->motherId)->save(public_path('uploads/').$motherId_name);
-        //     }
-        // }
+            }elseif ($ext == 'png' || $ext == 'jpeg') {
+              $motherId_name = auth('api')->user()->id.time().'motherId'.'.' . explode('/', explode(':', substr($request->motherId, 0, strpos($request->motherId, ';')))[1])[1];
+              \Image::make($request->motherId)->save(public_path('uploads/').$motherId_name);
+            }
+        }
 
-        // if ($request->guardianId) {
-        //     $ext = explode('/', explode(':', substr($request->guardianId, 0, strpos($request->guardianId, ';')))[1])[1];
+        if ($request->guardianId) {
+            $ext = explode('/', explode(':', substr($request->guardianId, 0, strpos($request->guardianId, ';')))[1])[1];
 
-        //     if ($ext == 'pdf') {
+            if ($ext == 'pdf') {
 
-        //     }elseif ($ext == 'png' || $ext == 'jpeg') {
-        //       $guardianId_name = auth('api')->user()->id.time().'guardianId'.'.' . explode('/', explode(':', substr($request->guardianId, 0, strpos($request->guardianId, ';')))[1])[1];
-        //       \Image::make($request->guardianId)->save(public_path('uploads/').$guardianId_name);
-        //     }
-        // }
+            }elseif ($ext == 'png' || $ext == 'jpeg') {
+              $guardianId_name = auth('api')->user()->id.time().'guardianId'.'.' . explode('/', explode(':', substr($request->guardianId, 0, strpos($request->guardianId, ';')))[1])[1];
+              \Image::make($request->guardianId)->save(public_path('uploads/').$guardianId_name);
+            }
+        }
 
          $user = auth('api')->user()->id;
 
          $application = new Application();
          $application->user_id = $user;
          $application->name = $request['name'];
-         $application->passport = $request['passport'];
+         $application->passport = $passport_name;
          $application->email = $request['email'];
          $application->id_no = $request['idNo'];
          $application->reg_no = $request['regNo'];
@@ -202,7 +202,7 @@ class ApplicationController extends Controller
          $father->occupation = $request['foccupation'];
          $father->income = $request['fincome'];
          $father->tel = $request['ftelephone'];
-         $father->cert = $request->fatherId;
+         $father->cert = $fatherId_name;
          $father->year = date('Y');
 
          $father->save();
@@ -215,7 +215,7 @@ class ApplicationController extends Controller
          $mother->occupation = $request['moccupation'];
          $mother->income = $request['mincome'];
          $mother->tel = $request['mtelephone'];
-         $mother->cert = $request->motherId;
+         $mother->cert = $motherId_name;
          $mother->year = date('Y');
 
          $mother->save();
@@ -228,7 +228,7 @@ class ApplicationController extends Controller
          $guardian->occupation = $request['goccupation'];
          $guardian->income = $request['gincome'];
          $guardian->tel = $request['gtelephone'];
-         $guardian->cert = $request->guardianId;
+         $guardian->cert = $guardianId_name;
          $guardian->year = date('Y');
 
          $guardian->save();
@@ -325,35 +325,35 @@ class ApplicationController extends Controller
 
     public function accept($applicantId)
     {
-        $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
+        $application = Application::where('user_id', $applicantId)->where('status', 1)->first();
         $appli = Application::findOrFail($application['id']);
-        $appli->status = 1;
+        $appli->status = 3;
         $appli->update();
 
-        $family = Family::where('user_id', $applicantId)->where('status', 0)->get();
+        $family = Family::where('user_id', $applicantId)->where('status', 1)->get();
         foreach ($family as $fam) {
             $fami = Family::findOrFail($fam['id']);
-            $fami->status=1;
+            $fami->status=3;
             $fami->update();
         }
 
-        $morefamily = MoreFamily::where('user_id', $applicantId)->where('status', 0)->first();
+        $morefamily = MoreFamily::where('user_id', $applicantId)->where('status', 1)->first();
         $more=MoreFamily::findOrFail($morefamily['id']);
-        $more->status = 1;
+        $more->status = 3;
         $more->update();
 
-        $institution = Institution::where('user_id', $applicantId)->where('status', 0)->first();
+        $institution = Institution::where('user_id', $applicantId)->where('status', 1)->first();
         $insti = Institution::findOrFail($institution['id']);
-        $insti->status=1;
+        $insti->status=3;
         $insti->update();
 
-        $geographical = Geographical::where('user_id', $applicantId)->where('status', 0)->first();
+        $geographical = Geographical::where('user_id', $applicantId)->where('status', 1)->first();
         $geo=Geographical::findOrFail($geographical['id']);
-        $geo->status=1;
+        $geo->status=3;
         $geo->update();
 
-        $email = User::where('id',$applicantId)->value('email');
-        Mail::to( $email)->send(new BursaryEmail());
+        // $email = User::where('id',$applicantId)->value('email');
+        // Mail::to( $email)->send(new BursaryEmail());
 
     }
 
@@ -391,10 +391,6 @@ class ApplicationController extends Controller
 
     }
 
-    {{ random_int($min, $max) }}
-
-    {{ random_int(10000, 99999)}}
-    
     public function reject($applicantId)
     {
         $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
