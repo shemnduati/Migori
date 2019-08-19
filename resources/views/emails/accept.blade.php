@@ -182,14 +182,14 @@
                             <tr>
                                 <td class="content-cell">
                                     <h1>Baza Bursary Application</h1>
-                                    <p>Thanks for signing up to <b style="color: #b2dba1">Baza.co.ke</b>! We're excited to have you </p>
                                     <!-- Action -->
                                     <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td align="center">
                                                 <div>
-                                                    Hello <i>Applicant</i>,
-                                                    <p>This is to inform you that your bursary application has been accepted</p>
+                                                    <h5>Hello <i>Applicant</i></h5>,
+                                                    <p>This is to inform you that your bursary application has been accepted click on the link below to download your application form</p>
+                                                    <a href="https://baza.co.ke/print">Download</a>
                                                     Thank You,
                                                     <br/>
                                                     <i>Regards Baza.co.ke</i>

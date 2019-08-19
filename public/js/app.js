@@ -3256,7 +3256,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3296,8 +3295,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    //setInterval(() => this.loadUsers(), 3000);
+    var _this3 = this;
+
+    Fire.$on('searching', function () {
+      var query = _this3.$parent.search;
+      axios.get('api/findbursary?q=' + query).then(function (data) {
+        _this3.applications = data.data;
+      })["catch"](function () {});
+    });
     this.getApplications();
+    Fire.$on('AfterCreate', function () {
+      _this3.getApplications();
+    });
   }
 });
 
@@ -76462,6 +76471,8 @@ var render = function() {
                         _vm._v(" "),
                         _vm._l(_vm.applications, function(application) {
                           return _c("tr", { key: application.id }, [
+                            _c("td", [_vm._v(_vm._s(application.serial))]),
+                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(application.name))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(application.gender))]),
@@ -76545,7 +76556,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [_vm._v("Name")]),
+      _c("th", [_vm._v("Serial N.o")]),
       _vm._v(" "),
       _c("th", [_vm._v("Gender")]),
       _vm._v(" "),
@@ -80338,14 +80349,22 @@ var render = function() {
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "row pt-2" }, [
-            _vm._m(1),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("h5", [_vm._v(_vm._s(_vm.application.serial))])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "text-center col-md-4" }, [
               _c("h5", [_vm._v(_vm._s(_vm.geographical.County))])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "text-right col-md-4" }, [
-              _c("h5", [_vm._v(_vm._s(_vm.application.bursary_type))])
+              _c("h5", [
+                _vm._v(
+                  _vm._s(_vm.application.bursary_type) +
+                    " Bursary " +
+                    _vm._s(_vm.application.year)
+                )
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -80355,7 +80374,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
             _c(
@@ -80559,7 +80578,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "row form-group" }, [
             _c(
@@ -80767,11 +80786,11 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(4),
+          _vm._m(3),
           _vm._v(" "),
           _c("div", { staticClass: "row px-4" }, [
             _c("table", { staticClass: "table table-bordered" }, [
-              _vm._m(5),
+              _vm._m(4),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -80982,7 +81001,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(6),
+          _vm._m(5),
           _vm._v(" "),
           _c("div", { staticClass: "row form-group" }, [
             _c(
@@ -81243,6 +81262,8 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
           _vm._m(7),
           _vm._v(" "),
           _vm._m(8),
@@ -81265,9 +81286,7 @@ var render = function() {
           _vm._v(" "),
           _vm._m(17),
           _vm._v(" "),
-          _vm._m(18),
-          _vm._v(" "),
-          _vm._m(19)
+          _vm._m(18)
         ])
       : _vm._e()
   ])
@@ -81282,14 +81301,6 @@ var staticRenderFns = [
         staticClass: "mx-auto d-block",
         attrs: { src: "/img/kel.png", alt: "" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("h5", [_vm._v("serial no.")])
     ])
   },
   function() {

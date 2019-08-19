@@ -12,13 +12,13 @@
     </div>
     <div class="row pt-2">
       <div class="col-md-4">
-        <h5>serial no.</h5>
+        <h5>{{application.serial}}</h5>
       </div>
       <div class="text-center col-md-4">
         <h5>{{geographical.County}}</h5>
       </div>
       <div class="text-right col-md-4">
-        <h5>{{application.bursary_type}}</h5>
+        <h5>{{application.bursary_type}} Bursary {{application.year}}</h5>
       </div>
     </div>
     <div class="row p-2">
@@ -176,7 +176,7 @@
             <input type="text" v-model="institution.balance" readonly class="form-control" >
           </div>
           <div class="col-sm-3">
-            
+
           </div>
           <p class="pl-3">(Kindly attach fees structure. First year to attach there calling letter duly stamped)</p>
           <p class="pl-3">FOR OFFICIAL USE ONLY. (To be filled by head of institution/Bursar/Finacial officer)</p>

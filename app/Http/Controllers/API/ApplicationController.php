@@ -13,6 +13,7 @@ use App\Institution;
 use App\County;
 use App\Ward;
 use App\User;
+use Hashids\Hashids;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -176,7 +177,7 @@ class ApplicationController extends Controller
         // }
 
          $user = auth('api')->user()->id;
-
+         $serial =auth('api')->user()->id.time();
          $application = new Application();
          $application->user_id = $user;
          $application->name = $request['name'];
@@ -190,6 +191,7 @@ class ApplicationController extends Controller
          $application->tel = $request['telephone'];
          $application->ward_id = $request['ward'];
          $application->year = date('Y');
+         $application->serial = str_pad($serial,4,'0',STR_PAD_LEFT);
 
          $application->save();
 
@@ -386,8 +388,8 @@ class ApplicationController extends Controller
         $geo->status=1;
         $geo->update();
 
-        // $email = User::where('id',$applicantId)->value('email');
-        // Mail::to( $email)->send(new BursaryEmail());
+         $email = User::where('id',$applicantId)->value('email');
+         Mail::to( $email)->send(new BursaryEmail());
 
     }
 

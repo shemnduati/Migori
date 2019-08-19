@@ -23,6 +23,7 @@ Route::apiResources(['user'=>'API\UserController']);
 Route::get('findUser','API\UserController@search');
 Route::get('findWard','API\WardController@search');
 Route::get('findCounty','API\CountyController@search');
+Route::get('findbursary','API\InformationController@search');
 Route::apiResources(['dashboard'=>'API\DashboardContoller']);
 Route::put('profile','API\UserController@updateProfile');
 Route::get('dash','API\DashboardContoller@sub');
