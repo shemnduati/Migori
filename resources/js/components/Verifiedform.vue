@@ -1,15 +1,18 @@
 <template>
   <div class="container-fluid">
     <div class="row justify-content-center" style="margin-bottom: 20px;">
-      <button type="button" class="btn btn-primary">Download</button>
+      <button v-if="this.verified == 1" @click="print()" id="print" type="button" class="btn btn-primary">
+        <i class="fa fa-print"></i>
+        Print
+      </button>
     </div>
-    <div class="container" v-if="this.verified == 1" style="border: 1px solid black;">
+    <div class="container" id="myform" v-if="this.verified == 1">
     <div class="row pt-2">
         <img src="/img/kel.png" class="mx-auto d-block" alt="">
     </div>
     <div class="row pt-2">
       <div class="col-md-4">
-        <h5>{{application.serial}}</h5>
+        <h5>serial: {{application.serial}}</h5>
       </div>
       <div class="text-center col-md-4">
         <h5>{{geographical.County}}</h5>
@@ -141,43 +144,46 @@
       </div>
       <div class="row form-group">
         <label for="staticEmail" class="col-sm-3 col-form-label">NAME OF INSTITUTION</label>
-          <div class="col-sm-3">
+          <div class="col-sm-5">
             <input type="text" v-model="institution.name" readonly class="form-control" >
           </div>
           <label for="staticEmail" class="col-sm-1 col-form-label">BRANCH</label>
           <div class="col-sm-3">
             <input type="text" v-model="institution.branch" readonly class="form-control" >
           </div>
+      </div>
+      <div class="row form-group">
+
           <label for="staticEmail" class="col-sm-1 col-form-label">CLASS</label>
-          <div class="col-sm-1">
+          <div class="col-sm-6">
             <input type="text" v-model="institution.class" readonly class="form-control" >
           </div>
-      </div>
-      <div class="row form-group">
-        <label for="staticEmail" class="col-sm-1 col-form-label">YEAR OF STUDY</label>
-          <div class="col-sm-1">
+          <label for="staticEmail" class="col-sm-2 col-form-label">YEAR OF STUDY</label>
+          <div class="col-sm-2">
             <input type="text" v-model="institution.yearofstudy" readonly class="form-control" >
           </div>
-        <label for="staticEmail" class="col-sm-3 col-form-label">ANNUAL FEES</label>
-          <div class="col-sm-3">
-            <input type="text" v-model="institution.fees" readonly class="form-control" >
-          </div>
-          <label for="staticEmail" class="col-sm-1 col-form-label">AMOUNT PAID</label>
-          <div class="col-sm-3">
-            <input type="text" v-model="institution.amount_paid" readonly class="form-control" >
-          </div>
       </div>
       <div class="row form-group">
-          <label for="staticEmail" class="col-sm-2 col-form-label">REMAINING BALANCE</label>
-          <div class="col-sm-3">
+
+        <label for="staticEmail" class="col-sm-1 col-form-label">ANNUAL FEES</label>
+          <div class="col-sm-2">
+            <input type="text" v-model="institution.fees" readonly class="form-control" >
+          </div>
+          <label for="staticEmail" class="col-sm-2 col-form-label">AMOUNT PAID</label>
+          <div class="col-sm-2">
+            <input type="text" v-model="institution.amount_paid" readonly class="form-control" >
+          </div>
+          <label for="staticEmail" class="col-sm-3 col-form-label">REMAINING BALANCE</label>
+          <div class="col-sm-2">
             <input type="text" v-model="institution.balance" readonly class="form-control" >
           </div>
-          <div class="col-sm-3">
-
-          </div>
-          <p class="pl-3">(Kindly attach fees structure. First year to attach there calling letter duly stamped)</p>
-          <p class="pl-3">FOR OFFICIAL USE ONLY. (To be filled by head of institution/Bursar/Finacial officer)</p>
       </div>
+          <div class="row">
+            <p class="pl-3">(Kindly attach fees structure. First year to attach there calling letter duly stamped)</p>
+          </div>
+          <div class="row">
+            <p class="pl-3">FOR OFFICIAL USE ONLY. (To be filled by head of institution/Bursar/Finacial officer)</p>
+          </div>
       <div class="row form-group">
         <label for="staticEmail" class="col-sm-4 col-form-label">BANK ACCOUNT NUMBER</label>
         <div class="col-sm-3">
@@ -286,6 +292,29 @@ export default {
         axios.get("/api/form").then(({ data }) => ([this.institution = data['institution']]));
         axios.get("/api/form").then(({ data }) => ([this.verified = data['verified']]));
       },
+      download(){
+        html2canvas($('#myform'),  {
+          onrendered: function(canvas) {
+            var img =canvas.toDataURL("image/jpeg,1.0");
+            var doc = new jsPDF('p','pt','a4');
+            doc.addImage(img, 'JPEG', 0, 0);
+            console.log('clicked');
+            doc.save('Testing.pdf');
+            // document.getElementById('pdf').innerHTML = ''
+          }
+        });
+      //   html2canvas(document.querySelector('#myform'), {imageTimeout: 5000, useCORS: true}).then(canvas => {
+      //   document.getElementById('pdf').appendChild(canvas)
+      //   let img = canvas.toDataURL('image/png')
+      //   let pdf = new JsPDF('portrait', 'mm', 'a4')
+      //   pdf.addImage(img, 'JPEG', 5, 5, 200, 287)
+      //   pdf.save('relatorio-remoto.pdf')
+      //   document.getElementById('pdf').innerHTML = ''
+      // })
+      },
+      print(){
+        window.print();
+      }
   },
   created(){
       this.getApplications();
