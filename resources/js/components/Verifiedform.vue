@@ -1,9 +1,12 @@
 <template>
   <div class="container-fluid">
     <div class="row justify-content-center" style="margin-bottom: 20px;">
-      <button type="button" class="btn btn-primary">Download</button>
+      <button @click="print()" id="print" type="button" class="btn btn-primary">
+        <i class="fa fa-print"></i>
+        Print
+      </button>
     </div>
-    <div class="container" v-if="this.verified == 1" style="border: 1px solid black;">
+    <div class="container" id="myform" v-if="this.verified == 1">
     <div class="row pt-2">
         <img src="/img/kel.png" class="mx-auto d-block" alt="">
     </div>
@@ -286,6 +289,29 @@ export default {
         axios.get("/api/form").then(({ data }) => ([this.institution = data['institution']]));
         axios.get("/api/form").then(({ data }) => ([this.verified = data['verified']]));
       },
+      download(){
+        html2canvas($('#myform'),  {
+          onrendered: function(canvas) {
+            var img =canvas.toDataURL("image/jpeg,1.0");
+            var doc = new jsPDF('p','pt','a4');
+            doc.addImage(img, 'JPEG', 0, 0);
+            console.log('clicked');
+            doc.save('Testing.pdf');
+            // document.getElementById('pdf').innerHTML = ''
+          }
+        });
+      //   html2canvas(document.querySelector('#myform'), {imageTimeout: 5000, useCORS: true}).then(canvas => {
+      //   document.getElementById('pdf').appendChild(canvas)
+      //   let img = canvas.toDataURL('image/png')
+      //   let pdf = new JsPDF('portrait', 'mm', 'a4')
+      //   pdf.addImage(img, 'JPEG', 5, 5, 200, 287)
+      //   pdf.save('relatorio-remoto.pdf')
+      //   document.getElementById('pdf').innerHTML = ''
+      // })
+      },
+      print(){
+        window.print();
+      }
   },
   created(){
       this.getApplications();
