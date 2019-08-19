@@ -37237,3 +37237,21 @@ readers do not read off random characters that represent icons */
   color: #fff !important;
 }
 
+@media print {
+  #print {
+    display: none;
+  }
+
+  .nav.nav-tabs li:not(.active) {
+    display: none;
+  }
+
+@page {
+    margin: 0;
+}
+
+  body {
+    margin: 1.6cm;
+  }
+}
+
