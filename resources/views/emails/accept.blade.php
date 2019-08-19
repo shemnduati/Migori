@@ -189,7 +189,7 @@
                                                 <div>
                                                     <h5>Hello <i>Applicant</i></h5>,
                                                     <p>This is to inform you that your bursary application has been accepted click on the link below to download your application form</p>
-                                                    <router-link to="/users"></router-link>
+                                                    <a href="https://baza.co.ke/print">Download</a>
                                                     Thank You,
                                                     <br/>
                                                     <i>Regards Baza.co.ke</i>

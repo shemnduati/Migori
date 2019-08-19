@@ -23,6 +23,7 @@ Route::apiResources(['user'=>'API\UserController']);
 Route::get('findUser','API\UserController@search');
 Route::get('findWard','API\WardController@search');
 Route::get('findCounty','API\CountyController@search');
+Route::get('findbursary','API\InformationController@search');
 Route::apiResources(['dashboard'=>'API\DashboardContoller']);
 Route::put('profile','API\UserController@updateProfile');
 Route::get('dash','API\DashboardContoller@sub');
@@ -44,7 +45,6 @@ Route::put('/send/{applicantId}','API\ApplicationController@send');
 // Route::apiResources(['Information'=>'API\InformationController']);
 Route::get('/getapplications','API\InformationController@getApplications');
 Route::get('/getbusary','API\InformationController@getbusary');
-Route::get('/getApplication','API\InformationController@getApplication');
 Route::get('/gettype/{id}','API\InformationController@getType');
 Route::get('/getstatus/{id}','API\InformationController@getstatus');
 Route::get('wards','API\UserController@wards');
@@ -53,3 +53,7 @@ Route::get('counties','API\UserController@counties');
 Route::get('/getcounty','API\UserController@getCounties');
 Route::get('/getward','API\UserController@getWards');
 Route::get('/getcountyward/{countyId}','API\UserController@getCountyWards');
+
+
+// Route::apiResources(['form' => 'API\FormController']);
+Route::get('/form','API\FormController@getDetails');

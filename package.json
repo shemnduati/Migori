@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "admin-lte": "^3.0.0-beta.2",
+        "jspdf": "^1.5.3",
         "laravel-vue-pagination": "^2.3.0",
         "moment": "^2.24.0",
         "sweetalert2": "^8.15.2",

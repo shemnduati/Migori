@@ -36,14 +36,7 @@ class InformationController extends Controller
         return ['applications'=>$applications];
 
     }
-    public function getApplication()
-    {
-       $userId = Auth::user()->id;
-        $applications = Application::Where('id',$userId)->where('year', date('Y'))->get();
 
-        return ['applications'=>$applications];
-
-    }
     public function getbusary()
     {
         // return User::latest()->paginate(10);
@@ -157,15 +150,18 @@ class InformationController extends Controller
         return ['message'=> 'user deleted'];
     }
     public function search(){
+        $ward_id = User::where('id',Auth::user()->id)->value('ward');
         if ($search = \Request::get('q')) {
-            $users = User::where(function($query) use ($search){
+            $bursary = Application::where('year', date('Y'))->where('ward_id',$ward_id)->where(function($query) use ($search){
                 $query->where('name','LIKE',"%$search%")
-                    ->orWhere('email','LIKE',"%$search%")
-                    ->orWhere('role','LIKE',"%$search%");
-            })->paginate(20);
+                    ->orWhere('serial','LIKE',"%$search%");
+            })->get();
         }else{
-            $users = User::latest()->paginate(10);
+            $ward_id = User::where('id',Auth::user()->id)->value('ward');
+            $applications = Application::where('year', date('Y'))->where('ward_id',$ward_id)->get();
+            $bursary = ['applications'=>$applications];
+
         }
-        return $users;
+        return $bursary;
     }
 }

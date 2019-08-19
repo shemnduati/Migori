@@ -23,8 +23,7 @@
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tbody><tr>
-
-                                <th>Name</th>
+                                <th>Serial N.o</th>
                                 <th>Gender</th>
                                 <th>Status</th>
                                 <th>View to Send</th>
@@ -32,7 +31,7 @@
 
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
-
+                                <td>{{application.serial}}</td>
                                 <td>{{application.name}}</td>
                                 <td>{{application.gender}}</td>
                                 <td>
@@ -96,8 +95,20 @@
 
 
         created() {
-            //setInterval(() => this.loadUsers(), 3000);
+            Fire.$on('searching', ()=>{
+                let query = this.$parent.search;
+                axios.get('api/findbursary?q=' + query)
+                    .then((data)=>{
+                        this.applications = data.data;
+                    })
+                    .catch(()=>{
+
+                    })
+            })
             this.getApplications();
+            Fire.$on('AfterCreate', () =>{
+                this.getApplications();
+            })
         }
     }
 </script>
