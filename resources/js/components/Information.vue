@@ -24,6 +24,7 @@
                         <table class="table table-hover">
                             <tbody><tr>
                                 <th>Serial N.o</th>
+                                <th>Name</th>
                                 <th>Gender</th>
                                 <th>Status</th>
                                 <th>View to Send</th>

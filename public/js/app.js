@@ -3256,6 +3256,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3855,6 +3856,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -76558,6 +76562,8 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("Serial N.o")]),
       _vm._v(" "),
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Gender")]),
       _vm._v(" "),
       _c("th", [_vm._v("Status")]),
@@ -80350,7 +80356,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "row pt-2" }, [
             _c("div", { staticClass: "col-md-4" }, [
-              _c("h5", [_vm._v(_vm._s(_vm.application.serial))])
+              _c("h5", [_vm._v("serial: " + _vm._s(_vm.application.serial))])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "text-center col-md-4" }, [
@@ -81013,7 +81019,7 @@ var render = function() {
               [_vm._v("NAME OF INSTITUTION")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "col-sm-5" }, [
               _c("input", {
                 directives: [
                   {
@@ -81046,7 +81052,7 @@ var render = function() {
               [_vm._v("BRANCH")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-3" }, [
               _c("input", {
                 directives: [
                   {
@@ -81068,8 +81074,10 @@ var render = function() {
                   }
                 }
               })
-            ]),
-            _vm._v(" "),
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row form-group" }, [
             _c(
               "label",
               {
@@ -81079,7 +81087,7 @@ var render = function() {
               [_vm._v("CLASS")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-2" }, [
+            _c("div", { staticClass: "col-sm-6" }, [
               _c("input", {
                 directives: [
                   {
@@ -81101,20 +81109,18 @@ var render = function() {
                   }
                 }
               })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group" }, [
+            ]),
+            _vm._v(" "),
             _c(
               "label",
               {
-                staticClass: "col-sm-1 col-form-label",
+                staticClass: "col-sm-2 col-form-label",
                 attrs: { for: "staticEmail" }
               },
               [_vm._v("YEAR OF STUDY")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-1" }, [
+            _c("div", { staticClass: "col-sm-2" }, [
               _c("input", {
                 directives: [
                   {
@@ -81140,18 +81146,20 @@ var render = function() {
                   }
                 }
               })
-            ]),
-            _vm._v(" "),
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row form-group" }, [
             _c(
               "label",
               {
-                staticClass: "col-sm-3 col-form-label",
+                staticClass: "col-sm-1 col-form-label",
                 attrs: { for: "staticEmail" }
               },
               [_vm._v("ANNUAL FEES")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "col-sm-2" }, [
               _c("input", {
                 directives: [
                   {
@@ -81178,13 +81186,13 @@ var render = function() {
             _c(
               "label",
               {
-                staticClass: "col-sm-1 col-form-label",
+                staticClass: "col-sm-2 col-form-label",
                 attrs: { for: "staticEmail" }
               },
               [_vm._v("AMOUNT PAID")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "col-sm-2" }, [
               _c("input", {
                 directives: [
                   {
@@ -81210,20 +81218,18 @@ var render = function() {
                   }
                 }
               })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group" }, [
+            ]),
+            _vm._v(" "),
             _c(
               "label",
               {
-                staticClass: "col-sm-2 col-form-label",
+                staticClass: "col-sm-3 col-form-label",
                 attrs: { for: "staticEmail" }
               },
               [_vm._v("REMAINING BALANCE")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "col-sm-2" }, [
               _c("input", {
                 directives: [
                   {
@@ -81245,20 +81251,6 @@ var render = function() {
                   }
                 }
               })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }),
-            _vm._v(" "),
-            _c("p", { staticClass: "pl-3" }, [
-              _vm._v(
-                "(Kindly attach fees structure. First year to attach there calling letter duly stamped)"
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "pl-3" }, [
-              _vm._v(
-                "FOR OFFICIAL USE ONLY. (To be filled by head of institution/Bursar/Finacial officer)"
-              )
             ])
           ]),
           _vm._v(" "),
@@ -81286,7 +81278,11 @@ var render = function() {
           _vm._v(" "),
           _vm._m(17),
           _vm._v(" "),
-          _vm._m(18)
+          _vm._m(18),
+          _vm._v(" "),
+          _vm._m(19),
+          _vm._v(" "),
+          _vm._m(20)
         ])
       : _vm._e()
   ])
@@ -81358,6 +81354,30 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row pb-3" }, [
       _c("h5", { staticClass: "pl-3" }, [
         _vm._v(" 4. Institution and Fee Details")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("p", { staticClass: "pl-3" }, [
+        _vm._v(
+          "(Kindly attach fees structure. First year to attach there calling letter duly stamped)"
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("p", { staticClass: "pl-3" }, [
+        _vm._v(
+          "FOR OFFICIAL USE ONLY. (To be filled by head of institution/Bursar/Finacial officer)"
+        )
       ])
     ])
   },
@@ -99151,8 +99171,18 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+<<<<<<< HEAD
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> d2a3f6c5538ce669428142c2c0a7502ea74fb0b4
+>>>>>>> 1c1495a22dba485b7040f99811cbf4c6b60a25c1
 
 
 /***/ })
