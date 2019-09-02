@@ -31,7 +31,7 @@ class CountyController extends Controller
         ]);
         return County::Create([
             'name' => $request['name'],
-        ]);;
+        ]);
     }
 
     /**

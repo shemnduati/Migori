@@ -562,6 +562,7 @@
         },
         methods:{
             sendApplication(){
+                this.$Progress.start();
                this.form.post('api/apply')
                     .then(() => {
                         Fire.$emit('AfterCreate');

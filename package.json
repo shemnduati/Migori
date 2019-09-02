@@ -14,7 +14,6 @@
         "axios": "^0.18.1",
         "bootstrap": "^4.1.0",
         "cross-env": "^5.1",
-        "html2canvas": "^1.0.0-rc.3",
         "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.5",

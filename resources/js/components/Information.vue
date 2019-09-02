@@ -95,11 +95,14 @@
 
 
         created() {
+            this.$Progress.start();
             Fire.$on('searching', ()=>{
+                this.$Progress.start();
                 let query = this.$parent.search;
                 axios.get('api/findbursary?q=' + query)
                     .then((data)=>{
                         this.applications = data.data;
+                        this.$Progress.finish();
                     })
                     .catch(()=>{
 
