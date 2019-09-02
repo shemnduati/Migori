@@ -20,7 +20,7 @@ class CreateInstitutionTable extends Migration
             $table->string('branch');
             $table->string('class');
             $table->string('yearofstudy');
-            $table->integer('status')->default(0);
+            $table->integer('status');
             $table->string('fees');
             $table->year('year');
             $table->string('amount_paid');

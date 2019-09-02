@@ -4,7 +4,7 @@
 			<h3>Student Information</h3>
 		</div>
 		<div class="row pl-3">
-			<img src="/img/logo.jpg" alt="">
+			<img :src="application.passport" alt="" style="width: 200px">
 		</div>
 		<div class="row">
 			<div class="col-md-8">

@@ -576,6 +576,7 @@
                         this.$Progress.finish();
                     })
                     .catch(error => {
+                        this.$Progress.fail();
                         this.errors = error.response.data.errors;
                         Swal.fire({
                           type: 'error',

@@ -91,10 +91,7 @@ Vue.use(VueProgressBar, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component(
-    'not-found',
-    require('./components/NotFound.vue').default
-);
+Vue.component('not-found', require('./components/NotFound.vue').default);
 Vue.component('application', require('./components/Application.vue').default);
 Vue.component('verifiedform', require('./components/Verifiedform.vue').default);
 

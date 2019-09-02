@@ -24,7 +24,7 @@ class CreateApplicationsTable extends Migration
             $table->string('bursary_type');
             $table->date('dob');
             $table->string('gender');
-            $table->integer('status')->default(0);
+            $table->integer('status');
             $table->string('tel');
             $table->year('year');
             $table->integer('ward_id');

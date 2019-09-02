@@ -24,7 +24,7 @@ class CreateFamilyTable extends Migration
             $table->string('cert');
             $table->string('tel');
             $table->year('year');
-            $table->integer('status')->default(0);
+            $table->integer('status');
             $table->timestamps();
         });
     }

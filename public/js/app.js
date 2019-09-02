@@ -2292,6 +2292,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$Progress.finish();
       })["catch"](function (error) {
+        _this.$Progress.fail();
+
         _this.errors = error.response.data.errors;
         Swal.fire({
           type: 'error',
@@ -3190,6 +3192,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -69578,6 +69581,8 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("Serial N.o")]),
       _vm._v(" "),
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Gender")]),
       _vm._v(" "),
       _c("th", [_vm._v("Status")]),
@@ -69612,9 +69617,14 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { staticClass: "row pl-3" }, [
+      _c("img", {
+        staticStyle: { width: "200px" },
+        attrs: { src: _vm.application.passport, alt: "" }
+      })
+    ]),
     _vm._v(" "),
-    _vm._m(2),
+    _vm._m(1),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -69622,7 +69632,7 @@ var render = function() {
           "div",
           { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
           [
-            _vm._m(3),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4" }, [
               _c("p", [_vm._v(" " + _vm._s(_vm.application["name"]) + " ")]),
@@ -69641,7 +69651,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-md-4 pt-5" }, [
         _c("div", { staticClass: "row" }, [
-          _vm._m(4),
+          _vm._m(3),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-4" }, [
             _c(
@@ -69661,7 +69671,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(5),
+    _vm._m(4),
     _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -69707,9 +69717,9 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "row col-md-12" }, [
-                _vm._m(6),
+                _vm._m(5),
                 _vm._v(" "),
-                _vm._m(7),
+                _vm._m(6),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4" }, [
                   _c("p", [_vm._v(_vm._s(_vm.morefamily["totalSiblings"]))]),
@@ -69760,7 +69770,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(8),
+    _vm._m(7),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -69768,7 +69778,7 @@ var render = function() {
           "div",
           { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
           [
-            _vm._m(9),
+            _vm._m(8),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4" }, [
               _c("p", [_vm._v(" " + _vm._s(_vm.institution["name"]) + " ")]),
@@ -69794,7 +69804,7 @@ var render = function() {
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _vm._m(10),
+    _vm._m(9),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -69802,7 +69812,7 @@ var render = function() {
           "div",
           { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
           [
-            _vm._m(11),
+            _vm._m(10),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4" }, [
               _c("p", [_vm._v(" " + _vm._s(_vm.geographical["County"]) + " ")]),
@@ -69884,7 +69894,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(12),
+              _vm._m(11),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("img", {
@@ -69893,7 +69903,7 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _vm._m(13)
+              _vm._m(12)
             ])
           ]
         )
@@ -69908,14 +69918,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center pt-2" }, [
       _c("h3", [_vm._v("Student Information")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row pl-3" }, [
-      _c("img", { attrs: { src: "/img/logo.jpg", alt: "" } })
     ])
   },
   function() {
