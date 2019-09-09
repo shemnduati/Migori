@@ -292,7 +292,7 @@ export default {
         axios.get("/api/form").then(({ data }) => ([this.institution = data['institution']]));
         axios.get("/api/form").then(({ data }) => ([this.verified = data['verified']]));
       },
-      download(){
+      /*download(){
         html2canvas($('#myform'),  {
           onrendered: function(canvas) {
             var img =canvas.toDataURL("image/jpeg,1.0");
@@ -302,7 +302,7 @@ export default {
             doc.save('Testing.pdf');
             // document.getElementById('pdf').innerHTML = ''
           }
-        });
+        });*/
       //   html2canvas(document.querySelector('#myform'), {imageTimeout: 5000, useCORS: true}).then(canvas => {
       //   document.getElementById('pdf').appendChild(canvas)
       //   let img = canvas.toDataURL('image/png')
@@ -311,7 +311,7 @@ export default {
       //   pdf.save('relatorio-remoto.pdf')
       //   document.getElementById('pdf').innerHTML = ''
       // })
-      },
+    /*  },*/
       print(){
         window.print();
       }

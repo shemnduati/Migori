@@ -39,8 +39,8 @@ class DashboardContoller extends Controller
         $total_student = User::where('role','student')->count();
         $total_subadmin = User::where('role','sub-admin')->count();
         $ward_id = User::where('id',Auth::user()->id)->value('ward');
-        $total_apllication = Application::Where('ward_id',$ward_id)->count();
-        $total_awarded = Application::where('status','1')->count();
+        $total_apllication = Application::where('ward_id',$ward_id)->count();
+        $total_awarded = Application::where('ward_id',$ward_id)->where('status','1')->count();
         $data = array(
             'total_student'=>$total_student,
             'total_subadmin'=>$total_subadmin,

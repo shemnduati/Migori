@@ -46,7 +46,7 @@
                 color: #c00000;
                 font-weight: 700;
                 font-size: 25px;
-                
+
             }
             .logo2{
                 color: #7030a0;
@@ -99,6 +99,7 @@
                         @if (Route::has('login'))
                             <div class="top-right links">
                                 @auth
+                                    <p> {{ Auth::user()->name }}</p>
                                     <a href="/apply" class="btn btn mb-2 px-4 pr-2">Get Started</a>
 
                                     <a class="btn btn px-5" href="{{ route('logout') }}"
@@ -115,7 +116,7 @@
                                 @endauth
                             </div>
                         @endif
-                        
+
                     </div>
                 </div>
                 <div class="banner d-flex justify-content-center">
@@ -138,14 +139,14 @@
                     <div class="col-md-3 col-sm-12 pl-5 p-2"><img src="/img/grad.png" alt="">See career guide</div>
                     <div class="col-md-2 col-sm-12 pl-5 p-2"></div>
                 </div>
-                
+
             </div>
         </div>
 
         <footer class=" p-3 mx-3">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                
+
             </div>
             <!-- Default to the left -->
             <strong>Developed by <a href="https://twtechnology.africa">TransOnline Web Technologies</a>.</strong> All rights reserved.

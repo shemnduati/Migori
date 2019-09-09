@@ -17,12 +17,12 @@ window.uniq = uniq;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component('pagination', require('laravel-vue-pagination'));
-// import html2canvas from 'hmtl2canvas';
-import html2canvas from 'html2canvas';
+
+
 import jsPDF from 'jspdf';
 
 window.jsPDF = jsPDF;
-window.html2canvas = html2canvas;
+
 
 import  Gate from "./Gate";
 Vue.prototype.$gate =  new Gate(window.user);
@@ -91,10 +91,7 @@ Vue.use(VueProgressBar, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component(
-    'not-found',
-    require('./components/NotFound.vue').default
-);
+Vue.component('not-found', require('./components/NotFound.vue').default);
 Vue.component('application', require('./components/Application.vue').default);
 Vue.component('verifiedform', require('./components/Verifiedform.vue').default);
 

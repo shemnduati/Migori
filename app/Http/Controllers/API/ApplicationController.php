@@ -69,7 +69,6 @@ class ApplicationController extends Controller
                     'msg'    => 'You already sent an application',
                 ], 422);
         }else {
-
         $this->validate($request,[
             'year' => 'required|min:1|max:7',
             'type'=>'required',
@@ -119,6 +118,7 @@ class ApplicationController extends Controller
             'mtelephone'=>'required',
             'gtelephone'=>'required',
         ]);
+<<<<<<< HEAD
 
         $passport_name = "";
         $guardianId_name = "";
@@ -271,6 +271,214 @@ class ApplicationController extends Controller
 
          $institution->save();
 
+=======
+        $available = User::where('ward', $request['ward'])->count();
+        if($available > 0) {
+            $user = auth('api')->user()->id;
+            $serial = auth('api')->user()->id . time();
+            $application = new Application();
+            $application->user_id = $user;
+            $application->name = $request['name'];
+            $application->passport = $request['passport'];
+            $application->email = $request['email'];
+            $application->id_no = $request['idNo'];
+            $application->reg_no = $request['regNo'];
+            $application->bursary_type = $request['type'];
+            $application->dob = $request['dob'];
+            $application->status = 0;
+            $application->gender = $request['gender'];
+            $application->tel = $request['telephone'];
+            $application->ward_id = $request['ward'];
+            $application->year = date('Y');
+            $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
+
+            $application->save();
+
+
+            $father = new Family();
+            $father->user_id = $user;
+            $father->name = $request['fname'];
+            $father->relationship = 'Father';
+            $father->living = $request['fliving'];
+            $father->occupation = $request['foccupation'];
+            $father->income = $request['fincome'];
+            $father->tel = $request['ftelephone'];
+            $father->cert = $request->fatherId;
+            $application->status = 0;
+            $father->year = date('Y');
+
+            $father->save();
+
+            $mother = new Family();
+            $mother->user_id = $user;
+            $mother->name = $request['mname'];
+            $mother->relationship = 'Mother';
+            $mother->living = $request['mliving'];
+            $mother->occupation = $request['moccupation'];
+            $mother->income = $request['mincome'];
+            $mother->tel = $request['mtelephone'];
+            $mother->cert = $request->motherId;
+            $application->status = 0;
+            $mother->year = date('Y');
+
+            $mother->save();
+
+            $guardian = new Family();
+            $guardian->user_id = $user;
+            $guardian->name = $request['gname'];
+            $guardian->relationship = 'Guardian';
+            $guardian->living = $request['gliving'];
+            $guardian->occupation = $request['goccupation'];
+            $guardian->income = $request['gincome'];
+            $guardian->tel = $request['gtelephone'];
+            $guardian->cert = $request->guardianId;
+            $application->status = 0;
+            $guardian->year = date('Y');
+
+            $guardian->save();
+
+            $more_family = new MoreFamily();
+            $more_family->user_id = $user;
+            $more_family->totalSiblings = $request['tSiblings'];
+            $more_family->workingSiblings = $request['sWorking'];
+            $more_family->schoolSiblings = $request['inSchool'];
+            $more_family->pFees = $request['pFees'];
+            $application->status = 0;
+            $more_family->pFeesRelationship = $request['pRelationship'];
+            $more_family->year = date('Y');
+
+            $more_family->save();
+
+            $geographical = new Geographical();
+            $geographical->user_id = $user;
+            $geographical->County = $request['county'];
+            $geographical->Ward = $request['ward'];
+            $geographical->Division = $request['division'];
+            $geographical->Location = $request['location'];
+            $application->status = 0;
+            $geographical->Sublocation = $request['sublocation'];
+            $geographical->Village = $request['village'];
+            $geographical->year = date('Y');
+
+            $geographical->save();
+
+            $institution = new Institution();
+            $institution->user_id = $user;
+            $institution->name = $request['iname'];
+            $institution->branch = $request['branch'];
+            $institution->class = $request['class'];
+            $institution->yearofstudy = $request['year'];
+            $institution->fees = $request['payable'];
+            $application->status = 0;
+            $institution->amount_paid = $request['paid'];
+            $institution->balance = $request['balance'];
+            $institution->year = date('Y');
+
+            $institution->save();
+        }else{
+            $user = auth('api')->user()->id;
+            $serial = auth('api')->user()->id . time();
+            $application = new Application();
+            $application->user_id = $user;
+            $application->name = $request['name'];
+            $application->passport = $request['passport'];
+            $application->email = $request['email'];
+            $application->id_no = $request['idNo'];
+            $application->reg_no = $request['regNo'];
+            $application->bursary_type = $request['type'];
+            $application->dob = $request['dob'];
+            $application->status = 2;
+            $application->gender = $request['gender'];
+            $application->tel = $request['telephone'];
+            $application->ward_id = $request['ward'];
+            $application->year = date('Y');
+            $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
+
+            $application->save();
+
+
+            $father = new Family();
+            $father->user_id = $user;
+            $father->name = $request['fname'];
+            $father->relationship = 'Father';
+            $father->living = $request['fliving'];
+            $father->occupation = $request['foccupation'];
+            $father->income = $request['fincome'];
+            $father->tel = $request['ftelephone'];
+            $father->cert = $request->fatherId;
+            $application->status = 2;
+            $father->year = date('Y');
+
+            $father->save();
+
+            $mother = new Family();
+            $mother->user_id = $user;
+            $mother->name = $request['mname'];
+            $mother->relationship = 'Mother';
+            $mother->living = $request['mliving'];
+            $mother->occupation = $request['moccupation'];
+            $mother->income = $request['mincome'];
+            $mother->tel = $request['mtelephone'];
+            $mother->cert = $request->motherId;
+            $application->status = 2;
+            $mother->year = date('Y');
+
+            $mother->save();
+
+            $guardian = new Family();
+            $guardian->user_id = $user;
+            $guardian->name = $request['gname'];
+            $guardian->relationship = 'Guardian';
+            $guardian->living = $request['gliving'];
+            $guardian->occupation = $request['goccupation'];
+            $guardian->income = $request['gincome'];
+            $guardian->tel = $request['gtelephone'];
+            $guardian->cert = $request->guardianId;
+            $application->status = 2;
+            $guardian->year = date('Y');
+
+            $guardian->save();
+
+            $more_family = new MoreFamily();
+            $more_family->user_id = $user;
+            $more_family->totalSiblings = $request['tSiblings'];
+            $more_family->workingSiblings = $request['sWorking'];
+            $more_family->schoolSiblings = $request['inSchool'];
+            $more_family->pFees = $request['pFees'];
+            $application->status = 2;
+            $more_family->pFeesRelationship = $request['pRelationship'];
+            $more_family->year = date('Y');
+
+            $more_family->save();
+
+            $geographical = new Geographical();
+            $geographical->user_id = $user;
+            $geographical->County = $request['county'];
+            $geographical->Ward = $request['ward'];
+            $geographical->Division = $request['division'];
+            $geographical->Location = $request['location'];
+            $geographical->Sublocation = $request['sublocation'];
+            $geographical->Village = $request['village'];
+            $application->status = 2;
+            $geographical->year = date('Y');
+
+            $geographical->save();
+
+            $institution = new Institution();
+            $institution->user_id = $user;
+            $institution->name = $request['iname'];
+            $institution->branch = $request['branch'];
+            $institution->class = $request['class'];
+            $institution->yearofstudy = $request['year'];
+            $institution->fees = $request['payable'];
+            $institution->amount_paid = $request['paid'];
+            $institution->balance = $request['balance'];
+            $application->status = 2;
+            $institution->year = date('Y');
+
+            $institution->save();
+        }
+>>>>>>> 95da055ce1802fde2c16b4bf9743afc401b6fb48
     }
 }
 

@@ -562,6 +562,7 @@
         },
         methods:{
             sendApplication(){
+                this.$Progress.start();
                this.form.post('api/apply')
                     .then(() => {
                         Fire.$emit('AfterCreate');
@@ -575,6 +576,7 @@
                         this.$Progress.finish();
                     })
                     .catch(error => {
+                        this.$Progress.fail();
                         this.errors = error.response.data.errors;
                         Swal.fire({
                           type: 'error',
