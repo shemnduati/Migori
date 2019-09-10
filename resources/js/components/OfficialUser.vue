@@ -14,7 +14,6 @@
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tbody><tr>
-                                <th>id</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
@@ -23,7 +22,6 @@
                                 <th>Modify</th>
                             </tr>
                             <tr v-for="user in users" :key="user.id">
-                                <td>{{user.id}}</td>
                                 <td>{{user.name}}</td>
                                 <td>{{user.email}}</td>
                                 <td>{{user.role | upText}}</td>
@@ -76,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="county">County</label>
-                                <select v-model="form.county" @change='getCountyWards()' class="form-control" name="county" id="county"
+                                <select v-model="form.county"  class="form-control" name="county" id="county"
                                         :class="{ 'is-invalid': form.errors.has('county') }">
                                     <option selected value="">--Select county--</option>
                                     <option v-for="count in counties" :key="count.id" :value="count.id">{{ count.name}}</option>
@@ -124,7 +122,7 @@
             },
             updateUser(){
                 this.$Progress.start();
-                this.form.post('api/user/'+this.form.id)
+                this.form.put('api/user/'+this.form.id)
                     .then(()=>{
                         $('#addnew').modal('hide');
                         Swal.fire(
@@ -189,9 +187,6 @@
             },
             getWards(){
                 axios.get("api/getward").then(({ data }) => ([this.wards = data['wards']]));
-            },
-            getCountyWards(){
-                axios.get("api/getcountyward/" + this.form.county).then(({ data }) => ([this.wards = data['wards']]));
             },
             createUser(){
                 this.$Progress.start();
