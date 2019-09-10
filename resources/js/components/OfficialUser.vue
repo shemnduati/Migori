@@ -124,7 +124,7 @@
             },
             updateUser(){
                 this.$Progress.start();
-                this.form.post('api/user/'+this.form.id)
+                this.form.put('api/user/'+this.form.id)
                     .then(()=>{
                         $('#addnew').modal('hide');
                         Swal.fire(

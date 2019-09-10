@@ -3774,7 +3774,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.post('api/user/' + this.form.id).then(function () {
+      this.form.put('api/user/' + this.form.id).then(function () {
         $('#addnew').modal('hide');
         Swal.fire('Edited!', 'User information updated.', 'success');
 
