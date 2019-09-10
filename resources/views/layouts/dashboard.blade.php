@@ -156,8 +156,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-
-
+                        <li class="nav-item">
+                            <router-link to="/OfficialUser" class="nav-link">
+                                <i class="nav-icon fas fa-user-tie orange"></i>
+                                <p>
+                                    Add OfficialUser
+                                </p>
+                            </router-link>
+                        </li>
                     <li class="nav-item">
                         <router-link to="/users" class="nav-link ">
                             <i class="fa fa-users nav-icon indigo"></i>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddWardToUsers extends Migration
+class AddCountyToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddWardToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('ward')->nullable();
-          /*  $table->foreign('ward_id')->references('id')->on('wards');*/
+            $table->integer('county')->nullable()->after('password');
         });
     }
 
@@ -27,7 +26,7 @@ class AddWardToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            Schema::dropColumn('ward');
+            Schema::dropColumn('county');
         });
     }
 }

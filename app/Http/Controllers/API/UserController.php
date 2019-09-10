@@ -69,6 +69,32 @@ class UserController extends Controller
 
           return ['parent'=>$parent];
     }
+
+    public function official()
+    {
+        $offs = User::where('role','official')->get();
+        $parent = array();
+
+        foreach ($offs as $off){
+            $id = $off['id'];
+            $name = $off['name'];
+            $County_name = County::where('id', $off['county'])->value('name');
+            $email = $off['email'];
+            $reg = $off['created_at'];
+            $role = $off['role'];
+            $child=array(
+                'id' =>$id,
+                'name'=>$name,
+                'county'=>$County_name,
+                'email'=>$email,
+                'reg'=>$reg,
+                'role'=>$role
+            );
+            array_push($parent, $child);
+        }
+
+        return ['parent'=>$parent];
+    }
     public function getCounties()
     {
         $counties = County::all();
@@ -115,7 +141,22 @@ class UserController extends Controller
             'email_verified_at'=> Carbon::now(),
         ]);
     }
-
+    public function officialUser(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users',
+            'county'=> 'required',
+        ]);
+        return User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'role' => 'official',
+            'password' => Hash::make(123456789),
+            'email_verified_at'=> Carbon::now(),
+            'county' =>  $request['county'],
+        ]);
+    }
     /**
      * Display the specified resource.
      *
@@ -134,6 +175,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function updateOfficials(Request $request, $id)
+    {
+        $this->authorize('isAdmin');
+        $user = User::findorFail($id);
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'county'=> 'sometimes|required',
+        ]);
+        $user->update($request->all());
+        /* $user->role = $request['role'];
+         $user->update();*/
+        return ['message'=>'user information updated'];
+    }
     public function update(Request $request, $id)
     {
         $this->authorize('isAdmin');
@@ -141,7 +196,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'ward'=> 'required',
+            'ward'=> 'sometimes|required',
+            'county'=> 'sometimes|required',
         ]);
        $user->update($request->all());
        /* $user->role = $request['role'];

@@ -49,6 +49,8 @@ Route::get('/gettype/{id}','API\InformationController@getType');
 Route::get('/getstatus/{id}','API\InformationController@getstatus');
 Route::get('wards','API\UserController@wards');
 Route::get('subadmin','API\UserController@subadmin');
+Route::get('official','API\UserController@official');
+Route::post('officialUser','API\UserController@officialUser');
 Route::get('counties','API\UserController@counties');
 Route::get('/getcounty','API\UserController@getCounties');
 Route::get('/getward','API\UserController@getWards');
