@@ -111,7 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </router-link>
                     </li>
                     @endcan
-                    @can('isSubadmin')
+                    @can('isSubadminOrOfficial')
                       <li class="nav-item">
                         <router-link to="/Information" class="nav-link">
                             <i class="nav-icon fas fa-clipboard-list green"></i>

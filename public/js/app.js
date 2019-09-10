@@ -3279,20 +3279,27 @@ __webpack_require__.r(__webpack_exports__);
           return [_this.applications = data['applications']];
         });
       }
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/getCountyBursary').then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this.applications = data['applications']];
+        });
+      }
     },
     getType: function getType() {
       var _this2 = this;
 
       if (this.$gate.isAdmin()) {
-        axios.get('api/gettype/' + this.form.type).then(function (_ref2) {
-          var data = _ref2.data;
+        axios.get('api/gettype/' + this.form.type).then(function (_ref3) {
+          var data = _ref3.data;
           return [_this2.applications = data['applications']];
         });
       }
 
       if (this.$gate.isSubadmin()) {
-        axios.get('api/getstatus/' + this.form.type).then(function (_ref3) {
-          var data = _ref3.data;
+        axios.get('api/getstatus/' + this.form.type).then(function (_ref4) {
+          var data = _ref4.data;
           return [_this2.applications = data['applications']];
         });
       }
@@ -69665,7 +69672,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isSubadmin()
+    _vm.$gate.isSubadminOrOfficial()
       ? _c("div", { staticClass: "row mt-5" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -91615,6 +91622,11 @@ function () {
     key: "isAdminOrSubadmin",
     value: function isAdminOrSubadmin() {
       return this.user.role === 'admin' || this.user.role === 'sub-admin';
+    }
+  }, {
+    key: "isSubadminOrOfficial",
+    value: function isSubadminOrOfficial() {
+      return this.user.role === 'sub-admin' || this.user.role === 'official';
     }
   }]);
 
