@@ -4,7 +4,7 @@
 			<h3>Student Information</h3>
 		</div>
 		<div class="row pl-3">
-			<img src="/img/logo.jpg" alt="">
+			<img :src="application.passport" alt="" style="width: 200px">
 		</div>
 		<div class="row">
 			<div class="col-md-8">
@@ -222,6 +222,7 @@
                 });
 			},
 			accept(){
+                this.$Progress.start();
                		axios.put("/api/accept/" + this.applicantId).then( response => {
                     Fire.$emit('AfterCreate');
                     Swal.fire({
@@ -231,9 +232,11 @@
                            text: 'Accepted!',
                         })
                     this.$router.push('/Information');
+                        this.$Progress.finish();
                 });
 			},
 			reject(){
+                this.$Progress.start();
                 axios.put("/api/reject/" + this.applicantId).then( response => {
                     Fire.$emit('AfterCreate');
                     Swal.fire({
@@ -243,6 +246,7 @@
                           text: 'You rejected the application',
                         })
                     this.$router.push('/Information');
+                    his.$Progress.finish();
                 });
 			}
 		},
