@@ -3744,8 +3744,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3855,16 +3853,8 @@ __webpack_require__.r(__webpack_exports__);
         return [_this6.wards = data['wards']];
       });
     },
-    getCountyWards: function getCountyWards() {
-      var _this7 = this;
-
-      axios.get("api/getcountyward/" + this.form.county).then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this7.wards = data['wards']];
-      });
-    },
     createUser: function createUser() {
-      var _this8 = this;
+      var _this7 = this;
 
       this.$Progress.start();
       this.form.post('api/officialUser').then(function () {
@@ -3875,30 +3865,30 @@ __webpack_require__.r(__webpack_exports__);
           title: 'User Created in successfully'
         });
 
-        _this8.$Progress.finish();
+        _this7.$Progress.finish();
       })["catch"](function () {
         Swal.fire("Failed to Create new user!", "There was something wrong.");
       });
     }
   },
   created: function created() {
-    var _this9 = this;
+    var _this8 = this;
 
     Fire.$on('searching', function () {
-      var query = _this9.$parent.search;
+      var query = _this8.$parent.search;
       axios.get('api/findUser?q=' + query).then(function (data) {
-        _this9.users = data.data;
+        _this8.users = data.data;
       })["catch"](function () {});
     });
     this.loadUsers();
     this.getCounties();
     this.getWards();
     Fire.$on('AfterCreate', function () {
-      _this9.loadUsers();
+      _this8.loadUsers();
 
-      _this9.getCounties();
+      _this8.getCounties();
 
-      _this9.getWards();
+      _this8.getWards();
     }); //setInterval(() => this.loadUsers(), 3000);
   }
 });
@@ -73216,8 +73206,6 @@ var render = function() {
                         _vm._v(" "),
                         _vm._l(_vm.users, function(user) {
                           return _c("tr", { key: user.id }, [
-                            _c("td", [_vm._v(_vm._s(user.id))]),
-                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.name))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.email))]),
@@ -73446,29 +73434,23 @@ var render = function() {
                             },
                             attrs: { name: "county", id: "county" },
                             on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.form,
-                                    "county",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                },
-                                function($event) {
-                                  return _vm.getCountyWards()
-                                }
-                              ]
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "county",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
                             }
                           },
                           [
@@ -73559,8 +73541,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [_vm._v("id")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Email")]),
@@ -91625,6 +91605,11 @@ function () {
     key: "isStudent",
     value: function isStudent() {
       return this.user.role === 'student';
+    }
+  }, {
+    key: "isOfficial",
+    value: function isOfficial() {
+      return this.user.role === 'official';
     }
   }, {
     key: "isAdminOrSubadmin",

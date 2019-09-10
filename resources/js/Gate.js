@@ -12,6 +12,9 @@ export default class Gate {
     isStudent(){
         return this.user.role === 'student';
     }
+    isOfficial(){
+        return this.user.role === 'official';
+    }
     isAdminOrSubadmin(){
         return this.user.role === 'admin' || this.user.role === 'sub-admin';
 
