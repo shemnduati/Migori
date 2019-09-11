@@ -113,7 +113,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </router-link>
                     </li>
                     @endcan
-                    @can('isSubadmin')
+                    @can('isSubadminOrOfficial')
                       <li class="nav-item">
                         <router-link to="/Information" class="nav-link">
                             <i class="nav-icon fas fa-clipboard-list green"></i>
@@ -122,6 +122,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
+                    @endcan
+                    @can('isOfficial')
+                        <li class="nav-item">
+                            <router-link to="/subadmin" class="nav-link">
+                                <i class="nav-icon fas fa-user-plus green"></i>
+                                <p>
+                                    Add sub-Admin
+                                </p>
+                            </router-link>
+                        </li>
                     @endcan
                     @can('isAdmin')
 
@@ -158,8 +168,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
-
-
+                        <li class="nav-item">
+                            <router-link to="/OfficialUser" class="nav-link">
+                                <i class="nav-icon fas fa-user-tie orange"></i>
+                                <p>
+                                    Add OfficialUser
+                                </p>
+                            </router-link>
+                        </li>
                     <li class="nav-item">
                         <router-link to="/users" class="nav-link ">
                             <i class="fa fa-users nav-icon indigo"></i>

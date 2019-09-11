@@ -8,6 +8,7 @@ use App\User;
 use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 class UserController extends Controller
@@ -53,6 +54,7 @@ class UserController extends Controller
          $id = $sub['id'];
          $name = $sub['name'];
          $ward_name = Ward::where('id', $sub['ward'])->value('name');
+         $County_name = County::where('id', $sub['county'])->value('name');
          $email = $sub['email'];
          $reg = $sub['created_at'];
          $role = $sub['role'];
@@ -61,6 +63,7 @@ class UserController extends Controller
             'name'=>$name,
              'ward'=>$ward_name,
              'email'=>$email,
+             'county'=>$County_name,
              'reg'=>$reg,
              'role'=>$role
          );
@@ -69,13 +72,71 @@ class UserController extends Controller
 
           return ['parent'=>$parent];
     }
+    public function MySubAdmin()
+    {
+        $county_id = User::where('id',Auth::user()->id)->value('county');
+        $subs = User::where('role','sub-admin')->where('county',$county_id)->get();
+        $parent = array();
+        foreach ($subs as $sub){
+            $id = $sub['id'];
+            $name = $sub['name'];
+            $ward_name = Ward::where('id', $sub['ward'])->value('name');
+            $County_name = County::where('id', $sub['county'])->value('name');
+            $email = $sub['email'];
+            $reg = $sub['created_at'];
+            $role = $sub['role'];
+            $child=array(
+                'id' =>$id,
+                'name'=>$name,
+                'ward'=>$ward_name,
+                'county'=>$County_name,
+                'email'=>$email,
+                'reg'=>$reg,
+                'role'=>$role
+            );
+            array_push($parent, $child);
+        }
+
+        return ['parent'=>$parent];
+    }
+    public function official()
+    {
+        $offs = User::where('role','official')->get();
+        $parent = array();
+
+        foreach ($offs as $off){
+            $id = $off['id'];
+            $name = $off['name'];
+            $County_name = County::where('id', $off['county'])->value('name');
+            $email = $off['email'];
+            $reg = $off['created_at'];
+            $role = $off['role'];
+            $child=array(
+                'id' =>$id,
+                'name'=>$name,
+                'county'=>$County_name,
+                'email'=>$email,
+                'reg'=>$reg,
+                'role'=>$role
+            );
+            array_push($parent, $child);
+        }
+
+        return ['parent'=>$parent];
+    }
     public function getCounties()
     {
         $counties = County::all();
 
         return ['counties'=>$counties];
     }
+    public function getMyCounties()
+    {
+        $county_id = User::where('id',Auth::user()->id)->value('county');
+        $counties = County::where('id',$county_id)->get();
 
+        return ['counties'=>$counties];
+    }
     public function getWards()
     {
         $wards = Ward::all();
@@ -92,6 +153,23 @@ class UserController extends Controller
     public function wards()
     {
         return Ward::all();
+    }
+    public function officialUser(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users',
+            'county'=> 'required',
+        ]);
+        return User::create([
+            'county' =>  $request['county'],
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'role' => 'official',
+            'password' => Hash::make(123456789),
+            'email_verified_at'=> Carbon::now(),
+
+        ]);
     }
     /**
      * Store a newly created resource in storage.
@@ -113,6 +191,7 @@ class UserController extends Controller
             'ward' => $request['ward'],
             'password' => Hash::make(123456789),
             'email_verified_at'=> Carbon::now(),
+            'county'=>$request['county']
         ]);
     }
 
@@ -134,6 +213,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         $this->authorize('isAdmin');
@@ -141,7 +221,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'ward'=> 'required',
+            'ward'=> 'sometimes|required',
+            'county'=> 'sometimes|required',
         ]);
        $user->update($request->all());
        /* $user->role = $request['role'];

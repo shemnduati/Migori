@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isAdminOrOfficial()">
+        <div class="row mt-5" v-if="$gate.isAdmin()">
 
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Sub-Admin Table</h3>
+                        <h3 class="card-title">Official Users Table</h3>
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal">Add Sub-admin<i class="fa fa-user-plus fa-fw"></i></button>
+                            <button class="btn btn-success" @click="newModal">Add new Official<i class="fa fa-user-plus fa-fw"></i></button>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -18,7 +18,6 @@
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>County</th>
-                                <th>Ward</th>
                                 <th>Registered At</th>
                                 <th>Modify</th>
                             </tr>
@@ -27,7 +26,6 @@
                                 <td>{{user.email}}</td>
                                 <td>{{user.role | upText}}</td>
                                 <td>{{user.county}}</td>
-                                <td>{{user.ward}}</td>
                                 <td>{{user.reg | myDate}}</td>
                                 <td>
                                     <a href="#" @click="editModal(user)" >
@@ -56,8 +54,8 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content ">
                     <div class="modal-header">
-                        <h5 class="modal-title" v-show="!editMode" id="addnew">Add user</h5>
-                        <h5 class="modal-title" v-show="editMode" id="addnew">Update User info</h5>
+                        <h5 class="modal-title" v-show="!editMode" id="addnew">Add official user</h5>
+                        <h5 class="modal-title" v-show="editMode" id="addnew">Update official User info</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -76,28 +74,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="county">County</label>
-                                <select v-model="form.county" @change='getCountyWards()' class="form-control" name="county" id="county"
+                                <select v-model="form.county"  class="form-control" name="county" id="county"
                                         :class="{ 'is-invalid': form.errors.has('county') }">
                                     <option selected value="">--Select county--</option>
                                     <option v-for="count in counties" :key="count.id" :value="count.id">{{ count.name}}</option>
                                 </select>
                                 <has-error :form="form" field="county"></has-error>
                             </div>
-                            <div class="form-group">
-                                <label for="ward">Ward</label>
-                                <select v-model="form.ward" class="form-control" name="ward" id="ward"
-                                        :class="{ 'is-invalid': form.errors.has('ward') }">
-                                    <option selected value="">--Select Ward--</option>
-                                    <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}}</option>
-                                </select>
-                                <has-error :form="form" field="ward"></has-error>
-                            </div>
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             <button v-show="editMode" type="submit" class="btn btn-primary">Edit</button>
-                            <button v-show="!editMode" type="submit" class="btn btn-primary">Add user</button>
+                            <button v-show="!editMode" type="submit" class="btn btn-primary">Add Official user</button>
                         </div>
                     </form>
                 </div>
@@ -118,7 +107,6 @@
                     id:'',
                     name:'',
                     email: '',
-                    ward:'',
                     county:'',
                 })
 
@@ -190,32 +178,19 @@
             },
             loadUsers(){
                 if (this.$gate.isAdmin()){
-                    axios.get("api/subadmin").then(({ data }) => (this.users = data['parent']));
-                    axios.get("api/wards").then(({ data }) => (this.wards = data));
-                }
-                if (this.$gate.isOfficial()){
-                    axios.get("api/MySubAdmin").then(({ data }) => (this.users = data['parent']));
+                    axios.get("api/official").then(({ data }) => (this.users = data['parent']));
                     axios.get("api/wards").then(({ data }) => (this.wards = data));
                 }
             },
             getCounties(){
-                if (this.$gate.isAdmin()){
-                    axios.get("api/getcounty").then(({ data }) => ([this.counties = data['counties']]));
-                }
-                if (this.$gate.isOfficial()){
-                    axios.get("api/getMyCounty").then(({ data }) => ([this.counties = data['counties']]));
-                }
-
+                axios.get("api/getcounty").then(({ data }) => ([this.counties = data['counties']]));
             },
             getWards(){
                 axios.get("api/getward").then(({ data }) => ([this.wards = data['wards']]));
             },
-            getCountyWards(){
-                axios.get("api/getcountyward/" + this.form.county).then(({ data }) => ([this.wards = data['wards']]));
-            },
             createUser(){
                 this.$Progress.start();
-                this.form.post('api/user')
+                this.form.post('api/officialUser')
                     .then(() => {
                         Fire.$emit('AfterCreate');
                         $('#addnew').modal('hide')

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isSubadmin()">
+        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial()">
 
             <div class="col-md-12">
                 <div class="card">
@@ -82,6 +82,9 @@
             getApplications(){
                 if (this.$gate.isSubadmin()) {
                     axios.get('api/getbusary').then(({data}) => ([this.applications = data['applications']]));
+                }
+                if(this.$gate.isOfficial()){
+                    axios.get('api/getCountyBursary').then(({data}) => ([this.applications = data['applications']]));
                 }
             },
             getType(){
