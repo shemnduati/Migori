@@ -134,6 +134,7 @@ class ApplicationController extends Controller
             $application->status = 0;
             $application->gender = $request['gender'];
             $application->tel = $request['telephone'];
+            $application->county_id = $request['county'];
             $application->ward_id = $request['ward'];
             $application->year = date('Y');
             $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
