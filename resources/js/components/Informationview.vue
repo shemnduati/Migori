@@ -155,10 +155,25 @@
 		<hr>
 		<div class="row mb-3">
 			<div class="col-md-6">
-				<button @click="accept()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-success px-5 offset-md-1">Send</button>
+				<button class="btn btn-success px-5 offset-md-1">Recommendation</button>
 			</div>
 			<div class="col-md-6">
-				<button @click="reject()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-danger px-5 offset-md-3" >Reject</button>
+				<div class="form-check form-check-inline">
+                <input v-model="form.recommendation" class="form-check-input" type="radio" name="yes" id="yes" value="Yes"
+                        :class="{ 'is-invalid': form.errors.has('yes') }">
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                <input v-model="form.recommendation" class="form-check-input" type="radio" name="partially" id="partially" value="Partially"
+                        :class="{ 'is-invalid': form.errors.has('partially') }">
+                <label class="form-check-label" for="inlineRadio1">Partially</label>
+                </div>
+                <div class="form-check form-check-inline">
+                <input v-model="form.recommendation" class="form-check-input" type="radio" name="no" id="no" value="No"
+                        :class="{ 'is-invalid': form.errors.has('no') }">
+                <label class="form-check-label" for="inlineRadio1">No</label>
+                </div>
+				<!-- <button @click="reject()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-danger px-5 offset-md-3" >Reject</button> -->
 			</div>
 		</div>
 		<!-- Modal -->
@@ -194,6 +209,9 @@
 	        	geographical:{},
 	        	institution:{},
 	        	photo: '',
+	        	form: new Form({
+                   recommendation: ''
+	        	})
 			}
 
 		},
