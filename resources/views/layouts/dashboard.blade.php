@@ -25,6 +25,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
 
+
+
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
         <!-- Left navbar links -->
@@ -111,7 +113,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </router-link>
                     </li>
                     @endcan
-                    @can('isSubadmin')
+                    @can('isSubadminOrOfficial')
                       <li class="nav-item">
                         <router-link to="/Information" class="nav-link">
                             <i class="nav-icon fas fa-clipboard-list green"></i>
@@ -120,6 +122,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </p>
                         </router-link>
                     </li>
+                    @endcan
+                    @can('isOfficial')
+                        <li class="nav-item">
+                            <router-link to="/subadmin" class="nav-link">
+                                <i class="nav-icon fas fa-user-plus green"></i>
+                                <p>
+                                    Add sub-Admin
+                                </p>
+                            </router-link>
+                        </li>
                     @endcan
                     @can('isAdmin')
 
@@ -248,6 +260,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Bootstrap 4 -->
 
 <!-- AdminLTE App -->
+
+
+
 
 <!-- Scripts -->
 @auth

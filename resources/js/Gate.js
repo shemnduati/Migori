@@ -17,6 +17,13 @@ export default class Gate {
     }
     isAdminOrSubadmin(){
         return this.user.role === 'admin' || this.user.role === 'sub-admin';
+    }
+    isSubadminOrOfficial(){
+        return this.user.role === 'sub-admin' || this.user.role === 'official';
+
+    }
+    isAdminOrOfficial(){
+        return this.user.role === 'admin' || this.user.role === 'official';
 
     }
 }

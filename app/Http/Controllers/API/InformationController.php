@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\User;
+use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Application;
@@ -37,6 +38,15 @@ class InformationController extends Controller
 
     }
 
+    public function getCountyBursary()
+    {
+        $county_id = User::where('id',Auth::user()->id)->value('county');
+        $ward_id = Ward::where('county_id',$county_id)->value('id');
+        $applications = Application::where('year', date('Y'))->where('ward_id',$ward_id)->get();
+
+        return ['applications'=>$applications];
+
+    }
     public function getbusary()
     {
         // return User::latest()->paginate(10);

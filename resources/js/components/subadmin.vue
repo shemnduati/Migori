@@ -1,32 +1,32 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isAdmin()">
+        <div class="row mt-5" v-if="$gate.isAdminOrOfficial()">
 
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Sub-Admin Table</h3>
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal">Add new user<i class="fa fa-user-plus fa-fw"></i></button>
+                            <button class="btn btn-success" @click="newModal">Add Sub-admin<i class="fa fa-user-plus fa-fw"></i></button>
                         </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tbody><tr>
-                                <th>id</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
+                                <th>County</th>
                                 <th>Ward</th>
                                 <th>Registered At</th>
                                 <th>Modify</th>
                             </tr>
                             <tr v-for="user in users" :key="user.id">
-                                <td>{{user.id}}</td>
                                 <td>{{user.name}}</td>
                                 <td>{{user.email}}</td>
                                 <td>{{user.role | upText}}</td>
+                                <td>{{user.county}}</td>
                                 <td>{{user.ward}}</td>
                                 <td>{{user.reg | myDate}}</td>
                                 <td>
@@ -119,6 +119,7 @@
                     name:'',
                     email: '',
                     ward:'',
+                    county:'',
                 })
 
 
@@ -192,9 +193,19 @@
                     axios.get("api/subadmin").then(({ data }) => (this.users = data['parent']));
                     axios.get("api/wards").then(({ data }) => (this.wards = data));
                 }
+                if (this.$gate.isOfficial()){
+                    axios.get("api/MySubAdmin").then(({ data }) => (this.users = data['parent']));
+                    axios.get("api/wards").then(({ data }) => (this.wards = data));
+                }
             },
             getCounties(){
-                axios.get("api/getcounty").then(({ data }) => ([this.counties = data['counties']]));
+                if (this.$gate.isAdmin()){
+                    axios.get("api/getcounty").then(({ data }) => ([this.counties = data['counties']]));
+                }
+                if (this.$gate.isOfficial()){
+                    axios.get("api/getMyCounty").then(({ data }) => ([this.counties = data['counties']]));
+                }
+
             },
             getWards(){
                 axios.get("api/getward").then(({ data }) => ([this.wards = data['wards']]));

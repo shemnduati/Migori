@@ -2279,7 +2279,6 @@ __webpack_require__.r(__webpack_exports__);
     sendApplication: function sendApplication() {
       var _this = this;
 
-      this.$Progress.start();
       this.form.post('api/apply').then(function () {
         Fire.$emit('AfterCreate');
         Swal.fire({
@@ -2292,8 +2291,6 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$Progress.finish();
       })["catch"](function (error) {
-        _this.$Progress.fail();
-
         _this.errors = error.response.data.errors;
         Swal.fire({
           type: 'error',
@@ -3295,20 +3292,27 @@ __webpack_require__.r(__webpack_exports__);
           return [_this2.applications = data['applications']];
         });
       }
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/getCountyBursary').then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this2.applications = data['applications']];
+        });
+      }
     },
     getType: function getType() {
       var _this3 = this;
 
       if (this.$gate.isAdmin()) {
-        axios.get('api/gettype/' + this.form.type).then(function (_ref3) {
-          var data = _ref3.data;
+        axios.get('api/gettype/' + this.form.type).then(function (_ref4) {
+          var data = _ref4.data;
           return [_this3.applications = data['applications']];
         });
       }
 
       if (this.$gate.isSubadmin()) {
-        axios.get('api/getstatus/' + this.form.type).then(function (_ref4) {
-          var data = _ref4.data;
+        axios.get('api/getstatus/' + this.form.type).then(function (_ref5) {
+          var data = _ref5.data;
           return [_this3.applications = data['applications']];
         });
       }
@@ -4943,7 +4947,8 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         name: '',
         email: '',
-        ward: ''
+        ward: '',
+        county: ''
       })
     };
   },
@@ -5024,28 +5029,48 @@ __webpack_require__.r(__webpack_exports__);
           return _this4.wards = data;
         });
       }
+
+      if (this.$gate.isOfficial()) {
+        axios.get("api/MySubAdmin").then(function (_ref3) {
+          var data = _ref3.data;
+          return _this4.users = data['parent'];
+        });
+        axios.get("api/wards").then(function (_ref4) {
+          var data = _ref4.data;
+          return _this4.wards = data;
+        });
+      }
     },
     getCounties: function getCounties() {
       var _this5 = this;
 
-      axios.get("api/getcounty").then(function (_ref3) {
-        var data = _ref3.data;
-        return [_this5.counties = data['counties']];
-      });
+      if (this.$gate.isAdmin()) {
+        axios.get("api/getcounty").then(function (_ref5) {
+          var data = _ref5.data;
+          return [_this5.counties = data['counties']];
+        });
+      }
+
+      if (this.$gate.isOfficial()) {
+        axios.get("api/getMyCounty").then(function (_ref6) {
+          var data = _ref6.data;
+          return [_this5.counties = data['counties']];
+        });
+      }
     },
     getWards: function getWards() {
       var _this6 = this;
 
-      axios.get("api/getward").then(function (_ref4) {
-        var data = _ref4.data;
+      axios.get("api/getward").then(function (_ref7) {
+        var data = _ref7.data;
         return [_this6.wards = data['wards']];
       });
     },
     getCountyWards: function getCountyWards() {
       var _this7 = this;
 
-      axios.get("api/getcountyward/" + this.form.county).then(function (_ref5) {
-        var data = _ref5.data;
+      axios.get("api/getcountyward/" + this.form.county).then(function (_ref8) {
+        var data = _ref8.data;
         return [_this7.wards = data['wards']];
       });
     },
@@ -66697,7 +66722,11 @@ var render = function() {
                                       "telephone"
                                     )
                                   },
-                                  attrs: { type: "tel", name: "telephone" },
+                                  attrs: {
+                                    type: "tel",
+                                    placeholder: "+254",
+                                    name: "telephone"
+                                  },
                                   domProps: { value: _vm.form.telephone },
                                   on: {
                                     input: function($event) {
@@ -69681,7 +69710,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isSubadmin()
+    _vm.$gate.isSubadminOrOfficial()
       ? _c("div", { staticClass: "row mt-5" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -76004,7 +76033,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdmin()
+    _vm.$gate.isAdminOrOfficial()
       ? _c("div", { staticClass: "row mt-5" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -76021,7 +76050,7 @@ var render = function() {
                       on: { click: _vm.newModal }
                     },
                     [
-                      _vm._v("Add new user"),
+                      _vm._v("Add Sub-admin"),
                       _c("i", { staticClass: "fa fa-user-plus fa-fw" })
                     ]
                   )
@@ -76040,8 +76069,6 @@ var render = function() {
                         _vm._v(" "),
                         _vm._l(_vm.users, function(user) {
                           return _c("tr", { key: user.id }, [
-                            _c("td", [_vm._v(_vm._s(user.id))]),
-                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.name))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.email))]),
@@ -76049,6 +76076,8 @@ var render = function() {
                             _c("td", [
                               _vm._v(_vm._s(_vm._f("upText")(user.role)))
                             ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.county))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.ward))]),
                             _vm._v(" "),
@@ -76455,13 +76484,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [_vm._v("id")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Email")]),
       _vm._v(" "),
       _c("th", [_vm._v("Role")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("County")]),
       _vm._v(" "),
       _c("th", [_vm._v("Ward")]),
       _vm._v(" "),
@@ -91666,6 +91695,16 @@ function () {
     key: "isAdminOrSubadmin",
     value: function isAdminOrSubadmin() {
       return this.user.role === 'admin' || this.user.role === 'sub-admin';
+    }
+  }, {
+    key: "isSubadminOrOfficial",
+    value: function isSubadminOrOfficial() {
+      return this.user.role === 'sub-admin' || this.user.role === 'official';
+    }
+  }, {
+    key: "isAdminOrOfficial",
+    value: function isAdminOrOfficial() {
+      return this.user.role === 'admin' || this.user.role === 'official';
     }
   }]);
 
