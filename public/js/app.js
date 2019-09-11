@@ -3260,6 +3260,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3270,51 +3278,59 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getApplications: function getApplications() {
+    getBursary: function getBursary(type) {
       var _this = this;
 
-      if (this.$gate.isSubadmin()) {
-        axios.get('api/getbusary').then(function (_ref) {
-          var data = _ref.data;
-          return [_this.applications = data['applications']];
-        });
-      }
+      axios.get('api/getbursarytype/' + type).then(function (_ref) {
+        var data = _ref.data;
+        return [_this.applications = data['applications']];
+      });
     },
-    getType: function getType() {
+    getApplications: function getApplications() {
       var _this2 = this;
 
-      if (this.$gate.isAdmin()) {
-        axios.get('api/gettype/' + this.form.type).then(function (_ref2) {
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/getbusary').then(function (_ref2) {
           var data = _ref2.data;
           return [_this2.applications = data['applications']];
         });
       }
+    },
+    getType: function getType() {
+      var _this3 = this;
+
+      if (this.$gate.isAdmin()) {
+        axios.get('api/gettype/' + this.form.type).then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this3.applications = data['applications']];
+        });
+      }
 
       if (this.$gate.isSubadmin()) {
-        axios.get('api/getstatus/' + this.form.type).then(function (_ref3) {
-          var data = _ref3.data;
-          return [_this2.applications = data['applications']];
+        axios.get('api/getstatus/' + this.form.type).then(function (_ref4) {
+          var data = _ref4.data;
+          return [_this3.applications = data['applications']];
         });
       }
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.$Progress.start();
     Fire.$on('searching', function () {
-      _this3.$Progress.start();
+      _this4.$Progress.start();
 
-      var query = _this3.$parent.search;
+      var query = _this4.$parent.search;
       axios.get('api/findbursary?q=' + query).then(function (data) {
-        _this3.applications = data.data;
+        _this4.applications = data.data;
 
-        _this3.$Progress.finish();
+        _this4.$Progress.finish();
       })["catch"](function () {});
     });
     this.getApplications();
     Fire.$on('AfterCreate', function () {
-      _this3.getApplications();
+      _this4.getApplications();
     });
   }
 });
@@ -69675,66 +69691,101 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
-                  _c("form", [
-                    _c(
-                      "select",
-                      {
-                        directives: [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-6" }, [
+                      _c("form", [
+                        _c(
+                          "select",
                           {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.type,
-                            expression: "form.type"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        on: {
-                          change: [
-                            function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "type",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            },
-                            function($event) {
-                              return _vm.getType()
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.type,
+                                expression: "form.type"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "type",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.getType()
+                                }
+                              ]
                             }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { selected: "", value: "" } },
+                              [_vm._v("--Sort By--")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("All")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("Pending")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("Sent")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("Rejected")
+                            ])
                           ]
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "", value: "" } }, [
-                          _vm._v("--Sort By--")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "1" } }, [
-                          _vm._v("All")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "2" } }, [
-                          _vm._v("Pending")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "3" } }, [
-                          _vm._v("Sent")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "4" } }, [
-                          _vm._v("Rejected")
-                        ])
-                      ]
-                    )
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-6" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          on: {
+                            click: function($event) {
+                              return _vm.getBursary("CDF")
+                            }
+                          }
+                        },
+                        [_vm._v("CDF")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          on: {
+                            click: function($event) {
+                              return _vm.getBursary("County")
+                            }
+                          }
+                        },
+                        [_vm._v("County")]
+                      )
+                    ])
                   ])
                 ])
               ]),
@@ -69797,7 +69848,7 @@ var render = function() {
                                 _c(
                                   "router-link",
                                   {
-                                    staticClass: "btn btn-primary",
+                                    staticClass: "btn btn-primary btn-sm",
                                     attrs: {
                                       to: {
                                         path:
