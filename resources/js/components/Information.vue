@@ -8,15 +8,23 @@
                         <h3 class="card-title">Information Table</h3>
 
                         <div class="card-tools">
-                            <form>
-                            <select @change="getType()" v-model="form.type" class="form-control">
-                            <option selected value="">--Sort By--</option>
-                            <option value="1">All</option>
-                            <option value="2">Pending</option>
-                            <option value="3">Sent</option>
-                            <option value="4">Rejected</option>
-                        </select>
-                    </form>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <form>
+                                        <select @change="getType()" v-model="form.type" class="form-control">
+                                            <option selected value="">--Sort By--</option>
+                                            <option value="1">All</option>
+                                            <option value="2">Pending</option>
+                                            <option value="3">Sent</option>
+                                            <option value="4">Rejected</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button @click="getBursary('CDF')" class="btn btn-success btn-sm">CDF</button>
+                                    <button @click="getBursary('County')" class="btn btn-success btn-sm">County</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -41,7 +49,7 @@
                                     <span v-if="application.status==1" style="color: blue;">Sent</span>
                                     <span v-if="application.status==3" style="color: green;">Accepted</span>
                                </td>
-                                <td><router-link :to="{path:'/informationview/'+ application.user_id}" type="button" class="btn btn-primary">view</router-link></td>
+                                <td><router-link :to="{path:'/informationview/'+ application.user_id}" type="button" class="btn btn-primary btn-sm">view</router-link></td>
                                 <td>{{application.bursary_type}}</td>
 
                             </tr>
@@ -79,6 +87,9 @@
             }
         },
         methods:{
+            getBursary(type){
+               axios.get('api/getbursarytype/' + type).then(({data}) => ([this.applications = data['applications']]));
+            },
             getApplications(){
                 if (this.$gate.isSubadmin()) {
                     axios.get('api/getbusary').then(({data}) => ([this.applications = data['applications']]));
