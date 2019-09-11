@@ -118,7 +118,7 @@ class ApplicationController extends Controller
             'mtelephone'=>'required',
             'gtelephone'=>'required',
         ]);
-<<<<<<< HEAD
+
 
         $passport_name = "";
         $guardianId_name = "";
@@ -271,7 +271,6 @@ class ApplicationController extends Controller
 
          $institution->save();
 
-=======
         $available = User::where('ward', $request['ward'])->count();
         if($available > 0) {
             $user = auth('api')->user()->id;
@@ -479,7 +478,7 @@ class ApplicationController extends Controller
 
             $institution->save();
         }
->>>>>>> 95da055ce1802fde2c16b4bf9743afc401b6fb48
+
     }
 }
 

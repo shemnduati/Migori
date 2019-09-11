@@ -59,7 +59,7 @@ class InformationController extends Controller
 
     public function getBursaryType($type){
        $ward_id = User::where('id',Auth::user()->id)->value('ward');
-        $applications = Application::where('year', date('Y'))->where('ward_id',$ward_id)->where('type', $type)->get();
+        $applications = Application::where('year', date('Y'))->where('ward_id',$ward_id)->where('bursary_type', $type)->get();
 
         return ['applications'=>$applications];
     }
