@@ -52,7 +52,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                     <label>ID Number</label>
-                                    <input v-model="form.idNo" type="number" name="idNo" class="form-control" :class="{ 'is-invalid': form.errors.has('idNo') }">
+                                    <input v-model="form.idNo"  type="number" name="idNo" class="form-control" :class="{ 'is-invalid': form.errors.has('idNo') }">
                                     <has-error :form="form" field="idNo"></has-error>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Telephone</label>
-                                    <input v-model="form.telephone" type="tel" name="telephone"
+                                    <input v-model="form.telephone" type="tel" placeholder="+254" name="telephone"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('telephone') }">
                                     <has-error :form="form" field="telephone"></has-error>
                                     </div>
@@ -562,7 +562,6 @@
         },
         methods:{
             sendApplication(){
-                this.$Progress.start();
                this.form.post('api/apply')
                     .then(() => {
                         Fire.$emit('AfterCreate');
@@ -576,7 +575,6 @@
                         this.$Progress.finish();
                     })
                     .catch(error => {
-                        this.$Progress.fail();
                         this.errors = error.response.data.errors;
                         Swal.fire({
                           type: 'error',

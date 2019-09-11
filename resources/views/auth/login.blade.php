@@ -34,6 +34,10 @@
             }
         .state{
                 color: #1db5b5;
+            }
+        .fa-eye {
+                font-size: 20px;
+                margin: 8px 6px;
             }    
     </style>
 </head>
@@ -44,6 +48,7 @@
             <div class="card">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
+                    
                     <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
                   </li>
                   <li class="nav-item">
@@ -78,12 +83,15 @@
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
                                       </div>
-                                      <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                      <input type="password" id="pwd" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                       @error('password')
+
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
+
                                       @enderror
+                                      <i class="fas fa-eye" id="eye"></i>
                                   </div>
                               </div>
 
@@ -191,6 +199,21 @@
         </div>
     </div>
 </div>
+<script>
+  
+  var pwd = document.getElementById('pwd');
+  var eye = document.getElementById('eye');
+
+
+  eye.addEventListener('click',togglepass);
+
+  function togglepass(){
+
+    eye.classList.toggle('active');
+
+    (pwd.type == 'password') ? pwd.type = 'text' : pwd.type = 'password';
+  }
+</script>
 
 </body>
 </html>
