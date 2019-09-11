@@ -121,6 +121,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </router-link>
                     </li>
                     @endcan
+                    @can('isOfficial')
+                        <li class="nav-item">
+                            <router-link to="/subadmin" class="nav-link">
+                                <i class="nav-icon fas fa-user-plus green"></i>
+                                <p>
+                                    Add sub-Admin
+                                </p>
+                            </router-link>
+                        </li>
+                    @endcan
                     @can('isAdmin')
 
                     <li class="nav-item">
