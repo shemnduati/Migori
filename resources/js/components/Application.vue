@@ -85,7 +85,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Telephone</label>
-                                    <input v-model="form.telephone" type="tel" placeholder="+254" name="telephone"
+                                    <input v-model="form.telephone" type="tel" pattern="[0-9]" name="telephone"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('telephone') }">
                                     <has-error :form="form" field="telephone"></has-error>
                                     </div>
@@ -157,7 +157,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Telephone</label>
-                                    <input v-model="form.ftelephone" type="tel" name="ftelephone"
+                                    <input v-model="form.ftelephone" type="tel" pattern="[0-9]" name="ftelephone"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('ftelephone') }">
                                     <has-error :form="form" field="ftelephone"></has-error>
                                     </div>
@@ -216,7 +216,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Telephone</label>
-                                    <input v-model="form.mtelephone" type="tel" name="mtelephone"
+                                    <input v-model="form.mtelephone" type="tel" pattern="[0-9]" name="mtelephone"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('mtelephone') }">
                                     <has-error :form="form" field="mtelephone"></has-error>
                                     </div>
@@ -275,7 +275,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Telephone</label>
-                                    <input v-model="form.gtelephone" type="tel" name="gtelephone"
+                                    <input v-model="form.gtelephone" type="tel" pattern="[0-9]" name="gtelephone"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('gtelephone') }">
                                     <has-error :form="form" field="gtelephone"></has-error>
                                     </div>

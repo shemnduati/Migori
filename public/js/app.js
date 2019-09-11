@@ -66708,7 +66708,7 @@ var render = function() {
                                   },
                                   attrs: {
                                     type: "tel",
-                                    placeholder: "+254",
+                                    pattern: "[0-9]",
                                     name: "telephone"
                                   },
                                   domProps: { value: _vm.form.telephone },
@@ -67082,7 +67082,11 @@ var render = function() {
                                       "ftelephone"
                                     )
                                   },
-                                  attrs: { type: "tel", name: "ftelephone" },
+                                  attrs: {
+                                    type: "tel",
+                                    pattern: "[0-9]",
+                                    name: "ftelephone"
+                                  },
                                   domProps: { value: _vm.form.ftelephone },
                                   on: {
                                     input: function($event) {
@@ -67416,7 +67420,11 @@ var render = function() {
                                       "mtelephone"
                                     )
                                   },
-                                  attrs: { type: "tel", name: "mtelephone" },
+                                  attrs: {
+                                    type: "tel",
+                                    pattern: "[0-9]",
+                                    name: "mtelephone"
+                                  },
                                   domProps: { value: _vm.form.mtelephone },
                                   on: {
                                     input: function($event) {
@@ -67750,7 +67758,11 @@ var render = function() {
                                       "gtelephone"
                                     )
                                   },
-                                  attrs: { type: "tel", name: "gtelephone" },
+                                  attrs: {
+                                    type: "tel",
+                                    pattern: "[0-9]",
+                                    name: "gtelephone"
+                                  },
                                   domProps: { value: _vm.form.gtelephone },
                                   on: {
                                     input: function($event) {
