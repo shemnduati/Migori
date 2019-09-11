@@ -304,7 +304,7 @@ class ApplicationController extends Controller
             $father->income = $request['fincome'];
             $father->tel = $request['ftelephone'];
             $father->cert = $request->fatherId;
-            $application->status = 0;
+            $father->status = 0;
             $father->year = date('Y');
 
             $father->save();
@@ -318,7 +318,7 @@ class ApplicationController extends Controller
             $mother->income = $request['mincome'];
             $mother->tel = $request['mtelephone'];
             $mother->cert = $request->motherId;
-            $application->status = 0;
+            $mother->status = 0;
             $mother->year = date('Y');
 
             $mother->save();
@@ -332,7 +332,7 @@ class ApplicationController extends Controller
             $guardian->income = $request['gincome'];
             $guardian->tel = $request['gtelephone'];
             $guardian->cert = $request->guardianId;
-            $application->status = 0;
+            $guardian->status = 0;
             $guardian->year = date('Y');
 
             $guardian->save();
@@ -343,7 +343,7 @@ class ApplicationController extends Controller
             $more_family->workingSiblings = $request['sWorking'];
             $more_family->schoolSiblings = $request['inSchool'];
             $more_family->pFees = $request['pFees'];
-            $application->status = 0;
+            $more_family->status = 0;
             $more_family->pFeesRelationship = $request['pRelationship'];
             $more_family->year = date('Y');
 
@@ -355,7 +355,7 @@ class ApplicationController extends Controller
             $geographical->Ward = $request['ward'];
             $geographical->Division = $request['division'];
             $geographical->Location = $request['location'];
-            $application->status = 0;
+            $geographical->status = 0;
             $geographical->Sublocation = $request['sublocation'];
             $geographical->Village = $request['village'];
             $geographical->year = date('Y');
@@ -369,7 +369,7 @@ class ApplicationController extends Controller
             $institution->class = $request['class'];
             $institution->yearofstudy = $request['year'];
             $institution->fees = $request['payable'];
-            $application->status = 0;
+            $institution->status = 0;
             $institution->amount_paid = $request['paid'];
             $institution->balance = $request['balance'];
             $institution->year = date('Y');
@@ -406,7 +406,7 @@ class ApplicationController extends Controller
             $father->income = $request['fincome'];
             $father->tel = $request['ftelephone'];
             $father->cert = $request->fatherId;
-            $application->status = 2;
+            $father->status = 2;
             $father->year = date('Y');
 
             $father->save();
@@ -420,7 +420,7 @@ class ApplicationController extends Controller
             $mother->income = $request['mincome'];
             $mother->tel = $request['mtelephone'];
             $mother->cert = $request->motherId;
-            $application->status = 2;
+            $mother->status = 2;
             $mother->year = date('Y');
 
             $mother->save();
@@ -434,7 +434,7 @@ class ApplicationController extends Controller
             $guardian->income = $request['gincome'];
             $guardian->tel = $request['gtelephone'];
             $guardian->cert = $request->guardianId;
-            $application->status = 2;
+            $guardian->status = 2;
             $guardian->year = date('Y');
 
             $guardian->save();
@@ -445,7 +445,7 @@ class ApplicationController extends Controller
             $more_family->workingSiblings = $request['sWorking'];
             $more_family->schoolSiblings = $request['inSchool'];
             $more_family->pFees = $request['pFees'];
-            $application->status = 2;
+            $more_family->status = 2;
             $more_family->pFeesRelationship = $request['pRelationship'];
             $more_family->year = date('Y');
 
@@ -459,7 +459,7 @@ class ApplicationController extends Controller
             $geographical->Location = $request['location'];
             $geographical->Sublocation = $request['sublocation'];
             $geographical->Village = $request['village'];
-            $application->status = 2;
+            $geographical->status = 2;
             $geographical->year = date('Y');
 
             $geographical->save();
@@ -473,7 +473,7 @@ class ApplicationController extends Controller
             $institution->fees = $request['payable'];
             $institution->amount_paid = $request['paid'];
             $institution->balance = $request['balance'];
-            $application->status = 2;
+            $institution->status = 2;
             $institution->year = date('Y');
 
             $institution->save();
