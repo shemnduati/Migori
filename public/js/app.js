@@ -2279,7 +2279,6 @@ __webpack_require__.r(__webpack_exports__);
     sendApplication: function sendApplication() {
       var _this = this;
 
-      this.$Progress.start();
       this.form.post('api/apply').then(function () {
         Fire.$emit('AfterCreate');
         Swal.fire({
@@ -2292,8 +2291,6 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$Progress.finish();
       })["catch"](function (error) {
-        _this.$Progress.fail();
-
         _this.errors = error.response.data.errors;
         Swal.fire({
           type: 'error',
@@ -9490,7 +9487,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
 
 // exports
 
@@ -66424,7 +66421,11 @@ var render = function() {
                                       "telephone"
                                     )
                                   },
-                                  attrs: { type: "tel", name: "telephone" },
+                                  attrs: {
+                                    type: "tel",
+                                    placeholder: "+254",
+                                    name: "telephone"
+                                  },
                                   domProps: { value: _vm.form.telephone },
                                   on: {
                                     input: function($event) {
@@ -92182,13 +92183,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 95da055ce1802fde2c16b4bf9743afc401b6fb48
 
 
 /***/ })
