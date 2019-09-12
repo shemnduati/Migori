@@ -69773,100 +69773,106 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-sm-6" }, [
-                      _c("form", [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.type,
-                                expression: "form.type"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.form,
-                                    "type",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                },
-                                function($event) {
-                                  return _vm.getType()
-                                }
-                              ]
-                            }
-                          },
-                          [
+                    _vm.$gate.isOfficial()
+                      ? _c("div", { staticClass: "col-sm-12" }, [
+                          _c("form", [
                             _c(
-                              "option",
-                              { attrs: { selected: "", value: "" } },
-                              [_vm._v("--Sort By--")]
-                            ),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "1" } }, [
-                              _vm._v("All")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "2" } }, [
-                              _vm._v("Pending")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "3" } }, [
-                              _vm._v("Sent")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "4" } }, [
-                              _vm._v("Rejected")
-                            ])
-                          ]
-                        )
-                      ])
-                    ]),
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.type,
+                                    expression: "form.type"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.form,
+                                        "type",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.getType()
+                                    }
+                                  ]
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { selected: "", value: "" } },
+                                  [_vm._v("--Sort By--")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "1" } }, [
+                                  _vm._v("All")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "2" } }, [
+                                  _vm._v("Pending")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "3" } }, [
+                                  _vm._v("Sent")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "4" } }, [
+                                  _vm._v("Rejected")
+                                ])
+                              ]
+                            )
+                          ])
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-6" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-sm",
-                          on: {
-                            click: function($event) {
-                              return _vm.getBursary("CDF")
-                            }
-                          }
-                        },
-                        [_vm._v("CDF")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-sm",
-                          on: {
-                            click: function($event) {
-                              return _vm.getBursary("County")
-                            }
-                          }
-                        },
-                        [_vm._v("County")]
-                      )
-                    ])
+                    _vm.$gate.isSubadmin()
+                      ? _c("div", { staticClass: "col-sm-12" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getBursary("CDF")
+                                }
+                              }
+                            },
+                            [_vm._v("CDF")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getBursary("County")
+                                }
+                              }
+                            },
+                            [_vm._v("County")]
+                          )
+                        ])
+                      : _vm._e()
                   ])
                 ])
               ]),
@@ -69879,7 +69885,23 @@ var render = function() {
                     _c(
                       "tbody",
                       [
-                        _vm._m(0),
+                        _c("tr", [
+                          _c("th", [_vm._v("Serial N.o")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Name")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Gender")]),
+                          _vm._v(" "),
+                          _vm.$gate.isOfficial()
+                            ? _c("th", [_vm._v("Status")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Recommendation")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("View to Send")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Type")])
+                        ]),
                         _vm._v(" "),
                         _vm._l(_vm.applications, function(application) {
                           return _c("tr", { key: application.id }, [
@@ -69889,39 +69911,41 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(application.gender))]),
                             _vm._v(" "),
-                            _c("td", [
-                              application.status == 0
-                                ? _c(
-                                    "span",
-                                    { staticStyle: { color: "purple" } },
-                                    [_vm._v("Pending...")]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              application.status == 2
-                                ? _c(
-                                    "span",
-                                    { staticStyle: { color: "red" } },
-                                    [_vm._v("Rejected")]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              application.status == 1
-                                ? _c(
-                                    "span",
-                                    { staticStyle: { color: "blue" } },
-                                    [_vm._v("Sent")]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              application.status == 3
-                                ? _c(
-                                    "span",
-                                    { staticStyle: { color: "green" } },
-                                    [_vm._v("Accepted")]
-                                  )
-                                : _vm._e()
-                            ]),
+                            _vm.$gate.isOfficial()
+                              ? _c("td", [
+                                  application.status == 0
+                                    ? _c(
+                                        "span",
+                                        { staticStyle: { color: "purple" } },
+                                        [_vm._v("Pending...")]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  application.status == 2
+                                    ? _c(
+                                        "span",
+                                        { staticStyle: { color: "red" } },
+                                        [_vm._v("Rejected")]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  application.status == 1
+                                    ? _c(
+                                        "span",
+                                        { staticStyle: { color: "blue" } },
+                                        [_vm._v("Sent")]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  application.status == 3
+                                    ? _c(
+                                        "span",
+                                        { staticStyle: { color: "green" } },
+                                        [_vm._v("Accepted")]
+                                      )
+                                    : _vm._e()
+                                ])
+                              : _vm._e(),
                             _vm._v(" "),
                             _c("td", [
                               !application.recommendation
@@ -69996,28 +70020,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Serial N.o")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Gender")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Status")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Recommendation")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("View to Send")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Type")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

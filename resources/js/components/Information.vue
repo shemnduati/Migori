@@ -9,7 +9,7 @@
 
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12" v-if="$gate.isOfficial()">
                                     <form>
                                         <select @change="getType()" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
@@ -20,7 +20,7 @@
                                         </select>
                                     </form>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12" v-if="$gate.isSubadmin()">
                                     <button @click="getBursary('CDF')" class="btn btn-success btn-sm">CDF</button>
                                     <button @click="getBursary('County')" class="btn btn-success btn-sm">County</button>
                                 </div>
@@ -34,7 +34,7 @@
                                 <th>Serial N.o</th>
                                 <th>Name</th>
                                 <th>Gender</th>
-                                <th>Status</th>
+                                <th v-if="$gate.isOfficial()">Status</th>
                                 <th>Recommendation</th>
                                 <th>View to Send</th>
                                 <th>Type</th>
@@ -44,7 +44,7 @@
                                 <td>{{application.serial}}</td>
                                 <td>{{application.name}}</td>
                                 <td>{{application.gender}}</td>
-                                <td>
+                                <td v-if="$gate.isOfficial()">
                                     <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
                                     <span v-if="application.status==1" style="color: blue;">Sent</span>
