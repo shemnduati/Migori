@@ -3559,6 +3559,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3571,10 +3605,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       photo: '',
       form: new Form({
         recommendation: ''
+      }),
+      formf: new Form({
+        amount: ''
       })
     };
   },
   methods: {
+    notAward: function notAward() {},
+    award: function award() {
+      this.formf.post("/api/award/" + this.application.id).then(function () {
+        Swal.fire('Success!', 'Successfully Awarded.', 'success');
+        Fire.$emit('entry');
+      })["catch"](function () {
+        Swal.fire('Failed!', 'There was something wrong');
+      });
+    },
+    newModal: function newModal() {
+      this.formf.reset();
+      $('#new').modal('show');
+    },
     recommend: function recommend() {
       var _this = this;
 
@@ -3592,7 +3642,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             Swal.fire('Success!', 'Operation successful.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
-            swal('Failed!', 'There was something wrong');
+            Swal.fire('Failed!', 'There was something wrong');
           });
         }
       });
@@ -69896,11 +69946,11 @@ var render = function() {
                             ? _c("th", [_vm._v("Status")])
                             : _vm._e(),
                           _vm._v(" "),
-                          _c("th", [_vm._v("Recommendation")]),
+                          _c("th", [_vm._v("Recomm.")]),
                           _vm._v(" "),
-                          _c("th", [_vm._v("View to Send")]),
+                          _c("th", [_vm._v("Type")]),
                           _vm._v(" "),
-                          _c("th", [_vm._v("Type")])
+                          _c("th", [_vm._v("View to Send")])
                         ]),
                         _vm._v(" "),
                         _vm._l(_vm.applications, function(application) {
@@ -69941,7 +69991,7 @@ var render = function() {
                                     ? _c(
                                         "span",
                                         { staticStyle: { color: "green" } },
-                                        [_vm._v("Accepted")]
+                                        [_vm._v("Awarded")]
                                       )
                                     : _vm._e()
                                 ])
@@ -69981,6 +70031,10 @@ var render = function() {
                                 : _vm._e()
                             ]),
                             _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(application.bursary_type))
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "td",
                               [
@@ -70001,9 +70055,7 @@ var render = function() {
                                 )
                               ],
                               1
-                            ),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(application.bursary_type))])
+                            )
                           ])
                         })
                       ],
@@ -70268,11 +70320,52 @@ var render = function() {
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _vm.$gate.isSubadmin() && !_vm.application.recommendation
-      ? _c("div", { staticClass: "row mb-3" }, [
-          _vm._m(11),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
+    _c("div", { staticClass: "row mb-3" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _vm.$gate.isSubadmin() && !_vm.application.recommendation
+          ? _c("button", { staticClass: "btn btn-success px-5 offset-md-1" }, [
+              _vm._v("Recommendation")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() && !_vm.application.amount
+          ? _c("h4", [_vm._v("Award?")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() && _vm.application.amount
+          ? _c("h4", [
+              _c("b", [_vm._v("Awarded:")]),
+              _vm._v(" Ksh " + _vm._s(_vm.application.amount))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() && !_vm.application.amount
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "button" },
+                on: { click: _vm.newModal }
+              },
+              [_vm._v("Yes")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() && !_vm.application.amount
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { type: "button" },
+                on: { click: function($event) {} }
+              },
+              [_vm._v("No")]
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm.$gate.isSubadmin() && !_vm.application.recommendation
+        ? _c("div", { staticClass: "col-md-6" }, [
             _c("div", { staticClass: "form-check form-check-inline" }, [
               _c("input", {
                 directives: [
@@ -70376,8 +70469,8 @@ var render = function() {
               )
             ])
           ])
-        ])
-      : _vm._e(),
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -70397,7 +70490,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(12),
+              _vm._m(11),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("img", {
@@ -70406,7 +70499,91 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _vm._m(13)
+              _vm._m(12)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "new",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addnewLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(13),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.award()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Amount")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formf.amount,
+                              expression: "formf.amount"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("amount")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "name",
+                            placeholder: "Amount"
+                          },
+                          domProps: { value: _vm.formf.amount },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.formf, "amount", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "amount" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(14)
+                ]
+              )
             ])
           ]
         )
@@ -70569,16 +70746,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("button", { staticClass: "btn btn-success px-5 offset-md-1" }, [
-        _vm._v("Recommendation")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c(
         "button",
@@ -70606,6 +70773,53 @@ var staticRenderFns = [
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Close")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "addnewLabel" } }, [
+        _vm._v("Award")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [
+          _c("i", { staticClass: "fas fa-save" }),
+          _vm._v("\n                        Save\n                        ")
+        ]
       )
     ])
   }

@@ -35,9 +35,9 @@
                                 <th>Name</th>
                                 <th>Gender</th>
                                 <th v-if="$gate.isOfficial()">Status</th>
-                                <th>Recommendation</th>
-                                <th>View to Send</th>
+                                <th>Recomm.</th>
                                 <th>Type</th>
+                                <th>View to Send</th>
 
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
@@ -48,7 +48,7 @@
                                     <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
                                     <span v-if="application.status==1" style="color: blue;">Sent</span>
-                                    <span v-if="application.status==3" style="color: green;">Accepted</span>
+                                    <span v-if="application.status==3" style="color: green;">Awarded</span>
                                </td>
                                <td>
                                    <span class="badge badge-primary" v-if="!application.recommendation">Pending</span>
@@ -56,8 +56,8 @@
                                     <span class="badge badge-warning" v-if="application.recommendation == 'Partially'">Partially</span>
                                     <span class="badge badge-danger" v-if="application.recommendation == 'No'">No</span>
                                </td>
+                               <td>{{application.bursary_type}}</td>
                                 <td><router-link :to="{path:'/informationview/'+ application.user_id}" type="button" class="btn btn-primary btn-sm">view</router-link></td>
-                                <td>{{application.bursary_type}}</td>
 
                             </tr>
 

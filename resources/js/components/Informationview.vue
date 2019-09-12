@@ -153,11 +153,15 @@
 			</div>
 		</div>
 		<hr>
-		<div class="row mb-3" v-if="$gate.isSubadmin() && !application.recommendation">
+		<div class="row mb-3">
 			<div class="col-md-6">
-				<button class="btn btn-success px-5 offset-md-1">Recommendation</button>
+				<button class="btn btn-success px-5 offset-md-1" v-if="$gate.isSubadmin() && !application.recommendation">Recommendation</button>
+				<h4 v-if="$gate.isOfficial() && !application.amount">Award?</h4>
+				<h4 v-if="$gate.isOfficial() && application.amount"><b>Awarded:</b> Ksh {{application.amount}}</h4>
+				<button type="button" class="btn btn-success" @click="newModal" v-if="$gate.isOfficial() && !application.amount">Yes</button>
+				<button type="button" class="btn btn-danger" @click="" v-if="$gate.isOfficial() && !application.amount">No</button>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6" v-if="$gate.isSubadmin() && !application.recommendation">
 				<div class="form-check form-check-inline">
                 <input v-model="form.recommendation" class="form-check-input" type="radio" name="yes" id="yes" value="Yes"
                         :class="{ 'is-invalid': form.errors.has('yes') }" @click="recommend">
@@ -195,6 +199,36 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="addnewLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addnewLabel">Award</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form @submit.prevent="award()">
+                    <div class="modal-body">
+                        <div class="form-group">
+                          <label>Amount</label>
+                          <input v-model="formf.amount" type="text" name="name"
+                            placeholder="Amount"
+                            class="form-control" :class="{ 'is-invalid': form.errors.has('amount') }">
+                          <has-error :form="form" field="amount"></has-error>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">
+                        	<i class="fas fa-save"></i>
+                        Save
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 	</div>
 </template>
 
@@ -211,11 +245,33 @@
 	        	photo: '',
 	        	form: new Form({
                    recommendation: ''
+	        	}),
+	        	formf: new Form({
+	        		amount: ''
 	        	})
 			}
 
 		},
 		methods:{
+			notAward(){
+
+			},
+			award(){
+              this.formf.post("/api/award/" + this.application.id).then(()=>{
+                      Swal.fire(
+                        'Success!',
+                        'Successfully Awarded.',
+                        'success'
+                        )
+                            Fire.$emit('entry');
+                        }).catch(()=>{
+                      Swal.fire('Failed!','There was something wrong')
+                    });
+			},
+			newModal(){
+              this.formf.reset();
+              $('#new').modal('show');
+            },
 			recommend(){
                Swal.fire({
                   title: 'Are you sure?',
@@ -235,7 +291,7 @@
                         )
                             Fire.$emit('entry');
                         }).catch(()=>{
-                      swal('Failed!','There was something wrong')
+                      Swal.fire('Failed!','There was something wrong')
                     });
                     }
                 })
