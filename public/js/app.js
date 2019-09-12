@@ -3265,6 +3265,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3568,28 +3575,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: {
-    getApplications: function getApplications() {
+    recommend: function recommend() {
       var _this = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        //type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then(function (result) {
+        if (result.value) {
+          _this.form.post("/api/recommend/" + _this.applicantId).then(function () {
+            Swal.fire('Success!', 'Operation successful.', 'success');
+            Fire.$emit('entry');
+          })["catch"](function () {
+            swal('Failed!', 'There was something wrong');
+          });
+        }
+      });
+    },
+    getApplications: function getApplications() {
+      var _this2 = this;
 
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref) {
         var data = _ref.data;
-        return [_this.application = data['application']];
+        return [_this2.application = data['application']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref2) {
         var data = _ref2.data;
-        return [_this.family = data['family']];
+        return [_this2.family = data['family']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref3) {
         var data = _ref3.data;
-        return [_this.morefamily = data['morefamily']];
+        return [_this2.morefamily = data['morefamily']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref4) {
         var data = _ref4.data;
-        return [_this.geographical = data['geographical']];
+        return [_this2.geographical = data['geographical']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref5) {
         var data = _ref5.data;
-        return [_this.institution = data['institution']];
+        return [_this2.institution = data['institution']];
       });
     },
     launch: function launch(passport) {
@@ -3597,7 +3626,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.photo = passport;
     },
     send: function send() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.put("/api/send/" + this.applicantId).then(function (response) {
         Fire.$emit('AfterCreate');
@@ -3607,11 +3636,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Sent!!'
         }, "text", 'Sent to Admin!'));
 
-        _this2.$router.push('/Information');
+        _this3.$router.push('/Information');
       });
     },
     accept: function accept() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$Progress.start();
       axios.put("/api/accept/" + this.applicantId).then(function (response) {
@@ -3622,13 +3651,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Accept'
         }, "text", 'Accepted!'));
 
-        _this3.$router.push('/Information');
+        _this4.$router.push('/Information');
 
-        _this3.$Progress.finish();
+        _this4.$Progress.finish();
       });
     },
     reject: function reject() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.$Progress.start();
       axios.put("/api/reject/" + this.applicantId).then(function (response) {
@@ -3639,14 +3668,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Rejected!!'
         }, "text", 'You rejected the application'));
 
-        _this4.$router.push('/Information');
+        _this5.$router.push('/Information');
 
         his.$Progress.finish();
       });
     }
   },
   created: function created() {
+    var _this6 = this;
+
     this.getApplications();
+    Fire.$on('entry', function () {
+      _this6.getApplications();
+    });
   }
 });
 
@@ -69889,6 +69923,40 @@ var render = function() {
                                 : _vm._e()
                             ]),
                             _vm._v(" "),
+                            _c("td", [
+                              !application.recommendation
+                                ? _c(
+                                    "span",
+                                    { staticClass: "badge badge-primary" },
+                                    [_vm._v("Pending")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.recommendation == "Yes"
+                                ? _c(
+                                    "span",
+                                    { staticClass: "badge badge-success" },
+                                    [_vm._v("Yes / High")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.recommendation == "Partially"
+                                ? _c(
+                                    "span",
+                                    { staticClass: "badge badge-warning" },
+                                    [_vm._v("Partially")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.recommendation == "No"
+                                ? _c(
+                                    "span",
+                                    { staticClass: "badge badge-danger" },
+                                    [_vm._v("No")]
+                                  )
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "td",
                               [
@@ -69941,6 +70009,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("Gender")]),
       _vm._v(" "),
       _c("th", [_vm._v("Status")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Recommendation")]),
       _vm._v(" "),
       _c("th", [_vm._v("View to Send")]),
       _vm._v(" "),
@@ -70195,100 +70265,116 @@ var render = function() {
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _c("div", { staticClass: "row mb-3" }, [
-      _vm._m(11),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-check form-check-inline" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.recommendation,
-                expression: "form.recommendation"
-              }
-            ],
-            staticClass: "form-check-input",
-            class: { "is-invalid": _vm.form.errors.has("yes") },
-            attrs: { type: "radio", name: "yes", id: "yes", value: "Yes" },
-            domProps: { checked: _vm._q(_vm.form.recommendation, "Yes") },
-            on: {
-              change: function($event) {
-                return _vm.$set(_vm.form, "recommendation", "Yes")
-              }
-            }
-          }),
+    _vm.$gate.isSubadmin() && !_vm.application.recommendation
+      ? _c("div", { staticClass: "row mb-3" }, [
+          _vm._m(11),
           _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "form-check-label", attrs: { for: "inlineRadio1" } },
-            [_vm._v("Yes")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check form-check-inline" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.recommendation,
-                expression: "form.recommendation"
-              }
-            ],
-            staticClass: "form-check-input",
-            class: { "is-invalid": _vm.form.errors.has("partially") },
-            attrs: {
-              type: "radio",
-              name: "partially",
-              id: "partially",
-              value: "Partially"
-            },
-            domProps: { checked: _vm._q(_vm.form.recommendation, "Partially") },
-            on: {
-              change: function($event) {
-                return _vm.$set(_vm.form, "recommendation", "Partially")
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "form-check-label", attrs: { for: "inlineRadio1" } },
-            [_vm._v("Partially")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check form-check-inline" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.recommendation,
-                expression: "form.recommendation"
-              }
-            ],
-            staticClass: "form-check-input",
-            class: { "is-invalid": _vm.form.errors.has("no") },
-            attrs: { type: "radio", name: "no", id: "no", value: "No" },
-            domProps: { checked: _vm._q(_vm.form.recommendation, "No") },
-            on: {
-              change: function($event) {
-                return _vm.$set(_vm.form, "recommendation", "No")
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "form-check-label", attrs: { for: "inlineRadio1" } },
-            [_vm._v("No")]
-          )
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.recommendation,
+                    expression: "form.recommendation"
+                  }
+                ],
+                staticClass: "form-check-input",
+                class: { "is-invalid": _vm.form.errors.has("yes") },
+                attrs: { type: "radio", name: "yes", id: "yes", value: "Yes" },
+                domProps: { checked: _vm._q(_vm.form.recommendation, "Yes") },
+                on: {
+                  click: _vm.recommend,
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "recommendation", "Yes")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio1" }
+                },
+                [_vm._v("Yes")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.recommendation,
+                    expression: "form.recommendation"
+                  }
+                ],
+                staticClass: "form-check-input",
+                class: { "is-invalid": _vm.form.errors.has("partially") },
+                attrs: {
+                  type: "radio",
+                  name: "partially",
+                  id: "partially",
+                  value: "Partially"
+                },
+                domProps: {
+                  checked: _vm._q(_vm.form.recommendation, "Partially")
+                },
+                on: {
+                  click: _vm.recommend,
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "recommendation", "Partially")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio1" }
+                },
+                [_vm._v("Partially")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.recommendation,
+                    expression: "form.recommendation"
+                  }
+                ],
+                staticClass: "form-check-input",
+                class: { "is-invalid": _vm.form.errors.has("no") },
+                attrs: { type: "radio", name: "no", id: "no", value: "No" },
+                domProps: { checked: _vm._q(_vm.form.recommendation, "No") },
+                on: {
+                  click: _vm.recommend,
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "recommendation", "No")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio1" }
+                },
+                [_vm._v("No")]
+              )
+            ])
+          ])
         ])
-      ])
-    ]),
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
@@ -93117,13 +93203,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! /opt/lampp/htdocs/Transonline/New/Baza/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/New/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> b45a03fee910a68fd6675519cdc3657a5d54ad5d
 
 
 /***/ })

@@ -153,24 +153,24 @@
 			</div>
 		</div>
 		<hr>
-		<div class="row mb-3">
+		<div class="row mb-3" v-if="$gate.isSubadmin() && !application.recommendation">
 			<div class="col-md-6">
 				<button class="btn btn-success px-5 offset-md-1">Recommendation</button>
 			</div>
 			<div class="col-md-6">
 				<div class="form-check form-check-inline">
                 <input v-model="form.recommendation" class="form-check-input" type="radio" name="yes" id="yes" value="Yes"
-                        :class="{ 'is-invalid': form.errors.has('yes') }">
+                        :class="{ 'is-invalid': form.errors.has('yes') }" @click="recommend">
                 <label class="form-check-label" for="inlineRadio1">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
                 <input v-model="form.recommendation" class="form-check-input" type="radio" name="partially" id="partially" value="Partially"
-                        :class="{ 'is-invalid': form.errors.has('partially') }">
+                        :class="{ 'is-invalid': form.errors.has('partially') }" @click="recommend">
                 <label class="form-check-label" for="inlineRadio1">Partially</label>
                 </div>
                 <div class="form-check form-check-inline">
                 <input v-model="form.recommendation" class="form-check-input" type="radio" name="no" id="no" value="No"
-                        :class="{ 'is-invalid': form.errors.has('no') }">
+                        :class="{ 'is-invalid': form.errors.has('no') }" @click="recommend">
                 <label class="form-check-label" for="inlineRadio1">No</label>
                 </div>
 				<!-- <button @click="reject()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-danger px-5 offset-md-3" >Reject</button> -->
@@ -216,6 +216,30 @@
 
 		},
 		methods:{
+			recommend(){
+               Swal.fire({
+                  title: 'Are you sure?',
+                  text: "You won't be able to revert this!",
+                  //type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes!'
+                }).then((result) => {
+                  if(result.value){
+                    this.form.post("/api/recommend/" + this.applicantId).then(()=>{
+                      Swal.fire(
+                        'Success!',
+                        'Operation successful.',
+                        'success'
+                        )
+                            Fire.$emit('entry');
+                        }).catch(()=>{
+                      swal('Failed!','There was something wrong')
+                    });
+                    }
+                })
+			},
 			getApplications(){
 				axios.get("/api/getappdetails/" + this.applicantId).then(({ data }) => ([this.application = data['application']]));
 				axios.get("/api/getappdetails/" + this.applicantId).then(({ data }) => ([this.family = data['family']]));
@@ -270,7 +294,9 @@
 		},
 		created(){
 			this.getApplications();
-
+            Fire.$on('entry', () =>{
+                this.getApplications();
+            })
 		}
 	}
 </script>

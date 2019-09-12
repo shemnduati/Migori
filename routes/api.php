@@ -49,6 +49,7 @@ Route::get('/getCountyBursary','API\InformationController@getCountyBursary');
 Route::get('/gettype/{id}','API\InformationController@getType');
 Route::get('/getstatus/{id}','API\InformationController@getstatus');
 Route::get('/getbursarytype/{type}','API\InformationController@getBursaryType');
+Route::post('/recommend/{applicantId}','API\InformationController@recommend');
 
 Route::get('wards','API\UserController@wards');
 Route::get('subadmin','API\UserController@subadmin');

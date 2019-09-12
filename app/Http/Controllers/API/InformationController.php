@@ -81,9 +81,11 @@ class InformationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function recommend(Request $request, $applicantId)
     {
-        //
+        $application = Application::findOrFail($applicantId);
+        $application->recommendation = $request['recommendation'];
+        $application->save();
     }
 
     public function getType($id)

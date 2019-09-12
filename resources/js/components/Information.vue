@@ -35,6 +35,7 @@
                                 <th>Name</th>
                                 <th>Gender</th>
                                 <th>Status</th>
+                                <th>Recommendation</th>
                                 <th>View to Send</th>
                                 <th>Type</th>
 
@@ -48,6 +49,12 @@
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
                                     <span v-if="application.status==1" style="color: blue;">Sent</span>
                                     <span v-if="application.status==3" style="color: green;">Accepted</span>
+                               </td>
+                               <td>
+                                   <span class="badge badge-primary" v-if="!application.recommendation">Pending</span>
+                                    <span class="badge badge-success" v-if="application.recommendation == 'Yes'">Yes / High</span>
+                                    <span class="badge badge-warning" v-if="application.recommendation == 'Partially'">Partially</span>
+                                    <span class="badge badge-danger" v-if="application.recommendation == 'No'">No</span>
                                </td>
                                 <td><router-link :to="{path:'/informationview/'+ application.user_id}" type="button" class="btn btn-primary btn-sm">view</router-link></td>
                                 <td>{{application.bursary_type}}</td>
