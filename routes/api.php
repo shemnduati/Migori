@@ -51,6 +51,7 @@ Route::get('/getstatus/{id}','API\InformationController@getstatus');
 Route::get('/getbursarytype/{type}','API\InformationController@getBursaryType');
 Route::post('/recommend/{applicantId}','API\InformationController@recommend');
 Route::post('/award/{applicantId}','API\InformationController@award');
+Route::post('/notaward/{applicantId}','API\InformationController@notAward');
 
 Route::get('wards','API\UserController@wards');
 Route::get('subadmin','API\UserController@subadmin');

@@ -3271,7 +3271,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3310,7 +3309,7 @@ __webpack_require__.r(__webpack_exports__);
     getType: function getType() {
       var _this3 = this;
 
-      if (this.$gate.isAdmin()) {
+      if (this.$gate.isOfficial()) {
         axios.get('api/gettype/' + this.form.type).then(function (_ref4) {
           var data = _ref4.data;
           return [_this3.applications = data['applications']];
@@ -3612,7 +3611,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: {
-    notAward: function notAward() {},
+    notAward: function notAward() {
+      var _this = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        //type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then(function (result) {
+        if (result.value) {
+          _this.form.post("/api/notaward/" + _this.application.id).then(function () {
+            Swal.fire('Success!', 'Operation successful.', 'success');
+            Fire.$emit('entry');
+          })["catch"](function () {
+            Swal.fire('Failed!', 'There was something wrong');
+          });
+        }
+      });
+    },
     award: function award() {
       this.formf.post("/api/award/" + this.application.id).then(function () {
         Swal.fire('Success!', 'Successfully Awarded.', 'success');
@@ -3626,7 +3646,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#new').modal('show');
     },
     recommend: function recommend() {
-      var _this = this;
+      var _this2 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -3638,7 +3658,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes!'
       }).then(function (result) {
         if (result.value) {
-          _this.form.post("/api/recommend/" + _this.application.id).then(function () {
+          _this2.form.post("/api/recommend/" + _this2.application.id).then(function () {
             Swal.fire('Success!', 'Operation successful.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
@@ -3648,27 +3668,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     getApplications: function getApplications() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref) {
         var data = _ref.data;
-        return [_this2.application = data['application']];
+        return [_this3.application = data['application']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref2) {
         var data = _ref2.data;
-        return [_this2.family = data['family']];
+        return [_this3.family = data['family']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref3) {
         var data = _ref3.data;
-        return [_this2.morefamily = data['morefamily']];
+        return [_this3.morefamily = data['morefamily']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref4) {
         var data = _ref4.data;
-        return [_this2.geographical = data['geographical']];
+        return [_this3.geographical = data['geographical']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref5) {
         var data = _ref5.data;
-        return [_this2.institution = data['institution']];
+        return [_this3.institution = data['institution']];
       });
     },
     launch: function launch(passport) {
@@ -3676,7 +3696,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.photo = passport;
     },
     send: function send() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.put("/api/send/" + this.applicantId).then(function (response) {
         Fire.$emit('AfterCreate');
@@ -3686,11 +3706,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Sent!!'
         }, "text", 'Sent to Admin!'));
 
-        _this3.$router.push('/Information');
+        _this4.$router.push('/Information');
       });
     },
     accept: function accept() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.$Progress.start();
       axios.put("/api/accept/" + this.applicantId).then(function (response) {
@@ -3701,13 +3721,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Accept'
         }, "text", 'Accepted!'));
 
-        _this4.$router.push('/Information');
+        _this5.$router.push('/Information');
 
-        _this4.$Progress.finish();
+        _this5.$Progress.finish();
       });
     },
     reject: function reject() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$Progress.start();
       axios.put("/api/reject/" + this.applicantId).then(function (response) {
@@ -3718,18 +3738,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Rejected!!'
         }, "text", 'You rejected the application'));
 
-        _this5.$router.push('/Information');
+        _this6.$router.push('/Information');
 
         his.$Progress.finish();
       });
     }
   },
   created: function created() {
-    var _this6 = this;
+    var _this7 = this;
 
     this.getApplications();
     Fire.$on('entry', function () {
-      _this6.getApplications();
+      _this7.getApplications();
     });
   }
 });
@@ -69882,7 +69902,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "3" } }, [
-                                  _vm._v("Sent")
+                                  _vm._v("Awarded")
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "4" } }, [
@@ -69976,14 +69996,6 @@ var render = function() {
                                         "span",
                                         { staticStyle: { color: "red" } },
                                         [_vm._v("Rejected")]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  application.status == 1
-                                    ? _c(
-                                        "span",
-                                        { staticStyle: { color: "blue" } },
-                                        [_vm._v("Sent")]
                                       )
                                     : _vm._e(),
                                   _vm._v(" "),
@@ -70328,7 +70340,9 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.$gate.isOfficial() && !_vm.application.amount
+        _vm.$gate.isOfficial() &&
+        !_vm.application.amount &&
+        _vm.application.status != 2
           ? _c("h4", [_vm._v("Award?")])
           : _vm._e(),
         _vm._v(" "),
@@ -70339,7 +70353,9 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.$gate.isOfficial() && !_vm.application.amount
+        _vm.$gate.isOfficial() &&
+        !_vm.application.amount &&
+        _vm.application.status != 2
           ? _c(
               "button",
               {
@@ -70351,13 +70367,15 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _vm.$gate.isOfficial() && !_vm.application.amount
+        _vm.$gate.isOfficial() &&
+        !_vm.application.amount &&
+        _vm.application.status != 2
           ? _c(
               "button",
               {
                 staticClass: "btn btn-danger",
                 attrs: { type: "button" },
-                on: { click: function($event) {} }
+                on: { click: _vm.notAward }
               },
               [_vm._v("No")]
             )

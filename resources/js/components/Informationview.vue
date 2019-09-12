@@ -156,10 +156,10 @@
 		<div class="row mb-3">
 			<div class="col-md-6">
 				<button class="btn btn-success px-5 offset-md-1" v-if="$gate.isSubadmin() && !application.recommendation">Recommendation</button>
-				<h4 v-if="$gate.isOfficial() && !application.amount">Award?</h4>
+				<h4 v-if="$gate.isOfficial() && !application.amount && application.status != 2">Award?</h4>
 				<h4 v-if="$gate.isOfficial() && application.amount"><b>Awarded:</b> Ksh {{application.amount}}</h4>
-				<button type="button" class="btn btn-success" @click="newModal" v-if="$gate.isOfficial() && !application.amount">Yes</button>
-				<button type="button" class="btn btn-danger" @click="" v-if="$gate.isOfficial() && !application.amount">No</button>
+				<button type="button" class="btn btn-success" @click="newModal" v-if="$gate.isOfficial() && !application.amount && application.status != 2">Yes</button>
+				<button type="button" class="btn btn-danger" @click="notAward" v-if="$gate.isOfficial() && !application.amount && application.status != 2">No</button>
 			</div>
 			<div class="col-md-6" v-if="$gate.isSubadmin() && !application.recommendation">
 				<div class="form-check form-check-inline">
@@ -254,7 +254,28 @@
 		},
 		methods:{
 			notAward(){
-
+               Swal.fire({
+                  title: 'Are you sure?',
+                  text: "You won't be able to revert this!",
+                  //type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes!'
+                }).then((result) => {
+                  if(result.value){
+                    this.form.post("/api/notaward/" + this.application.id).then(()=>{
+                      Swal.fire(
+                        'Success!',
+                        'Operation successful.',
+                        'success'
+                        )
+                            Fire.$emit('entry');
+                        }).catch(()=>{
+                      Swal.fire('Failed!','There was something wrong')
+                    });
+                    }
+                })
 			},
 			award(){
               this.formf.post("/api/award/" + this.application.id).then(()=>{

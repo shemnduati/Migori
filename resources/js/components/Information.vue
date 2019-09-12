@@ -15,7 +15,7 @@
                                             <option selected value="">--Sort By--</option>
                                             <option value="1">All</option>
                                             <option value="2">Pending</option>
-                                            <option value="3">Sent</option>
+                                            <option value="3">Awarded</option>
                                             <option value="4">Rejected</option>
                                         </select>
                                     </form>
@@ -47,7 +47,6 @@
                                 <td v-if="$gate.isOfficial()">
                                     <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
-                                    <span v-if="application.status==1" style="color: blue;">Sent</span>
                                     <span v-if="application.status==3" style="color: green;">Awarded</span>
                                </td>
                                <td>
@@ -106,7 +105,7 @@
                 }
             },
             getType(){
-                if (this.$gate.isAdmin()) {
+                if (this.$gate.isOfficial()) {
                     axios.get('api/gettype/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
                 }
                 if (this.$gate.isSubadmin()) {
