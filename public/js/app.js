@@ -3637,6 +3637,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.formf.post("/api/award/" + this.application.id).then(function () {
         Swal.fire('Success!', 'Successfully Awarded.', 'success');
         Fire.$emit('entry');
+        $('#new').modal('hide');
       })["catch"](function () {
         Swal.fire('Failed!', 'There was something wrong');
       });

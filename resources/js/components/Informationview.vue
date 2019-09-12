@@ -284,7 +284,8 @@
                         'Successfully Awarded.',
                         'success'
                         )
-                            Fire.$emit('entry');
+                         Fire.$emit('entry');
+                         $('#new').modal('hide');
                         }).catch(()=>{
                       Swal.fire('Failed!','There was something wrong')
                     });
