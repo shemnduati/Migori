@@ -3779,6 +3779,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.formf.post("/api/award/" + this.application.id).then(function () {
         Swal.fire('Success!', 'Successfully Awarded.', 'success');
         Fire.$emit('entry');
+        $('#new').modal('hide');
       })["catch"](function () {
         Swal.fire('Failed!', 'There was something wrong');
       });
@@ -70879,7 +70880,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.form.errors.has("amount")
+                            "is-invalid": _vm.formf.errors.has("amount")
                           },
                           attrs: {
                             type: "text",
@@ -70898,7 +70899,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "amount" }
+                          attrs: { form: _vm.formf, field: "amount" }
                         })
                       ],
                       1
