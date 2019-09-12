@@ -50,6 +50,7 @@ let routes = [
     { path: '/verified', component: require('./components/Verified.vue').default },
     { path: '/subadmin', component: require('./components/subadmin.vue').default },
     { path: '/OfficialUser', component: require('./components/OfficialUser.vue').default },
+    { path: '/Applicants', component: require('./components/Applicants.vue').default },
     // { path: '/application', component: require('./components/Application.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
     //{ path: '*', component: require('./components/NotFound.vue').default },
