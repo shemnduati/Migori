@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\County;
+use App\Institution;
 use App\User;
 use App\Ward;
 use Illuminate\Http\Request;
@@ -45,6 +47,33 @@ class InformationController extends Controller
 
         return ['applications'=>$applications];
 
+    }
+    public function Applicants()
+    {
+        $county_id = User::where('id',Auth::user()->id)->value('county');
+        $applications = Application::where('year', date('Y'))->where('county',$county_id)->get();
+        $parent = array();
+
+        foreach ( $applications as $apps){
+            $id = $apps['id'];
+            $name = $apps['name'];
+            $reg = $apps['reg_no'];
+            $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
+            $institution = Institution::where('user_id',$apps['user_id'])->value('name');
+            $amount = $apps['amount'];
+            $date = $apps['updated_at'];
+            $child=array(
+                'id' =>$id,
+                'name'=>$name,
+                'ward'=>$ward_name,
+                'amount'=>$amount,
+                'reg'=>$reg,
+                'date'=>$date,
+                'institution' => $institution,
+            );
+            array_push($parent, $child);
+        }
+        return ['parent'=>$parent];
     }
     public function getbusary()
     {
