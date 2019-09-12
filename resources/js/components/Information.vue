@@ -105,6 +105,9 @@
                 if (this.$gate.isSubadmin()) {
                     axios.get('api/getstatus/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
                 }
+                if (this.$gate.isOfficial()) {
+                    axios.get('api/gettype/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
+                }
             }
         },
 

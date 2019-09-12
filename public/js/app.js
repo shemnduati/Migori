@@ -3316,6 +3316,13 @@ __webpack_require__.r(__webpack_exports__);
           return [_this3.applications = data['applications']];
         });
       }
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/gettype/' + this.form.type).then(function (_ref6) {
+          var data = _ref6.data;
+          return [_this3.applications = data['applications']];
+        });
+      }
     }
   },
   created: function created() {
