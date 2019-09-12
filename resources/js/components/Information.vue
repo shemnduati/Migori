@@ -9,7 +9,7 @@
 
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12" v-if="$gate.isOfficial()">
                                     <form>
                                         <select @change="getType()" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
@@ -20,7 +20,7 @@
                                         </select>
                                     </form>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12" v-if="$gate.isSubadmin()">
                                     <button @click="getBursary('CDF')" class="btn btn-success btn-sm">CDF</button>
                                     <button @click="getBursary('County')" class="btn btn-success btn-sm">County</button>
                                 </div>
@@ -34,7 +34,8 @@
                                 <th>Serial N.o</th>
                                 <th>Name</th>
                                 <th>Gender</th>
-                                <th>Status</th>
+                                <th v-if="$gate.isOfficial()">Status</th>
+                                <th>Recommendation</th>
                                 <th>View to Send</th>
                                 <th>Type</th>
 
@@ -43,11 +44,17 @@
                                 <td>{{application.serial}}</td>
                                 <td>{{application.name}}</td>
                                 <td>{{application.gender}}</td>
-                                <td>
+                                <td v-if="$gate.isOfficial()">
                                     <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
                                     <span v-if="application.status==1" style="color: blue;">Sent</span>
                                     <span v-if="application.status==3" style="color: green;">Accepted</span>
+                               </td>
+                               <td>
+                                   <span class="badge badge-primary" v-if="!application.recommendation">Pending</span>
+                                    <span class="badge badge-success" v-if="application.recommendation == 'Yes'">Yes / High</span>
+                                    <span class="badge badge-warning" v-if="application.recommendation == 'Partially'">Partially</span>
+                                    <span class="badge badge-danger" v-if="application.recommendation == 'No'">No</span>
                                </td>
                                 <td><router-link :to="{path:'/informationview/'+ application.user_id}" type="button" class="btn btn-primary btn-sm">view</router-link></td>
                                 <td>{{application.bursary_type}}</td>
