@@ -93206,13 +93206,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! /opt/lampp/htdocs/Transonline/New/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/New/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> 13e68a209fb1a38fa8469a3d1e353daec5a30f2f
 
 
 /***/ })
