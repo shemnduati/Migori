@@ -9788,7 +9788,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
 
 // exports
 
@@ -66724,7 +66724,7 @@ var render = function() {
                                   },
                                   attrs: {
                                     type: "tel",
-                                    pattern: "[0-9]",
+                                    placeholder: "+254",
                                     name: "telephone"
                                   },
                                   domProps: { value: _vm.form.telephone },
@@ -67098,11 +67098,7 @@ var render = function() {
                                       "ftelephone"
                                     )
                                   },
-                                  attrs: {
-                                    type: "tel",
-                                    pattern: "[0-9]",
-                                    name: "ftelephone"
-                                  },
+                                  attrs: { type: "tel", name: "ftelephone" },
                                   domProps: { value: _vm.form.ftelephone },
                                   on: {
                                     input: function($event) {
@@ -67436,11 +67432,7 @@ var render = function() {
                                       "mtelephone"
                                     )
                                   },
-                                  attrs: {
-                                    type: "tel",
-                                    pattern: "[0-9]",
-                                    name: "mtelephone"
-                                  },
+                                  attrs: { type: "tel", name: "mtelephone" },
                                   domProps: { value: _vm.form.mtelephone },
                                   on: {
                                     input: function($event) {
@@ -67774,11 +67766,7 @@ var render = function() {
                                       "gtelephone"
                                     )
                                   },
-                                  attrs: {
-                                    type: "tel",
-                                    pattern: "[0-9]",
-                                    name: "gtelephone"
-                                  },
+                                  attrs: { type: "tel", name: "gtelephone" },
                                   domProps: { value: _vm.form.gtelephone },
                                   on: {
                                     input: function($event) {
@@ -93042,8 +93030,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
