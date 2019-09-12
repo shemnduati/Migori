@@ -23,6 +23,7 @@ class CreateApplicationsTable extends Migration
             $table->string('reg_no');
             $table->string('bursary_type');
             $table->date('dob');
+            $table->decimal('amount', 8, 2);
             $table->string('recommendation');
             $table->string('gender');
             $table->integer('status');

@@ -7,6 +7,10 @@ use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Application;
+use App\Family;
+use App\MoreFamily;
+use App\Geographical;
+use App\Institution;
 use Illuminate\Support\Facades\Auth;
 
 class InformationController extends Controller
@@ -81,11 +85,45 @@ class InformationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function recommend(Request $request, $applicantId)
+    public function recommend(Request $request, $applicationId)
     {
-        $application = Application::findOrFail($applicantId);
+        $application = Application::findOrFail($applicationId);
         $application->recommendation = $request['recommendation'];
         $application->save();
+    }
+
+    public function award(Request $request, $applicationId)
+    {
+        $application = Application::findOrFail($applicationId);
+        $application->amount = $request['amount'];
+        $application->update();
+
+        $appli = Application::findOrFail($applicationId);
+        $appli->status = 3;
+        $appli->update();
+
+        $applicantId = Application::where('id', $applicationId)->value('user_id');
+        $family = Family::where('user_id', $applicantId)->where('year', date('Y'))->get();
+        foreach ($family as $fam) {
+            $fami = Family::findOrFail($fam['id']);
+            $fami->status=3;
+            $fami->update();
+        }
+
+        $morefamily = MoreFamily::where('user_id', $applicantId)->where('year', date('Y'))->first();
+        $more=MoreFamily::findOrFail($morefamily['id']);
+        $more->status = 3;
+        $more->update();
+
+        $institution = Institution::where('user_id', $applicantId)->where('year', date('Y'))->first();
+        $insti = Institution::findOrFail($institution['id']);
+        $insti->status=3;
+        $insti->update();
+
+        $geographical = Geographical::where('user_id', $applicantId)->where('year', date('Y'))->first();
+        $geo=Geographical::findOrFail($geographical['id']);
+        $geo->status=3;
+        $geo->update();
     }
 
     public function getType($id)
