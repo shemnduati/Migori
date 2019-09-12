@@ -214,8 +214,8 @@
                           <label>Amount</label>
                           <input v-model="formf.amount" type="text" name="name"
                             placeholder="Amount"
-                            class="form-control" :class="{ 'is-invalid': form.errors.has('amount') }">
-                          <has-error :form="form" field="amount"></has-error>
+                            class="form-control" :class="{ 'is-invalid': formf.errors.has('amount') }">
+                          <has-error :form="formf" field="amount"></has-error>
                         </div>
                     </div>
                     <div class="modal-footer">

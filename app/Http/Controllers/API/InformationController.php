@@ -94,6 +94,10 @@ class InformationController extends Controller
 
     public function award(Request $request, $applicationId)
     {
+        $this->validate($request,[
+             'amount'=>'required',
+        ]);
+
         $application = Application::findOrFail($applicationId);
         $application->amount = $request['amount'];
         $application->update();
