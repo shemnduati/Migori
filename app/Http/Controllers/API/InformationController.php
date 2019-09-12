@@ -12,7 +12,6 @@ use App\Application;
 use App\Family;
 use App\MoreFamily;
 use App\Geographical;
-use App\Institution;
 use Illuminate\Support\Facades\Auth;
 
 class InformationController extends Controller
