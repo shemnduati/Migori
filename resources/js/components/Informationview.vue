@@ -227,7 +227,7 @@
                   confirmButtonText: 'Yes!'
                 }).then((result) => {
                   if(result.value){
-                    this.form.post("/api/recommend/" + this.applicantId).then(()=>{
+                    this.form.post("/api/recommend/" + this.application.id).then(()=>{
                       Swal.fire(
                         'Success!',
                         'Operation successful.',

@@ -3588,7 +3588,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes!'
       }).then(function (result) {
         if (result.value) {
-          _this.form.post("/api/recommend/" + _this.applicantId).then(function () {
+          _this.form.post("/api/recommend/" + _this.application.id).then(function () {
             Swal.fire('Success!', 'Operation successful.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
