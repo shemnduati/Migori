@@ -9,7 +9,15 @@
 
                         <div class="card-tools">
                             <div class="row">
-
+                                <div class="col-sm-12">
+                                    <form>
+                                        <select @change="getType()" v-model="form.type" class="form-control">
+                                            <option selected value="">--Sort By--</option>
+                                            <option value="0">county</option>
+                                            <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}} ward</option>
+                                        </select>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -58,6 +66,8 @@
         data(){
             return{
                 applications :{},
+                wards:{},
+                county:{},
                 form: new Form({
                     type: ''
                 })
@@ -70,8 +80,11 @@
                     axios.get('api/getApplicants').then(({data}) => ([this.applications = data['parent']]));
             },
             getType(){
-                    axios.get('api/gettype/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
-            }
+                    axios.get('api/getWardsById/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
+            },
+            getWards(){
+                axios.get("api/getMyWards").then(({ data }) => ([this.wards = data['wards']]));
+            },
         },
 
 
@@ -90,8 +103,10 @@
                     })
             })
             this.getApplications();
+            this.getWards();
             Fire.$on('AfterCreate', () =>{
                 this.getApplications();
+                this.getWards();
             })
         }
     }
