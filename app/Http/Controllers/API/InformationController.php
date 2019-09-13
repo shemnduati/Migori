@@ -96,8 +96,8 @@ class InformationController extends Controller
     public function getMyCounty()
     {
         $county_id = User::where('id',Auth::user()->id)->value('county');
-        $county = County::where('id',$county_id)->get();
-        return['county'=>$county];
+        $county = County::where('id',$county_id)->value('name');
+        return ['county'=>$county];
     }
     public function getWardsById($id)
     {

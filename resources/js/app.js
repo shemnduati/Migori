@@ -23,6 +23,8 @@ import jsPDF from 'jspdf';
 
 window.jsPDF = jsPDF;
 
+import 'jspdf-autotable';
+
 
 import  Gate from "./Gate";
 Vue.prototype.$gate =  new Gate(window.user);

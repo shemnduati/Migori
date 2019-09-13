@@ -9,7 +9,7 @@
 
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <form>
                                         <select @change="getType()" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
@@ -18,12 +18,18 @@
                                         </select>
                                     </form>
                                 </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-primary btn-sm" @click="createPDF">
+                                        <i class="fas fa-download"></i>
+                                      Download
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="my-table">
                             <tbody><tr>
                                 <th>Name</th>
                                 <th>Adm/Reg</th>
@@ -67,7 +73,7 @@
             return{
                 applications :{},
                 wards:{},
-                county:{},
+                mycounty: {},
                 form: new Form({
                     type: ''
                 })
@@ -76,6 +82,26 @@
             }
         },
         methods:{
+            createPDF(){
+               var specialElementHandlers = {
+                    "#editor":function(element, renderer){
+                        return true;
+                    }
+                }
+                var doc = new jsPDF();
+                
+                doc.setFontSize(18);
+                doc.text('Approved Bursary Applications', 14, 22);
+                doc.setFontSize(11);
+                doc.setTextColor(100);
+
+                doc.autoTable({
+                    showHead: 'firstPage',
+                    html: '#my-table',
+                    startY: 60,
+                });
+                doc.save('Week'+ '.pdf');
+            },
             getApplications(){
                     axios.get('api/getApplicants').then(({data}) => ([this.applications = data['parent']]));
             },
@@ -84,6 +110,10 @@
             },
             getWards(){
                 axios.get("api/getMyWards").then(({ data }) => ([this.wards = data['wards']]));
+            },
+
+            getCounty(){
+                axios.get("api/getMyCounty").then(({ data }) => ([this.mycounty = data['county']]));
             },
         },
 
@@ -104,6 +134,7 @@
             })
             this.getApplications();
             this.getWards();
+            this.getCounty();
             Fire.$on('AfterCreate', () =>{
                 this.getApplications();
                 this.getWards();
