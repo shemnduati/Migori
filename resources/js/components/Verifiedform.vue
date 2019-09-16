@@ -1,4 +1,4 @@
-gi<template>
+<template>
   <div class="container-fluid">
     <div class="row justify-content-center" style="margin-bottom: 20px;">
       <button v-if="this.verified == 1" @click="print()" id="print" type="button" class="btn btn-primary">

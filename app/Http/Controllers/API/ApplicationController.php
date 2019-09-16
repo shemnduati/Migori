@@ -325,6 +325,7 @@ class ApplicationController extends Controller
         }
 
     }
+
 }
 
     /**
