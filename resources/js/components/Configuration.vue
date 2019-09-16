@@ -4,7 +4,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">List of the Counties</h3>
+                    <h3 class="card-title">Configuration</h3>
 
                     <div class="card-tools">
                         <button class="btn btn-sm btn-primary" @click="newModal">Add Year</button>
@@ -15,7 +15,7 @@
                     <table class="table table-hover">
                       <thead>
                         <tr>
-                          <th>Apllication Year</th>
+                          <th>Application Year</th>
                           <th>OFF/ON</th>
                           <th>Action</th>
                         </tr>
