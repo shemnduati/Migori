@@ -46,11 +46,16 @@ Route::put('/send/{applicantId}','API\ApplicationController@send');
 Route::get('/getapplications','API\InformationController@getApplications');
 Route::get('/getbusary','API\InformationController@getbusary');
 Route::get('/getCountyBursary','API\InformationController@getCountyBursary');
+Route::get('/getApplicants','API\InformationController@Applicants');
 Route::get('/gettype/{id}','API\InformationController@getType');
+Route::get('/getWardsById/{id}','API\InformationController@getWardsById');
+Route::get('/getMyCounty','API\InformationController@getMyCounty');
 Route::get('/getstatus/{id}','API\InformationController@getstatus');
+Route::get('/getMyWards','API\InformationController@getMyWards');
 Route::get('/getbursarytype/{type}','API\InformationController@getBursaryType');
 Route::post('/recommend/{applicantId}','API\InformationController@recommend');
 Route::post('/award/{applicantId}','API\InformationController@award');
+Route::post('/notaward/{applicantId}','API\InformationController@notAward');
 
 Route::get('wards','API\UserController@wards');
 Route::get('subadmin','API\UserController@subadmin');

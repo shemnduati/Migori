@@ -476,9 +476,14 @@
                               </div>
                             </section>
 
-                            <button v-if="step != 1" type="button" class="btn btn-primary" @click.prevent="prevStep">Previous Step</button>
+                            <button v-if="step != 1" type="button" class="btn btn-primary " @click.prevent="prevStep">Previous Step</button>
                             <button v-if="step != totalSteps" type="button" class="btn btn-primary" @click.prevent="nextStep">Next Step</button>
-                            <button v-if="step == 5" type="button" class="btn btn-success" @click.prevent="sendApplication()">Submit Application</button>
+                            <button v-if="step == 5" type="button" class="btn btn-success btn-submit" @click.prevent="sendApplication()" :disabled="loading">
+                                <div class="loader">
+                                <div class="lds-roller" v-if="loading"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                </div>
+                                Submit Application
+                            </button>
 
                         </form>
                     </div>
@@ -486,11 +491,11 @@
                 <div v-if="enable == 0">
                     <div class="card">
                       <div class="card-header">
-                        Aplication Form not Available
+                        Application Form not Available
                       </div>
                       <div class="card-body">
                         <h5 class="card-title">Application window closed</h5>
-                        <p class="card-text">The application window has been clossed for now wait until the window is opened</p>
+                        <p class="card-text">The application window has been closed for now wait until the window is opened</p>
                         <a href="/" class="btn btn-danger">Go Back Home</a>
                       </div>
                     </div>
@@ -510,6 +515,7 @@
                 wards: {},
                 info: {},
                 enable:{},
+                loading: false,
                 form: new Form({
                     type:'',
                     name: '',
@@ -562,8 +568,10 @@
         },
         methods:{
             sendApplication(){
+                this.loading = true;
                this.form.post('api/apply')
                     .then(() => {
+                        this.loading = false;
                         Fire.$emit('AfterCreate');
                         Swal.fire({
                           type: 'success',
@@ -573,8 +581,10 @@
                         })
                         this.form.reset();
                         this.$Progress.finish();
+                        window.location.href = "/student"
                     })
                     .catch(error => {
+                        this.loading = false;
                         this.errors = error.response.data.errors;
                         Swal.fire({
                           type: 'error',
@@ -998,3 +1008,106 @@
         }
     }
 </script>
+<style>
+    .btn-submit {
+        cursor: pointer;
+    &:hover {
+         background: #38c172;
+     }
+    &:disabled {
+         background: #f6993f;
+         cursor: not-allowed;
+     }
+    }
+    .loader{
+        position: absolute;
+        right: 50%;
+    }
+    .lds-roller {
+        display: inline-block;
+        position: relative;
+        width: 25px;
+        height: 25px;
+
+    }
+    .lds-roller div {
+        animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        transform-origin: 32px 32px;
+    }
+    .lds-roller div:after {
+        content: " ";
+        display: block;
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #4dc0b5;
+        margin: -3px 0 0 -3px;
+
+    }
+    .lds-roller div:nth-child(1) {
+        animation-delay: -0.036s;
+    }
+    .lds-roller div:nth-child(1):after {
+        top: 50px;
+        left: 50px;
+    }
+    .lds-roller div:nth-child(2) {
+        animation-delay: -0.072s;
+    }
+    .lds-roller div:nth-child(2):after {
+        top: 54px;
+        left: 45px;
+    }
+    .lds-roller div:nth-child(3) {
+        animation-delay: -0.108s;
+    }
+    .lds-roller div:nth-child(3):after {
+        top: 57px;
+        left: 39px;
+    }
+    .lds-roller div:nth-child(4) {
+        animation-delay: -0.144s;
+    }
+    .lds-roller div:nth-child(4):after {
+        top: 58px;
+        left: 32px;
+    }
+    .lds-roller div:nth-child(5) {
+        animation-delay: -0.18s;
+    }
+    .lds-roller div:nth-child(5):after {
+        top: 57px;
+        left: 25px;
+    }
+    .lds-roller div:nth-child(6) {
+        animation-delay: -0.216s;
+    }
+    .lds-roller div:nth-child(6):after {
+        top: 54px;
+        left: 19px;
+    }
+    .lds-roller div:nth-child(7) {
+        animation-delay: -0.252s;
+    }
+    .lds-roller div:nth-child(7):after {
+        top: 50px;
+        left: 14px;
+    }
+    .lds-roller div:nth-child(8) {
+        animation-delay: -0.288s;
+    }
+    .lds-roller div:nth-child(8):after {
+        top: 45px;
+        left: 10px;
+    }
+    @keyframes lds-roller {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+</style>
