@@ -44,7 +44,7 @@ window.Fire =  new Vue();
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 let routes = [
-    { path: '/dashboard', component: require('./components/dashboard.vue').default },
+    { path: '/dashboard',meta:{student:false}, component: require('./components/dashboard.vue').default },
     { path: '/users', component: require('./components/users.vue').default },
     { path: '/county', component: require('./components/County.vue').default },
     { path: '/ward', component: require('./components/Ward.vue').default },
@@ -82,7 +82,16 @@ Vue.use(VueProgressBar, {
     height: '3px'
 })
 
+router.beforeEach((to, from, next) => {
 
+    if (to.meta.student) {
+
+        return next({path:'/student'}); // '/' is home page for example
+        // else then continue to next()
+    }
+
+    return next();
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
