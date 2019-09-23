@@ -17,12 +17,14 @@
                                 <th>Ward</th>
                                 <th>Budget</th>
                                 <th>Current Balance</th>
+                                <th>Budget year</th>
                                 <th>Modify</th>
                             </tr>
                             <tr v-for="budget in budgets" :key="budget.id">
                                 <td>{{budget.name}}</td>
                                 <td>{{budget.amount}}</td>
                                 <td>{{budget.remaining}}</td>
+                                <td>{{budget.year}}</td>
                                 <td>
                                     <a href="#" @click="editModal(budget)" >
                                         <i class="fa fa-edit teal"></i>
@@ -66,9 +68,17 @@
                                 <has-error :form="form" field="ward"></has-error>
                             </div>
                             <div class="form-group">
+                                <label>Budget Amount</label>
                                 <input v-model="form.amount" type="text" name="amount" placeholder="Budget Amount"
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('amount') }">
                                 <has-error :form="form" field="amount"></has-error>
+                            </div>
+                            <div class="form-group">
+                                <label>Budget Year</label>
+                                <input v-model="form.year" type="text" name="year"
+                                       placeholder="Enter Year"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('year') }">
+                                <has-error :form="form" field="year"></has-error>
                             </div>
                         </div>
 
@@ -95,6 +105,7 @@
                     id:'',
                     ward:'',
                     amount:'',
+                    year: '',
                 })
 
 

@@ -18,6 +18,7 @@ class CreateBudgetsTable extends Migration
             $table->integer('ward_id')->index();
             $table->decimal('amount', 8, 2);
             $table->decimal('remaining', 8, 2);
+            $table->string('year');
             $table->timestamps();
         });
     }

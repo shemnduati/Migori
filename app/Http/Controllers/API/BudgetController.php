@@ -33,11 +33,13 @@ class BudgetController extends Controller
             $ward_name = Ward::where('id',$id)->value('name');
             $amount =$budg['amount'];
             $remaining = $budg['remaining'];
+            $year = $budg['year'];
             $child = array(
                 'id' => $id,
                 'name' => $ward_name,
                 'amount' => $amount,
-                'remaining' => $remaining
+                'remaining' => $remaining,
+                'year' => $year,
             );
             array_push($parent,$child);
     }
@@ -55,11 +57,13 @@ class BudgetController extends Controller
         $this->validate($request, [
             'amount' => 'required|integer',
             'ward'=> 'required',
+            'year' => 'required|string|max:25|unique:configurations',
         ]);
         return Budget::create([
             'ward_id' => $request['ward'],
             'amount' => $request['amount'],
-            'remaining' => $request['amount']
+            'remaining' => $request['amount'],
+            'year' => $request['year']
         ]);
     }
 
