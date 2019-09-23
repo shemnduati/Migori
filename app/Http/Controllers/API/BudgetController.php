@@ -89,7 +89,13 @@ class BudgetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $budget = Budget::findorFail($id);
+        $this->validate($request, [
+            'amount' => 'required',
+            'ward'=> 'required',
+        ]);
+        $budget->update($request->all());
+
     }
 
     /**
@@ -100,6 +106,8 @@ class BudgetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $budget = Budget::findOrFail($id);
+        $budget->delete();
+        return ['message'=> 'budget deleted'];
     }
 }

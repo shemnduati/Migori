@@ -3209,16 +3209,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editMode: false,
       county: {},
       form: new Form({
-        id: ''
-        /*name: '',*/
-
+        id: '',
+        name: ''
       })
     };
   },
@@ -5115,8 +5113,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5124,19 +5120,20 @@ __webpack_require__.r(__webpack_exports__);
       wards: {},
       budgets: {},
       form: new Form({
+        id: '',
         ward: '',
         amount: ''
       })
     };
   },
   methods: {
-    updateUser: function updateUser() {
+    updateBudget: function updateBudget() {
       var _this = this;
 
       this.$Progress.start();
-      this.form.put('api/user/' + this.form.id).then(function () {
+      this.form.put('api/budget/' + this.form.id).then(function () {
         $('#addnew').modal('hide');
-        Swal.fire('Edited!', 'User information updated.', 'success');
+        Swal.fire('Edited!', 'Budget information updated.', 'success');
 
         _this.$Progress.finish();
 
@@ -5147,10 +5144,10 @@ __webpack_require__.r(__webpack_exports__);
         Swal.fire("Failed to Edit!", "Check if you have permission to Edit.");
       });
     },
-    editModal: function editModal(user) {
+    editModal: function editModal(budget) {
       this.editMode = true;
       this.form.reset();
-      this.form.fill(user);
+      this.form.fill(budget);
       $('#addnew').modal('show');
     },
     newModal: function newModal() {
@@ -5171,7 +5168,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         // send the request to the controller
         if (result.value) {
-          _this2.form["delete"]('api/user/' + id).then(function () {
+          _this2.form["delete"]('api/budget/' + id).then(function () {
             Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
 
             _this2.$Progress.finish();
@@ -78987,7 +78984,7 @@ var render = function() {
                                   attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.editModal()
+                                      return _vm.editModal(budget)
                                     }
                                   }
                                 },
@@ -79000,7 +78997,7 @@ var render = function() {
                                   attrs: { href: "#" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.deleteUser()
+                                      return _vm.deleteUser(budget.id)
                                     }
                                   }
                                 },
@@ -79090,7 +79087,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      _vm.editMode ? _vm.updateUser() : _vm.createBudget()
+                      _vm.editMode ? _vm.updateBudget() : _vm.createBudget()
                     }
                   }
                 },
@@ -79140,25 +79137,14 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _c(
+                          _vm._l(_vm.wards, function(wardy) {
+                            return _c(
                               "option",
-                              { attrs: { selected: "", value: "" } },
-                              [_vm._v("--Select Ward--")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.wards, function(wardy) {
-                              return _c(
-                                "option",
-                                {
-                                  key: wardy.id,
-                                  domProps: { value: wardy.id }
-                                },
-                                [_vm._v(_vm._s(wardy.name))]
-                              )
-                            })
-                          ],
-                          2
+                              { key: wardy.id, domProps: { value: wardy.id } },
+                              [_vm._v(_vm._s(wardy.name))]
+                            )
+                          }),
+                          0
                         ),
                         _vm._v(" "),
                         _c("has-error", {
@@ -79182,7 +79168,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("name") },
+                          class: {
+                            "is-invalid": _vm.form.errors.has("amount")
+                          },
                           attrs: {
                             type: "text",
                             name: "amount",

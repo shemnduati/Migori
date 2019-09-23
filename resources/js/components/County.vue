@@ -58,8 +58,7 @@
         				<div class="form-group">
         			      <label>County Name</label>
         			      <input v-model="form.name" type="text" name="name"
-        			      	placeholder="Enter County"
-        			        class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+        			      	placeholder="Enter County" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
         			      <has-error :form="form" field="name"></has-error>
         			    </div>
         			</div>
@@ -82,7 +81,7 @@
         county:{},
 				form: new Form({
                     id:'',
-					/*name: '',*/
+					name: '',
 				})
 			}
 		},

@@ -24,10 +24,10 @@
                                 <td>{{budget.amount}}</td>
                                 <td>{{budget.remaining}}</td>
                                 <td>
-                                    <a href="#" @click="editModal()" >
+                                    <a href="#" @click="editModal(budget)" >
                                         <i class="fa fa-edit teal"></i>
                                     </a>
-                                    <a href="#" @click="deleteUser()">
+                                    <a href="#" @click="deleteUser(budget.id)">
                                         <i class="fa fa-trash red"></i>
                                     </a>
                                 </td>
@@ -39,7 +39,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="card-footer">
-                        <!--                        <pagination :data="users" @pagination-change-page="getResults"></pagination>-->
+                        <!--<pagination :data="users" @pagination-change-page="getResults"></pagination>-->
                     </div>
                 </div>
                 <!-- /.box -->
@@ -56,20 +56,18 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="editMode ? updateUser() :createBudget()">
+                    <form @submit.prevent="editMode ? updateBudget() :createBudget()">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="ward">Ward</label>
-                                <select v-model="form.ward" class="form-control" name="ward" id="ward"
-                                        :class="{ 'is-invalid': form.errors.has('ward') }">
-                                    <option selected value="">--Select Ward--</option>
+                                <select name="ward" v-model="form.ward" class="form-control"  id="ward" :class="{ 'is-invalid': form.errors.has('ward') }">
                                     <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}}</option>
                                 </select>
                                 <has-error :form="form" field="ward"></has-error>
                             </div>
                             <div class="form-group">
                                 <input v-model="form.amount" type="text" name="amount" placeholder="Budget Amount"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('amount') }">
                                 <has-error :form="form" field="amount"></has-error>
                             </div>
                         </div>
@@ -94,6 +92,7 @@
                 wards:{},
                 budgets:{},
                 form: new Form({
+                    id:'',
                     ward:'',
                     amount:'',
                 })
@@ -102,14 +101,14 @@
             }
         },
         methods:{
-            updateUser(){
+            updateBudget(){
                 this.$Progress.start();
-                this.form.put('api/user/'+this.form.id)
+                this.form.put('api/budget/'+this.form.id)
                     .then(()=>{
                         $('#addnew').modal('hide');
                         Swal.fire(
                             'Edited!',
-                            'User information updated.',
+                            'Budget information updated.',
                             'success'
                         )
                         this.$Progress.finish();
@@ -120,10 +119,10 @@
                         Swal.fire("Failed to Edit!", "Check if you have permission to Edit.");
                     })
             },
-            editModal(user){
+            editModal(budget){
                 this.editMode = true;
                 this.form.reset();
-                this.form.fill(user);
+                this.form.fill(budget);
                 $('#addnew').modal('show');
             },
             newModal(){
@@ -142,7 +141,7 @@
                 }).then((result) => {
                     // send the request to the controller
                     if (result.value) {
-                        this.form.delete('api/user/'+ id).then(()=>{
+                        this.form.delete('api/budget/'+ id).then(()=>{
 
                             Swal.fire(
                                 'Deleted!',
