@@ -133,6 +133,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link to="/budget" class="nav-link">
+                                <i class="nav-icon fas fa-funnel-dollar indigo"></i>
+                                <p>
+                                    Budgets
+                                </p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link to="/Applicants" class="nav-link">
                                 <i class="nav-icon fas fa-user-graduate teal"></i>
                                 <p>
