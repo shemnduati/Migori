@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Application;
+use App\Budget;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,11 +42,15 @@ class DashboardContoller extends Controller
         $ward_id = User::where('id',Auth::user()->id)->value('ward');
         $total_apllication = Application::where('ward_id',$ward_id)->count();
         $total_awarded = Application::where('ward_id',$ward_id)->where('status','1')->count();
+        $budget = (int) Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('amount');
+        $remaining = (int) Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('remaining');
         $data = array(
             'total_student'=>$total_student,
             'total_subadmin'=>$total_subadmin,
             'total_application'=> $total_apllication,
             'total_awarded'=>$total_awarded,
+            'budget'=>$budget,
+            'remaining'=>$remaining
         );
         return['data'=>$data];
 
