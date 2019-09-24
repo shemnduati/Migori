@@ -56,14 +56,13 @@ class BudgetController extends Controller
     {
         $this->validate($request, [
             'amount' => 'required|integer',
-            'ward'=> 'required',
-            'year' => 'required|string|max:25|unique:configurations',
+            'ward'=> 'required'
         ]);
         return Budget::create([
             'ward_id' => $request['ward'],
             'amount' => $request['amount'],
             'remaining' => $request['amount'],
-            'year' => $request['year']
+            'year' => date('Y'),
         ]);
     }
 

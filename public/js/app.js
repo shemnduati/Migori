@@ -3776,6 +3776,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3787,7 +3817,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       institution: {},
       photo: '',
       form: new Form({
-        recommendation: ''
+        recommendation: '',
+        amount: ''
       }),
       formf: new Form({
         amount: ''
@@ -3830,7 +3861,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.formf.reset();
       $('#new').modal('show');
     },
-    recommend: function recommend() {
+    recommendNo: function recommendNo() {
       var _this2 = this;
 
       Swal.fire({
@@ -5116,13 +5147,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5132,8 +5156,7 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: '',
         ward: '',
-        amount: '',
-        year: ''
+        amount: ''
       })
     };
   },
@@ -73161,7 +73184,7 @@ var render = function() {
                 attrs: { type: "radio", name: "no", id: "no", value: "No" },
                 domProps: { checked: _vm._q(_vm.form.recommendation, "No") },
                 on: {
-                  click: _vm.recommend,
+                  click: _vm.recommendNo,
                   change: function($event) {
                     return _vm.$set(_vm.form, "recommendation", "No")
                   }
@@ -73291,6 +73314,90 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._m(14)
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "new",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addnewLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(15),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.award()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Amount")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formf.amount,
+                              expression: "formf.amount"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.formf.errors.has("amount")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "name",
+                            placeholder: "Amount"
+                          },
+                          domProps: { value: _vm.formf.amount },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.formf, "amount", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.formf, field: "amount" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(16)
                 ]
               )
             ])
@@ -73528,6 +73635,53 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-save" }),
           _vm._v("\n                        Save\n                        ")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "addnewLabel" } }, [
+        _vm._v("Award")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [
+          _c("i", { staticClass: "fas fa-save" }),
+          _vm._v("\n\t\t\t\t\t\t\t\tSave\n\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -79277,46 +79431,6 @@ var render = function() {
                         _vm._v(" "),
                         _c("has-error", {
                           attrs: { form: _vm.form, field: "amount" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", [_vm._v("Budget Year")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.year,
-                              expression: "form.year"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("year") },
-                          attrs: {
-                            type: "text",
-                            name: "year",
-                            placeholder: "Enter Year"
-                          },
-                          domProps: { value: _vm.form.year },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "year", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "year" }
                         })
                       ],
                       1
