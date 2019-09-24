@@ -225,11 +225,17 @@ class InformationController extends Controller
             ], 422);
         }else {
 
+            $id = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('id');
+            $budge = Budget::findOrFail($id);
+            $budge->remaining = $budget - $request['amount'];
+            $budge->update();
+
             $application = Application::findOrFail($applicationId);
             $application->rec_amount = $request['amount'];
             $application->status = 1;
             $application->recommendation = $request['recommendation'];
             $application->update();
+
         }
     }
 
