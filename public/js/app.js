@@ -79732,7 +79732,7 @@ var render = function() {
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            application.status == 3
+                            application.status == 1
                               ? _c(
                                   "span",
                                   { staticStyle: { color: "green" } },
@@ -79740,7 +79740,7 @@ var render = function() {
                                 )
                               : _vm._e(),
                             _vm._v(" "),
-                            application.status == 4
+                            application.status == 3
                               ? _c(
                                   "span",
                                   { staticStyle: { color: "green" } },
@@ -79778,13 +79778,13 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.status === 2
+                  _vm.status === 1
                     ? _c("div", { staticClass: "row" }, [
                         _vm._v("Your form has been successfully verified")
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.status === 3
+                  _vm.status === 2
                     ? _c("div", { staticClass: "row" }, [
                         _vm._v(
                           "Your form has been rejected due to misinformation.Please contact your ward\n                        administrator for more information"
@@ -79792,7 +79792,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.status === 4
+                  _vm.status === 3
                     ? _c("div", { staticClass: "row" }, [
                         _vm._v(
                           "You have been awarded Ksh " + _vm._s(_vm.amount)
@@ -97082,8 +97082,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
