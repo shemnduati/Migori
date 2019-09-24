@@ -174,7 +174,7 @@
                 </div>
                 <div class="form-check form-check-inline">
                 <input v-model="form.recommendation" class="form-check-input" type="radio" name="no" id="no" value="No"
-                        :class="{ 'is-invalid': form.errors.has('no') }" @click="recommend">
+                        :class="{ 'is-invalid': form.errors.has('no') }" @click="recommendNo">
                 <label class="form-check-label" for="inlineRadio1">No</label>
                 </div>
 				<!-- <button @click="reject()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-danger px-5 offset-md-3" >Reject</button> -->
@@ -229,6 +229,36 @@
                 </div>
             </div>
         </div>
+		<div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="addnewLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="addnewLabel">Award</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form @submit.prevent="award()">
+						<div class="modal-body">
+							<div class="form-group">
+								<label>Amount</label>
+								<input v-model="formf.amount" type="text" name="name"
+									   placeholder="Amount"
+									   class="form-control" :class="{ 'is-invalid': formf.errors.has('amount') }">
+								<has-error :form="formf" field="amount"></has-error>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-success">
+								<i class="fas fa-save"></i>
+								Save
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -244,7 +274,8 @@
 	        	institution:{},
 	        	photo: '',
 	        	form: new Form({
-                   recommendation: ''
+                   recommendation: '',
+					amount: ''
 	        	}),
 	        	formf: new Form({
 	        		amount: ''
@@ -294,7 +325,7 @@
               this.formf.reset();
               $('#new').modal('show');
             },
-			recommend(){
+			recommendNo(){
                Swal.fire({
                   title: 'Are you sure?',
                   text: "You won't be able to revert this!",

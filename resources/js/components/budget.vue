@@ -73,13 +73,6 @@
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('amount') }">
                                 <has-error :form="form" field="amount"></has-error>
                             </div>
-                            <div class="form-group">
-                                <label>Budget Year</label>
-                                <input v-model="form.year" type="text" name="year"
-                                       placeholder="Enter Year"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('year') }">
-                                <has-error :form="form" field="year"></has-error>
-                            </div>
                         </div>
 
                         <div class="modal-footer">
@@ -105,7 +98,6 @@
                     id:'',
                     ward:'',
                     amount:'',
-                    year: '',
                 })
 
 
