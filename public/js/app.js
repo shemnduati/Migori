@@ -3853,6 +3853,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     award: function award() {
+      var _this2 = this;
+
       if (this.$gate.isOfficial()) {
         this.formf.post("/api/award/" + this.application.id).then(function () {
           Swal.fire('Success!', 'Successfully Awarded.', 'success');
@@ -3868,8 +3870,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           Swal.fire('Success!', 'Successfully Awarded.', 'success');
           Fire.$emit('entry');
           $('#recommendation').modal('hide');
-        })["catch"](function () {
-          Swal.fire('Failed!', 'There was something wrong');
+        })["catch"](function (error) {
+          _this2.errors = error.response.data.errors;
+          Swal.fire({
+            type: 'error',
+            title: 'Error!',
+            text: error.response.data.msg
+          });
         });
       }
     },
@@ -3878,7 +3885,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#new').modal('show');
     },
     recommendNo: function recommendNo() {
-      var _this2 = this;
+      var _this3 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -3890,7 +3897,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes!'
       }).then(function (result) {
         if (result.value) {
-          _this2.form.post("/api/recommend/" + _this2.application.id).then(function () {
+          _this3.form.post("/api/recommend/" + _this3.application.id).then(function () {
             Swal.fire('Success!', 'Operation successful.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
@@ -3900,27 +3907,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     getApplications: function getApplications() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref) {
         var data = _ref.data;
-        return [_this3.application = data['application']];
+        return [_this4.application = data['application']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref2) {
         var data = _ref2.data;
-        return [_this3.family = data['family']];
+        return [_this4.family = data['family']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref3) {
         var data = _ref3.data;
-        return [_this3.morefamily = data['morefamily']];
+        return [_this4.morefamily = data['morefamily']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref4) {
         var data = _ref4.data;
-        return [_this3.geographical = data['geographical']];
+        return [_this4.geographical = data['geographical']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref5) {
         var data = _ref5.data;
-        return [_this3.institution = data['institution']];
+        return [_this4.institution = data['institution']];
       });
     },
     launch: function launch(passport) {
@@ -3928,7 +3935,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.photo = passport;
     },
     send: function send() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.put("/api/send/" + this.applicantId).then(function (response) {
         Fire.$emit('AfterCreate');
@@ -3938,11 +3945,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Sent!!'
         }, "text", 'Sent to Admin!'));
 
-        _this4.$router.push('/Information');
+        _this5.$router.push('/Information');
       });
     },
     accept: function accept() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$Progress.start();
       axios.put("/api/accept/" + this.applicantId).then(function (response) {
@@ -3953,13 +3960,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Accept'
         }, "text", 'Accepted!'));
 
-        _this5.$router.push('/Information');
+        _this6.$router.push('/Information');
 
-        _this5.$Progress.finish();
+        _this6.$Progress.finish();
       });
     },
     reject: function reject() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.$Progress.start();
       axios.put("/api/reject/" + this.applicantId).then(function (response) {
@@ -3970,18 +3977,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Rejected!!'
         }, "text", 'You rejected the application'));
 
-        _this6.$router.push('/Information');
+        _this7.$router.push('/Information');
 
         his.$Progress.finish();
       });
     }
   },
   created: function created() {
-    var _this7 = this;
+    var _this8 = this;
 
     this.getApplications();
     Fire.$on('entry', function () {
-      _this7.getApplications();
+      _this8.getApplications();
     });
   }
 });
@@ -97082,8 +97089,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

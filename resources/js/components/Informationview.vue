@@ -336,8 +336,13 @@
 						)
 						Fire.$emit('entry');
 						$('#recommendation').modal('hide');
-					}).catch(() => {
-						Swal.fire('Failed!', 'There was something wrong')
+					}).catch(error => {
+						this.errors = error.response.data.errors;
+						Swal.fire({
+							type: 'error',
+							title: 'Error!',
+							text: error.response.data.msg
+						})
 					});
 				}
 			},

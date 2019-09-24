@@ -12,6 +12,7 @@ use App\Application;
 use App\Family;
 use App\MoreFamily;
 use App\Geographical;
+use App\Budget;
 use Illuminate\Support\Facades\Auth;
 
 class InformationController extends Controller
@@ -214,12 +215,22 @@ class InformationController extends Controller
             'recommendation'=> 'required',
         ]);
 
-        $application = Application::findOrFail($applicationId);
-        $application->rec_amount = $request['amount'];
-        $application->status = 1;
-        $application->recommendation = $request['recommendation'];
-        $application->status = 1;
-        $application->update();
+        $ward = Application::where('id', $applicationId)->value('ward_id');
+        $budget = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('amount');
+
+        if ($budget <= $request['amount']){
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'Amount exceeds the allocated budget',
+            ], 422);
+        }else {
+
+            $application = Application::findOrFail($applicationId);
+            $application->rec_amount = $request['amount'];
+            $application->status = 1;
+            $application->recommendation = $request['recommendation'];
+            $application->update();
+        }
     }
 
     public function award(Request $request, $applicationId)
