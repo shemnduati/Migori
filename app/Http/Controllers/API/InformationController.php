@@ -101,6 +101,11 @@ class InformationController extends Controller
         return ['count'=>$count];
 
     }
+    public function getMyStatus()
+    {
+        $status = Application::where('year', date('Y'))->where('user_id',Auth::user()->id)->value('status');
+        return ['status'=>$status];
+    }
     public function getMyWards()
     {
         $county_id = User::where('id',Auth::user()->id)->value('county');

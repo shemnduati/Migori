@@ -5419,9 +5419,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      status: {},
       applications: {},
       count: {}
     };
@@ -5441,6 +5446,14 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('api/getApplication').then(function (_ref2) {
         var data = _ref2.data;
         return [_this2.count = data['count']];
+      });
+    },
+    getMyStatus: function getMyStatus() {
+      var _this3 = this;
+
+      axios.get('api/getMyStatus').then(function (_ref3) {
+        var data = _ref3.data;
+        return [_this3.status = data['status']];
       });
     }
   },
@@ -79699,14 +79712,56 @@ var render = function() {
                                   [_vm._v("Verified")]
                                 )
                               : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Read More")])
+                          ])
                         ])
                       })
                     ],
                     2
                   )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    attrs: {
+                      href: "#",
+                      "data-toggle": "collapse",
+                      role: "button",
+                      "aria-expanded": "false"
+                    },
+                    on: { click: _vm.getMyStatus }
+                  },
+                  [_vm._v("Read more..")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _vm.status === 0
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._v(
+                          "Your form has been successfully submitted and await verification"
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.status === 2
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._v("Your form has been successfully verified")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.status === 3
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._v(
+                          "Your form has been rejected due to misinformation.Please contact your ward\n                        administrator for more information"
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.status === 4
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._v("You have been awarded Ksh xxx")
+                      ])
+                    : _vm._e()
                 ])
               ])
             ])
