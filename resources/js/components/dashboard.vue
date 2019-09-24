@@ -59,6 +59,33 @@
                         </div>
                     </div>
                     <!-- ./col -->
+                    <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{dash['budget']}}</h3>
+
+                                <p>Ward's Budget(Ksh)</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-dollar-sign white"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
+                        <!-- small box -->
+                        <div class="small-box bg-danger white">
+                            <div class="inner">
+                                <h3>{{dash['remaining']}}</h3>
+
+                                <p>Remaining(Ksh)</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-coins white"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

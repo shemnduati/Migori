@@ -3454,6 +3454,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3548,6 +3551,17 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5274,8 +5288,13 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         _this5.$Progress.finish();
-      })["catch"](function () {
-        Swal.fire("Failed to Create new budget!", "There was something wrong.");
+      })["catch"](function (error) {
+        _this5.errors = error.response.data.errors;
+        Swal.fire({
+          type: 'error',
+          title: 'Error!',
+          text: error.response.data.msg
+        });
       });
     }
   },
@@ -5309,6 +5328,33 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -10455,7 +10501,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bg-b[data-v-788ff5b6]{\n\tbackground-color: #bfbfbf;\n}\n.bg-a[data-v-788ff5b6]{\n\tbackground-color: #77933c;\n}\n.bgc[data-v-788ff5b6]{\n\tbackground-color: #1db5b5;\n}\n", ""]);
+exports.push([module.i, "\n.bg-b[data-v-788ff5b6] {\n    background-color: #bfbfbf;\n}\n.bg-a[data-v-788ff5b6] {\n    background-color: #77933c;\n}\n.bgc[data-v-788ff5b6] {\n    background-color: #1db5b5;\n}\n", ""]);
 
 // exports
 
@@ -72850,7 +72896,11 @@ var render = function() {
                                       type: "button"
                                     }
                                   },
-                                  [_vm._v("view")]
+                                  [
+                                    _vm._v(
+                                      "view\n                                "
+                                    )
+                                  ]
                                 )
                               ],
                               1
@@ -73123,7 +73173,7 @@ var render = function() {
       _c("div", { staticClass: "col-md-6" }, [
         _vm.$gate.isSubadmin() && !_vm.application.recommendation
           ? _c("button", { staticClass: "btn btn-success px-5 offset-md-1" }, [
-              _vm._v("Recommendation")
+              _vm._v("Recommendation\n            ")
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -73150,7 +73200,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.newModal }
               },
-              [_vm._v("Yes")]
+              [_vm._v("Yes\n            ")]
             )
           : _vm._e(),
         _vm._v(" "),
@@ -73164,7 +73214,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.notAward }
               },
-              [_vm._v("No")]
+              [_vm._v("No\n            ")]
             )
           : _vm._e()
       ]),
@@ -73514,13 +73564,13 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-4" }, [
       _c("p", [_vm._v(" Official name ")]),
       _vm._v(" "),
-      _c("p", [_vm._v(" DOB  ")]),
+      _c("p", [_vm._v(" DOB ")]),
       _vm._v(" "),
       _c("p", [_vm._v(" Gender ")]),
       _vm._v(" "),
       _c("p", [_vm._v(" Reg/Adm No. ")]),
       _vm._v(" "),
-      _c("p", [_vm._v(" Tel.  ")])
+      _c("p", [_vm._v(" Tel. ")])
     ])
   },
   function() {
@@ -73592,7 +73642,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [_vm._v(" Branch ")]),
       _vm._v(" "),
-      _c("p", [_vm._v(" Year of Study  ")]),
+      _c("p", [_vm._v(" Year of Study ")]),
       _vm._v(" "),
       _c("p", [_vm._v("Annual Fees ")]),
       _vm._v(" "),
@@ -73622,7 +73672,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [_vm._v(" Division ")]),
       _vm._v(" "),
-      _c("p", [_vm._v(" Location  ")]),
+      _c("p", [_vm._v(" Location ")]),
       _vm._v(" "),
       _c("p", [_vm._v("Sub-Location ")]),
       _vm._v(" "),
@@ -73707,7 +73757,7 @@ var staticRenderFns = [
         { staticClass: "btn btn-success", attrs: { type: "submit" } },
         [
           _c("i", { staticClass: "fas fa-save" }),
-          _vm._v("\n                        Save\n                        ")
+          _vm._v("\n                            Save\n                        ")
         ]
       )
     ])
@@ -73754,7 +73804,7 @@ var staticRenderFns = [
         { staticClass: "btn btn-success", attrs: { type: "submit" } },
         [
           _c("i", { staticClass: "fas fa-save" }),
-          _vm._v("\n\t\t\t\t\t\t\t\tSave\n\t\t\t\t\t\t\t")
+          _vm._v("\n                            Save\n                        ")
         ]
       )
     ])
@@ -79670,7 +79720,35 @@ var render = function() {
                   _vm._v(" "),
                   _vm._m(3)
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.$gate.isSubadmin()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-success" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [_vm._v(_vm._s(_vm.dash["budget"]))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Ward's Budget(Ksh)")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(4)
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$gate.isSubadmin()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-danger white" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [_vm._v(_vm._s(_vm.dash["remaining"]))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Remaining(Ksh)")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(5)
+                    ])
+                  ])
+                : _vm._e()
             ])
           ])
         ])
@@ -79708,6 +79786,22 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-award white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-dollar-sign white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-coins white" })
     ])
   }
 ]

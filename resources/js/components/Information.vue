@@ -30,7 +30,8 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
-                            <tbody><tr>
+                            <tbody>
+                            <tr>
                                 <th>Serial N.o</th>
                                 <th>Name</th>
                                 <th>Gender</th>
@@ -49,26 +50,30 @@
                                     <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
                                     <span v-if="application.status==3" style="color: green;">Awarded</span>
-                               </td>
-                               <td>
-                                   <span class="badge badge-primary" v-if="!application.recommendation">Pending</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary" v-if="!application.recommendation">Pending</span>
                                     <span class="badge badge-success" v-if="application.recommendation == 'Yes'">Yes / High</span>
                                     <span class="badge badge-warning" v-if="application.recommendation == 'Partially'">Partially</span>
                                     <span class="badge badge-danger" v-if="application.recommendation == 'No'">No</span>
-                               </td>
-                               <td>
-                                   <span v-if="application.rec_amount"> Ksh. {{application.rec_amount}}</span>
-                                   <span v-if="application.status==2"> N/A</span>
-                                   <span v-if="!application.rec_amount">Not Allocated</span>
-                               </td>
-                               <td>{{application.bursary_type}}</td>
-                                <td><router-link :to="{path:'/informationview/'+ application.user_id}" type="button" class="btn btn-primary btn-sm">view</router-link></td>
+                                </td>
+                                <td>
+                                    <span v-if="application.rec_amount"> Ksh. {{application.rec_amount}}</span>
+                                    <span v-if="application.status==2"> N/A</span>
+                                    <span v-if="!application.rec_amount">Not Allocated</span>
+                                </td>
+                                <td>{{application.bursary_type}}</td>
+                                <td>
+                                    <router-link :to="{path:'/informationview/'+ application.user_id}" type="button"
+                                                 class="btn btn-primary btn-sm">view
+                                    </router-link>
+                                </td>
 
                             </tr>
 
 
-
-                            </tbody></table>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- /.box-body -->
                     <div class="card-footer">
@@ -81,36 +86,34 @@
         <!-- Modal -->
 
 
-
-
     </div>
 </template>
 
 <script>
     export default {
-        data(){
-            return{
-                applications :{},
+        data() {
+            return {
+                applications: {},
                 form: new Form({
-                   type: ''
+                    type: ''
                 })
 
 
             }
         },
-        methods:{
-            getBursary(type){
-               axios.get('api/getbursarytype/' + type).then(({data}) => ([this.applications = data['applications']]));
+        methods: {
+            getBursary(type) {
+                axios.get('api/getbursarytype/' + type).then(({data}) => ([this.applications = data['applications']]));
             },
-            getApplications(){
+            getApplications() {
                 if (this.$gate.isSubadmin()) {
                     axios.get('api/getbusary').then(({data}) => ([this.applications = data['applications']]));
                 }
-                if(this.$gate.isOfficial()){
+                if (this.$gate.isOfficial()) {
                     axios.get('api/getCountyBursary').then(({data}) => ([this.applications = data['applications']]));
                 }
             },
-            getType(){
+            getType() {
                 if (this.$gate.isOfficial()) {
                     axios.get('api/gettype/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
                 }
@@ -126,20 +129,20 @@
 
         created() {
             this.$Progress.start();
-            Fire.$on('searching', ()=>{
+            Fire.$on('searching', () => {
                 this.$Progress.start();
                 let query = this.$parent.search;
                 axios.get('api/findbursary?q=' + query)
-                    .then((data)=>{
+                    .then((data) => {
                         this.applications = data.data;
                         this.$Progress.finish();
                     })
-                    .catch(()=>{
+                    .catch(() => {
 
                     })
             })
             this.getApplications();
-            Fire.$on('AfterCreate', () =>{
+            Fire.$on('AfterCreate', () => {
                 this.getApplications();
             })
         }
