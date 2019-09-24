@@ -5423,10 +5423,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       status: {},
+      amount: {},
       applications: {},
       count: {}
     };
@@ -5455,11 +5457,20 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref3.data;
         return [_this3.status = data['status']];
       });
+    },
+    getMyAmount: function getMyAmount() {
+      var _this4 = this;
+
+      axios.get('api/getMyAmount').then(function (_ref4) {
+        var data = _ref4.data;
+        return [_this4.amount = data['amount']];
+      });
     }
   },
   created: function created() {
     this.getApplications();
     this.getMyApplications();
+    this.getMyAmount();
   }
 });
 
@@ -79711,6 +79722,14 @@ var render = function() {
                                   { staticStyle: { color: "green" } },
                                   [_vm._v("Verified")]
                                 )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            application.status == 4
+                              ? _c(
+                                  "span",
+                                  { staticStyle: { color: "green" } },
+                                  [_vm._v("Awarded")]
+                                )
                               : _vm._e()
                           ])
                         ])
@@ -79759,7 +79778,9 @@ var render = function() {
                   _vm._v(" "),
                   _vm.status === 4
                     ? _c("div", { staticClass: "row" }, [
-                        _vm._v("You have been awarded Ksh xxx")
+                        _vm._v(
+                          "You have been awarded Ksh " + _vm._s(_vm.amount)
+                        )
                       ])
                     : _vm._e()
                 ])

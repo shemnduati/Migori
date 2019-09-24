@@ -48,6 +48,7 @@ Route::get('/getbusary','API\InformationController@getbusary');
 Route::get('/getMyBursary','API\InformationController@getMyBursary');
 Route::get('/getApplication','API\InformationController@getApplication');
 Route::get('/getMyStatus','API\InformationController@getMyStatus');
+Route::get('/getMyAmount','API\InformationController@getAmount');
 Route::get('/getCountyBursary','API\InformationController@getCountyBursary');
 Route::get('/getApplicants','API\InformationController@Applicants');
 Route::get('/gettype/{id}','API\InformationController@getType');
