@@ -3448,6 +3448,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -72729,6 +72735,8 @@ var render = function() {
                           _vm._v(" "),
                           _c("th", [_vm._v("Recomm.")]),
                           _vm._v(" "),
+                          _c("th", [_vm._v("Recomm. Amount")]),
+                          _vm._v(" "),
                           _c("th", [_vm._v("Type")]),
                           _vm._v(" "),
                           _c("th", [_vm._v("View to Send")])
@@ -72801,6 +72809,24 @@ var render = function() {
                                     { staticClass: "badge badge-danger" },
                                     [_vm._v("No")]
                                   )
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              application.rec_amount
+                                ? _c("span", [
+                                    _vm._v(
+                                      " Ksh. " + _vm._s(application.rec_amount)
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.status == 2
+                                ? _c("span", [_vm._v(" N/A")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              !application.rec_amount
+                                ? _c("span", [_vm._v("Not Allocated")])
                                 : _vm._e()
                             ]),
                             _vm._v(" "),

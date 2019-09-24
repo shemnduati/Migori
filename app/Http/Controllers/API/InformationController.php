@@ -216,9 +216,9 @@ class InformationController extends Controller
         ]);
 
         $ward = Application::where('id', $applicationId)->value('ward_id');
-        $budget = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('amount');
+        $remaining = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('remaining');
 
-        if ($budget <= $request['amount']){
+        if ($remaining <= $request['amount']){
             return response()->json([
                 'status' => 'error',
                 'msg' => 'Amount exceeds the allocated budget',
@@ -227,7 +227,7 @@ class InformationController extends Controller
 
             $id = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('id');
             $budge = Budget::findOrFail($id);
-            $budge->remaining = $budget - $request['amount'];
+            $budge->remaining = $remaining - $request['amount'];
             $budge->update();
 
             $application = Application::findOrFail($applicationId);
