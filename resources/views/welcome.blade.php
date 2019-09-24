@@ -77,7 +77,7 @@
     <body>
 
 
-        <div class="container-fluid">
+        <div class="container-fluid" id="app">
 
             <div class="content">
                 <div class="grad col-md-12 pb-3">
@@ -119,6 +119,13 @@
 
                     </div>
                 </div>
+                @auth
+                <div class="col-md-12">
+                    <div class="row col-md-4 col-sm-6 col-xm-6">
+                        <mystatus></mystatus>
+                    </div>
+                </div>
+                @endauth
                 <div class="banner d-flex justify-content-center">
                     <img class="align-self-center img-fluid" src="/img/frin.png" alt="">
                 </div>

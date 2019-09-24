@@ -5420,9 +5420,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      status: {},
+      applications: {},
+      count: {}
+    };
+  },
+  methods: {
+    getApplications: function getApplications() {
+      var _this = this;
+
+      axios.get('api/getMyBursary').then(function (_ref) {
+        var data = _ref.data;
+        return [_this.applications = data['applications']];
+      });
+    },
+    getMyApplications: function getMyApplications() {
+      var _this2 = this;
+
+      axios.get('api/getApplication').then(function (_ref2) {
+        var data = _ref2.data;
+        return [_this2.count = data['count']];
+      });
+    },
+    getMyStatus: function getMyStatus() {
+      var _this3 = this;
+
+      axios.get('api/getMyStatus').then(function (_ref3) {
+        var data = _ref3.data;
+        return [_this3.status = data['status']];
+      });
+    }
+  },
+  created: function created() {
+    this.getApplications();
+    this.getMyApplications();
   }
 });
 
@@ -79635,30 +79688,110 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.count > 0
+    ? _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-md-8" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v("Application Status")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("table", { staticClass: "table table-hover" }, [
+                  _c(
+                    "tbody",
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _vm._l(_vm.applications, function(application) {
+                        return _c("tr", { key: application.id }, [
+                          _c("td", [
+                            application.status == 0
+                              ? _c(
+                                  "span",
+                                  { staticStyle: { color: "purple" } },
+                                  [_vm._v("Received")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            application.status == 2
+                              ? _c("span", { staticStyle: { color: "red" } }, [
+                                  _vm._v("Rejected")
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            application.status == 3
+                              ? _c(
+                                  "span",
+                                  { staticStyle: { color: "green" } },
+                                  [_vm._v("Verified")]
+                                )
+                              : _vm._e()
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    attrs: {
+                      href: "#",
+                      "data-toggle": "collapse",
+                      role: "button",
+                      "aria-expanded": "false"
+                    },
+                    on: { click: _vm.getMyStatus }
+                  },
+                  [_vm._v("Read more..")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _vm.status === 0
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._v(
+                          "Your form has been successfully submitted and await verification"
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.status === 2
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._v("Your form has been successfully verified")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.status === 3
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._v(
+                          "Your form has been rejected due to misinformation.Please contact your ward\n                        administrator for more information"
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.status === 4
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._v("You have been awarded Ksh xxx")
+                      ])
+                    : _vm._e()
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
+    return _c("tr", [_c("th", [_vm._v("Status")])])
   }
 ]
 render._withStripped = true
@@ -95514,7 +95647,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('not-found', __webpack_require__(/*! ./components/NotFound.vue */ "./resources/js/components/NotFound.vue")["default"]);
 Vue.component('application', __webpack_require__(/*! ./components/Application.vue */ "./resources/js/components/Application.vue")["default"]);
 Vue.component('verifiedform', __webpack_require__(/*! ./components/Verifiedform.vue */ "./resources/js/components/Verifiedform.vue")["default"]);
-Vue.component('MyStatus', __webpack_require__(/*! ./components/status.vue */ "./resources/js/components/status.vue")["default"]);
+Vue.component('mystatus', __webpack_require__(/*! ./components/status.vue */ "./resources/js/components/status.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

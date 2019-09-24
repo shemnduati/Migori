@@ -87,6 +87,25 @@ class InformationController extends Controller
         return ['applications'=>$applications];
 
     }
+    public function getMyBursary()
+    {
+        $applications = Application::where('year', date('Y'))->where('user_id',Auth::user()->id)->get();
+
+        return ['applications'=>$applications];
+
+    }
+    public function getApplication()
+    {
+        $count = Application::where('year', date('Y'))->where('user_id',Auth::user()->id)->count();
+
+        return ['count'=>$count];
+
+    }
+    public function getMyStatus()
+    {
+        $status = Application::where('year', date('Y'))->where('user_id',Auth::user()->id)->value('status');
+        return ['status'=>$status];
+    }
     public function getMyWards()
     {
         $county_id = User::where('id',Auth::user()->id)->value('county');
