@@ -58,14 +58,6 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->get();
-
-        if (count($check) > 0) {
-            return response()->json([
-                    'status' => 'error',
-                    'msg'    => 'You already sent an application',
-                ], 422);
-        }else {
         $this->validate($request,[
             'year' => 'required|min:1|max:7',
             'type'=>'required',
@@ -115,6 +107,15 @@ class ApplicationController extends Controller
             'mtelephone'=>'required',
             'gtelephone'=>'required',
         ]);
+
+        $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->where('type', $request->type)->get();
+
+        if (count($check) > 0) {
+            return response()->json([
+                    'status' => 'error',
+                    'msg'    => 'You already sent an application',
+                ], 422);
+        }else {
 
         $available = User::where('ward', $request['ward'])->count();
         if($available > 0) {
