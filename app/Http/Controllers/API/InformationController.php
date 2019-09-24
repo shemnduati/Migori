@@ -216,6 +216,7 @@ class InformationController extends Controller
 
         $application = Application::findOrFail($applicationId);
         $application->rec_amount = $request['amount'];
+        $application->status = 1;
         $application->recommendation = $request['recommendation'];
         $application->update();
     }
