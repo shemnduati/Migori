@@ -208,6 +208,18 @@ class InformationController extends Controller
         $application->save();
     }
 
+    public function recommendAmount(Request $request, $applicationId){
+        $this->validate($request,[
+            'amount'=>'required',
+            'recommendation'=> 'required',
+        ]);
+
+        $application = Application::findOrFail($applicationId);
+        $application->rec_amount = $request['amount'];
+        $application->recommendation = $request['recommendation'];
+        $application->update();
+    }
+
     public function award(Request $request, $applicationId)
     {
         $this->validate($request,[
