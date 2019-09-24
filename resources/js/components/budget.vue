@@ -178,9 +178,14 @@
                         })
                         this.$Progress.finish();
                     })
-                    .catch(() => {
-                        Swal.fire("Failed to Create new budget!", "There was something wrong.");
-                    })
+                    .catch(error => {
+                        this.errors = error.response.data.errors;
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error!',
+                            text: error.response.data.msg
+                        })
+                    });
             }
         },
 
