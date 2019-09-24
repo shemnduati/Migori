@@ -3826,6 +3826,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: {
+    recommend: function recommend() {
+      this.form.reset();
+      $('#recommendation').modal('show');
+    },
     notAward: function notAward() {
       var _this = this;
 
@@ -3849,13 +3853,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     award: function award() {
-      this.formf.post("/api/award/" + this.application.id).then(function () {
-        Swal.fire('Success!', 'Successfully Awarded.', 'success');
-        Fire.$emit('entry');
-        $('#new').modal('hide');
-      })["catch"](function () {
-        Swal.fire('Failed!', 'There was something wrong');
-      });
+      if (this.$gate.isOfficial()) {
+        this.formf.post("/api/award/" + this.application.id).then(function () {
+          Swal.fire('Success!', 'Successfully Awarded.', 'success');
+          Fire.$emit('entry');
+          $('#new').modal('hide');
+        })["catch"](function () {
+          Swal.fire('Failed!', 'There was something wrong');
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        this.form.post("/api/recommendAmount/" + this.application.id).then(function () {
+          Swal.fire('Success!', 'Successfully Awarded.', 'success');
+          Fire.$emit('entry');
+          $('#recommendation').modal('hide');
+        })["catch"](function () {
+          Swal.fire('Failed!', 'There was something wrong');
+        });
+      }
     },
     newModal: function newModal() {
       this.formf.reset();
@@ -73287,7 +73303,7 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "new",
+          id: "recommendation",
           tabindex: "-1",
           role: "dialog",
           "aria-labelledby": "addnewLabel",
@@ -73325,32 +73341,32 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.formf.amount,
-                              expression: "formf.amount"
+                              value: _vm.form.amount,
+                              expression: "form.amount"
                             }
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.formf.errors.has("amount")
+                            "is-invalid": _vm.form.errors.has("amount")
                           },
                           attrs: {
                             type: "text",
                             name: "name",
                             placeholder: "Amount"
                           },
-                          domProps: { value: _vm.formf.amount },
+                          domProps: { value: _vm.form.amount },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.formf, "amount", $event.target.value)
+                              _vm.$set(_vm.form, "amount", $event.target.value)
                             }
                           }
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.formf, field: "amount" }
+                          attrs: { form: _vm.form, field: "amount" }
                         })
                       ],
                       1
@@ -73605,7 +73621,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h5", { staticClass: "modal-title", attrs: { id: "addnewLabel" } }, [
-        _vm._v("Award")
+        _vm._v("Recommend Amount")
       ]),
       _vm._v(" "),
       _c(

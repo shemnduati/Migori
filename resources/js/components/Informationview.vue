@@ -229,11 +229,11 @@
                 </div>
             </div>
         </div>
-		<div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="addnewLabel" aria-hidden="true">
+		<div class="modal fade" id="recommendation" tabindex="-1" role="dialog" aria-labelledby="addnewLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="addnewLabel">Award</h5>
+						<h5 class="modal-title" id="addnewLabel">Recommend Amount</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -242,10 +242,10 @@
 						<div class="modal-body">
 							<div class="form-group">
 								<label>Amount</label>
-								<input v-model="formf.amount" type="text" name="name"
+								<input v-model="form.amount" type="text" name="name"
 									   placeholder="Amount"
-									   class="form-control" :class="{ 'is-invalid': formf.errors.has('amount') }">
-								<has-error :form="formf" field="amount"></has-error>
+									   class="form-control" :class="{ 'is-invalid': form.errors.has('amount') }">
+								<has-error :form="form" field="amount"></has-error>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -284,6 +284,10 @@
 
 		},
 		methods:{
+    		recommend(){
+    			this.form.reset();
+				$('#recommendation').modal('show');
+			},
 			notAward(){
                Swal.fire({
                   title: 'Are you sure?',
@@ -309,17 +313,33 @@
                 })
 			},
 			award(){
-              this.formf.post("/api/award/" + this.application.id).then(()=>{
-                      Swal.fire(
-                        'Success!',
-                        'Successfully Awarded.',
-                        'success'
-                        )
-                         Fire.$emit('entry');
-                         $('#new').modal('hide');
-                        }).catch(()=>{
-                      Swal.fire('Failed!','There was something wrong')
-                    });
+				if (this.$gate.isOfficial()) {
+					this.formf.post("/api/award/" + this.application.id).then(() => {
+						Swal.fire(
+								'Success!',
+								'Successfully Awarded.',
+								'success'
+						)
+						Fire.$emit('entry');
+						$('#new').modal('hide');
+					}).catch(() => {
+						Swal.fire('Failed!', 'There was something wrong')
+					});
+				}
+
+				if (this.$gate.isSubadmin()) {
+					this.form.post("/api/recommendAmount/" + this.application.id).then(() => {
+						Swal.fire(
+								'Success!',
+								'Successfully Awarded.',
+								'success'
+						)
+						Fire.$emit('entry');
+						$('#recommendation').modal('hide');
+					}).catch(() => {
+						Swal.fire('Failed!', 'There was something wrong')
+					});
+				}
 			},
 			newModal(){
               this.formf.reset();
