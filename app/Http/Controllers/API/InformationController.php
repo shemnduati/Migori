@@ -106,6 +106,11 @@ class InformationController extends Controller
         $status = Application::where('year', date('Y'))->where('user_id',Auth::user()->id)->value('status');
         return ['status'=>$status];
     }
+    public function getAmount()
+    {
+        $amount = Application::where('year', date('Y'))->where('user_id',Auth::user()->id)->value('amount');
+        return ['amount'=>$amount];
+    }
     public function getMyWards()
     {
         $county_id = User::where('id',Auth::user()->id)->value('county');
@@ -211,6 +216,7 @@ class InformationController extends Controller
 
         $application = Application::findOrFail($applicationId);
         $application->rec_amount = $request['amount'];
+        $application->status = 1;
         $application->recommendation = $request['recommendation'];
         $application->status = 1;
         $application->update();

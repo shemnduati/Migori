@@ -14,17 +14,18 @@
                                 <td>
                                     <span v-if="application.status==0" style="color: purple;">Received</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
-                                    <span v-if="application.status==3" style="color: green;">Verified</span>
+                                    <span v-if="application.status==1" style="color: green;">Verified</span>
+                                    <span v-if="application.status==3" style="color: green;">Awarded</span>
                                 </td>
                             </tr>
                             </tbody></table>
                         <a href="#" data-toggle="collapse"  role="button" aria-expanded="false" @click="getMyStatus">Read more..</a>
                         <div class="col-md-12">
                             <div class="row" v-if="status === 0">Your form has been successfully submitted and await verification</div>
-                            <div class="row" v-if="status === 2">Your form has been successfully verified</div>
-                            <div class="row" v-if="status === 3">Your form has been rejected due to misinformation.Please contact your ward
+                            <div class="row" v-if="status === 1">Your form has been successfully verified</div>
+                            <div class="row" v-if="status === 2">Your form has been rejected due to misinformation.Please contact your ward
                             administrator for more information</div>
-                            <div class="row" v-if="status === 4">You have been awarded Ksh xxx</div>
+                            <div class="row" v-if="status === 3">You have been awarded Ksh {{amount}}</div>
                         </div>
                     </div>
                 </div>
@@ -38,6 +39,7 @@
         data(){
             return {
                 status:{},
+                amount:{},
                 applications :{},
                 count : {},
             }
@@ -52,10 +54,14 @@
             getMyStatus(){
                 axios.get('api/getMyStatus').then(({data}) => ([this.status = data['status']]));
             },
+            getMyAmount(){
+                axios.get('api/getMyAmount').then(({data}) => ([this.amount = data['amount']]));
+            },
         },
         created() {
             this.getApplications();
             this. getMyApplications();
+            this.getMyAmount();
         }
     }
 </script>

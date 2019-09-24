@@ -5439,10 +5439,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       status: {},
+      amount: {},
       applications: {},
       count: {}
     };
@@ -5471,11 +5473,20 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref3.data;
         return [_this3.status = data['status']];
       });
+    },
+    getMyAmount: function getMyAmount() {
+      var _this4 = this;
+
+      axios.get('api/getMyAmount').then(function (_ref4) {
+        var data = _ref4.data;
+        return [_this4.amount = data['amount']];
+      });
     }
   },
   created: function created() {
     this.getApplications();
     this.getMyApplications();
+    this.getMyAmount();
   }
 });
 
@@ -79721,11 +79732,19 @@ var render = function() {
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            application.status == 3
+                            application.status == 1
                               ? _c(
                                   "span",
                                   { staticStyle: { color: "green" } },
                                   [_vm._v("Verified")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            application.status == 3
+                              ? _c(
+                                  "span",
+                                  { staticStyle: { color: "green" } },
+                                  [_vm._v("Awarded")]
                                 )
                               : _vm._e()
                           ])
@@ -79759,13 +79778,13 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.status === 2
+                  _vm.status === 1
                     ? _c("div", { staticClass: "row" }, [
                         _vm._v("Your form has been successfully verified")
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.status === 3
+                  _vm.status === 2
                     ? _c("div", { staticClass: "row" }, [
                         _vm._v(
                           "Your form has been rejected due to misinformation.Please contact your ward\n                        administrator for more information"
@@ -79773,9 +79792,11 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.status === 4
+                  _vm.status === 3
                     ? _c("div", { staticClass: "row" }, [
-                        _vm._v("You have been awarded Ksh xxx")
+                        _vm._v(
+                          "You have been awarded Ksh " + _vm._s(_vm.amount)
+                        )
                       ])
                     : _vm._e()
                 ])
@@ -97061,8 +97082,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
