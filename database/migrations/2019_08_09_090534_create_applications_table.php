@@ -23,9 +23,9 @@ class CreateApplicationsTable extends Migration
             $table->string('reg_no');
             $table->string('bursary_type');
             $table->date('dob');
-            $table->decimal('amount', 8, 2);
-            $table->decimal('rec_amount', 12, 2);
-            $table->string('recommendation');
+            $table->decimal('amount', 8, 2)->nullable();
+            $table->decimal('rec_amount', 12, 2)->nullable();
+            $table->string('recommendation')->nullable();
             $table->string('gender');
             $table->integer('status');
             $table->string('tel');
