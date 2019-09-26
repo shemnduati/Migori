@@ -153,7 +153,9 @@
         <footer class=" p-3 mx-3">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-               Terms and conditions
+                <a class="pl-2 state btn-link" href="{{ route('privacy') }}">
+                    {{ __('Terms and condition') }}
+                </a>
             </div>
             <!-- Default to the left -->
             <strong><a href="https://twtechnologies.africa">Copyright &copy; Baza {{date('Y')}}</a>.</strong> All rights reserved.

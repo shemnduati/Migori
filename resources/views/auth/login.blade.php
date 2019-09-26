@@ -190,7 +190,7 @@
 
                                           <label class="form-check-label logo2" for="terms">
                                               <a class="pl-2 state btn-link" href="{{ route('privacy') }}">
-                                                  {{ __('Terms and condition') }}
+                                                  {{ __('Agree with the terms and conditions') }}
                                               </a>
                                           </label>
                                           @error('terms')
