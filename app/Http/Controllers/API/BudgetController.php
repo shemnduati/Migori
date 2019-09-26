@@ -26,11 +26,11 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        $budgs = Budget::all();
+        $budgs = Budget::where('county', auth()->user()->county)->get();
         $parent = array();
 
         foreach ($budgs as $budg) {
-            $id = $budg['id'];
+            $id = $budg['ward_id'];
             $ward_name = Ward::where('id', $id)->value('name');
             $amount = $budg['amount'];
             $remaining = $budg['remaining'];
@@ -67,7 +67,9 @@ class BudgetController extends Controller
                 'msg' => 'Budget for this word has already been set',
             ], 422);
         } else {
+            $county = Ward::where('id', $request['ward'])->value('county_id');
             return Budget::create([
+                'county' => $county,
                 'ward_id' => $request['ward'],
                 'amount' => $request['amount'],
                 'remaining' => $request['amount'],
