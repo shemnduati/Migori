@@ -38,6 +38,7 @@ class BudgetController extends Controller
             $year = $budg['year'];
             $child = array(
                 'id' => $id,
+                'ward' => $budg['ward_id'],
                 'name' => $ward_name,
                 'amount' => $amount,
                 'remaining' => $remaining,

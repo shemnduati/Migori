@@ -22,8 +22,8 @@
                             </tr>
                             <tr v-for="budget in budgets" :key="budget.id">
                                 <td>{{budget.name}}</td>
-                                <td>{{budget.amount}}</td>
-                                <td>{{budget.remaining}}</td>
+                                <td>Ksh. {{budget.amount}}</td>
+                                <td>Ksh. {{budget.remaining}}</td>
                                 <td>{{budget.year}}</td>
                                 <td>
                                     <a href="#" @click="editModal(budget)" >
