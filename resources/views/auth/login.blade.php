@@ -38,7 +38,7 @@
         .fa-eye {
                 font-size: 20px;
                 margin: 8px 6px;
-            }    
+            }
     </style>
 </head>
 <body>
@@ -48,7 +48,7 @@
             <div class="card">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
-                    
+
                     <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
                   </li>
                   <li class="nav-item">
@@ -62,7 +62,7 @@
                               @csrf
 
                               <div class="form-group row">
-                                  
+
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-envelope"></i></div>
@@ -78,7 +78,7 @@
                               </div>
 
                               <div class="form-group row">
-                                  
+
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
@@ -129,7 +129,7 @@
                               @csrf
 
                               <div class="form-group row">
-                                  
+
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-user"></i></div>
@@ -144,7 +144,7 @@
                               </div>
 
                               <div class="form-group row">
-                                  
+
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-envelope"></i></div>
@@ -160,7 +160,7 @@
                               </div>
 
                               <div class="form-group row">
-                                  
+
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
@@ -175,7 +175,7 @@
                               </div>
 
                               <div class="form-group row">
-                                  
+
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
@@ -183,7 +183,24 @@
                                       <input id="password-confirm" placeholder="Confirm Password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                   </div>
                               </div>
+                              <div class="form-group row">
+                                  <div class="">
+                                      <div class="form-check">
+                                          <input class="form-check-input @error('terms') is-invalid @enderror" type="checkbox" name="terms" id="terms" value="1">
 
+                                          <label class="form-check-label logo2" for="terms">
+                                              <a class="pl-2 state btn-link" href="{{ route('privacy') }}">
+                                                  {{ __('Terms and condition') }}
+                                              </a>
+                                          </label>
+                                          @error('terms')
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                      </div>
+                                  </div>
+                              </div>
                               <div class="form-group row mb-0">
                                   <div class="col-md-6 offset-md-2">
                                       <button type="submit" class="btn btn px-5">
@@ -200,7 +217,7 @@
     </div>
 </div>
 <script>
-  
+
   var pwd = document.getElementById('pwd');
   var eye = document.getElementById('eye');
 

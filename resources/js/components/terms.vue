@@ -6,7 +6,7 @@
                     <div class="card-header">Terms and conditions</div>
 
                     <div class="card-body">
-                       <h3>Terms of service</h3>
+                       <h3 class="d-flex justify-content-center">Terms of service</h3>
                         <h4>Last updated : September 22, 2019</h4>
                         <p>MeltCome (Service provider) and its affiliates offer a number of different services through their
                             respective websites and Software. The terms of this document govern your use of those services. </p>
@@ -47,7 +47,53 @@
                         <p>h. If you upload any content or User Generated Content to our sites, you warrant that you have
                             the necessary rights and authority to do so, including the necessary consent to upload and
                             distribute any personal information about third persons. You agree that you will not upload
-                            viruses or other forms of malware.</p>
+                            viruses or other forms of malware.</p><br><br>
+                        <h3 class="d-flex justify-content-center">End User License Agreement</h3>
+                        <h4>Baza software</h4>
+                        <h4>Last updated September 25, 2019</h4>
+                        <p>This End user license agreement (“EULA”) forms a binding contract between you and MeltCom. This
+                            EULA governs your download and/ or use of the executable code for Baza software applications,
+                            however branded, including any updates or upgrades thereto (“Software”). </p>
+                        <p>Terms & Conditions</p>
+                        <p>1. This is a contract. This EULA constitute a contract between you and MeltCom (Service provider)
+                            for the use of Baza software. You may not use the software if you do not accept the terms in this
+                            EULA. By downloading and /or using the software, you agree to be bound by all the terms and
+                            conditions set forth in this EULA.</p>
+                        <p>2. You are only granted a limited license to use the software. Subject to the terms and conditions
+                            of this EULA, MeltCom hereby grants you a personal, limited, non-sub licensable license to use
+                            the executable code version of the Software as expressly authorized in this EULA</p>
+                        <p>3. You must respect our rights in the Software. Unless expressly permitted by law, you may not
+                            copy, decompile, reverse engineer, disassemble, attempt to derive the source code of, modify,
+                            or create derivative works of the software. You may not remove, obscure, or alter any copyright
+                            notice or other proprietary rights notices affixed to or contained within the software. You may
+                            not separate the component programs of the Software for use on different computers or
+                            sublicense, lease, rent, loan, or distribute the Software to any third party. You may not permit,
+                            direct or authorize any third party to take any action with respect to the software which is
+                            inconsistent with the terms set forth in this EULA.
+                        </p>
+                        <p>4. The Software contains our valuable intellectual property. You acknowledge and agree that the
+                            software, including its sequence, structure, organization, source code and applicable
+                            documentations, contain valuable trade secrets and other intellectual property of MeltCom and
+                            its suppliers. The software is licensed and not sold to you, and no title or ownership to such
+                            Software or the intellectual property rights embodied therein is granted to you other that the
+                            ones granted to you through this EULA. The Software is the exclusive property of MeltCome and
+                            its suppliers, and all rights in and to the Software not expressly granted to you in this EULA will
+                            be deemed to grant, by application, estoppel or otherwise, a license under any existing or future
+                            patents of the software, except to the extent necessary for you to use the Software as expressly
+                            permitted under this EULA. You acknowledge and agree that any actual or threatened breach of
+                            this EULA will constitute immediate, irreparable harm to MeltCom for which monetary damages
+                            would be an inadequate remedy, and that injunctive relief is an appropriate remedy for any
+                            such breach or violation.</p>
+                        <p>5. The Software may include additional services which are ad-supported. By using the software and
+                            services, you consent to the placement of such ads within the software and services.</p>
+                        <p>6. Your privacy is important to us. MeltCom takes the protection and security of its users’
+                            information very seriously and will treat any and all such information in accordance with our
+                            privacy statement, currently posted at https://baza.co.ke/privacy (‘Privacy Statement”) the
+                            privacy statement is incorporated into this EULA by this reference. You agree to the use of your
+                            data in accordance with MeltCom’s privacy statement.</p>
+                        <p>7. Your license to use this software terminates if you breach this EULA</p>
+                        <p>8. The software is provided AS IS, and MeltCom declaims all warranties with regard to the software
+                            whether express, implied or statutory.</p>
                     </div>
                 </div>
             </div>

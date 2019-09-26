@@ -5914,6 +5914,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -80561,7 +80607,9 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _c("h3", [_vm._v("Terms of service")]),
+              _c("h3", { staticClass: "d-flex justify-content-center" }, [
+                _vm._v("Terms of service")
+              ]),
               _vm._v(" "),
               _c("h4", [_vm._v("Last updated : September 22, 2019")]),
               _vm._v(" "),
@@ -80632,6 +80680,72 @@ var staticRenderFns = [
               _c("p", [
                 _vm._v(
                   "h. If you upload any content or User Generated Content to our sites, you warrant that you have\n                        the necessary rights and authority to do so, including the necessary consent to upload and\n                        distribute any personal information about third persons. You agree that you will not upload\n                        viruses or other forms of malware."
+                )
+              ]),
+              _c("br"),
+              _c("br"),
+              _vm._v(" "),
+              _c("h3", { staticClass: "d-flex justify-content-center" }, [
+                _vm._v("End User License Agreement")
+              ]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Baza software")]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Last updated September 25, 2019")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "This End user license agreement (“EULA”) forms a binding contract between you and MeltCom. This\n                        EULA governs your download and/ or use of the executable code for Baza software applications,\n                        however branded, including any updates or upgrades thereto (“Software”). "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Terms & Conditions")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "1. This is a contract. This EULA constitute a contract between you and MeltCom (Service provider)\n                        for the use of Baza software. You may not use the software if you do not accept the terms in this\n                        EULA. By downloading and /or using the software, you agree to be bound by all the terms and\n                        conditions set forth in this EULA."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "2. You are only granted a limited license to use the software. Subject to the terms and conditions\n                        of this EULA, MeltCom hereby grants you a personal, limited, non-sub licensable license to use\n                        the executable code version of the Software as expressly authorized in this EULA"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "3. You must respect our rights in the Software. Unless expressly permitted by law, you may not\n                        copy, decompile, reverse engineer, disassemble, attempt to derive the source code of, modify,\n                        or create derivative works of the software. You may not remove, obscure, or alter any copyright\n                        notice or other proprietary rights notices affixed to or contained within the software. You may\n                        not separate the component programs of the Software for use on different computers or\n                        sublicense, lease, rent, loan, or distribute the Software to any third party. You may not permit,\n                        direct or authorize any third party to take any action with respect to the software which is\n                        inconsistent with the terms set forth in this EULA.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "4. The Software contains our valuable intellectual property. You acknowledge and agree that the\n                        software, including its sequence, structure, organization, source code and applicable\n                        documentations, contain valuable trade secrets and other intellectual property of MeltCom and\n                        its suppliers. The software is licensed and not sold to you, and no title or ownership to such\n                        Software or the intellectual property rights embodied therein is granted to you other that the\n                        ones granted to you through this EULA. The Software is the exclusive property of MeltCome and\n                        its suppliers, and all rights in and to the Software not expressly granted to you in this EULA will\n                        be deemed to grant, by application, estoppel or otherwise, a license under any existing or future\n                        patents of the software, except to the extent necessary for you to use the Software as expressly\n                        permitted under this EULA. You acknowledge and agree that any actual or threatened breach of\n                        this EULA will constitute immediate, irreparable harm to MeltCom for which monetary damages\n                        would be an inadequate remedy, and that injunctive relief is an appropriate remedy for any\n                        such breach or violation."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "5. The Software may include additional services which are ad-supported. By using the software and\n                        services, you consent to the placement of such ads within the software and services."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "6. Your privacy is important to us. MeltCom takes the protection and security of its users’\n                        information very seriously and will treat any and all such information in accordance with our\n                        privacy statement, currently posted at https://baza.co.ke/privacy (‘Privacy Statement”) the\n                        privacy statement is incorporated into this EULA by this reference. You agree to the use of your\n                        data in accordance with MeltCom’s privacy statement."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "7. Your license to use this software terminates if you breach this EULA"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "8. The software is provided AS IS, and MeltCom declaims all warranties with regard to the software\n                        whether express, implied or statutory."
                 )
               ])
             ])

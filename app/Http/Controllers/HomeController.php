@@ -32,6 +32,7 @@ class HomeController extends Controller
         return view('apply');
     }
 
+
     public function download()
     {
         return view('download');
