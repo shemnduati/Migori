@@ -30,8 +30,9 @@ class BudgetController extends Controller
         $parent = array();
 
         foreach ($budgs as $budg) {
-            $id = $budg['ward_id'];
-            $ward_name = Ward::where('id', $id)->value('name');
+            $id = $budg['id'];
+            $ward_id = $budg['ward_id'];
+            $ward_name = Ward::where('id', $ward_id)->value('name');
             $amount = $budg['amount'];
             $remaining = $budg['remaining'];
             $year = $budg['year'];
@@ -105,12 +106,14 @@ class BudgetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $budget = Budget::findorFail($id);
+        $budget = Budget::findOrFail($id);
         $this->validate($request, [
             'amount' => 'required',
             'ward' => 'required',
         ]);
-        $budget->update($request->all());
+        $budget->ward_id = $request->ward;
+        $budget->amount = $request->amount;
+        $budget->update();
 
     }
 
