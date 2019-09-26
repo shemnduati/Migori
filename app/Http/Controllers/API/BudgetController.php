@@ -66,7 +66,7 @@ class BudgetController extends Controller
         if ($exist > 0) {
             return response()->json([
                 'status' => 'error',
-                'msg' => 'Budget for this word has already been set',
+                'msg' => 'Budget for this ward has already been set',
             ], 422);
         } else {
             $county = Ward::where('id', $request['ward'])->value('county_id');

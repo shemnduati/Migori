@@ -156,7 +156,7 @@
 
             </div>
             <!-- Default to the left -->
-            <strong>Developed by <a href="https://twtechnology.africa">TransOnline Web Technologies</a>.</strong> All rights reserved.
+            <strong>Developed by <a href="https://twtechnologies.africa">TransOnline Web Technologies</a>.</strong> All rights reserved.
         </footer>
 
         <!-- Scripts -->
