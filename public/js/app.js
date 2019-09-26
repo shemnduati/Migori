@@ -79334,9 +79334,11 @@ var render = function() {
                           return _c("tr", { key: budget.id }, [
                             _c("td", [_vm._v(_vm._s(budget.name))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(budget.amount))]),
+                            _c("td", [_vm._v("Ksh. " + _vm._s(budget.amount))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(budget.remaining))]),
+                            _c("td", [
+                              _vm._v("Ksh. " + _vm._s(budget.remaining))
+                            ]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(budget.year))]),
                             _vm._v(" "),

@@ -26,17 +26,19 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        $budgs = Budget::all();
+        $budgs = Budget::where('county', auth()->user()->county)->get();
         $parent = array();
 
         foreach ($budgs as $budg) {
             $id = $budg['id'];
-            $ward_name = Ward::where('id', $id)->value('name');
+            $ward_id = $budg['ward_id'];
+            $ward_name = Ward::where('id', $ward_id)->value('name');
             $amount = $budg['amount'];
             $remaining = $budg['remaining'];
             $year = $budg['year'];
             $child = array(
                 'id' => $id,
+                'ward' => $budg['ward_id'],
                 'name' => $ward_name,
                 'amount' => $amount,
                 'remaining' => $remaining,
@@ -67,7 +69,9 @@ class BudgetController extends Controller
                 'msg' => 'Budget for this word has already been set',
             ], 422);
         } else {
+            $county = Ward::where('id', $request['ward'])->value('county_id');
             return Budget::create([
+                'county' => $county,
                 'ward_id' => $request['ward'],
                 'amount' => $request['amount'],
                 'remaining' => $request['amount'],
@@ -103,12 +107,19 @@ class BudgetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $budget = Budget::findorFail($id);
+        $budget = Budget::findOrFail($id);
+        $previous = $budget->amount;
+        $remaining = $budget->remaining;
+        $diff = $request->amount - $previous;
+
         $this->validate($request, [
             'amount' => 'required',
             'ward' => 'required',
         ]);
-        $budget->update($request->all());
+        $budget->ward_id = $request->ward;
+        $budget->remaining = $remaining + $diff;
+        $budget->amount = $request->amount;
+        $budget->update();
 
     }
 
