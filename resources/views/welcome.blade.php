@@ -153,10 +153,10 @@
         <footer class=" p-3 mx-3">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-
+               Terms and conditions
             </div>
             <!-- Default to the left -->
-            <strong>Developed by <a href="https://twtechnologies.africa">TransOnline Web Technologies</a>.</strong> All rights reserved.
+            <strong><a href="https://twtechnologies.africa">Copyright &copy; Baza {{date('Y')}}</a>.</strong> All rights reserved.
         </footer>
 
         <!-- Scripts -->

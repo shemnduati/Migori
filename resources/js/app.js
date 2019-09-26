@@ -60,6 +60,7 @@ let routes = [
     { path: '/budget', component: require('./components/budget.vue').default },
     { path: '/informationview/:applicantId', component: require('./components/Informationview.vue').default },
     // { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
+    { path: 'terms', component: require('./components/terms.vue').default },
 
 ]
 
@@ -109,6 +110,7 @@ Vue.component('not-found', require('./components/NotFound.vue').default);
 Vue.component('application', require('./components/Application.vue').default);
 Vue.component('verifiedform', require('./components/Verifiedform.vue').default);
 Vue.component('mystatus', require('./components/status.vue').default);
+Vue.component('terms', require('./components/terms.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
