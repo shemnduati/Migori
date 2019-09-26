@@ -107,11 +107,16 @@ class BudgetController extends Controller
     public function update(Request $request, $id)
     {
         $budget = Budget::findOrFail($id);
+        $previous = $budget->amount;
+        $remaining = $budget->remaining;
+        $diff = $request->amount - $previous;
+
         $this->validate($request, [
             'amount' => 'required',
             'ward' => 'required',
         ]);
         $budget->ward_id = $request->ward;
+        $budget->remaining = $remaining + $diff;
         $budget->amount = $request->amount;
         $budget->update();
 
