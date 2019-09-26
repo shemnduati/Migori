@@ -5313,7 +5313,7 @@ __webpack_require__.r(__webpack_exports__);
       _this6.getMyWards();
 
       _this6.getBudget();
-    }); //setInterval(() => this.loadUsers(), 3000);
+    });
   }
 });
 

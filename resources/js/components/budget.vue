@@ -207,7 +207,6 @@
                 this.getMyWards();
                 this.getBudget();
             })
-            //setInterval(() => this.loadUsers(), 3000);
         }
     }
 </script>
