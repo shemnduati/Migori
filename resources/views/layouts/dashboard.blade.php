@@ -202,6 +202,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     @endcan
                     <li class="nav-item">
+                        <router-link to="/terms" class="nav-link">
+                            <i class="nav-icon fas fa-clipboard-list cyan"></i>
+                            <p>
+                               Terms
+                            </p>
+                        </router-link>
+                    <li class="nav-item">
                         <router-link to="/profile" class="nav-link">
                             <i class="nav-icon fa fa-user orange"></i>
                             <p>

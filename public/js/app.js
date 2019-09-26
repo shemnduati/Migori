@@ -5873,6 +5873,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -80513,16 +80554,86 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
+              _vm._v("Terms and conditions")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
+              _c("h3", [_vm._v("Terms of service")]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Last updated : September 22, 2019")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "MeltCome (Service provider) and its affiliates offer a number of different services through their\n                        respective websites and Software. The terms of this document govern your use of those services. "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("1. This is a contract.")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "a. These terms of service (“Terms”), along with MeltCom’s privacy statement, form a legallybinding contract between you and MeltCom, as well as its affiliates (MeltCom, and “Baza”,”we”,\n                        “us”, and “our”). By using the services (as defined below), you are agreeing to be legally bound\n                        by these Terms."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "b. As used in these Terms, the word “Services” applies to online and offline services provided to\n                        you by MeltCom through its Baza software applications, websites and APIs."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("2. We expect you to be a responsible user")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "a. You agree that you will not use the services for any purpose that is unlawful or prohibited by\n                        these Terms. You agree to follow all applicable local, state, national and international laws and\n                        regulations. You are solely responsible for all acts or omissions that occur while using any\n                        services, including the content of any transmission you send through the services and any\n                        content you upload of publish using the Services.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "b. We expect you to respect the rights of others. By using the services, you agree that you will not\n                        upload, transfer, or otherwise make available files, images, code, materials, or other information\n                        or content (“Content”) that violate the rights of any third party, including their intellectual\n                        property rights, however designed."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "c. You also agree not to upload, transfer, or otherwise make available any Content that is obscene,\n                        vulgar, sexually-oriented, hateful, or threatening. MeltCom strictly forbid unsolicited messaging\n                        and unauthorized advertisements while using the services."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "d. MeltCom has a zero-tolerance policy against child sexual abuse content and will terminate the\n                        access of any user who publishes or distribute child sexual abuse content. Furthermore, we will\n                        report such user to the appropriate authorities.\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "e. You are responsible for the security of your user account. You are entirely responsible for\n                        maintaining the confidentiality of your user account and password. Additionally, you are also\n                        responsible for any and all activities that occur under your account."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "f. You acknowledge that information of any kind presented to you via the services may be\n                        protected by copyrights, trademarks, patent and/ or other proprietary rights and laws. You\n                        agree not to violate these laws or infringe these rights in any way."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "g. Certain features of the services may allow you to publish or send content that can be viewed by\n                        others. (“User Generated Content”). You agree that MeltCom is not liable for User Generated\n                        Content that is provided by others. MeltCom has no duty to pre-screen User Generated\n                        Contents."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "h. If you upload any content or User Generated Content to our sites, you warrant that you have\n                        the necessary rights and authority to do so, including the necessary consent to upload and\n                        distribute any personal information about third persons. You agree that you will not upload\n                        viruses or other forms of malware."
+                )
+              ])
             ])
           ])
         ])
@@ -95836,7 +95947,7 @@ var routes = [{
   component: __webpack_require__(/*! ./components/Informationview.vue */ "./resources/js/components/Informationview.vue")["default"]
 }, // { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
 {
-  path: 'terms',
+  path: '/terms',
   component: __webpack_require__(/*! ./components/terms.vue */ "./resources/js/components/terms.vue")["default"]
 }];
 Vue.filter('upText', function (text) {
