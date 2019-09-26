@@ -201,14 +201,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </router-link>
 
                     @endcan
-                    <li class="nav-item">
-                        <router-link to="/privacy" class="nav-link">
-                            <i class="nav-icon fas fa-clipboard-list cyan"></i>
-                            <p>
-                               Terms
-                            </p>
-                        </router-link>
-                    <li class="nav-item">
                         <router-link to="/profile" class="nav-link">
                             <i class="nav-icon fa fa-user orange"></i>
                             <p>
