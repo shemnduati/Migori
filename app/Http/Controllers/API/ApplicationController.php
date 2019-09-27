@@ -108,7 +108,7 @@ class ApplicationController extends Controller
             'gtelephone'=>'required',
         ]);
 
-        $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->where('type', $request->type)->get();
+        $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->where('bursary_type', $request->type)->get();
 
         if (count($check) > 0) {
             return response()->json([
