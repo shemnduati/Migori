@@ -277,7 +277,7 @@
     export default {
         data() {
             return {
-                applicantId: this.$route.params.applicantId,
+                applicantId: this.$route.params.applicationId,
                 application: {},
                 family: {},
                 morefamily: {},

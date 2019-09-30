@@ -36,7 +36,7 @@ Route::apiResources(['configuration' => 'API\ConfigurationController']);
 Route::get('/getcounties', 'API\ApplicationController@getCounties');
 Route::get('/getwards', 'API\ApplicationController@getWards');
 Route::get('/getdetails', 'API\ApplicationController@getDetails');
-Route::get('/getappdetails/{applicantId}', 'API\ApplicationController@show');
+Route::get('/getappdetails/{applicationId}', 'API\ApplicationController@show');
 Route::get('/getcountywards/{countyId}', 'API\ApplicationController@getCountyWards');
 Route::put('/accept/{applicantId}', 'API\ApplicationController@accept');
 Route::put('/reject/{applicantId}', 'API\ApplicationController@reject');

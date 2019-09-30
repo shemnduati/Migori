@@ -146,6 +146,7 @@ class ApplicationController extends Controller
                 $father->user_id = $user;
                 $father->name = $request['fname'];
                 $father->relationship = 'Father';
+                $father->applicationId = $appId;
                 $father->living = $request['fliving'];
                 $father->occupation = $request['foccupation'];
                 $father->income = $request['fincome'];
@@ -159,6 +160,7 @@ class ApplicationController extends Controller
                 $mother = new Family();
                 $mother->user_id = $user;
                 $mother->name = $request['mname'];
+                $mother->applicationId = $appId;
                 $mother->relationship = 'Mother';
                 $mother->living = $request['mliving'];
                 $mother->occupation = $request['moccupation'];
@@ -179,6 +181,7 @@ class ApplicationController extends Controller
                 $guardian->income = $request['gincome'];
                 $guardian->tel = $request['gtelephone'];
                 $guardian->cert = $request->guardianId;
+                $guardian->applicationId = $appId;
                 $guardian->status = 0;
                 $guardian->year = date('Y');
 
@@ -191,6 +194,7 @@ class ApplicationController extends Controller
                 $more_family->schoolSiblings = $request['inSchool'];
                 $more_family->pFees = $request['pFees'];
                 $more_family->status = 0;
+                $more_family->applicationId = $appId;
                 $more_family->pFeesRelationship = $request['pRelationship'];
                 $more_family->year = date('Y');
 
@@ -203,6 +207,7 @@ class ApplicationController extends Controller
                 $geographical->Division = $request['division'];
                 $geographical->Location = $request['location'];
                 $geographical->status = 0;
+                $geographical->applicationId = $appId;
                 $geographical->Sublocation = $request['sublocation'];
                 $geographical->Village = $request['village'];
                 $geographical->year = date('Y');
@@ -212,6 +217,7 @@ class ApplicationController extends Controller
                 $institution = new Institution();
                 $institution->user_id = $user;
                 $institution->name = $request['iname'];
+                $institution->applicationId = $appId;
                 $institution->branch = $request['branch'];
                 $institution->class = $request['class'];
                 $institution->yearofstudy = $request['year'];
@@ -243,12 +249,14 @@ class ApplicationController extends Controller
                 $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
 
                 $application->save();
+                $appId = $application->id;
 
 
                 $father = new Family();
                 $father->user_id = $user;
                 $father->name = $request['fname'];
                 $father->relationship = 'Father';
+                $father->applicationId = $appId;
                 $father->living = $request['fliving'];
                 $father->occupation = $request['foccupation'];
                 $father->income = $request['fincome'];
@@ -261,6 +269,7 @@ class ApplicationController extends Controller
 
                 $mother = new Family();
                 $mother->user_id = $user;
+                $mother->applicationId = $appId;
                 $mother->name = $request['mname'];
                 $mother->relationship = 'Mother';
                 $mother->living = $request['mliving'];
@@ -275,6 +284,7 @@ class ApplicationController extends Controller
 
                 $guardian = new Family();
                 $guardian->user_id = $user;
+                $guardian->applicationId = $appId;
                 $guardian->name = $request['gname'];
                 $guardian->relationship = 'Guardian';
                 $guardian->living = $request['gliving'];
@@ -289,6 +299,7 @@ class ApplicationController extends Controller
 
                 $more_family = new MoreFamily();
                 $more_family->user_id = $user;
+                $more_family->applicationId = $appId;
                 $more_family->totalSiblings = $request['tSiblings'];
                 $more_family->workingSiblings = $request['sWorking'];
                 $more_family->schoolSiblings = $request['inSchool'];
@@ -301,6 +312,7 @@ class ApplicationController extends Controller
 
                 $geographical = new Geographical();
                 $geographical->user_id = $user;
+                $geographical->applicationId = $appId;
                 $geographical->County = $request['county'];
                 $geographical->Ward = $request['ward'];
                 $geographical->Division = $request['division'];
@@ -314,6 +326,7 @@ class ApplicationController extends Controller
 
                 $institution = new Institution();
                 $institution->user_id = $user;
+                $institution->applicationId = $appId;
                 $institution->name = $request['iname'];
                 $institution->branch = $request['branch'];
                 $institution->class = $request['class'];
@@ -337,13 +350,13 @@ class ApplicationController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($applicantId)
+    public function show($applicationId)
     {
-        $application = Application::where('user_id', $applicantId)->where('year', date('Y'))->first();
-        $family = Family::where('user_id', $applicantId)->where('year', date('Y'))->get();
-        $morefamily = MoreFamily::where('user_id', $applicantId)->where('year', date('Y'))->first();
-        $institution = Institution::where('user_id', $applicantId)->where('year', date('Y'))->first();
-        $geos = Geographical::where('user_id', $applicantId)->where('year', date('Y'))->first();
+        $application = Application::where('id', $applicationId)->where('year', date('Y'))->first();
+        $family = Family::where('applicationId', $applicationId)->where('year', date('Y'))->get();
+        $morefamily = MoreFamily::where('applicationId', $applicationId)->where('year', date('Y'))->first();
+        $institution = Institution::where('applicationId', $applicationId)->where('year', date('Y'))->first();
+        $geos = Geographical::where('applicationId', $applicationId)->where('year', date('Y'))->first();
 
 
         $County = County::where('id', $geos['County'])->value('name');

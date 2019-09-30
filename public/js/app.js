@@ -3829,7 +3829,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      applicantId: this.$route.params.applicantId,
+      applicantId: this.$route.params.applicationId,
       application: {},
       family: {},
       morefamily: {},
@@ -73005,7 +73005,16 @@ var render = function() {
                                 : _vm._e(),
                               _vm._v(" "),
                               application.status == 2
-                                ? _c("span", [_vm._v(" N/A")])
+                                ? _c(
+                                    "span",
+                                    {
+                                      attrs: {
+                                        "&&": "",
+                                        "!application.rec_amount": ""
+                                      }
+                                    },
+                                    [_vm._v(" N/A")]
+                                  )
                                 : _vm._e(),
                               _vm._v(" "),
                               !application.rec_amount
@@ -73027,8 +73036,7 @@ var render = function() {
                                     attrs: {
                                       to: {
                                         path:
-                                          "/informationview/" +
-                                          application.user_id
+                                          "/informationview/" + application.id
                                       },
                                       type: "button"
                                     }
@@ -96134,7 +96142,7 @@ var routes = [{
   path: '/budget',
   component: __webpack_require__(/*! ./components/budget.vue */ "./resources/js/components/budget.vue")["default"]
 }, {
-  path: '/informationview/:applicantId',
+  path: '/informationview/:applicationId',
   component: __webpack_require__(/*! ./components/Informationview.vue */ "./resources/js/components/Informationview.vue")["default"]
 }];
 Vue.filter('upText', function (text) {
