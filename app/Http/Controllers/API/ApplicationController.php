@@ -139,6 +139,7 @@ class ApplicationController extends Controller
                 $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
 
                 $application->save();
+                $appId = $application->id;
 
 
                 $father = new Family();
