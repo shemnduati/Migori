@@ -96059,10 +96059,6 @@ var routes = [{
 }, {
   path: '/informationview/:applicantId',
   component: __webpack_require__(/*! ./components/Informationview.vue */ "./resources/js/components/Informationview.vue")["default"]
-}, // { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
-{
-  path: '/terms',
-  component: __webpack_require__(/*! ./components/terms.vue */ "./resources/js/components/terms.vue")["default"]
 }];
 Vue.filter('upText', function (text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
