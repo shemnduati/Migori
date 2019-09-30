@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="this.myWard == geographical.wardId || this.myCounty == geographical.countyId">
         <div class="text-center pt-2">
             <h3>Student Information</h3>
         </div>
@@ -284,6 +284,8 @@
                 geographical: {},
                 institution: {},
                 photo: '',
+                myWard: '',
+                myCounty: '',
                 form: new Form({
                     recommendation: '',
                     amount: ''
@@ -295,6 +297,10 @@
 
         },
         methods: {
+            getMyDetails(){
+                axios.get("/api/getMyWardId/").then(({data}) => ([this.myWard = data]));
+                axios.get("/api/getMyCountyId/").then(({data}) => ([this.myCounty = data]));
+            },
             recommend() {
                 this.form.reset();
                 $('#recommendation').modal('show');
@@ -439,6 +445,7 @@
         },
         created() {
             this.getApplications();
+            this.getMyDetails();
             Fire.$on('entry', () => {
                 this.getApplications();
             })

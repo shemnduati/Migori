@@ -92,6 +92,14 @@ class InformationController extends Controller
 
     }
 
+    public function getMyCountyId(){
+        return auth()->user()->county;
+    }
+
+    public function getMyWardId(){
+        return auth()->user()->ward;
+    }
+
     public function getMyBursary()
     {
         $applications = Application::where('year', date('Y'))->where('user_id', Auth::user()->id)->get();

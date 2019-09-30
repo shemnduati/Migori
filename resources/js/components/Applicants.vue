@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Applicants Table</h3>
+                        <h3 class="card-title">Applicants Details</h3>
 
                         <div class="card-tools">
                             <div class="row">
@@ -43,7 +43,7 @@
                                 <td>{{application.reg}}</td>
                                 <td>{{application.institution}}</td>
                                 <td>{{application.ward}}</td>
-                                <td>{{application.amount}}</td>
+                                <td>Ksh. {{application.amount}}</td>
                                 <td>{{application.date | myDate}}</td>
                             </tr>
 
