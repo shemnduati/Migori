@@ -10659,7 +10659,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
 
 // exports
 
@@ -96059,10 +96059,6 @@ var routes = [{
 }, {
   path: '/informationview/:applicantId',
   component: __webpack_require__(/*! ./components/Informationview.vue */ "./resources/js/components/Informationview.vue")["default"]
-}, // { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
-{
-  path: '/terms',
-  component: __webpack_require__(/*! ./components/terms.vue */ "./resources/js/components/terms.vue")["default"]
 }];
 Vue.filter('upText', function (text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
@@ -97590,8 +97586,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
