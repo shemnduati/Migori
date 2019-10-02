@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\County;
 use App\Institution;
+use App\Mail\BursaryEmail;
 use App\User;
 use App\Ward;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use App\MoreFamily;
 use App\Geographical;
 use App\Budget;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class InformationController extends Controller
 {
@@ -296,6 +298,9 @@ class InformationController extends Controller
         $geo = Geographical::findOrFail($geographical['id']);
         $geo->status = 3;
         $geo->update();
+
+        $email = User::where('id', $applicantId)->value('email');
+        Mail::to($email)->send(new BursaryEmail());
     }
 
     public function notAward(Request $request, $applicationId)
