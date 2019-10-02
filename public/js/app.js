@@ -5620,6 +5620,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -80166,179 +80168,200 @@ var render = function() {
           _c("div", { staticClass: "col-md-8" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
-                _vm._v("Application Status")
+                _vm._v("Check your Application Status")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("div", { staticClass: "col-sm-12" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "accordion",
-                      attrs: { id: "accordionExample" }
-                    },
-                    _vm._l(_vm.applications, function(application) {
-                      return _c(
+                  this.count == 0
+                    ? _c(
                         "div",
-                        { key: application.id, staticClass: "card" },
+                        {
+                          staticClass: "alert alert-warning",
+                          attrs: { role: "alert" }
+                        },
                         [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "card-header",
-                              attrs: { id: "headingOne" }
-                            },
-                            [
-                              _c("h2", { staticClass: "mb-0" }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn",
-                                    attrs: {
-                                      type: "button",
-                                      "data-toggle": "collapse",
-                                      "data-target": "#" + "w" + application.id,
-                                      "aria-expanded": "true",
-                                      "aria-controls": "collapseOne"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                            " +
-                                        _vm._s(application.bursary_type) +
-                                        " (" +
-                                        _vm._s(application.year) +
-                                        ") - Click for more...\n                                        "
-                                    )
-                                  ]
-                                )
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "collapse",
-                              attrs: {
-                                id: "w" + application.id,
-                                "aria-labelledby": "headingOne",
-                                "data-parent": "#accordionExample"
-                              }
-                            },
-                            [
-                              _c("div", { staticClass: "card-body" }, [
-                                _c("p", [
-                                  _vm._v(
-                                    "Serial No: " + _vm._s(application.serial)
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "table",
-                                  { staticClass: "table table-hover" },
-                                  [
-                                    _c("tbody", [
-                                      _c("tr", [
-                                        _c("th", [
-                                          _vm._v(
-                                            "\n                                                    Status: "
-                                          ),
-                                          application.status == 0
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticStyle: {
-                                                    color: "purple"
-                                                  }
-                                                },
-                                                [_vm._v("Received")]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          application.status == 2
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticStyle: { color: "red" }
-                                                },
-                                                [_vm._v("Rejected")]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          application.status == 1
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticStyle: {
-                                                    color: "green"
-                                                  }
-                                                },
-                                                [_vm._v("Verified")]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          application.status == 3
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticStyle: {
-                                                    color: "green"
-                                                  }
-                                                },
-                                                [_vm._v("Awarded")]
-                                              )
-                                            : _vm._e()
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("tr", [
-                                        _c("td", [
-                                          application.status === 0
-                                            ? _c("span", [
-                                                _vm._v(
-                                                  "Your form has been successfully submitted and await verification"
-                                                )
-                                              ])
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          application.status === 1
-                                            ? _c("span", [
-                                                _vm._v(
-                                                  "Your form has been successfully verified"
-                                                )
-                                              ])
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          application.status === 2
-                                            ? _c("span", [
-                                                _vm._v(
-                                                  "Your form has been rejected due to misinformation.Please contact your ward\n                                                        administrator for more information"
-                                                )
-                                              ])
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          application.status === 3
-                                            ? _c("span", [
-                                                _vm._v(
-                                                  "You have been awarded Ksh " +
-                                                    _vm._s(_vm.amount)
-                                                )
-                                              ])
-                                            : _vm._e()
-                                        ])
-                                      ])
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ]
+                          _vm._v(
+                            "\n                            You have not made any application yet.\n                        "
                           )
                         ]
                       )
-                    }),
-                    0
-                  )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  this.count > 0
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "accordion",
+                          attrs: { id: "accordionExample" }
+                        },
+                        _vm._l(_vm.applications, function(application) {
+                          return _c(
+                            "div",
+                            { key: application.id, staticClass: "card" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "card-header",
+                                  attrs: { id: "headingOne" }
+                                },
+                                [
+                                  _c("h2", { staticClass: "mb-0" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn",
+                                        attrs: {
+                                          type: "button",
+                                          "data-toggle": "collapse",
+                                          "data-target":
+                                            "#" + "w" + application.id,
+                                          "aria-expanded": "true",
+                                          "aria-controls": "collapseOne"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            " +
+                                            _vm._s(application.bursary_type) +
+                                            " (" +
+                                            _vm._s(application.year) +
+                                            ") - Click for more...\n                                        "
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "collapse",
+                                  attrs: {
+                                    id: "w" + application.id,
+                                    "aria-labelledby": "headingOne",
+                                    "data-parent": "#accordionExample"
+                                  }
+                                },
+                                [
+                                  _c("div", { staticClass: "card-body" }, [
+                                    _c("p", [
+                                      _vm._v(
+                                        "Serial No: " +
+                                          _vm._s(application.serial)
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "table",
+                                      { staticClass: "table table-hover" },
+                                      [
+                                        _c("tbody", [
+                                          _c("tr", [
+                                            _c("th", [
+                                              _vm._v(
+                                                "\n                                                    Status: "
+                                              ),
+                                              application.status == 0
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        color: "purple"
+                                                      }
+                                                    },
+                                                    [_vm._v("Received")]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status == 2
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        color: "red"
+                                                      }
+                                                    },
+                                                    [_vm._v("Rejected")]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status == 1
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        color: "green"
+                                                      }
+                                                    },
+                                                    [_vm._v("Verified")]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status == 3
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        color: "green"
+                                                      }
+                                                    },
+                                                    [_vm._v("Awarded")]
+                                                  )
+                                                : _vm._e()
+                                            ])
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("tr", [
+                                            _c("td", [
+                                              application.status === 0
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "Your form has been successfully submitted and await verification"
+                                                    )
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status === 1
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "Your form has been successfully verified"
+                                                    )
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status === 2
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "Your form has been rejected due to misinformation.Please contact your ward\n                                                        administrator for more information"
+                                                    )
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status === 3
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "You have been awarded Ksh " +
+                                                        _vm._s(_vm.amount)
+                                                    )
+                                                  ])
+                                                : _vm._e()
+                                            ])
+                                          ])
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e()
                 ])
               ])
             ])

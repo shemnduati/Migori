@@ -3,12 +3,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Application Status</div>
+                    <div class="card-header">Check your Application Status</div>
 
                     <div class="card-body">
                         <div class="col-sm-12">
-
-                            <div class="accordion" id="accordionExample">
+                            <div class="alert alert-warning" role="alert" v-if="this.count == 0">
+                                You have not made any application yet.
+                            </div>
+                            <div class="accordion" id="accordionExample" v-if="this.count > 0">
                                 <div class="card" v-for="application in applications" :key="application.id">
                                     <div class="card-header" id="headingOne">
                                         <h2 class="mb-0">
