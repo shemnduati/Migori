@@ -3829,13 +3829,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      applicantId: this.$route.params.applicantId,
+      applicantId: this.$route.params.applicationId,
       application: {},
       family: {},
       morefamily: {},
       geographical: {},
       institution: {},
       photo: '',
+      myWard: '',
+      myCounty: '',
       form: new Form({
         recommendation: '',
         amount: ''
@@ -3846,12 +3848,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: {
+    getMyDetails: function getMyDetails() {
+      var _this = this;
+
+      axios.get("/api/getMyWardId/").then(function (_ref) {
+        var data = _ref.data;
+        return [_this.myWard = data];
+      });
+      axios.get("/api/getMyCountyId/").then(function (_ref2) {
+        var data = _ref2.data;
+        return [_this.myCounty = data];
+      });
+    },
     recommend: function recommend() {
       this.form.reset();
       $('#recommendation').modal('show');
     },
     notAward: function notAward() {
-      var _this = this;
+      var _this2 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -3863,7 +3877,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes!'
       }).then(function (result) {
         if (result.value) {
-          _this.form.post("/api/notaward/" + _this.application.id).then(function () {
+          _this2.form.post("/api/notaward/" + _this2.application.id).then(function () {
             Swal.fire('Success!', 'Operation successful.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
@@ -3873,7 +3887,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     award: function award() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.$gate.isOfficial()) {
         this.formf.post("/api/award/" + this.application.id).then(function () {
@@ -3891,7 +3905,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           Fire.$emit('entry');
           $('#recommendation').modal('hide');
         })["catch"](function (error) {
-          _this2.errors = error.response.data.errors;
+          _this3.errors = error.response.data.errors;
           Swal.fire({
             type: 'error',
             title: 'Error!',
@@ -3905,7 +3919,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#new').modal('show');
     },
     recommendNo: function recommendNo() {
-      var _this3 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -3917,7 +3931,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes!'
       }).then(function (result) {
         if (result.value) {
-          _this3.form.post("/api/recommend/" + _this3.application.id).then(function () {
+          _this4.form.post("/api/recommend/" + _this4.application.id).then(function () {
             Swal.fire('Success!', 'Operation successful.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
@@ -3927,27 +3941,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     getApplications: function getApplications() {
-      var _this4 = this;
+      var _this5 = this;
 
-      axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref) {
-        var data = _ref.data;
-        return [_this4.application = data['application']];
-      });
-      axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref2) {
-        var data = _ref2.data;
-        return [_this4.family = data['family']];
-      });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref3) {
         var data = _ref3.data;
-        return [_this4.morefamily = data['morefamily']];
+        return [_this5.application = data['application']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref4) {
         var data = _ref4.data;
-        return [_this4.geographical = data['geographical']];
+        return [_this5.family = data['family']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref5) {
         var data = _ref5.data;
-        return [_this4.institution = data['institution']];
+        return [_this5.morefamily = data['morefamily']];
+      });
+      axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref6) {
+        var data = _ref6.data;
+        return [_this5.geographical = data['geographical']];
+      });
+      axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref7) {
+        var data = _ref7.data;
+        return [_this5.institution = data['institution']];
       });
     },
     launch: function launch(passport) {
@@ -3955,7 +3969,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.photo = passport;
     },
     send: function send() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.put("/api/send/" + this.applicantId).then(function (response) {
         Fire.$emit('AfterCreate');
@@ -3965,11 +3979,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Sent!!'
         }, "text", 'Sent to Admin!'));
 
-        _this5.$router.push('/Information');
+        _this6.$router.push('/Information');
       });
     },
     accept: function accept() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.$Progress.start();
       axios.put("/api/accept/" + this.applicantId).then(function (response) {
@@ -3980,13 +3994,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Accept'
         }, "text", 'Accepted!'));
 
-        _this6.$router.push('/Information');
+        _this7.$router.push('/Information');
 
-        _this6.$Progress.finish();
+        _this7.$Progress.finish();
       });
     },
     reject: function reject() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.$Progress.start();
       axios.put("/api/reject/" + this.applicantId).then(function (response) {
@@ -3997,18 +4011,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Rejected!!'
         }, "text", 'You rejected the application'));
 
-        _this7.$router.push('/Information');
+        _this8.$router.push('/Information');
 
         his.$Progress.finish();
       });
     }
   },
   created: function created() {
-    var _this8 = this;
+    var _this9 = this;
 
     this.getApplications();
+    this.getMyDetails();
     Fire.$on('entry', function () {
-      _this8.getApplications();
+      _this9.getApplications();
     });
   }
 });
@@ -69138,7 +69153,7 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _c("h3", { staticClass: "card-title" }, [
-                  _vm._v("Applicants Table")
+                  _vm._v("Applicants Details")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
@@ -69258,7 +69273,9 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(application.ward))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(application.amount))]),
+                              _c("td", [
+                                _vm._v("Ksh. " + _vm._s(application.amount))
+                              ]),
                               _vm._v(" "),
                               _c("td", [
                                 _vm._v(
@@ -72988,7 +73005,16 @@ var render = function() {
                                 : _vm._e(),
                               _vm._v(" "),
                               application.status == 2
-                                ? _c("span", [_vm._v(" N/A")])
+                                ? _c(
+                                    "span",
+                                    {
+                                      attrs: {
+                                        "&&": "",
+                                        "!application.rec_amount": ""
+                                      }
+                                    },
+                                    [_vm._v(" N/A")]
+                                  )
                                 : _vm._e(),
                               _vm._v(" "),
                               !application.rec_amount
@@ -73010,8 +73036,7 @@ var render = function() {
                                     attrs: {
                                       to: {
                                         path:
-                                          "/informationview/" +
-                                          application.user_id
+                                          "/informationview/" + application.id
                                       },
                                       type: "button"
                                     }
@@ -73063,592 +73088,652 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "row pl-3" }, [
-      _c("img", {
-        staticStyle: { width: "200px" },
-        attrs: { src: _vm.application.passport, alt: "" }
-      })
-    ]),
-    _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c(
-          "div",
-          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
-          [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("p", [_vm._v(" " + _vm._s(_vm.application["name"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.application["dob"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.application["gender"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.application["reg_no"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.application["tel"]) + " ")])
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4 pt-5" }, [
+  return this.myWard == _vm.geographical.wardId ||
+    this.myCounty == _vm.geographical.countyId
+    ? _c("div", [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row pl-3" }, [
+          _c("img", {
+            staticStyle: { width: "200px" },
+            attrs: { src: _vm.application.passport, alt: "" }
+          })
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _vm._m(3),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [
+          _c("div", { staticClass: "col-md-8" }, [
             _c(
-              "button",
+              "div",
               {
-                staticClass: "btn btn-lg bg-success",
-                on: {
-                  click: function($event) {
-                    return _vm.launch(_vm.application["passport"])
-                  }
-                }
+                staticClass: "row mx-2 pl-3 pt-2 border border-success rounded"
               },
-              [_vm._v("View")]
+              [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.application["name"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" " + _vm._s(_vm.application["dob"]) + " ")]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.application["gender"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.application["reg_no"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" " + _vm._s(_vm.application["tel"]) + " ")])
+                ])
+              ]
             )
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(4),
-    _vm._v(" "),
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c(
-          "div",
-          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
-          [
-            _vm._l(_vm.family, function(fam) {
-              return _c("div", { key: fam.id, staticClass: "col-md-12" }, [
-                _c("span", [_vm._v("Name: ")]),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(fam["name"]))]),
-                _c("br"),
-                _vm._v(" "),
-                _c("span", [_vm._v("Relationship: ")]),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(fam["relationship"]))]),
-                _c("br"),
-                _vm._v(" "),
-                _c("span", [_vm._v("Status: ")]),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(fam["living"]))]),
-                _c("br"),
-                _vm._v(" "),
-                _c("span", [_vm._v("Telephone: ")]),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(fam["tel"]))]),
-                _c("br"),
-                _vm._v(" "),
-                _c("span", [_vm._v("Occupation: ")]),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(fam["occupation"]))]),
-                _c("br"),
-                _vm._v(" "),
-                _c("span", [_vm._v("Income per Year: ")]),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(fam["income"]))]),
-                _c("br"),
-                _vm._v(" "),
-                _c("hr")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4 pt-5" }, [
+            _c("div", { staticClass: "row" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-lg bg-success",
+                    on: {
+                      click: function($event) {
+                        return _vm.launch(_vm.application["passport"])
+                      }
+                    }
+                  },
+                  [_vm._v("View")]
+                )
               ])
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "row col-md-12" }, [
-                _vm._m(5),
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-md-8" }, [
+            _c(
+              "div",
+              {
+                staticClass: "row mx-2 pl-3 pt-2 border border-success rounded"
+              },
+              [
+                _vm._l(_vm.family, function(fam) {
+                  return _c("div", { key: fam.id, staticClass: "col-md-12" }, [
+                    _c("span", [_vm._v("Name: ")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(fam["name"]))]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Relationship: ")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(fam["relationship"]))]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Status: ")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(fam["living"]))]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Telephone: ")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(fam["tel"]))]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Occupation: ")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(fam["occupation"]))]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Income per Year: ")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(fam["income"]))]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("hr")
+                  ])
+                }),
                 _vm._v(" "),
-                _vm._m(6),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "row col-md-12" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4" }, [
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.morefamily["totalSiblings"]))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.morefamily["schoolSiblings"]))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.morefamily["workingSiblings"]))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(_vm.morefamily["pFees"]))]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.morefamily["pFeesRelationship"]))
+                      ])
+                    ])
+                  ])
+                ])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-md-4 pt-5" },
+            _vm._l(_vm.family, function(fam) {
+              return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "p",
+                    { staticClass: "rounded p-2 mt-2 text-center bg-b" },
+                    [_vm._v(_vm._s(fam["relationship"]) + "'s ID/ Death Cert")]
+                  )
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c("p", [_vm._v(_vm._s(_vm.morefamily["totalSiblings"]))]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.morefamily["schoolSiblings"]))]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.morefamily["workingSiblings"]))]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.morefamily["pFees"]))]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.morefamily["pFeesRelationship"]))])
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-lg bg-success",
+                      on: {
+                        click: function($event) {
+                          return _vm.launch(fam.cert)
+                        }
+                      }
+                    },
+                    [_vm._v("Views")]
+                  )
                 ])
               ])
-            ])
-          ],
-          2
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4 pt-5" },
-        _vm._l(_vm.family, function(fam) {
-          return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
-            _c("div", { staticClass: "col-md-8" }, [
-              _c("p", { staticClass: "rounded p-2 mt-2 text-center bg-b" }, [
-                _vm._v(_vm._s(fam["relationship"]) + "'s ID/ Death Cert")
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(7),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-8" }, [
+            _c(
+              "div",
+              {
+                staticClass: "row mx-2 pl-3 pt-2 border border-success rounded"
+              },
+              [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.institution["name"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.institution["branch"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.institution["yearofstudy"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.institution["fees"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.institution["amount_paid"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.institution["balance"]) + " ")
+                  ])
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _vm._m(9),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-8" }, [
+            _c(
+              "div",
+              {
+                staticClass: "row mx-2 pl-3 pt-2 border border-success rounded"
+              },
+              [
+                _vm._m(10),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.geographical["County"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.geographical["Division"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.geographical["Location"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.geographical["Sublocation"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.geographical["Ward"]) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(" " + _vm._s(_vm.geographical["Village"]) + " ")
+                  ])
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mb-3" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _vm.$gate.isSubadmin() && !_vm.application.recommendation
+              ? _c(
+                  "button",
+                  { staticClass: "btn btn-success px-5 offset-md-1" },
+                  [_vm._v("Recommendation\n            ")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$gate.isOfficial() &&
+            !_vm.application.amount &&
+            _vm.application.status != 2
+              ? _c("h4", [_vm._v("Award?")])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$gate.isOfficial() && _vm.application.amount
+              ? _c("h4", [
+                  _c("b", [_vm._v("Awarded:")]),
+                  _vm._v(" Ksh " + _vm._s(_vm.application.amount))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$gate.isOfficial() &&
+            !_vm.application.amount &&
+            _vm.application.status != 2
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "button" },
+                    on: { click: _vm.newModal }
+                  },
+                  [_vm._v("Yes\n            ")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$gate.isOfficial() &&
+            !_vm.application.amount &&
+            _vm.application.status != 2
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button" },
+                    on: { click: _vm.notAward }
+                  },
+                  [_vm._v("No\n            ")]
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm.$gate.isSubadmin() && !_vm.application.recommendation
+            ? _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-check form-check-inline" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.recommendation,
+                        expression: "form.recommendation"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    class: { "is-invalid": _vm.form.errors.has("yes") },
+                    attrs: {
+                      type: "radio",
+                      name: "yes",
+                      id: "yes",
+                      value: "Yes"
+                    },
+                    domProps: {
+                      checked: _vm._q(_vm.form.recommendation, "Yes")
+                    },
+                    on: {
+                      click: _vm.recommend,
+                      change: function($event) {
+                        return _vm.$set(_vm.form, "recommendation", "Yes")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "inlineRadio1" }
+                    },
+                    [_vm._v("Yes")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-check form-check-inline" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.recommendation,
+                        expression: "form.recommendation"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    class: { "is-invalid": _vm.form.errors.has("partially") },
+                    attrs: {
+                      type: "radio",
+                      name: "partially",
+                      id: "partially",
+                      value: "Partially"
+                    },
+                    domProps: {
+                      checked: _vm._q(_vm.form.recommendation, "Partially")
+                    },
+                    on: {
+                      click: _vm.recommend,
+                      change: function($event) {
+                        return _vm.$set(_vm.form, "recommendation", "Partially")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "inlineRadio1" }
+                    },
+                    [_vm._v("Partially")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-check form-check-inline" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.recommendation,
+                        expression: "form.recommendation"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    class: { "is-invalid": _vm.form.errors.has("no") },
+                    attrs: { type: "radio", name: "no", id: "no", value: "No" },
+                    domProps: {
+                      checked: _vm._q(_vm.form.recommendation, "No")
+                    },
+                    on: {
+                      click: _vm.recommendNo,
+                      change: function($event) {
+                        return _vm.$set(_vm.form, "recommendation", "No")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "inlineRadio1" }
+                    },
+                    [_vm._v("No")]
+                  )
+                ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-lg bg-success",
-                  on: {
-                    click: function($event) {
-                      return _vm.launch(fam.cert)
-                    }
-                  }
-                },
-                [_vm._v("Views")]
-              )
-            ])
-          ])
-        }),
-        0
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(7),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [
+            : _vm._e()
+        ]),
+        _vm._v(" "),
         _c(
           "div",
-          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "addnew",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "addnewLabel",
+              "aria-hidden": "true"
+            }
+          },
           [
-            _vm._m(8),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("p", [_vm._v(" " + _vm._s(_vm.institution["name"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.institution["branch"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(" " + _vm._s(_vm.institution["yearofstudy"]) + " ")
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.institution["fees"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(" " + _vm._s(_vm.institution["amount_paid"]) + " ")
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.institution["balance"]) + " ")])
-            ])
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(11),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("img", {
+                      staticStyle: { width: "400px" },
+                      attrs: { src: this.photo, alt: "" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(12)
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "new",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "addnewLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(13),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.award()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("Amount")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.formf.amount,
+                                  expression: "formf.amount"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.formf.errors.has("amount")
+                              },
+                              attrs: {
+                                type: "text",
+                                name: "name",
+                                placeholder: "Amount"
+                              },
+                              domProps: { value: _vm.formf.amount },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.formf,
+                                    "amount",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.formf, field: "amount" }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(14)
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "recommendation",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "addnewLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(15),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.award()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("Amount")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.amount,
+                                  expression: "form.amount"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("amount")
+                              },
+                              attrs: {
+                                type: "text",
+                                name: "name",
+                                placeholder: "Amount"
+                              },
+                              domProps: { value: _vm.form.amount },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "amount",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "amount" }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(16)
+                    ]
+                  )
+                ])
+              ]
+            )
           ]
         )
       ])
-    ]),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _vm._m(9),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c(
-          "div",
-          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
-          [
-            _vm._m(10),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("p", [_vm._v(" " + _vm._s(_vm.geographical["County"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(" " + _vm._s(_vm.geographical["Division"]) + " ")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(" " + _vm._s(_vm.geographical["Location"]) + " ")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(" " + _vm._s(_vm.geographical["Sublocation"]) + " ")
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.geographical["Ward"]) + " ")]),
-              _vm._v(" "),
-              _c("p", [_vm._v(" " + _vm._s(_vm.geographical["Village"]) + " ")])
-            ])
-          ]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c("div", { staticClass: "row mb-3" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _vm.$gate.isSubadmin() && !_vm.application.recommendation
-          ? _c("button", { staticClass: "btn btn-success px-5 offset-md-1" }, [
-              _vm._v("Recommendation\n            ")
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.$gate.isOfficial() &&
-        !_vm.application.amount &&
-        _vm.application.status != 2
-          ? _c("h4", [_vm._v("Award?")])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.$gate.isOfficial() && _vm.application.amount
-          ? _c("h4", [
-              _c("b", [_vm._v("Awarded:")]),
-              _vm._v(" Ksh " + _vm._s(_vm.application.amount))
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.$gate.isOfficial() &&
-        !_vm.application.amount &&
-        _vm.application.status != 2
-          ? _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                attrs: { type: "button" },
-                on: { click: _vm.newModal }
-              },
-              [_vm._v("Yes\n            ")]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.$gate.isOfficial() &&
-        !_vm.application.amount &&
-        _vm.application.status != 2
-          ? _c(
-              "button",
-              {
-                staticClass: "btn btn-danger",
-                attrs: { type: "button" },
-                on: { click: _vm.notAward }
-              },
-              [_vm._v("No\n            ")]
-            )
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _vm.$gate.isSubadmin() && !_vm.application.recommendation
-        ? _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-check form-check-inline" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.recommendation,
-                    expression: "form.recommendation"
-                  }
-                ],
-                staticClass: "form-check-input",
-                class: { "is-invalid": _vm.form.errors.has("yes") },
-                attrs: { type: "radio", name: "yes", id: "yes", value: "Yes" },
-                domProps: { checked: _vm._q(_vm.form.recommendation, "Yes") },
-                on: {
-                  click: _vm.recommend,
-                  change: function($event) {
-                    return _vm.$set(_vm.form, "recommendation", "Yes")
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "inlineRadio1" }
-                },
-                [_vm._v("Yes")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check form-check-inline" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.recommendation,
-                    expression: "form.recommendation"
-                  }
-                ],
-                staticClass: "form-check-input",
-                class: { "is-invalid": _vm.form.errors.has("partially") },
-                attrs: {
-                  type: "radio",
-                  name: "partially",
-                  id: "partially",
-                  value: "Partially"
-                },
-                domProps: {
-                  checked: _vm._q(_vm.form.recommendation, "Partially")
-                },
-                on: {
-                  click: _vm.recommend,
-                  change: function($event) {
-                    return _vm.$set(_vm.form, "recommendation", "Partially")
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "inlineRadio1" }
-                },
-                [_vm._v("Partially")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check form-check-inline" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.recommendation,
-                    expression: "form.recommendation"
-                  }
-                ],
-                staticClass: "form-check-input",
-                class: { "is-invalid": _vm.form.errors.has("no") },
-                attrs: { type: "radio", name: "no", id: "no", value: "No" },
-                domProps: { checked: _vm._q(_vm.form.recommendation, "No") },
-                on: {
-                  click: _vm.recommendNo,
-                  change: function($event) {
-                    return _vm.$set(_vm.form, "recommendation", "No")
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "inlineRadio1" }
-                },
-                [_vm._v("No")]
-              )
-            ])
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "addnew",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "addnewLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(11),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("img", {
-                  staticStyle: { width: "400px" },
-                  attrs: { src: this.photo, alt: "" }
-                })
-              ]),
-              _vm._v(" "),
-              _vm._m(12)
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "new",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "addnewLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(13),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.award()
-                    }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", [_vm._v("Amount")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.formf.amount,
-                              expression: "formf.amount"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.formf.errors.has("amount")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "name",
-                            placeholder: "Amount"
-                          },
-                          domProps: { value: _vm.formf.amount },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.formf, "amount", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.formf, field: "amount" }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(14)
-                ]
-              )
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "recommendation",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "addnewLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(15),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.award()
-                    }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", [_vm._v("Amount")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.amount,
-                              expression: "form.amount"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("amount")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "name",
-                            placeholder: "Amount"
-                          },
-                          domProps: { value: _vm.form.amount },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "amount", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "amount" }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(16)
-                ]
-              )
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -79287,7 +79372,7 @@ var render = function() {
                           attrs: {
                             type: "text",
                             name: "name",
-                            placeholder: "Enter County"
+                            placeholder: "Enter Ward"
                           },
                           domProps: { value: _vm.form.name },
                           on: {
@@ -96057,7 +96142,7 @@ var routes = [{
   path: '/budget',
   component: __webpack_require__(/*! ./components/budget.vue */ "./resources/js/components/budget.vue")["default"]
 }, {
-  path: '/informationview/:applicantId',
+  path: '/informationview/:applicationId',
   component: __webpack_require__(/*! ./components/Informationview.vue */ "./resources/js/components/Informationview.vue")["default"]
 }];
 Vue.filter('upText', function (text) {
@@ -97586,8 +97671,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

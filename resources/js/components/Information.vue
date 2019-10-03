@@ -59,12 +59,12 @@
                                 </td>
                                 <td>
                                     <span v-if="application.rec_amount"> Ksh. {{application.rec_amount}}</span>
-                                    <span v-if="application.status==2"> N/A</span>
+                                    <span v-if="application.status==2" && !application.rec_amount> N/A</span>
                                     <span v-if="!application.rec_amount">Not Allocated</span>
                                 </td>
                                 <td>{{application.bursary_type}}</td>
                                 <td>
-                                    <router-link :to="{path:'/informationview/'+ application.user_id}" type="button"
+                                    <router-link :to="{path:'/informationview/'+ application.id}" type="button"
                                                  class="btn btn-primary btn-sm">view
                                     </router-link>
                                 </td>
