@@ -26,4 +26,9 @@ export default class Gate {
         return this.user.role === 'admin' || this.user.role === 'official';
 
     }
+
+    isAllowed(){
+        return this.user.role === 'sub-admin' || this.user.role === 'official' || this.user.role === 'admin';
+
+    }
 }

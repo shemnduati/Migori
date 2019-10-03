@@ -3,29 +3,56 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Application Status</div>
+                    <div class="card-header">Check your Application Status</div>
 
                     <div class="card-body">
-                        <table class="table table-hover">
-                            <tbody><tr>
-                                <th>Status</th>
-                            </tr>
-                            <tr v-for="application in applications" :key="application.id">
-                                <td>
-                                    <span v-if="application.status==0" style="color: purple;">Received</span>
-                                    <span v-if="application.status==2" style="color: red;">Rejected</span>
-                                    <span v-if="application.status==1" style="color: green;">Verified</span>
-                                    <span v-if="application.status==3" style="color: green;">Awarded</span>
-                                </td>
-                            </tr>
-                            </tbody></table>
-                        <a href="#" data-toggle="collapse"  role="button" aria-expanded="false" @click="getMyStatus">Read more..</a>
-                        <div class="col-md-12">
-                            <div class="row" v-if="status === 0">Your form has been successfully submitted and await verification</div>
-                            <div class="row" v-if="status === 1">Your form has been successfully verified</div>
-                            <div class="row" v-if="status === 2">Your form has been rejected due to misinformation.Please contact your ward
-                            administrator for more information</div>
-                            <div class="row" v-if="status === 3">You have been awarded Ksh {{amount}}</div>
+                        <div class="col-sm-12">
+                            <div class="alert alert-warning" role="alert" v-if="this.count == 0">
+                                You have not made any application yet.
+                            </div>
+                            <div class="accordion" id="accordionExample" v-if="this.count > 0">
+                                <div class="card" v-for="application in applications" :key="application.id">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button class="btn" type="button" data-toggle="collapse"
+                                                    :data-target="'#' + 'w' + application.id" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                {{application.bursary_type}} ({{application.year}}) - Click for more...
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div :id="'w' + application.id" class="collapse" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <p>Serial No: {{application.serial}}</p>
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <th>
+                                                        Status: <span v-if="application.status==0" style="color: purple;">Received</span>
+                                                        <span v-if="application.status==2"
+                                                              style="color: red;">Rejected</span>
+                                                        <span v-if="application.status==1" style="color: green;">Verified</span>
+                                                        <span v-if="application.status==3"
+                                                              style="color: green;">Awarded</span>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span v-if="application.status === 0">Your form has been successfully submitted and await verification</span>
+                                                        <span v-if="application.status === 1">Your form has been successfully verified</span>
+                                                        <span v-if="application.status === 2">Your form has been rejected due to misinformation.Please contact your ward
+                                                            administrator for more information</span>
+                                                        <span v-if="application.status === 3">You have been awarded Ksh {{amount}}</span>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -36,31 +63,31 @@
 
 <script>
     export default {
-        data(){
+        data() {
             return {
-                status:{},
-                amount:{},
-                applications :{},
-                count : {},
+                status: {},
+                amount: {},
+                applications: {},
+                count: {},
             }
         },
-        methods:{
-            getApplications(){
-                    axios.get('api/getMyBursary').then(({data}) => ([this.applications = data['applications']]));
+        methods: {
+            getApplications() {
+                axios.get('api/getMyBursary').then(({data}) => ([this.applications = data['applications']]));
             },
-            getMyApplications(){
+            getMyApplications() {
                 axios.get('api/getApplication').then(({data}) => ([this.count = data['count']]));
             },
-            getMyStatus(){
+            getMyStatus() {
                 axios.get('api/getMyStatus').then(({data}) => ([this.status = data['status']]));
             },
-            getMyAmount(){
+            getMyAmount() {
                 axios.get('api/getMyAmount').then(({data}) => ([this.amount = data['amount']]));
             },
         },
         created() {
             this.getApplications();
-            this. getMyApplications();
+            this.getMyApplications();
             this.getMyAmount();
         }
     }
