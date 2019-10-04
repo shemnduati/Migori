@@ -463,8 +463,8 @@ class ApplicationController extends Controller
         $geo->status = 1;
         $geo->update();
 
-        $email = User::where('id', $applicantId)->value('email');
-        Mail::to($email)->send(new BursaryEmail());
+//        $email = User::where('id', $applicantId)->value('email');
+//        Mail::to($email)->send(new BursaryEmail());
 
     }
 

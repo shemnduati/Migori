@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\County;
 use App\Institution;
+use App\Mail\BursaryEmail;
 use App\User;
 use App\Ward;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use App\MoreFamily;
 use App\Geographical;
 use App\Budget;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class InformationController extends Controller
 {
@@ -39,7 +41,7 @@ class InformationController extends Controller
     public function getApplications()
     {
         // return User::latest()->paginate(10);
-        $applications = Application::where('year', date('Y'))->whereIn('status', [1, 3])->get();
+        $applications = Application::where('year', date('Y'))->whereIn('status', [1,3])->get();
 
         return ['applications' => $applications];
 
@@ -85,18 +87,20 @@ class InformationController extends Controller
     public function getbusary()
     {
         // return User::latest()->paginate(10);
-        $ward_id = User::where('id', Auth::user()->id)->value('ward');
+        $ward_id = auth()->user()->ward;
         $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->get();
 
         return ['applications' => $applications];
 
     }
 
-    public function getMyCountyId(){
+    public function getMyCountyId()
+    {
         return auth()->user()->county;
     }
 
-    public function getMyWardId(){
+    public function getMyWardId()
+    {
         return auth()->user()->ward;
     }
 
@@ -226,6 +230,7 @@ class InformationController extends Controller
     {
         $application = Application::findOrFail($applicationId);
         $application->recommendation = $request['recommendation'];
+        $application->status = 2;
         $application->save();
     }
 
@@ -296,6 +301,9 @@ class InformationController extends Controller
         $geo = Geographical::findOrFail($geographical['id']);
         $geo->status = 3;
         $geo->update();
+
+        $email = User::where('id', $applicantId)->value('email');
+        Mail::to($email)->send(new BursaryEmail());
     }
 
     public function notAward(Request $request, $applicationId)

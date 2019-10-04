@@ -2389,6 +2389,79 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2453,30 +2526,38 @@ __webpack_require__.r(__webpack_exports__);
     sendApplication: function sendApplication() {
       var _this = this;
 
-      this.loading = true;
-      this.form.post('api/apply').then(function () {
-        _this.loading = false;
-        Fire.$emit('AfterCreate');
-        Swal.fire({
-          type: 'success',
-          title: 'Submited!!',
-          text: 'Application Submitted Successfully'
+      if (this.$gate.isStudent()) {
+        this.loading = true;
+        this.form.post('api/apply').then(function () {
+          _this.loading = false;
+          Fire.$emit('AfterCreate');
+          Swal.fire({
+            type: 'success',
+            title: 'Submited!!',
+            text: 'Application Submitted Successfully'
+          });
+
+          _this.form.reset();
+
+          _this.$Progress.finish();
+
+          window.location.href = "/student";
+        })["catch"](function (error) {
+          _this.loading = false;
+          _this.errors = error.response.data.errors;
+          Swal.fire({
+            type: 'error',
+            title: 'Error!!',
+            text: error.response.data.msg
+          });
         });
-
-        _this.form.reset();
-
-        _this.$Progress.finish();
-
-        window.location.href = "/student";
-      })["catch"](function (error) {
-        _this.loading = false;
-        _this.errors = error.response.data.errors;
+      } else {
         Swal.fire({
           type: 'error',
-          title: 'Error!!',
-          text: error.response.data.msg
+          title: 'Ooops...',
+          text: 'You are not eligible to make an application'
         });
-      });
+      }
     },
     getGuardianId: function getGuardianId(e) {
       var _this2 = this;
@@ -3366,6 +3447,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -5478,6 +5560,33 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -10617,7 +10726,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.btn-submit {\n    cursor: pointer;\n&:hover {\n     background: #38c172;\n}\n&:disabled {\n     background: #f6993f;\n     cursor: not-allowed;\n}\n}\n.loader{\n    position: absolute;\n    right: 50%;\n}\n.lds-roller {\n    display: inline-block;\n    position: relative;\n    width: 25px;\n    height: 25px;\n}\n.lds-roller div {\n    -webkit-animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n            animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n    transform-origin: 32px 32px;\n}\n.lds-roller div:after {\n    content: \" \";\n    display: block;\n    position: absolute;\n    width: 6px;\n    height: 6px;\n    border-radius: 50%;\n    background: #4dc0b5;\n    margin: -3px 0 0 -3px;\n}\n.lds-roller div:nth-child(1) {\n    -webkit-animation-delay: -0.036s;\n            animation-delay: -0.036s;\n}\n.lds-roller div:nth-child(1):after {\n    top: 50px;\n    left: 50px;\n}\n.lds-roller div:nth-child(2) {\n    -webkit-animation-delay: -0.072s;\n            animation-delay: -0.072s;\n}\n.lds-roller div:nth-child(2):after {\n    top: 54px;\n    left: 45px;\n}\n.lds-roller div:nth-child(3) {\n    -webkit-animation-delay: -0.108s;\n            animation-delay: -0.108s;\n}\n.lds-roller div:nth-child(3):after {\n    top: 57px;\n    left: 39px;\n}\n.lds-roller div:nth-child(4) {\n    -webkit-animation-delay: -0.144s;\n            animation-delay: -0.144s;\n}\n.lds-roller div:nth-child(4):after {\n    top: 58px;\n    left: 32px;\n}\n.lds-roller div:nth-child(5) {\n    -webkit-animation-delay: -0.18s;\n            animation-delay: -0.18s;\n}\n.lds-roller div:nth-child(5):after {\n    top: 57px;\n    left: 25px;\n}\n.lds-roller div:nth-child(6) {\n    -webkit-animation-delay: -0.216s;\n            animation-delay: -0.216s;\n}\n.lds-roller div:nth-child(6):after {\n    top: 54px;\n    left: 19px;\n}\n.lds-roller div:nth-child(7) {\n    -webkit-animation-delay: -0.252s;\n            animation-delay: -0.252s;\n}\n.lds-roller div:nth-child(7):after {\n    top: 50px;\n    left: 14px;\n}\n.lds-roller div:nth-child(8) {\n    -webkit-animation-delay: -0.288s;\n            animation-delay: -0.288s;\n}\n.lds-roller div:nth-child(8):after {\n    top: 45px;\n    left: 10px;\n}\n@-webkit-keyframes lds-roller {\n0% {\n        transform: rotate(0deg);\n}\n100% {\n        transform: rotate(360deg);\n}\n}\n@keyframes lds-roller {\n0% {\n        transform: rotate(0deg);\n}\n100% {\n        transform: rotate(360deg);\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.btn-submit {\n    cursor: pointer;\n&\n:hover {\n    background: #38c172;\n}\n&\n:disabled {\n    background: #f6993f;\n    cursor: not-allowed;\n}\n}\n.loader {\n    position: absolute;\n    right: 50%;\n}\n.lds-roller {\n    display: inline-block;\n    position: relative;\n    width: 25px;\n    height: 25px;\n}\n.lds-roller div {\n    -webkit-animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n            animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n    transform-origin: 32px 32px;\n}\n.lds-roller div:after {\n    content: \" \";\n    display: block;\n    position: absolute;\n    width: 6px;\n    height: 6px;\n    border-radius: 50%;\n    background: #4dc0b5;\n    margin: -3px 0 0 -3px;\n}\n.lds-roller div:nth-child(1) {\n    -webkit-animation-delay: -0.036s;\n            animation-delay: -0.036s;\n}\n.lds-roller div:nth-child(1):after {\n    top: 50px;\n    left: 50px;\n}\n.lds-roller div:nth-child(2) {\n    -webkit-animation-delay: -0.072s;\n            animation-delay: -0.072s;\n}\n.lds-roller div:nth-child(2):after {\n    top: 54px;\n    left: 45px;\n}\n.lds-roller div:nth-child(3) {\n    -webkit-animation-delay: -0.108s;\n            animation-delay: -0.108s;\n}\n.lds-roller div:nth-child(3):after {\n    top: 57px;\n    left: 39px;\n}\n.lds-roller div:nth-child(4) {\n    -webkit-animation-delay: -0.144s;\n            animation-delay: -0.144s;\n}\n.lds-roller div:nth-child(4):after {\n    top: 58px;\n    left: 32px;\n}\n.lds-roller div:nth-child(5) {\n    -webkit-animation-delay: -0.18s;\n            animation-delay: -0.18s;\n}\n.lds-roller div:nth-child(5):after {\n    top: 57px;\n    left: 25px;\n}\n.lds-roller div:nth-child(6) {\n    -webkit-animation-delay: -0.216s;\n            animation-delay: -0.216s;\n}\n.lds-roller div:nth-child(6):after {\n    top: 54px;\n    left: 19px;\n}\n.lds-roller div:nth-child(7) {\n    -webkit-animation-delay: -0.252s;\n            animation-delay: -0.252s;\n}\n.lds-roller div:nth-child(7):after {\n    top: 50px;\n    left: 14px;\n}\n.lds-roller div:nth-child(8) {\n    -webkit-animation-delay: -0.288s;\n            animation-delay: -0.288s;\n}\n.lds-roller div:nth-child(8):after {\n    top: 45px;\n    left: 10px;\n}\n@-webkit-keyframes lds-roller {\n0% {\n        transform: rotate(0deg);\n}\n100% {\n        transform: rotate(360deg);\n}\n}\n@keyframes lds-roller {\n0% {\n        transform: rotate(0deg);\n}\n100% {\n        transform: rotate(360deg);\n}\n}\n\n", ""]);
 
 // exports
 
@@ -71267,7 +71376,12 @@ var render = function() {
                                           key: count.id,
                                           domProps: { value: count.id }
                                         },
-                                        [_vm._v(_vm._s(count.name))]
+                                        [
+                                          _vm._v(
+                                            _vm._s(count.name) +
+                                              "\n                                            "
+                                          )
+                                        ]
                                       )
                                     })
                                   ],
@@ -71344,7 +71458,12 @@ var render = function() {
                                           key: wardy.id,
                                           domProps: { value: wardy.id }
                                         },
-                                        [_vm._v(_vm._s(wardy.name))]
+                                        [
+                                          _vm._v(
+                                            _vm._s(wardy.name) +
+                                              "\n                                            "
+                                          )
+                                        ]
                                       )
                                     })
                                   ],
@@ -71942,7 +72061,11 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Previous Step")]
+                        [
+                          _vm._v(
+                            "\n                            Previous Step\n                        "
+                          )
+                        ]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -71959,7 +72082,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Next Step")]
+                        [_vm._v("Next Step\n                        ")]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -71981,18 +72104,25 @@ var render = function() {
                             _vm.loading
                               ? _c("div", { staticClass: "lds-roller" }, [
                                   _c("div"),
+                                  _vm._v(" "),
                                   _c("div"),
+                                  _vm._v(" "),
                                   _c("div"),
+                                  _vm._v(" "),
                                   _c("div"),
+                                  _vm._v(" "),
                                   _c("div"),
+                                  _vm._v(" "),
                                   _c("div"),
+                                  _vm._v(" "),
                                   _c("div"),
+                                  _vm._v(" "),
                                   _c("div")
                                 ])
                               : _vm._e()
                           ]),
                           _vm._v(
-                            "\n                                Submit Application\n                            "
+                            "\n                            Submit Application\n                        "
                           )
                         ]
                       )
@@ -72015,7 +72145,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-header" }, [
         _vm._v(
-          "\n                        Application Form not Available\n                      "
+          "\n                        Application Form not Available\n                    "
         )
       ]),
       _vm._v(" "),
@@ -72026,7 +72156,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(
-            "The application window has been closed for now wait until the window is opened"
+            "The application window has been closed for now wait until the window is\n                            opened"
           )
         ]),
         _vm._v(" "),
@@ -72935,6 +73065,14 @@ var render = function() {
                             _vm._v(" "),
                             _vm.$gate.isOfficial()
                               ? _c("td", [
+                                  application.status == 1
+                                    ? _c(
+                                        "span",
+                                        { staticStyle: { color: "purple" } },
+                                        [_vm._v("Verified.")]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
                                   application.status == 0
                                     ? _c(
                                         "span",
@@ -73004,17 +73142,8 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              application.status == 2
-                                ? _c(
-                                    "span",
-                                    {
-                                      attrs: {
-                                        "&&": "",
-                                        "!application.rec_amount": ""
-                                      }
-                                    },
-                                    [_vm._v(" N/A")]
-                                  )
+                              application.status == 2 && !application.rec_amount
+                                ? _c("span", [_vm._v("N/A")])
                                 : _vm._e(),
                               _vm._v(" "),
                               !application.rec_amount
@@ -80039,99 +80168,199 @@ var render = function() {
           _c("div", { staticClass: "col-md-8" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
-                _vm._v("Application Status")
+                _vm._v("Check your Application Status")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("table", { staticClass: "table table-hover" }, [
-                  _c(
-                    "tbody",
-                    [
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _vm._l(_vm.applications, function(application) {
-                        return _c("tr", { key: application.id }, [
-                          _c("td", [
-                            application.status == 0
-                              ? _c(
-                                  "span",
-                                  { staticStyle: { color: "purple" } },
-                                  [_vm._v("Received")]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            application.status == 2
-                              ? _c("span", { staticStyle: { color: "red" } }, [
-                                  _vm._v("Rejected")
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            application.status == 1
-                              ? _c(
-                                  "span",
-                                  { staticStyle: { color: "green" } },
-                                  [_vm._v("Verified")]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            application.status == 3
-                              ? _c(
-                                  "span",
-                                  { staticStyle: { color: "green" } },
-                                  [_vm._v("Awarded")]
-                                )
-                              : _vm._e()
-                          ])
-                        ])
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: "#",
-                      "data-toggle": "collapse",
-                      role: "button",
-                      "aria-expanded": "false"
-                    },
-                    on: { click: _vm.getMyStatus }
-                  },
-                  [_vm._v("Read more..")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-12" }, [
-                  _vm.status === 0
-                    ? _c("div", { staticClass: "row" }, [
-                        _vm._v(
-                          "Your form has been successfully submitted and await verification"
-                        )
-                      ])
+                _c("div", { staticClass: "col-sm-12" }, [
+                  this.count == 0
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-warning",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            You have not made any application yet.\n                        "
+                          )
+                        ]
+                      )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.status === 1
-                    ? _c("div", { staticClass: "row" }, [
-                        _vm._v("Your form has been successfully verified")
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.status === 2
-                    ? _c("div", { staticClass: "row" }, [
-                        _vm._v(
-                          "Your form has been rejected due to misinformation.Please contact your ward\n                        administrator for more information"
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.status === 3
-                    ? _c("div", { staticClass: "row" }, [
-                        _vm._v(
-                          "You have been awarded Ksh " + _vm._s(_vm.amount)
-                        )
-                      ])
+                  this.count > 0
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "accordion",
+                          attrs: { id: "accordionExample" }
+                        },
+                        _vm._l(_vm.applications, function(application) {
+                          return _c(
+                            "div",
+                            { key: application.id, staticClass: "card" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "card-header",
+                                  attrs: { id: "headingOne" }
+                                },
+                                [
+                                  _c("h2", { staticClass: "mb-0" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn",
+                                        attrs: {
+                                          type: "button",
+                                          "data-toggle": "collapse",
+                                          "data-target":
+                                            "#" + "w" + application.id,
+                                          "aria-expanded": "true",
+                                          "aria-controls": "collapseOne"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            " +
+                                            _vm._s(application.bursary_type) +
+                                            " (" +
+                                            _vm._s(application.year) +
+                                            ") - Click for more...\n                                        "
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "collapse",
+                                  attrs: {
+                                    id: "w" + application.id,
+                                    "aria-labelledby": "headingOne",
+                                    "data-parent": "#accordionExample"
+                                  }
+                                },
+                                [
+                                  _c("div", { staticClass: "card-body" }, [
+                                    _c("p", [
+                                      _vm._v(
+                                        "Serial No: " +
+                                          _vm._s(application.serial)
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "table",
+                                      { staticClass: "table table-hover" },
+                                      [
+                                        _c("tbody", [
+                                          _c("tr", [
+                                            _c("th", [
+                                              _vm._v(
+                                                "\n                                                    Status: "
+                                              ),
+                                              application.status == 0
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        color: "purple"
+                                                      }
+                                                    },
+                                                    [_vm._v("Received")]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status == 2
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        color: "red"
+                                                      }
+                                                    },
+                                                    [_vm._v("Rejected")]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status == 1
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        color: "green"
+                                                      }
+                                                    },
+                                                    [_vm._v("Verified")]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status == 3
+                                                ? _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        color: "green"
+                                                      }
+                                                    },
+                                                    [_vm._v("Awarded")]
+                                                  )
+                                                : _vm._e()
+                                            ])
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("tr", [
+                                            _c("td", [
+                                              application.status === 0
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "Your form has been successfully submitted and await verification"
+                                                    )
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status === 1
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "Your form has been successfully verified"
+                                                    )
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status === 2
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "Your form has been rejected due to misinformation.Please contact your ward\n                                                        administrator for more information"
+                                                    )
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              application.status === 3
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      "You have been awarded Ksh " +
+                                                        _vm._s(_vm.amount)
+                                                    )
+                                                  ])
+                                                : _vm._e()
+                                            ])
+                                          ])
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
                     : _vm._e()
                 ])
               ])
@@ -80141,14 +80370,7 @@ var render = function() {
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [_c("th", [_vm._v("Status")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -96028,6 +96250,11 @@ function () {
     key: "isAdminOrOfficial",
     value: function isAdminOrOfficial() {
       return this.user.role === 'admin' || this.user.role === 'official';
+    }
+  }, {
+    key: "isAllowed",
+    value: function isAllowed() {
+      return this.user.role === 'sub-admin' || this.user.role === 'official' || this.user.role === 'admin';
     }
   }]);
 

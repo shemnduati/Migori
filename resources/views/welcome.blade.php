@@ -99,14 +99,30 @@
                         @if (Route::has('login'))
                             <div class="top-right links">
                                 @auth
-                                    <p> {{ Auth::user()->name }}</p>
-                                    <a href="/apply" class="btn btn mb-2 px-4 pr-2">Get Started</a>
+                                    <button class="nav-item dropdown btn btn-primary btn-sm">
+                                        <a id="navbarDropdown" style="color: white;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            {{ Auth::user()->name }} <span class="caret"></span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a href="/status" class="dropdown-item">Application Status</a>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
 
-                                    <a class="btn btn px-5" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                    </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </button>
+                                    <a href="/apply" class="btn btn mb-2 mt-4 px-4 pr-2">Get Started</a>
+
+{{--                                    <a class="btn btn px-5" href="{{ route('logout') }}"--}}
+{{--                                       onclick="event.preventDefault();--}}
+{{--                                                                 document.getElementById('logout-form').submit();">--}}
+{{--                                            {{ __('Logout') }}--}}
+{{--                                    </a>--}}
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -119,13 +135,13 @@
 
                     </div>
                 </div>
-                @auth
-                <div class="col-md-12">
-                    <div class="row col-md-4 col-sm-6 col-xm-6">
-                        <mystatus></mystatus>
-                    </div>
-                </div>
-                @endauth
+{{--                @auth--}}
+{{--                <div class="col-md-12">--}}
+{{--                    <div class="row col-md-4 col-sm-6 col-xm-6">--}}
+{{--                        <mystatus></mystatus>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                @endauth--}}
                 <div class="banner d-flex justify-content-center">
                     <img class="align-self-center img-fluid" src="/img/frin.png" alt="">
                 </div>

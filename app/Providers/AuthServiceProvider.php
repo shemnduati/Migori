@@ -43,5 +43,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isSubadminOrOfficial',function ($user){
             return $user-> role == 'sub-admin' || $user-> role == 'official';
         });
+        Gate::define('isAllowed',function ($user){
+            return $user-> role == 'sub-admin' || $user-> role == 'official' || $user->role == 'admin';
+        });
     }
 }
