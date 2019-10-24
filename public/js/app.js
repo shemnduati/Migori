@@ -73133,17 +73133,8 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              application.status == 2
-                                ? _c(
-                                    "span",
-                                    {
-                                      attrs: {
-                                        "&&": "",
-                                        "!application.rec_amount": ""
-                                      }
-                                    },
-                                    [_vm._v(" N/A")]
-                                  )
+                              application.status == 2 && !application.rec_amount
+                                ? _c("span", [_vm._v(" N/A")])
                                 : _vm._e(),
                               _vm._v(" "),
                               !application.rec_amount
@@ -97898,8 +97889,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
