@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'support@baza.co.ke'),
-        'name' => env('MAIL_FROM_NAME', 'erification'),
+        'name' => env('MAIL_FROM_NAME', 'Verification'),
     ],
 
     /*
