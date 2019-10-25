@@ -364,7 +364,7 @@ class ApplicationController extends Controller
         $Division = $geos['Division'];
         $Location = $geos['Location'];
         $ward_id = $geos['Ward'];
-        $county_id = $geos['Ward'];
+        $county_id = $geos['County'];
 
         $geographical = array(
             'County' => $County,
