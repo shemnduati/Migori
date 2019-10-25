@@ -47,6 +47,7 @@
                                 <td>{{application.name}}</td>
                                 <td>{{application.gender}}</td>
                                 <td v-if="$gate.isOfficial()">
+                                    <span v-if="application.status==1" style="color: purple;">Verified.</span>
                                     <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
                                     <span v-if="application.status==3" style="color: green;">Awarded</span>
@@ -59,7 +60,7 @@
                                 </td>
                                 <td>
                                     <span v-if="application.rec_amount"> Ksh. {{application.rec_amount}}</span>
-                                    <span v-if="application.status==2 && !application.rec_amount"> N/A</span>
+                                    <span v-if="application.status==2 && !application.rec_amount">N/A</span>
                                     <span v-if="!application.rec_amount">Not Allocated</span>
                                 </td>
                                 <td>{{application.bursary_type}}</td>

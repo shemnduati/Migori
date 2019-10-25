@@ -41,7 +41,7 @@ class InformationController extends Controller
     public function getApplications()
     {
         // return User::latest()->paginate(10);
-        $applications = Application::where('year', date('Y'))->whereIn('status', [1, 3])->get();
+        $applications = Application::where('year', date('Y'))->whereIn('status', [1,3])->get();
 
         return ['applications' => $applications];
 
@@ -87,18 +87,20 @@ class InformationController extends Controller
     public function getbusary()
     {
         // return User::latest()->paginate(10);
-        $ward_id = User::where('id', Auth::user()->id)->value('ward');
+        $ward_id = auth()->user()->ward;
         $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->get();
 
         return ['applications' => $applications];
 
     }
 
-    public function getMyCountyId(){
+    public function getMyCountyId()
+    {
         return auth()->user()->county;
     }
 
-    public function getMyWardId(){
+    public function getMyWardId()
+    {
         return auth()->user()->ward;
     }
 
@@ -228,6 +230,7 @@ class InformationController extends Controller
     {
         $application = Application::findOrFail($applicationId);
         $application->recommendation = $request['recommendation'];
+        $application->status = 2;
         $application->save();
     }
 

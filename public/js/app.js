@@ -3538,6 +3538,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -73064,6 +73065,14 @@ var render = function() {
                             _vm._v(" "),
                             _vm.$gate.isOfficial()
                               ? _c("td", [
+                                  application.status == 1
+                                    ? _c(
+                                        "span",
+                                        { staticStyle: { color: "purple" } },
+                                        [_vm._v("Verified.")]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
                                   application.status == 0
                                     ? _c(
                                         "span",
@@ -73134,7 +73143,7 @@ var render = function() {
                                 : _vm._e(),
                               _vm._v(" "),
                               application.status == 2 && !application.rec_amount
-                                ? _c("span", [_vm._v(" N/A")])
+                                ? _c("span", [_vm._v("N/A")])
                                 : _vm._e(),
                               _vm._v(" "),
                               !application.rec_amount
