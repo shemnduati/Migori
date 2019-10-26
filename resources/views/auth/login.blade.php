@@ -78,7 +78,8 @@ i{
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
                                       </div>
-                                      <input type="password" id="pwd" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"> <div class="input-group-text"><i class="fas fa-eye-slash" id="eye"></i></div>
+                                      <input id="pwd" type="password"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"  placeholder="Password"> 
+                                      <div class="input-group-text"><i class="fas fa-eye-slash" id="eye"></i></div>
                                       @error('password')
 
                                           <span class="invalid-feedback" role="alert">
