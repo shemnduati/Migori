@@ -10783,7 +10783,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
 
 // exports
 
@@ -78763,13 +78763,46 @@ var render = function() {
           _vm._v(" "),
           _vm._m(16),
           _vm._v(" "),
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-4 col-form-label",
+                attrs: { for: "staticEmail" }
+              },
+              [_vm._v("Bursar Awarded in Ksh:")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.application.amount,
+                    expression: "application.amount"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", readonly: "" },
+                domProps: { value: _vm.application.amount },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.application, "amount", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
           _vm._m(17),
           _vm._v(" "),
           _vm._m(18),
           _vm._v(" "),
-          _vm._m(19),
-          _vm._v(" "),
-          _vm._m(20)
+          _vm._m(19)
         ])
       : _vm._e()
   ])
@@ -79127,28 +79160,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", { staticClass: "pt-2 pl-4" }, [
         _vm._v("___________________________")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row form-group" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-sm-4 col-form-label",
-          attrs: { for: "staticEmail" }
-        },
-        [_vm._v("Bursar Awarded in Ksh:")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-8" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", readonly: "" }
-        })
       ])
     ])
   },
@@ -97898,8 +97909,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
