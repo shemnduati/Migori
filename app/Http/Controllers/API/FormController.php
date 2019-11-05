@@ -28,7 +28,7 @@ class FormController extends Controller
     public function getDetails()
     {
         $applicantId = auth()->user()->id;
-        $verified = Application::where('user_id', $applicantId)->where('status', 1)->count();
+        $verified = Application::where('user_id', $applicantId)->where('status', 3)->count();
 
         if ($verified > 0) {
             $application = Application::where('user_id', $applicantId)->where('year', date('Y'))->first();

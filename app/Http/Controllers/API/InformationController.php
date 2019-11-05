@@ -41,7 +41,7 @@ class InformationController extends Controller
     public function getApplications()
     {
         // return User::latest()->paginate(10);
-        $applications = Application::where('year', date('Y'))->whereIn('status', [1,3])->get();
+        $applications = Application::latest()->where('year', date('Y'))->whereIn('status', [1, 3])->get();
 
         return ['applications' => $applications];
 
@@ -50,7 +50,7 @@ class InformationController extends Controller
     public function getCountyBursary()
     {
         $county_id = User::where('id', Auth::user()->id)->value('county');
-        $applications = Application::where('year', date('Y'))->where('county', $county_id)->get();
+        $applications = Application::latest()->where('year', date('Y'))->where('county', $county_id)->get();
 
         return ['applications' => $applications];
 
