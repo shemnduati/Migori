@@ -28,16 +28,11 @@
                 color: #fff;
                 font-weight: 700;
             }
-        .logo2{
-                color: #7030a0;
-                font-weight: 700;
-            }
-        .state{
-                color: #1db5b5;
-            }
-        .fa-eye {
-                font-size: 20px;
-                margin: 8px 6px;
+
+i{
+  cursor:pointer;
+}
+
             }
     </style>
 </head>
@@ -83,7 +78,8 @@
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
                                       </div>
-                                      <input type="password" id="pwd" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                      <input id="pwd" type="password"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"  placeholder="Password"> 
+                                      <div class="input-group-text"><i class="fas fa-eye-slash" id="eye"></i></div>
                                       @error('password')
 
                                           <span class="invalid-feedback" role="alert">
@@ -91,7 +87,7 @@
                                           </span>
 
                                       @enderror
-                                      <i class="fas fa-eye" id="eye"></i>
+                                       <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
                                   </div>
                               </div>
 
