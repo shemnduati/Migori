@@ -37,6 +37,11 @@ class HomeController extends Controller
         return view('apply');
     }
 
+    public function scholarship()
+    {
+        return view('scholarship');
+    }
+
 
     public function download()
     {

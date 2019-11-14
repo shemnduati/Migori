@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" v-if="enable==1">
-                    <div class="card-header">Application Component</div>
+                    <div class="card-header">Application</div>
 
                     <div class="card-body">
                         <form>
@@ -16,7 +16,7 @@
                                             <label for="type">Bursary Type</label>
                                             <select v-model="form.type" class="form-control" name="type" id="type"
                                                     :class="{ 'is-invalid': form.errors.has('type') }">
-                                                <option selected value="">--Select Status--</option>
+                                                <option selected value="">--Select Type--</option>
                                                 <option value="CDF">CDF</option>
                                                 <option value="County">County</option>
                                             </select>
