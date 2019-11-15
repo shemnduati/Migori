@@ -4550,6 +4550,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Scholarship.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Scholarship.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Scholarship"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Verified.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Verified.vue?vue&type=script&lang=js& ***!
@@ -69455,7 +69476,7 @@ var render = function() {
         _vm.enable == 1
           ? _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
-                _vm._v("Application Component")
+                _vm._v("Application")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
@@ -69532,7 +69553,7 @@ var render = function() {
                                           {
                                             attrs: { selected: "", value: "" }
                                           },
-                                          [_vm._v("--Select Status--")]
+                                          [_vm._v("--Select Type--")]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -77671,6 +77692,37 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Scholarship.vue?vue&type=template&id=24291807&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Scholarship.vue?vue&type=template&id=24291807&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h1", [_vm._v("Scholarship")])])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Verified.vue?vue&type=template&id=758adf9a&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Verified.vue?vue&type=template&id=758adf9a&scoped=true& ***!
@@ -78763,13 +78815,46 @@ var render = function() {
           _vm._v(" "),
           _vm._m(16),
           _vm._v(" "),
+          _c("div", { staticClass: "row form-group" }, [
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-4 col-form-label",
+                attrs: { for: "staticEmail" }
+              },
+              [_vm._v("Bursar Awarded in Ksh:")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.application.amount,
+                    expression: "application.amount"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", readonly: "" },
+                domProps: { value: _vm.application.amount },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.application, "amount", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
           _vm._m(17),
           _vm._v(" "),
           _vm._m(18),
           _vm._v(" "),
-          _vm._m(19),
-          _vm._v(" "),
-          _vm._m(20)
+          _vm._m(19)
         ])
       : _vm._e()
   ])
@@ -79127,28 +79212,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", { staticClass: "pt-2 pl-4" }, [
         _vm._v("___________________________")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row form-group" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-sm-4 col-form-label",
-          attrs: { for: "staticEmail" }
-        },
-        [_vm._v("Bursar Awarded in Ksh:")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-8" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", readonly: "" }
-        })
       ])
     ])
   },
@@ -96416,6 +96479,7 @@ Vue.component('application', __webpack_require__(/*! ./components/Application.vu
 Vue.component('verifiedform', __webpack_require__(/*! ./components/Verifiedform.vue */ "./resources/js/components/Verifiedform.vue")["default"]);
 Vue.component('mystatus', __webpack_require__(/*! ./components/status.vue */ "./resources/js/components/status.vue")["default"]);
 Vue.component('terms', __webpack_require__(/*! ./components/terms.vue */ "./resources/js/components/terms.vue")["default"]);
+Vue.component('scholarship', __webpack_require__(/*! ./components/Scholarship.vue */ "./resources/js/components/Scholarship.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -97236,6 +97300,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_template_id_3bd692e4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_template_id_3bd692e4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Scholarship.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/Scholarship.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Scholarship_vue_vue_type_template_id_24291807_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Scholarship.vue?vue&type=template&id=24291807&scoped=true& */ "./resources/js/components/Scholarship.vue?vue&type=template&id=24291807&scoped=true&");
+/* harmony import */ var _Scholarship_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Scholarship.vue?vue&type=script&lang=js& */ "./resources/js/components/Scholarship.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Scholarship_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Scholarship_vue_vue_type_template_id_24291807_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Scholarship_vue_vue_type_template_id_24291807_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "24291807",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Scholarship.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Scholarship.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Scholarship.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Scholarship_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Scholarship.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Scholarship.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Scholarship_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Scholarship.vue?vue&type=template&id=24291807&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/Scholarship.vue?vue&type=template&id=24291807&scoped=true& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Scholarship_vue_vue_type_template_id_24291807_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Scholarship.vue?vue&type=template&id=24291807&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Scholarship.vue?vue&type=template&id=24291807&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Scholarship_vue_vue_type_template_id_24291807_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Scholarship_vue_vue_type_template_id_24291807_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

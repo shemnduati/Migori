@@ -111,6 +111,7 @@ Vue.component('application', require('./components/Application.vue').default);
 Vue.component('verifiedform', require('./components/Verifiedform.vue').default);
 Vue.component('mystatus', require('./components/status.vue').default);
 Vue.component('terms', require('./components/terms.vue').default);
+Vue.component('scholarship', require('./components/Scholarship.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

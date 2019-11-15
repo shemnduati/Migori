@@ -117,6 +117,7 @@
                                         </div>
                                     </button>
                                     <a href="/apply" class="btn btn mb-2 mt-4 px-4 pr-2">Get Started</a>
+                                    <a href="/scholarship" class="btn btn mb-2 mt-2 px-4 pr-2">Scholarship</a>
 
 {{--                                    <a class="btn btn px-5" href="{{ route('logout') }}"--}}
 {{--                                       onclick="event.preventDefault();--}}

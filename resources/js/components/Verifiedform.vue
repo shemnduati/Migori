@@ -247,7 +247,7 @@
       <div class="row form-group">
         <label for="staticEmail" class="col-sm-4 col-form-label">Bursar Awarded in Ksh:</label>
         <div class="col-sm-8">
-          <input type="text" readonly class="form-control" >
+          <input type="text" v-model="application.amount" readonly class="form-control" >
         </div>
       </div>
       <div class="row form-group">
