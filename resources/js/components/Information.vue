@@ -98,8 +98,6 @@
                 form: new Form({
                     type: ''
                 })
-
-
             }
         },
         methods: {
@@ -126,8 +124,6 @@
                 }
             }
         },
-
-
         created() {
             this.$Progress.start();
             Fire.$on('searching', () => {
@@ -139,7 +135,6 @@
                         this.$Progress.finish();
                     })
                     .catch(() => {
-
                     })
             })
             this.getApplications();
