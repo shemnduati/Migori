@@ -16,15 +16,30 @@ class CreateFamilyTable extends Migration
         Schema::create('family', function (Blueprint $table) {
         	$table->bigIncrements('id');
         	$table->integer('user_id')->index();
-            $table->string('name');
-            $table->string('relationship');
-            $table->string('living');
-            $table->string('occupation');
-            $table->decimal('income',8,2);
-            $table->string('cert');
-            $table->string('tel');
-            $table->year('year');
-            $table->integer('status');
+            $table->string('name')->nullable();
+            $table->string('relationship')->nullable();
+            $table->string('living')->nullable();;
+            $table->string('occupation')->nullable();
+            $table->decimal('income',8,2)->nullable();
+            $table->binary('cert')->nullable();
+            $table->string('tel')->nullable();
+            $table->year('year')->nullable();
+            $table->integer('status')->nullable();
+            $table->integer('applicationId')->nullable();
+
+            $table->string('who')->nullable();
+            $table->string('firstName')->nullable();
+            $table->string('middleName')->nullable();
+            $table->string('lastName')->nullable();
+            $table->string('idNumber')->nullable();
+            $table->string('alt_tel')->nullable();
+            $table->string('box')->nullable();
+            $table->string('G_relationship')->nullable();
+            $table->integer('county')->nullable();
+            $table->integer('ward')->nullable();
+            $table->string('subcounty')->nullable();
+            $table->string('location')->nullable();
+            $table->string('sublocation')->nullable();
             $table->timestamps();
         });
     }

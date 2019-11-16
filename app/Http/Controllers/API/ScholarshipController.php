@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use App\Application;
+use App\Evidence;
+use App\Family;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class ScholarshipController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+    public function store(Request $request)
+    {
+        $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->where('bursary_type', $request->type)->get();
+        if (count($check) > 0) {
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'You already sent an application',
+            ], 422);
+        } else {
+            $application = new Application();
+            $application->user_id = auth()->user()->id;
+            $application->bursary_type = $request->type;
+            $application->firstName = $request->firstName;
+            $application->middleName = $request->middleName;
+            $application->lastName = $request->lastName;
+            $application->dob = $request->dob;
+            $application->parentName = $request->parentName;
+            $application->box = $request->box;
+            $application->status = 0;
+            $application->gender = $request->gender;
+            $application->tel = $request->telephone;
+            $application->alt_tel = $request->alt_telephone;
+            $application->county = $request->county;
+            $application->ward_id = $request->ward;
+            $application->subcounty = $request->subcounty;
+            $application->location = $request->location;
+            $application->sublocation = $request->sublocation;
+            $application->kcpeMarks = $request->kcpeMarks;
+            $application->indexNo = $request->indexNo;
+            $application->year = date('Y');
+            $application->resultslip = $request->resultslip;
+            $application->kcpeYear = $request->kcpeYear;
+            $application->kcpeQuiz = $request->kcpeQuiz;
+            $application->repeatQuiz = $request->repeatQuiz;
+            $application->secSchoolName = $request->secSchoolName;
+            $application->classification = $request->classification;
+            $serial = auth('api')->user()->id . time();
+            $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
+            $application->save();
+
+            $applicationId = $application->id;
+
+            $father = new Family();
+            $father->user_id = auth()->user()->id;
+            $father->status = 0;
+            $father->who = "Father";
+            $father->year = date('Y');
+            $father->applicationId = $applicationId;
+            $father->firstName = $request->fatherFirstName;
+            $father->middleName = $request->fatherMiddleName;
+            $father->lastName = $request->fatherLastName;
+            $father->idNumber = $request->fatherIdNo;
+            $father->living = $request->fliving;
+            $father->cert = $request->fatherId;
+            $father->occupation = $request->fatherOccupation;
+            $father->tel = $request->ftelephone;
+            $father->alt_tel = $request->alt_ftelephone;
+            $father->box = $request->fbox;
+            $father->save();
+
+            $mother = new Family();
+            $mother->user_id = auth()->user()->id;
+            $mother->who = "Mother";
+            $mother->status = 0;
+            $mother->year = date('Y');
+            $mother->applicationId = $applicationId;
+            $mother->firstName = $request->motherFirstName;
+            $mother->middleName = $request->motherMiddleName;
+            $mother->lastName = $request->motherLastName;
+            $mother->idNumber = $request->motherIdNo;
+            $mother->living = $request->mliving;
+            $mother->cert = $request->motherId;
+            $mother->occupation = $request->motherOccupation;
+            $mother->tel = $request->mtelephone;
+            $mother->alt_tel = $request->alt_mtelephone;
+            $mother->box = $request->mbox;
+            $mother->save();
+
+            $guardian = new Family();
+            $guardian->user_id = auth()->user()->id;
+            $guardian->who = "Guardian";
+            $guardian->status = 0;
+            $guardian->year = date('Y');
+            $guardian->applicationId = $applicationId;
+            $guardian->firstName = $request->guardianFirstName;
+            $guardian->middleName = $request->guardianMiddleName;
+            $guardian->lastName = $request->guardianLastName;
+            $guardian->idNumber = $request->guardianIdNo;
+            $guardian->G_relationship = $request->relationship;
+            $guardian->occupation = $request->guardianOccupation;
+            $guardian->tel = $request->gtelephone;
+            $guardian->alt_tel = $request->alt_gtelephone;
+            $guardian->box = $request->gbox;
+            $guardian->county = $request->gcounty;
+            $guardian->ward = $request->gward;
+            $guardian->subcounty = $request->gsubcounty;
+            $guardian->location = $request->glocation;
+            $guardian->sublocation = $request->gsublocation;
+            $guardian->save();
+
+            $evidence = new Evidence();
+            $evidence->inheritance = $request->inheritance;
+            $evidence->whyApply = $request->whyApply;
+            $evidence->finSupport = $request->finSupport;
+            $evidence->specialNeeds = $request->specialNeeds;
+            $evidence->otherSpecialNeeds = $request->otherSpecialNeeds;
+            $evidence->familyConflict = $request->familyConflict;
+            $evidence->familyHouse = $request->familyHouse;
+            $evidence->otherDisabilities = $request->otherDis;
+            $evidence->siblingsInfo = $request->siblingsInfo;
+            $evidence->hear = $request->hear;
+            $evidence->hearDetails = $request->hearDetails;
+            $evidence->status = 0;
+            $evidence->applicationId = $applicationId;
+            $evidence->year = date('Y');
+            $evidence->save();
+
+
+        }
+    }
+}

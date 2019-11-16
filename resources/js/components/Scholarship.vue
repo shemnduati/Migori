@@ -1231,6 +1231,7 @@
                     }
                 ],
                 form: new Form({
+                    type: 'scholarship',
                     firstName: '',
                     middleName: '',
                     lastName: '',
@@ -1338,7 +1339,7 @@
             sendApplication() {
                 if (this.$gate.isStudent()) {
                     this.loading = true;
-                    this.form.post('api/apply')
+                    this.form.post('api/applyScholarship')
                         .then(() => {
                             this.loading = false;
                             Fire.$emit('AfterCreate');
@@ -1348,9 +1349,9 @@
                                 text: 'Application Submitted Successfully',
 
                             })
-                            this.form.reset();
+                            // this.form.reset();
                             this.$Progress.finish();
-                            window.location.href = "/student"
+                            // window.location.href = "/student"
                         })
                         .catch(error => {
                             this.loading = false;

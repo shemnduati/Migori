@@ -5789,6 +5789,7 @@ __webpack_require__.r(__webpack_exports__);
         others: ''
       }],
       form: new Form({
+        type: 'scholarship',
         firstName: '',
         middleName: '',
         lastName: '',
@@ -5896,20 +5897,17 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.$gate.isStudent()) {
         this.loading = true;
-        this.form.post('api/apply').then(function () {
+        this.form.post('api/applyScholarship').then(function () {
           _this.loading = false;
           Fire.$emit('AfterCreate');
           Swal.fire({
             type: 'success',
             title: 'Submited!!',
             text: 'Application Submitted Successfully'
-          });
+          }); // this.form.reset();
 
-          _this.form.reset();
+          _this.$Progress.finish(); // window.location.href = "/student"
 
-          _this.$Progress.finish();
-
-          window.location.href = "/student";
         })["catch"](function (error) {
           _this.loading = false;
           _this.errors = error.response.data.errors;
