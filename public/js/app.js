@@ -5870,7 +5870,8 @@ __webpack_require__.r(__webpack_exports__);
         familyHouse: '',
         otherDis: '',
         siblingsInfo: '',
-        hear: ''
+        hear: '',
+        hearDetails: ''
       })
     };
   },
@@ -6346,6 +6347,11 @@ __webpack_require__.r(__webpack_exports__);
             fOrGDisability: 'This field is required'
           });
           return false;
+        } else if (!this.form.mOrGDisability) {
+          this.form.errors.set({
+            mOrGDisability: 'This field is required'
+          });
+          return false;
         } else if (!this.form.fOrGAilment) {
           this.form.errors.set({
             fOrGAilment: 'This field is required'
@@ -6432,41 +6438,46 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      if (this.step == 5) {
-        if (!this.form.iname) {
+      if (this.step == 4) {
+        if (!this.form.hear) {
           // set(type, 'required');
           this.form.errors.set({
-            iname: 'This field is required'
+            hear: 'This field is required'
           });
           return false;
-        } else if (!this.form.branch) {
+        } else if (this.form.hear == 'School - teacher, principal or Ward Representative' && !this.form.hearDetails) {
           this.form.errors.set({
-            branch: 'This field is required'
+            hearDetails: 'This field is required'
           });
           return false;
-        } else if (!this.form["class"]) {
+        } else if (this.form.hear == 'Church, mosques, synagogue' && !this.form.hearDetails) {
           this.form.errors.set({
-            "class": 'This field is required'
+            hearDetails: 'This field is required'
           });
           return false;
-        } else if (!this.form.year) {
+        } else if (this.form.hear == 'Internet' && !this.form.hearDetails) {
           this.form.errors.set({
-            year: 'This field is required'
+            hearDetails: 'This field is required'
           });
           return false;
-        } else if (!this.form.payable) {
+        } else if (this.form.hear == 'Radio, TV' && !this.form.hearDetails) {
           this.form.errors.set({
-            gender: 'This field is required'
+            hearDetails: 'This field is required'
           });
           return false;
-        } else if (!this.form.paid) {
+        } else if (this.form.hear == 'Newspaper, magazine' && !this.form.hearDetails) {
           this.form.errors.set({
-            paid: 'This field is required'
+            hearDetails: 'This field is required'
           });
           return false;
-        } else if (!this.form.balance) {
+        } else if (this.form.hear == 'Social work such as face book, Twitter, MySpace' && !this.form.hearDetails) {
           this.form.errors.set({
-            balance: 'This field is required'
+            hearDetails: 'This field is required'
+          });
+          return false;
+        } else if (this.form.hear == 'Other' && !this.form.hearDetails) {
+          this.form.errors.set({
+            hearDetails: 'This field is required'
           });
           return false;
         } else {
@@ -85433,7 +85444,7 @@ var render = function() {
                           on: {
                             click: function($event) {
                               $event.preventDefault()
-                              return _vm.next($event)
+                              return _vm.nextStep($event)
                             }
                           }
                         },
