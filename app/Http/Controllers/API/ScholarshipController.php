@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Application;
 use App\Evidence;
 use App\Family;
+use App\MoreEvidence;
+use App\Sibling;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -132,7 +134,61 @@ class ScholarshipController extends Controller
             $evidence->year = date('Y');
             $evidence->save();
 
+            $males = new MoreEvidence();
+            $males->who = "Father/Male Guardian";
+            $males->age = $request->fOrGAge;
+            $males->disability = $request->fOrGDisability;
+            $males->ailment = $request->fOrGAilment;
+            $males->abandon = $request->fOrGAbandon;
+            $males->employment = $request->fOrGEmployment;
+            $males->business = $request->fOrGBusiness;
+            $males->land = $request->fOrGLand;
+            $males->assets = $request->fOrGAssets;
+            $males->status = 0;
+            $males->applicationId = $applicationId;
+            $males->year = date('Y');
+            $males->save();
+
+            $females = new MoreEvidence();
+            $females->who = "Mother/Female Guardian";
+            $females->age = $request->mOrGAge;
+            $females->disability = $request->mOrGDisability;
+            $females->ailment = $request->mOrGAilment;
+            $females->abandon = $request->mOrGAbandon;
+            $females->employment = $request->mOrGEmployment;
+            $females->business = $request->mOrGBusiness;
+            $females->land = $request->mOrGLand;
+            $females->assets = $request->mOrGAssets;
+            $females->status = 0;
+            $females->applicationId = $applicationId;
+            $females->year = date('Y');
+            $females->save();
+
+
+            return $applicationId;
+
 
         }
+    }
+
+    public function complete(Request $request){
+
+        return $request->siblings;
+//        if ($request->siblings){
+//            $siblings = $request->siblings;
+//
+//            foreach ($siblings as $sibling){
+//                $sib = new Sibling();
+//                $sib->name = $sibling->name;
+//                $sib->age = $sibling->age;
+//                $sib->schoolOrEmployer = $sibling->schoolOrEmployer;
+//                $sib->classOrSalary = $sibling->classOrSalary;
+//                $sib->others = $sibling->others;
+//                $sib->year = date('Y');
+//                $sib->applicationId = $request->applicationId;
+//                $sib->status = 0;
+//                $sib->save();
+//            }
+//        }
     }
 }

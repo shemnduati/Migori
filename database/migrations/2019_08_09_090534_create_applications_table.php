@@ -51,7 +51,6 @@ class CreateApplicationsTable extends Migration
             $table->text('kcpeQuiz')->nullable();
             $table->string('secSchoolName')->nullable();
             $table->string('classification')->nullable();
-            $table->integer('applicationId')->nullable();
             $table->timestamps();
         });
     }

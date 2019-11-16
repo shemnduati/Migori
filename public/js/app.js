@@ -5770,6 +5770,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5788,6 +5789,7 @@ __webpack_require__.r(__webpack_exports__);
         classOrSalary: '',
         others: ''
       }],
+      formf: new FormData(),
       form: new Form({
         type: 'scholarship',
         firstName: '',
@@ -5877,6 +5879,30 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    sendOther: function sendOther(applicationId) {
+      var _this = this;
+
+      this.formf.append('siblings[]', this.sibling);
+      this.formf.append('applicationId', applicationId);
+      var config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      axios.post('/api/complete', this.formf, config).then(function (response) {
+        // this.form.reset();
+        _this.loading = false;
+
+        _this.$Progress.finish();
+
+        Swal.fire({
+          type: 'success',
+          title: 'Submited!!',
+          text: 'Successfully'
+        });
+      })["catch"](function (response) {//error
+      });
+    },
     next: function next() {
       this.step++;
     },
@@ -5893,24 +5919,28 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     sendApplication: function sendApplication() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.$gate.isStudent()) {
         this.loading = true;
-        this.form.post('api/applyScholarship').then(function () {
-          _this.loading = false;
-          Fire.$emit('AfterCreate');
-          Swal.fire({
-            type: 'success',
-            title: 'Submited!!',
-            text: 'Application Submitted Successfully'
-          }); // this.form.reset();
+        this.form.post('api/applyScholarship').then(function (_ref) {
+          var data = _ref.data;
 
-          _this.$Progress.finish(); // window.location.href = "/student"
-
+          // this.loading = false;
+          // Fire.$emit('AfterCreate');
+          // Swal.fire({
+          //     title: 'Submited!!',
+          //     type: 'success',
+          //     text: 'Application Submitted Successfully' + data,
+          //
+          // })
+          // this.form.reset();
+          // this.$Progress.finish();
+          // window.location.href = "/student"
+          _this2.sendOther(data);
         })["catch"](function (error) {
-          _this.loading = false;
-          _this.errors = error.response.data.errors;
+          _this2.loading = false;
+          _this2.errors = error.response.data.errors;
           Swal.fire({
             type: 'error',
             title: 'Error!!',
@@ -5926,7 +5956,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getGuardianId: function getGuardianId(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -5935,7 +5965,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this2.form.guardianId = reader.result;
+            _this3.form.guardianId = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -5955,7 +5985,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getFatherId: function getFatherId(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       console.log('Father');
       var file = e.target.files[0];
@@ -5965,7 +5995,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this3.form.fatherId = reader.result;
+            _this4.form.fatherId = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -5985,7 +6015,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getMotherId: function getMotherId(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -5994,7 +6024,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this4.form.motherId = reader.result;
+            _this5.form.motherId = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -6488,31 +6518,31 @@ __webpack_require__.r(__webpack_exports__);
       this.step--;
     },
     getCounties: function getCounties() {
-      var _this5 = this;
+      var _this6 = this;
 
-      axios.get("api/getcounties").then(function (_ref) {
-        var data = _ref.data;
-        return [_this5.counties = data['counties']];
+      axios.get("api/getcounties").then(function (_ref2) {
+        var data = _ref2.data;
+        return [_this6.counties = data['counties']];
       });
     },
     getWards: function getWards() {
-      var _this6 = this;
-
-      axios.get("api/getwards").then(function (_ref2) {
-        var data = _ref2.data;
-        return [_this6.wards = data['wards']];
-      });
-    },
-    getCountyWards: function getCountyWards() {
       var _this7 = this;
 
-      axios.get("api/getcountywards/" + this.form.county).then(function (_ref3) {
+      axios.get("api/getwards").then(function (_ref3) {
         var data = _ref3.data;
         return [_this7.wards = data['wards']];
       });
     },
-    getResultSlip: function getResultSlip(e) {
+    getCountyWards: function getCountyWards() {
       var _this8 = this;
+
+      axios.get("api/getcountywards/" + this.form.county).then(function (_ref4) {
+        var data = _ref4.data;
+        return [_this8.wards = data['wards']];
+      });
+    },
+    getResultSlip: function getResultSlip(e) {
+      var _this9 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -6522,7 +6552,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this8.form.resultslip = reader.result;
+            _this9.form.resultslip = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -6542,19 +6572,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getDetails: function getDetails() {
-      var _this9 = this;
+      var _this10 = this;
 
-      axios.get("api/getdetails").then(function (_ref4) {
-        var data = _ref4.data;
-        return [_this9.info = data['user']];
+      axios.get("api/getdetails").then(function (_ref5) {
+        var data = _ref5.data;
+        return [_this10.info = data['user']];
       });
     },
     getStatus: function getStatus() {
-      var _this10 = this;
+      var _this11 = this;
 
-      axios.get("api/status").then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this10.enable = data['num']];
+      axios.get("api/status").then(function (_ref6) {
+        var data = _ref6.data;
+        return [_this11.enable = data['num']];
       });
     }
   },
@@ -83235,6 +83265,20 @@ var render = function() {
                           2
                         ),
                         _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary btn-sm",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.sendOther(1)
+                              }
+                            }
+                          },
+                          [_vm._v("send")]
+                        ),
+                        _vm._v(" "),
                         _c("hr"),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-row" }, [
@@ -85442,7 +85486,7 @@ var render = function() {
                           on: {
                             click: function($event) {
                               $event.preventDefault()
-                              return _vm.nextStep($event)
+                              return _vm.next($event)
                             }
                           }
                         },

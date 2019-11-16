@@ -81,3 +81,4 @@ Route::get('/getMyWard', 'API\BudgetController@getMyWards');
 Route::get('/form', 'API\FormController@getDetails');
 
 Route::post('applyScholarship', 'API\ScholarshipController@store');
+Route::post('complete', 'API\ScholarshipController@complete');

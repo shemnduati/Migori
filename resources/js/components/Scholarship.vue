@@ -716,6 +716,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <button class="btn btn-primary btn-sm" @click.prevent="sendOther(1)">send</button>
                                 <hr>
                                 <div class="form-row">
                                     <div class="col">
@@ -1169,7 +1170,7 @@
                                 Previous Step
                             </button>
                             <button v-if="step != totalSteps" type="button" class="btn btn-primary"
-                                    @click.prevent="nextStep">Next Step
+                                    @click.prevent="next">Next Step
                             </button>
                             <button v-if="step == 5" type="button" class="btn btn-success btn-submit"
                                     @click.prevent="sendApplication()" :disabled="loading">
@@ -1230,6 +1231,7 @@
                         others: '',
                     }
                 ],
+                formf: new FormData(),
                 form: new Form({
                     type: 'scholarship',
                     firstName: '',
@@ -1321,6 +1323,26 @@
             }
         },
         methods: {
+            sendOther(applicationId){
+                this.formf.append('siblings[]',this.sibling);
+                this.formf.append('applicationId',applicationId);
+                const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+                axios.post('/api/complete',this.formf,config).then(response=>{
+                    // this.form.reset();
+                    this.loading = false;
+                    this.$Progress.finish();
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Submited!!',
+                        text: 'Successfully',
+                    })
+
+                })
+                    .catch(response=>{
+                        //error
+                    });
+            },
             next() {
                 this.step++
             },
@@ -1340,18 +1362,20 @@
                 if (this.$gate.isStudent()) {
                     this.loading = true;
                     this.form.post('api/applyScholarship')
-                        .then(() => {
-                            this.loading = false;
-                            Fire.$emit('AfterCreate');
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Submited!!',
-                                text: 'Application Submitted Successfully',
-
-                            })
+                        .then(({data}) => {
+                            // this.loading = false;
+                            // Fire.$emit('AfterCreate');
+                            // Swal.fire({
+                            //     title: 'Submited!!',
+                            //     type: 'success',
+                            //     text: 'Application Submitted Successfully' + data,
+                            //
+                            // })
                             // this.form.reset();
-                            this.$Progress.finish();
+                            // this.$Progress.finish();
                             // window.location.href = "/student"
+                            this.sendOther(data);
+
                         })
                         .catch(error => {
                             this.loading = false;
