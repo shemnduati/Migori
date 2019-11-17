@@ -5,10 +5,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Applicants Details</h3>
+                        <h3 class="card-title">County Bursary Applicants Details</h3>
 
                         <div class="card-tools">
                             <div class="row">
+                                <button type="button" class="btn btn-primary btn-sm" @click="createPDF">
+                                    Scholarship
+                                </button>
                                 <div class="col-sm-6" v-if="$gate.isOfficial()">
                                     <form>
                                         <select @change="getType()" v-model="form.type" class="form-control">

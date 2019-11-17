@@ -89,4 +89,13 @@ Route::post('complete', 'API\ScholarshipController@complete');
 
 Route::get('/scholarshipApps', 'API\ScholarshipController@index');
 
+Route::get('/scholarshipRec', 'API\ScholarshipController@recommendedApp');
+
+Route::get('/scholarshipRej', 'API\ScholarshipController@rejectedApp');
+
 Route::get('/scholarshipdetails/{applicationId}', 'API\ScholarshipController@show');
+Route::get('getfiles/{applicationId}', 'API\ScholarshipController@getFiles');
+Route::get('download/{fileId}', 'API\ScholarshipController@downloadFile');
+Route::post('recommendIt/{applicationId}', 'API\ScholarshipController@recommend');
+
+Route::post('approveIt/{applicationId}', 'API\ScholarshipController@approve');
