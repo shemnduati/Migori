@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Application;
+use App\County;
 use App\Evidence;
 use App\Family;
 use App\File;
+use App\Geographical;
+use App\Institution;
 use App\MoreEvidence;
+use App\MoreFamily;
 use App\Sibling;
+use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,6 +21,37 @@ class ScholarshipController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+    }
+
+    public function index()
+    {
+        if (auth()->user()->role == "sub-admin") {
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 0)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);
+        } elseif (auth()->user()->role == "official") {
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('county', auth()->user()->county)->latest()->paginate(10);
+        }
+    }
+
+    public function show($applicationId)
+    {
+        $app = Application::where('id', $applicationId)->where('year', date('Y'))->first();
+        $family = Family::where('applicationId', $applicationId)->where('year', date('Y'))->get();
+        $evidence = Evidence::where('applicationId', $applicationId)->where('year', date('Y'))->first();
+        $moreEvidence = MoreEvidence::where('applicationId', $applicationId)->where('year', date('Y'))->get();
+        $siblings = Sibling::where('applicationId', $applicationId)->where('year', date('Y'))->get();
+
+
+        $County = County::where('id', $app['county'])->value('name');
+        $Ward = Ward::where('id', $app['ward_id'])->value('name');
+
+        $application = array(
+            'County' => $County,
+            'Ward' => $Ward,
+            'app' => $app
+
+        );
+
+        return ['application' => $application, 'family' => $family, 'evidence' => $evidence, 'moreEvidence' => $moreEvidence, 'siblings' => $siblings];
     }
 
     public function store(Request $request)
@@ -166,7 +202,7 @@ class ScholarshipController extends Controller
             $females->save();
 
 
-            if ($request->firstSibName){
+            if ($request->firstSibName) {
                 $first = new Sibling();
                 $first->name = $request->firstSibName;
                 $first->age = $request->firstSibAge;
@@ -179,7 +215,7 @@ class ScholarshipController extends Controller
                 $first->save();
             }
 
-            if ($request->secondSibName){
+            if ($request->secondSibName) {
                 $second = new Sibling();
                 $second->name = $request->secondSibName;
                 $second->age = $request->secondSibAge;
@@ -192,7 +228,7 @@ class ScholarshipController extends Controller
                 $second->save();
             }
 
-            if ($request->thirdSibName){
+            if ($request->thirdSibName) {
                 $third = new Sibling();
                 $third->name = $request->thirdSibName;
                 $third->age = $request->thirdSibAge;
@@ -205,7 +241,7 @@ class ScholarshipController extends Controller
                 $third->save();
             }
 
-            if ($request->forthSibName){
+            if ($request->forthSibName) {
                 $forth = new Sibling();
                 $forth->name = $request->forthSibName;
                 $forth->age = $request->forthSibAge;
@@ -218,7 +254,7 @@ class ScholarshipController extends Controller
                 $forth->save();
             }
 
-            if ($request->fifthSibName){
+            if ($request->fifthSibName) {
                 $fifth = new Sibling();
                 $fifth->name = $request->fifthSibName;
                 $fifth->age = $request->fifthSibAge;
@@ -231,7 +267,7 @@ class ScholarshipController extends Controller
                 $fifth->save();
             }
 
-            if ($request->sixthSibName){
+            if ($request->sixthSibName) {
                 $sixth = new Sibling();
                 $sixth->name = $request->sixthSibName;
                 $sixth->age = $request->sixthSibAge;

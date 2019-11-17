@@ -86,3 +86,7 @@ Route::get('/form', 'API\FormController@getDetails');
 
 Route::post('applyScholarship', 'API\ScholarshipController@store');
 Route::post('complete', 'API\ScholarshipController@complete');
+
+Route::get('/scholarshipApps', 'API\ScholarshipController@index');
+
+Route::get('/scholarshipdetails/{applicationId}', 'API\ScholarshipController@show');

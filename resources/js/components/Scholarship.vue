@@ -1480,7 +1480,7 @@
                                 Previous Step
                             </button>
                             <button v-if="step != totalSteps" type="button" class="btn btn-primary"
-                                    @click.prevent="nextStep">Next Step
+                                    @click.prevent="next">Next Step
                             </button>
                             <button v-if="step == 5" type="button" class="btn btn-success btn-submit"
                                     @click.prevent="sendApplication()" :disabled="loading">
