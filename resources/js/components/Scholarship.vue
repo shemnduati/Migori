@@ -637,87 +637,6 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="col-sm-12">
-                                    <h4>SIBLING INFORMATION</h4>
-                                    <p>List all the applicants' brothers and sisters starting with the oldest and state
-                                        what each is doing
-                                        (If working describe job and monthly salary, if in university state it, if in
-                                        school state the form or standard, if
-                                        in training describe it, if a sister is married show the occupation of the
-                                        husband, if a brother is married show
-                                        the occupation of the wife)</p>
-                                    <button type="button" class="btn btn-primary btn-sm mb-3" @click="addSibling">Add
-                                        sibling
-                                    </button>
-                                    <div class="card" v-for="(sibli, index) in sibling">
-                                        <div class="card-header">
-                                            <h5>Sibling (index: {{index}})</h5>
-                                            <div class="card-tools">
-                                                <!--                                                <button type="button" class="btn btn-danger btn-s"-->
-                                                <!--                                                        @click="removeSiblingForm(index)">close-->
-                                                <!--                                                </button>-->
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label>SIBLING NAME</label>
-                                                        <input v-model="sibling[index].name" type="text"
-                                                               name="siblingName"
-                                                               class="form-control"
-                                                               :class="{ 'is-invalid': form.errors.has('siblingName') }">
-                                                        <has-error :form="form" field="siblingName"></has-error>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label>SIBLING AGE</label>
-                                                        <input v-model="sibling[index].age" type="number"
-                                                               name="siblingAge"
-                                                               class="form-control" min="1"
-                                                               :class="{ 'is-invalid': form.errors.has('siblingAge') }">
-                                                        <has-error :form="form" field="siblingAge"></has-error>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label>SCHOOL/EMPLOYER</label>
-                                                        <input v-model="sibling[index].schoolOrEmployer" type="text"
-                                                               name="siblingSchoolOrEmployer"
-                                                               class="form-control"
-                                                               :class="{ 'is-invalid': form.errors.has('siblingSchoolOrEmployer') }">
-                                                        <has-error :form="form"
-                                                                   field="siblingSchoolOrEmployer"></has-error>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label>CLASS/SALARY</label>
-                                                        <input v-model="sibling[index].classOrSalary" type="text"
-                                                               name="classOrSalary"
-                                                               class="form-control"
-                                                               :class="{ 'is-invalid': form.errors.has('classOrSalary') }">
-                                                        <has-error :form="form" field="classOrSalary"></has-error>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label>OTHER INFORMATION (if any)</label>
-                                                        <textarea v-model="sibling[index].others" class="form-control"
-                                                                  rows="3"
-                                                                  :class="{ 'is-invalid': form.errors.has('otherInfo') }"></textarea>
-                                                        <has-error :form="form" field="otherInfo"></has-error>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm" @click.prevent="sendOther(1)">send</button>
-                                <hr>
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
@@ -733,6 +652,362 @@
                                 </div>
                             </section>
                             <section v-if="step==3">
+                                <h3>PART B Section ii</h3>
+                                <div class="col-sm-12">
+                                    <h4>SIBLING INFORMATION</h4>
+                                    <p>List all the applicants' brothers and sisters starting with the oldest and state
+                                        what each is doing
+                                        (If working describe job and monthly salary, if in university state it, if in
+                                        school state the form or standard, if
+                                        in training describe it, if a sister is married show the occupation of the
+                                        husband, if a brother is married show
+                                        the occupation of the wife)</p>
+                                    <p style="color: red">Leave Others Blank if Done</p>
+                                    <div class="card" style="padding: 20px;">
+                                        <h4>First Sibling</h4>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING NAME</label>
+                                                    <input v-model="form.firstSibName" type="text"
+                                                           name="firstSibName"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('firstSibName') }">
+                                                    <has-error :form="form" field="firstSibName"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING AGE</label>
+                                                    <input v-model="form.firstSibAge" type="number"
+                                                           name="firstSibAge"
+                                                           class="form-control" min="1"
+                                                           :class="{ 'is-invalid': form.errors.has('firstSibAge') }">
+                                                    <has-error :form="form" field="firstSibAge"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SCHOOL/EMPLOYER</label>
+                                                    <input v-model="form.firstSibSchoolOrEmployer" type="text"
+                                                           name="firstSibSchoolOrEmployer"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('firstSibSchoolOrEmployer') }">
+                                                    <has-error :form="form"
+                                                               field="firstSibSchoolOrEmployer"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>CLASS/SALARY</label>
+                                                    <input v-model="form.firstSibClassOrSalary" type="text"
+                                                           name="firstSibClassOrSalary"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('firstSibClassOrSalary') }">
+                                                    <has-error :form="form" field="firstSibClassOrSalary"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>OTHER INFORMATION (if any)</label>
+                                                    <textarea v-model="form.firstSibOthers" class="form-control"
+                                                              rows="3"
+                                                              :class="{ 'is-invalid': form.errors.has('firstSibOthers') }"></textarea>
+                                                    <has-error :form="form" field="firstSibOthers"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="padding: 20px;">
+                                        <h4>Second Sibling</h4>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING NAME</label>
+                                                    <input v-model="form.secondSibName" type="text"
+                                                           name="secondSibName"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('secondSibName') }">
+                                                    <has-error :form="form" field="secondSibName"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING AGE</label>
+                                                    <input v-model="form.secondSibAge" type="number"
+                                                           name="secondSibAge"
+                                                           class="form-control" min="1"
+                                                           :class="{ 'is-invalid': form.errors.has('secondSibAge') }">
+                                                    <has-error :form="form" field="secondSibAge"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SCHOOL/EMPLOYER</label>
+                                                    <input v-model="form.secondSibSchoolOrEmployer" type="text"
+                                                           name="secondSibSchoolOrEmployer"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('secondSibSchoolOrEmployer') }">
+                                                    <has-error :form="form"
+                                                               field="secondSibSchoolOrEmployer"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>CLASS/SALARY</label>
+                                                    <input v-model="form.secondSibClassOrSalary" type="text"
+                                                           name="secondSibClassOrSalary"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('secondSibClassOrSalary') }">
+                                                    <has-error :form="form" field="secondSibClassOrSalary"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>OTHER INFORMATION (if any)</label>
+                                                    <textarea v-model="form.secondSibOthers" class="form-control"
+                                                              rows="3"
+                                                              :class="{ 'is-invalid': form.errors.has('secondSibOthers') }"></textarea>
+                                                    <has-error :form="form" field="secondSibOthers"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="padding: 20px;">
+                                        <h4>Third Sibling</h4>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING NAME</label>
+                                                    <input v-model="form.thirdSibName" type="text"
+                                                           name="thirdSibName"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('thirdSibName') }">
+                                                    <has-error :form="form" field="thirdSibName"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING AGE</label>
+                                                    <input v-model="form.thirdSibAge" type="number"
+                                                           name="thirdSibAge"
+                                                           class="form-control" min="1"
+                                                           :class="{ 'is-invalid': form.errors.has('thirdSibAge') }">
+                                                    <has-error :form="form" field="thirdSibAge"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SCHOOL/EMPLOYER</label>
+                                                    <input v-model="form.thirdSibSchoolOrEmployer" type="text"
+                                                           name="thirdSibSchoolOrEmployer"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('thirdSibSchoolOrEmployer') }">
+                                                    <has-error :form="form"
+                                                               field="thirdSibSchoolOrEmployer"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>CLASS/SALARY</label>
+                                                    <input v-model="form.thirdSibClassOrSalary" type="text"
+                                                           name="thirdSibClassOrSalary"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('thirdSibClassOrSalary') }">
+                                                    <has-error :form="form" field="thirdSibClassOrSalary"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>OTHER INFORMATION (if any)</label>
+                                                    <textarea v-model="form.thirdSibOthers" class="form-control"
+                                                              rows="3"
+                                                              :class="{ 'is-invalid': form.errors.has('thirdSibOthers') }"></textarea>
+                                                    <has-error :form="form" field="thirdSibOthers"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="padding: 20px;">
+                                        <h4>Forth Sibling</h4>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING NAME</label>
+                                                    <input v-model="form.forthSibName" type="text"
+                                                           name="forthSibName"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('forthSibName') }">
+                                                    <has-error :form="form" field="forthSibName"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING AGE</label>
+                                                    <input v-model="form.forthSibAge" type="number"
+                                                           name="forthSibAge"
+                                                           class="form-control" min="1"
+                                                           :class="{ 'is-invalid': form.errors.has('forthSibAge') }">
+                                                    <has-error :form="form" field="forthSibAge"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SCHOOL/EMPLOYER</label>
+                                                    <input v-model="form.forthSibSchoolOrEmployer" type="text"
+                                                           name="forthSibSchoolOrEmployer"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('forthSibSchoolOrEmployer') }">
+                                                    <has-error :form="form"
+                                                               field="forthSibSchoolOrEmployer"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>CLASS/SALARY</label>
+                                                    <input v-model="form.forthSibClassOrSalary" type="text"
+                                                           name="forthSibClassOrSalary"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('forthSibClassOrSalary') }">
+                                                    <has-error :form="form" field="forthSibClassOrSalary"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>OTHER INFORMATION (if any)</label>
+                                                    <textarea v-model="form.forthSibOthers" class="form-control"
+                                                              rows="3"
+                                                              :class="{ 'is-invalid': form.errors.has('forthSibOthers') }"></textarea>
+                                                    <has-error :form="form" field="firstSibOthers"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="padding: 20px;">
+                                        <h4>Fifth Sibling</h4>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING NAME</label>
+                                                    <input v-model="form.fifthSibName" type="text"
+                                                           name="fifthSibName"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('fifthSibName') }">
+                                                    <has-error :form="form" field="fifthSibName"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING AGE</label>
+                                                    <input v-model="form.fifthSibAge" type="number"
+                                                           name="fifthSibAge"
+                                                           class="form-control" min="1"
+                                                           :class="{ 'is-invalid': form.errors.has('fifthSibAge') }">
+                                                    <has-error :form="form" field="fifthSibAge"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SCHOOL/EMPLOYER</label>
+                                                    <input v-model="form.fifthSibSchoolOrEmployer" type="text"
+                                                           name="fifthSibSchoolOrEmployer"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('fifthSibSchoolOrEmployer') }">
+                                                    <has-error :form="form"
+                                                               field="fifthSibSchoolOrEmployer"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>CLASS/SALARY</label>
+                                                    <input v-model="form.fifthSibClassOrSalary" type="text"
+                                                           name="fifthSibClassOrSalary"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('fifthSibClassOrSalary') }">
+                                                    <has-error :form="form" field="fifthSibClassOrSalary"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>OTHER INFORMATION (if any)</label>
+                                                    <textarea v-model="form.fifthSibOthers" class="form-control"
+                                                              rows="3"
+                                                              :class="{ 'is-invalid': form.errors.has('fifthSibOthers') }"></textarea>
+                                                    <has-error :form="form" field="fifthSibOthers"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="padding: 20px;">
+                                        <h4>Sixth Sibling</h4>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING NAME</label>
+                                                    <input v-model="form.sixthSibName" type="text"
+                                                           name="sixthSibName"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('sixthSibName') }">
+                                                    <has-error :form="form" field="sixthSibName"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SIBLING AGE</label>
+                                                    <input v-model="form.sixthSibAge" type="number"
+                                                           name="sixthSibAge"
+                                                           class="form-control" min="1"
+                                                           :class="{ 'is-invalid': form.errors.has('sixthSibAge') }">
+                                                    <has-error :form="form" field="sixthSibAge"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>SCHOOL/EMPLOYER</label>
+                                                    <input v-model="form.sixthSibSchoolOrEmployer" type="text"
+                                                           name="firstSibSchoolOrEmployer"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('sixthSibSchoolOrEmployer') }">
+                                                    <has-error :form="form"
+                                                               field="sixthSibSchoolOrEmployer"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>CLASS/SALARY</label>
+                                                    <input v-model="form.sixthSibClassOrSalary" type="text"
+                                                           name="sixthSibClassOrSalary"
+                                                           class="form-control"
+                                                           :class="{ 'is-invalid': form.errors.has('sixthSibClassOrSalary') }">
+                                                    <has-error :form="form" field="sixthSibClassOrSalary"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>OTHER INFORMATION (if any)</label>
+                                                    <textarea v-model="form.sixthSibOthers" class="form-control"
+                                                              rows="3"
+                                                              :class="{ 'is-invalid': form.errors.has('sixthSibOthers') }"></textarea>
+                                                    <has-error :form="form" field="sixthSibOthers"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section v-if="step==4">
                                 <h3>PART C: APPLICANT'S EVIDENCE OF NEED</h3>
                                 <h4>Applicant's Information</h4>
                                 <div class="form-row">
@@ -1062,11 +1337,11 @@
                                         </div>
                                     </div>
                                     <div class="col">
-<!--                                        <button class="btn btn-primary btn-sm" @click.prevent="sendOther(1)">send</button>-->
+                                        <!--                                        <button class="btn btn-primary btn-sm" @click.prevent="sendOther(1)">send</button>-->
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==4">
+                            <section v-if="step==5">
                                 <h3>PART D</h3>
                                 <div class="form-row">
                                     <div class="col">
@@ -1205,7 +1480,7 @@
                                 Previous Step
                             </button>
                             <button v-if="step != totalSteps" type="button" class="btn btn-primary"
-                                    @click.prevent="next">Next Step
+                                    @click.prevent="nextStep">Next Step
                             </button>
                             <button v-if="step == 5" type="button" class="btn btn-success btn-submit"
                                     @click.prevent="sendApplication()" :disabled="loading">
@@ -1258,15 +1533,6 @@
                 enable: {},
                 loading: false,
                 attachments: [],
-                sibling: [
-                    {
-                        name: '',
-                        age: '',
-                        schoolOrEmployer: '',
-                        classOrSalary: '',
-                        others: '',
-                    }
-                ],
                 formf: new FormData(),
                 form: new Form({
                     type: 'scholarship',
@@ -1354,11 +1620,50 @@
                     otherDis: '',
                     siblingsInfo: '',
                     hear: '',
-                    hearDetails: ''
+                    hearDetails: '',
+
+                    firstSibName: '',
+                    firstSibAge: '',
+                    firstSibSchoolOrEmployer: '',
+                    firstSibClassOrSalary: '',
+                    firstSibOthers: '',
+
+                    secondSibName: '',
+                    secondSibSchoolOrEmployer: '',
+                    secondSibAge: '',
+                    secondSibClassOrSalary: '',
+                    secondSibOthers: '',
+
+                    thirdSibName: '',
+                    thirdSibAge: '',
+                    thirdSibSchoolOrEmployer: '',
+                    thirdSibClassOrSalary: '',
+                    thirdSibOthers: '',
+
+                    forthSibName: '',
+                    forthSibAge: '',
+                    forthSibSchoolOrEmployer: '',
+                    forthSibClassOrSalary: '',
+                    forthSibOthers: '',
+
+                    fifthSibName: '',
+                    fifthSibAge: '',
+                    fifthSibSchoolOrEmployer: '',
+                    fifthSibClassOrSalary: '',
+                    fifthSibOthers: '',
+
+                    sixthSibName: '',
+                    sixthSibAge: '',
+                    sixthSibSchoolOrEmployer: '',
+                    sixthSibClassOrSalary: '',
+                    sixthSibOthers: '',
                 })
             }
         },
         methods: {
+            printSib() {
+                console.log(this.sibling);
+            },
             fieldChange(e) {
                 let selectedFiles = e.target.files;
                 if (!selectedFiles.length) {
@@ -1388,7 +1693,7 @@
                     })
                     this.form.reset();
                     this.$Progress.finish();
-                    // window.location.href = "/student"
+                    window.location.href = "/student"
 
                 })
                     .catch(error => {
@@ -1823,6 +2128,11 @@
                 }
 
                 if (this.step == 3) {
+                    this.step++;
+                    return false;
+                }
+
+                if (this.step == 4) {
                     if (!this.form.whyApply) {
                         // set(type, 'required');
                         this.form.errors.set({
@@ -1950,7 +2260,7 @@
                     }
                 }
 
-                if (this.step == 4) {
+                if (this.step == 5) {
                     if (!this.form.hear) {
                         // set(type, 'required');
                         this.form.errors.set({
