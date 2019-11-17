@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card" v-if="enable==1">
+                <div class="card" v-if="watch == 0">
                     <div class="card-header">Application</div>
 
                     <div class="card-body">
@@ -23,9 +23,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row justify-content-center">
+                                <div class="col-sm-6 justify-content-center">
+                                    <div class="form-group">
+                                        <label for="county">Select Your County</label>
+                                        <select   v-model="form.county" @change='getStatus()'
+                                                class="form-control" :required="true" name="county" id="Mycounty"
+                                                :class="{ 'is-invalid': form.errors.has('county') }" >
+                                            <option selected value="">--Select county--</option>
+                                            <option v-for="count in counties" :key="count.id" :value="count.id">{{
+                                                count.name}}
+                                            </option>
+                                        </select>
+                                        <has-error :form="form" field="county"></has-error>
+                                    </div>
+                                </div>
+                                </div>
                             </section>
 
-                            <section v-if="step==2">
+                            <section v-if="step==2 && enable==1">
                                 <h3>PERSONAL DETAILS</h3>
 
                                 <div class="form-row ">
@@ -386,7 +402,7 @@
                                         <div class="form-group">
                                             <label for="county">County</label>
                                             <select v-model="form.county" @change='getCountyWards()'
-                                                    class="form-control" name="county" id="county"
+                                                    class="form-control"  name="county" id="county"
                                                     :class="{ 'is-invalid': form.errors.has('county') }">
                                                 <option selected value="">--Select county--</option>
                                                 <option v-for="count in counties" :key="count.id" :value="count.id">{{
@@ -400,7 +416,7 @@
                                         <div class="form-group">
                                             <label for="ward">Ward</label>
                                             <select v-model="form.ward" class="form-control" name="ward" id="ward"
-                                                    :class="{ 'is-invalid': form.errors.has('ward') }">
+                                                    :class="{ 'is-invalid': form.errors.has('ward') }" >
                                                 <option selected value="">--Select Ward--</option>
                                                 <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
                                                     wardy.name}}
@@ -604,7 +620,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Application window closed</h5>
-                            <p class="card-text">The application window has been closed for now wait until the window is
+                            <p class="card-text">The application window for your County has been closed for now wait until the window is
                                 opened</p>
                             <a href="/" class="btn btn-danger">Go Back Home</a>
                         </div>
@@ -626,6 +642,7 @@
                 info: {},
                 enable: {},
                 loading: false,
+                watch:0,
                 form: new Form({
                     type: '',
                     name: '',
@@ -809,6 +826,13 @@
 
                         })
                         return false;
+                    }else if(!this.form.county) {
+                        this.form.errors.set({
+                            county: 'This field is required'
+                        })
+                        return false;
+                    }else if(this.enable == 0){
+                        this.watch = 1;
                     } else {
                         this.step++;
                         return false;
@@ -1118,14 +1142,15 @@
                 axios.get("api/getdetails").then(({data}) => ([this.info = data['user']]));
             },
             getStatus() {
-                axios.get("api/status").then(({data}) => ([this.enable = data['num']]));
+                axios.get("api/status/" + this.form.county).then(({data}) => ([this.enable = data['num']]));
+
             }
         },
         created() {
             this.getCounties();
             this.getWards();
             this.getDetails();
-            this.getStatus();
+
         }
     }
 </script>
