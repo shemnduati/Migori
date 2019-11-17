@@ -5,15 +5,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Information Table</h3>
-
+                        <h3 class="card-title">County bursary Information Table</h3>
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-7"  v-if="$gate.isOfficial()">
-                                    <button @click="getBursary('CDF')" class="btn btn-success btn-sm">Scholarship</button>
-                                    <button @click="getBursary('County')" class="btn btn-success btn-sm">County</button>
-                                </div>
-                                <div class="col-sm-5" v-if="$gate.isOfficial()">
+                                <div class="col-sm-12" v-if="$gate.isOfficial()">
                                     <form>
                                         <select @change="getType()" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
@@ -23,10 +18,6 @@
                                             <option value="4">Rejected</option>
                                         </select>
                                     </form>
-                                </div>
-                                <div class="col-sm-12" v-if="$gate.isSubadmin()">
-                                    <button @click="getBursary('CDF')" class="btn btn-success btn-sm">Scholarship</button>
-                                    <button @click="getBursary('County')" class="btn btn-success btn-sm">County</button>
                                 </div>
                             </div>
                         </div>

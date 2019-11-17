@@ -3601,15 +3601,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -76205,43 +76196,13 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _c("h3", { staticClass: "card-title" }, [
-                  _vm._v("Information Table")
+                  _vm._v("County bursary Information Table")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
                     _vm.$gate.isOfficial()
-                      ? _c("div", { staticClass: "col-sm-7" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success btn-sm",
-                              on: {
-                                click: function($event) {
-                                  return _vm.getBursary("CDF")
-                                }
-                              }
-                            },
-                            [_vm._v("Scholarship")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success btn-sm",
-                              on: {
-                                click: function($event) {
-                                  return _vm.getBursary("County")
-                                }
-                              }
-                            },
-                            [_vm._v("County")]
-                          )
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.$gate.isOfficial()
-                      ? _c("div", { staticClass: "col-sm-5" }, [
+                      ? _c("div", { staticClass: "col-sm-12" }, [
                           _c("form", [
                             _c(
                               "select",
@@ -76308,36 +76269,6 @@ var render = function() {
                               ]
                             )
                           ])
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.$gate.isSubadmin()
-                      ? _c("div", { staticClass: "col-sm-12" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success btn-sm",
-                              on: {
-                                click: function($event) {
-                                  return _vm.getBursary("CDF")
-                                }
-                              }
-                            },
-                            [_vm._v("Scholarship")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success btn-sm",
-                              on: {
-                                click: function($event) {
-                                  return _vm.getBursary("County")
-                                }
-                              }
-                            },
-                            [_vm._v("County")]
-                          )
                         ])
                       : _vm._e()
                   ])

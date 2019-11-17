@@ -77,7 +77,7 @@ class InformationController extends Controller
     public function getCountyBursary()
     {
         $county_id = User::where('id', Auth::user()->id)->value('county');
-        $applications = Application::latest()->where('year', date('Y'))->where('county', $county_id)->get();
+        $applications = Application::latest()->where('year', date('Y'))->where('bursary_type','County')->where('county', $county_id)->get();
 
         return ['applications' => $applications];
 
@@ -115,7 +115,7 @@ class InformationController extends Controller
     {
         // return User::latest()->paginate(10);
         $ward_id = auth()->user()->ward;
-        $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->get();
+        $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('ward_id', $ward_id)->get();
 
         return ['applications' => $applications];
 
