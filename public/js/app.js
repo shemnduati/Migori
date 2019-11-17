@@ -6187,7 +6187,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       step: 1,
-      totalSteps: 5,
+      totalSteps: 6,
       counties: {},
       wards: {},
       info: {},
@@ -88310,7 +88310,7 @@ var render = function() {
                           on: {
                             click: function($event) {
                               $event.preventDefault()
-                              return _vm.next($event)
+                              return _vm.nextStep($event)
                             }
                           }
                         },
@@ -88484,7 +88484,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(
-            "The application window has been closed for now wait until the window is\n                            opened"
+            "The application window for your county has been closed for now wait until the window is\n                            opened"
           )
         ]),
         _vm._v(" "),
@@ -88551,74 +88551,7 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.$gate.isOfficial()
-                      ? _c("div", { staticClass: "col-sm-5" }, [
-                          _c("form", [
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.type,
-                                    expression: "form.type"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                on: {
-                                  change: [
-                                    function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.form,
-                                        "type",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    },
-                                    function($event) {
-                                      return _vm.getType()
-                                    }
-                                  ]
-                                }
-                              },
-                              [
-                                _c(
-                                  "option",
-                                  { attrs: { selected: "", value: "" } },
-                                  [_vm._v("--Sort By--")]
-                                ),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "1" } }, [
-                                  _vm._v("All")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("Pending")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "3" } }, [
-                                  _vm._v("Awarded")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "4" } }, [
-                                  _vm._v("Rejected")
-                                ])
-                              ]
-                            )
-                          ])
-                        ])
+                      ? _c("div", { staticClass: "col-sm-5" })
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.$gate.isSubadmin()

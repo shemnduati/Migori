@@ -1497,7 +1497,7 @@
                                 Previous Step
                             </button>
                             <button v-if="step != totalSteps" type="button" class="btn btn-primary"
-                                    @click.prevent="next">Next Step
+                                    @click.prevent="nextStep">Next Step
                             </button>
                             <button v-if="step == 6" type="button" class="btn btn-success btn-submit"
                                     @click.prevent="sendApplication()" :disabled="loading">
@@ -1526,7 +1526,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Application window closed</h5>
-                            <p class="card-text">The application window has been closed for now wait until the window is
+                            <p class="card-text">The application window for your county has been closed for now wait until the window is
                                 opened</p>
                             <a href="/" class="btn btn-danger">Go Back Home</a>
                         </div>
@@ -1542,7 +1542,7 @@
         data() {
             return {
                 step: 1,
-                totalSteps: 5,
+                totalSteps: 6,
                 counties: {},
                 wards: {},
                 info: {},
