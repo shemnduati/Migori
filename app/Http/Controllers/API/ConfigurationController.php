@@ -4,7 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Configuration;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ConfigurationController extends Controller
 {
@@ -13,9 +16,10 @@ class ConfigurationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return Configuration::all();
+        $county =User::where('id',$id)->value('county');
+        return Configuration::where('county',$county)->get();
     }
 
     /**
@@ -24,24 +28,29 @@ class ConfigurationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $this->validate($request,[
-            'year' => 'required|string|max:25|unique:configurations',
+            'year' => 'required|string|max:25',
             'status' => 'required|boolean',
+            'type' => 'required'
         ]);
 
-        $conf = Configuration::where('status', 1)->get();
-        foreach ($conf as $co) {
-            $confi = Configuration::findOrFail($co['id']);
-            $confi->status = 0;
-            $confi->craete();
-        }
+         $county =User::where('id',$id)->value('county');
+         $conf = Configuration::where('status', 1)->where('county',$county)->where('type',$request->type)->get();
+            foreach ($conf as $co) {
+                $confi = Configuration::findOrFail($co['id']);
+                $confi->status = 0;
+                $confi->craete();
+            }
 
-        return Configuration::Create([
-            'year' => $request['year'],
-            'status' => $request['status'],
-        ]);
+            return Configuration::Create([
+                'year' => $request['year'],
+                'status' => $request['status'],
+                'county' => $county,
+                'type' => $request['type'],
+            ]);
+
     }
 
     /**
@@ -74,8 +83,10 @@ class ConfigurationController extends Controller
         $this->validate($request,[
             // 'year' => 'required|string|max:25',
         ]);
+        $user_id = Auth::user();
+        $county =User::where('id',$user_id['id'])->value('county');
 
-        $conf = Configuration::where('status', 1)->get();
+        $conf = Configuration::where('status', 1)->where('county',$county)->where('type',$request->type)->get();
         foreach ($conf as $co) {
             $confi = Configuration::findOrFail($co['id']);
             $confi->status = 0;

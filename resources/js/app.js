@@ -60,7 +60,7 @@ let routes = [
     { path: '/budget', component: require('./components/budget.vue').default },
     { path: '/informationview/:applicationId', component: require('./components/Informationview.vue').default },
     // { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
-   
+
 
 ]
 

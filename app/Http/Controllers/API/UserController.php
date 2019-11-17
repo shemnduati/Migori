@@ -143,7 +143,9 @@ class UserController extends Controller
 
         return ['wards'=>$wards];
     }
+    public function getMyWard(){
 
+    }
     public function getCountyWards($countyId)
     {
         $wards = Ward::where('county_id', $countyId)->get();

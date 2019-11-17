@@ -17,6 +17,7 @@
                         <tr>
                           <th>Application Year</th>
                           <th>OFF/ON</th>
+                            <th>Bursary type</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -27,6 +28,10 @@
                             <span class="text-danger font-weight-bolder" v-if="configurations.status == 0">OFF</span>
                             <span class="text-success font-weight-bolder" v-if="configurations.status == 1">ON</span>
                           </td>
+                            <td>
+                                <span class="badge badge-warning font-weight-bolder" v-if="configurations.type == 1">Scholarship</span>
+                                <span class="badge badge-primary font-weight-bolder" v-if="configurations.type == 2">County</span>
+                            </td>
                           <td>
                             <a href="#" @click="editModal(configurations)">
                                 <i class="fa fa-edit p-1 text-primary"></i>
@@ -72,6 +77,14 @@
                                 </select>
                                 <has-error :form="form" field="status"></has-error>
                             </div>
+                            <div class="form-group">
+                                <select name="type" v-model="form.type" id="type" class="form-control"   :class="{ 'is-invalid': form.errors.has('type') }">
+                                    <option value="">Select bursary type</option>
+                                    <option value="1">Scholarship</option>
+                                    <option value="2">County</option>
+                                </select>
+                                <has-error :form="form" field="type"></has-error>
+                            </div>
                         </div>
 
                         <div class="modal-footer">
@@ -88,6 +101,12 @@
 
 <script>
     export default {
+        props:{
+            user: {
+                type: Object,
+                required: true
+            }
+        },
         data(){
         return{
             editMode:false,
@@ -95,7 +114,8 @@
                 form: new Form({
                   id:'',
                   year: '',
-                  status: ''
+                  status: '',
+                    type:'',
                 })
             }
         },
@@ -108,7 +128,7 @@
         methods: {
             addConfiguration(){
                 this.$Progress.start();
-                this.form.post('api/configuration')
+                this.form.post('api/configuration/' + this.user.id)
                     .then(()=>{
                         Fire.$emit('entry');
                         $('#addnew').modal('hide');
@@ -171,9 +191,7 @@
                     })
                 },
             loadConfiguration(){
-                if (this.$gate.isAdmin()) {
-                    axios.get("api/configuration").then(({data}) => (this.configuration = data));
-                }
+                    axios.get("api/configurations/" + this.user.id).then(({data}) => (this.configuration = data));
             },
             newModal(){
                 this.editMode = false;

@@ -117,17 +117,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </router-link>
                         </li>
                         @endcan
-                        @can('isSubadminOrOfficial')
+                        @can('isOfficial')
                             <li class="nav-item">
-                                <router-link to="/Information" class="nav-link">
-                                    <i class="nav-icon fas fa-clipboard-list cyan"></i>
+                                <router-link to="/configuration" class="nav-link">
+                                    <i class="fas fa-cog orange"></i>
                                     <p>
-                                        Information
+                                        Configuration
                                     </p>
                                 </router-link>
                             </li>
-                        @endcan
-                        @can('isOfficial')
                             <li class="nav-item">
                                 <router-link to="/subadmin" class="nav-link">
                                     <i class="nav-icon fas fa-user-plus green"></i>
@@ -144,6 +142,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
+                        @endcan
+                        @can('isSubadminOrOfficial')
+                            <li class="nav-item">
+                                <router-link to="/Information" class="nav-link">
+                                    <i class="nav-icon fas fa-clipboard-list cyan"></i>
+                                    <p>
+                                        Information
+                                    </p>
+                                </router-link>
+                            </li>
                             <li class="nav-item">
                                 <router-link to="/Applicants" class="nav-link">
                                     <i class="nav-icon fas fa-user-graduate teal"></i>
@@ -154,16 +162,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                         @endcan
                         @can('isAdmin')
-
-                            <li class="nav-item">
-                                <router-link to="/configuration" class="nav-link">
-                                    <i class="fas fa-cog"></i>
-                                    <p>
-                                        Configuration
-                                    </p>
-                                </router-link>
-                            </li>
-
                             <li class="nav-item">
                                 <router-link to="/county" class="nav-link">
                                     <i class="nav-icon fas fa-globe-africa blue"></i>
@@ -244,7 +242,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content">
                 <div class="container-fluid">
                     <vue-progress-bar></vue-progress-bar>
-                    <router-view></router-view>
+                    <router-view :user="{{auth()->user()}}"></router-view>
                     @yield('content')
                 </div><!-- /.container-fluid -->
             </div>

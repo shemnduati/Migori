@@ -17,7 +17,6 @@
                                             <select v-model="form.type" class="form-control" name="type" id="type"
                                                     :class="{ 'is-invalid': form.errors.has('type') }">
                                                 <option selected value="">--Select Type--</option>
-                                                <option value="CDF">CDF</option>
                                                 <option value="County">County</option>
                                             </select>
                                             <has-error :form="form" field="type"></has-error>
@@ -461,6 +460,15 @@
                                             <has-error :form="form" field="village"></has-error>
                                         </div>
                                     </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Polling Station</label>
+                                            <input v-model="form.polling" type="text" name="polling"
+                                                   class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('polling') }">
+                                            <has-error :form="form" field="polling"></has-error>
+                                        </div>
+                                    </div>
                                 </div>
                             </section>
                             <section v-if="step==5">
@@ -529,6 +537,35 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('balance') }">
                                             <has-error :form="form" field="balance"></has-error>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Bank Name</label>
+                                            <input v-model="form.bank" type="text" name="bank"
+                                                   class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('bank') }">
+                                            <has-error :form="form" field="bank"></has-error>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Account Number</label>
+                                            <input v-model="form.account" type="number" name="account"
+                                                   class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('account') }">
+                                            <has-error :form="form" field="account"></has-error>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Branch</label>
+                                            <input v-model="form.bran" type="text" name="branch"
+                                                   class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('bran') }">
+                                            <has-error :form="form" field="bran"></has-error>
                                         </div>
                                     </div>
                                 </div>
@@ -618,6 +655,7 @@
                     division: '',
                     sublocation: '',
                     village: '',
+                    polling:'',
                     iname: '',
                     branch: '',
                     year: '',
@@ -636,6 +674,9 @@
                     ftelephone: '',
                     mtelephone: '',
                     gtelephone: '',
+                    bank:'',
+                    account:'',
+                    bran:'',
                 })
             }
         },

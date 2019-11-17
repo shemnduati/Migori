@@ -9,7 +9,7 @@
 
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" v-if="$gate.isOfficial()">
                                     <form>
                                         <select @change="getType()" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
@@ -73,6 +73,7 @@
             return{
                 applications :{},
                 wards:{},
+                myward:'',
                 mycounty: {},
                 form: new Form({
                     type: ''
@@ -89,7 +90,7 @@
                     }
                 }
                 var doc = new jsPDF();
-                
+
                 doc.setFontSize(18);
                 doc.text('Approved Bursary Applications', 14, 22);
                 doc.setFontSize(11);
@@ -103,7 +104,10 @@
                 doc.save('Week'+ '.pdf');
             },
             getApplications(){
+                if(this.$gate.isOfficial()) {
                     axios.get('api/getApplicants').then(({data}) => ([this.applications = data['parent']]));
+                }
+                    axios.get('api/getApp').then(({data}) => ([this.applications = data['parent']]));
             },
             getType(){
                     axios.get('api/getWardsById/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
@@ -115,6 +119,7 @@
             getCounty(){
                 axios.get("api/getMyCounty").then(({ data }) => ([this.mycounty = data['county']]));
             },
+
         },
 
 

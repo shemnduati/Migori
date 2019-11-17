@@ -32,6 +32,8 @@ Route::post('apply', 'API\ApplicationController@store');
 Route::apiResources(['county' => 'API\CountyController']);
 Route::get('status', 'API\ConfigurationController@getStatus');
 Route::apiResources(['configuration' => 'API\ConfigurationController']);
+Route::post('configuration/{id}','API\ConfigurationController@store');
+Route::get('configurations/{id}','API\ConfigurationController@index');
 
 Route::get('/getcounties', 'API\ApplicationController@getCounties');
 Route::get('/getwards', 'API\ApplicationController@getWards');
@@ -51,6 +53,7 @@ Route::get('/getMyStatus', 'API\InformationController@getMyStatus');
 Route::get('/getMyAmount', 'API\InformationController@getAmount');
 Route::get('/getCountyBursary', 'API\InformationController@getCountyBursary');
 Route::get('/getApplicants', 'API\InformationController@Applicants');
+Route::get('/getApp', 'API\InformationController@getApp');
 Route::get('/gettype/{id}', 'API\InformationController@getType');
 Route::get('/getWardsById/{id}', 'API\InformationController@getWardsById');
 Route::get('/getMyCounty', 'API\InformationController@getMyCounty');
@@ -73,6 +76,7 @@ Route::get('counties', 'API\UserController@counties');
 Route::get('/getMyCounty', 'API\UserController@getMyCounties');
 Route::get('/getcounty', 'API\UserController@getCounties');
 Route::get('/getward', 'API\UserController@getWards');
+Route::get('/getMyWard', 'API\UserController@getMyWard');
 Route::get('/getcountyward/{countyId}', 'API\UserController@getCountyWards');
 
 Route::apiResources(['budget' => 'API\BudgetController']);
