@@ -1788,6 +1788,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       applications: {},
       wards: {},
+      myward: '',
       mycounty: {},
       form: new Form({
         type: ''
@@ -1816,32 +1817,39 @@ __webpack_require__.r(__webpack_exports__);
     getApplications: function getApplications() {
       var _this = this;
 
-      axios.get('api/getApplicants').then(function (_ref) {
-        var data = _ref.data;
+      if (this.$gate.isOfficial()) {
+        axios.get('api/getApplicants').then(function (_ref) {
+          var data = _ref.data;
+          return [_this.applications = data['parent']];
+        });
+      }
+
+      axios.get('api/getApp').then(function (_ref2) {
+        var data = _ref2.data;
         return [_this.applications = data['parent']];
       });
     },
     getType: function getType() {
       var _this2 = this;
 
-      axios.get('api/getWardsById/' + this.form.type).then(function (_ref2) {
-        var data = _ref2.data;
+      axios.get('api/getWardsById/' + this.form.type).then(function (_ref3) {
+        var data = _ref3.data;
         return [_this2.applications = data['parent']];
       });
     },
     getWards: function getWards() {
       var _this3 = this;
 
-      axios.get("api/getMyWards").then(function (_ref3) {
-        var data = _ref3.data;
+      axios.get("api/getMyWards").then(function (_ref4) {
+        var data = _ref4.data;
         return [_this3.wards = data['wards']];
       });
     },
     getCounty: function getCounty() {
       var _this4 = this;
 
-      axios.get("api/getMyCounty").then(function (_ref4) {
-        var data = _ref4.data;
+      axios.get("api/getMyCounty").then(function (_ref5) {
+        var data = _ref5.data;
         return [_this4.mycounty = data['county']];
       });
     }
@@ -3099,7 +3107,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
   data: function data() {
     return {
       editMode: false,
@@ -3107,7 +3134,8 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: '',
         year: '',
-        status: ''
+        status: '',
+        type: ''
       })
     };
   },
@@ -3124,7 +3152,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      this.form.post('api/configuration').then(function () {
+      this.form.post('api/configuration/' + this.user.id).then(function () {
         Fire.$emit('entry');
         $('#addnew').modal('hide');
         toast.fire({
@@ -3183,12 +3211,10 @@ __webpack_require__.r(__webpack_exports__);
     loadConfiguration: function loadConfiguration() {
       var _this5 = this;
 
-      if (this.$gate.isAdmin()) {
-        axios.get("api/configuration").then(function (_ref) {
-          var data = _ref.data;
-          return _this5.configuration = data;
-        });
-      }
+      axios.get("api/configurations/" + this.user.id).then(function (_ref) {
+        var data = _ref.data;
+        return _this5.configuration = data;
+      });
     },
     newModal: function newModal() {
       this.editMode = false;
@@ -3447,6 +3473,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -10804,7 +10834,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
 
 // exports
 
@@ -69288,72 +69318,76 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-sm-6" }, [
-                      _c("form", [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.type,
-                                expression: "form.type"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.form,
-                                    "type",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                },
-                                function($event) {
-                                  return _vm.getType()
-                                }
-                              ]
-                            }
-                          },
-                          [
+                    _vm.$gate.isOfficial()
+                      ? _c("div", { staticClass: "col-sm-6" }, [
+                          _c("form", [
                             _c(
-                              "option",
-                              { attrs: { selected: "", value: "" } },
-                              [_vm._v("--Sort By--")]
-                            ),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "0" } }, [
-                              _vm._v("county")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.wards, function(wardy) {
-                              return _c(
-                                "option",
-                                {
-                                  key: wardy.id,
-                                  domProps: { value: wardy.id }
-                                },
-                                [_vm._v(_vm._s(wardy.name) + " ward")]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ])
-                    ]),
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.type,
+                                    expression: "form.type"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.form,
+                                        "type",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.getType()
+                                    }
+                                  ]
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { selected: "", value: "" } },
+                                  [_vm._v("--Sort By--")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "0" } }, [
+                                  _vm._v("county")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.wards, function(wardy) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: wardy.id,
+                                      domProps: { value: wardy.id }
+                                    },
+                                    [_vm._v(_vm._s(wardy.name) + " ward")]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ])
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-6" }, [
                       _c(
@@ -72257,6 +72291,30 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
+                      configurations.type == 1
+                        ? _c(
+                            "span",
+                            {
+                              staticClass:
+                                "badge badge-warning font-weight-bolder"
+                            },
+                            [_vm._v("Scholarship")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      configurations.type == 2
+                        ? _c(
+                            "span",
+                            {
+                              staticClass:
+                                "badge badge-primary font-weight-bolder"
+                            },
+                            [_vm._v("County")]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
                       _c(
                         "a",
                         {
@@ -72471,6 +72529,68 @@ var render = function() {
                         })
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.type,
+                                expression: "form.type"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("type")
+                            },
+                            attrs: { name: "type", id: "type" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "type",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "" } }, [
+                              _vm._v("Select bursary type")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("Scholarship")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("County")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "type" }
+                        })
+                      ],
+                      1
                     )
                   ]),
                   _vm._v(" "),
@@ -72537,6 +72657,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Application Year")]),
         _vm._v(" "),
         _c("th", [_vm._v("OFF/ON")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Bursary type")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])
@@ -72945,7 +73067,37 @@ var render = function() {
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
                     _vm.$gate.isOfficial()
-                      ? _c("div", { staticClass: "col-sm-12" }, [
+                      ? _c("div", { staticClass: "col-sm-7" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getBursary("CDF")
+                                }
+                              }
+                            },
+                            [_vm._v("Scholarship")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getBursary("County")
+                                }
+                              }
+                            },
+                            [_vm._v("County")]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.$gate.isOfficial()
+                      ? _c("div", { staticClass: "col-sm-5" }, [
                           _c("form", [
                             _c(
                               "select",
@@ -73027,7 +73179,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("CDF")]
+                            [_vm._v("Scholarship")]
                           ),
                           _vm._v(" "),
                           _c(

@@ -9,7 +9,11 @@
 
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-12" v-if="$gate.isOfficial()">
+                                <div class="col-sm-7"  v-if="$gate.isOfficial()">
+                                    <button @click="getBursary('CDF')" class="btn btn-success btn-sm">Scholarship</button>
+                                    <button @click="getBursary('County')" class="btn btn-success btn-sm">County</button>
+                                </div>
+                                <div class="col-sm-5" v-if="$gate.isOfficial()">
                                     <form>
                                         <select @change="getType()" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
@@ -21,7 +25,7 @@
                                     </form>
                                 </div>
                                 <div class="col-sm-12" v-if="$gate.isSubadmin()">
-                                    <button @click="getBursary('CDF')" class="btn btn-success btn-sm">CDF</button>
+                                    <button @click="getBursary('CDF')" class="btn btn-success btn-sm">Scholarship</button>
                                     <button @click="getBursary('County')" class="btn btn-success btn-sm">County</button>
                                 </div>
                             </div>
