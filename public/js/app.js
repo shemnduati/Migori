@@ -5771,6 +5771,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5782,6 +5817,7 @@ __webpack_require__.r(__webpack_exports__);
       now: moment().format('YYYY'),
       enable: {},
       loading: false,
+      attachments: [],
       sibling: [{
         name: '',
         age: '',
@@ -5879,10 +5915,26 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    fieldChange: function fieldChange(e) {
+      var selectedFiles = e.target.files;
+
+      if (!selectedFiles.length) {
+        return false;
+      }
+
+      for (var i = 0; i < selectedFiles.length; i++) {
+        this.attachments.push(selectedFiles[i]);
+      } // console.log(this.attachments);
+
+    },
     sendOther: function sendOther(applicationId) {
       var _this = this;
 
-      this.formf.append('siblings[]', this.sibling);
+      for (var i = 0; i < this.attachments.length; i++) {
+        this.formf.append('files[]', this.attachments[i]);
+      }
+
+      this.formf.append('siblings', this.sibling);
       this.formf.append('applicationId', applicationId);
       var config = {
         headers: {
@@ -5890,17 +5942,26 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       axios.post('/api/complete', this.formf, config).then(function (response) {
-        // this.form.reset();
         _this.loading = false;
-
-        _this.$Progress.finish();
-
+        Fire.$emit('AfterCreate');
         Swal.fire({
           type: 'success',
           title: 'Submited!!',
-          text: 'Successfully'
+          text: 'Application Submitted Successfully'
         });
-      })["catch"](function (response) {//error
+
+        _this.form.reset();
+
+        _this.$Progress.finish(); // window.location.href = "/student"
+
+      })["catch"](function (error) {
+        _this.loading = false;
+        _this.errors = error.response.data.errors;
+        Swal.fire({
+          type: 'error',
+          title: 'Error!!',
+          text: error.response.data.msg
+        });
       });
     },
     next: function next() {
@@ -5926,17 +5987,6 @@ __webpack_require__.r(__webpack_exports__);
         this.form.post('api/applyScholarship').then(function (_ref) {
           var data = _ref.data;
 
-          // this.loading = false;
-          // Fire.$emit('AfterCreate');
-          // Swal.fire({
-          //     title: 'Submited!!',
-          //     type: 'success',
-          //     text: 'Application Submitted Successfully' + data,
-          //
-          // })
-          // this.form.reset();
-          // this.$Progress.finish();
-          // window.location.href = "/student"
           _this2.sendOther(data);
         })["catch"](function (error) {
           _this2.loading = false;
@@ -80347,7 +80397,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           _vm._s(count.name) +
-                                            "\n                                        "
+                                            "\n                                            "
                                         )
                                       ]
                                     )
@@ -80426,7 +80476,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             _vm._s(wardy.name) +
-                                              "\n                                            "
+                                              "\n                                                "
                                           )
                                         ]
                                       )
@@ -80772,7 +80822,7 @@ var render = function() {
                               [
                                 _c("label", { attrs: { for: "task" } }, [
                                   _vm._v(
-                                    "Have you attempted KCPE previous years? If more than once,\n                                            how many times and why? Give the scores attained in the previous\n                                            years"
+                                    "Have you attempted KCPE previous years? If more than once,\n                                                how many times and why? Give the scores attained in the previous\n                                                years"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -82690,7 +82740,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           _vm._s(count.name) +
-                                            "\n                                        "
+                                            "\n                                            "
                                         )
                                       ]
                                     )
@@ -82769,7 +82819,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             _vm._s(wardy.name) +
-                                              "\n                                            "
+                                              "\n                                                "
                                           )
                                         ]
                                       )
@@ -82940,7 +82990,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("p", [
                               _vm._v(
-                                "List all the applicants' brothers and sisters starting with the oldest and state\n                                    what each is doing\n                                    (If working describe job and monthly salary, if in university state it, if in\n                                    school state the form or standard, if\n                                    in training describe it, if a sister is married show the occupation of the\n                                    husband, if a brother is married show\n                                    the occupation of the wife)"
+                                "List all the applicants' brothers and sisters starting with the oldest and state\n                                        what each is doing\n                                        (If working describe job and monthly salary, if in university state it, if in\n                                        school state the form or standard, if\n                                        in training describe it, if a sister is married show the occupation of the\n                                        husband, if a brother is married show\n                                        the occupation of the wife)"
                               )
                             ]),
                             _vm._v(" "),
@@ -82953,7 +83003,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "Add\n                                    sibling\n                                "
+                                  "Add\n                                        sibling\n                                    "
                                 )
                               ]
                             ),
@@ -83289,7 +83339,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Do you have any form of inheritance from your\n                                            parents/guardians/grandparents or any other source? If yes\n                                            describe"
+                                    "Do you have any form of inheritance from your\n                                                parents/guardians/grandparents or any other source? If yes\n                                                describe"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -83406,7 +83456,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Have you received any financial\n                                            support/Bursaries in the past? Please provide\n                                            documentation"
+                                    "Have you received any financial\n                                                support/Bursaries in the past? Please provide\n                                                documentation"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -83458,7 +83508,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Do you have any special need? For example:\n                                            Chronic illness, disability. Please provide\n                                            documentation"
+                                    "Do you have any special need? For example:\n                                                Chronic illness, disability. Please provide\n                                                documentation"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -84411,7 +84461,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Has your family been affected by civil\n                                            conflict or natural disasters such as flooding,\n                                            drought, fire, or famine? Describe:"
+                                    "Has your family been affected by civil\n                                                conflict or natural disasters such as flooding,\n                                                drought, fire, or famine? Describe:"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -84521,7 +84571,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Please describe any other cause of\n                                            disadvantage or vulnerability?"
+                                    "Please describe any other cause of\n                                                disadvantage or vulnerability?"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -84571,7 +84621,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "How many siblings are in secondary school,\n                                            collage and tertiary level."
+                                    "How many siblings are in secondary school,\n                                                collage and tertiary level."
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -84616,6 +84666,41 @@ var render = function() {
                               1
                             )
                           ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "col" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "form-group justify-content-center"
+                              },
+                              [
+                                _c("label", { attrs: { for: "files" } }, [
+                                  _vm._v(
+                                    "Please attach all RELEVANT DOCUMENTS. Copies of ALL\n                                                DOCUMENTS required must be provided by the applicant. Any applications\n                                                without\n                                                relevant documents will be rejected"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  staticClass: "form-control-file",
+                                  attrs: {
+                                    type: "file",
+                                    multiple: "",
+                                    id: "files"
+                                  },
+                                  on: { change: _vm.fieldChange }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "files" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col" })
                         ])
                       ])
                     : _vm._e(),
@@ -84629,7 +84714,7 @@ var render = function() {
                             _c("div", { staticClass: "form-group" }, [
                               _c("label", [
                                 _vm._v(
-                                  "How did you first learn about the Governor's scholarship program?"
+                                  "How did you first learn about the Governor's scholarship\n                                                program?"
                                 )
                               ]),
                               _vm._v(" "),
@@ -84679,6 +84764,7 @@ var render = function() {
                                   )
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
                               _c(
@@ -84726,12 +84812,13 @@ var render = function() {
                                     { staticClass: "form-check-label" },
                                     [
                                       _vm._v(
-                                        "School - teacher, principal or Ward Representative"
+                                        "School - teacher, principal or Ward\n                                                    Representative"
                                       )
                                     ]
                                   )
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
                               _c(
@@ -84780,6 +84867,7 @@ var render = function() {
                                   )
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
                               _c(
@@ -84828,12 +84916,13 @@ var render = function() {
                                     { staticClass: "form-check-label" },
                                     [
                                       _vm._v(
-                                        "Friends, parents, guardians or relative"
+                                        "Friends, parents, guardians or\n                                                    relative"
                                       )
                                     ]
                                   )
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
                               _c(
@@ -84879,6 +84968,7 @@ var render = function() {
                                   )
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
                               _c(
@@ -84927,6 +85017,7 @@ var render = function() {
                                   )
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
                               _c(
@@ -84975,6 +85066,7 @@ var render = function() {
                                   )
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
                               _c(
@@ -85023,12 +85115,13 @@ var render = function() {
                                     { staticClass: "form-check-label" },
                                     [
                                       _vm._v(
-                                        "Social work such as face book, Twitter, MySpace"
+                                        "Social work such as face book, Twitter,\n                                                    MySpace"
                                       )
                                     ]
                                   )
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(" "),
                               _c(
@@ -85471,7 +85564,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                            Previous Step\n                        "
+                            "\n                                Previous Step\n                            "
                           )
                         ]
                       )
@@ -85490,7 +85583,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Next Step\n                        ")]
+                        [_vm._v("Next Step\n                            ")]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -85530,7 +85623,7 @@ var render = function() {
                               : _vm._e()
                           ]),
                           _vm._v(
-                            "\n                            Submit Application\n                        "
+                            "\n                                Submit Application\n                            "
                           )
                         ]
                       )
@@ -85577,7 +85670,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Does either of your parents / guardians\n                                    suffer from a chronic disease or ailment,\n                                    describe:"
+          "Does either of your parents / guardians\n                                        suffer from a chronic disease or ailment,\n                                        describe:"
         )
       ])
     ])
@@ -85589,7 +85682,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Have either of your parents abandoned your\n                                    family? Describe:"
+          "Have either of your parents abandoned your\n                                        family? Describe:"
         )
       ])
     ])
@@ -85601,7 +85694,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Are your parents / guardians employed? Give\n                                    details of job and salary per month: attach\n                                    Payslip"
+          "Are your parents / guardians employed? Give\n                                        details of job and salary per month: attach\n                                        Payslip"
         )
       ])
     ])
@@ -85613,7 +85706,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Do your parents / guardians own a business?\n                                    Describe and show the average monthly\n                                    income: Attach Bank Statement"
+          "Do your parents / guardians own a business?\n                                        Describe and show the average monthly\n                                        income: Attach Bank Statement"
         )
       ])
     ])
@@ -85625,7 +85718,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Do your parents / guardians own land? state\n                                    number of acres, type of crops grown,\n                                    number of cows/sheep/goats/donkeys and\n                                    income from such assets:"
+          "Do your parents / guardians own land? state\n                                        number of acres, type of crops grown,\n                                        number of cows/sheep/goats/donkeys and\n                                        income from such assets:"
         )
       ])
     ])
@@ -85637,7 +85730,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Do your parents / guardians have any other\n                                    assets or source of income, including casual\n                                    labour? Indicate the approximate monthly\n                                    income"
+          "Do your parents / guardians have any other\n                                        assets or source of income, including casual\n                                        labour? Indicate the approximate monthly\n                                        income"
         )
       ])
     ])
@@ -85649,7 +85742,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-header" }, [
         _vm._v(
-          "\n                        Application Form not Available\n                    "
+          "\n                            Application Form not Available\n                        "
         )
       ]),
       _vm._v(" "),
@@ -85660,7 +85753,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(
-            "The application window has been closed for now wait until the window is\n                            opened"
+            "The application window has been closed for now wait until the window is\n                                opened"
           )
         ]),
         _vm._v(" "),

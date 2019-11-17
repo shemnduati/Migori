@@ -1008,7 +1008,8 @@
                                             <label>Has your family been affected by civil
                                                 conflict or natural disasters such as flooding,
                                                 drought, fire, or famine? Describe:</label>
-                                            <textarea v-model="form.familyConflict" class="form-control" name="familyConflict"
+                                            <textarea v-model="form.familyConflict" class="form-control"
+                                                      name="familyConflict"
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('familyConflict') }"></textarea>
                                             <has-error :form="form" field="familyConflict"></has-error>
@@ -1048,61 +1049,93 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group justify-content-center">
+                                            <label for="files">Please attach all RELEVANT DOCUMENTS. Copies of ALL
+                                                DOCUMENTS required must be provided by the applicant. Any applications
+                                                without
+                                                relevant documents will be rejected</label>
+                                            <input type="file" multiple class="form-control-file" @change="fieldChange"
+                                                   id="files">
+                                            <has-error :form="form" field="files"></has-error>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+<!--                                        <button class="btn btn-primary btn-sm" @click.prevent="sendOther(1)">send</button>-->
+                                    </div>
+                                </div>
                             </section>
                             <section v-if="step==4">
                                 <h3>PART D</h3>
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>How did you first learn about the Governor's scholarship program?</label>
+                                            <label>How did you first learn about the Governor's scholarship
+                                                program?</label>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
                                                        name="classification" value="Ward Level"
                                                        :class="{ 'is-invalid': form.errors.has('hear') }">
                                                 <label class="form-check-label">Ward Level</label>
-                                            </div><br>
+                                            </div>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
-                                                       name="classification" value="School - teacher, principal or Ward Representative"
+                                                       name="classification"
+                                                       value="School - teacher, principal or Ward Representative"
                                                        :class="{ 'is-invalid': form.errors.has('hear') }">
-                                                <label class="form-check-label">School - teacher, principal or Ward Representative</label>
-                                            </div><br>
+                                                <label class="form-check-label">School - teacher, principal or Ward
+                                                    Representative</label>
+                                            </div>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
-                                                       name="Church, mosques, synagogue" value="Church, mosques, synagogue"
+                                                       name="Church, mosques, synagogue"
+                                                       value="Church, mosques, synagogue"
                                                        :class="{ 'is-invalid': form.errors.has('hear') }">
                                                 <label class="form-check-label">Church, mosques, synagogue</label>
-                                            </div><br>
+                                            </div>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
-                                                       name="Friends, parents, guardians or relative" value="Friends, parents, guardians or relative"
+                                                       name="Friends, parents, guardians or relative"
+                                                       value="Friends, parents, guardians or relative"
                                                        :class="{ 'is-invalid': form.errors.has('hear') }">
-                                                <label class="form-check-label">Friends, parents, guardians or relative</label>
-                                            </div><br>
+                                                <label class="form-check-label">Friends, parents, guardians or
+                                                    relative</label>
+                                            </div>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
                                                        name="Internet" value="Internet"
                                                        :class="{ 'is-invalid': form.errors.has('hear') }">
                                                 <label class="form-check-label">Internet</label>
-                                            </div><br>
+                                            </div>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
                                                        name="Radio, TV" value="Radio, TV"
                                                        :class="{ 'is-invalid': form.errors.has('hear') }">
                                                 <label class="form-check-label">Radio, TV</label>
-                                            </div><br>
+                                            </div>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
                                                        name="Newspaper, magazine" value="Newspaper, magazine"
                                                        :class="{ 'is-invalid': form.errors.has('hear') }">
                                                 <label class="form-check-label">Newspaper, magazine</label>
-                                            </div><br>
+                                            </div>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
-                                                       name="Social work such as face book, Twitter, MySpace" value="Social work such as face book, Twitter, MySpace"
+                                                       name="Social work such as face book, Twitter, MySpace"
+                                                       value="Social work such as face book, Twitter, MySpace"
                                                        :class="{ 'is-invalid': form.errors.has('hear') }">
-                                                <label class="form-check-label">Social work such as face book, Twitter, MySpace</label>
-                                            </div><br>
+                                                <label class="form-check-label">Social work such as face book, Twitter,
+                                                    MySpace</label>
+                                            </div>
+                                            <br>
                                             <div class="form-check form-check-inline">
                                                 <input v-model="form.hear" class="form-check-input" type="radio"
                                                        name="other" value="Other"
@@ -1113,7 +1146,8 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="form-group" v-if="this.form.hear == 'School - teacher, principal or Ward Representative'">
+                                        <div class="form-group"
+                                             v-if="this.form.hear == 'School - teacher, principal or Ward Representative'">
                                             <label>Enter Name</label>
                                             <input v-model="form.hearDetails" type="text" name="hearDetails"
                                                    class="form-control"
@@ -1148,7 +1182,8 @@
                                                    :class="{ 'is-invalid': form.errors.has('hearDetails') }">
                                             <has-error :form="form" field="hearDetails"></has-error>
                                         </div>
-                                        <div class="form-group" v-if="this.form.hear == 'Social work such as face book, Twitter, MySpace'">
+                                        <div class="form-group"
+                                             v-if="this.form.hear == 'Social work such as face book, Twitter, MySpace'">
                                             <label>Specify</label>
                                             <input v-model="form.hearDetails" type="text" name="hearDetails"
                                                    class="form-control"
@@ -1222,6 +1257,7 @@
                 now: moment().format('YYYY'),
                 enable: {},
                 loading: false,
+                attachments: [],
                 sibling: [
                     {
                         name: '',
@@ -1323,24 +1359,47 @@
             }
         },
         methods: {
-            sendOther(applicationId){
-                this.formf.append('siblings[]',this.sibling);
-                this.formf.append('applicationId',applicationId);
-                const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+            fieldChange(e) {
+                let selectedFiles = e.target.files;
+                if (!selectedFiles.length) {
+                    return false;
+                }
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    this.attachments.push(selectedFiles[i]);
+                }
+                // console.log(this.attachments);
+            },
+            sendOther(applicationId) {
+                for (let i = 0; i < this.attachments.length; i++) {
+                    this.formf.append('files[]', this.attachments[i]);
+                }
+                this.formf.append('siblings', this.sibling);
+                this.formf.append('applicationId', applicationId);
+                const config = {headers: {'Content-Type': 'multipart/form-data'}};
 
-                axios.post('/api/complete',this.formf,config).then(response=>{
-                    // this.form.reset();
+                axios.post('/api/complete', this.formf, config).then(response => {
                     this.loading = false;
-                    this.$Progress.finish();
+                    Fire.$emit('AfterCreate');
                     Swal.fire({
                         type: 'success',
                         title: 'Submited!!',
-                        text: 'Successfully',
+                        text: 'Application Submitted Successfully',
+
                     })
+                    this.form.reset();
+                    this.$Progress.finish();
+                    // window.location.href = "/student"
 
                 })
-                    .catch(response=>{
-                        //error
+                    .catch(error => {
+                        this.loading = false;
+                        this.errors = error.response.data.errors;
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error!!',
+                            text: error.response.data.msg,
+
+                        })
                     });
             },
             next() {
@@ -1363,17 +1422,6 @@
                     this.loading = true;
                     this.form.post('api/applyScholarship')
                         .then(({data}) => {
-                            // this.loading = false;
-                            // Fire.$emit('AfterCreate');
-                            // Swal.fire({
-                            //     title: 'Submited!!',
-                            //     type: 'success',
-                            //     text: 'Application Submitted Successfully' + data,
-                            //
-                            // })
-                            // this.form.reset();
-                            // this.$Progress.finish();
-                            // window.location.href = "/student"
                             this.sendOther(data);
 
                         })
@@ -1811,87 +1859,87 @@
                             fOrGDisability: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.mOrGDisability) {
+                    } else if (!this.form.mOrGDisability) {
                         this.form.errors.set({
                             mOrGDisability: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.fOrGAilment) {
+                    } else if (!this.form.fOrGAilment) {
                         this.form.errors.set({
                             fOrGAilment: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.mOrGAilment) {
+                    } else if (!this.form.mOrGAilment) {
                         this.form.errors.set({
                             mOrGAilment: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.fOrGAbandon) {
+                    } else if (!this.form.fOrGAbandon) {
                         this.form.errors.set({
                             fOrGAbandon: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.mOrGAbandon) {
+                    } else if (!this.form.mOrGAbandon) {
                         this.form.errors.set({
                             mOrGAbandon: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.fOrGEmployment) {
+                    } else if (!this.form.fOrGEmployment) {
                         this.form.errors.set({
                             fOrGEmployment: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.mOrGEmployment) {
+                    } else if (!this.form.mOrGEmployment) {
                         this.form.errors.set({
                             mOrGEmployment: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.fOrGBusiness) {
+                    } else if (!this.form.fOrGBusiness) {
                         this.form.errors.set({
                             fOrGBusiness: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.mOrGBusiness) {
+                    } else if (!this.form.mOrGBusiness) {
                         this.form.errors.set({
                             mOrGBusiness: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.fOrGLand) {
+                    } else if (!this.form.fOrGLand) {
                         this.form.errors.set({
                             fOrGLand: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.mOrGLand) {
+                    } else if (!this.form.mOrGLand) {
                         this.form.errors.set({
                             mOrGLand: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.fOrGAssets) {
+                    } else if (!this.form.fOrGAssets) {
                         this.form.errors.set({
                             fOrGAssets: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.mOrGAssets) {
+                    } else if (!this.form.mOrGAssets) {
                         this.form.errors.set({
                             mOrGAssets: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.familyConflict) {
+                    } else if (!this.form.familyConflict) {
                         this.form.errors.set({
                             familyConflict: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.familyHouse) {
+                    } else if (!this.form.familyHouse) {
                         this.form.errors.set({
                             familyHouse: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.otherDis) {
+                    } else if (!this.form.otherDis) {
                         this.form.errors.set({
                             otherDis: 'This field is required'
                         })
                         return false;
-                    }else if (!this.form.siblingsInfo) {
+                    } else if (!this.form.siblingsInfo) {
                         this.form.errors.set({
                             siblingsInfo: 'This field is required'
                         })
@@ -1914,32 +1962,32 @@
                             hearDetails: 'This field is required'
                         })
                         return false;
-                    }else if (this.form.hear == 'Church, mosques, synagogue' && !this.form.hearDetails) {
+                    } else if (this.form.hear == 'Church, mosques, synagogue' && !this.form.hearDetails) {
                         this.form.errors.set({
                             hearDetails: 'This field is required'
                         })
                         return false;
-                    }else if (this.form.hear == 'Internet' && !this.form.hearDetails) {
+                    } else if (this.form.hear == 'Internet' && !this.form.hearDetails) {
                         this.form.errors.set({
                             hearDetails: 'This field is required'
                         })
                         return false;
-                    }else if (this.form.hear == 'Radio, TV' && !this.form.hearDetails) {
+                    } else if (this.form.hear == 'Radio, TV' && !this.form.hearDetails) {
                         this.form.errors.set({
                             hearDetails: 'This field is required'
                         })
                         return false;
-                    }else if (this.form.hear == 'Newspaper, magazine' && !this.form.hearDetails) {
+                    } else if (this.form.hear == 'Newspaper, magazine' && !this.form.hearDetails) {
                         this.form.errors.set({
                             hearDetails: 'This field is required'
                         })
                         return false;
-                    }else if (this.form.hear == 'Social work such as face book, Twitter, MySpace' && !this.form.hearDetails) {
+                    } else if (this.form.hear == 'Social work such as face book, Twitter, MySpace' && !this.form.hearDetails) {
                         this.form.errors.set({
                             hearDetails: 'This field is required'
                         })
                         return false;
-                    }else if (this.form.hear == 'Other' && !this.form.hearDetails) {
+                    } else if (this.form.hear == 'Other' && !this.form.hearDetails) {
                         this.form.errors.set({
                             hearDetails: 'This field is required'
                         })

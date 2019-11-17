@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Application;
 use App\Evidence;
 use App\Family;
+use App\File;
 use App\MoreEvidence;
 use App\Sibling;
 use Illuminate\Http\Request;
@@ -171,13 +172,14 @@ class ScholarshipController extends Controller
         }
     }
 
-    public function complete(Request $request){
+    public function complete(Request $request)
+    {
+        if ($request->siblings) {
+            $siblings = $request->siblings;
 
-        return $request->siblings;
-//        if ($request->siblings){
-//            $siblings = $request->siblings;
-//
-//            foreach ($siblings as $sibling){
+            dd($request->siblings);
+
+//            foreach ($request->siblings as $key => $sibling) {
 //                $sib = new Sibling();
 //                $sib->name = $sibling->name;
 //                $sib->age = $sibling->age;
@@ -189,6 +191,20 @@ class ScholarshipController extends Controller
 //                $sib->status = 0;
 //                $sib->save();
 //            }
-//        }
+        }
+
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $uploadedFile) {
+                $filename = $uploadedFile->store('uploads');
+                // echo $filename;
+                $file = new File();
+                $file->applicationId = $request->applicationId;
+                $file->path = $filename;
+                $file->status = 0;
+                $file->year = date('Y');
+                $file->save();
+            }
+        }
+        return response(['status' => 'success'], 200);
     }
 }
