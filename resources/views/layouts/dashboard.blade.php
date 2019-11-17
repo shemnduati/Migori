@@ -146,9 +146,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         @can('isSubadminOrOfficial')
                             <li class="nav-item">
                                 <router-link to="/Information" class="nav-link">
-                                    <i class="nav-icon fas fa-clipboard-list cyan"></i>
+                                    <i class="nav-icon fas fa-clipboard-list green"></i>
                                     <p>
-                                        Information
+                                        County Information
                                     </p>
                                 </router-link>
                             </li>
@@ -156,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <router-link to="/scholarship-admin" class="nav-link">
                                     <i class="nav-icon fas fa-clipboard-list cyan"></i>
                                     <p>
-                                        Scholarship
+                                        Scholarship Information
                                     </p>
                                 </router-link>
                             </li>
@@ -164,7 +164,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <router-link to="/Applicants" class="nav-link">
                                     <i class="nav-icon fas fa-user-graduate teal"></i>
                                     <p>
-                                        View Applicants
+                                        County Applicants
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/ScholarApplicants" class="nav-link">
+                                    <i class="nav-icon fas fa-user-graduate pink"></i>
+                                    <p>
+                                        Scholarship Applicants
                                     </p>
                                 </router-link>
                             </li>
