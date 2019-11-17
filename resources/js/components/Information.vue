@@ -19,10 +19,6 @@
                                         </select>
                                     </form>
                                 </div>
-                                <div class="col-sm-12" v-if="$gate.isSubadmin()">
-                                    <button @click="getBursary('CDF')" class="btn btn-success btn-sm">Scholarship</button>
-                                    <button @click="getBursary('County')" class="btn btn-success btn-sm">County</button>
-                                </div>
                             </div>
                         </div>
                     </div>
