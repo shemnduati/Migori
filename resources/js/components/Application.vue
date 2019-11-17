@@ -402,7 +402,7 @@
                                         <div class="form-group">
                                             <label for="county">County</label>
                                             <select v-model="form.county" @change='getCountyWards()'
-                                                    class="form-control" name="county" id="county"
+                                                    class="form-control"  name="county" id="county"
                                                     :class="{ 'is-invalid': form.errors.has('county') }">
                                                 <option selected value="">--Select county--</option>
                                                 <option v-for="count in counties" :key="count.id" :value="count.id">{{
@@ -416,7 +416,7 @@
                                         <div class="form-group">
                                             <label for="ward">Ward</label>
                                             <select v-model="form.ward" class="form-control" name="ward" id="ward"
-                                                    :class="{ 'is-invalid': form.errors.has('ward') }">
+                                                    :class="{ 'is-invalid': form.errors.has('ward') }" >
                                                 <option selected value="">--Select Ward--</option>
                                                 <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
                                                     wardy.name}}
