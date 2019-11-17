@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\API;
 
 use App\Application;
+use App\County;
 use App\Evidence;
 use App\Family;
 use App\File;
+use App\Geographical;
+use App\Institution;
 use App\MoreEvidence;
+use App\MoreFamily;
 use App\Sibling;
+use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,6 +21,37 @@ class ScholarshipController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+    }
+
+    public function index()
+    {
+        if (auth()->user()->role == "sub-admin") {
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 0)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);
+        } elseif (auth()->user()->role == "official") {
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('county', auth()->user()->county)->latest()->paginate(10);
+        }
+    }
+
+    public function show($applicationId)
+    {
+        $app = Application::where('id', $applicationId)->where('year', date('Y'))->first();
+        $family = Family::where('applicationId', $applicationId)->where('year', date('Y'))->get();
+        $evidence = Evidence::where('applicationId', $applicationId)->where('year', date('Y'))->first();
+        $moreEvidence = MoreEvidence::where('applicationId', $applicationId)->where('year', date('Y'))->get();
+        $siblings = Sibling::where('applicationId', $applicationId)->where('year', date('Y'))->get();
+
+
+        $County = County::where('id', $app['county'])->value('name');
+        $Ward = Ward::where('id', $app['ward_id'])->value('name');
+
+        $application = array(
+            'County' => $County,
+            'Ward' => $Ward,
+            'app' => $app
+
+        );
+
+        return ['application' => $application, 'family' => $family, 'evidence' => $evidence, 'moreEvidence' => $moreEvidence, 'siblings' => $siblings];
     }
 
     public function store(Request $request)
@@ -166,6 +202,85 @@ class ScholarshipController extends Controller
             $females->save();
 
 
+            if ($request->firstSibName) {
+                $first = new Sibling();
+                $first->name = $request->firstSibName;
+                $first->age = $request->firstSibAge;
+                $first->schoolOrEmployer = $request->firstSibSchoolOrEmployer;
+                $first->classOrSalary = $request->firstSibClassOrSalary;
+                $first->others = $request->firstSibOthers;
+                $first->status = 0;
+                $first->applicationId = $applicationId;
+                $first->year = date('Y');
+                $first->save();
+            }
+
+            if ($request->secondSibName) {
+                $second = new Sibling();
+                $second->name = $request->secondSibName;
+                $second->age = $request->secondSibAge;
+                $second->schoolOrEmployer = $request->secondSibSchoolOrEmployer;
+                $second->classOrSalary = $request->secondSibClassOrSalary;
+                $second->others = $request->secondSibOthers;
+                $second->status = 0;
+                $second->applicationId = $applicationId;
+                $second->year = date('Y');
+                $second->save();
+            }
+
+            if ($request->thirdSibName) {
+                $third = new Sibling();
+                $third->name = $request->thirdSibName;
+                $third->age = $request->thirdSibAge;
+                $third->schoolOrEmployer = $request->thirdSibSchoolOrEmployer;
+                $third->classOrSalary = $request->thirdSibClassOrSalary;
+                $third->others = $request->thirdSibOthers;
+                $third->status = 0;
+                $third->applicationId = $applicationId;
+                $third->year = date('Y');
+                $third->save();
+            }
+
+            if ($request->forthSibName) {
+                $forth = new Sibling();
+                $forth->name = $request->forthSibName;
+                $forth->age = $request->forthSibAge;
+                $forth->schoolOrEmployer = $request->forthSibSchoolOrEmployer;
+                $forth->classOrSalary = $request->forthSibClassOrSalary;
+                $forth->others = $request->forthSibOthers;
+                $forth->status = 0;
+                $forth->applicationId = $applicationId;
+                $forth->year = date('Y');
+                $forth->save();
+            }
+
+            if ($request->fifthSibName) {
+                $fifth = new Sibling();
+                $fifth->name = $request->fifthSibName;
+                $fifth->age = $request->fifthSibAge;
+                $fifth->schoolOrEmployer = $request->fifthSibSchoolOrEmployer;
+                $fifth->classOrSalary = $request->fifthSibClassOrSalary;
+                $fifth->others = $request->fifthSibOthers;
+                $fifth->status = 0;
+                $fifth->applicationId = $applicationId;
+                $fifth->year = date('Y');
+                $fifth->save();
+            }
+
+            if ($request->sixthSibName) {
+                $sixth = new Sibling();
+                $sixth->name = $request->sixthSibName;
+                $sixth->age = $request->sixthSibAge;
+                $sixth->schoolOrEmployer = $request->sixthSibSchoolOrEmployer;
+                $sixth->classOrSalary = $request->sixthSibClassOrSalary;
+                $sixth->others = $request->sixthSibOthers;
+                $sixth->status = 0;
+                $sixth->applicationId = $applicationId;
+                $sixth->year = date('Y');
+                $sixth->save();
+            }
+
+
             return $applicationId;
 
 
@@ -174,11 +289,9 @@ class ScholarshipController extends Controller
 
     public function complete(Request $request)
     {
-        if ($request->siblings) {
-            $siblings = $request->siblings;
-
-            dd($request->siblings);
-
+//        if ($request->siblings) {
+//            $siblings = $request->siblings;
+//
 //            foreach ($request->siblings as $key => $sibling) {
 //                $sib = new Sibling();
 //                $sib->name = $sibling->name;
@@ -191,7 +304,7 @@ class ScholarshipController extends Controller
 //                $sib->status = 0;
 //                $sib->save();
 //            }
-        }
+//        }
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $uploadedFile) {

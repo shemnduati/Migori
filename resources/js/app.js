@@ -60,6 +60,8 @@ let routes = [
     { path: '/budget', component: require('./components/budget.vue').default },
     { path: '/informationview/:applicationId', component: require('./components/Informationview.vue').default },
     // { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
+    { path: '/scholarship-admin', component: require('./components/ScholarshipAdmin.vue').default },
+    { path: '/scholarship-admin-details/:applicationId', component: require('./components/ScholarshipAdminDetails.vue').default },
 
 
 ]

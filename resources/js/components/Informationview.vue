@@ -1,5 +1,5 @@
 <template>
-    <div v-if="this.myWard == geographical.wardId || this.myCounty == geographical.countyId">
+    <div>
         <div class="text-center pt-2">
             <h3>Student Information</h3>
         </div>

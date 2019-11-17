@@ -5891,6 +5891,281 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5903,13 +6178,6 @@ __webpack_require__.r(__webpack_exports__);
       enable: {},
       loading: false,
       attachments: [],
-      sibling: [{
-        name: '',
-        age: '',
-        schoolOrEmployer: '',
-        classOrSalary: '',
-        others: ''
-      }],
       formf: new FormData(),
       form: new Form({
         type: 'scholarship',
@@ -5995,11 +6263,44 @@ __webpack_require__.r(__webpack_exports__);
         otherDis: '',
         siblingsInfo: '',
         hear: '',
-        hearDetails: ''
+        hearDetails: '',
+        firstSibName: '',
+        firstSibAge: '',
+        firstSibSchoolOrEmployer: '',
+        firstSibClassOrSalary: '',
+        firstSibOthers: '',
+        secondSibName: '',
+        secondSibSchoolOrEmployer: '',
+        secondSibAge: '',
+        secondSibClassOrSalary: '',
+        secondSibOthers: '',
+        thirdSibName: '',
+        thirdSibAge: '',
+        thirdSibSchoolOrEmployer: '',
+        thirdSibClassOrSalary: '',
+        thirdSibOthers: '',
+        forthSibName: '',
+        forthSibAge: '',
+        forthSibSchoolOrEmployer: '',
+        forthSibClassOrSalary: '',
+        forthSibOthers: '',
+        fifthSibName: '',
+        fifthSibAge: '',
+        fifthSibSchoolOrEmployer: '',
+        fifthSibClassOrSalary: '',
+        fifthSibOthers: '',
+        sixthSibName: '',
+        sixthSibAge: '',
+        sixthSibSchoolOrEmployer: '',
+        sixthSibClassOrSalary: '',
+        sixthSibOthers: ''
       })
     };
   },
   methods: {
+    printSib: function printSib() {
+      console.log(this.sibling);
+    },
     fieldChange: function fieldChange(e) {
       var selectedFiles = e.target.files;
 
@@ -6037,8 +6338,9 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.form.reset();
 
-        _this.$Progress.finish(); // window.location.href = "/student"
+        _this.$Progress.finish();
 
+        window.location.href = "/student";
       })["catch"](function (error) {
         _this.loading = false;
         _this.errors = error.response.data.errors;
@@ -6474,6 +6776,11 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.step == 3) {
+        this.step++;
+        return false;
+      }
+
+      if (this.step == 4) {
         if (!this.form.whyApply) {
           // set(type, 'required');
           this.form.errors.set({
@@ -6601,7 +6908,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      if (this.step == 4) {
+      if (this.step == 5) {
         if (!this.form.hear) {
           // set(type, 'required');
           this.form.errors.set({
@@ -6728,6 +7035,455 @@ __webpack_require__.r(__webpack_exports__);
     this.getWards();
     this.getDetails();
     this.getStatus();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdmin.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScholarshipAdmin.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ScholarshipAdmin",
+  data: function data() {
+    return {
+      applications: {}
+    };
+  },
+  methods: {
+    getApplications: function getApplications() {
+      var _this = this;
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/scholarshipApps').then(function (_ref) {
+          var data = _ref.data;
+          return [_this.applications = data];
+        });
+      }
+    }
+  },
+  created: function created() {
+    this.getApplications();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ScholarshipAdminDetails",
+  data: function data() {
+    return {
+      applicationId: this.$route.params.applicationId,
+      application: {},
+      family: {},
+      evidence: {},
+      moreEvidence: {},
+      siblings: {},
+      photo: {}
+    };
+  },
+  methods: {
+    launch: function launch(passport) {
+      $('#addnew').modal('show');
+      this.photo = passport;
+    },
+    getApplications: function getApplications() {
+      var _this = this;
+
+      axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref) {
+        var data = _ref.data;
+        return [_this.application = data['application']];
+      });
+      axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref2) {
+        var data = _ref2.data;
+        return [_this.family = data['family']];
+      });
+      axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref3) {
+        var data = _ref3.data;
+        return [_this.evidence = data['evidence']];
+      });
+      axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref4) {
+        var data = _ref4.data;
+        return [_this.moreEvidence = data['moreEvidence']];
+      });
+      axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref5) {
+        var data = _ref5.data;
+        return [_this.siblings = data['siblings']];
+      });
+    }
+  },
+  created: function created() {
+    this.getApplications();
   }
 });
 
@@ -12973,6 +13729,25 @@ exports.push([module.i, "\n.btn-submit {\n    cursor: pointer;\n&\n:hover {\n   
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.bg-b[data-v-4ce57c1a] {\n    background-color: #bfbfbf;\n}\n.bg-a[data-v-4ce57c1a] {\n    background-color: #77933c;\n}\n.bgc[data-v-4ce57c1a] {\n    background-color: #1db5b5;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Verifiedform.vue?vue&type=style&index=0&id=6abf5512&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Verifiedform.vue?vue&type=style&index=0&id=6abf5512&scoped=true&lang=css& ***!
@@ -12985,7 +13760,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
 
 // exports
 
@@ -66951,6 +67726,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Verifiedform.vue?vue&type=style&index=0&id=6abf5512&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Verifiedform.vue?vue&type=style&index=0&id=6abf5512&scoped=true&lang=css& ***!
@@ -75791,652 +76596,592 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return this.myWard == _vm.geographical.wardId ||
-    this.myCounty == _vm.geographical.countyId
-    ? _c("div", [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "row pl-3" }, [
-          _c("img", {
-            staticStyle: { width: "200px" },
-            attrs: { src: _vm.application.passport, alt: "" }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-8" }, [
-            _c(
-              "div",
-              {
-                staticClass: "row mx-2 pl-3 pt-2 border border-success rounded"
-              },
-              [
-                _vm._m(2),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.application["name"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(" " + _vm._s(_vm.application["dob"]) + " ")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.application["gender"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.application["reg_no"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(" " + _vm._s(_vm.application["tel"]) + " ")])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 pt-5" }, [
-            _c("div", { staticClass: "row" }, [
-              _vm._m(3),
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row pl-3" }, [
+      _c("img", {
+        staticStyle: { width: "200px" },
+        attrs: { src: _vm.application.passport, alt: "" }
+      })
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("p", [_vm._v(" " + _vm._s(_vm.application["name"]) + " ")]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-lg bg-success",
-                    on: {
-                      click: function($event) {
-                        return _vm.launch(_vm.application["passport"])
-                      }
-                    }
-                  },
-                  [_vm._v("View")]
-                )
-              ])
+              _c("p", [_vm._v(" " + _vm._s(_vm.application["dob"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.application["gender"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.application["reg_no"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.application["tel"]) + " ")])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(4),
-        _vm._v(" "),
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-md-8" }, [
-            _c(
-              "div",
-              {
-                staticClass: "row mx-2 pl-3 pt-2 border border-success rounded"
-              },
-              [
-                _vm._l(_vm.family, function(fam) {
-                  return _c("div", { key: fam.id, staticClass: "col-md-12" }, [
-                    _c("span", [_vm._v("Name: ")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(fam["name"]))]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Relationship: ")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(fam["relationship"]))]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Status: ")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(fam["living"]))]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Telephone: ")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(fam["tel"]))]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Occupation: ")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(fam["occupation"]))]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Income per Year: ")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(fam["income"]))]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("hr")
-                  ])
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "row col-md-12" }, [
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-4" }, [
-                      _c("p", [
-                        _vm._v(_vm._s(_vm.morefamily["totalSiblings"]))
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(_vm._s(_vm.morefamily["schoolSiblings"]))
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(_vm._s(_vm.morefamily["workingSiblings"]))
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v(_vm._s(_vm.morefamily["pFees"]))]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(_vm._s(_vm.morefamily["pFeesRelationship"]))
-                      ])
-                    ])
-                  ])
-                ])
-              ],
-              2
-            )
-          ]),
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 pt-5" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(3),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-md-4 pt-5" },
+          _c("div", { staticClass: "col-md-4" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-lg bg-success",
+                on: {
+                  click: function($event) {
+                    return _vm.launch(_vm.application["passport"])
+                  }
+                }
+              },
+              [_vm._v("View")]
+            )
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
             _vm._l(_vm.family, function(fam) {
-              return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
-                _c("div", { staticClass: "col-md-8" }, [
-                  _c(
-                    "p",
-                    { staticClass: "rounded p-2 mt-2 text-center bg-b" },
-                    [_vm._v(_vm._s(fam["relationship"]) + "'s ID/ Death Cert")]
-                  )
-                ]),
+              return _c("div", { key: fam.id, staticClass: "col-md-12" }, [
+                _c("span", [_vm._v("Name: ")]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-lg bg-success",
-                      on: {
-                        click: function($event) {
-                          return _vm.launch(fam.cert)
-                        }
-                      }
-                    },
-                    [_vm._v("Views")]
-                  )
-                ])
+                _c("span", [_vm._v(_vm._s(fam["name"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Relationship: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["relationship"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Status: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["living"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Telephone: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["tel"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Occupation: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["occupation"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Income per Year: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["income"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("hr")
               ])
             }),
-            0
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(7),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-8" }, [
-            _c(
-              "div",
-              {
-                staticClass: "row mx-2 pl-3 pt-2 border border-success rounded"
-              },
-              [
-                _vm._m(8),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.institution["name"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.institution["branch"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.institution["yearofstudy"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.institution["fees"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.institution["amount_paid"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.institution["balance"]) + " ")
-                  ])
-                ])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _vm._m(9),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-8" }, [
-            _c(
-              "div",
-              {
-                staticClass: "row mx-2 pl-3 pt-2 border border-success rounded"
-              },
-              [
-                _vm._m(10),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.geographical["County"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.geographical["Division"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.geographical["Location"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.geographical["Sublocation"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.geographical["Ward"]) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(" " + _vm._s(_vm.geographical["Village"]) + " ")
-                  ])
-                ])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "row mb-3" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _vm.$gate.isSubadmin() && !_vm.application.recommendation
-              ? _c(
-                  "button",
-                  { staticClass: "btn btn-success px-5 offset-md-1" },
-                  [_vm._v("Recommendation\n            ")]
-                )
-              : _vm._e(),
             _vm._v(" "),
-            _vm.$gate.isOfficial() &&
-            !_vm.application.amount &&
-            _vm.application.status != 2
-              ? _c("h4", [_vm._v("Award?")])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.$gate.isOfficial() && _vm.application.amount
-              ? _c("h4", [
-                  _c("b", [_vm._v("Awarded:")]),
-                  _vm._v(" Ksh " + _vm._s(_vm.application.amount))
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.$gate.isOfficial() &&
-            !_vm.application.amount &&
-            _vm.application.status != 2
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success",
-                    attrs: { type: "button" },
-                    on: { click: _vm.newModal }
-                  },
-                  [_vm._v("Yes\n            ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.$gate.isOfficial() &&
-            !_vm.application.amount &&
-            _vm.application.status != 2
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: { type: "button" },
-                    on: { click: _vm.notAward }
-                  },
-                  [_vm._v("No\n            ")]
-                )
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm.$gate.isSubadmin() && !_vm.application.recommendation
-            ? _c("div", { staticClass: "col-md-6" }, [
-                _c("div", { staticClass: "form-check form-check-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.recommendation,
-                        expression: "form.recommendation"
-                      }
-                    ],
-                    staticClass: "form-check-input",
-                    class: { "is-invalid": _vm.form.errors.has("yes") },
-                    attrs: {
-                      type: "radio",
-                      name: "yes",
-                      id: "yes",
-                      value: "Yes"
-                    },
-                    domProps: {
-                      checked: _vm._q(_vm.form.recommendation, "Yes")
-                    },
-                    on: {
-                      click: _vm.recommend,
-                      change: function($event) {
-                        return _vm.$set(_vm.form, "recommendation", "Yes")
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-check-label",
-                      attrs: { for: "inlineRadio1" }
-                    },
-                    [_vm._v("Yes")]
-                  )
-                ]),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "row col-md-12" }, [
+                _vm._m(5),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-check form-check-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.recommendation,
-                        expression: "form.recommendation"
-                      }
-                    ],
-                    staticClass: "form-check-input",
-                    class: { "is-invalid": _vm.form.errors.has("partially") },
-                    attrs: {
-                      type: "radio",
-                      name: "partially",
-                      id: "partially",
-                      value: "Partially"
-                    },
-                    domProps: {
-                      checked: _vm._q(_vm.form.recommendation, "Partially")
-                    },
-                    on: {
-                      click: _vm.recommend,
-                      change: function($event) {
-                        return _vm.$set(_vm.form, "recommendation", "Partially")
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-check-label",
-                      attrs: { for: "inlineRadio1" }
-                    },
-                    [_vm._v("Partially")]
-                  )
-                ]),
+                _vm._m(6),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-check form-check-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.recommendation,
-                        expression: "form.recommendation"
-                      }
-                    ],
-                    staticClass: "form-check-input",
-                    class: { "is-invalid": _vm.form.errors.has("no") },
-                    attrs: { type: "radio", name: "no", id: "no", value: "No" },
-                    domProps: {
-                      checked: _vm._q(_vm.form.recommendation, "No")
-                    },
-                    on: {
-                      click: _vm.recommendNo,
-                      change: function($event) {
-                        return _vm.$set(_vm.form, "recommendation", "No")
-                      }
-                    }
-                  }),
+                _c("div", { staticClass: "col-sm-4" }, [
+                  _c("p", [_vm._v(_vm._s(_vm.morefamily["totalSiblings"]))]),
                   _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-check-label",
-                      attrs: { for: "inlineRadio1" }
-                    },
-                    [_vm._v("No")]
-                  )
+                  _c("p", [_vm._v(_vm._s(_vm.morefamily["schoolSiblings"]))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.morefamily["workingSiblings"]))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.morefamily["pFees"]))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.morefamily["pFeesRelationship"]))])
                 ])
               ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
+            ])
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-4 pt-5" },
+        _vm._l(_vm.family, function(fam) {
+          return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
+            _c("div", { staticClass: "col-md-8" }, [
+              _c("p", { staticClass: "rounded p-2 mt-2 text-center bg-b" }, [
+                _vm._v(_vm._s(fam["relationship"]) + "'s ID/ Death Cert")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-lg bg-success",
+                  on: {
+                    click: function($event) {
+                      return _vm.launch(fam.cert)
+                    }
+                  }
+                },
+                [_vm._v("Views")]
+              )
+            ])
+          ])
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(7),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
         _c(
           "div",
-          {
-            staticClass: "modal fade",
-            attrs: {
-              id: "addnew",
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "addnewLabel",
-              "aria-hidden": "true"
-            }
-          },
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
           [
-            _c(
-              "div",
-              { staticClass: "modal-dialog", attrs: { role: "document" } },
-              [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(11),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c("img", {
-                      staticStyle: { width: "400px" },
-                      attrs: { src: this.photo, alt: "" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(12)
-                ])
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "modal fade",
-            attrs: {
-              id: "new",
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "addnewLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "modal-dialog", attrs: { role: "document" } },
-              [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(13),
-                  _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.award()
-                        }
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "modal-body" }, [
-                        _c(
-                          "div",
-                          { staticClass: "form-group" },
-                          [
-                            _c("label", [_vm._v("Amount")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.formf.amount,
-                                  expression: "formf.amount"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              class: {
-                                "is-invalid": _vm.formf.errors.has("amount")
-                              },
-                              attrs: {
-                                type: "text",
-                                name: "name",
-                                placeholder: "Amount"
-                              },
-                              domProps: { value: _vm.formf.amount },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.formf,
-                                    "amount",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("has-error", {
-                              attrs: { form: _vm.formf, field: "amount" }
-                            })
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(14)
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "modal fade",
-            attrs: {
-              id: "recommendation",
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "addnewLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "modal-dialog", attrs: { role: "document" } },
-              [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(15),
-                  _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.award()
-                        }
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "modal-body" }, [
-                        _c(
-                          "div",
-                          { staticClass: "form-group" },
-                          [
-                            _c("label", [_vm._v("Amount")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.amount,
-                                  expression: "form.amount"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              class: {
-                                "is-invalid": _vm.form.errors.has("amount")
-                              },
-                              attrs: {
-                                type: "text",
-                                name: "name",
-                                placeholder: "Amount"
-                              },
-                              domProps: { value: _vm.form.amount },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "amount",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("has-error", {
-                              attrs: { form: _vm.form, field: "amount" }
-                            })
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(16)
-                    ]
-                  )
-                ])
-              ]
-            )
+            _vm._m(8),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("p", [_vm._v(" " + _vm._s(_vm.institution["name"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.institution["branch"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.institution["yearofstudy"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.institution["fees"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.institution["amount_paid"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.institution["balance"]) + " ")])
+            ])
           ]
         )
       ])
-    : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _vm._m(9),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _vm._m(10),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("p", [_vm._v(" " + _vm._s(_vm.geographical["County"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.geographical["Division"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.geographical["Location"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.geographical["Sublocation"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.geographical["Ward"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.geographical["Village"]) + " ")])
+            ])
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mb-3" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _vm.$gate.isSubadmin() && !_vm.application.recommendation
+          ? _c("button", { staticClass: "btn btn-success px-5 offset-md-1" }, [
+              _vm._v("Recommendation\n            ")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() &&
+        !_vm.application.amount &&
+        _vm.application.status != 2
+          ? _c("h4", [_vm._v("Award?")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() && _vm.application.amount
+          ? _c("h4", [
+              _c("b", [_vm._v("Awarded:")]),
+              _vm._v(" Ksh " + _vm._s(_vm.application.amount))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() &&
+        !_vm.application.amount &&
+        _vm.application.status != 2
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "button" },
+                on: { click: _vm.newModal }
+              },
+              [_vm._v("Yes\n            ")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() &&
+        !_vm.application.amount &&
+        _vm.application.status != 2
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { type: "button" },
+                on: { click: _vm.notAward }
+              },
+              [_vm._v("No\n            ")]
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm.$gate.isSubadmin() && !_vm.application.recommendation
+        ? _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.recommendation,
+                    expression: "form.recommendation"
+                  }
+                ],
+                staticClass: "form-check-input",
+                class: { "is-invalid": _vm.form.errors.has("yes") },
+                attrs: { type: "radio", name: "yes", id: "yes", value: "Yes" },
+                domProps: { checked: _vm._q(_vm.form.recommendation, "Yes") },
+                on: {
+                  click: _vm.recommend,
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "recommendation", "Yes")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio1" }
+                },
+                [_vm._v("Yes")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.recommendation,
+                    expression: "form.recommendation"
+                  }
+                ],
+                staticClass: "form-check-input",
+                class: { "is-invalid": _vm.form.errors.has("partially") },
+                attrs: {
+                  type: "radio",
+                  name: "partially",
+                  id: "partially",
+                  value: "Partially"
+                },
+                domProps: {
+                  checked: _vm._q(_vm.form.recommendation, "Partially")
+                },
+                on: {
+                  click: _vm.recommend,
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "recommendation", "Partially")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio1" }
+                },
+                [_vm._v("Partially")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.recommendation,
+                    expression: "form.recommendation"
+                  }
+                ],
+                staticClass: "form-check-input",
+                class: { "is-invalid": _vm.form.errors.has("no") },
+                attrs: { type: "radio", name: "no", id: "no", value: "No" },
+                domProps: { checked: _vm._q(_vm.form.recommendation, "No") },
+                on: {
+                  click: _vm.recommendNo,
+                  change: function($event) {
+                    return _vm.$set(_vm.form, "recommendation", "No")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio1" }
+                },
+                [_vm._v("No")]
+              )
+            ])
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addnew",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addnewLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(11),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("img", {
+                  staticStyle: { width: "400px" },
+                  attrs: { src: this.photo, alt: "" }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(12)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "new",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addnewLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(13),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.award()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Amount")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formf.amount,
+                              expression: "formf.amount"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.formf.errors.has("amount")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "name",
+                            placeholder: "Amount"
+                          },
+                          domProps: { value: _vm.formf.amount },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.formf, "amount", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.formf, field: "amount" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(14)
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "recommendation",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addnewLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(15),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.award()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Amount")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.amount,
+                              expression: "form.amount"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("amount")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "name",
+                            placeholder: "Amount"
+                          },
+                          domProps: { value: _vm.form.amount },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "amount", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "amount" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(16)
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -80824,7 +81569,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           _vm._s(count.name) +
-                                            "\n                                            "
+                                            "\n                                        "
                                         )
                                       ]
                                     )
@@ -80903,7 +81648,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             _vm._s(wardy.name) +
-                                              "\n                                                "
+                                              "\n                                            "
                                           )
                                         ]
                                       )
@@ -81249,7 +81994,7 @@ var render = function() {
                               [
                                 _c("label", { attrs: { for: "task" } }, [
                                   _vm._v(
-                                    "Have you attempted KCPE previous years? If more than once,\n                                                how many times and why? Give the scores attained in the previous\n                                                years"
+                                    "Have you attempted KCPE previous years? If more than once,\n                                            how many times and why? Give the scores attained in the previous\n                                            years"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -83167,7 +83912,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           _vm._s(count.name) +
-                                            "\n                                            "
+                                            "\n                                        "
                                         )
                                       ]
                                     )
@@ -83246,7 +83991,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             _vm._s(wardy.name) +
-                                              "\n                                                "
+                                              "\n                                            "
                                           )
                                         ]
                                       )
@@ -83409,355 +84154,6 @@ var render = function() {
                         _vm._v(" "),
                         _c("hr"),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-sm-12" },
-                          [
-                            _c("h4", [_vm._v("SIBLING INFORMATION")]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "List all the applicants' brothers and sisters starting with the oldest and state\n                                        what each is doing\n                                        (If working describe job and monthly salary, if in university state it, if in\n                                        school state the form or standard, if\n                                        in training describe it, if a sister is married show the occupation of the\n                                        husband, if a brother is married show\n                                        the occupation of the wife)"
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary btn-sm mb-3",
-                                attrs: { type: "button" },
-                                on: { click: _vm.addSibling }
-                              },
-                              [
-                                _vm._v(
-                                  "Add\n                                        sibling\n                                    "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.sibling, function(sibli, index) {
-                              return _c("div", { staticClass: "card" }, [
-                                _c("div", { staticClass: "card-header" }, [
-                                  _c("h5", [
-                                    _vm._v(
-                                      "Sibling (index: " + _vm._s(index) + ")"
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "card-tools" })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "card-body" }, [
-                                  _c("div", { staticClass: "form-row" }, [
-                                    _c("div", { staticClass: "col" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "form-group" },
-                                        [
-                                          _c("label", [_vm._v("SIBLING NAME")]),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.sibling[index].name,
-                                                expression:
-                                                  "sibling[index].name"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            class: {
-                                              "is-invalid": _vm.form.errors.has(
-                                                "siblingName"
-                                              )
-                                            },
-                                            attrs: {
-                                              type: "text",
-                                              name: "siblingName"
-                                            },
-                                            domProps: {
-                                              value: _vm.sibling[index].name
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.$set(
-                                                  _vm.sibling[index],
-                                                  "name",
-                                                  $event.target.value
-                                                )
-                                              }
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("has-error", {
-                                            attrs: {
-                                              form: _vm.form,
-                                              field: "siblingName"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "col" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "form-group" },
-                                        [
-                                          _c("label", [_vm._v("SIBLING AGE")]),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.sibling[index].age,
-                                                expression: "sibling[index].age"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            class: {
-                                              "is-invalid": _vm.form.errors.has(
-                                                "siblingAge"
-                                              )
-                                            },
-                                            attrs: {
-                                              type: "number",
-                                              name: "siblingAge",
-                                              min: "1"
-                                            },
-                                            domProps: {
-                                              value: _vm.sibling[index].age
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.$set(
-                                                  _vm.sibling[index],
-                                                  "age",
-                                                  $event.target.value
-                                                )
-                                              }
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("has-error", {
-                                            attrs: {
-                                              form: _vm.form,
-                                              field: "siblingAge"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "col" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "form-group" },
-                                        [
-                                          _c("label", [
-                                            _vm._v("SCHOOL/EMPLOYER")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.sibling[index]
-                                                    .schoolOrEmployer,
-                                                expression:
-                                                  "sibling[index].schoolOrEmployer"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            class: {
-                                              "is-invalid": _vm.form.errors.has(
-                                                "siblingSchoolOrEmployer"
-                                              )
-                                            },
-                                            attrs: {
-                                              type: "text",
-                                              name: "siblingSchoolOrEmployer"
-                                            },
-                                            domProps: {
-                                              value:
-                                                _vm.sibling[index]
-                                                  .schoolOrEmployer
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.$set(
-                                                  _vm.sibling[index],
-                                                  "schoolOrEmployer",
-                                                  $event.target.value
-                                                )
-                                              }
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("has-error", {
-                                            attrs: {
-                                              form: _vm.form,
-                                              field: "siblingSchoolOrEmployer"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "form-row" }, [
-                                    _c("div", { staticClass: "col" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "form-group" },
-                                        [
-                                          _c("label", [_vm._v("CLASS/SALARY")]),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.sibling[index]
-                                                    .classOrSalary,
-                                                expression:
-                                                  "sibling[index].classOrSalary"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            class: {
-                                              "is-invalid": _vm.form.errors.has(
-                                                "classOrSalary"
-                                              )
-                                            },
-                                            attrs: {
-                                              type: "text",
-                                              name: "classOrSalary"
-                                            },
-                                            domProps: {
-                                              value:
-                                                _vm.sibling[index].classOrSalary
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.$set(
-                                                  _vm.sibling[index],
-                                                  "classOrSalary",
-                                                  $event.target.value
-                                                )
-                                              }
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("has-error", {
-                                            attrs: {
-                                              form: _vm.form,
-                                              field: "classOrSalary"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "col" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "form-group" },
-                                        [
-                                          _c("label", [
-                                            _vm._v("OTHER INFORMATION (if any)")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("textarea", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.sibling[index].others,
-                                                expression:
-                                                  "sibling[index].others"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            class: {
-                                              "is-invalid": _vm.form.errors.has(
-                                                "otherInfo"
-                                              )
-                                            },
-                                            attrs: { rows: "3" },
-                                            domProps: {
-                                              value: _vm.sibling[index].others
-                                            },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.$set(
-                                                  _vm.sibling[index],
-                                                  "others",
-                                                  $event.target.value
-                                                )
-                                              }
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("has-error", {
-                                            attrs: {
-                                              form: _vm.form,
-                                              field: "otherInfo"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ])
-                                  ])
-                                ])
-                              ])
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary btn-sm",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.sendOther(1)
-                              }
-                            }
-                          },
-                          [_vm._v("send")]
-                        ),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
                         _c("div", { staticClass: "form-row" }, [
                           _c("div", { staticClass: "col" }, [
                             _c(
@@ -83766,7 +84162,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Do you have any form of inheritance from your\n                                                parents/guardians/grandparents or any other source? If yes\n                                                describe"
+                                    "Do you have any form of inheritance from your\n                                            parents/guardians/grandparents or any other source? If yes\n                                            describe"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -83816,6 +84212,1767 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.step == 3
+                    ? _c("section", [
+                        _c("h3", [_vm._v("PART B Section ii")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-12" }, [
+                          _c("h4", [_vm._v("SIBLING INFORMATION")]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "List all the applicants' brothers and sisters starting with the oldest and state\n                                    what each is doing\n                                    (If working describe job and monthly salary, if in university state it, if in\n                                    school state the form or standard, if\n                                    in training describe it, if a sister is married show the occupation of the\n                                    husband, if a brother is married show\n                                    the occupation of the wife)"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticStyle: { color: "red" } }, [
+                            _vm._v("Leave Others Blank if Done")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card",
+                              staticStyle: { padding: "20px" }
+                            },
+                            [
+                              _c("h4", [_vm._v("First Sibling")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING NAME")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.firstSibName,
+                                            expression: "form.firstSibName"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "firstSibName"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "firstSibName"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.firstSibName
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "firstSibName",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "firstSibName"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING AGE")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.firstSibAge,
+                                            expression: "form.firstSibAge"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "firstSibAge"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "number",
+                                          name: "firstSibAge",
+                                          min: "1"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.firstSibAge
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "firstSibAge",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "firstSibAge"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SCHOOL/EMPLOYER")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.firstSibSchoolOrEmployer,
+                                            expression:
+                                              "form.firstSibSchoolOrEmployer"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "firstSibSchoolOrEmployer"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "firstSibSchoolOrEmployer"
+                                        },
+                                        domProps: {
+                                          value:
+                                            _vm.form.firstSibSchoolOrEmployer
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "firstSibSchoolOrEmployer",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "firstSibSchoolOrEmployer"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("CLASS/SALARY")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.firstSibClassOrSalary,
+                                            expression:
+                                              "form.firstSibClassOrSalary"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "firstSibClassOrSalary"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "firstSibClassOrSalary"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.firstSibClassOrSalary
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "firstSibClassOrSalary",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "firstSibClassOrSalary"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [
+                                        _vm._v("OTHER INFORMATION (if any)")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.firstSibOthers,
+                                            expression: "form.firstSibOthers"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "firstSibOthers"
+                                          )
+                                        },
+                                        attrs: { rows: "3" },
+                                        domProps: {
+                                          value: _vm.form.firstSibOthers
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "firstSibOthers",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "firstSibOthers"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card",
+                              staticStyle: { padding: "20px" }
+                            },
+                            [
+                              _c("h4", [_vm._v("Second Sibling")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING NAME")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.secondSibName,
+                                            expression: "form.secondSibName"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "secondSibName"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "secondSibName"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.secondSibName
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "secondSibName",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "secondSibName"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING AGE")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.secondSibAge,
+                                            expression: "form.secondSibAge"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "secondSibAge"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "number",
+                                          name: "secondSibAge",
+                                          min: "1"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.secondSibAge
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "secondSibAge",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "secondSibAge"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SCHOOL/EMPLOYER")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form
+                                                .secondSibSchoolOrEmployer,
+                                            expression:
+                                              "form.secondSibSchoolOrEmployer"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "secondSibSchoolOrEmployer"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "secondSibSchoolOrEmployer"
+                                        },
+                                        domProps: {
+                                          value:
+                                            _vm.form.secondSibSchoolOrEmployer
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "secondSibSchoolOrEmployer",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "secondSibSchoolOrEmployer"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("CLASS/SALARY")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.secondSibClassOrSalary,
+                                            expression:
+                                              "form.secondSibClassOrSalary"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "secondSibClassOrSalary"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "secondSibClassOrSalary"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.secondSibClassOrSalary
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "secondSibClassOrSalary",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "secondSibClassOrSalary"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [
+                                        _vm._v("OTHER INFORMATION (if any)")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.secondSibOthers,
+                                            expression: "form.secondSibOthers"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "secondSibOthers"
+                                          )
+                                        },
+                                        attrs: { rows: "3" },
+                                        domProps: {
+                                          value: _vm.form.secondSibOthers
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "secondSibOthers",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "secondSibOthers"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card",
+                              staticStyle: { padding: "20px" }
+                            },
+                            [
+                              _c("h4", [_vm._v("Third Sibling")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING NAME")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.thirdSibName,
+                                            expression: "form.thirdSibName"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "thirdSibName"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "thirdSibName"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.thirdSibName
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "thirdSibName",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "thirdSibName"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING AGE")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.thirdSibAge,
+                                            expression: "form.thirdSibAge"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "thirdSibAge"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "number",
+                                          name: "thirdSibAge",
+                                          min: "1"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.thirdSibAge
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "thirdSibAge",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "thirdSibAge"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SCHOOL/EMPLOYER")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.thirdSibSchoolOrEmployer,
+                                            expression:
+                                              "form.thirdSibSchoolOrEmployer"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "thirdSibSchoolOrEmployer"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "thirdSibSchoolOrEmployer"
+                                        },
+                                        domProps: {
+                                          value:
+                                            _vm.form.thirdSibSchoolOrEmployer
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "thirdSibSchoolOrEmployer",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "thirdSibSchoolOrEmployer"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("CLASS/SALARY")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.thirdSibClassOrSalary,
+                                            expression:
+                                              "form.thirdSibClassOrSalary"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "thirdSibClassOrSalary"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "thirdSibClassOrSalary"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.thirdSibClassOrSalary
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "thirdSibClassOrSalary",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "thirdSibClassOrSalary"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [
+                                        _vm._v("OTHER INFORMATION (if any)")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.thirdSibOthers,
+                                            expression: "form.thirdSibOthers"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "thirdSibOthers"
+                                          )
+                                        },
+                                        attrs: { rows: "3" },
+                                        domProps: {
+                                          value: _vm.form.thirdSibOthers
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "thirdSibOthers",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "thirdSibOthers"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card",
+                              staticStyle: { padding: "20px" }
+                            },
+                            [
+                              _c("h4", [_vm._v("Forth Sibling")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING NAME")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.forthSibName,
+                                            expression: "form.forthSibName"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "forthSibName"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "forthSibName"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.forthSibName
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "forthSibName",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "forthSibName"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING AGE")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.forthSibAge,
+                                            expression: "form.forthSibAge"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "forthSibAge"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "number",
+                                          name: "forthSibAge",
+                                          min: "1"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.forthSibAge
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "forthSibAge",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "forthSibAge"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SCHOOL/EMPLOYER")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.forthSibSchoolOrEmployer,
+                                            expression:
+                                              "form.forthSibSchoolOrEmployer"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "forthSibSchoolOrEmployer"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "forthSibSchoolOrEmployer"
+                                        },
+                                        domProps: {
+                                          value:
+                                            _vm.form.forthSibSchoolOrEmployer
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "forthSibSchoolOrEmployer",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "forthSibSchoolOrEmployer"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("CLASS/SALARY")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.forthSibClassOrSalary,
+                                            expression:
+                                              "form.forthSibClassOrSalary"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "forthSibClassOrSalary"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "forthSibClassOrSalary"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.forthSibClassOrSalary
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "forthSibClassOrSalary",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "forthSibClassOrSalary"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [
+                                        _vm._v("OTHER INFORMATION (if any)")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.forthSibOthers,
+                                            expression: "form.forthSibOthers"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "forthSibOthers"
+                                          )
+                                        },
+                                        attrs: { rows: "3" },
+                                        domProps: {
+                                          value: _vm.form.forthSibOthers
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "forthSibOthers",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "firstSibOthers"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card",
+                              staticStyle: { padding: "20px" }
+                            },
+                            [
+                              _c("h4", [_vm._v("Fifth Sibling")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING NAME")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.fifthSibName,
+                                            expression: "form.fifthSibName"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "fifthSibName"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "fifthSibName"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.fifthSibName
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "fifthSibName",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "fifthSibName"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING AGE")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.fifthSibAge,
+                                            expression: "form.fifthSibAge"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "fifthSibAge"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "number",
+                                          name: "fifthSibAge",
+                                          min: "1"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.fifthSibAge
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "fifthSibAge",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "fifthSibAge"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SCHOOL/EMPLOYER")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.fifthSibSchoolOrEmployer,
+                                            expression:
+                                              "form.fifthSibSchoolOrEmployer"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "fifthSibSchoolOrEmployer"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "fifthSibSchoolOrEmployer"
+                                        },
+                                        domProps: {
+                                          value:
+                                            _vm.form.fifthSibSchoolOrEmployer
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "fifthSibSchoolOrEmployer",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "fifthSibSchoolOrEmployer"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("CLASS/SALARY")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.fifthSibClassOrSalary,
+                                            expression:
+                                              "form.fifthSibClassOrSalary"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "fifthSibClassOrSalary"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "fifthSibClassOrSalary"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.fifthSibClassOrSalary
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "fifthSibClassOrSalary",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "fifthSibClassOrSalary"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [
+                                        _vm._v("OTHER INFORMATION (if any)")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.fifthSibOthers,
+                                            expression: "form.fifthSibOthers"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "fifthSibOthers"
+                                          )
+                                        },
+                                        attrs: { rows: "3" },
+                                        domProps: {
+                                          value: _vm.form.fifthSibOthers
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "fifthSibOthers",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "fifthSibOthers"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "card",
+                              staticStyle: { padding: "20px" }
+                            },
+                            [
+                              _c("h4", [_vm._v("Sixth Sibling")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING NAME")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.sixthSibName,
+                                            expression: "form.sixthSibName"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "sixthSibName"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "sixthSibName"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.sixthSibName
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "sixthSibName",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "sixthSibName"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SIBLING AGE")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.sixthSibAge,
+                                            expression: "form.sixthSibAge"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "sixthSibAge"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "number",
+                                          name: "sixthSibAge",
+                                          min: "1"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.sixthSibAge
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "sixthSibAge",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "sixthSibAge"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("SCHOOL/EMPLOYER")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.sixthSibSchoolOrEmployer,
+                                            expression:
+                                              "form.sixthSibSchoolOrEmployer"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "sixthSibSchoolOrEmployer"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "firstSibSchoolOrEmployer"
+                                        },
+                                        domProps: {
+                                          value:
+                                            _vm.form.sixthSibSchoolOrEmployer
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "sixthSibSchoolOrEmployer",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "sixthSibSchoolOrEmployer"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-row" }, [
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [_vm._v("CLASS/SALARY")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.form.sixthSibClassOrSalary,
+                                            expression:
+                                              "form.sixthSibClassOrSalary"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "sixthSibClassOrSalary"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          name: "sixthSibClassOrSalary"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.sixthSibClassOrSalary
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "sixthSibClassOrSalary",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "sixthSibClassOrSalary"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _c("label", [
+                                        _vm._v("OTHER INFORMATION (if any)")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.sixthSibOthers,
+                                            expression: "form.sixthSibOthers"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "sixthSibOthers"
+                                          )
+                                        },
+                                        attrs: { rows: "3" },
+                                        domProps: {
+                                          value: _vm.form.sixthSibOthers
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "sixthSibOthers",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "sixthSibOthers"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.step == 4
                     ? _c("section", [
                         _c("h3", [
                           _vm._v("PART C: APPLICANT'S EVIDENCE OF NEED")
@@ -83883,7 +86040,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Have you received any financial\n                                                support/Bursaries in the past? Please provide\n                                                documentation"
+                                    "Have you received any financial\n                                            support/Bursaries in the past? Please provide\n                                            documentation"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -83935,7 +86092,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Do you have any special need? For example:\n                                                Chronic illness, disability. Please provide\n                                                documentation"
+                                    "Do you have any special need? For example:\n                                            Chronic illness, disability. Please provide\n                                            documentation"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -84888,7 +87045,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Has your family been affected by civil\n                                                conflict or natural disasters such as flooding,\n                                                drought, fire, or famine? Describe:"
+                                    "Has your family been affected by civil\n                                            conflict or natural disasters such as flooding,\n                                            drought, fire, or famine? Describe:"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -84998,7 +87155,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "Please describe any other cause of\n                                                disadvantage or vulnerability?"
+                                    "Please describe any other cause of\n                                            disadvantage or vulnerability?"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -85048,7 +87205,7 @@ var render = function() {
                               [
                                 _c("label", [
                                   _vm._v(
-                                    "How many siblings are in secondary school,\n                                                collage and tertiary level."
+                                    "How many siblings are in secondary school,\n                                            collage and tertiary level."
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -85105,7 +87262,7 @@ var render = function() {
                               [
                                 _c("label", { attrs: { for: "files" } }, [
                                   _vm._v(
-                                    "Please attach all RELEVANT DOCUMENTS. Copies of ALL\n                                                DOCUMENTS required must be provided by the applicant. Any applications\n                                                without\n                                                relevant documents will be rejected"
+                                    "Please attach all RELEVANT DOCUMENTS. Copies of ALL\n                                            DOCUMENTS required must be provided by the applicant. Any applications\n                                            without\n                                            relevant documents will be rejected"
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -85132,7 +87289,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 4
+                  _vm.step == 5
                     ? _c("section", [
                         _c("h3", [_vm._v("PART D")]),
                         _vm._v(" "),
@@ -85141,7 +87298,7 @@ var render = function() {
                             _c("div", { staticClass: "form-group" }, [
                               _c("label", [
                                 _vm._v(
-                                  "How did you first learn about the Governor's scholarship\n                                                program?"
+                                  "How did you first learn about the Governor's scholarship\n                                            program?"
                                 )
                               ]),
                               _vm._v(" "),
@@ -85239,7 +87396,7 @@ var render = function() {
                                     { staticClass: "form-check-label" },
                                     [
                                       _vm._v(
-                                        "School - teacher, principal or Ward\n                                                    Representative"
+                                        "School - teacher, principal or Ward\n                                                Representative"
                                       )
                                     ]
                                   )
@@ -85343,7 +87500,7 @@ var render = function() {
                                     { staticClass: "form-check-label" },
                                     [
                                       _vm._v(
-                                        "Friends, parents, guardians or\n                                                    relative"
+                                        "Friends, parents, guardians or\n                                                relative"
                                       )
                                     ]
                                   )
@@ -85542,7 +87699,7 @@ var render = function() {
                                     { staticClass: "form-check-label" },
                                     [
                                       _vm._v(
-                                        "Social work such as face book, Twitter,\n                                                    MySpace"
+                                        "Social work such as face book, Twitter,\n                                                MySpace"
                                       )
                                     ]
                                   )
@@ -85991,7 +88148,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                Previous Step\n                            "
+                            "\n                            Previous Step\n                        "
                           )
                         ]
                       )
@@ -86010,7 +88167,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Next Step\n                            ")]
+                        [_vm._v("Next Step\n                        ")]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -86050,7 +88207,7 @@ var render = function() {
                               : _vm._e()
                           ]),
                           _vm._v(
-                            "\n                                Submit Application\n                            "
+                            "\n                            Submit Application\n                        "
                           )
                         ]
                       )
@@ -86097,7 +88254,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Does either of your parents / guardians\n                                        suffer from a chronic disease or ailment,\n                                        describe:"
+          "Does either of your parents / guardians\n                                    suffer from a chronic disease or ailment,\n                                    describe:"
         )
       ])
     ])
@@ -86109,7 +88266,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Have either of your parents abandoned your\n                                        family? Describe:"
+          "Have either of your parents abandoned your\n                                    family? Describe:"
         )
       ])
     ])
@@ -86121,7 +88278,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Are your parents / guardians employed? Give\n                                        details of job and salary per month: attach\n                                        Payslip"
+          "Are your parents / guardians employed? Give\n                                    details of job and salary per month: attach\n                                    Payslip"
         )
       ])
     ])
@@ -86133,7 +88290,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Do your parents / guardians own a business?\n                                        Describe and show the average monthly\n                                        income: Attach Bank Statement"
+          "Do your parents / guardians own a business?\n                                    Describe and show the average monthly\n                                    income: Attach Bank Statement"
         )
       ])
     ])
@@ -86145,7 +88302,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Do your parents / guardians own land? state\n                                        number of acres, type of crops grown,\n                                        number of cows/sheep/goats/donkeys and\n                                        income from such assets:"
+          "Do your parents / guardians own land? state\n                                    number of acres, type of crops grown,\n                                    number of cows/sheep/goats/donkeys and\n                                    income from such assets:"
         )
       ])
     ])
@@ -86157,7 +88314,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("h5", [
         _vm._v(
-          "Do your parents / guardians have any other\n                                        assets or source of income, including casual\n                                        labour? Indicate the approximate monthly\n                                        income"
+          "Do your parents / guardians have any other\n                                    assets or source of income, including casual\n                                    labour? Indicate the approximate monthly\n                                    income"
         )
       ])
     ])
@@ -86169,7 +88326,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-header" }, [
         _vm._v(
-          "\n                            Application Form not Available\n                        "
+          "\n                        Application Form not Available\n                    "
         )
       ]),
       _vm._v(" "),
@@ -86180,7 +88337,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(
-            "The application window has been closed for now wait until the window is\n                                opened"
+            "The application window has been closed for now wait until the window is\n                            opened"
           )
         ]),
         _vm._v(" "),
@@ -86188,6 +88345,1036 @@ var staticRenderFns = [
           _vm._v("Go Back Home")
         ])
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdmin.vue?vue&type=template&id=26bd3e38&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScholarshipAdmin.vue?vue&type=template&id=26bd3e38&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-fluid" }, [
+    _vm.$gate.isSubadminOrOfficial()
+      ? _c("div", { staticClass: "row mt-5" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("h3", { staticClass: "card-title" }, [
+                  _vm._v("Scholarships")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-tools" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _vm.$gate.isOfficial()
+                      ? _c("div", { staticClass: "col-sm-7" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: { click: function($event) {} }
+                            },
+                            [_vm._v("Scholarship")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: { click: function($event) {} }
+                            },
+                            [_vm._v("County")]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.$gate.isOfficial()
+                      ? _c("div", { staticClass: "col-sm-5" }, [
+                          _c("form", [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.type,
+                                    expression: "form.type"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.form,
+                                        "type",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.getType()
+                                    }
+                                  ]
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { selected: "", value: "" } },
+                                  [_vm._v("--Sort By--")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "1" } }, [
+                                  _vm._v("All")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "2" } }, [
+                                  _vm._v("Pending")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "3" } }, [
+                                  _vm._v("Awarded")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "4" } }, [
+                                  _vm._v("Rejected")
+                                ])
+                              ]
+                            )
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.$gate.isSubadmin()
+                      ? _c("div", { staticClass: "col-sm-12" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getBursary("CDF")
+                                }
+                              }
+                            },
+                            [_vm._v("Scholarship")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.getBursary("County")
+                                }
+                              }
+                            },
+                            [_vm._v("County")]
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "box-body table-responsive no-padding" },
+                [
+                  _c("table", { staticClass: "table table-hover" }, [
+                    _c(
+                      "tbody",
+                      [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _vm._l(_vm.applications.data, function(application) {
+                          return _c("tr", { key: application.id }, [
+                            _c("td", [_vm._v(_vm._s(application.serial))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(application.firstName))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(application.lastName))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(application.gender))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              application.status == 1
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "purple" } },
+                                    [_vm._v("Recommended.")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.status == 0
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "purple" } },
+                                    [_vm._v("Pending...")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.status == 2
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "red" } },
+                                    [_vm._v("Rejected")]
+                                  )
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(application.bursary_type))
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-primary btn-sm",
+                                    attrs: {
+                                      to: {
+                                        path:
+                                          "/scholarship-admin-details/" +
+                                          application.id
+                                      },
+                                      type: "button"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "view\n                                "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" })
+            ])
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Serial N.o")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("First Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Last Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Gender")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Status")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Type")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("View More")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=template&id=4ce57c1a&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=template&id=4ce57c1a&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {}, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row pl-3" }),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["firstName"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["middleName"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["lastName"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["dob"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["gender"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["parentName"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["box"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["tel"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["alt_tel"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.application["County"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(" " + _vm._s(_vm.application["Ward"]) + " ")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["subcounty"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["location"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  " " + _vm._s(_vm.application["app"]["sublocation"]) + " "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["indexNo"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["kcpeMarks"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["kcpeYear"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["kcpeQuiz"]) + " ")
+              ]),
+              _c("br"),
+              _c("br"),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["app"]["repeatQuiz"]) + " ")
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  " " + _vm._s(_vm.application["app"]["secSchoolName"]) + " "
+                )
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  " " + _vm._s(_vm.application["app"]["classification"]) + " "
+                )
+              ])
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 pt-5" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-lg bg-success",
+                on: {
+                  click: function($event) {
+                    return _vm.launch(_vm.application["app"].resultslip)
+                  }
+                }
+              },
+              [_vm._v("View")]
+            )
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _vm._l(_vm.family, function(fam) {
+              return _c("div", { key: fam.id, staticClass: "col-md-4" }, [
+                _c("span", [_vm._v("Relationship: ")]),
+                _vm._v(" "),
+                _c("span", { staticStyle: { "font-weight": "bold" } }, [
+                  _vm._v(_vm._s(fam["who"]))
+                ]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("First Name: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["firstName"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Middle Name: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["middleName"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Last Name: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["lastName"]))]),
+                _c("br"),
+                _vm._v(" "),
+                fam.living ? _c("span", [_vm._v("Status: ")]) : _vm._e(),
+                _vm._v(" "),
+                fam.living
+                  ? _c("span", [_vm._v(_vm._s(fam["living"]))])
+                  : _vm._e(),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Id Number: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["idNumber"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Telephone: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["tel"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Alt Telephone: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["alt_tel"]))]),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", [_vm._v("Occupation: ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(fam["occupation"]))]),
+                _c("br"),
+                _vm._v(" "),
+                fam.subcounty
+                  ? _c("p", [_vm._v("Sub-County: " + _vm._s(fam.subcounty))])
+                  : _vm._e(),
+                _vm._v(" "),
+                fam.location
+                  ? _c("p", [_vm._v("Location: " + _vm._s(fam.location))])
+                  : _vm._e(),
+                _vm._v(" "),
+                fam.sublocation
+                  ? _c("p", [
+                      _vm._v("Sub-Location: " + _vm._s(fam.sublocation))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("hr")
+              ])
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "row col-md-12" },
+                _vm._l(_vm.siblings, function(sib) {
+                  return _c("div", { staticClass: "col-sm-6" }, [
+                    _c("p", [_vm._v("Name: " + _vm._s(sib.name) + " ")]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Age: " + _vm._s(sib.age) + " ")]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "School/Employer: " + _vm._s(sib.schoolOrEmployer) + " "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v("Class/Salary: " + _vm._s(sib.classOrSalary) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Others: " + _vm._s(sib.others) + " ")]),
+                    _vm._v(" "),
+                    _c("hr")
+                  ])
+                }),
+                0
+              )
+            ])
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-4 pt-5" },
+        _vm._l(_vm.family, function(fam) {
+          return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
+            fam.cert
+              ? _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "p",
+                    { staticClass: "rounded p-2 mt-2 text-center bg-b" },
+                    [_vm._v(_vm._s(fam["who"]) + "'s ID/ Death Cert")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            fam.cert
+              ? _c("div", { staticClass: "col-md-4" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-lg bg-success",
+                      on: {
+                        click: function($event) {
+                          return _vm.launch(fam.cert)
+                        }
+                      }
+                    },
+                    [_vm._v("Views")]
+                  )
+                ])
+              : _vm._e()
+          ])
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(6),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v(
+                  "Do you have any form of inheritance from your parents/guardians/grandparents or any other source?"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.inheritance))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Why are you applying for a scholarship?")]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.whyApply))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v(
+                  "Have you received any financial\n                            support/Bursaries in the past? Please provide\n                            documentation"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.finSupport))
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v(
+                  "Do you have any special need? For example:\n                            Chronic illness, disability. Please provide\n                            documentation"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.specialNeeds))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v("Any other cause for special needs? describe:")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.OtherSpecialNeeds))
+              ])
+            ])
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _vm._m(7),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          _vm._l(_vm.moreEvidence, function(more) {
+            return _c("div", { staticClass: "col-md-6" }, [
+              _c("h5", [_vm._v(_vm._s(more.who))]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Age:")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(more.age))]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Disability:")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(more.disability))]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Chronic Diseases or Ailment:")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(more.ailment))]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Abandoned your family:")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(more.abandon))]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Details of Job and salary per month:")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(more.employment))]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Own Business:")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(more.business))]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Land:")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(more.land))]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Assets:")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(more.assets))]),
+              _vm._v(" "),
+              _c("hr")
+            ])
+          }),
+          0
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(8),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v(
+                  "Has your family been affected by civil\n                            conflict or natural disasters such as flooding,\n                            drought, fire, or famine? Describe:"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.familyConflict))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v("What type of house do you live in? Describe")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.familyHouse))
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v(
+                  "Please describe any other cause of\n                            disadvantage or vulnerability?"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.otherDisabilities))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v(
+                  "How many siblings are in secondary school,\n                            collage and tertiary level."
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.siblingsInfo))
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(9),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
+          [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [
+                _vm._v(
+                  "How did you first learn about the Governor's scholarship program?"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticStyle: { color: "blue" } }, [
+                _vm._v(_vm._s(_vm.evidence.hear))
+              ]),
+              _vm._v(" "),
+              _vm.evidence.hearDetails
+                ? _c("p", [
+                    _vm._v("Specify: " + _vm._s(_vm.evidence.hearDetails))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" })
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addnew",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addnewLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(10),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-body", staticStyle: { height: "auto" } },
+                [
+                  _c("img", {
+                    staticStyle: { width: "700px" },
+                    attrs: { src: this.photo, alt: "" }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(11)
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center pt-2" }, [
+      _c("h3", [_vm._v("Student Information")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("h5", { staticClass: " rounded bgc p-2 mt-2 text-center" }, [
+          _vm._v("APPLICANT’S BIO")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("h5", { staticClass: "rounded p-2 mt-2 text-center bg-a" }, [
+          _vm._v("Attachments")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", [_vm._v(" First name ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(" Middle name ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(" Last name ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(" DOB ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(" Gender ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(" Parent Name ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Postal Address")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(" Tel. ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Alternative Tel. ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("County")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Ward")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Sub-County")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Location")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Sub-Location")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("KCPE Index No.")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("KCPE Marks")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("KCPE Year")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("KCPE attempts, how many times, why and scores attained")
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Repeated any class? Which one")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Name of secondary school of admission")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("School Classification")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("p", { staticClass: "rounded p-2 mt-2 text-center bg-b" }, [
+        _vm._v("Results Slip")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row col-md-12" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("h5", { staticClass: " rounded bg-success p-2 mt-2 text-center" }, [
+          _vm._v("APPLICANT'S FAMILY INFORMATION")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("h5", { staticClass: " rounded bg-success p-2 mt-2 text-center" }, [
+        _vm._v("SIBLINGS")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("h5", { staticClass: " rounded bg-blue p-2 mt-2 text-center" }, [
+          _vm._v("APPLICANT'S EVIDENCE OF NEED")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("h5", { staticClass: " rounded bg-yellow p-2 mt-2 text-center" }, [
+          _vm._v("PARENT GUARDIAN INFORMATION")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("h5", { staticClass: " rounded bg-blue p-2 mt-2 text-center" }, [
+          _vm._v("FAMILY INFORMATION")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("h5", { staticClass: " rounded bg-blue p-2 mt-2 text-center" }, [
+          _vm._v("HOW DID YOU LEARN:")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
     ])
   }
 ]
@@ -104912,6 +108099,13 @@ var routes = [{
 }, {
   path: '/informationview/:applicationId',
   component: __webpack_require__(/*! ./components/Informationview.vue */ "./resources/js/components/Informationview.vue")["default"]
+}, // { path: '/verifiedform', component: require('./components/Verifiedform.vue').default }
+{
+  path: '/scholarship-admin',
+  component: __webpack_require__(/*! ./components/ScholarshipAdmin.vue */ "./resources/js/components/ScholarshipAdmin.vue")["default"]
+}, {
+  path: '/scholarship-admin-details/:applicationId',
+  component: __webpack_require__(/*! ./components/ScholarshipAdminDetails.vue */ "./resources/js/components/ScholarshipAdminDetails.vue")["default"]
 }];
 Vue.filter('upText', function (text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
@@ -105870,6 +109064,162 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ScholarshipAdmin.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/ScholarshipAdmin.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ScholarshipAdmin_vue_vue_type_template_id_26bd3e38_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ScholarshipAdmin.vue?vue&type=template&id=26bd3e38&scoped=true& */ "./resources/js/components/ScholarshipAdmin.vue?vue&type=template&id=26bd3e38&scoped=true&");
+/* harmony import */ var _ScholarshipAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScholarshipAdmin.vue?vue&type=script&lang=js& */ "./resources/js/components/ScholarshipAdmin.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ScholarshipAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ScholarshipAdmin_vue_vue_type_template_id_26bd3e38_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ScholarshipAdmin_vue_vue_type_template_id_26bd3e38_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "26bd3e38",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ScholarshipAdmin.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipAdmin.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/ScholarshipAdmin.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ScholarshipAdmin.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdmin.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdmin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipAdmin.vue?vue&type=template&id=26bd3e38&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/ScholarshipAdmin.vue?vue&type=template&id=26bd3e38&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdmin_vue_vue_type_template_id_26bd3e38_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ScholarshipAdmin.vue?vue&type=template&id=26bd3e38&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdmin.vue?vue&type=template&id=26bd3e38&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdmin_vue_vue_type_template_id_26bd3e38_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdmin_vue_vue_type_template_id_26bd3e38_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipAdminDetails.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/ScholarshipAdminDetails.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ScholarshipAdminDetails_vue_vue_type_template_id_4ce57c1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ScholarshipAdminDetails.vue?vue&type=template&id=4ce57c1a&scoped=true& */ "./resources/js/components/ScholarshipAdminDetails.vue?vue&type=template&id=4ce57c1a&scoped=true&");
+/* harmony import */ var _ScholarshipAdminDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScholarshipAdminDetails.vue?vue&type=script&lang=js& */ "./resources/js/components/ScholarshipAdminDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ScholarshipAdminDetails_vue_vue_type_style_index_0_id_4ce57c1a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css& */ "./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ScholarshipAdminDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ScholarshipAdminDetails_vue_vue_type_template_id_4ce57c1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ScholarshipAdminDetails_vue_vue_type_template_id_4ce57c1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4ce57c1a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ScholarshipAdminDetails.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipAdminDetails.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/ScholarshipAdminDetails.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ScholarshipAdminDetails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_style_index_0_id_4ce57c1a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=style&index=0&id=4ce57c1a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_style_index_0_id_4ce57c1a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_style_index_0_id_4ce57c1a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_style_index_0_id_4ce57c1a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_style_index_0_id_4ce57c1a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_style_index_0_id_4ce57c1a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipAdminDetails.vue?vue&type=template&id=4ce57c1a&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/ScholarshipAdminDetails.vue?vue&type=template&id=4ce57c1a&scoped=true& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_template_id_4ce57c1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ScholarshipAdminDetails.vue?vue&type=template&id=4ce57c1a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipAdminDetails.vue?vue&type=template&id=4ce57c1a&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_template_id_4ce57c1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipAdminDetails_vue_vue_type_template_id_4ce57c1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Verified.vue":
 /*!**********************************************!*\
   !*** ./resources/js/components/Verified.vue ***!
@@ -106527,8 +109877,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
