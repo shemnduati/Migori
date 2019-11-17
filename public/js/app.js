@@ -2727,7 +2727,7 @@ __webpack_require__.r(__webpack_exports__);
           });
           return false;
         } else if (this.enable == 0) {
-          this.watch == 1;
+          this.watch = 1;
         } else {
           this.step++;
           return false;
@@ -6166,6 +6166,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6176,6 +6193,7 @@ __webpack_require__.r(__webpack_exports__);
       info: {},
       now: moment().format('YYYY'),
       enable: {},
+      watch: 0,
       loading: false,
       attachments: [],
       formf: new FormData(),
@@ -6482,6 +6500,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextStep: function nextStep() {
       if (this.step == 1) {
+        if (!this.form.county) {
+          this.form.errors.set({
+            county: 'This field is required'
+          });
+          return false;
+        } else if (this.enable == 0) {
+          this.watch = 1;
+        } else {
+          this.step++;
+          return false;
+        }
+      }
+
+      if (this.step == 2) {
         if (!this.form.firstName) {
           this.form.errors.set({
             firstName: 'This field is required'
@@ -6598,7 +6630,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      if (this.step == 2) {
+      if (this.step == 3) {
         if (!this.form.fatherFirstName) {
           this.form.errors.set({
             fatherFirstName: 'This field is required'
@@ -6775,12 +6807,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      if (this.step == 3) {
+      if (this.step == 4) {
         this.step++;
         return false;
       }
 
-      if (this.step == 4) {
+      if (this.step == 5) {
         if (!this.form.whyApply) {
           // set(type, 'required');
           this.form.errors.set({
@@ -6908,7 +6940,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      if (this.step == 5) {
+      if (this.step == 6) {
         if (!this.form.hear) {
           // set(type, 'required');
           this.form.errors.set({
@@ -7024,7 +7056,7 @@ __webpack_require__.r(__webpack_exports__);
     getStatus: function getStatus() {
       var _this11 = this;
 
-      axios.get("api/status").then(function (_ref6) {
+      axios.get("api/statuz/" + this.form.county).then(function (_ref6) {
         var data = _ref6.data;
         return [_this11.enable = data['num']];
       });
@@ -7034,7 +7066,6 @@ __webpack_require__.r(__webpack_exports__);
     this.getCounties();
     this.getWards();
     this.getDetails();
-    this.getStatus();
   }
 });
 
@@ -72493,11 +72524,13 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Application")]),
-          _vm._v(" "),
-          _vm.watch == 0
-            ? _c("div", { staticClass: "card-body" }, [
+        _vm.watch == 0
+          ? _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v("Application")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
                 _c("form", [
                   _vm.step == 1
                     ? _c("section", [
@@ -75450,8 +75483,8 @@ var render = function() {
                     : _vm._e()
                 ])
               ])
-            : _vm._e()
-        ]),
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _vm.enable == 0 ? _c("div", [_vm._m(0)]) : _vm._e()
       ])
@@ -81008,13 +81041,127 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _vm.enable == 1
+        _vm.watch == 0
           ? _c("div", { staticClass: "card" }, [
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("form", [
                   _vm.step == 1
+                    ? _c("section", [
+                        _c(
+                          "div",
+                          { staticClass: "row justify-content-center" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-sm-6 justify-content-center"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("label", { attrs: { for: "county" } }, [
+                                      _vm._v("Select Your County")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.county,
+                                            expression: "form.county"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "county"
+                                          )
+                                        },
+                                        attrs: {
+                                          required: true,
+                                          name: "county",
+                                          id: "Mycounty"
+                                        },
+                                        on: {
+                                          change: [
+                                            function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                _vm.form,
+                                                "county",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            },
+                                            function($event) {
+                                              return _vm.getStatus()
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          {
+                                            attrs: { selected: "", value: "" }
+                                          },
+                                          [_vm._v("--Select county--")]
+                                        ),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.counties, function(count) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              key: count.id,
+                                              domProps: { value: count.id }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(count.name) +
+                                                  "\n                                            "
+                                              )
+                                            ]
+                                          )
+                                        })
+                                      ],
+                                      2
+                                    ),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "county" }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.step == 2 && _vm.enable == 1
                     ? _c("section", [
                         _c("h3", [_vm._v("PERSONAL DETAILS")]),
                         _vm._v(" "),
@@ -82270,7 +82417,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 2
+                  _vm.step == 3 && _vm.enable == 1
                     ? _c("section", [
                         _c("h3", [
                           _vm._v("PART B: APPLICANT'S FAMILY INFORMATION")
@@ -84211,7 +84358,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 3
+                  _vm.step == 4 && _vm.enable == 1
                     ? _c("section", [
                         _c("h3", [_vm._v("PART B Section ii")]),
                         _vm._v(" "),
@@ -85972,7 +86119,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 4
+                  _vm.step == 5 && _vm.enable == 1
                     ? _c("section", [
                         _c("h3", [
                           _vm._v("PART C: APPLICANT'S EVIDENCE OF NEED")
@@ -87289,7 +87436,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 5
+                  _vm.step == 6 && _vm.enable == 1
                     ? _c("section", [
                         _c("h3", [_vm._v("PART D")]),
                         _vm._v(" "),
@@ -88171,7 +88318,7 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 5
+                  _vm.step == 6
                     ? _c(
                         "button",
                         {

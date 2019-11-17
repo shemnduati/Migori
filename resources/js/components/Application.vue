@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" v-if="watch == 0">
                     <div class="card-header">Application</div>
 
-                    <div class="card-body" v-if="watch == 0">
+                    <div class="card-body">
                         <form>
 
                             <section v-if="step==1">
@@ -832,7 +832,7 @@
                         })
                         return false;
                     }else if(this.enable == 0){
-                        this.watch == 1;
+                        this.watch = 1;
                     } else {
                         this.step++;
                         return false;

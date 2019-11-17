@@ -71,7 +71,13 @@ class ConfigurationController extends Controller
 
         return ['num'=>$num];
     }
+    public function getStatuz($countyId)
+    {
 
+        $num = Configuration::where('county',$countyId)->where('type', 1)->where('status', 1)->count();
+
+        return ['num'=>$num];
+    }
     /**
      * Update the specified resource in storage.
      *

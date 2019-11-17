@@ -2,15 +2,32 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card" v-if="enable==1">
+                <div class="card" v-if="watch == 0">
                     <div class="card-header">
                         <h3 class="card-title">Scholarship Application</h3>
                     </div>
 
                     <div class="card-body">
                         <form>
-
                             <section v-if="step==1">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-6 justify-content-center">
+                                        <div class="form-group">
+                                            <label for="county">Select Your County</label>
+                                            <select   v-model="form.county" @change='getStatus()'
+                                                      class="form-control" :required="true" name="county" id="Mycounty"
+                                                      :class="{ 'is-invalid': form.errors.has('county') }" >
+                                                <option selected value="">--Select county--</option>
+                                                <option v-for="count in counties" :key="count.id" :value="count.id">{{
+                                                    count.name}}
+                                                </option>
+                                            </select>
+                                            <has-error :form="form" field="county"></has-error>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section v-if="step==2 && enable==1">
                                 <h3>PERSONAL DETAILS</h3>
 
                                 <div class="form-row ">
@@ -267,7 +284,7 @@
                                 </div>
 
                             </section>
-                            <section v-if="step==2">
+                            <section v-if="step==3 && enable==1">
                                 <h3>PART B: APPLICANT'S FAMILY INFORMATION</h3>
                                 <div class="form-row ">
                                     <div class="col-md-4">
@@ -651,7 +668,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==3">
+                            <section v-if="step==4 && enable==1">
                                 <h3>PART B Section ii</h3>
                                 <div class="col-sm-12">
                                     <h4>SIBLING INFORMATION</h4>
@@ -1007,7 +1024,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==4">
+                            <section v-if="step==5 && enable==1">
                                 <h3>PART C: APPLICANT'S EVIDENCE OF NEED</h3>
                                 <h4>Applicant's Information</h4>
                                 <div class="form-row">
@@ -1341,7 +1358,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==5">
+                            <section v-if="step==6 && enable==1">
                                 <h3>PART D</h3>
                                 <div class="form-row">
                                     <div class="col">
@@ -1482,7 +1499,7 @@
                             <button v-if="step != totalSteps" type="button" class="btn btn-primary"
                                     @click.prevent="next">Next Step
                             </button>
-                            <button v-if="step == 5" type="button" class="btn btn-success btn-submit"
+                            <button v-if="step == 6" type="button" class="btn btn-success btn-submit"
                                     @click.prevent="sendApplication()" :disabled="loading">
                                 <div class="loader">
                                     <div class="lds-roller" v-if="loading">
@@ -1531,6 +1548,7 @@
                 info: {},
                 now: moment().format('YYYY'),
                 enable: {},
+                watch:0,
                 loading: false,
                 attachments: [],
                 formf: new FormData(),
@@ -1832,8 +1850,21 @@
                 }
             },
             nextStep() {
-
                 if (this.step == 1) {
+                    if(!this.form.county) {
+                        this.form.errors.set({
+                            county: 'This field is required'
+                        })
+                        return false;
+                    }else if(this.enable == 0){
+                        this.watch = 1;
+                    } else {
+                        this.step++;
+                        return false;
+                    }
+                }
+
+                if (this.step == 2) {
                     if (!this.form.firstName) {
                         this.form.errors.set({
                             firstName: 'This field is required'
@@ -1950,7 +1981,7 @@
                     }
                 }
 
-                if (this.step == 2) {
+                if (this.step == 3) {
                     if (!this.form.fatherFirstName) {
                         this.form.errors.set({
                             fatherFirstName: 'This field is required'
@@ -2127,12 +2158,12 @@
                     }
                 }
 
-                if (this.step == 3) {
+                if (this.step == 4) {
                     this.step++;
                     return false;
                 }
 
-                if (this.step == 4) {
+                if (this.step == 5) {
                     if (!this.form.whyApply) {
                         // set(type, 'required');
                         this.form.errors.set({
@@ -2260,7 +2291,7 @@
                     }
                 }
 
-                if (this.step == 5) {
+                if (this.step == 6) {
                     if (!this.form.hear) {
                         // set(type, 'required');
                         this.form.errors.set({
@@ -2354,14 +2385,14 @@
                 axios.get("api/getdetails").then(({data}) => ([this.info = data['user']]));
             },
             getStatus() {
-                axios.get("api/status").then(({data}) => ([this.enable = data['num']]));
+                axios.get("api/statuz/" + this.form.county).then(({data}) => ([this.enable = data['num']]));
             }
         },
         created() {
             this.getCounties();
             this.getWards();
             this.getDetails();
-            this.getStatus();
+
         }
     }
 </script>

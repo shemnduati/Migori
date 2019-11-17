@@ -31,6 +31,7 @@ Route::get('profile', 'API\UserController@profile');
 Route::post('apply', 'API\ApplicationController@store');
 Route::apiResources(['county' => 'API\CountyController']);
 Route::get('status/{countyId}', 'API\ConfigurationController@getStatus');
+Route::get('statuz/{countyId}', 'API\ConfigurationController@getStatuz');
 Route::apiResources(['configuration' => 'API\ConfigurationController']);
 Route::post('configuration/{id}','API\ConfigurationController@store');
 Route::get('configurations/{id}','API\ConfigurationController@index');
