@@ -83,3 +83,6 @@ Route::apiResources(['budget' => 'API\BudgetController']);
 Route::get('/getMyWard', 'API\BudgetController@getMyWards');
 // Route::apiResources(['form' => 'API\FormController']);
 Route::get('/form', 'API\FormController@getDetails');
+
+Route::post('applyScholarship', 'API\ScholarshipController@store');
+Route::post('complete', 'API\ScholarshipController@complete');

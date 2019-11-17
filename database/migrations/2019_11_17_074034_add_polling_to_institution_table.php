@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddApplicationIdToFamily extends Migration
+class AddPollingToInstitutionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddApplicationIdToFamily extends Migration
      */
     public function up()
     {
-        Schema::table('family', function (Blueprint $table) {
-            $table->integer('applicationId')->after('id');
+        Schema::table('institution', function (Blueprint $table) {
+            $table->string('bank')->after('balance');
+            $table->integer('account')->after('bank');
+            $table->string('bank_branch')->after('account');
         });
     }
 
@@ -25,7 +27,7 @@ class AddApplicationIdToFamily extends Migration
      */
     public function down()
     {
-        Schema::table('family', function (Blueprint $table) {
+        Schema::table('institution', function (Blueprint $table) {
             //
         });
     }

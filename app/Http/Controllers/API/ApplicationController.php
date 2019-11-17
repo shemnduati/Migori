@@ -88,6 +88,7 @@ class ApplicationController extends Controller
             'division' => 'required|string',
             'sublocation' => 'required|string',
             'village' => 'required|string',
+            'polling' =>'required|string',
             'iname' => 'required|string',
             'branch' => 'required|string',
             'year' => 'required',
@@ -106,6 +107,9 @@ class ApplicationController extends Controller
             'ftelephone' => 'required',
             'mtelephone' => 'required',
             'gtelephone' => 'required',
+            'bank' => 'required',
+            'account' =>'required',
+            'bran'=>'required',
         ]);
 
         $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->where('bursary_type', $request->type)->get();
@@ -211,7 +215,7 @@ class ApplicationController extends Controller
                 $geographical->Sublocation = $request['sublocation'];
                 $geographical->Village = $request['village'];
                 $geographical->year = date('Y');
-
+                $geographical->polling = $request['polling'];
                 $geographical->save();
 
                 $institution = new Institution();
@@ -226,6 +230,10 @@ class ApplicationController extends Controller
                 $institution->amount_paid = $request['paid'];
                 $institution->balance = $request['balance'];
                 $institution->year = date('Y');
+                $institution->bank = $request['bank'];
+                $institution->account = $request['account'];
+                $institution->bank_branch = $request['bran'];
+
 
                 $institution->save();
         }else{
@@ -321,6 +329,7 @@ class ApplicationController extends Controller
                 $geographical->Village = $request['village'];
                 $geographical->status = 2;
                 $geographical->year = date('Y');
+                $geographical->polling = $request['polling'];
 
                 $geographical->save();
 
@@ -336,7 +345,9 @@ class ApplicationController extends Controller
                 $institution->balance = $request['balance'];
                 $institution->status = 2;
                 $institution->year = date('Y');
-
+                $institution->bank = $request['bank'];
+                $institution->account = $request['account'];
+                $institution->bank_branch = $request['bran'];
                 $institution->save();
             }
 
