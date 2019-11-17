@@ -4,7 +4,7 @@
             <h3>Student Information</h3>
         </div>
         <div class="row pl-3">
-<!--            <img :src="application['app'].resultslip" alt="" style="width: 200px">-->
+            <!--            <img :src="application['app'].resultslip" alt="" style="width: 200px">-->
         </div>
         <div class="row">
             <div class="col-md-8">
@@ -71,7 +71,8 @@
                         <p class="rounded p-2 mt-2 text-center bg-b">Results Slip</p>
                     </div>
                     <div class="col-md-4">
-                        <button @click="launch(application['app'].resultslip)" class="btn btn-lg bg-success">View</button>
+                        <button @click="launch(application['app'].resultslip)" class="btn btn-lg bg-success">View
+                        </button>
                     </div>
                 </div>
             </div>
@@ -126,6 +127,40 @@
                         <button @click="launch(fam.cert)" class="btn btn-lg bg-success">Views</button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="box">
+                        <div class="box-header">
+                            <h4 class="box-title">Attached Files (Click to download)</h4>
+                        </div>
+                        <div class="box" style="margin-bottom: 10px;">
+
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12" v-for="file in files" :key="file.id">
+                                    <a @click.prevent="download(file.id, file.path)">
+                                        <div class="info-box">
+                                            <span class="info-box-icon" style="background-color: green;"><i
+                                                    class="fas fa-download" style="color: white;"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Download</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                    </a>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!--                                            <button type="button" class="btn btn-primary" @click="downloadAll">Download all files</button>-->
+                            </div>
+                        </div>
+                        <div class="alert alert-warning alert-dismissible" v-if="files.length == 0">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fa fa-ban"></i> Alert!</h5>
+                            No files attached!!
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -137,7 +172,8 @@
             <div class="col-md-8">
                 <div class="row mx-2 pl-3 pt-2 border border-success rounded">
                     <div class="col-md-6">
-                        <label>Do you have any form of inheritance from your parents/guardians/grandparents or any other source?</label>
+                        <label>Do you have any form of inheritance from your parents/guardians/grandparents or any other
+                            source?</label>
                         <p style="color:blue;">{{evidence.inheritance}}</p>
                     </div>
                     <div class="col-md-6">
@@ -146,7 +182,7 @@
                 </div>
                 <div class="row mx-2 pl-3 pt-2 border border-success rounded">
                     <div class="col-md-6">
-                      <label>Why are you applying for a scholarship?</label>
+                        <label>Why are you applying for a scholarship?</label>
                         <p style="color:blue;">{{evidence.whyApply}}</p>
                     </div>
                     <div class="col-md-6">
@@ -197,7 +233,7 @@
                         <p>{{more.land}}</p>
                         <label>Assets:</label>
                         <p>{{more.assets}}</p>
-                    <hr>
+                        <hr>
                     </div>
                 </div>
             </div>
@@ -250,6 +286,26 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-4">
+                <p v-if="!application['app']['recommendation'] && $gate.isSubadmin()">Recommend</p>
+            </div>
+            <div class="col-sm-8" style="padding: 10px">
+                <button type="button" class="btn btn-success" @click="recommend(1)"
+                        v-if="!application['app']['recommendation'] && $gate.isSubadmin()">HIGHLY
+                </button>
+                <button type="button" class="btn btn-primary" @click="recommend(2)"
+                        v-if="!application['app']['recommendation'] && $gate.isSubadmin()">PARTIALLY
+                </button>
+                <button type="button" class="btn btn-danger" @click="recommend(3)"
+                        v-if="!application['app']['recommendation'] && $gate.isSubadmin()">NO
+                </button>
+                <button type="button" class="btn btn-success" @click="approve"
+                        v-if="$gate.isOfficial() && !application['app']['approved']">Approve
+                </button>
+            </div>
+        </div>
         <div class="modal fade" id="addnew" tabindex="-1" role="dialog" aria-labelledby="addnewLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -275,18 +331,87 @@
 <script>
     export default {
         name: "ScholarshipAdminDetails",
-        data(){
-            return{
+        data() {
+            return {
                 applicationId: this.$route.params.applicationId,
                 application: {},
                 family: {},
                 evidence: {},
-                moreEvidence:{},
+                moreEvidence: {},
                 siblings: {},
-                photo: {}
+                photo: {},
+                files: {},
+                form: new Form({
+                    recommendation: '',
+                })
             }
         },
-        methods:{
+        methods: {
+            approve(){
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    //type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!'
+                }).then((result) => {
+                    if (result.value) {
+                        this.form.post("/api/approveIt/" + this.applicationId).then(() => {
+                            Swal.fire(
+                                'Success!',
+                                'Operation successful.',
+                                'success'
+                            )
+                            Fire.$emit('entry');
+                        }).catch(() => {
+                            Swal.fire('Failed!', 'There was something wrong')
+                        });
+                    }
+                })
+            },
+            recommend(rec) {
+                this.form.recommendation = rec;
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    //type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!'
+                }).then((result) => {
+                    if (result.value) {
+                        this.form.post("/api/recommendIt/" + this.applicationId).then(() => {
+                            Swal.fire(
+                                'Success!',
+                                'Operation successful.',
+                                'success'
+                            )
+                            Fire.$emit('entry');
+                        }).catch(() => {
+                            Swal.fire('Failed!', 'There was something wrong')
+                        });
+                    }
+                })
+            },
+            download(id, path) {
+                axios.get("/api/download/" + id, {responseType: 'blob'})
+                    .then((response) => {
+                        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                        var fileLink = document.createElement('a');
+                        console.log(fileLink);
+                        fileLink.href = fileURL;
+                        fileLink.setAttribute('download', path.substring(8));
+                        document.body.appendChild(fileLink);
+
+                        fileLink.click();
+                    });
+            },
+            getFiles() {
+                axios.get("/api/getfiles/" + this.applicationId).then(({data}) => ([this.files = data]));
+            },
             launch(passport) {
                 $('#addnew').modal('show');
                 this.photo = passport;
@@ -301,6 +426,7 @@
         },
         created() {
             this.getApplications();
+            this.getFiles();
         }
     }
 </script>

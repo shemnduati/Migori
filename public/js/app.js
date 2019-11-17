@@ -1783,6 +1783,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7161,6 +7164,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ScholarshipAdmin",
   data: function data() {
@@ -7169,13 +7186,33 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getApplications: function getApplications() {
+    rejected: function rejected() {
       var _this = this;
 
       if (this.$gate.isSubadmin()) {
-        axios.get('api/scholarshipApps').then(function (_ref) {
+        axios.get('api/scholarshipRej').then(function (_ref) {
           var data = _ref.data;
           return [_this.applications = data];
+        });
+      }
+    },
+    recommended: function recommended() {
+      var _this2 = this;
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/scholarshipRec').then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this2.applications = data];
+        });
+      }
+    },
+    getApplications: function getApplications() {
+      var _this3 = this;
+
+      if (this.$gate.isSubadminOrOfficial()) {
+        axios.get('api/scholarshipApps').then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this3.applications = data];
         });
       }
     }
@@ -7470,6 +7507,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ScholarshipAdminDetails",
   data: function data() {
@@ -7480,41 +7573,112 @@ __webpack_require__.r(__webpack_exports__);
       evidence: {},
       moreEvidence: {},
       siblings: {},
-      photo: {}
+      photo: {},
+      files: {},
+      form: new Form({
+        recommendation: ''
+      })
     };
   },
   methods: {
+    approve: function approve() {
+      var _this = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        //type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then(function (result) {
+        if (result.value) {
+          _this.form.post("/api/approveIt/" + _this.applicationId).then(function () {
+            Swal.fire('Success!', 'Operation successful.', 'success');
+            Fire.$emit('entry');
+          })["catch"](function () {
+            Swal.fire('Failed!', 'There was something wrong');
+          });
+        }
+      });
+    },
+    recommend: function recommend(rec) {
+      var _this2 = this;
+
+      this.form.recommendation = rec;
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        //type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then(function (result) {
+        if (result.value) {
+          _this2.form.post("/api/recommendIt/" + _this2.applicationId).then(function () {
+            Swal.fire('Success!', 'Operation successful.', 'success');
+            Fire.$emit('entry');
+          })["catch"](function () {
+            Swal.fire('Failed!', 'There was something wrong');
+          });
+        }
+      });
+    },
+    download: function download(id, path) {
+      axios.get("/api/download/" + id, {
+        responseType: 'blob'
+      }).then(function (response) {
+        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        var fileLink = document.createElement('a');
+        console.log(fileLink);
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', path.substring(8));
+        document.body.appendChild(fileLink);
+        fileLink.click();
+      });
+    },
+    getFiles: function getFiles() {
+      var _this3 = this;
+
+      axios.get("/api/getfiles/" + this.applicationId).then(function (_ref) {
+        var data = _ref.data;
+        return [_this3.files = data];
+      });
+    },
     launch: function launch(passport) {
       $('#addnew').modal('show');
       this.photo = passport;
     },
     getApplications: function getApplications() {
-      var _this = this;
+      var _this4 = this;
 
-      axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref) {
-        var data = _ref.data;
-        return [_this.application = data['application']];
-      });
       axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref2) {
         var data = _ref2.data;
-        return [_this.family = data['family']];
+        return [_this4.application = data['application']];
       });
       axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref3) {
         var data = _ref3.data;
-        return [_this.evidence = data['evidence']];
+        return [_this4.family = data['family']];
       });
       axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref4) {
         var data = _ref4.data;
-        return [_this.moreEvidence = data['moreEvidence']];
+        return [_this4.evidence = data['evidence']];
       });
       axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref5) {
         var data = _ref5.data;
-        return [_this.siblings = data['siblings']];
+        return [_this4.moreEvidence = data['moreEvidence']];
+      });
+      axios.get("/api/scholarshipdetails/" + this.applicationId).then(function (_ref6) {
+        var data = _ref6.data;
+        return [_this4.siblings = data['siblings']];
       });
     }
   },
   created: function created() {
     this.getApplications();
+    this.getFiles();
   }
 });
 
@@ -72330,11 +72494,25 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _c("h3", { staticClass: "card-title" }, [
-                  _vm._v("Applicants Details")
+                  _vm._v("County Bursary Applicants Details")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-sm",
+                        attrs: { type: "button" },
+                        on: { click: _vm.createPDF }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                Scholarship\n                            "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
                     _vm.$gate.isOfficial()
                       ? _c("div", { staticClass: "col-sm-6" }, [
                           _c("form", [
@@ -88549,37 +88727,33 @@ var render = function() {
                           )
                         ])
                       : _vm._e(),
-                    _vm._v(" "),
+                    _vm._v("\n<<<<<<< HEAD\n                                "),
                     _vm.$gate.isOfficial()
                       ? _c("div", { staticClass: "col-sm-5" })
                       : _vm._e(),
+                    _vm._v("\n=======\n"),
                     _vm._v(" "),
+                    _vm._v(
+                      "\n>>>>>>> 1ba4f910a4ec38ad91260827384a99d53ea3a83a\n                                "
+                    ),
                     _vm.$gate.isSubadmin()
                       ? _c("div", { staticClass: "col-sm-12" }, [
                           _c(
                             "button",
                             {
                               staticClass: "btn btn-success btn-sm",
-                              on: {
-                                click: function($event) {
-                                  return _vm.getBursary("CDF")
-                                }
-                              }
+                              on: { click: _vm.recommended }
                             },
-                            [_vm._v("Scholarship")]
+                            [_vm._v("Recommended")]
                           ),
                           _vm._v(" "),
                           _c(
                             "button",
                             {
-                              staticClass: "btn btn-success btn-sm",
-                              on: {
-                                click: function($event) {
-                                  return _vm.getBursary("County")
-                                }
-                              }
+                              staticClass: "btn btn-danger btn-sm",
+                              on: { click: _vm.rejected }
                             },
-                            [_vm._v("County")]
+                            [_vm._v("Rejected")]
                           )
                         ])
                       : _vm._e()
@@ -88612,7 +88786,13 @@ var render = function() {
                                 ? _c(
                                     "span",
                                     { staticStyle: { color: "purple" } },
-                                    [_vm._v("Recommended.")]
+                                    [
+                                      _vm._v(
+                                        "Recommended.(" +
+                                          _vm._s(application.recommendation) +
+                                          ")"
+                                      )
+                                    ]
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
@@ -88655,7 +88835,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "view\n                                "
+                                      "view\n                                    "
                                     )
                                   ]
                                 )
@@ -88846,7 +89026,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("View")]
+              [_vm._v("View\n                    ")]
             )
           ])
         ])
@@ -88968,41 +89148,111 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-md-4 pt-5" },
-        _vm._l(_vm.family, function(fam) {
-          return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
-            fam.cert
-              ? _c("div", { staticClass: "col-md-8" }, [
-                  _c(
-                    "p",
-                    { staticClass: "rounded p-2 mt-2 text-center bg-b" },
-                    [_vm._v(_vm._s(fam["who"]) + "'s ID/ Death Cert")]
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            fam.cert
-              ? _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-lg bg-success",
-                      on: {
-                        click: function($event) {
-                          return _vm.launch(fam.cert)
+        [
+          _vm._l(_vm.family, function(fam) {
+            return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
+              fam.cert
+                ? _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "p",
+                      { staticClass: "rounded p-2 mt-2 text-center bg-b" },
+                      [_vm._v(_vm._s(fam["who"]) + "'s ID/ Death Cert")]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              fam.cert
+                ? _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-lg bg-success",
+                        on: {
+                          click: function($event) {
+                            return _vm.launch(fam.cert)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("Views")]
+                      },
+                      [_vm._v("Views")]
+                    )
+                  ])
+                : _vm._e()
+            ])
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "box" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "box",
+                staticStyle: { "margin-bottom": "10px" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.files, function(file) {
+                    return _c(
+                      "div",
+                      {
+                        key: file.id,
+                        staticClass: "col-md-6 col-sm-6 col-xs-12"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.download(file.id, file.path)
+                              }
+                            }
+                          },
+                          [_vm._m(7, true)]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm.files.length == 0
+                ? _c(
+                    "div",
+                    { staticClass: "alert alert-warning alert-dismissible" },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "close",
+                          attrs: {
+                            type: "button",
+                            "data-dismiss": "alert",
+                            "aria-hidden": "true"
+                          }
+                        },
+                        [_vm._v("×")]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(8),
+                      _vm._v(
+                        "\n                        No files attached!!\n                    "
+                      )
+                    ]
                   )
-                ])
-              : _vm._e()
+                : _vm._e()
+            ])
           ])
-        }),
-        0
+        ],
+        2
       )
     ]),
     _vm._v(" "),
-    _vm._m(6),
+    _vm._m(9),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -89013,7 +89263,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-6" }, [
               _c("label", [
                 _vm._v(
-                  "Do you have any form of inheritance from your parents/guardians/grandparents or any other source?"
+                  "Do you have any form of inheritance from your parents/guardians/grandparents or any other\n                        source?"
                 )
               ]),
               _vm._v(" "),
@@ -89041,7 +89291,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-6" }, [
               _c("label", [
                 _vm._v(
-                  "Have you received any financial\n                            support/Bursaries in the past? Please provide\n                            documentation"
+                  "Have you received any financial\n                        support/Bursaries in the past? Please provide\n                        documentation"
                 )
               ]),
               _vm._v(" "),
@@ -89059,7 +89309,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-6" }, [
               _c("label", [
                 _vm._v(
-                  "Do you have any special need? For example:\n                            Chronic illness, disability. Please provide\n                            documentation"
+                  "Do you have any special need? For example:\n                        Chronic illness, disability. Please provide\n                        documentation"
                 )
               ]),
               _vm._v(" "),
@@ -89084,7 +89334,7 @@ var render = function() {
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _vm._m(7),
+    _vm._m(10),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -89135,7 +89385,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(8),
+    _vm._m(11),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -89146,7 +89396,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-6" }, [
               _c("label", [
                 _vm._v(
-                  "Has your family been affected by civil\n                            conflict or natural disasters such as flooding,\n                            drought, fire, or famine? Describe:"
+                  "Has your family been affected by civil\n                        conflict or natural disasters such as flooding,\n                        drought, fire, or famine? Describe:"
                 )
               ]),
               _vm._v(" "),
@@ -89174,7 +89424,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-6" }, [
               _c("label", [
                 _vm._v(
-                  "Please describe any other cause of\n                            disadvantage or vulnerability?"
+                  "Please describe any other cause of\n                        disadvantage or vulnerability?"
                 )
               ]),
               _vm._v(" "),
@@ -89186,7 +89436,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-6" }, [
               _c("label", [
                 _vm._v(
-                  "How many siblings are in secondary school,\n                            collage and tertiary level."
+                  "How many siblings are in secondary school,\n                        collage and tertiary level."
                 )
               ]),
               _vm._v(" "),
@@ -89197,7 +89447,7 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(9),
+        _vm._m(12),
         _vm._v(" "),
         _c(
           "div",
@@ -89227,6 +89477,78 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-4" }, [
+        !_vm.application["app"]["recommendation"] && _vm.$gate.isSubadmin()
+          ? _c("p", [_vm._v("Recommend")])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-8", staticStyle: { padding: "10px" } }, [
+        !_vm.application["app"]["recommendation"] && _vm.$gate.isSubadmin()
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.recommend(1)
+                  }
+                }
+              },
+              [_vm._v("HIGHLY\n            ")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.application["app"]["recommendation"] && _vm.$gate.isSubadmin()
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.recommend(2)
+                  }
+                }
+              },
+              [_vm._v("PARTIALLY\n            ")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.application["app"]["recommendation"] && _vm.$gate.isSubadmin()
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.recommend(3)
+                  }
+                }
+              },
+              [_vm._v("NO\n            ")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$gate.isOfficial() && !_vm.application["app"]["approved"]
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "button" },
+                on: { click: _vm.approve }
+              },
+              [_vm._v("Approve\n            ")]
+            )
+          : _vm._e()
+      ])
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -89245,7 +89567,7 @@ var render = function() {
           { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(10),
+              _vm._m(13),
               _vm._v(" "),
               _c(
                 "div",
@@ -89258,7 +89580,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(11)
+              _vm._m(14)
             ])
           ]
         )
@@ -89373,6 +89695,49 @@ var staticRenderFns = [
       _c("h5", { staticClass: " rounded bg-success p-2 mt-2 text-center" }, [
         _vm._v("SIBLINGS")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header" }, [
+      _c("h4", { staticClass: "box-title" }, [
+        _vm._v("Attached Files (Click to download)")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info-box" }, [
+      _c(
+        "span",
+        {
+          staticClass: "info-box-icon",
+          staticStyle: { "background-color": "green" }
+        },
+        [
+          _c("i", {
+            staticClass: "fas fa-download",
+            staticStyle: { color: "white" }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "info-box-content" }, [
+        _c("span", { staticClass: "info-box-text" }, [_vm._v("Download")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", [
+      _c("i", { staticClass: "icon fa fa-ban" }),
+      _vm._v(" Alert!")
     ])
   },
   function() {

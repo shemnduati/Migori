@@ -32,6 +32,27 @@ class ScholarshipController extends Controller
         }
     }
 
+    public function recommendedApp(){
+        return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);
+    }
+
+    public function rejectedApp(){
+        return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 2)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);
+    }
+
+    public function getFiles($applicationId)
+    {
+        return File::where('applicationId', $applicationId)->get();
+    }
+
+    public function downloadFile($id)
+    {
+        $file = File::where('id', $id)->firstOrFail();
+        $pathToFile = storage_path('app/' . $file->path);
+
+        return response()->download($pathToFile);
+    }
+
     public function show($applicationId)
     {
         $app = Application::where('id', $applicationId)->where('year', date('Y'))->first();
@@ -285,6 +306,31 @@ class ScholarshipController extends Controller
 
 
         }
+    }
+
+    public function recommend(Request $request, $applicationId){
+        if ($request->recommendation == 1){
+            $app = Application::findOrFail($applicationId);
+            $app->status = 1;
+            $app->recommendation = "high";
+            $app->update();
+        }elseif ($request->recommendation == 2){
+            $app = Application::findOrFail($applicationId);
+            $app->status = 1;
+            $app->recommendation = "partially";
+            $app->update();
+        }elseif ($request->recommendation == 3){
+            $app = Application::findOrFail($applicationId);
+            $app->status = 2;
+            $app->recommendation = "no";
+            $app->update();
+        }
+    }
+
+    public function approve($applicationId){
+        $app = Application::findOrFail($applicationId);
+        $app->approved = 1;
+        $app->update();
     }
 
     public function complete(Request $request)
