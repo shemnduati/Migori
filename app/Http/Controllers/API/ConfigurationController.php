@@ -64,9 +64,10 @@ class ConfigurationController extends Controller
         //
     }
 
-    public function getStatus()
+    public function getStatus($countyId)
     {
-        $num = Configuration::where('status', 1)->count();
+
+        $num = Configuration::where('county',$countyId)->where('type', 2)->where('status', 1)->count();
 
         return ['num'=>$num];
     }

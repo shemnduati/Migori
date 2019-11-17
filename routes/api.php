@@ -30,7 +30,7 @@ Route::get('dash', 'API\DashboardContoller@sub');
 Route::get('profile', 'API\UserController@profile');
 Route::post('apply', 'API\ApplicationController@store');
 Route::apiResources(['county' => 'API\CountyController']);
-Route::get('status', 'API\ConfigurationController@getStatus');
+Route::get('status/{countyId}', 'API\ConfigurationController@getStatus');
 Route::apiResources(['configuration' => 'API\ConfigurationController']);
 Route::post('configuration/{id}','API\ConfigurationController@store');
 Route::get('configurations/{id}','API\ConfigurationController@index');

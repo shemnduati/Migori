@@ -3,7 +3,7 @@
         <div class="row justify-content-center"  v-if="$gate.isAdminOrSubadmin()">
             <div class="col-md-12">
                 <div class="row mt-5">
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin()">
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin()">
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
