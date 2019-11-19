@@ -1696,7 +1696,7 @@
                 for (let i = 0; i < this.attachments.length; i++) {
                     this.formf.append('files[]', this.attachments[i]);
                 }
-                this.formf.append('siblings', this.sibling);
+
                 this.formf.append('applicationId', applicationId);
                 const config = {headers: {'Content-Type': 'multipart/form-data'}};
 
