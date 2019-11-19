@@ -49,7 +49,7 @@ class InformationController extends Controller
     {
         $userId = Auth::user()->id;
         $ward_id = User::where('id',$userId)->value('ward');
-        $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->where('status', 3)->get();
+        $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('ward_id', $ward_id)->where('status', 1)->get();
         $parent = array();
 
         foreach ($applications as $apps) {
@@ -68,6 +68,40 @@ class InformationController extends Controller
                 'reg' => $reg,
                 'date' => $date,
                 'institution' => $institution,
+            );
+            array_push($parent, $child);
+        }
+        return ['parent' => $parent];
+
+    }
+    public function getAppnts()
+    {
+        $userId = Auth::user()->id;
+        $ward_id = User::where('id',$userId)->value('ward');
+        $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->where('bursary_type','scholarship')->where('status', 1)->get();
+        $parent = array();
+
+        foreach ($applications as $apps) {
+            $id = $apps['id'];
+            $fname = $apps['firstName'];
+            $Mname = $apps['middleName'];
+            $Lname = $apps['lastName'];
+            $index = $apps['indexNo'];
+            $school = $apps['secSchoolName'];
+            $reco = $apps['recommendation'];
+            $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
+            $date = $apps['updated_at'];
+            $child = array(
+                'id' => $id,
+                'fname' => $fname,
+                'Mname'=>$Mname,
+                'Lname'=>$Lname,
+                'reco'=>$reco,
+                'index' =>$index,
+                'school'=>$school,
+                'ward' => $ward_name,
+                'date' => $date,
+
             );
             array_push($parent, $child);
         }
@@ -86,7 +120,7 @@ class InformationController extends Controller
     public function Applicants()
     {
         $county_id = User::where('id', Auth::user()->id)->value('county');
-        $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('status', 3)->get();
+        $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('bursary_type','County')->where('status', 3)->get();
         $parent = array();
 
         foreach ($applications as $apps) {
@@ -110,10 +144,35 @@ class InformationController extends Controller
         }
         return ['parent' => $parent];
     }
+    public function Applicantz()
+    {
+        $county_id = User::where('id', Auth::user()->id)->value('county');
+        $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('bursary_type','scholarship')->where('status', 3)->get();
+        $parent = array();
 
+        foreach ($applications as $apps) {
+            $id = $apps['id'];
+            $name = $apps['name'];
+            $reg = $apps['reg_no'];
+            $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
+            $institution = Institution::where('user_id', $apps['user_id'])->value('name');
+            $amount = $apps['amount'];
+            $date = $apps['updated_at'];
+            $child = array(
+                'id' => $id,
+                'name' => $name,
+                'ward' => $ward_name,
+                'amount' => $amount,
+                'reg' => $reg,
+                'date' => $date,
+                'institution' => $institution,
+            );
+            array_push($parent, $child);
+        }
+        return ['parent' => $parent];
+    }
     public function getbusary()
     {
-        // return User::latest()->paginate(10);
         $ward_id = auth()->user()->ward;
         $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('ward_id', $ward_id)->get();
 
@@ -227,7 +286,71 @@ class InformationController extends Controller
             return ['parent' => $parent];
         }
     }
+    public function getWardsApp($id)
+    {
+        if ($id == 0) {
 
+            $county_id = User::where('id', Auth::user()->id)->value('county');
+            $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('bursary_type','scholarship')->where('status', 3)->get();
+            $parent = array();
+
+            foreach ($applications as $apps) {
+                $id = $apps['id'];
+                $fname = $apps['firstName'];
+                $Mname = $apps['middleName'];
+                $Lname = $apps['lastName'];
+                $index = $apps['indexNo'];
+                $school = $apps['secSchoolName'];
+                $reco = $apps['recommendation'];
+                $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
+                $date = $apps['updated_at'];
+                $child = array(
+                    'id' => $id,
+                    'fname' => $fname,
+                    'Mname'=>$Mname,
+                    'Lname'=>$Lname,
+                    'reco'=>$reco,
+                    'index' =>$index,
+                    'school'=>$school,
+                    'ward' => $ward_name,
+                    'date' => $date,
+
+                );
+                array_push($parent, $child);
+            }
+            return ['parent' => $parent];
+        } elseif ($id != 0) {
+
+            $applications = Application::where('year', date('Y'))->where('ward_id', $id)->where('bursary_type','scholarship')->where('status', 3)->get();
+            $parent = array();
+
+            foreach ($applications as $apps) {
+                $id = $apps['id'];
+                $fname = $apps['firstName'];
+                $Mname = $apps['middleName'];
+                $Lname = $apps['lastName'];
+                $index = $apps['indexNo'];
+                $school = $apps['secSchoolName'];
+                $reco = $apps['recommendation'];
+                $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
+                $date = $apps['updated_at'];
+                $child = array(
+                    'id' => $id,
+                    'fname' => $fname,
+                    'Mname'=>$Mname,
+                    'Lname'=>$Lname,
+                    'reco'=>$reco,
+                    'index' =>$index,
+                    'school'=>$school,
+                    'ward' => $ward_name,
+                    'date' => $date,
+
+                );
+                array_push($parent, $child);
+            }
+            return ['parent' => $parent];
+        }
+    }
     public function getBursaryType($type)
     {
         $ward_id = User::where('id', Auth::user()->id)->value('ward');

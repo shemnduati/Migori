@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">County Bursary Applicants Details</h3>
+                        <h3 class="card-title">Scholarship Applicants Details</h3>
 
                         <div class="card-tools">
                             <div class="row">
@@ -21,7 +21,7 @@
                                 <div class="col-sm-6">
                                     <button type="button" class="btn btn-primary btn-sm" @click="createPDF">
                                         <i class="fas fa-download"></i>
-                                      Download
+                                        Download
                                     </button>
                                 </div>
                             </div>
@@ -31,19 +31,23 @@
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover" id="my-table">
                             <tbody><tr>
-                                <th>Name</th>
-                                <th>Adm/Reg</th>
-                                <th>Institution</th>
+                                <th>First Name</th>
+                                <th>Middile Name</th>
+                                <th>Last Name</th>
+                                <th>Index N.O</th>
+                                <th>School</th>
+                                <th>Recommendation</th>
                                 <th>Ward</th>
-                                <th>Amount</th>
                                 <th>Date</th>
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
-                                <td>{{application.name}}</td>
-                                <td>{{application.reg}}</td>
-                                <td>{{application.institution}}</td>
+                                <td>{{application.fname}}</td>
+                                <td>{{application.Mname}}</td>
+                                <td>{{application.Lname}}</td>
+                                <td>{{application.index}}</td>
+                                <td>{{application.school}}</td>
+                                <td>{{application.reco}}</td>
                                 <td>{{application.ward}}</td>
-                                <td>Ksh. {{application.amount}}</td>
                                 <td>{{application.date | myDate}}</td>
                             </tr>
 
@@ -84,7 +88,7 @@
         },
         methods:{
             createPDF(){
-               var specialElementHandlers = {
+                var specialElementHandlers = {
                     "#editor":function(element, renderer){
                         return true;
                     }
@@ -105,12 +109,12 @@
             },
             getApplications(){
                 if(this.$gate.isOfficial()) {
-                    axios.get('api/getApplicants').then(({data}) => ([this.applications = data['parent']]));
+                    axios.get('api/getApplicantz').then(({data}) => ([this.applications = data['parent']]));
                 }
-                    axios.get('api/getApp').then(({data}) => ([this.applications = data['parent']]));
+                axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
             },
             getType(){
-                    axios.get('api/getWardsById/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
+                axios.get('api/getWardsApp/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
             },
             getWards(){
                 axios.get("api/getMyWards").then(({ data }) => ([this.wards = data['wards']]));
