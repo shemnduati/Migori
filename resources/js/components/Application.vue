@@ -10,20 +10,20 @@
 
                             <section v-if="step==1">
                                 <div class="row justify-content-center">
-                                <div class="col-sm-6 justify-content-center">
-                                    <div class="form-group">
-                                        <label for="county">Select Your County</label>
-                                        <select   v-model="form.county" @change='getStatus()'
-                                                class="form-control" :required="true" name="county" id="Mycounty"
-                                                :class="{ 'is-invalid': form.errors.has('county') }" >
-                                            <option selected value="">--Select county--</option>
-                                            <option v-for="count in counties" :key="count.id" :value="count.id">{{
-                                                count.name}}
-                                            </option>
-                                        </select>
-                                        <has-error :form="form" field="county"></has-error>
+                                    <div class="col-sm-6 justify-content-center">
+                                        <div class="form-group">
+                                            <label for="county">Select Your County</label>
+                                            <select v-model="form.county" @change='getStatus()'
+                                                    class="form-control" :required="true" name="county" id="Mycounty"
+                                                    :class="{ 'is-invalid': form.errors.has('county') }">
+                                                <option selected value="">--Select county--</option>
+                                                <option v-for="count in counties" :key="count.id" :value="count.id">{{
+                                                    count.name}}
+                                                </option>
+                                            </select>
+                                            <has-error :form="form" field="county"></has-error>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </section>
 
@@ -385,7 +385,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="relationship">Relationship</label>
+                                            <label>Relationship</label>
                                             <select v-model="form.pRelationship" class="form-control"
                                                     name="pRelationship" id="pRelationship"
                                                     :class="{ 'is-invalid': form.errors.has('pRelationship') }">
@@ -406,7 +406,7 @@
                                         <div class="form-group">
                                             <label for="county">County</label>
                                             <select v-model="form.county" @change='getCountyWards()'
-                                                    class="form-control"  name="county" id="county"
+                                                    class="form-control" name="county" id="county"
                                                     :class="{ 'is-invalid': form.errors.has('county') }">
                                                 <option selected value="">--Select county--</option>
                                                 <option v-for="count in counties" :key="count.id" :value="count.id">{{
@@ -420,7 +420,7 @@
                                         <div class="form-group">
                                             <label for="ward">Ward</label>
                                             <select v-model="form.ward" class="form-control" name="ward" id="ward"
-                                                    :class="{ 'is-invalid': form.errors.has('ward') }" >
+                                                    :class="{ 'is-invalid': form.errors.has('ward') }">
                                                 <option selected value="">--Select Ward--</option>
                                                 <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
                                                     wardy.name}}
@@ -589,6 +589,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group justify-content-center">
+                                            <label for="files">Attach recommendation letter by head of
+                                                institution</label>
+                                            <input type="file" class="form-control-file" @change="fieldChange"
+                                                   id="files">
+                                            <has-error :form="form" field="files"></has-error>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <!--                                        <button class="btn btn-primary btn-sm" @click.prevent="sendOther(1)">send</button>-->
+                                    </div>
+                                </div>
                             </section>
 
                             <button v-if="step != 1" type="button" class="btn btn-primary " @click.prevent="prevStep">
@@ -598,7 +612,7 @@
                                     @click.prevent="nextStep">Next Step
                             </button>
                             <button v-if="step == 5" type="button" class="btn btn-success btn-submit"
-                                    @click.prevent="sendApplication()" :disabled="loading">
+                                    @click.prevent="sendApp()" :disabled="loading">
                                 <div class="loader">
                                     <div class="lds-roller" v-if="loading">
                                         <div></div>
@@ -624,7 +638,8 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Application window closed</h5>
-                            <p class="card-text">The application window for your County has been closed for now wait until the window is
+                            <p class="card-text">The application window for your County has been closed for now wait
+                                until the window is
                                 opened</p>
                             <a href="/" class="btn btn-danger">Go Back Home</a>
                         </div>
@@ -646,7 +661,9 @@
                 info: {},
                 enable: {},
                 loading: false,
-                watch:0,
+                watch: 0,
+                attachments: [],
+                formf: new FormData(),
                 form: new Form({
                     type: 'County',
                     firstName: '',
@@ -678,7 +695,7 @@
                     division: '',
                     sublocation: '',
                     village: '',
-                    polling:'',
+                    polling: '',
                     iname: '',
                     branch: '',
                     year: '',
@@ -697,29 +714,118 @@
                     ftelephone: '',
                     mtelephone: '',
                     gtelephone: '',
-                    bank:'',
-                    account:'',
-                    bran:'',
+                    bank: '',
+                    account: '',
+                    bran: '',
                 })
             }
         },
         methods: {
+            sendApp() {
+                for (let i = 0; i < this.attachments.length; i++) {
+                    this.formf.append('files[]', this.attachments[i]);
+                }
+
+                this.formf.append('type', this.form.type);
+                this.formf.append('firstName', this.form.firstName);
+                this.formf.append('middleName', this.form.middleName);
+                this.formf.append('lastName', this.form.lastName);
+                this.formf.append('dob', this.form.dob);
+                this.formf.append('email', this.form.email);
+                this.formf.append('gender', this.form.gender);
+                this.formf.append('telephone', this.form.telephone);
+                this.formf.append('regNo', this.form.regNo);
+                this.formf.append('class', this.form.class);
+                this.formf.append('idNo', this.form.idNo);
+                this.formf.append('fname', this.form.fname);
+                this.formf.append('fliving', this.form.fliving);
+                this.formf.append('foccupation', this.form.foccupation);
+                this.formf.append('mname', this.form.mname);
+                this.formf.append('mliving', this.form.mliving);
+                this.formf.append('moccupation', this.form.moccupation);
+                this.formf.append('gname', this.form.gname);
+                this.formf.append('gliving', this.form.gliving);
+                this.formf.append('goccupation', this.form.goccupation);
+                this.formf.append('fincome', this.form.fincome);
+                this.formf.append('mincome', this.form.mincome);
+                this.formf.append('gincome', this.form.gincome);
+                this.formf.append('county', this.form.county);
+                this.formf.append('ward', this.form.ward);
+                this.formf.append('constituency', this.form.constituency);
+                this.formf.append('location', this.form.location);
+                this.formf.append('division', this.form.division);
+                this.formf.append('sublocation', this.form.sublocation);
+                this.formf.append('village', this.form.village);
+                this.formf.append('polling', this.form.polling);
+                this.formf.append('iname', this.form.iname);
+                this.formf.append('branch', this.form.branch);
+                this.formf.append('year', this.form.year);
+                this.formf.append('payable', this.form.payable);
+                this.formf.append('paid', this.form.paid);
+                this.formf.append('balance', this.form.balance);
+                this.formf.append('tSiblings', this.form.tSiblings);
+                this.formf.append('inSchool', this.form.inSchool);
+                this.formf.append('sWorking', this.form.sWorking);
+                this.formf.append('pFees', this.form.pFees);
+                this.formf.append('pRelationship', this.form.pRelationship);
+                this.formf.append('passport', this.form.passport);
+                this.formf.append('fatherId', this.form.fatherId);
+                this.formf.append('motherId', this.form.motherId);
+                this.formf.append('guardianId', this.form.guardianId);
+                this.formf.append('ftelephone', this.form.ftelephone);
+                this.formf.append('mtelephone', this.form.mtelephone);
+                this.formf.append('gtelephone', this.form.gtelephone);
+                this.formf.append('bank', this.form.bank);
+                this.formf.append('account', this.form.account);
+                this.formf.append('bran', this.form.bran);
+                const config = {headers: {'Content-Type': 'multipart/form-data'}};
+
+                this.loading = true;
+                axios.post('/api/apply', this.formf, config).then(response => {
+                    this.loading = false;
+                    Fire.$emit('AfterCreate');
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Submited!!',
+                        text: 'Application Submitted Successfully',
+
+                    })
+                    this.form.reset();
+                    this.$Progress.finish();
+                    window.location.href = "/student"
+
+                })
+                    .catch(error => {
+                        this.loading = false;
+                        this.errors = error.response.data.errors;
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error!!',
+                            text: error.response.data.msg,
+
+                        })
+                    });
+            },
+            fieldChange(e) {
+                let selectedFiles = e.target.files;
+                if (!selectedFiles.length) {
+                    return false;
+                }
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    this.attachments.push(selectedFiles[i]);
+                }
+                // console.log(this.attachments);
+            },
+            next() {
+                this.step++;
+            },
             sendApplication() {
                 if (this.$gate.isStudent()) {
                     this.loading = true;
                     this.form.post('api/apply')
-                        .then(() => {
-                            this.loading = false;
-                            Fire.$emit('AfterCreate');
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Submited!!',
-                                text: 'Application Submitted Successfully',
+                        .then(({data}) => {
 
-                            })
-                            this.form.reset();
-                            this.$Progress.finish();
-                            window.location.href = "/student"
+                            this.uploadLetter(data);
                         })
                         .catch(error => {
                             this.loading = false;
@@ -731,7 +837,7 @@
 
                             })
                         })
-                }else {
+                } else {
                     Swal.fire({
                         type: 'error',
                         title: 'Ooops...',
@@ -825,12 +931,12 @@
             nextStep() {
 
                 if (this.step == 1) {
-                     if(!this.form.county) {
+                    if (!this.form.county) {
                         this.form.errors.set({
                             county: 'This field is required'
                         })
                         return false;
-                    }else if(this.enable == 0){
+                    } else if (this.enable == 0) {
                         this.watch = 1;
                     } else {
                         this.step++;

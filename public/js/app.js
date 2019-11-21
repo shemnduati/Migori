@@ -2527,6 +2527,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2538,6 +2553,8 @@ __webpack_require__.r(__webpack_exports__);
       enable: {},
       loading: false,
       watch: 0,
+      attachments: [],
+      formf: new FormData(),
       form: new Form({
         type: 'County',
         firstName: '',
@@ -2595,28 +2612,122 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    sendApplication: function sendApplication() {
+    sendApp: function sendApp() {
       var _this = this;
+
+      for (var i = 0; i < this.attachments.length; i++) {
+        this.formf.append('files[]', this.attachments[i]);
+      }
+
+      this.formf.append('type', this.form.type);
+      this.formf.append('firstName', this.form.firstName);
+      this.formf.append('middleName', this.form.middleName);
+      this.formf.append('lastName', this.form.lastName);
+      this.formf.append('dob', this.form.dob);
+      this.formf.append('email', this.form.email);
+      this.formf.append('gender', this.form.gender);
+      this.formf.append('telephone', this.form.telephone);
+      this.formf.append('regNo', this.form.regNo);
+      this.formf.append('class', this.form["class"]);
+      this.formf.append('idNo', this.form.idNo);
+      this.formf.append('fname', this.form.fname);
+      this.formf.append('fliving', this.form.fliving);
+      this.formf.append('foccupation', this.form.foccupation);
+      this.formf.append('mname', this.form.mname);
+      this.formf.append('mliving', this.form.mliving);
+      this.formf.append('moccupation', this.form.moccupation);
+      this.formf.append('gname', this.form.gname);
+      this.formf.append('gliving', this.form.gliving);
+      this.formf.append('goccupation', this.form.goccupation);
+      this.formf.append('fincome', this.form.fincome);
+      this.formf.append('mincome', this.form.mincome);
+      this.formf.append('gincome', this.form.gincome);
+      this.formf.append('county', this.form.county);
+      this.formf.append('ward', this.form.ward);
+      this.formf.append('constituency', this.form.constituency);
+      this.formf.append('location', this.form.location);
+      this.formf.append('division', this.form.division);
+      this.formf.append('sublocation', this.form.sublocation);
+      this.formf.append('village', this.form.village);
+      this.formf.append('polling', this.form.polling);
+      this.formf.append('iname', this.form.iname);
+      this.formf.append('branch', this.form.branch);
+      this.formf.append('year', this.form.year);
+      this.formf.append('payable', this.form.payable);
+      this.formf.append('paid', this.form.paid);
+      this.formf.append('balance', this.form.balance);
+      this.formf.append('tSiblings', this.form.tSiblings);
+      this.formf.append('inSchool', this.form.inSchool);
+      this.formf.append('sWorking', this.form.sWorking);
+      this.formf.append('pFees', this.form.pFees);
+      this.formf.append('pRelationship', this.form.pRelationship);
+      this.formf.append('passport', this.form.passport);
+      this.formf.append('fatherId', this.form.fatherId);
+      this.formf.append('motherId', this.form.motherId);
+      this.formf.append('guardianId', this.form.guardianId);
+      this.formf.append('ftelephone', this.form.ftelephone);
+      this.formf.append('mtelephone', this.form.mtelephone);
+      this.formf.append('gtelephone', this.form.gtelephone);
+      this.formf.append('bank', this.form.bank);
+      this.formf.append('account', this.form.account);
+      this.formf.append('bran', this.form.bran);
+      var config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      this.loading = true;
+      axios.post('/api/apply', this.formf, config).then(function (response) {
+        _this.loading = false;
+        Fire.$emit('AfterCreate');
+        Swal.fire({
+          type: 'success',
+          title: 'Submited!!',
+          text: 'Application Submitted Successfully'
+        });
+
+        _this.form.reset();
+
+        _this.$Progress.finish();
+
+        window.location.href = "/student";
+      })["catch"](function (error) {
+        _this.loading = false;
+        _this.errors = error.response.data.errors;
+        Swal.fire({
+          type: 'error',
+          title: 'Error!!',
+          text: error.response.data.msg
+        });
+      });
+    },
+    fieldChange: function fieldChange(e) {
+      var selectedFiles = e.target.files;
+
+      if (!selectedFiles.length) {
+        return false;
+      }
+
+      for (var i = 0; i < selectedFiles.length; i++) {
+        this.attachments.push(selectedFiles[i]);
+      } // console.log(this.attachments);
+
+    },
+    next: function next() {
+      this.step++;
+    },
+    sendApplication: function sendApplication() {
+      var _this2 = this;
 
       if (this.$gate.isStudent()) {
         this.loading = true;
-        this.form.post('api/apply').then(function () {
-          _this.loading = false;
-          Fire.$emit('AfterCreate');
-          Swal.fire({
-            type: 'success',
-            title: 'Submited!!',
-            text: 'Application Submitted Successfully'
-          });
+        this.form.post('api/apply').then(function (_ref) {
+          var data = _ref.data;
 
-          _this.form.reset();
-
-          _this.$Progress.finish();
-
-          window.location.href = "/student";
+          _this2.uploadLetter(data);
         })["catch"](function (error) {
-          _this.loading = false;
-          _this.errors = error.response.data.errors;
+          _this2.loading = false;
+          _this2.errors = error.response.data.errors;
           Swal.fire({
             type: 'error',
             title: 'Error!!',
@@ -2632,7 +2743,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getGuardianId: function getGuardianId(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -2641,7 +2752,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this2.form.guardianId = reader.result;
+            _this3.form.guardianId = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -2661,7 +2772,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getFatherId: function getFatherId(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       console.log('Father');
       var file = e.target.files[0];
@@ -2671,7 +2782,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this3.form.fatherId = reader.result;
+            _this4.form.fatherId = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -2691,7 +2802,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getMotherId: function getMotherId(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -2700,7 +2811,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this4.form.motherId = reader.result;
+            _this5.form.motherId = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -3004,31 +3115,31 @@ __webpack_require__.r(__webpack_exports__);
       this.step--;
     },
     getCounties: function getCounties() {
-      var _this5 = this;
+      var _this6 = this;
 
-      axios.get("api/getcounties").then(function (_ref) {
-        var data = _ref.data;
-        return [_this5.counties = data['counties']];
+      axios.get("api/getcounties").then(function (_ref2) {
+        var data = _ref2.data;
+        return [_this6.counties = data['counties']];
       });
     },
     getWards: function getWards() {
-      var _this6 = this;
-
-      axios.get("api/getwards").then(function (_ref2) {
-        var data = _ref2.data;
-        return [_this6.wards = data['wards']];
-      });
-    },
-    getCountyWards: function getCountyWards() {
       var _this7 = this;
 
-      axios.get("api/getcountywards/" + this.form.county).then(function (_ref3) {
+      axios.get("api/getwards").then(function (_ref3) {
         var data = _ref3.data;
         return [_this7.wards = data['wards']];
       });
     },
-    getPassport: function getPassport(e) {
+    getCountyWards: function getCountyWards() {
       var _this8 = this;
+
+      axios.get("api/getcountywards/" + this.form.county).then(function (_ref4) {
+        var data = _ref4.data;
+        return [_this8.wards = data['wards']];
+      });
+    },
+    getPassport: function getPassport(e) {
+      var _this9 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -3038,7 +3149,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this8.form.passport = reader.result;
+            _this9.form.passport = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -3058,19 +3169,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getDetails: function getDetails() {
-      var _this9 = this;
+      var _this10 = this;
 
-      axios.get("api/getdetails").then(function (_ref4) {
-        var data = _ref4.data;
-        return [_this9.info = data['user']];
+      axios.get("api/getdetails").then(function (_ref5) {
+        var data = _ref5.data;
+        return [_this10.info = data['user']];
       });
     },
     getStatus: function getStatus() {
-      var _this10 = this;
+      var _this11 = this;
 
-      axios.get("api/status/" + this.form.county).then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this10.enable = data['num']];
+      axios.get("api/status/" + this.form.county).then(function (_ref6) {
+        var data = _ref6.data;
+        return [_this11.enable = data['num']];
       });
     }
   },
@@ -14118,7 +14229,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
 
 // exports
 
@@ -72953,7 +73064,7 @@ var render = function() {
                                             [
                                               _vm._v(
                                                 _vm._s(count.name) +
-                                                  "\n                                        "
+                                                  "\n                                            "
                                               )
                                             ]
                                           )
@@ -74713,11 +74824,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _c(
-                                  "label",
-                                  { attrs: { for: "relationship" } },
-                                  [_vm._v("Relationship")]
-                                ),
+                                _c("label", [_vm._v("Relationship")]),
                                 _vm._v(" "),
                                 _c(
                                   "select",
@@ -75727,6 +75834,37 @@ var render = function() {
                               1
                             )
                           ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "col" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "form-group justify-content-center"
+                              },
+                              [
+                                _c("label", { attrs: { for: "files" } }, [
+                                  _vm._v(
+                                    "Attach recommendation letter by head of\n                                            institution"
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  staticClass: "form-control-file",
+                                  attrs: { type: "file", id: "files" },
+                                  on: { change: _vm.fieldChange }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "files" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col" })
                         ])
                       ])
                     : _vm._e(),
@@ -75778,7 +75916,7 @@ var render = function() {
                           on: {
                             click: function($event) {
                               $event.preventDefault()
-                              return _vm.sendApplication()
+                              return _vm.sendApp()
                             }
                           }
                         },
@@ -75839,7 +75977,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(
-            "The application window for your County has been closed for now wait until the window is\n                            opened"
+            "The application window for your County has been closed for now wait\n                            until the window is\n                            opened"
           )
         ]),
         _vm._v(" "),
@@ -77262,14 +77400,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "inlineRadio1" }
-                },
-                [_vm._v("Yes")]
-              )
+              _c("label", { staticClass: "form-check-label" }, [_vm._v("Yes")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -77301,14 +77432,9 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "inlineRadio1" }
-                },
-                [_vm._v("Partially")]
-              )
+              _c("label", { staticClass: "form-check-label" }, [
+                _vm._v("Partially")
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -110725,8 +110851,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

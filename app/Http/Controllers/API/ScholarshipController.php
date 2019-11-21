@@ -335,22 +335,6 @@ class ScholarshipController extends Controller
 
     public function complete(Request $request)
     {
-//        if ($request->siblings) {
-//            $siblings = $request->siblings;
-//
-//            foreach ($request->siblings as $key => $sibling) {
-//                $sib = new Sibling();
-//                $sib->name = $sibling->name;
-//                $sib->age = $sibling->age;
-//                $sib->schoolOrEmployer = $sibling->schoolOrEmployer;
-//                $sib->classOrSalary = $sibling->classOrSalary;
-//                $sib->others = $sibling->others;
-//                $sib->year = date('Y');
-//                $sib->applicationId = $request->applicationId;
-//                $sib->status = 0;
-//                $sib->save();
-//            }
-//        }
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $uploadedFile) {
@@ -360,6 +344,26 @@ class ScholarshipController extends Controller
                 $file->applicationId = $request->applicationId;
                 $file->path = $filename;
                 $file->status = 0;
+                $file->year = date('Y');
+                $file->type = "scholarship";
+                $file->save();
+            }
+        }
+        return response(['status' => 'success'], 200);
+    }
+
+    public function uploadLetter(Request $request)
+    {
+
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $uploadedFile) {
+                $filename = $uploadedFile->store('uploads');
+                // echo $filename;
+                $file = new File();
+                $file->applicationId = $request->applicationId;
+                $file->path = $filename;
+                $file->status = 0;
+                $file->type = "county";
                 $file->year = date('Y');
                 $file->save();
             }

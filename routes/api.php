@@ -91,6 +91,8 @@ Route::get('/form', 'API\FormController@getDetails');
 Route::post('applyScholarship', 'API\ScholarshipController@store');
 Route::post('complete', 'API\ScholarshipController@complete');
 
+Route::post('letter', 'API\ScholarshipController@uploadLetter');
+
 Route::get('/scholarshipApps', 'API\ScholarshipController@index');
 
 Route::get('/scholarshipRec', 'API\ScholarshipController@recommendedApp');

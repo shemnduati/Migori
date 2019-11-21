@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\File;
 use App\Mail\BursaryEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -240,6 +241,21 @@ class ApplicationController extends Controller
 
 
                 $institution->save();
+
+                if ($request->hasFile('files')) {
+                    foreach ($request->file('files') as $uploadedFile) {
+                        $filename = $uploadedFile->store('uploads');
+                        // echo $filename;
+                        $file = new File();
+                        $file->applicationId = $appId;
+                        $file->path = $filename;
+                        $file->status = 0;
+                        $file->type = "county";
+                        $file->year = date('Y');
+                        $file->save();
+                    }
+                }
+                return response(['status' => 'success'], 200);
         }else{
             $user = auth('api')->user()->id;
             $serial = auth('api')->user()->id . time();
@@ -353,6 +369,21 @@ class ApplicationController extends Controller
                 $institution->account = $request['account'];
                 $institution->bank_branch = $request['bran'];
                 $institution->save();
+
+                if ($request->hasFile('files')) {
+                    foreach ($request->file('files') as $uploadedFile) {
+                        $filename = $uploadedFile->store('uploads');
+                        // echo $filename;
+                        $file = new File();
+                        $file->applicationId = $appId;
+                        $file->path = $filename;
+                        $file->status = 0;
+                        $file->type = "county";
+                        $file->year = date('Y');
+                        $file->save();
+                    }
+                }
+                return response(['status' => 'success'], 200);
             }
 
         }
