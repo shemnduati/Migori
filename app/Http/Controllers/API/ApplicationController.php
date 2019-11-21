@@ -61,7 +61,9 @@ class ApplicationController extends Controller
         $this->validate($request, [
             'year' => 'required|min:1|max:7',
             'type' => 'required',
-            'name' => 'required|string',
+            'firstName' => 'required|string',
+            'middleName' => 'required|string',
+            'lastName' => 'required|string',
             'dob' => 'required|date',
             'email' => 'required|email',
             'gender' => 'required',
@@ -127,7 +129,9 @@ class ApplicationController extends Controller
                 $serial = auth('api')->user()->id . time();
                 $application = new Application();
                 $application->user_id = $user;
-                $application->name = $request['name'];
+                $application->firstName = $request->firstName;
+                $application->middleName = $request->middleName;
+                $application->lastName = $request->lastName;
                 $application->passport = $request['passport'];
                 $application->email = $request['email'];
                 $application->id_no = $request['idNo'];

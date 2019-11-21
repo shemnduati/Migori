@@ -10,20 +10,6 @@
 
                             <section v-if="step==1">
                                 <div class="row justify-content-center">
-                                    <div class="col-sm-6 justify-content-center">
-                                        <h3>Type</h3>
-                                        <div class="form-group">
-                                            <label for="type">Bursary Type</label>
-                                            <select v-model="form.type" class="form-control" name="type" id="type"
-                                                    :class="{ 'is-invalid': form.errors.has('type') }">
-                                                <option selected value="">--Select Type--</option>
-                                                <option value="County">County</option>
-                                            </select>
-                                            <has-error :form="form" field="type"></has-error>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
                                 <div class="col-sm-6 justify-content-center">
                                     <div class="form-group">
                                         <label for="county">Select Your County</label>
@@ -45,22 +31,31 @@
                                 <h3>PERSONAL DETAILS</h3>
 
                                 <div class="form-row ">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Name</label>
-                                            <input v-model="form.name = info['name']" type="text" name="name"
+                                            <label>First/Baptismal Name</label>
+                                            <input v-model="form.firstName" type="text" name="firstName"
                                                    class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('name') }">
-                                            <has-error :form="form" field="name"></has-error>
+                                                   :class="{ 'is-invalid': form.errors.has('firstName') }">
+                                            <has-error :form="form" field="firstName"></has-error>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Email</label>
-                                            <input v-model="form.email = info['email']" type="email" name="email"
+                                            <label>Middle Name</label>
+                                            <input v-model="form.middleName" type="text" name="middleName"
                                                    class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('email') }">
-                                            <has-error :form="form" field="email"></has-error>
+                                                   :class="{ 'is-invalid': form.errors.has('middleName') }">
+                                            <has-error :form="form" field="middleName"></has-error>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Surname/ Family Name</label>
+                                            <input v-model="form.lastName" type="text" name="lastName"
+                                                   class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('lastName') }">
+                                            <has-error :form="form" field="lastName"></has-error>
                                         </div>
                                     </div>
                                 </div>
@@ -72,6 +67,15 @@
                                             <input v-model="form.idNo" type="number" name="idNo" class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('idNo') }">
                                             <has-error :form="form" field="idNo"></has-error>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input v-model="form.email = info['email']" type="email" name="email"
+                                                   class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('email') }">
+                                            <has-error :form="form" field="email"></has-error>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -644,8 +648,10 @@
                 loading: false,
                 watch:0,
                 form: new Form({
-                    type: '',
-                    name: '',
+                    type: 'County',
+                    firstName: '',
+                    middleName: '',
+                    lastName: '',
                     dob: '',
                     email: '',
                     gender: '',
@@ -819,14 +825,7 @@
             nextStep() {
 
                 if (this.step == 1) {
-                    if (!this.form.type) {
-                        // set(type, 'required');
-                        this.form.errors.set({
-                            type: 'This field is required'
-
-                        })
-                        return false;
-                    }else if(!this.form.county) {
+                     if(!this.form.county) {
                         this.form.errors.set({
                             county: 'This field is required'
                         })
@@ -840,10 +839,19 @@
                 }
 
                 if (this.step == 2) {
-                    if (!this.form.name) {
-                        // set(type, 'required');
+                    if (!this.form.firstName) {
                         this.form.errors.set({
-                            name: 'This field is required'
+                            firstName: 'This field is required'
+                        })
+                        return false;
+                    } else if (!this.form.middleName) {
+                        this.form.errors.set({
+                            middleName: 'This field is required'
+                        })
+                        return false;
+                    } else if (!this.form.lastName) {
+                        this.form.errors.set({
+                            lastName: 'This field is required'
                         })
                         return false;
                     } else if (!this.form.email) {
