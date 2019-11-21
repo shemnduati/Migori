@@ -8,7 +8,7 @@
                         <h3 class="card-title">County bursary Information Table</h3>
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-12" v-if="$gate.isOfficial()">
+                                <div class="col-sm-12" v-if="$gate.isSubadmin()">
                                     <form>
                                         <select @change="getType()" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>

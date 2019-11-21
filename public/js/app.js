@@ -76681,7 +76681,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
-                    _vm.$gate.isOfficial()
+                    _vm.$gate.isSubadmin()
                       ? _c("div", { staticClass: "col-sm-12" }, [
                           _c("form", [
                             _c(
