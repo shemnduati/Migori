@@ -4115,6 +4115,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4137,16 +4171,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: {
-    getMyDetails: function getMyDetails() {
+    download: function download(id, path) {
+      axios.get("/api/download/" + id, {
+        responseType: 'blob'
+      }).then(function (response) {
+        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        var fileLink = document.createElement('a');
+        console.log(fileLink);
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', path.substring(8));
+        document.body.appendChild(fileLink);
+        fileLink.click();
+      });
+    },
+    getFiles: function getFiles() {
       var _this = this;
 
-      axios.get("/api/getMyWardId/").then(function (_ref) {
+      axios.get("/api/getfiles/" + this.applicantId).then(function (_ref) {
         var data = _ref.data;
-        return [_this.myWard = data];
+        return [_this.files = data];
       });
-      axios.get("/api/getMyCountyId/").then(function (_ref2) {
+    },
+    getMyDetails: function getMyDetails() {
+      var _this2 = this;
+
+      axios.get("/api/getMyWardId/").then(function (_ref2) {
         var data = _ref2.data;
-        return [_this.myCounty = data];
+        return [_this2.myWard = data];
+      });
+      axios.get("/api/getMyCountyId/").then(function (_ref3) {
+        var data = _ref3.data;
+        return [_this2.myCounty = data];
       });
     },
     recommend: function recommend() {
@@ -4154,7 +4209,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#recommendation').modal('show');
     },
     notAward: function notAward() {
-      var _this2 = this;
+      var _this3 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -4166,7 +4221,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes!'
       }).then(function (result) {
         if (result.value) {
-          _this2.form.post("/api/notaward/" + _this2.application.id).then(function () {
+          _this3.form.post("/api/notaward/" + _this3.application.id).then(function () {
             Swal.fire('Success!', 'Operation successful.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
@@ -4176,7 +4231,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     award: function award() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.$gate.isOfficial()) {
         this.formf.post("/api/award/" + this.application.id).then(function () {
@@ -4194,7 +4249,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           Fire.$emit('entry');
           $('#recommendation').modal('hide');
         })["catch"](function (error) {
-          _this3.errors = error.response.data.errors;
+          _this4.errors = error.response.data.errors;
           Swal.fire({
             type: 'error',
             title: 'Error!',
@@ -4208,7 +4263,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#new').modal('show');
     },
     recommendNo: function recommendNo() {
-      var _this4 = this;
+      var _this5 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -4220,7 +4275,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes!'
       }).then(function (result) {
         if (result.value) {
-          _this4.form.post("/api/recommend/" + _this4.application.id).then(function () {
+          _this5.form.post("/api/recommend/" + _this5.application.id).then(function () {
             Swal.fire('Success!', 'Operation successful.', 'success');
             Fire.$emit('entry');
           })["catch"](function () {
@@ -4230,27 +4285,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     getApplications: function getApplications() {
-      var _this5 = this;
+      var _this6 = this;
 
-      axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref3) {
-        var data = _ref3.data;
-        return [_this5.application = data['application']];
-      });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref4) {
         var data = _ref4.data;
-        return [_this5.family = data['family']];
+        return [_this6.application = data['application']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref5) {
         var data = _ref5.data;
-        return [_this5.morefamily = data['morefamily']];
+        return [_this6.family = data['family']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref6) {
         var data = _ref6.data;
-        return [_this5.geographical = data['geographical']];
+        return [_this6.morefamily = data['morefamily']];
       });
       axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref7) {
         var data = _ref7.data;
-        return [_this5.institution = data['institution']];
+        return [_this6.geographical = data['geographical']];
+      });
+      axios.get("/api/getappdetails/" + this.applicantId).then(function (_ref8) {
+        var data = _ref8.data;
+        return [_this6.institution = data['institution']];
       });
     },
     launch: function launch(passport) {
@@ -4258,7 +4313,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.photo = passport;
     },
     send: function send() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.put("/api/send/" + this.applicantId).then(function (response) {
         Fire.$emit('AfterCreate');
@@ -4268,11 +4323,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Sent!!'
         }, "text", 'Sent to Admin!'));
 
-        _this6.$router.push('/Information');
+        _this7.$router.push('/Information');
       });
     },
     accept: function accept() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.$Progress.start();
       axios.put("/api/accept/" + this.applicantId).then(function (response) {
@@ -4283,13 +4338,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Accept'
         }, "text", 'Accepted!'));
 
-        _this7.$router.push('/Information');
+        _this8.$router.push('/Information');
 
-        _this7.$Progress.finish();
+        _this8.$Progress.finish();
       });
     },
     reject: function reject() {
-      var _this8 = this;
+      var _this9 = this;
 
       this.$Progress.start();
       axios.put("/api/reject/" + this.applicantId).then(function (response) {
@@ -4300,19 +4355,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Rejected!!'
         }, "text", 'You rejected the application'));
 
-        _this8.$router.push('/Information');
+        _this9.$router.push('/Information');
 
         his.$Progress.finish();
       });
     }
   },
   created: function created() {
-    var _this9 = this;
+    var _this10 = this;
 
     this.getApplications();
     this.getMyDetails();
+    this.getFiles();
     Fire.$on('entry', function () {
-      _this9.getApplications();
+      _this10.getApplications();
     });
   }
 });
@@ -77228,35 +77284,105 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-md-4 pt-5" },
-        _vm._l(_vm.family, function(fam) {
-          return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
-            _c("div", { staticClass: "col-md-8" }, [
-              _c("p", { staticClass: "rounded p-2 mt-2 text-center bg-b" }, [
-                _vm._v(_vm._s(fam["relationship"]) + "'s ID/ Death Cert")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-lg bg-success",
-                  on: {
-                    click: function($event) {
-                      return _vm.launch(fam.cert)
+        [
+          _vm._l(_vm.family, function(fam) {
+            return _c("div", { key: fam.id, staticClass: "row pt-5" }, [
+              _c("div", { staticClass: "col-md-8" }, [
+                _c("p", { staticClass: "rounded p-2 mt-2 text-center bg-b" }, [
+                  _vm._v(_vm._s(fam["relationship"]) + "'s ID/ Death Cert")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-lg bg-success",
+                    on: {
+                      click: function($event) {
+                        return _vm.launch(fam.cert)
+                      }
                     }
-                  }
-                },
-                [_vm._v("Views")]
-              )
+                  },
+                  [_vm._v("Views")]
+                )
+              ])
+            ])
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "box" }, [
+              _vm._m(7),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "box",
+                staticStyle: { "margin-bottom": "10px" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.files, function(file) {
+                    return _c(
+                      "div",
+                      {
+                        key: file.id,
+                        staticClass: "col-md-6 col-sm-6 col-xs-12"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.download(file.id, file.path)
+                              }
+                            }
+                          },
+                          [_vm._m(8, true)]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm.files.length == 0
+                ? _c(
+                    "div",
+                    { staticClass: "alert alert-warning alert-dismissible" },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "close",
+                          attrs: {
+                            type: "button",
+                            "data-dismiss": "alert",
+                            "aria-hidden": "true"
+                          }
+                        },
+                        [_vm._v("×")]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(9),
+                      _vm._v(
+                        "\n                        No files attached!!\n                    "
+                      )
+                    ]
+                  )
+                : _vm._e()
             ])
           ])
-        }),
-        0
+        ],
+        2
       )
     ]),
     _vm._v(" "),
-    _vm._m(7),
+    _vm._m(10),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -77264,7 +77390,7 @@ var render = function() {
           "div",
           { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
           [
-            _vm._m(8),
+            _vm._m(11),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4" }, [
               _c("p", [_vm._v(" " + _vm._s(_vm.institution["name"]) + " ")]),
@@ -77290,7 +77416,7 @@ var render = function() {
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _vm._m(9),
+    _vm._m(12),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-8" }, [
@@ -77298,7 +77424,7 @@ var render = function() {
           "div",
           { staticClass: "row mx-2 pl-3 pt-2 border border-success rounded" },
           [
-            _vm._m(10),
+            _vm._m(13),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4" }, [
               _c("p", [_vm._v(" " + _vm._s(_vm.geographical["County"]) + " ")]),
@@ -77490,7 +77616,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(11),
+              _vm._m(14),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("img", {
@@ -77499,7 +77625,7 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _vm._m(12)
+              _vm._m(15)
             ])
           ]
         )
@@ -77524,7 +77650,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(13),
+              _vm._m(16),
               _vm._v(" "),
               _c(
                 "form",
@@ -77581,7 +77707,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(14)
+                  _vm._m(17)
                 ]
               )
             ])
@@ -77608,7 +77734,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(15),
+              _vm._m(18),
               _vm._v(" "),
               _c(
                 "form",
@@ -77665,7 +77791,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(16)
+                  _vm._m(19)
                 ]
               )
             ])
@@ -77764,6 +77890,49 @@ var staticRenderFns = [
       _c("p", [_vm._v("Fees Payer ")]),
       _vm._v(" "),
       _c("p", [_vm._v("Relationship ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header" }, [
+      _c("h4", { staticClass: "box-title" }, [
+        _vm._v("Letter of Recommendation (Click to download)")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "info-box" }, [
+      _c(
+        "span",
+        {
+          staticClass: "info-box-icon",
+          staticStyle: { "background-color": "green" }
+        },
+        [
+          _c("i", {
+            staticClass: "fas fa-download",
+            staticStyle: { color: "white" }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "info-box-content" }, [
+        _c("span", { staticClass: "info-box-text" }, [_vm._v("Download")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", [
+      _c("i", { staticClass: "icon fa fa-ban" }),
+      _vm._v(" Alert!")
     ])
   },
   function() {

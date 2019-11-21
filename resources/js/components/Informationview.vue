@@ -93,6 +93,40 @@
                         <button @click="launch(fam.cert)" class="btn btn-lg bg-success">Views</button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="box">
+                        <div class="box-header">
+                            <h4 class="box-title">Letter of Recommendation (Click to download)</h4>
+                        </div>
+                        <div class="box" style="margin-bottom: 10px;">
+
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12" v-for="file in files" :key="file.id">
+                                    <a @click.prevent="download(file.id, file.path)">
+                                        <div class="info-box">
+                                            <span class="info-box-icon" style="background-color: green;"><i
+                                                    class="fas fa-download" style="color: white;"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Download</span>
+                                            </div>
+                                            <!-- /.info-box-content -->
+                                        </div>
+                                    </a>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!--                                            <button type="button" class="btn btn-primary" @click="downloadAll">Download all files</button>-->
+                            </div>
+                        </div>
+                        <div class="alert alert-warning alert-dismissible" v-if="files.length == 0">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fa fa-ban"></i> Alert!</h5>
+                            No files attached!!
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -297,6 +331,22 @@
 
         },
         methods: {
+            download(id, path) {
+                axios.get("/api/download/" + id, {responseType: 'blob'})
+                    .then((response) => {
+                        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                        var fileLink = document.createElement('a');
+                        console.log(fileLink);
+                        fileLink.href = fileURL;
+                        fileLink.setAttribute('download', path.substring(8));
+                        document.body.appendChild(fileLink);
+
+                        fileLink.click();
+                    });
+            },
+            getFiles() {
+                axios.get("/api/getfiles/" + this.applicantId).then(({data}) => ([this.files = data]));
+            },
             getMyDetails(){
                 axios.get("/api/getMyWardId/").then(({data}) => ([this.myWard = data]));
                 axios.get("/api/getMyCountyId/").then(({data}) => ([this.myCounty = data]));
@@ -446,6 +496,7 @@
         created() {
             this.getApplications();
             this.getMyDetails();
+            this.getFiles();
             Fire.$on('entry', () => {
                 this.getApplications();
             })
