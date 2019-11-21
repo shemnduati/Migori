@@ -172,13 +172,13 @@
                     <input v-model="form.recommendation" class="form-check-input" type="radio" name="yes" id="yes"
                            value="Yes"
                            :class="{ 'is-invalid': form.errors.has('yes') }" @click="recommend">
-                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                    <label class="form-check-label">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input v-model="form.recommendation" class="form-check-input" type="radio" name="partially"
                            id="partially" value="Partially"
                            :class="{ 'is-invalid': form.errors.has('partially') }" @click="recommend">
-                    <label class="form-check-label" for="inlineRadio1">Partially</label>
+                    <label class="form-check-label">Partially</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input v-model="form.recommendation" class="form-check-input" type="radio" name="no" id="no"
