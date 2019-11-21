@@ -28,7 +28,8 @@
                             <tbody>
                             <tr>
                                 <th>Serial N.o</th>
-                                <th>Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Gender</th>
                                 <th v-if="$gate.isOfficial()">Status</th>
                                 <th>Recomm.</th>
@@ -39,7 +40,8 @@
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
                                 <td>{{application.serial}}</td>
-                                <td>{{application.name}}</td>
+                                <td>{{application.firstName}}</td>
+                                <td>{{application.lastName}}</td>
                                 <td>{{application.gender}}</td>
                                 <td v-if="$gate.isOfficial()">
                                     <span v-if="application.status==1" style="color: purple;">Verified.</span>
