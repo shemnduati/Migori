@@ -54,17 +54,25 @@ class InformationController extends Controller
 
         foreach ($applications as $apps) {
             $id = $apps['id'];
-            $name = $apps['name'];
+            $firstName = $apps['firstName'];
+            $lastName = $apps['lastName'];
+            $father = Family::where('applicationId',$id)->where('user_id', $apps['user_id'])->where('relationship','Father')->value('name');
             $reg = $apps['reg_no'];
             $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
             $institution = Institution::where('user_id', $apps['user_id'])->value('name');
+            $polling =Geographical::where('applicationId',$id)->value('polling');
+            $balance = Institution::where('applicationId',$id)->value('balance');
             $amount = $apps['amount'];
             $date = $apps['updated_at'];
             $child = array(
                 'id' => $id,
-                'name' => $name,
+                'firstName' => $firstName,
+                'lastName'=>  $lastName,
                 'ward' => $ward_name,
                 'amount' => $amount,
+                'balance'=>$balance,
+                'father' => $father,
+                'polling'=>$polling,
                 'reg' => $reg,
                 'date' => $date,
                 'institution' => $institution,

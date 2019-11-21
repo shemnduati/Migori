@@ -72771,9 +72771,15 @@ var render = function() {
                           _vm._v(" "),
                           _vm._l(_vm.applications, function(application) {
                             return _c("tr", { key: application.id }, [
-                              _c("td", [_vm._v(_vm._s(application.name))]),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(application.firstName) +
+                                    " " +
+                                    _vm._s(application.lastName)
+                                )
+                              ]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(application.reg))]),
+                              _c("td", [_vm._v(_vm._s(application.father))]),
                               _vm._v(" "),
                               _c("td", [
                                 _vm._v(_vm._s(application.institution))
@@ -72781,14 +72787,10 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(application.ward))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _vm._v("Ksh. " + _vm._s(application.amount))
-                              ]),
+                              _c("td", [_vm._v(_vm._s(application.polling))]),
                               _vm._v(" "),
                               _c("td", [
-                                _vm._v(
-                                  _vm._s(_vm._f("myDate")(application.date))
-                                )
+                                _vm._v("Ksh. " + _vm._s(application.balance))
                               ])
                             ])
                           })
@@ -72815,15 +72817,15 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("Name")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Adm/Reg")]),
+      _c("th", [_vm._v("Fathers Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Institution")]),
       _vm._v(" "),
       _c("th", [_vm._v("Ward")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Amount")]),
+      _c("th", [_vm._v("Polling station")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Date")])
+      _c("th", [_vm._v("Fee balance")])
     ])
   }
 ]

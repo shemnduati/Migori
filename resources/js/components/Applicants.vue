@@ -32,19 +32,19 @@
                         <table class="table table-hover" id="my-table">
                             <tbody><tr>
                                 <th>Name</th>
-                                <th>Adm/Reg</th>
+                                <th>Fathers Name</th>
                                 <th>Institution</th>
                                 <th>Ward</th>
-                                <th>Amount</th>
-                                <th>Date</th>
+                                <th>Polling station</th>
+                                <th>Fee balance</th>
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
-                                <td>{{application.name}}</td>
-                                <td>{{application.reg}}</td>
+                                <td>{{application.firstName}} {{application.lastName}}</td>
+                                <td>{{application.father}}</td>
                                 <td>{{application.institution}}</td>
                                 <td>{{application.ward}}</td>
-                                <td>Ksh. {{application.amount}}</td>
-                                <td>{{application.date | myDate}}</td>
+                                <td>{{application.polling}}</td>
+                                <td>Ksh. {{application.balance }}</td>
                             </tr>
 
 
