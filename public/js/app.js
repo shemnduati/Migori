@@ -1783,6 +1783,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3840,6 +3842,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -14285,7 +14291,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
 
 // exports
 
@@ -72934,7 +72940,23 @@ var render = function() {
                       _c(
                         "tbody",
                         [
-                          _vm._m(0),
+                          _c("tr", [
+                            _c("th", [_vm._v("Name")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Fathers Name")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Institution")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Ward")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Polling station")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Fee balance")]),
+                            _vm._v(" "),
+                            _vm.$gate.isOfficial()
+                              ? _c("th", [_vm._v("Awarded Amount")])
+                              : _vm._e()
+                          ]),
                           _vm._v(" "),
                           _vm._l(_vm.applications, function(application) {
                             return _c("tr", { key: application.id }, [
@@ -72958,7 +72980,13 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [
                                 _vm._v("Ksh. " + _vm._s(application.balance))
-                              ])
+                              ]),
+                              _vm._v(" "),
+                              _vm.$gate.isOfficial()
+                                ? _c("td", [
+                                    _vm._v("Ksh. " + _vm._s(application.amount))
+                                  ])
+                                : _vm._e()
                             ])
                           })
                         ],
@@ -72976,26 +73004,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Fathers Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Institution")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Ward")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Polling station")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Fee balance")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -77177,7 +77186,17 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4" }, [
-              _c("p", [_vm._v(" " + _vm._s(_vm.application["name"]) + " ")]),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["firstName"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["middleName"]) + " ")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(" " + _vm._s(_vm.application["lastName"]) + " ")
+              ]),
               _vm._v(" "),
               _c("p", [_vm._v(" " + _vm._s(_vm.application["dob"]) + " ")]),
               _vm._v(" "),
@@ -77833,7 +77852,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-4" }, [
-      _c("p", [_vm._v(" Official name ")]),
+      _c("p", [_vm._v(" FirstName")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(" MiddleName")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(" LastName")]),
       _vm._v(" "),
       _c("p", [_vm._v(" DOB ")]),
       _vm._v(" "),
@@ -111020,8 +111043,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Baza\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

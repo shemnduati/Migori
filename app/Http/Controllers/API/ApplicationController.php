@@ -370,7 +370,7 @@ class ApplicationController extends Controller
                 $institution->bank_branch = $request['bran'];
                 $institution->save();
 
-                if ($request->hasFile('files')) {
+               /* if ($request->hasFile('files')) {
                     foreach ($request->file('files') as $uploadedFile) {
                         $filename = $uploadedFile->store('uploads');
                         // echo $filename;
@@ -382,7 +382,7 @@ class ApplicationController extends Controller
                         $file->year = date('Y');
                         $file->save();
                     }
-                }
+                }*/
                 return response(['status' => 'success'], 200);
             }
 
