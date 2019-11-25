@@ -3135,6 +3135,7 @@ __webpack_require__.r(__webpack_exports__);
     getCountyWards: function getCountyWards() {
       var _this8 = this;
 
+      this.getStatus();
       axios.get("api/getcountywards/" + this.form.county).then(function (_ref4) {
         var data = _ref4.data;
         return [_this8.wards = data['wards']];
@@ -73029,7 +73030,7 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _vm.watch == 0
+        _vm.watch == 0 && _vm.enable != 0
           ? _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _vm._v("Application")
@@ -73105,7 +73106,7 @@ var render = function() {
                                               )
                                             },
                                             function($event) {
-                                              return _vm.getStatus()
+                                              return _vm.getCountyWards()
                                             }
                                           ]
                                         }
@@ -73677,7 +73678,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 3
+                  _vm.step == 3 && _vm.enable == 1
                     ? _c("section", [
                         _c("h3", [_vm._v("Family Background")]),
                         _vm._v(" "),
@@ -74976,7 +74977,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 4
+                  _vm.step == 4 && _vm.enable == 1
                     ? _c("section", [
                         _c("h3", [_vm._v("Geographical Details")]),
                         _vm._v(" "),
@@ -75445,7 +75446,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.step == 5
+                  _vm.step == 5 && _vm.enable == 1
                     ? _c("section", [
                         _c("h3", [_vm._v("INSTITUTION AND FEE DETAILS")]),
                         _vm._v(" "),

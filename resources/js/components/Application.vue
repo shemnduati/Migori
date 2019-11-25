@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card" v-if="watch == 0">
+                <div class="card" v-if="watch == 0 && enable !=0">
                     <div class="card-header">Application</div>
 
                     <div class="card-body">
@@ -13,7 +13,7 @@
                                     <div class="col-sm-6 justify-content-center">
                                         <div class="form-group">
                                             <label for="county">Select Your County</label>
-                                            <select v-model="form.county" @change='getStatus()'
+                                            <select v-model="form.county"   @change='getCountyWards()'
                                                     class="form-control" :required="true" name="county" id="Mycounty"
                                                     :class="{ 'is-invalid': form.errors.has('county') }">
                                                 <option selected value="">--Select county--</option>
@@ -141,7 +141,7 @@
                                 </div>
 
                             </section>
-                            <section v-if="step==3">
+                            <section v-if="step==3 && enable==1">
                                 <h3>Family Background</h3>
                                 <div class="form-row">
                                     <div class="col">
@@ -399,7 +399,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==4">
+                            <section v-if="step==4 && enable==1">
                                 <h3>Geographical Details</h3>
                                 <div class="form-row">
                                     <div class="col">
@@ -491,7 +491,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==5">
+                            <section v-if="step==5 && enable==1">
                                 <h3>INSTITUTION AND FEE DETAILS</h3>
                                 <div class="form-row">
                                     <div class="col">
@@ -1220,6 +1220,7 @@
                 axios.get("api/getwards").then(({data}) => ([this.wards = data['wards']]));
             },
             getCountyWards() {
+                this.getStatus();
                 axios.get("api/getcountywards/" + this.form.county).then(({data}) => ([this.wards = data['wards']]));
             },
             getPassport(e) {
