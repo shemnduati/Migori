@@ -283,7 +283,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             </div>
             <!-- Default to the left -->
-            <strong>Developed by <a href="https://twtechnology.africa">TransOnline Web Technologies</a>.</strong> All
+            <strong>Developed by <a href="https://twtechnologies.africa">TransOnline Web Technologies</a>.</strong> All
             rights reserved.
         </footer>
     </div>
