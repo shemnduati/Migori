@@ -37,6 +37,7 @@
                                 <th>Ward</th>
                                 <th>Polling station</th>
                                 <th>Fee balance</th>
+                                <th v-if="$gate.isOfficial()">Awarded Amount</th>
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
                                 <td>{{application.firstName}} {{application.lastName}}</td>
@@ -45,6 +46,7 @@
                                 <td>{{application.ward}}</td>
                                 <td>{{application.polling}}</td>
                                 <td>Ksh. {{application.balance }}</td>
+                                <td v-if="$gate.isOfficial()">Ksh. {{application.amount }}</td>
                             </tr>
 
 

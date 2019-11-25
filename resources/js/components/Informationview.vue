@@ -18,14 +18,18 @@
             <div class="col-md-8">
                 <div class="row mx-2 pl-3 pt-2 border border-success rounded">
                     <div class="col-md-4">
-                        <p> Official name </p>
+                        <p> FirstName</p>
+                        <p> MiddleName</p>
+                        <p> LastName</p>
                         <p> DOB </p>
                         <p> Gender </p>
                         <p> Reg/Adm No. </p>
                         <p> Tel. </p>
                     </div>
                     <div class="col-md-4">
-                        <p> {{application['name']}} </p>
+                        <p> {{application['firstName']}} </p>
+                        <p> {{application['middleName']}} </p>
+                        <p> {{application['lastName']}} </p>
                         <p> {{application['dob']}} </p>
                         <p> {{application['gender']}} </p>
                         <p> {{application['reg_no']}} </p>
