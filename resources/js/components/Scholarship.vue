@@ -602,7 +602,7 @@
                                 <div class="form-row ">
                                     <div class="col">
                                         <label>County</label>
-                                        <select v-model="form.gcounty" @change='getCountyWards()'
+                                        <select v-model="form.gcounty" @change='getGuardianWards()'
                                                 class="form-control" name="county"
                                                 :class="{ 'is-invalid': form.errors.has('gcounty') }">
                                             <option selected value="">--Select county--</option>
@@ -618,7 +618,7 @@
                                             <select v-model="form.gward" class="form-control" name="gward"
                                                     :class="{ 'is-invalid': form.errors.has('gward') }">
                                                 <option selected value="">--Select Ward--</option>
-                                                <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
+                                                <option v-for="wardy in Gwards" :key="wardy.id" :value="wardy.id">{{
                                                     wardy.name}}
                                                 </option>
                                             </select>
@@ -1547,6 +1547,7 @@
                 totalSteps: 6,
                 counties: {},
                 wards: {},
+                Gwards: {},
                 info: {},
                 now: moment().format('YYYY'),
                 enable: {},
@@ -2353,6 +2354,10 @@
             getCountyWards() {
                 this.getStatus();
                 axios.get("api/getcountywards/" + this.form.county).then(({data}) => ([this.wards = data['wards']]));
+            },
+            getGuardianWards() {
+                this.getStatus();
+                axios.get("api/getcountywards/" + this.form.gcounty).then(({data}) => ([this.Gwards = data['wards']]));
             },
             getResultSlip(e) {
                 let file = e.target.files[0];

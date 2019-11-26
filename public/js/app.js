@@ -6377,6 +6377,7 @@ __webpack_require__.r(__webpack_exports__);
       totalSteps: 6,
       counties: {},
       wards: {},
+      Gwards: {},
       info: {},
       now: moment().format('YYYY'),
       enable: {},
@@ -7202,8 +7203,17 @@ __webpack_require__.r(__webpack_exports__);
         return [_this8.wards = data['wards']];
       });
     },
-    getResultSlip: function getResultSlip(e) {
+    getGuardianWards: function getGuardianWards() {
       var _this9 = this;
+
+      this.getStatus();
+      axios.get("api/getcountywards/" + this.form.gcounty).then(function (_ref5) {
+        var data = _ref5.data;
+        return [_this9.Gwards = data['wards']];
+      });
+    },
+    getResultSlip: function getResultSlip(e) {
+      var _this10 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -7213,7 +7223,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this9.form.resultslip = reader.result;
+            _this10.form.resultslip = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -7233,19 +7243,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getDetails: function getDetails() {
-      var _this10 = this;
+      var _this11 = this;
 
-      axios.get("api/getdetails").then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this10.info = data['user']];
+      axios.get("api/getdetails").then(function (_ref6) {
+        var data = _ref6.data;
+        return [_this11.info = data['user']];
       });
     },
     getStatus: function getStatus() {
-      var _this11 = this;
+      var _this12 = this;
 
-      axios.get("api/statuz/" + this.form.county).then(function (_ref6) {
-        var data = _ref6.data;
-        return [_this11.enable = data['num']];
+      axios.get("api/statuz/" + this.form.county).then(function (_ref7) {
+        var data = _ref7.data;
+        return [_this12.enable = data['num']];
       });
     }
   },
@@ -84691,7 +84701,7 @@ var render = function() {
                                         )
                                       },
                                       function($event) {
-                                        return _vm.getCountyWards()
+                                        return _vm.getGuardianWards()
                                       }
                                     ]
                                   }
@@ -84782,7 +84792,7 @@ var render = function() {
                                       [_vm._v("--Select Ward--")]
                                     ),
                                     _vm._v(" "),
-                                    _vm._l(_vm.wards, function(wardy) {
+                                    _vm._l(_vm.Gwards, function(wardy) {
                                       return _c(
                                         "option",
                                         {
