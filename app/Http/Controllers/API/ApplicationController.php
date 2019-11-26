@@ -91,7 +91,7 @@ class ApplicationController extends Controller
             'division' => 'required|string',
             'sublocation' => 'required|string',
             'village' => 'required|string',
-            'polling' =>'required|string',
+            'polling' => 'required|string',
             'iname' => 'required|string',
             'branch' => 'required|string',
             'year' => 'required',
@@ -111,8 +111,8 @@ class ApplicationController extends Controller
             'mtelephone' => 'required',
             'gtelephone' => 'required',
             'bank' => 'required',
-            'account' =>'required',
-            'bran'=>'required',
+            'account' => 'required',
+            'bran' => 'required',
         ]);
 
         $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->where('bursary_type', $request->type)->get();
@@ -256,25 +256,28 @@ class ApplicationController extends Controller
                     }
                 }
                 return response(['status' => 'success'], 200);
-        }else{
-            $user = auth('api')->user()->id;
-            $serial = auth('api')->user()->id . time();
-            $application = new Application();
-            $application->user_id = $user;
-            $application->name = $request['name'];
-            $application->passport = $request['passport'];
-            $application->email = $request['email'];
-            $application->id_no = $request['idNo'];
-            $application->reg_no = $request['regNo'];
-            $application->bursary_type = $request['type'];
-            $application->dob = $request['dob'];
-            $application->status = 2;
-            $application->gender = $request['gender'];
-            $application->tel = $request['telephone'];
-            $application->ward_id = $request['ward'];
-            $application->county = $request['county'];
-            $application->year = date('Y');
-            $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
+            } else {
+                $user = auth('api')->user()->id;
+                $serial = auth('api')->user()->id . time();
+                $application = new Application();
+                $application->user_id = $user;
+                $application->name = $request['name'];
+                $application->passport = $request['passport'];
+                $application->firstName = $request->firstName;
+                $application->middleName = $request->middleName;
+                $application->lastName = $request->lastName;
+                $application->email = $request['email'];
+                $application->id_no = $request['idNo'];
+                $application->reg_no = $request['regNo'];
+                $application->bursary_type = $request['type'];
+                $application->dob = $request['dob'];
+                $application->status = 2;
+                $application->gender = $request['gender'];
+                $application->tel = $request['telephone'];
+                $application->ward_id = $request['ward'];
+                $application->county = $request['county'];
+                $application->year = date('Y');
+                $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
 
                 $application->save();
                 $appId = $application->id;
@@ -370,7 +373,7 @@ class ApplicationController extends Controller
                 $institution->bank_branch = $request['bran'];
                 $institution->save();
 
-              if ($request->hasFile('files')) {
+                if ($request->hasFile('files')) {
                     foreach ($request->file('files') as $uploadedFile) {
                         $filename = $uploadedFile->store('uploads');
                         // echo $filename;
