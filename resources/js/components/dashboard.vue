@@ -37,7 +37,8 @@
                         <div class="small-box bg-warning">
                             <div class="inner">
                                 <h3>{{dash['total_application']}}</h3>
-                                <p>Applications</p>
+                                <span>Bursary</span><br>
+                                <span>Applications</span>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-file-signature white"></i>
@@ -51,7 +52,8 @@
                             <div class="inner">
                                 <h3>{{dash['total_awarded']}}</h3>
 
-                                <p>Awarded-bursaries</p>
+                                <span>Recommended</span><br>
+                                <span>Bursaries</span>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-award white"></i>

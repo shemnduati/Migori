@@ -3749,83 +3749,120 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       applications: {},
+      wards: {},
+      formf: new Form({
+        sWard: ''
+      }),
       form: new Form({
         type: ''
       })
     };
   },
   methods: {
-    getBursary: function getBursary(type) {
+    sortByWard: function sortByWard() {
       var _this = this;
 
-      axios.get('api/getbursarytype/' + type).then(function (_ref) {
-        var data = _ref.data;
-        return [_this.applications = data['applications']];
+      if (this.$gate.isOfficial()) {
+        axios.get('api/getbyward/' + this.formf.sWard).then(function (_ref) {
+          var data = _ref.data;
+          return [_this.applications = data['applications']];
+        });
+      }
+    },
+    getMyWards: function getMyWards() {
+      var _this2 = this;
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/mywards/').then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this2.wards = data];
+        });
+      }
+    },
+    getBursary: function getBursary(type) {
+      var _this3 = this;
+
+      axios.get('api/getbursarytype/' + type).then(function (_ref3) {
+        var data = _ref3.data;
+        return [_this3.applications = data['applications']];
       });
     },
     getApplications: function getApplications() {
-      var _this2 = this;
+      var _this4 = this;
 
       if (this.$gate.isSubadmin()) {
-        axios.get('api/getbusary').then(function (_ref2) {
-          var data = _ref2.data;
-          return [_this2.applications = data['applications']];
+        axios.get('api/getbusary').then(function (_ref4) {
+          var data = _ref4.data;
+          return [_this4.applications = data['applications']];
         });
       }
 
       if (this.$gate.isOfficial()) {
-        axios.get('api/getCountyBursary').then(function (_ref3) {
-          var data = _ref3.data;
-          return [_this2.applications = data['applications']];
+        axios.get('api/getCountyBursary').then(function (_ref5) {
+          var data = _ref5.data;
+          return [_this4.applications = data['applications']];
         });
       }
     },
     getType: function getType() {
-      var _this3 = this;
-
-      if (this.$gate.isOfficial()) {
-        axios.get('api/gettype/' + this.form.type).then(function (_ref4) {
-          var data = _ref4.data;
-          return [_this3.applications = data['applications']];
-        });
-      }
-
-      if (this.$gate.isSubadmin()) {
-        axios.get('api/getstatus/' + this.form.type).then(function (_ref5) {
-          var data = _ref5.data;
-          return [_this3.applications = data['applications']];
-        });
-      }
+      var _this5 = this;
 
       if (this.$gate.isOfficial()) {
         axios.get('api/gettype/' + this.form.type).then(function (_ref6) {
           var data = _ref6.data;
-          return [_this3.applications = data['applications']];
+          return [_this5.applications = data['applications']];
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/getstatus/' + this.form.type).then(function (_ref7) {
+          var data = _ref7.data;
+          return [_this5.applications = data['applications']];
+        });
+      }
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/gettype/' + this.form.type).then(function (_ref8) {
+          var data = _ref8.data;
+          return [_this5.applications = data['applications']];
         });
       }
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this6 = this;
 
     this.$Progress.start();
     Fire.$on('searching', function () {
-      _this4.$Progress.start();
+      _this6.$Progress.start();
 
-      var query = _this4.$parent.search;
+      var query = _this6.$parent.search;
       axios.get('api/findbursary?q=' + query).then(function (data) {
-        _this4.applications = data.data;
+        _this6.applications = data.data;
 
-        _this4.$Progress.finish();
+        _this6.$Progress.finish();
       })["catch"](function () {});
     });
     this.getApplications();
+    this.getMyWards();
     Fire.$on('AfterCreate', function () {
-      _this4.getApplications();
+      _this6.getApplications();
     });
   }
 });
@@ -4168,6 +4205,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       photo: '',
       myWard: '',
       myCounty: '',
+      files: '',
       form: new Form({
         recommendation: '',
         amount: ''
@@ -8909,6 +8947,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -73492,10 +73532,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "label",
-                                  {
-                                    staticClass: "form-check-label",
-                                    attrs: { for: "inlineRadio1" }
-                                  },
+                                  { staticClass: "form-check-label" },
                                   [_vm._v("Male")]
                                 ),
                                 _vm._v(" "),
@@ -73545,10 +73582,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "label",
-                                  {
-                                    staticClass: "form-check-label",
-                                    attrs: { for: "inlineRadio1" }
-                                  },
+                                  { staticClass: "form-check-label" },
                                   [_vm._v("Female")]
                                 ),
                                 _vm._v(" "),
@@ -76979,6 +77013,90 @@ var render = function() {
                               ]
                             )
                           ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.$gate.isOfficial()
+                      ? _c("div", { staticClass: "col-sm-12" }, [
+                          _c(
+                            "form",
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.formf.sWard,
+                                      expression: "formf.sWard"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("sWard")
+                                  },
+                                  attrs: { name: "sWard" },
+                                  on: {
+                                    change: [
+                                      function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.formf,
+                                          "sWard",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      },
+                                      function($event) {
+                                        return _vm.sortByWard()
+                                      }
+                                    ]
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { selected: "", value: "" } },
+                                    [_vm._v("--Sort By Ward--")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.wards, function(wardy) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: wardy.id,
+                                        domProps: { value: wardy.id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(wardy.name) +
+                                            "\n                                        "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "sWard" }
+                              })
+                            ],
+                            1
+                          )
                         ])
                       : _vm._e()
                   ])
@@ -92874,7 +92992,10 @@ var render = function() {
                   _c("div", { staticClass: "inner" }, [
                     _c("h3", [_vm._v(_vm._s(_vm.dash["total_application"]))]),
                     _vm._v(" "),
-                    _c("p", [_vm._v("Applications")])
+                    _c("span", [_vm._v("Bursary")]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Applications")])
                   ]),
                   _vm._v(" "),
                   _vm._m(2)
@@ -92886,7 +93007,10 @@ var render = function() {
                   _c("div", { staticClass: "inner" }, [
                     _c("h3", [_vm._v(_vm._s(_vm.dash["total_awarded"]))]),
                     _vm._v(" "),
-                    _c("p", [_vm._v("Awarded-bursaries")])
+                    _c("span", [_vm._v("Recommended")]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Bursaries")])
                   ]),
                   _vm._v(" "),
                   _vm._m(3)

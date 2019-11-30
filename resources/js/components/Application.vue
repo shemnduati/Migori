@@ -96,14 +96,14 @@
                                             <input v-model="form.gender" class="form-check-input" type="radio"
                                                    name="gender" id="gender" value="male"
                                                    :class="{ 'is-invalid': form.errors.has('gender') }">
-                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                            <label class="form-check-label">Male</label>
                                             <has-error :form="form" field="gender"></has-error>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.gender" class="form-check-input" type="radio"
                                                    name="gender" id="gender" value="female"
                                                    :class="{ 'is-invalid': form.errors.has('gender') }">
-                                            <label class="form-check-label" for="inlineRadio1">Female</label>
+                                            <label class="form-check-label">Female</label>
                                             <has-error :form="form" field="gender"></has-error>
                                         </div>
                                     </div>

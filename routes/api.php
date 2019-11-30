@@ -33,8 +33,8 @@ Route::apiResources(['county' => 'API\CountyController']);
 Route::get('status/{countyId}', 'API\ConfigurationController@getStatus');
 Route::get('statuz/{countyId}', 'API\ConfigurationController@getStatuz');
 Route::apiResources(['configuration' => 'API\ConfigurationController']);
-Route::post('configuration/{id}','API\ConfigurationController@store');
-Route::get('configurations/{id}','API\ConfigurationController@index');
+Route::post('configuration/{id}', 'API\ConfigurationController@store');
+Route::get('configurations/{id}', 'API\ConfigurationController@index');
 
 Route::get('/getcounties', 'API\ApplicationController@getCounties');
 Route::get('/getwards', 'API\ApplicationController@getWards');
@@ -105,3 +105,7 @@ Route::get('download/{fileId}', 'API\ScholarshipController@downloadFile');
 Route::post('recommendIt/{applicationId}', 'API\ScholarshipController@recommend');
 
 Route::post('approveIt/{applicationId}', 'API\ScholarshipController@approve');
+
+
+Route::get('mywards', 'API\FeatureController@getMyWards');
+Route::get('/getbyward/{id}', 'API\FeatureController@getByWard');
