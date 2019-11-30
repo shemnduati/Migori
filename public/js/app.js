@@ -2054,6 +2054,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2061,6 +2064,9 @@ __webpack_require__.r(__webpack_exports__);
       wards: {},
       myward: '',
       mycounty: {},
+      selectedWard: '',
+      wardsCounty: '',
+      mywardy: '',
       form: new Form({
         type: ''
       })
@@ -2078,10 +2084,41 @@ __webpack_require__.r(__webpack_exports__);
       doc.text('Approved Bursary Applications', 14, 22);
       doc.setFontSize(11);
       doc.setTextColor(100);
+
+      if (this.$gate.isOfficial()) {
+        doc.setFontSize(15);
+        doc.text(this.mycounty + ' County', 14, 30);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
+      if (this.$gate.isSubadmin()) {
+        doc.setFontSize(15);
+        doc.text(this.wardsCounty + ' County', 14, 30);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
+      if (this.$gate.isOfficial()) {
+        if (this.selectedWard) {
+          doc.setFontSize(14);
+          doc.text(this.selectedWard + ' Ward', 14, 36);
+          doc.setFontSize(11);
+          doc.setTextColor(100);
+        }
+      }
+
+      if (this.$gate.isSubadmin()) {
+        doc.setFontSize(14);
+        doc.text(this.mywardy + ' Ward', 14, 36);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
       doc.autoTable({
         showHead: 'firstPage',
         html: '#my-table',
-        startY: 60
+        startY: 40
       });
       doc.save('Week' + '.pdf');
     },
@@ -2105,49 +2142,80 @@ __webpack_require__.r(__webpack_exports__);
     getType: function getType() {
       var _this2 = this;
 
-      axios.get('api/getWardsById/' + this.form.type).then(function (_ref3) {
-        var data = _ref3.data;
-        return [_this2.applications = data['parent']];
-      });
+      this.selectedWard = "";
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/getWardsById/' + this.form.type).then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this2.applications = data['parent']];
+        });
+
+        if (this.form.type > 0) {
+          axios.get('/api/wardname/' + this.form.type).then(function (_ref4) {
+            var data = _ref4.data;
+            return [_this2.selectedWard = data];
+          });
+        }
+      }
     },
     getWards: function getWards() {
       var _this3 = this;
 
-      axios.get("api/getMyWards").then(function (_ref4) {
-        var data = _ref4.data;
+      axios.get("api/getMyWards").then(function (_ref5) {
+        var data = _ref5.data;
         return [_this3.wards = data['wards']];
       });
     },
-    getCounty: function getCounty() {
+    subWard: function subWard() {
       var _this4 = this;
 
-      axios.get("api/getMyCounty").then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this4.mycounty = data['county']];
-      });
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/subAdminWard").then(function (_ref6) {
+          var data = _ref6.data;
+          return [_this4.mywardy = data];
+        });
+      }
+    },
+    getCounty: function getCounty() {
+      var _this5 = this;
+
+      if (this.$gate.isOfficial()) {
+        axios.get("api/getMyCounty").then(function (_ref7) {
+          var data = _ref7.data;
+          return [_this5.mycounty = data['counties']];
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/wardsCounty").then(function (_ref8) {
+          var data = _ref8.data;
+          return [_this5.wardsCounty = data];
+        });
+      }
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.$Progress.start();
     Fire.$on('searching', function () {
-      _this5.$Progress.start();
+      _this6.$Progress.start();
 
-      var query = _this5.$parent.search;
+      var query = _this6.$parent.search;
       axios.get('api/findbursary?q=' + query).then(function (data) {
-        _this5.applications = data.data;
+        _this6.applications = data.data;
 
-        _this5.$Progress.finish();
+        _this6.$Progress.finish();
       })["catch"](function () {});
     });
     this.getApplications();
     this.getWards();
     this.getCounty();
+    this.subWard();
     Fire.$on('AfterCreate', function () {
-      _this5.getApplications();
+      _this6.getApplications();
 
-      _this5.getWards();
+      _this6.getWards();
     });
   }
 });
@@ -7719,47 +7787,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ScholarshipAdmin",
   data: function data() {
     return {
-      applications: {}
+      applications: {},
+      wards: {},
+      form: new Form({
+        sWard: ''
+      })
     };
   },
   methods: {
-    rejected: function rejected() {
+    sortByWard: function sortByWard() {
       var _this = this;
 
-      if (this.$gate.isSubadmin()) {
-        axios.get('api/scholarshipRej').then(function (_ref) {
+      if (this.$gate.isOfficial()) {
+        axios.get('api/getbywardscholarship/' + this.form.sWard).then(function (_ref) {
           var data = _ref.data;
           return [_this.applications = data];
         });
       }
     },
-    recommended: function recommended() {
+    getMyWards: function getMyWards() {
       var _this2 = this;
 
-      if (this.$gate.isSubadmin()) {
-        axios.get('api/scholarshipRec').then(function (_ref2) {
+      if (this.$gate.isOfficial()) {
+        axios.get('api/mywards/').then(function (_ref2) {
           var data = _ref2.data;
-          return [_this2.applications = data];
+          return [_this2.wards = data];
+        });
+      }
+    },
+    rejected: function rejected() {
+      var _this3 = this;
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/scholarshipRej').then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this3.applications = data];
+        });
+      }
+    },
+    recommended: function recommended() {
+      var _this4 = this;
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/scholarshipRec').then(function (_ref4) {
+          var data = _ref4.data;
+          return [_this4.applications = data];
         });
       }
     },
     getApplications: function getApplications() {
-      var _this3 = this;
+      var _this5 = this;
 
       if (this.$gate.isSubadminOrOfficial()) {
-        axios.get('api/scholarshipApps').then(function (_ref3) {
-          var data = _ref3.data;
-          return [_this3.applications = data];
+        axios.get('api/scholarshipApps').then(function (_ref5) {
+          var data = _ref5.data;
+          return [_this5.applications = data];
         });
       }
     }
   },
   created: function created() {
     this.getApplications();
+    this.getMyWards();
   }
 });
 
@@ -8218,8 +8321,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    var _this5 = this;
+
     this.getApplications();
     this.getFiles();
+    Fire.$on('entry', function () {
+      _this5.getApplications();
+    });
   }
 });
 
@@ -8313,13 +8421,26 @@ __webpack_require__.r(__webpack_exports__);
       applications: {},
       wards: {},
       myward: '',
+      mywardy: '',
       mycounty: {},
+      selectedWard: '',
+      wardsCounty: '',
       form: new Form({
         type: ''
       })
     };
   },
   methods: {
+    subWard: function subWard() {
+      var _this = this;
+
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/subAdminWard").then(function (_ref) {
+          var data = _ref.data;
+          return [_this.mywardy = data];
+        });
+      }
+    },
     createPDF: function createPDF() {
       var specialElementHandlers = {
         "#editor": function editor(element, renderer) {
@@ -8328,79 +8449,131 @@ __webpack_require__.r(__webpack_exports__);
       };
       var doc = new jsPDF();
       doc.setFontSize(18);
-      doc.text('Approved Bursary Applications', 14, 22);
+      doc.text('Approved Scholarship Applications', 14, 22);
       doc.setFontSize(11);
       doc.setTextColor(100);
+
+      if (this.$gate.isOfficial()) {
+        doc.setFontSize(15);
+        doc.text(this.mycounty + ' County', 14, 30);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
+      if (this.$gate.isSubadmin()) {
+        doc.setFontSize(15);
+        doc.text(this.wardsCounty + ' County', 14, 30);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
+      if (this.$gate.isOfficial()) {
+        if (this.selectedWard) {
+          doc.setFontSize(14);
+          doc.text(this.selectedWard + ' Ward', 14, 36);
+          doc.setFontSize(11);
+          doc.setTextColor(100);
+        }
+      }
+
+      if (this.$gate.isSubadmin()) {
+        doc.setFontSize(14);
+        doc.text(this.mywardy + ' Ward', 14, 36);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
       doc.autoTable({
         showHead: 'firstPage',
         html: '#my-table',
-        startY: 60
+        startY: 40
       });
       doc.save('Week' + '.pdf');
     },
     getApplications: function getApplications() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.$gate.isOfficial()) {
-        axios.get('api/getApplicantz').then(function (_ref) {
-          var data = _ref.data;
-          return [_this.applications = data['parent']];
+        axios.get('api/getApplicantz').then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this2.applications = data['parent']];
         });
       }
 
       if (this.$gate.isSubadmin()) {
-        axios.get('api/getAppnts').then(function (_ref2) {
-          var data = _ref2.data;
-          return [_this.applications = data['parent']];
+        axios.get('api/getAppnts').then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this2.applications = data['parent']];
         });
       }
     },
-    getType: function getType() {
-      var _this2 = this;
-
-      axios.get('api/getWardsApp/' + this.form.type).then(function (_ref3) {
-        var data = _ref3.data;
-        return [_this2.applications = data['parent']];
-      });
-    },
-    getWards: function getWards() {
+    sortScholarship: function sortScholarship() {
       var _this3 = this;
 
-      axios.get("api/getMyWards").then(function (_ref4) {
-        var data = _ref4.data;
-        return [_this3.wards = data['wards']];
+      this.selectedWard = "";
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/sortscholarship/' + this.form.type).then(function (_ref4) {
+          var data = _ref4.data;
+          return [_this3.applications = data['parent']];
+        });
+
+        if (this.form.type > 0) {
+          axios.get('/api/wardname/' + this.form.type).then(function (_ref5) {
+            var data = _ref5.data;
+            return [_this3.selectedWard = data];
+          });
+        }
+      }
+    },
+    getWards: function getWards() {
+      var _this4 = this;
+
+      axios.get("api/getMyWards").then(function (_ref6) {
+        var data = _ref6.data;
+        return [_this4.wards = data['wards']];
       });
     },
     getCounty: function getCounty() {
-      var _this4 = this;
+      var _this5 = this;
 
-      axios.get("api/getMyCounty").then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this4.mycounty = data['county']];
-      });
+      if (this.$gate.isOfficial()) {
+        axios.get("api/getMyCounty").then(function (_ref7) {
+          var data = _ref7.data;
+          return [_this5.mycounty = data['counties']];
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/wardsCounty").then(function (_ref8) {
+          var data = _ref8.data;
+          return [_this5.wardsCounty = data];
+        });
+      }
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.$Progress.start();
     Fire.$on('searching', function () {
-      _this5.$Progress.start();
+      _this6.$Progress.start();
 
-      var query = _this5.$parent.search;
+      var query = _this6.$parent.search;
       axios.get('api/findbursary?q=' + query).then(function (data) {
-        _this5.applications = data.data;
+        _this6.applications = data.data;
 
-        _this5.$Progress.finish();
+        _this6.$Progress.finish();
       })["catch"](function () {});
     });
     this.getApplications();
     this.getWards();
     this.getCounty();
+    this.subWard();
     Fire.$on('AfterCreate', function () {
-      _this5.getApplications();
+      _this6.getApplications();
 
-      _this5.getWards();
+      _this6.getWards();
     });
   }
 });
@@ -73809,7 +73982,12 @@ var render = function() {
                                       key: wardy.id,
                                       domProps: { value: wardy.id }
                                     },
-                                    [_vm._v(_vm._s(wardy.name) + " ward")]
+                                    [
+                                      _vm._v(
+                                        _vm._s(wardy.name) +
+                                          " ward\n                                        "
+                                      )
+                                    ]
                                   )
                                 })
                               ],
@@ -73830,7 +74008,7 @@ var render = function() {
                         [
                           _c("i", { staticClass: "fas fa-download" }),
                           _vm._v(
-                            "\n                                  Download\n                                "
+                            "\n                                    Download\n                                "
                           )
                         ]
                       )
@@ -90254,7 +90432,87 @@ var render = function() {
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
                     _vm.$gate.isOfficial()
-                      ? _c("div", { staticClass: "col-sm-5" })
+                      ? _c("div", { staticClass: "col-sm-12" }, [
+                          _c(
+                            "form",
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.sWard,
+                                      expression: "form.sWard"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("sWard")
+                                  },
+                                  attrs: { name: "sWard" },
+                                  on: {
+                                    change: [
+                                      function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "sWard",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      },
+                                      function($event) {
+                                        return _vm.sortByWard()
+                                      }
+                                    ]
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { selected: "", value: "" } },
+                                    [_vm._v("--Sort By Ward--")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.wards, function(wardy) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: wardy.id,
+                                        domProps: { value: wardy.id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(wardy.name) +
+                                            "\n                                        "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "sWard" }
+                              })
+                            ],
+                            1
+                          )
+                        ])
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.$gate.isSubadmin()
@@ -90330,6 +90588,14 @@ var render = function() {
                                     "span",
                                     { staticStyle: { color: "red" } },
                                     [_vm._v("Rejected")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.status == 3
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "green" } },
+                                    [_vm._v("Approved")]
                                   )
                                 : _vm._e()
                             ]),
@@ -91414,9 +91680,7 @@ var render = function() {
                                           : $$selectedVal[0]
                                       )
                                     },
-                                    function($event) {
-                                      return _vm.getType()
-                                    }
+                                    _vm.sortScholarship
                                   ]
                                 }
                               },
@@ -91492,7 +91756,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(application.Lname))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(application.index))]),
+                              _c("td", [_vm._v(_vm._s(application.indexNo))]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(application.school))]),
                               _vm._v(" "),

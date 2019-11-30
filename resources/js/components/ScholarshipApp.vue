@@ -11,7 +11,7 @@
                             <div class="row">
                                 <div class="col-sm-6" v-if="$gate.isOfficial()">
                                     <form>
-                                        <select @change="getType()" v-model="form.type" class="form-control">
+                                        <select @change="sortScholarship" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
                                             <option value="0">county</option>
                                             <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}} ward</option>
@@ -44,7 +44,7 @@
                                 <td>{{application.fname}}</td>
                                 <td>{{application.Mname}}</td>
                                 <td>{{application.Lname}}</td>
-                                <td>{{application.index}}</td>
+                                <td>{{application.indexNo}}</td>
                                 <td>{{application.school}}</td>
                                 <td>{{application.reco}}</td>
                                 <td>{{application.ward}}</td>
@@ -78,7 +78,10 @@
                 applications :{},
                 wards:{},
                 myward:'',
+                mywardy: '',
                 mycounty: {},
+                selectedWard: '',
+                wardsCounty: '',
                 form: new Form({
                     type: ''
                 })
@@ -87,6 +90,11 @@
             }
         },
         methods:{
+            subWard() {
+                if (this.$gate.isSubadmin()) {
+                    axios.get("api/subAdminWard").then(({data}) => ([this.mywardy = data]));
+                }
+            },
             createPDF(){
                 var specialElementHandlers = {
                     "#editor":function(element, renderer){
@@ -96,14 +104,44 @@
                 var doc = new jsPDF();
 
                 doc.setFontSize(18);
-                doc.text('Approved Bursary Applications', 14, 22);
+                doc.text('Approved Scholarship Applications', 14, 22);
                 doc.setFontSize(11);
                 doc.setTextColor(100);
+
+                if (this.$gate.isOfficial()) {
+                    doc.setFontSize(15);
+                    doc.text(this.mycounty + ' County', 14, 30);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100);
+                }
+
+                if (this.$gate.isSubadmin()) {
+                    doc.setFontSize(15);
+                    doc.text(this.wardsCounty + ' County', 14, 30);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100);
+                }
+
+                if (this.$gate.isOfficial()) {
+                    if (this.selectedWard) {
+                        doc.setFontSize(14);
+                        doc.text(this.selectedWard + ' Ward', 14, 36);
+                        doc.setFontSize(11);
+                        doc.setTextColor(100)
+                    }
+                }
+
+                if (this.$gate.isSubadmin()) {
+                    doc.setFontSize(14);
+                    doc.text(this.mywardy + ' Ward', 14, 36);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100)
+                }
 
                 doc.autoTable({
                     showHead: 'firstPage',
                     html: '#my-table',
-                    startY: 60,
+                    startY: 40,
                 });
                 doc.save('Week'+ '.pdf');
             },
@@ -111,19 +149,32 @@
                 if(this.$gate.isOfficial()) {
                     axios.get('api/getApplicantz').then(({data}) => ([this.applications = data['parent']]));
                 }
+
                 if(this.$gate.isSubadmin()) {
                     axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
                 }
             },
-            getType(){
-                axios.get('api/getWardsApp/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
+            sortScholarship(){
+                this.selectedWard = "";
+                if(this.$gate.isOfficial()) {
+                    axios.get('api/sortscholarship/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
+
+                    if (this.form.type > 0){
+                        axios.get('/api/wardname/' + this.form.type).then(({data}) => ([this.selectedWard = data]));
+                    }
+                }
             },
             getWards(){
                 axios.get("api/getMyWards").then(({ data }) => ([this.wards = data['wards']]));
             },
 
             getCounty(){
-                axios.get("api/getMyCounty").then(({ data }) => ([this.mycounty = data['county']]));
+                if (this.$gate.isOfficial()) {
+                    axios.get("api/getMyCounty").then(({data}) => ([this.mycounty = data['counties']]));
+                }
+                if (this.$gate.isSubadmin()) {
+                    axios.get("api/wardsCounty").then(({data}) => ([this.wardsCounty = data]));
+                }
             },
 
         },
@@ -146,6 +197,7 @@
             this.getApplications();
             this.getWards();
             this.getCounty();
+            this.subWard();
             Fire.$on('AfterCreate', () =>{
                 this.getApplications();
                 this.getWards();

@@ -329,7 +329,7 @@ class ScholarshipController extends Controller
 
     public function approve($applicationId){
         $app = Application::findOrFail($applicationId);
-        $app->approved = 1;
+        $app->approved = 3;
         $app->update();
     }
 

@@ -14,14 +14,16 @@
                                         <select @change="getType()" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
                                             <option value="0">county</option>
-                                            <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}} ward</option>
+                                            <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
+                                                wardy.name}} ward
+                                            </option>
                                         </select>
                                     </form>
                                 </div>
                                 <div class="col-sm-6">
                                     <button type="button" class="btn btn-primary btn-sm" @click="createPDF">
                                         <i class="fas fa-download"></i>
-                                      Download
+                                        Download
                                     </button>
                                 </div>
                             </div>
@@ -30,7 +32,8 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover" id="my-table">
-                            <tbody><tr>
+                            <tbody>
+                            <tr>
                                 <th>Name</th>
                                 <th>Fathers Name</th>
                                 <th>Institution</th>
@@ -50,8 +53,8 @@
                             </tr>
 
 
-
-                            </tbody></table>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- /.box-body -->
                     <div class="card-footer">
@@ -71,12 +74,15 @@
 
 <script>
     export default {
-        data(){
-            return{
-                applications :{},
-                wards:{},
-                myward:'',
+        data() {
+            return {
+                applications: {},
+                wards: {},
+                myward: '',
                 mycounty: {},
+                selectedWard: '',
+                wardsCounty: '',
+                mywardy: '',
                 form: new Form({
                     type: ''
                 })
@@ -84,10 +90,10 @@
 
             }
         },
-        methods:{
-            createPDF(){
-               var specialElementHandlers = {
-                    "#editor":function(element, renderer){
+        methods: {
+            createPDF() {
+                var specialElementHandlers = {
+                    "#editor": function (element, renderer) {
                         return true;
                     }
                 }
@@ -98,30 +104,76 @@
                 doc.setFontSize(11);
                 doc.setTextColor(100);
 
+                if (this.$gate.isOfficial()) {
+                    doc.setFontSize(15);
+                    doc.text(this.mycounty + ' County', 14, 30);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100);
+                }
+
+                if (this.$gate.isSubadmin()) {
+                    doc.setFontSize(15);
+                    doc.text(this.wardsCounty + ' County', 14, 30);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100);
+                }
+
+                if (this.$gate.isOfficial()) {
+                    if (this.selectedWard) {
+                        doc.setFontSize(14);
+                        doc.text(this.selectedWard + ' Ward', 14, 36);
+                        doc.setFontSize(11);
+                        doc.setTextColor(100)
+                    }
+                }
+
+                if (this.$gate.isSubadmin()) {
+                    doc.setFontSize(14);
+                    doc.text(this.mywardy + ' Ward', 14, 36);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100)
+                }
+
                 doc.autoTable({
                     showHead: 'firstPage',
                     html: '#my-table',
-                    startY: 60,
+                    startY: 40,
                 });
-                doc.save('Week'+ '.pdf');
+                doc.save('Week' + '.pdf');
             },
-            getApplications(){
-                if(this.$gate.isOfficial()) {
+            getApplications() {
+                if (this.$gate.isOfficial()) {
                     axios.get('api/getApplicants').then(({data}) => ([this.applications = data['parent']]));
                 }
-                if(this.$gate.isSubadmin()) {
+                if (this.$gate.isSubadmin()) {
                     axios.get('api/getApp').then(({data}) => ([this.applications = data['parent']]));
                 }
             },
-            getType(){
+            getType() {
+                this.selectedWard = "";
+                if (this.$gate.isOfficial()) {
                     axios.get('api/getWardsById/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
-            },
-            getWards(){
-                axios.get("api/getMyWards").then(({ data }) => ([this.wards = data['wards']]));
-            },
 
-            getCounty(){
-                axios.get("api/getMyCounty").then(({ data }) => ([this.mycounty = data['county']]));
+                    if (this.form.type > 0) {
+                        axios.get('/api/wardname/' + this.form.type).then(({data}) => ([this.selectedWard = data]));
+                    }
+                }
+            },
+            getWards() {
+                axios.get("api/getMyWards").then(({data}) => ([this.wards = data['wards']]));
+            },
+            subWard() {
+                if (this.$gate.isSubadmin()) {
+                    axios.get("api/subAdminWard").then(({data}) => ([this.mywardy = data]));
+                }
+            },
+            getCounty() {
+                if (this.$gate.isOfficial()) {
+                    axios.get("api/getMyCounty").then(({data}) => ([this.mycounty = data['counties']]));
+                }
+                if (this.$gate.isSubadmin()) {
+                    axios.get("api/wardsCounty").then(({data}) => ([this.wardsCounty = data]));
+                }
             },
 
         },
@@ -129,22 +181,23 @@
 
         created() {
             this.$Progress.start();
-            Fire.$on('searching', ()=>{
+            Fire.$on('searching', () => {
                 this.$Progress.start();
                 let query = this.$parent.search;
                 axios.get('api/findbursary?q=' + query)
-                    .then((data)=>{
+                    .then((data) => {
                         this.applications = data.data;
                         this.$Progress.finish();
                     })
-                    .catch(()=>{
+                    .catch(() => {
 
                     })
             })
             this.getApplications();
             this.getWards();
             this.getCounty();
-            Fire.$on('AfterCreate', () =>{
+            this.subWard();
+            Fire.$on('AfterCreate', () => {
                 this.getApplications();
                 this.getWards();
             })
