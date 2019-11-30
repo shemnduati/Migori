@@ -164,7 +164,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <router-link to="/Applicants" class="nav-link">
                                     <i class="nav-icon fas fa-user-graduate teal"></i>
                                     <p>
-                                        County Applicants
+                                        Awarded Bursary Applicants
                                     </p>
                                 </router-link>
                             </li>
@@ -172,7 +172,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <router-link to="/ScholarApplicants" class="nav-link">
                                     <i class="nav-icon fas fa-user-graduate pink"></i>
                                     <p>
-                                        Scholarship Applicants
+                                        Approved Scholarship Applicants
                                     </p>
                                 </router-link>
                             </li>

@@ -120,6 +120,11 @@ class FeatureController extends Controller
         //
     }
 
+    public function wardName($id)
+    {
+        return Ward::where('id', $id)->value('name');
+    }
+
     /**
      * Display the specified resource.
      *

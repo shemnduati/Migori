@@ -8021,6 +8021,7 @@ __webpack_require__.r(__webpack_exports__);
       wards: {},
       myward: '',
       mycounty: {},
+      selectedWard: '',
       form: new Form({
         type: ''
       })
@@ -8038,10 +8039,22 @@ __webpack_require__.r(__webpack_exports__);
       doc.text('Approved Scholarship Applications', 14, 22);
       doc.setFontSize(11);
       doc.setTextColor(100);
+      doc.setFontSize(15);
+      doc.text(this.mycounty + ' County', 14, 30);
+      doc.setFontSize(11);
+      doc.setTextColor(100);
+
+      if (this.selectedWard) {
+        doc.setFontSize(14);
+        doc.text(this.selectedWard + ' Ward', 14, 36);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
       doc.autoTable({
         showHead: 'firstPage',
         html: '#my-table',
-        startY: 60
+        startY: 40
       });
       doc.save('Week' + '.pdf');
     },
@@ -8059,25 +8072,36 @@ __webpack_require__.r(__webpack_exports__);
     sortScholarship: function sortScholarship() {
       var _this2 = this;
 
-      axios.get('api/sortscholarship/' + this.form.type).then(function (_ref2) {
-        var data = _ref2.data;
-        return [_this2.applications = data['parent']];
-      });
+      this.selectedWard = "";
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/sortscholarship/' + this.form.type).then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this2.applications = data['parent']];
+        });
+
+        if (this.form.type > 0) {
+          axios.get('/api/wardname/' + this.form.type).then(function (_ref3) {
+            var data = _ref3.data;
+            return [_this2.selectedWard = data];
+          });
+        }
+      }
     },
     getWards: function getWards() {
       var _this3 = this;
 
-      axios.get("api/getMyWards").then(function (_ref3) {
-        var data = _ref3.data;
+      axios.get("api/getMyWards").then(function (_ref4) {
+        var data = _ref4.data;
         return [_this3.wards = data['wards']];
       });
     },
     getCounty: function getCounty() {
       var _this4 = this;
 
-      axios.get("api/getMyCounty").then(function (_ref4) {
-        var data = _ref4.data;
-        return [_this4.mycounty = data['county']];
+      axios.get("api/getMyCounty").then(function (_ref5) {
+        var data = _ref5.data;
+        return [_this4.mycounty = data['counties']];
       });
     }
   },

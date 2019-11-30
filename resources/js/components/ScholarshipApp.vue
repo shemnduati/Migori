@@ -79,6 +79,7 @@
                 wards:{},
                 myward:'',
                 mycounty: {},
+                selectedWard: '',
                 form: new Form({
                     type: ''
                 })
@@ -100,10 +101,21 @@
                 doc.setFontSize(11);
                 doc.setTextColor(100);
 
+                doc.setFontSize(15);
+                doc.text(this.mycounty + ' County', 14, 30);
+                doc.setFontSize(11);
+                doc.setTextColor(100);
+
+                if (this.selectedWard){
+                doc.setFontSize(14);
+                doc.text(this.selectedWard + ' Ward', 14, 36);
+                doc.setFontSize(11);
+                doc.setTextColor(100)}
+
                 doc.autoTable({
                     showHead: 'firstPage',
                     html: '#my-table',
-                    startY: 60,
+                    startY: 40,
                 });
                 doc.save('Week'+ '.pdf');
             },
@@ -114,14 +126,21 @@
                 // axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
             },
             sortScholarship(){
-                axios.get('api/sortscholarship/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
+                this.selectedWard = "";
+                if(this.$gate.isOfficial()) {
+                    axios.get('api/sortscholarship/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
+
+                    if (this.form.type > 0){
+                        axios.get('/api/wardname/' + this.form.type).then(({data}) => ([this.selectedWard = data]));
+                    }
+                }
             },
             getWards(){
                 axios.get("api/getMyWards").then(({ data }) => ([this.wards = data['wards']]));
             },
 
             getCounty(){
-                axios.get("api/getMyCounty").then(({ data }) => ([this.mycounty = data['county']]));
+                axios.get("api/getMyCounty").then(({ data }) => ([this.mycounty = data['counties']]));
             },
 
         },

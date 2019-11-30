@@ -111,3 +111,4 @@ Route::get('mywards', 'API\FeatureController@getMyWards');
 Route::get('/getbyward/{id}', 'API\FeatureController@getByWard');
 Route::get('/getbywardscholarship/{id}', 'API\FeatureController@getByWardScholarship');
 Route::get('/sortscholarship/{id}', 'API\FeatureController@sortScholarship');
+Route::get('/wardname/{id}', 'API\FeatureController@wardName');
