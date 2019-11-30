@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card" v-if="watch == 0">
+                <div class="card" v-if="watch == 0 && enable != 0">
                     <div class="card-header">
                         <h3 class="card-title">Scholarship Application</h3>
                     </div>
@@ -13,16 +13,18 @@
                                 <div class="row justify-content-center">
                                     <div class="col-sm-6 justify-content-center">
                                         <div class="form-group">
-                                            <label for="county">Select Your County</label>
-                                            <select   v-model="form.county" @change='getStatus()'
-                                                      class="form-control" :required="true" name="county" id="Mycounty"
-                                                      :class="{ 'is-invalid': form.errors.has('county') }" >
-                                                <option selected value="">--Select county--</option>
-                                                <option v-for="count in counties" :key="count.id" :value="count.id">{{
-                                                    count.name}}
-                                                </option>
-                                            </select>
-                                            <has-error :form="form" field="county"></has-error>
+                                            <div class="col">
+                                                <label>County</label>
+                                                <select v-model="form.county" @change='getCountyWards()'
+                                                        class="form-control" name="county"
+                                                        :class="{ 'is-invalid': form.errors.has('county') }">
+                                                    <option selected value="">--Select county--</option>
+                                                    <option v-for="count in counties" :key="count.id" :value="count.id">{{
+                                                        count.name}}
+                                                    </option>
+                                                </select>
+                                                <has-error :form="form" field="county"></has-error>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -600,7 +602,7 @@
                                 <div class="form-row ">
                                     <div class="col">
                                         <label>County</label>
-                                        <select v-model="form.gcounty" @change='getCountyWards()'
+                                        <select v-model="form.gcounty" @change='getGuardianWards()'
                                                 class="form-control" name="county"
                                                 :class="{ 'is-invalid': form.errors.has('gcounty') }">
                                             <option selected value="">--Select county--</option>
@@ -616,7 +618,7 @@
                                             <select v-model="form.gward" class="form-control" name="gward"
                                                     :class="{ 'is-invalid': form.errors.has('gward') }">
                                                 <option selected value="">--Select Ward--</option>
-                                                <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
+                                                <option v-for="wardy in Gwards" :key="wardy.id" :value="wardy.id">{{
                                                     wardy.name}}
                                                 </option>
                                             </select>
@@ -1545,6 +1547,7 @@
                 totalSteps: 6,
                 counties: {},
                 wards: {},
+                Gwards: {},
                 info: {},
                 now: moment().format('YYYY'),
                 enable: {},
@@ -2349,7 +2352,12 @@
                 axios.get("api/getwards").then(({data}) => ([this.wards = data['wards']]));
             },
             getCountyWards() {
+                this.getStatus();
                 axios.get("api/getcountywards/" + this.form.county).then(({data}) => ([this.wards = data['wards']]));
+            },
+            getGuardianWards() {
+                this.getStatus();
+                axios.get("api/getcountywards/" + this.form.gcounty).then(({data}) => ([this.Gwards = data['wards']]));
             },
             getResultSlip(e) {
                 let file = e.target.files[0];

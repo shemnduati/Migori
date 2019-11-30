@@ -6368,6 +6368,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6375,6 +6377,7 @@ __webpack_require__.r(__webpack_exports__);
       totalSteps: 6,
       counties: {},
       wards: {},
+      Gwards: {},
       info: {},
       now: moment().format('YYYY'),
       enable: {},
@@ -7194,13 +7197,23 @@ __webpack_require__.r(__webpack_exports__);
     getCountyWards: function getCountyWards() {
       var _this8 = this;
 
+      this.getStatus();
       axios.get("api/getcountywards/" + this.form.county).then(function (_ref4) {
         var data = _ref4.data;
         return [_this8.wards = data['wards']];
       });
     },
-    getResultSlip: function getResultSlip(e) {
+    getGuardianWards: function getGuardianWards() {
       var _this9 = this;
+
+      this.getStatus();
+      axios.get("api/getcountywards/" + this.form.gcounty).then(function (_ref5) {
+        var data = _ref5.data;
+        return [_this9.Gwards = data['wards']];
+      });
+    },
+    getResultSlip: function getResultSlip(e) {
+      var _this10 = this;
 
       var file = e.target.files[0];
       var reader = new FileReader();
@@ -7210,7 +7223,7 @@ __webpack_require__.r(__webpack_exports__);
         if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
           reader.onloadend = function (file) {
             // console.log('Result', reader.result)
-            _this9.form.resultslip = reader.result;
+            _this10.form.resultslip = reader.result;
           };
 
           reader.readAsDataURL(file);
@@ -7230,19 +7243,19 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getDetails: function getDetails() {
-      var _this10 = this;
+      var _this11 = this;
 
-      axios.get("api/getdetails").then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this10.info = data['user']];
+      axios.get("api/getdetails").then(function (_ref6) {
+        var data = _ref6.data;
+        return [_this11.info = data['user']];
       });
     },
     getStatus: function getStatus() {
-      var _this11 = this;
+      var _this12 = this;
 
-      axios.get("api/statuz/" + this.form.county).then(function (_ref6) {
-        var data = _ref6.data;
-        return [_this11.enable = data['num']];
+      axios.get("api/statuz/" + this.form.county).then(function (_ref7) {
+        var data = _ref7.data;
+        return [_this12.enable = data['num']];
       });
     }
   },
@@ -81693,7 +81706,7 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _vm.watch == 0
+        _vm.watch == 0 && _vm.enable != 0
           ? _c("div", { staticClass: "card" }, [
               _vm._m(0),
               _vm._v(" "),
@@ -81711,101 +81724,100 @@ var render = function() {
                                 staticClass: "col-sm-6 justify-content-center"
                               },
                               [
-                                _c(
-                                  "div",
-                                  { staticClass: "form-group" },
-                                  [
-                                    _c("label", { attrs: { for: "county" } }, [
-                                      _vm._v("Select Your County")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "select",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.form.county,
-                                            expression: "form.county"
-                                          }
-                                        ],
-                                        staticClass: "form-control",
-                                        class: {
-                                          "is-invalid": _vm.form.errors.has(
-                                            "county"
-                                          )
-                                        },
-                                        attrs: {
-                                          required: true,
-                                          name: "county",
-                                          id: "Mycounty"
-                                        },
-                                        on: {
-                                          change: [
-                                            function($event) {
-                                              var $$selectedVal = Array.prototype.filter
-                                                .call(
-                                                  $event.target.options,
-                                                  function(o) {
-                                                    return o.selected
-                                                  }
-                                                )
-                                                .map(function(o) {
-                                                  var val =
-                                                    "_value" in o
-                                                      ? o._value
-                                                      : o.value
-                                                  return val
-                                                })
-                                              _vm.$set(
-                                                _vm.form,
-                                                "county",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
-                                              )
-                                            },
-                                            function($event) {
-                                              return _vm.getStatus()
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "col" },
+                                    [
+                                      _c("label", [_vm._v("County")]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.county,
+                                              expression: "form.county"
                                             }
-                                          ]
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "option",
-                                          {
-                                            attrs: { selected: "", value: "" }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: {
+                                            "is-invalid": _vm.form.errors.has(
+                                              "county"
+                                            )
                                           },
-                                          [_vm._v("--Select county--")]
-                                        ),
-                                        _vm._v(" "),
-                                        _vm._l(_vm.counties, function(count) {
-                                          return _c(
+                                          attrs: { name: "county" },
+                                          on: {
+                                            change: [
+                                              function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "county",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                              function($event) {
+                                                return _vm.getCountyWards()
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        [
+                                          _c(
                                             "option",
                                             {
-                                              key: count.id,
-                                              domProps: { value: count.id }
+                                              attrs: { selected: "", value: "" }
                                             },
-                                            [
-                                              _vm._v(
-                                                _vm._s(count.name) +
-                                                  "\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        })
-                                      ],
-                                      2
-                                    ),
-                                    _vm._v(" "),
-                                    _c("has-error", {
-                                      attrs: { form: _vm.form, field: "county" }
-                                    })
-                                  ],
-                                  1
-                                )
+                                            [_vm._v("--Select county--")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._l(_vm.counties, function(count) {
+                                            return _c(
+                                              "option",
+                                              {
+                                                key: count.id,
+                                                domProps: { value: count.id }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(count.name) +
+                                                    "\n                                                "
+                                                )
+                                              ]
+                                            )
+                                          })
+                                        ],
+                                        2
+                                      ),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "county"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
                               ]
                             )
                           ]
@@ -84689,7 +84701,7 @@ var render = function() {
                                         )
                                       },
                                       function($event) {
-                                        return _vm.getCountyWards()
+                                        return _vm.getGuardianWards()
                                       }
                                     ]
                                   }
@@ -84780,7 +84792,7 @@ var render = function() {
                                       [_vm._v("--Select Ward--")]
                                     ),
                                     _vm._v(" "),
-                                    _vm._l(_vm.wards, function(wardy) {
+                                    _vm._l(_vm.Gwards, function(wardy) {
                                       return _c(
                                         "option",
                                         {
