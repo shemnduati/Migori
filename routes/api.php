@@ -21,6 +21,7 @@ Route::get('kryme', 'API\WardController@county');
 Route::apiResources(['ward' => 'API\WardController']);
 Route::apiResources(['user' => 'API\UserController']);
 Route::get('findUser', 'API\UserController@search');
+Route::post('accountant', 'API\UserController@accountant');
 Route::get('findWard', 'API\WardController@search');
 Route::get('findCounty', 'API\CountyController@search');
 Route::get('findbursary', 'API\InformationController@search');
@@ -73,6 +74,7 @@ Route::get('/getMyCountyId', 'API\InformationController@getMyCountyId');
 
 Route::get('wards', 'API\UserController@wards');
 Route::get('subadmin', 'API\UserController@subadmin');
+Route::get('account', 'API\UserController@account');
 Route::get('MySubAdmin', 'API\UserController@MySubAdmin');
 Route::get('official', 'API\UserController@official');
 Route::post('officialUser', 'API\UserController@officialUser');

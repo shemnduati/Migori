@@ -51,6 +51,7 @@ let routes = [
     { path: '/configuration', component: require('./components/Configuration.vue').default },
     { path: '/verified', component: require('./components/Verified.vue').default },
     { path: '/subadmin', component: require('./components/subadmin.vue').default },
+    { path: '/accountant', component: require('./components/Accountant.vue').default },
     { path: '/OfficialUser', component: require('./components/OfficialUser.vue').default },
     { path: '/Applicants', component: require('./components/Applicants.vue').default },
     { path: '/ScholarApplicants', component: require('./components/ScholarshipApp.vue').default },

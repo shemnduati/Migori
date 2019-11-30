@@ -72,6 +72,7 @@ class UserController extends Controller
 
           return ['parent'=>$parent];
     }
+
     public function MySubAdmin()
     {
         $county_id = User::where('id',Auth::user()->id)->value('county');
@@ -129,6 +130,33 @@ class UserController extends Controller
         $counties = County::all();
 
         return ['counties'=>$counties];
+    }
+    public function account()
+    {
+        $acnts = User::where('role','sub-official')->get();
+        $parent = array();
+
+        foreach ($acnts as $acc){
+            $id = $acc['id'];
+            $name = $acc['name'];
+            $ward_name = Ward::where('id',$acc['ward'])->value('name');
+            $County_name = County::where('id', $acc['county'])->value('name');
+            $email = $acc['email'];
+            $reg =$acc['created_at'];
+            $role = $acc['role'];
+            $child=array(
+                'id' =>$id,
+                'name'=>$name,
+                'ward'=>$ward_name,
+                'email'=>$email,
+                'county'=>$County_name,
+                'reg'=>$reg,
+                'role'=>$role
+            );
+            array_push($parent, $child);
+        }
+
+        return ['parent'=>$parent];
     }
     public function getMyCounties()
     {
@@ -197,6 +225,23 @@ class UserController extends Controller
         ]);
     }
 
+    public function accountant(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users',
+            'ward'=> 'required',
+        ]);
+        return User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'role' => 'sub-official',
+            'ward' => $request['ward'],
+            'password' => Hash::make(123456789),
+            'email_verified_at'=> Carbon::now(),
+            'county'=>$request['county']
+        ]);
+    }
     /**
      * Display the specified resource.
      *

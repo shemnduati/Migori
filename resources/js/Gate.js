@@ -31,4 +31,10 @@ export default class Gate {
         return this.user.role === 'sub-admin' || this.user.role === 'official' || this.user.role === 'admin';
 
     }
+    isSubofficial(){
+        return this.user.role === 'sub-official';
+    }
+    isAccepted(){
+        return this.user.role === 'sub-admin' || this.user.role === 'sub-official' || this.user.role === 'admin';
+    }
 }

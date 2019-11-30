@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            @can('isAdminOrSubadmin')
+                            @can('isAccepted')
                                 <router-link to="/dashboard" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt blue"></i>
                                     <p>
@@ -208,6 +208,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <i class="nav-icon fas fa-user-tie orange"></i>
                                     <p>
                                         Add OfficialUser
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/accountant" class="nav-link">
+                                    <i class="nav-icon fas fa-user-plus yellow"></i>
+                                    <p>
+                                        Add Sub-Official
                                     </p>
                                 </router-link>
                             </li>
