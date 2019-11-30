@@ -8165,8 +8165,14 @@ __webpack_require__.r(__webpack_exports__);
           var data = _ref2.data;
           return [_this2.applications = data['parent']];
         });
-      } // axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
+      }
 
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/getAppnts').then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this2.applications = data['parent']];
+        });
+      }
     },
     sortScholarship: function sortScholarship() {
       var _this3 = this;
@@ -8174,14 +8180,14 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedWard = "";
 
       if (this.$gate.isOfficial()) {
-        axios.get('api/sortscholarship/' + this.form.type).then(function (_ref3) {
-          var data = _ref3.data;
+        axios.get('api/sortscholarship/' + this.form.type).then(function (_ref4) {
+          var data = _ref4.data;
           return [_this3.applications = data['parent']];
         });
 
         if (this.form.type > 0) {
-          axios.get('/api/wardname/' + this.form.type).then(function (_ref4) {
-            var data = _ref4.data;
+          axios.get('/api/wardname/' + this.form.type).then(function (_ref5) {
+            var data = _ref5.data;
             return [_this3.selectedWard = data];
           });
         }
@@ -8190,8 +8196,8 @@ __webpack_require__.r(__webpack_exports__);
     getWards: function getWards() {
       var _this4 = this;
 
-      axios.get("api/getMyWards").then(function (_ref5) {
-        var data = _ref5.data;
+      axios.get("api/getMyWards").then(function (_ref6) {
+        var data = _ref6.data;
         return [_this4.wards = data['wards']];
       });
     },
@@ -8199,15 +8205,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       if (this.$gate.isOfficial()) {
-        axios.get("api/getMyCounty").then(function (_ref6) {
-          var data = _ref6.data;
+        axios.get("api/getMyCounty").then(function (_ref7) {
+          var data = _ref7.data;
           return [_this5.mycounty = data['counties']];
         });
       }
 
       if (this.$gate.isSubadmin()) {
-        axios.get("api/wardsCounty").then(function (_ref7) {
-          var data = _ref7.data;
+        axios.get("api/wardsCounty").then(function (_ref8) {
+          var data = _ref8.data;
           return [_this5.wardsCounty = data];
         });
       }

@@ -149,7 +149,10 @@
                 if(this.$gate.isOfficial()) {
                     axios.get('api/getApplicantz').then(({data}) => ([this.applications = data['parent']]));
                 }
-                // axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
+
+                if(this.$gate.isSubadmin()) {
+                    axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
+                }
             },
             sortScholarship(){
                 this.selectedWard = "";

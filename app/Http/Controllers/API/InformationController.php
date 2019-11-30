@@ -86,7 +86,7 @@ class InformationController extends Controller
     {
         $userId = Auth::user()->id;
         $ward_id = User::where('id',$userId)->value('ward');
-        $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->where('bursary_type','scholarship')->where('status', 1)->get();
+        $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->where('bursary_type','scholarship')->where('status', 3)->get();
         $parent = array();
 
         foreach ($applications as $apps) {
