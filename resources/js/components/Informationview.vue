@@ -342,7 +342,7 @@
                         var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                         var fileLink = document.createElement('a');
                         console.log(fileLink);
-                        fileLink.href = fileURL;
+                         fileLink.href = fileURL;
                         fileLink.setAttribute('download', path.substring(8));
                         document.body.appendChild(fileLink);
 

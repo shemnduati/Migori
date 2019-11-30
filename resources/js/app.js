@@ -50,6 +50,8 @@ let routes = [
     { path: '/ward', component: require('./components/Ward.vue').default },
     { path: '/configuration', component: require('./components/Configuration.vue').default },
     { path: '/verified', component: require('./components/Verified.vue').default },
+    { path: '/CountyApps', component: require('./components/CountyStats.vue').default },
+    { path: '/ScholarshipApps', component: require('./components/ScholarshipStat.vue').default },
     { path: '/subadmin', component: require('./components/subadmin.vue').default },
     { path: '/accountant', component: require('./components/Accountant.vue').default },
     { path: '/OfficialUser', component: require('./components/OfficialUser.vue').default },

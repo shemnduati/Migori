@@ -1813,15 +1813,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1833,7 +1824,6 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         name: '',
         email: '',
-        ward: '',
         county: ''
       })
     };
@@ -2105,10 +2095,12 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
-      axios.get('api/getApp').then(function (_ref2) {
-        var data = _ref2.data;
-        return [_this.applications = data['parent']];
-      });
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/getApp').then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this.applications = data['parent']];
+        });
+      }
     },
     getType: function getType() {
       var _this2 = this;
@@ -3892,6 +3884,68 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on('entry', function () {
       _this6.loadCounty();
     }); //setInterval(() => this.loadUsers(), 3000);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CountyStats.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CountyStats.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      wards: {}
+    };
+  },
+  methods: {
+    getWards: function getWards() {
+      var _this = this;
+
+      axios.get("/api/MyWards").then(function (_ref) {
+        var data = _ref.data;
+        return [_this.wards = data['parent']];
+      });
+    }
+  },
+  created: function created() {
+    this.getWards();
   }
 });
 
@@ -8353,6 +8407,69 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipStat.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScholarshipStat.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      wards: {}
+    };
+  },
+  methods: {
+    getWards: function getWards() {
+      var _this = this;
+
+      axios.get("/api/MyWardz").then(function (_ref) {
+        var data = _ref.data;
+        return [_this.wards = data['parent']];
+      });
+    }
+  },
+  created: function created() {
+    this.getWards();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Verified.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Verified.vue?vue&type=script&lang=js& ***!
@@ -9324,6 +9441,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9344,6 +9487,13 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$gate.isSubadmin()) {
         axios.get("api/dash").then(function (_ref2) {
           var data = _ref2.data;
+          return [_this.dash = data['data']];
+        });
+      }
+
+      if (this.$gate.isSubofficial()) {
+        axios.get("api/total").then(function (_ref3) {
+          var data = _ref3.data;
           return [_this.dash = data['data']];
         });
       }
@@ -73289,7 +73439,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "addnew" }
                   },
-                  [_vm._v("Add user")]
+                  [_vm._v("Add Sub-official user")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -73306,7 +73456,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "addnew" }
                   },
-                  [_vm._v("Update User info")]
+                  [_vm._v("Update official User info")]
                 ),
                 _vm._v(" "),
                 _vm._m(1)
@@ -73425,29 +73575,23 @@ var render = function() {
                             },
                             attrs: { name: "county", id: "county" },
                             on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.form,
-                                    "county",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                },
-                                function($event) {
-                                  return _vm.getCountyWards()
-                                }
-                              ]
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "county",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
                             }
                           },
                           [
@@ -73473,78 +73617,6 @@ var render = function() {
                         _vm._v(" "),
                         _c("has-error", {
                           attrs: { form: _vm.form, field: "county" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", { attrs: { for: "ward" } }, [
-                          _vm._v("Ward")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.ward,
-                                expression: "form.ward"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("ward")
-                            },
-                            attrs: { name: "ward", id: "ward" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.form,
-                                  "ward",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              { attrs: { selected: "", value: "" } },
-                              [_vm._v("--Select Ward--")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.wards, function(wardy) {
-                              return _c(
-                                "option",
-                                {
-                                  key: wardy.id,
-                                  domProps: { value: wardy.id }
-                                },
-                                [_vm._v(_vm._s(wardy.name))]
-                              )
-                            })
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "ward" }
                         })
                       ],
                       1
@@ -73592,7 +73664,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Add user")]
+                      [_vm._v("Add Sub-Official user")]
                     )
                   ])
                 ]
@@ -77650,6 +77722,90 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CountyStats.vue?vue&type=template&id=57dd0c4c&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CountyStats.vue?vue&type=template&id=57dd0c4c& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c(
+        "router-link",
+        {
+          staticClass: "fas fa-arrow-circle-left pull-left",
+          attrs: { to: "/dashboard" }
+        },
+        [_vm._v("back ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card mt-5" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("MY Wards County bursaries Applicants")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.wards, function(ward) {
+                  return _c(
+                    "div",
+                    { key: ward.id, staticClass: "col-lg-3 col-6" },
+                    [
+                      _c("div", { staticClass: "small-box bg-success" }, [
+                        _c("div", { staticClass: "inner" }, [
+                          _c("h5", [_vm._v("Total Applicants")]),
+                          _vm._v(" "),
+                          _c("h3", [_vm._v(_vm._s(ward.total))]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(ward.name))])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(0, true)
+                      ])
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-user-tie white" })
+    ])
   }
 ]
 render._withStripped = true
@@ -91396,6 +91552,90 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipStat.vue?vue&type=template&id=9a702e0a&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScholarshipStat.vue?vue&type=template&id=9a702e0a& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c(
+        "router-link",
+        {
+          staticClass: "fas fa-arrow-circle-left pull-left",
+          attrs: { to: "/dashboard" }
+        },
+        [_vm._v("back ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card mt-5" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("MY Wards Scholarship Applicants")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.wards, function(ward) {
+                  return _c(
+                    "div",
+                    { key: ward.id, staticClass: "col-lg-3 col-6" },
+                    [
+                      _c("div", { staticClass: "small-box bg-success" }, [
+                        _c("div", { staticClass: "inner" }, [
+                          _c("h5", [_vm._v("Total Applicants")]),
+                          _vm._v(" "),
+                          _c("h3", [_vm._v(_vm._s(ward.total))]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(ward.name))])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(0, true)
+                      ])
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-user-tie white" })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Verified.vue?vue&type=template&id=758adf9a&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Verified.vue?vue&type=template&id=758adf9a&scoped=true& ***!
@@ -93742,7 +93982,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isAdminOrSubadmin()
+    _vm.$gate.isAccepted()
       ? _c("div", { staticClass: "row justify-content-center" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "row mt-5" }, [
@@ -93774,35 +94014,41 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-3 col-6" }, [
-                _c("div", { staticClass: "small-box bg-warning" }, [
-                  _c("div", { staticClass: "inner" }, [
-                    _c("h3", [_vm._v(_vm._s(_vm.dash["total_application"]))]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Bursary")]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Applications")])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ])
-              ]),
+              _vm.$gate.isAdmin()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-warning" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [
+                          _vm._v(_vm._s(_vm.dash["total_application"]))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Bursary")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Applications")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-3 col-6" }, [
-                _c("div", { staticClass: "small-box bg-danger white" }, [
-                  _c("div", { staticClass: "inner" }, [
-                    _c("h3", [_vm._v(_vm._s(_vm.dash["total_awarded"]))]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Recommended")]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Bursaries")])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(3)
-                ])
-              ]),
+              _vm.$gate.isAdmin()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-danger white" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [_vm._v(_vm._s(_vm.dash["total_awarded"]))]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Recommended")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Bursaries")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3)
+                    ])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _vm.$gate.isSubadmin()
                 ? _c("div", { staticClass: "col-lg-3 col-6" }, [
@@ -93829,6 +94075,80 @@ var render = function() {
                       _vm._v(" "),
                       _vm._m(5)
                     ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$gate.isSubofficial()
+                ? _c("div", { staticClass: "col-lg-6 col-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "small-box bg-success white" },
+                      [
+                        _c("div", { staticClass: "inner" }, [
+                          _c("h3", [
+                            _vm._v(_vm._s(_vm.dash["total_County_applicants"]))
+                          ]),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Total county Applications")])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "small-box-footer",
+                            attrs: { to: "/CountyApps" }
+                          },
+                          [
+                            _vm._v("More info "),
+                            _c("i", {
+                              staticClass: "fas fa-arrow-circle-right"
+                            })
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$gate.isSubofficial()
+                ? _c("div", { staticClass: "col-lg-6 col-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "small-box bg-warning white" },
+                      [
+                        _c("div", { staticClass: "inner" }, [
+                          _c("h3", [
+                            _vm._v(
+                              _vm._s(_vm.dash["total_scholarship_applicants"])
+                            )
+                          ]),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Total Scholarship Applications")])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(7),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "small-box-footer",
+                            attrs: { to: "/ScholarshipApps" }
+                          },
+                          [
+                            _vm._v("More info "),
+                            _c("i", {
+                              staticClass: "fas fa-arrow-circle-right"
+                            })
+                          ]
+                        )
+                      ],
+                      1
+                    )
                   ])
                 : _vm._e()
             ])
@@ -93884,6 +94204,22 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-coins white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-users fa-2x white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-users white" })
     ])
   }
 ]
@@ -110000,7 +110336,7 @@ function () {
   }, {
     key: "isAllowed",
     value: function isAllowed() {
-      return this.user.role === 'sub-admin' || this.user.role === 'official' || this.user.role === 'admin';
+      return this.user.role === 'sub-admin' || this.user.role === 'official' || this.user.role === 'admin' || this.user.role === 'sub-official';
     }
   }, {
     key: "isSubofficial",
@@ -110104,6 +110440,12 @@ var routes = [{
 }, {
   path: '/verified',
   component: __webpack_require__(/*! ./components/Verified.vue */ "./resources/js/components/Verified.vue")["default"]
+}, {
+  path: '/CountyApps',
+  component: __webpack_require__(/*! ./components/CountyStats.vue */ "./resources/js/components/CountyStats.vue")["default"]
+}, {
+  path: '/ScholarshipApps',
+  component: __webpack_require__(/*! ./components/ScholarshipStat.vue */ "./resources/js/components/ScholarshipStat.vue")["default"]
 }, {
   path: '/subadmin',
   component: __webpack_require__(/*! ./components/subadmin.vue */ "./resources/js/components/subadmin.vue")["default"]
@@ -110625,6 +110967,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_County_vue_vue_type_template_id_3e2cca75___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_County_vue_vue_type_template_id_3e2cca75___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CountyStats.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/CountyStats.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CountyStats_vue_vue_type_template_id_57dd0c4c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CountyStats.vue?vue&type=template&id=57dd0c4c& */ "./resources/js/components/CountyStats.vue?vue&type=template&id=57dd0c4c&");
+/* harmony import */ var _CountyStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CountyStats.vue?vue&type=script&lang=js& */ "./resources/js/components/CountyStats.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CountyStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CountyStats_vue_vue_type_template_id_57dd0c4c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CountyStats_vue_vue_type_template_id_57dd0c4c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CountyStats.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CountyStats.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/CountyStats.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CountyStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CountyStats.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CountyStats.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CountyStats_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CountyStats.vue?vue&type=template&id=57dd0c4c&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/CountyStats.vue?vue&type=template&id=57dd0c4c& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountyStats_vue_vue_type_template_id_57dd0c4c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CountyStats.vue?vue&type=template&id=57dd0c4c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CountyStats.vue?vue&type=template&id=57dd0c4c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountyStats_vue_vue_type_template_id_57dd0c4c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountyStats_vue_vue_type_template_id_57dd0c4c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -111387,6 +111798,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipApp_vue_vue_type_template_id_26c2876c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipApp_vue_vue_type_template_id_26c2876c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipStat.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/ScholarshipStat.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ScholarshipStat_vue_vue_type_template_id_9a702e0a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ScholarshipStat.vue?vue&type=template&id=9a702e0a& */ "./resources/js/components/ScholarshipStat.vue?vue&type=template&id=9a702e0a&");
+/* harmony import */ var _ScholarshipStat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScholarshipStat.vue?vue&type=script&lang=js& */ "./resources/js/components/ScholarshipStat.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ScholarshipStat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ScholarshipStat_vue_vue_type_template_id_9a702e0a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ScholarshipStat_vue_vue_type_template_id_9a702e0a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ScholarshipStat.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipStat.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/ScholarshipStat.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipStat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ScholarshipStat.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipStat.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipStat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ScholarshipStat.vue?vue&type=template&id=9a702e0a&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/ScholarshipStat.vue?vue&type=template&id=9a702e0a& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipStat_vue_vue_type_template_id_9a702e0a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ScholarshipStat.vue?vue&type=template&id=9a702e0a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScholarshipStat.vue?vue&type=template&id=9a702e0a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipStat_vue_vue_type_template_id_9a702e0a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScholarshipStat_vue_vue_type_template_id_9a702e0a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

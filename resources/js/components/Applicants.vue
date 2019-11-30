@@ -109,7 +109,9 @@
                 if(this.$gate.isOfficial()) {
                     axios.get('api/getApplicants').then(({data}) => ([this.applications = data['parent']]));
                 }
+                if(this.$gate.isSubadmin()) {
                     axios.get('api/getApp').then(({data}) => ([this.applications = data['parent']]));
+                }
             },
             getType(){
                     axios.get('api/getWardsById/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));

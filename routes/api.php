@@ -111,3 +111,7 @@ Route::post('approveIt/{applicationId}', 'API\ScholarshipController@approve');
 
 Route::get('mywards', 'API\FeatureController@getMyWards');
 Route::get('/getbyward/{id}', 'API\FeatureController@getByWard');
+
+Route::get('total', 'API\StatsController@index');
+Route::get('/MyWards', 'API\StatsController@MyWards');
+Route::get('/MyWardz', 'API\StatsController@MyWardz');

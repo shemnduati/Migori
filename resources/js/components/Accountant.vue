@@ -56,8 +56,8 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content ">
                     <div class="modal-header">
-                        <h5 class="modal-title" v-show="!editMode" id="addnew">Add user</h5>
-                        <h5 class="modal-title" v-show="editMode" id="addnew">Update User info</h5>
+                        <h5 class="modal-title" v-show="!editMode" id="addnew">Add Sub-official user</h5>
+                        <h5 class="modal-title" v-show="editMode" id="addnew">Update official User info</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -76,28 +76,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="county">County</label>
-                                <select v-model="form.county" @change='getCountyWards()' class="form-control" name="county" id="county"
+                                <select v-model="form.county"  class="form-control" name="county" id="county"
                                         :class="{ 'is-invalid': form.errors.has('county') }">
                                     <option selected value="">--Select county--</option>
                                     <option v-for="count in counties" :key="count.id" :value="count.id">{{ count.name}}</option>
                                 </select>
                                 <has-error :form="form" field="county"></has-error>
                             </div>
-                            <div class="form-group">
-                                <label for="ward">Ward</label>
-                                <select v-model="form.ward" class="form-control" name="ward" id="ward"
-                                        :class="{ 'is-invalid': form.errors.has('ward') }">
-                                    <option selected value="">--Select Ward--</option>
-                                    <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}}</option>
-                                </select>
-                                <has-error :form="form" field="ward"></has-error>
-                            </div>
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             <button v-show="editMode" type="submit" class="btn btn-primary">Edit</button>
-                            <button v-show="!editMode" type="submit" class="btn btn-primary">Add user</button>
+                            <button v-show="!editMode" type="submit" class="btn btn-primary">Add Sub-Official user</button>
                         </div>
                     </form>
                 </div>
@@ -118,7 +109,6 @@
                     id:'',
                     name:'',
                     email: '',
-                    ward:'',
                     county:'',
                 })
 

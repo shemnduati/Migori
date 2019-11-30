@@ -28,7 +28,7 @@ export default class Gate {
     }
 
     isAllowed(){
-        return this.user.role === 'sub-admin' || this.user.role === 'official' || this.user.role === 'admin';
+        return this.user.role === 'sub-admin' || this.user.role === 'official' || this.user.role === 'admin' || this.user.role === 'sub-official';
 
     }
     isSubofficial(){

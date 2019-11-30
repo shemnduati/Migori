@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center"  v-if="$gate.isAdminOrSubadmin()">
+        <div class="row justify-content-center"  v-if="$gate.isAccepted()">
             <div class="col-md-12">
                 <div class="row mt-5">
                     <div class="col-lg-3 col-6" v-if="$gate.isAdmin()">
@@ -32,9 +32,9 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin()" >
                         <!-- small box -->
-                        <div class="small-box bg-warning">
+                        <div class="small-box bg-warning"  >
                             <div class="inner">
                                 <h3>{{dash['total_application']}}</h3>
                                 <span>Bursary</span><br>
@@ -46,9 +46,9 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin()">
                         <!-- small box -->
-                        <div class="small-box bg-danger white">
+                        <div class="small-box bg-danger white" >
                             <div class="inner">
                                 <h3>{{dash['total_awarded']}}</h3>
 
@@ -88,6 +88,32 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6 col-6" v-if="$gate.isSubofficial()">
+                        <!-- small box -->
+                        <div class="small-box bg-success white">
+                            <div class="inner">
+                                <h3>{{dash['total_County_applicants']}}</h3><br>
+                                <p>Total county Applications</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-users fa-2x white"></i>
+                            </div>
+                            <router-link to="/CountyApps" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-6" v-if="$gate.isSubofficial()">
+                        <!-- small box -->
+                        <div class="small-box bg-warning white">
+                            <div class="inner">
+                                <h3>{{dash['total_scholarship_applicants']}}</h3><br>
+                                <p>Total Scholarship Applications</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-users white"></i>
+                            </div>
+                            <router-link to="/ScholarshipApps" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,6 +135,9 @@
                 }
                 if (this.$gate.isSubadmin()) {
                     axios.get("api/dash").then(({data}) => ([this.dash = data['data']]));
+                }
+                if (this.$gate.isSubofficial()) {
+                    axios.get("api/total").then(({data}) => ([this.dash = data['data']]));
                 }
             },
         },
