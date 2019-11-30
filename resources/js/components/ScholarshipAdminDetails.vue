@@ -427,6 +427,9 @@
         created() {
             this.getApplications();
             this.getFiles();
+            Fire.$on('entry', () => {
+                this.getApplications();
+            })
         }
     }
 </script>

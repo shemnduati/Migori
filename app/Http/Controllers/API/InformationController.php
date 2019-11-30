@@ -168,20 +168,22 @@ class InformationController extends Controller
 
         foreach ($applications as $apps) {
             $id = $apps['id'];
-            $name = $apps['name'];
-            $reg = $apps['reg_no'];
+            $fname = $apps['firstName'];
+            $Mname = $apps['middleName'];
+            $Lname = $apps['lastName'];
+            $indexNo = $apps['indexNo'];
             $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
-            $institution = Institution::where('user_id', $apps['user_id'])->value('name');
-            $amount = $apps['amount'];
             $date = $apps['updated_at'];
             $child = array(
                 'id' => $id,
-                'name' => $name,
+                'fname' => $fname,
+                'Mname' => $Mname,
+                'Lname' => $Lname,
                 'ward' => $ward_name,
-                'amount' => $amount,
-                'reg' => $reg,
+                'indexNo' => $indexNo,
                 'date' => $date,
-                'institution' => $institution,
+                'school' => $apps['secSchoolName'],
+                'reco' => $apps['recommendation']
             );
             array_push($parent, $child);
         }

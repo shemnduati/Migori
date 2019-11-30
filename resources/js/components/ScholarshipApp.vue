@@ -11,7 +11,7 @@
                             <div class="row">
                                 <div class="col-sm-6" v-if="$gate.isOfficial()">
                                     <form>
-                                        <select @change="getType()" v-model="form.type" class="form-control">
+                                        <select @change="sortScholarship" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
                                             <option value="0">county</option>
                                             <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}} ward</option>
@@ -44,7 +44,7 @@
                                 <td>{{application.fname}}</td>
                                 <td>{{application.Mname}}</td>
                                 <td>{{application.Lname}}</td>
-                                <td>{{application.index}}</td>
+                                <td>{{application.indexNo}}</td>
                                 <td>{{application.school}}</td>
                                 <td>{{application.reco}}</td>
                                 <td>{{application.ward}}</td>
@@ -96,7 +96,7 @@
                 var doc = new jsPDF();
 
                 doc.setFontSize(18);
-                doc.text('Approved Bursary Applications', 14, 22);
+                doc.text('Approved Scholarship Applications', 14, 22);
                 doc.setFontSize(11);
                 doc.setTextColor(100);
 
@@ -111,10 +111,10 @@
                 if(this.$gate.isOfficial()) {
                     axios.get('api/getApplicantz').then(({data}) => ([this.applications = data['parent']]));
                 }
-                axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
+                // axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
             },
-            getType(){
-                axios.get('api/getWardsApp/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
+            sortScholarship(){
+                axios.get('api/sortscholarship/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
             },
             getWards(){
                 axios.get("api/getMyWards").then(({ data }) => ([this.wards = data['wards']]));

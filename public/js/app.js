@@ -7386,47 +7386,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ScholarshipAdmin",
   data: function data() {
     return {
-      applications: {}
+      applications: {},
+      wards: {},
+      form: new Form({
+        sWard: ''
+      })
     };
   },
   methods: {
-    rejected: function rejected() {
+    sortByWard: function sortByWard() {
       var _this = this;
 
-      if (this.$gate.isSubadmin()) {
-        axios.get('api/scholarshipRej').then(function (_ref) {
+      if (this.$gate.isOfficial()) {
+        axios.get('api/getbywardscholarship/' + this.form.sWard).then(function (_ref) {
           var data = _ref.data;
           return [_this.applications = data];
         });
       }
     },
-    recommended: function recommended() {
+    getMyWards: function getMyWards() {
       var _this2 = this;
 
-      if (this.$gate.isSubadmin()) {
-        axios.get('api/scholarshipRec').then(function (_ref2) {
+      if (this.$gate.isOfficial()) {
+        axios.get('api/mywards/').then(function (_ref2) {
           var data = _ref2.data;
-          return [_this2.applications = data];
+          return [_this2.wards = data];
+        });
+      }
+    },
+    rejected: function rejected() {
+      var _this3 = this;
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/scholarshipRej').then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this3.applications = data];
+        });
+      }
+    },
+    recommended: function recommended() {
+      var _this4 = this;
+
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/scholarshipRec').then(function (_ref4) {
+          var data = _ref4.data;
+          return [_this4.applications = data];
         });
       }
     },
     getApplications: function getApplications() {
-      var _this3 = this;
+      var _this5 = this;
 
       if (this.$gate.isSubadminOrOfficial()) {
-        axios.get('api/scholarshipApps').then(function (_ref3) {
-          var data = _ref3.data;
-          return [_this3.applications = data];
+        axios.get('api/scholarshipApps').then(function (_ref5) {
+          var data = _ref5.data;
+          return [_this5.applications = data];
         });
       }
     }
   },
   created: function created() {
     this.getApplications();
+    this.getMyWards();
   }
 });
 
@@ -7885,8 +7920,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    var _this5 = this;
+
     this.getApplications();
     this.getFiles();
+    Fire.$on('entry', function () {
+      _this5.getApplications();
+    });
   }
 });
 
@@ -7995,7 +8035,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       var doc = new jsPDF();
       doc.setFontSize(18);
-      doc.text('Approved Bursary Applications', 14, 22);
+      doc.text('Approved Scholarship Applications', 14, 22);
       doc.setFontSize(11);
       doc.setTextColor(100);
       doc.autoTable({
@@ -8013,34 +8053,30 @@ __webpack_require__.r(__webpack_exports__);
           var data = _ref.data;
           return [_this.applications = data['parent']];
         });
-      }
+      } // axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
 
-      axios.get('api/getAppnts').then(function (_ref2) {
-        var data = _ref2.data;
-        return [_this.applications = data['parent']];
-      });
     },
-    getType: function getType() {
+    sortScholarship: function sortScholarship() {
       var _this2 = this;
 
-      axios.get('api/getWardsApp/' + this.form.type).then(function (_ref3) {
-        var data = _ref3.data;
+      axios.get('api/sortscholarship/' + this.form.type).then(function (_ref2) {
+        var data = _ref2.data;
         return [_this2.applications = data['parent']];
       });
     },
     getWards: function getWards() {
       var _this3 = this;
 
-      axios.get("api/getMyWards").then(function (_ref4) {
-        var data = _ref4.data;
+      axios.get("api/getMyWards").then(function (_ref3) {
+        var data = _ref3.data;
         return [_this3.wards = data['wards']];
       });
     },
     getCounty: function getCounty() {
       var _this4 = this;
 
-      axios.get("api/getMyCounty").then(function (_ref5) {
-        var data = _ref5.data;
+      axios.get("api/getMyCounty").then(function (_ref4) {
+        var data = _ref4.data;
         return [_this4.mycounty = data['county']];
       });
     }
@@ -14345,7 +14381,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.zz[data-v-6abf5512]{\r\n  padding-left: 45%;\n}\r\n", ""]);
+exports.push([module.i, "\n.zz[data-v-6abf5512]{\n  padding-left: 45%;\n}\n", ""]);
 
 // exports
 
@@ -89311,7 +89347,87 @@ var render = function() {
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
                     _vm.$gate.isOfficial()
-                      ? _c("div", { staticClass: "col-sm-5" })
+                      ? _c("div", { staticClass: "col-sm-12" }, [
+                          _c(
+                            "form",
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.sWard,
+                                      expression: "form.sWard"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("sWard")
+                                  },
+                                  attrs: { name: "sWard" },
+                                  on: {
+                                    change: [
+                                      function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "sWard",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      },
+                                      function($event) {
+                                        return _vm.sortByWard()
+                                      }
+                                    ]
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { selected: "", value: "" } },
+                                    [_vm._v("--Sort By Ward--")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.wards, function(wardy) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: wardy.id,
+                                        domProps: { value: wardy.id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(wardy.name) +
+                                            "\n                                        "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "sWard" }
+                              })
+                            ],
+                            1
+                          )
+                        ])
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.$gate.isSubadmin()
@@ -89387,6 +89503,14 @@ var render = function() {
                                     "span",
                                     { staticStyle: { color: "red" } },
                                     [_vm._v("Rejected")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              application.status == 3
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "green" } },
+                                    [_vm._v("Approved")]
                                   )
                                 : _vm._e()
                             ]),
@@ -90471,9 +90595,7 @@ var render = function() {
                                           : $$selectedVal[0]
                                       )
                                     },
-                                    function($event) {
-                                      return _vm.getType()
-                                    }
+                                    _vm.sortScholarship
                                   ]
                                 }
                               },
@@ -90549,7 +90671,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(application.Lname))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(application.index))]),
+                              _c("td", [_vm._v(_vm._s(application.indexNo))]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(application.school))]),
                               _vm._v(" "),
@@ -111180,8 +111302,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\Baza\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\Baza\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Transonline/Baza/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -10,8 +10,17 @@
                         <div class="card-tools">
                             <div class="row">
 
-                                <div class="col-sm-5" v-if="$gate.isOfficial()">
-
+                                <div class="col-sm-12" v-if="$gate.isOfficial()">
+                                    <form>
+                                        <select @change="sortByWard()" v-model="form.sWard" class="form-control" name="sWard"
+                                                :class="{ 'is-invalid': form.errors.has('sWard') }">
+                                            <option selected value="">--Sort By Ward--</option>
+                                            <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
+                                                wardy.name}}
+                                            </option>
+                                        </select>
+                                        <has-error :form="form" field="sWard"></has-error>
+                                    </form>
                                 </div>
 
                                 <div class="col-sm-12" v-if="$gate.isSubadmin()">
@@ -44,6 +53,7 @@
                                     <span v-if="application.status==1" style="color: purple;">Recommended.({{application.recommendation}})</span>
                                     <span v-if="application.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
+                                    <span v-if="application.status==3" style="color: green;">Approved</span>
                                 </td>
                                 <td>{{application.bursary_type}}</td>
                                 <td>
@@ -74,10 +84,24 @@
         name: "ScholarshipAdmin",
         data(){
             return{
-                applications: {}
+                applications: {},
+                wards: {},
+                form: new Form({
+                    sWard: '',
+                }),
             }
         },
         methods:{
+            sortByWard(){
+                if (this.$gate.isOfficial()) {
+                    axios.get('api/getbywardscholarship/' + this.form.sWard).then(({data}) => ([this.applications = data]));
+                }
+            },
+            getMyWards() {
+                if (this.$gate.isOfficial()) {
+                    axios.get('api/mywards/').then(({data}) => ([this.wards = data]));
+                }
+            },
             rejected(){
                 if (this.$gate.isSubadmin()) {
                     axios.get('api/scholarshipRej').then(({data}) => ([this.applications = data]));
@@ -96,6 +120,7 @@
         },
         created() {
            this.getApplications();
+           this.getMyWards();
         }
     }
 </script>
