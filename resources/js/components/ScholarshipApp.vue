@@ -78,8 +78,10 @@
                 applications :{},
                 wards:{},
                 myward:'',
+                mywardy: '',
                 mycounty: {},
                 selectedWard: '',
+                wardsCounty: '',
                 form: new Form({
                     type: ''
                 })
@@ -88,6 +90,11 @@
             }
         },
         methods:{
+            subWard() {
+                if (this.$gate.isSubadmin()) {
+                    axios.get("api/subAdminWard").then(({data}) => ([this.mywardy = data]));
+                }
+            },
             createPDF(){
                 var specialElementHandlers = {
                     "#editor":function(element, renderer){
@@ -101,16 +108,35 @@
                 doc.setFontSize(11);
                 doc.setTextColor(100);
 
-                doc.setFontSize(15);
-                doc.text(this.mycounty + ' County', 14, 30);
-                doc.setFontSize(11);
-                doc.setTextColor(100);
+                if (this.$gate.isOfficial()) {
+                    doc.setFontSize(15);
+                    doc.text(this.mycounty + ' County', 14, 30);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100);
+                }
 
-                if (this.selectedWard){
-                doc.setFontSize(14);
-                doc.text(this.selectedWard + ' Ward', 14, 36);
-                doc.setFontSize(11);
-                doc.setTextColor(100)}
+                if (this.$gate.isSubadmin()) {
+                    doc.setFontSize(15);
+                    doc.text(this.wardsCounty + ' County', 14, 30);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100);
+                }
+
+                if (this.$gate.isOfficial()) {
+                    if (this.selectedWard) {
+                        doc.setFontSize(14);
+                        doc.text(this.selectedWard + ' Ward', 14, 36);
+                        doc.setFontSize(11);
+                        doc.setTextColor(100)
+                    }
+                }
+
+                if (this.$gate.isSubadmin()) {
+                    doc.setFontSize(14);
+                    doc.text(this.mywardy + ' Ward', 14, 36);
+                    doc.setFontSize(11);
+                    doc.setTextColor(100)
+                }
 
                 doc.autoTable({
                     showHead: 'firstPage',
@@ -140,7 +166,12 @@
             },
 
             getCounty(){
-                axios.get("api/getMyCounty").then(({ data }) => ([this.mycounty = data['counties']]));
+                if (this.$gate.isOfficial()) {
+                    axios.get("api/getMyCounty").then(({data}) => ([this.mycounty = data['counties']]));
+                }
+                if (this.$gate.isSubadmin()) {
+                    axios.get("api/wardsCounty").then(({data}) => ([this.wardsCounty = data]));
+                }
             },
 
         },
@@ -163,6 +194,7 @@
             this.getApplications();
             this.getWards();
             this.getCounty();
+            this.subWard();
             Fire.$on('AfterCreate', () =>{
                 this.getApplications();
                 this.getWards();

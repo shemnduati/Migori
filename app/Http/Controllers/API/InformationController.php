@@ -243,6 +243,12 @@ class InformationController extends Controller
         return ['wards' => $wards];
     }
 
+    public function subAdminWard(){
+        if (auth()->user()->role == "sub-admin"){
+            return Ward::where('id', auth()->user()->ward)->value('name');
+        }
+    }
+
     public function getMyCounty()
     {
         $county_id = User::where('id', Auth::user()->id)->value('county');
@@ -254,7 +260,7 @@ class InformationController extends Controller
     {
         if ($id == 0) {
             $county_id = User::where('id', Auth::user()->id)->value('county');
-            $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('status', 3)->get();
+            $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('county', $county_id)->where('status', 3)->get();
             $parent = array();
 
             foreach ($applications as $apps) {
@@ -287,7 +293,7 @@ class InformationController extends Controller
             return ['parent' => $parent];
         } elseif ($id != 0) {
 
-            $applications = Application::where('year', date('Y'))->where('ward_id', $id)->where('status', 3)->get();
+            $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('ward_id', $id)->where('status', 3)->get();
             $parent = array();
 
             foreach ($applications as $apps) {

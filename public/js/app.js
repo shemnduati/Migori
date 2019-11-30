@@ -1785,6 +1785,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1792,6 +1793,9 @@ __webpack_require__.r(__webpack_exports__);
       wards: {},
       myward: '',
       mycounty: {},
+      selectedWard: '',
+      wardsCounty: '',
+      mywardy: '',
       form: new Form({
         type: ''
       })
@@ -1809,10 +1813,41 @@ __webpack_require__.r(__webpack_exports__);
       doc.text('Approved Bursary Applications', 14, 22);
       doc.setFontSize(11);
       doc.setTextColor(100);
+
+      if (this.$gate.isOfficial()) {
+        doc.setFontSize(15);
+        doc.text(this.mycounty + ' County', 14, 30);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
+      if (this.$gate.isSubadmin()) {
+        doc.setFontSize(15);
+        doc.text(this.wardsCounty + ' County', 14, 30);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
+      if (this.$gate.isOfficial()) {
+        if (this.selectedWard) {
+          doc.setFontSize(14);
+          doc.text(this.selectedWard + ' Ward', 14, 36);
+          doc.setFontSize(11);
+          doc.setTextColor(100);
+        }
+      }
+
+      if (this.$gate.isSubadmin()) {
+        doc.setFontSize(14);
+        doc.text(this.mywardy + ' Ward', 14, 36);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
       doc.autoTable({
         showHead: 'firstPage',
         html: '#my-table',
-        startY: 60
+        startY: 40
       });
       doc.save('Week' + '.pdf');
     },
@@ -1826,57 +1861,90 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
-      axios.get('api/getApp').then(function (_ref2) {
-        var data = _ref2.data;
-        return [_this.applications = data['parent']];
-      });
+      if (this.$gate.isSubadmin()) {
+        axios.get('api/getApp').then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this.applications = data['parent']];
+        });
+      }
     },
     getType: function getType() {
       var _this2 = this;
 
-      axios.get('api/getWardsById/' + this.form.type).then(function (_ref3) {
-        var data = _ref3.data;
-        return [_this2.applications = data['parent']];
-      });
+      this.selectedWard = "";
+
+      if (this.$gate.isOfficial()) {
+        axios.get('api/getWardsById/' + this.form.type).then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this2.applications = data['parent']];
+        });
+
+        if (this.form.type > 0) {
+          axios.get('/api/wardname/' + this.form.type).then(function (_ref4) {
+            var data = _ref4.data;
+            return [_this2.selectedWard = data];
+          });
+        }
+      }
     },
     getWards: function getWards() {
       var _this3 = this;
 
-      axios.get("api/getMyWards").then(function (_ref4) {
-        var data = _ref4.data;
+      axios.get("api/getMyWards").then(function (_ref5) {
+        var data = _ref5.data;
         return [_this3.wards = data['wards']];
       });
     },
-    getCounty: function getCounty() {
+    subWard: function subWard() {
       var _this4 = this;
 
-      axios.get("api/getMyCounty").then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this4.mycounty = data['county']];
-      });
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/subAdminWard").then(function (_ref6) {
+          var data = _ref6.data;
+          return [_this4.mywardy = data];
+        });
+      }
+    },
+    getCounty: function getCounty() {
+      var _this5 = this;
+
+      if (this.$gate.isOfficial()) {
+        axios.get("api/getMyCounty").then(function (_ref7) {
+          var data = _ref7.data;
+          return [_this5.mycounty = data['counties']];
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/wardsCounty").then(function (_ref8) {
+          var data = _ref8.data;
+          return [_this5.wardsCounty = data];
+        });
+      }
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.$Progress.start();
     Fire.$on('searching', function () {
-      _this5.$Progress.start();
+      _this6.$Progress.start();
 
-      var query = _this5.$parent.search;
+      var query = _this6.$parent.search;
       axios.get('api/findbursary?q=' + query).then(function (data) {
-        _this5.applications = data.data;
+        _this6.applications = data.data;
 
-        _this5.$Progress.finish();
+        _this6.$Progress.finish();
       })["catch"](function () {});
     });
     this.getApplications();
     this.getWards();
     this.getCounty();
+    this.subWard();
     Fire.$on('AfterCreate', function () {
-      _this5.getApplications();
+      _this6.getApplications();
 
-      _this5.getWards();
+      _this6.getWards();
     });
   }
 });
@@ -8020,14 +8088,26 @@ __webpack_require__.r(__webpack_exports__);
       applications: {},
       wards: {},
       myward: '',
+      mywardy: '',
       mycounty: {},
       selectedWard: '',
+      wardsCounty: '',
       form: new Form({
         type: ''
       })
     };
   },
   methods: {
+    subWard: function subWard() {
+      var _this = this;
+
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/subAdminWard").then(function (_ref) {
+          var data = _ref.data;
+          return [_this.mywardy = data];
+        });
+      }
+    },
     createPDF: function createPDF() {
       var specialElementHandlers = {
         "#editor": function editor(element, renderer) {
@@ -8039,14 +8119,33 @@ __webpack_require__.r(__webpack_exports__);
       doc.text('Approved Scholarship Applications', 14, 22);
       doc.setFontSize(11);
       doc.setTextColor(100);
-      doc.setFontSize(15);
-      doc.text(this.mycounty + ' County', 14, 30);
-      doc.setFontSize(11);
-      doc.setTextColor(100);
 
-      if (this.selectedWard) {
+      if (this.$gate.isOfficial()) {
+        doc.setFontSize(15);
+        doc.text(this.mycounty + ' County', 14, 30);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
+      if (this.$gate.isSubadmin()) {
+        doc.setFontSize(15);
+        doc.text(this.wardsCounty + ' County', 14, 30);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+      }
+
+      if (this.$gate.isOfficial()) {
+        if (this.selectedWard) {
+          doc.setFontSize(14);
+          doc.text(this.selectedWard + ' Ward', 14, 36);
+          doc.setFontSize(11);
+          doc.setTextColor(100);
+        }
+      }
+
+      if (this.$gate.isSubadmin()) {
         doc.setFontSize(14);
-        doc.text(this.selectedWard + ' Ward', 14, 36);
+        doc.text(this.mywardy + ' Ward', 14, 36);
         doc.setFontSize(11);
         doc.setTextColor(100);
       }
@@ -8059,73 +8158,83 @@ __webpack_require__.r(__webpack_exports__);
       doc.save('Week' + '.pdf');
     },
     getApplications: function getApplications() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.$gate.isOfficial()) {
-        axios.get('api/getApplicantz').then(function (_ref) {
-          var data = _ref.data;
-          return [_this.applications = data['parent']];
+        axios.get('api/getApplicantz').then(function (_ref2) {
+          var data = _ref2.data;
+          return [_this2.applications = data['parent']];
         });
       } // axios.get('api/getAppnts').then(({data}) => ([this.applications = data['parent']]));
 
     },
     sortScholarship: function sortScholarship() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.selectedWard = "";
 
       if (this.$gate.isOfficial()) {
-        axios.get('api/sortscholarship/' + this.form.type).then(function (_ref2) {
-          var data = _ref2.data;
-          return [_this2.applications = data['parent']];
+        axios.get('api/sortscholarship/' + this.form.type).then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this3.applications = data['parent']];
         });
 
         if (this.form.type > 0) {
-          axios.get('/api/wardname/' + this.form.type).then(function (_ref3) {
-            var data = _ref3.data;
-            return [_this2.selectedWard = data];
+          axios.get('/api/wardname/' + this.form.type).then(function (_ref4) {
+            var data = _ref4.data;
+            return [_this3.selectedWard = data];
           });
         }
       }
     },
     getWards: function getWards() {
-      var _this3 = this;
+      var _this4 = this;
 
-      axios.get("api/getMyWards").then(function (_ref4) {
-        var data = _ref4.data;
-        return [_this3.wards = data['wards']];
+      axios.get("api/getMyWards").then(function (_ref5) {
+        var data = _ref5.data;
+        return [_this4.wards = data['wards']];
       });
     },
     getCounty: function getCounty() {
-      var _this4 = this;
+      var _this5 = this;
 
-      axios.get("api/getMyCounty").then(function (_ref5) {
-        var data = _ref5.data;
-        return [_this4.mycounty = data['counties']];
-      });
+      if (this.$gate.isOfficial()) {
+        axios.get("api/getMyCounty").then(function (_ref6) {
+          var data = _ref6.data;
+          return [_this5.mycounty = data['counties']];
+        });
+      }
+
+      if (this.$gate.isSubadmin()) {
+        axios.get("api/wardsCounty").then(function (_ref7) {
+          var data = _ref7.data;
+          return [_this5.wardsCounty = data];
+        });
+      }
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.$Progress.start();
     Fire.$on('searching', function () {
-      _this5.$Progress.start();
+      _this6.$Progress.start();
 
-      var query = _this5.$parent.search;
+      var query = _this6.$parent.search;
       axios.get('api/findbursary?q=' + query).then(function (data) {
-        _this5.applications = data.data;
+        _this6.applications = data.data;
 
-        _this5.$Progress.finish();
+        _this6.$Progress.finish();
       })["catch"](function () {});
     });
     this.getApplications();
     this.getWards();
     this.getCounty();
+    this.subWard();
     Fire.$on('AfterCreate', function () {
-      _this5.getApplications();
+      _this6.getApplications();
 
-      _this5.getWards();
+      _this6.getWards();
     });
   }
 });
@@ -73010,7 +73119,12 @@ var render = function() {
                                       key: wardy.id,
                                       domProps: { value: wardy.id }
                                     },
-                                    [_vm._v(_vm._s(wardy.name) + " ward")]
+                                    [
+                                      _vm._v(
+                                        _vm._s(wardy.name) +
+                                          " ward\n                                        "
+                                      )
+                                    ]
                                   )
                                 })
                               ],
@@ -73031,7 +73145,7 @@ var render = function() {
                         [
                           _c("i", { staticClass: "fas fa-download" }),
                           _vm._v(
-                            "\n                                  Download\n                                "
+                            "\n                                    Download\n                                "
                           )
                         ]
                       )

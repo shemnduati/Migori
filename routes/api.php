@@ -112,3 +112,5 @@ Route::get('/getbyward/{id}', 'API\FeatureController@getByWard');
 Route::get('/getbywardscholarship/{id}', 'API\FeatureController@getByWardScholarship');
 Route::get('/sortscholarship/{id}', 'API\FeatureController@sortScholarship');
 Route::get('/wardname/{id}', 'API\FeatureController@wardName');
+Route::get('/wardsCounty', 'API\FeatureController@wardsCounty');
+Route::get('/subAdminWard', 'API\InformationController@subAdminWard');

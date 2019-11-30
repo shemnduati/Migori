@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Application;
+use App\County;
 use App\User;
 use App\Ward;
 use Illuminate\Http\Request;
@@ -123,6 +124,14 @@ class FeatureController extends Controller
     public function wardName($id)
     {
         return Ward::where('id', $id)->value('name');
+    }
+
+    public function wardsCounty(){
+        if (auth()->user()->role == "sub-admin") {
+            $county_id = Ward::where('id', auth()->user()->ward)->value('county_id');
+
+            return County::where('id', $county_id)->value('name');
+        }
     }
 
     /**
