@@ -324,6 +324,7 @@
                 photo: '',
                 myWard: '',
                 myCounty: '',
+                files: '',
                 form: new Form({
                     recommendation: '',
                     amount: ''

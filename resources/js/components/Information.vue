@@ -19,6 +19,18 @@
                                         </select>
                                     </form>
                                 </div>
+                                <div class="col-sm-12" v-if="$gate.isOfficial()">
+                                    <form>
+                                        <select @change="sortByWard()" v-model="formf.sWard" class="form-control" name="sWard"
+                                                :class="{ 'is-invalid': form.errors.has('sWard') }">
+                                            <option selected value="">--Sort By Ward--</option>
+                                            <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
+                                                wardy.name}}
+                                            </option>
+                                        </select>
+                                        <has-error :form="form" field="sWard"></has-error>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,12 +104,26 @@
         data() {
             return {
                 applications: {},
+                wards: {},
+                formf: new Form({
+                    sWard: '',
+                }),
                 form: new Form({
                     type: ''
                 })
             }
         },
         methods: {
+            sortByWard(){
+                if (this.$gate.isOfficial()) {
+                    axios.get('api/getbyward/' + this.formf.sWard).then(({data}) => ([this.applications = data['applications']]));
+                }
+            },
+            getMyWards() {
+                if (this.$gate.isOfficial()) {
+                    axios.get('api/mywards/').then(({data}) => ([this.wards = data]));
+                }
+            },
             getBursary(type) {
                 axios.get('api/getbursarytype/' + type).then(({data}) => ([this.applications = data['applications']]));
             },
@@ -135,6 +161,7 @@
                     })
             })
             this.getApplications();
+            this.getMyWards();
             Fire.$on('AfterCreate', () => {
                 this.getApplications();
             })
