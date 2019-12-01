@@ -41,7 +41,8 @@ class DashboardContoller extends Controller
         $total_subadmin = User::where('role','sub-admin')->count();
         $ward_id = User::where('id',Auth::user()->id)->value('ward');
         $total_apllication = Application::where('ward_id',$ward_id)->count();
-        $total_awarded = Application::where('ward_id',$ward_id)->where('status','1')->count();
+        $total_recommended =  Application::where('ward_id',$ward_id)->where('status',1)->count();
+        $total_awarded = Application::where('ward_id',$ward_id)->where('status',3)->count();
         $budget = (int) Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('amount');
         $remaining = (int) Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('remaining');
         $data = array(
@@ -49,6 +50,7 @@ class DashboardContoller extends Controller
             'total_subadmin'=>$total_subadmin,
             'total_application'=> $total_apllication,
             'total_awarded'=>$total_awarded,
+            'total_recommended'=>$total_recommended,
             'budget'=>$budget,
             'remaining'=>$remaining
         );

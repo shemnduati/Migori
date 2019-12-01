@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin()" >
+                    <div class="col-lg-3 col-6" >
                         <!-- small box -->
                         <div class="small-box bg-warning"  >
                             <div class="inner">
@@ -51,6 +51,21 @@
                         <div class="small-box bg-danger white" >
                             <div class="inner">
                                 <h3>{{dash['total_awarded']}}</h3>
+
+                                <span>Awarded</span><br>
+                                <span>Bursaries</span>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-award white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
+                        <!-- small box -->
+                        <div class="small-box bg-danger white" >
+                            <div class="inner">
+                                <h3>{{dash['total_recommended']}}</h3>
 
                                 <span>Recommended</span><br>
                                 <span>Bursaries</span>
