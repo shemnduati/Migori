@@ -114,6 +114,45 @@
                             <router-link to="/ScholarshipApps" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin()">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{dash['totalAwarded']}}</h3>
+                                <p>Total Awarded Bursaries</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-user-tie white"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{dash['totalReco']}}</h3>
+                                <p>Total Recommended</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-dollar white"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6" v-if="$gate.isOfficial()">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{dash['totalAwarded']}}</h3>
+                                <p>Total Awarded</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-dollar white"></i>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,6 +175,11 @@
                 if (this.$gate.isSubadmin()) {
                     axios.get("api/dash").then(({data}) => ([this.dash = data['data']]));
                 }
+
+                if (this.$gate.isOfficial()) {
+                    axios.get("api/dash").then(({data}) => ([this.dash = data['data']]));
+                }
+
                 if (this.$gate.isSubofficial()) {
                     axios.get("api/total").then(({data}) => ([this.dash = data['data']]));
                 }

@@ -15,6 +15,7 @@ class DashboardContoller extends Controller
     {
         $this->middleware('auth:api');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,43 +23,57 @@ class DashboardContoller extends Controller
      */
     public function index()
     {
-        $total_student = User::where('role','student')->count();
-        $total_subadmin = User::where('role','sub-admin')->count();
-        $total_apllication = Application::all()->count();
-        $total_awarded = Application::where('status','1')->count();
+        $total_student = User::where('role', 'student')->count();
+        $total_subadmin = User::where('role', 'sub-admin')->count();
+        $total_apllication = Application::where('bursary_type', 'County')->count();
+        $total_awarded = Application::where('recommendation', '!=', '')->where('bursary_type', 'County')->count();
+        $totalAwarded = Application::where('status', 3)->where('bursary_type', 'County')->count();
         $data = array(
-            'total_student'=>$total_student,
-            'total_subadmin'=>$total_subadmin,
-            'total_application'=> $total_apllication,
-            'total_awarded'=>$total_awarded,
+            'total_student' => $total_student,
+            'total_subadmin' => $total_subadmin,
+            'total_application' => $total_apllication,
+            'total_awarded' => $total_awarded,
+            'totalAwarded' => $totalAwarded
         );
-        return['data'=>$data];
+        return ['data' => $data];
 
     }
+
     public function sub()
     {
-        $total_student = User::where('role','student')->count();
-        $total_subadmin = User::where('role','sub-admin')->count();
-        $ward_id = User::where('id',Auth::user()->id)->value('ward');
-        $total_apllication = Application::where('ward_id',$ward_id)->count();
-        $total_awarded = Application::where('ward_id',$ward_id)->where('status','1')->count();
-        $budget = (int) Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('amount');
-        $remaining = (int) Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('remaining');
-        $data = array(
-            'total_student'=>$total_student,
-            'total_subadmin'=>$total_subadmin,
-            'total_application'=> $total_apllication,
-            'total_awarded'=>$total_awarded,
-            'budget'=>$budget,
-            'remaining'=>$remaining
-        );
-        return['data'=>$data];
+        if (auth()->user()->role == "sub-admin") {
+            $total_student = User::where('role', 'student')->count();
+            $total_subadmin = User::where('role', 'sub-admin')->count();
+            $ward_id = User::where('id', Auth::user()->id)->value('ward');
+            $total_apllication = Application::where('ward_id', $ward_id)->where('bursary_type', 'County')->count();
+            $total_awarded = Application::where('recommendation', '!=', '')->where('bursary_type', 'County')->count();
+            $budget = (int)Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('amount');
+            $remaining = (int)Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('remaining');
+            $data = array(
+                'total_student' => $total_student,
+                'total_subadmin' => $total_subadmin,
+                'total_application' => $total_apllication,
+                'total_awarded' => $total_awarded,
+                'budget' => $budget,
+                'remaining' => $remaining,
+                'totalReco' => (int)Application::where('ward_id', $ward_id)->where('bursary_type', 'County')->where('recommendation', '!=', '')->sum('rec_amount')
+            );
+            return ['data' => $data];
+        }
+
+        if (auth()->user()->role == "official") {
+            $data = array(
+                'totalAwarded' => (int)Application::where('county', auth()->user()->county)->where('bursary_type', 'County')->where('status', 3)->sum('amount')
+            );
+            return ['data' => $data];
+        }
 
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -69,7 +84,7 @@ class DashboardContoller extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -80,8 +95,8 @@ class DashboardContoller extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,7 +107,7 @@ class DashboardContoller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

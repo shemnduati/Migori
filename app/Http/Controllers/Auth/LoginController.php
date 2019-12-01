@@ -39,7 +39,7 @@ class LoginController extends Controller
     } elseif (Auth::check() && Auth::user()->role == 'sub-official') {
         return('/dashboard');
     }elseif (Auth::check() && Auth::user()->role == 'official') {
-        return('/Information');
+        return('/dashboard');
     }elseif (Auth::check() && Auth::user()->role == 'sub-official') {
         return('/dashboard');
     }

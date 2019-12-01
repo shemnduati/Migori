@@ -9703,6 +9703,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9727,9 +9766,16 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
-      if (this.$gate.isSubofficial()) {
-        axios.get("api/total").then(function (_ref3) {
+      if (this.$gate.isOfficial()) {
+        axios.get("api/dash").then(function (_ref3) {
           var data = _ref3.data;
+          return [_this.dash = data['data']];
+        });
+      }
+
+      if (this.$gate.isSubofficial()) {
+        axios.get("api/total").then(function (_ref4) {
+          var data = _ref4.data;
           return [_this.dash = data['data']];
         });
       }
@@ -94643,6 +94689,48 @@ var render = function() {
                       1
                     )
                   ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$gate.isAdmin()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-success" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [_vm._v(_vm._s(_vm.dash["totalAwarded"]))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Total Awarded Bursaries")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(8)
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$gate.isSubadmin()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-success" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [_vm._v(_vm._s(_vm.dash["totalReco"]))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Total Recommended")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(9)
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$gate.isOfficial()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-success" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [_vm._v(_vm._s(_vm.dash["totalAwarded"]))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Total Awarded")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(10)
+                    ])
+                  ])
                 : _vm._e()
             ])
           ])
@@ -94713,6 +94801,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-users white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-user-tie white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-dollar white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-dollar white" })
     ])
   }
 ]
@@ -110839,7 +110951,7 @@ function () {
   }, {
     key: "isAccepted",
     value: function isAccepted() {
-      return this.user.role === 'sub-admin' || this.user.role === 'sub-official' || this.user.role === 'admin';
+      return this.user.role === 'sub-admin' || this.user.role === 'sub-official' || this.user.role === 'admin' || this.user.role === 'official';
     }
   }]);
 
