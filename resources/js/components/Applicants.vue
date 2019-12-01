@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial()">
+        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial() || $gate.isSubofficial()">
 
             <div class="col-md-12">
                 <div class="card">
@@ -40,7 +40,8 @@
                                 <th>Ward</th>
                                 <th>Polling station</th>
                                 <th>Fee balance</th>
-                                <th v-if="$gate.isOfficial()">Awarded Amount</th>
+                                <th v-if="$gate.isOfficial() || $gate.isSubofficial()">Awarded Amount</th>
+                                <th>Cheque</th>
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
                                 <td>{{application.firstName}} {{application.lastName}}</td>
@@ -49,7 +50,12 @@
                                 <td>{{application.ward}}</td>
                                 <td>{{application.polling}}</td>
                                 <td>Ksh. {{application.balance }}</td>
-                                <td v-if="$gate.isOfficial()">Ksh. {{application.amount }}</td>
+                                <td v-if="$gate.isOfficial() || $gate.isSubofficial()">Ksh. {{application.amount }}</td>
+                                <td>
+                                    <i v-if="!application.cheque" class="fas fa-check-circle"
+                                       style="font-size: 20px; color: purple;" @click="issueCheque(application.id)"></i>
+                                    <span v-if="application.cheque == 1" class="badge badge-success">Issued</span>
+                                </td>
                             </tr>
 
 
@@ -65,8 +71,6 @@
             </div>
         </div>
         <!-- Modal -->
-
-
 
 
     </div>
@@ -91,6 +95,31 @@
             }
         },
         methods: {
+            issueCheque(applicationId) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Mark as issued?? You won't be able to revert this!",
+                    //type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!'
+                }).then((result) => {
+                    if (result.value) {
+                        axios.post("/api/issuedcheque/" + applicationId).then(() => {
+                            Swal.fire(
+                                'Success!',
+                                'Operation successful.',
+                                'success'
+                            )
+                            Fire.$emit('entry');
+                            Fire.$emit('AfterCreate');
+                        }).catch(() => {
+                            Swal.fire('Failed!', 'There was something wrong')
+                        });
+                    }
+                })
+            },
             createPDF() {
                 var specialElementHandlers = {
                     "#editor": function (element, renderer) {
@@ -146,6 +175,10 @@
                     axios.get('api/getApplicants').then(({data}) => ([this.applications = data['parent']]));
                 }
                 if (this.$gate.isSubadmin()) {
+                    axios.get('api/getApp').then(({data}) => ([this.applications = data['parent']]));
+                }
+
+                if (this.$gate.isSubofficial()) {
                     axios.get('api/getApp').then(({data}) => ([this.applications = data['parent']]));
                 }
             },

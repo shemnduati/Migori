@@ -47,39 +47,76 @@ class InformationController extends Controller
     }
     public function getApp()
     {
-        $userId = Auth::user()->id;
-        $ward_id = User::where('id',$userId)->value('ward');
-        $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('ward_id', $ward_id)->where('status', 3)->get();
-        $parent = array();
+        if (auth()->user()->role == "sub-admin") {
+            $userId = Auth::user()->id;
+            $ward_id = User::where('id', $userId)->value('ward');
+            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')->where('ward_id', $ward_id)->where('status', 3)->get();
+            $parent = array();
 
-        foreach ($applications as $apps) {
-            $id = $apps['id'];
-            $firstName = $apps['firstName'];
-            $lastName = $apps['lastName'];
-            $father = Family::where('applicationId',$id)->where('user_id', $apps['user_id'])->where('relationship','Father')->value('name');
-            $reg = $apps['reg_no'];
-            $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
-            $institution = Institution::where('user_id', $apps['user_id'])->value('name');
-            $polling =Geographical::where('applicationId',$id)->value('polling');
-            $balance = Institution::where('applicationId',$id)->value('balance');
-            $amount = $apps['amount'];
-            $date = $apps['updated_at'];
-            $child = array(
-                'id' => $id,
-                'firstName' => $firstName,
-                'lastName'=>  $lastName,
-                'ward' => $ward_name,
-                'amount' => $amount,
-                'balance'=>$balance,
-                'father' => $father,
-                'polling'=>$polling,
-                'reg' => $reg,
-                'date' => $date,
-                'institution' => $institution,
-            );
-            array_push($parent, $child);
+            foreach ($applications as $apps) {
+                $id = $apps['id'];
+                $firstName = $apps['firstName'];
+                $lastName = $apps['lastName'];
+                $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])->where('relationship', 'Father')->value('name');
+                $reg = $apps['reg_no'];
+                $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
+                $institution = Institution::where('user_id', $apps['user_id'])->value('name');
+                $polling = Geographical::where('applicationId', $id)->value('polling');
+                $balance = Institution::where('applicationId', $id)->value('balance');
+                $amount = $apps['amount'];
+                $date = $apps['updated_at'];
+                $child = array(
+                    'id' => $id,
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'ward' => $ward_name,
+                    'amount' => $amount,
+                    'balance' => $balance,
+                    'father' => $father,
+                    'polling' => $polling,
+                    'reg' => $reg,
+                    'date' => $date,
+                    'institution' => $institution,
+                );
+                array_push($parent, $child);
+            }
+            return ['parent' => $parent];
         }
-        return ['parent' => $parent];
+
+        if (auth()->user()->role == "sub-official") {
+            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')->where('county', auth()->user()->county)->where('status', 3)->get();
+            $parent = array();
+
+            foreach ($applications as $apps) {
+                $id = $apps['id'];
+                $firstName = $apps['firstName'];
+                $lastName = $apps['lastName'];
+                $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])->where('relationship', 'Father')->value('name');
+                $reg = $apps['reg_no'];
+                $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
+                $institution = Institution::where('user_id', $apps['user_id'])->value('name');
+                $polling = Geographical::where('applicationId', $id)->value('polling');
+                $balance = Institution::where('applicationId', $id)->value('balance');
+                $amount = $apps['amount'];
+                $date = $apps['updated_at'];
+                $child = array(
+                    'id' => $id,
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'ward' => $ward_name,
+                    'amount' => $amount,
+                    'balance' => $balance,
+                    'father' => $father,
+                    'polling' => $polling,
+                    'reg' => $reg,
+                    'date' => $date,
+                    'institution' => $institution,
+                    'cheque' => $apps['cheque']
+                );
+                array_push($parent, $child);
+            }
+            return ['parent' => $parent];
+        }
 
     }
     public function getAppnts()

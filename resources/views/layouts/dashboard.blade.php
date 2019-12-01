@@ -177,6 +177,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </router-link>
                             </li>
                         @endcan
+                        @can('isSubofficial')
+                            <li class="nav-item">
+                                <router-link to="/Applicants" class="nav-link">
+                                    <i class="nav-icon fas fa-user-graduate teal"></i>
+                                    <p>
+                                        Awarded Bursary Applicants
+                                    </p>
+                                </router-link>
+                            </li>
+                        @endcan
                         @can('isAdmin')
                             <li class="nav-item">
                                 <router-link to="/county" class="nav-link">
@@ -227,31 +237,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
 
-                                @endcan
-                                <li class="nav-item">
-                                <router-link to="/profile" class="nav-link">
-                                    <i class="nav-icon fa fa-user orange"></i>
-                                    <p>
-                                        My Profile
-                                    </p>
-                                </router-link>
-                            </li>
+                        @endcan
+                        <li class="nav-item">
+                            <router-link to="/profile" class="nav-link">
+                                <i class="nav-icon fa fa-user orange"></i>
+                                <p>
+                                    My Profile
+                                </p>
+                            </router-link>
+                        </li>
 
-                            <li class="nav-item ">
-                                <a class="nav-link" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    <i class="nav-icon fa fa-power-off red"></i>
-                                    <p>
-                                        {{ __('Logout') }}
-                                    </p>
-                                </a>
+                                <i class="nav-icon fa fa-power-off red"></i>
+                                <p>
+                                    {{ __('Logout') }}
+                                </p>
+                            </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

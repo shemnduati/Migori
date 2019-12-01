@@ -140,9 +140,13 @@ class FeatureController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function issueCheque($id)
     {
-        //
+        if (auth()->user()->role == "sub-official") {
+            $app = Application::findOrFail($id);
+            $app->cheque = 1;
+            $app->update();
+        }
     }
 
     /**
