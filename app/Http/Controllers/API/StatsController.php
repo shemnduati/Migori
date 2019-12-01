@@ -52,10 +52,13 @@ class StatsController extends Controller
         foreach ( $wards as $ward){
             $name = $ward['name'];
             $total_app = Application::where('ward_id',$ward['id'])->where('bursary_type','County')->count();
-
+            $awarded = Application::where('ward_id',$ward['id'])->where('bursary_type','County')->where('status',3)->count();
+            $rejected = Application::where('ward_id',$ward['id'])->where('bursary_type','County')->where('status',2)->count();
             $child = array(
                 'name'=>$name,
                 'total' =>$total_app,
+                'awarded'=>$awarded,
+                'rejected'=>$rejected,
             );
             array_push($parent, $child);
         }
@@ -72,10 +75,13 @@ class StatsController extends Controller
         foreach ( $wards as $ward){
             $name = $ward['name'];
             $total_app = Application::where('ward_id',$ward['id'])->where('bursary_type','scholarship')->count();
-
+            $awarded = Application::where('ward_id',$ward['id'])->where('bursary_type','scholarship')->where('status',3)->count();
+            $rejected = Application::where('ward_id',$ward['id'])->where('bursary_type','scholarship')->where('status',2)->count();
             $child = array(
                 'name'=>$name,
                 'total' =>$total_app,
+                'awarded'=>$awarded,
+                'rejected'=>$rejected,
             );
             array_push($parent, $child);
         }

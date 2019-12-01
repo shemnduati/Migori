@@ -36,6 +36,8 @@ class LoginController extends Controller
         return('/student');
     } elseif (Auth::check() && Auth::user()->role == 'sub-admin') {
         return('/dashboard');
+    } elseif (Auth::check() && Auth::user()->role == 'sub-official') {
+        return('/dashboard');
     }elseif (Auth::check() && Auth::user()->role == 'official') {
         return('/Information');
     }elseif (Auth::check() && Auth::user()->role == 'sub-official') {
