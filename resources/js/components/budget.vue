@@ -17,6 +17,7 @@
                                 <th>Ward</th>
                                 <th>Budget</th>
                                 <th>Current Balance</th>
+                                <th>Awarded Amount</th>
                                 <th>Budget year</th>
                                 <th>Modify</th>
                             </tr>
@@ -24,6 +25,7 @@
                                 <td>{{budget.name}}</td>
                                 <td>Ksh. {{budget.amount}}</td>
                                 <td>Ksh. {{budget.remaining}}</td>
+                                <td>Ksh. {{budget.amount - budget.remaining}}</td>
                                 <td>{{budget.year}}</td>
                                 <td>
                                     <a href="#" @click="editModal(budget)" >

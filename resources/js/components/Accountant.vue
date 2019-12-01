@@ -18,7 +18,6 @@
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>County</th>
-                                <th>Ward</th>
                                 <th>Registered At</th>
                                 <th>Modify</th>
                             </tr>
@@ -27,7 +26,6 @@
                                 <td>{{user.email}}</td>
                                 <td>{{user.role | upText}}</td>
                                 <td>{{user.county}}</td>
-                                <td>{{user.ward}}</td>
                                 <td>{{user.reg | myDate}}</td>
                                 <td>
                                     <a href="#" @click="editModal(user)" >
