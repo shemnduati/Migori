@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6" >
+                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin() || $gate.isSubadmin()" >
                         <!-- small box -->
                         <div class="small-box bg-warning"  >
                             <div class="inner">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin()">
+                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin() || $gate.isSubadmin()">
                         <!-- small box -->
                         <div class="small-box bg-danger white" >
                             <div class="inner">

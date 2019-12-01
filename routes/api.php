@@ -120,3 +120,4 @@ Route::get('/subAdminWard', 'API\InformationController@subAdminWard');
 Route::get('total', 'API\StatsController@index');
 Route::get('/MyWards', 'API\StatsController@MyWards');
 Route::get('/MyWardz', 'API\StatsController@MyWardz');
+Route::post('/issuedcheque/{applicationId}', 'API\FeatureController@issueCheque');

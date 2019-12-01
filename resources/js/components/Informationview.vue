@@ -391,7 +391,7 @@
                             'Success!',
                             'Successfully Awarded.',
                             'success'
-                        )
+                        );
                         Fire.$emit('entry');
                         $('#new').modal('hide');
                     }).catch(() => {

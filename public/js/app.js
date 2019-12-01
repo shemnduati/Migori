@@ -2057,6 +2057,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2073,6 +2077,27 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    issueCheque: function issueCheque(applicationId) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Mark as issued?? You won't be able to revert this!",
+        //type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post("/api/issuedcheque/" + applicationId).then(function () {
+            Swal.fire('Success!', 'Operation successful.', 'success');
+            Fire.$emit('entry');
+            Fire.$emit('AfterCreate');
+          })["catch"](function () {
+            Swal.fire('Failed!', 'There was something wrong');
+          });
+        }
+      });
+    },
     createPDF: function createPDF() {
       var specialElementHandlers = {
         "#editor": function editor(element, renderer) {
@@ -2138,6 +2163,13 @@ __webpack_require__.r(__webpack_exports__);
           return [_this.applications = data['parent']];
         });
       }
+
+      if (this.$gate.isSubofficial()) {
+        axios.get('api/getApp').then(function (_ref3) {
+          var data = _ref3.data;
+          return [_this.applications = data['parent']];
+        });
+      }
     },
     getType: function getType() {
       var _this2 = this;
@@ -2145,14 +2177,14 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedWard = "";
 
       if (this.$gate.isOfficial()) {
-        axios.get('api/getWardsById/' + this.form.type).then(function (_ref3) {
-          var data = _ref3.data;
+        axios.get('api/getWardsById/' + this.form.type).then(function (_ref4) {
+          var data = _ref4.data;
           return [_this2.applications = data['parent']];
         });
 
         if (this.form.type > 0) {
-          axios.get('/api/wardname/' + this.form.type).then(function (_ref4) {
-            var data = _ref4.data;
+          axios.get('/api/wardname/' + this.form.type).then(function (_ref5) {
+            var data = _ref5.data;
             return [_this2.selectedWard = data];
           });
         }
@@ -2161,8 +2193,8 @@ __webpack_require__.r(__webpack_exports__);
     getWards: function getWards() {
       var _this3 = this;
 
-      axios.get("api/getMyWards").then(function (_ref5) {
-        var data = _ref5.data;
+      axios.get("api/getMyWards").then(function (_ref6) {
+        var data = _ref6.data;
         return [_this3.wards = data['wards']];
       });
     },
@@ -2170,8 +2202,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       if (this.$gate.isSubadmin()) {
-        axios.get("api/subAdminWard").then(function (_ref6) {
-          var data = _ref6.data;
+        axios.get("api/subAdminWard").then(function (_ref7) {
+          var data = _ref7.data;
           return [_this4.mywardy = data];
         });
       }
@@ -2180,15 +2212,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       if (this.$gate.isOfficial()) {
-        axios.get("api/getMyCounty").then(function (_ref7) {
-          var data = _ref7.data;
+        axios.get("api/getMyCounty").then(function (_ref8) {
+          var data = _ref8.data;
           return [_this5.mycounty = data['counties']];
         });
       }
 
       if (this.$gate.isSubadmin()) {
-        axios.get("api/wardsCounty").then(function (_ref8) {
-          var data = _ref8.data;
+        axios.get("api/wardsCounty").then(function (_ref9) {
+          var data = _ref9.data;
           return [_this5.wardsCounty = data];
         });
       }
@@ -74054,7 +74086,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isSubadminOrOfficial()
+    _vm.$gate.isSubadminOrOfficial() || _vm.$gate.isSubofficial()
       ? _c("div", { staticClass: "row mt-5" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -74188,8 +74220,12 @@ var render = function() {
                             _vm._v(" "),
                             _c("th", [_vm._v("Fee balance")]),
                             _vm._v(" "),
-                            _vm.$gate.isOfficial()
+                            _vm.$gate.isOfficial() || _vm.$gate.isSubofficial()
                               ? _c("th", [_vm._v("Awarded Amount")])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.$gate.isSubofficial()
+                              ? _c("th", [_vm._v("Cheque")])
                               : _vm._e()
                           ]),
                           _vm._v(" "),
@@ -74217,9 +74253,41 @@ var render = function() {
                                 _vm._v("Ksh. " + _vm._s(application.balance))
                               ]),
                               _vm._v(" "),
-                              _vm.$gate.isOfficial()
+                              _vm.$gate.isOfficial() ||
+                              _vm.$gate.isSubofficial()
                                 ? _c("td", [
                                     _vm._v("Ksh. " + _vm._s(application.amount))
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.$gate.isSubofficial()
+                                ? _c("td", [
+                                    !application.cheque
+                                      ? _c("i", {
+                                          staticClass: "fas fa-check-circle",
+                                          staticStyle: {
+                                            "font-size": "20px",
+                                            color: "purple"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.issueCheque(
+                                                application.id
+                                              )
+                                            }
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    application.cheque == 1
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass: "badge badge-success"
+                                          },
+                                          [_vm._v("Issued")]
+                                        )
+                                      : _vm._e()
                                   ])
                                 : _vm._e()
                             ])
@@ -94454,22 +94522,26 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-3 col-6" }, [
-                _c("div", { staticClass: "small-box bg-warning" }, [
-                  _c("div", { staticClass: "inner" }, [
-                    _c("h3", [_vm._v(_vm._s(_vm.dash["total_application"]))]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Bursary")]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Applications")])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ])
-              ]),
+              _vm.$gate.isAdmin() || _vm.$gate.isSubadmin()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-warning" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [
+                          _vm._v(_vm._s(_vm.dash["total_application"]))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Bursary")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Applications")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
-              _vm.$gate.isAdmin()
+              _vm.$gate.isAdmin() || _vm.$gate.isSubadmin()
                 ? _c("div", { staticClass: "col-lg-3 col-6" }, [
                     _c("div", { staticClass: "small-box bg-danger white" }, [
                       _c("div", { staticClass: "inner" }, [
