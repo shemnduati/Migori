@@ -74209,7 +74209,9 @@ var render = function() {
                               ? _c("th", [_vm._v("Awarded Amount")])
                               : _vm._e(),
                             _vm._v(" "),
-                            _c("th", [_vm._v("Cheque")])
+                            _vm.$gate.isSubofficial()
+                              ? _c("th", [_vm._v("Cheque")])
+                              : _vm._e()
                           ]),
                           _vm._v(" "),
                           _vm._l(_vm.applications, function(application) {
@@ -74243,30 +74245,36 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              _c("td", [
-                                !application.cheque
-                                  ? _c("i", {
-                                      staticClass: "fas fa-check-circle",
-                                      staticStyle: {
-                                        "font-size": "20px",
-                                        color: "purple"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.issueCheque(application.id)
-                                        }
-                                      }
-                                    })
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                application.cheque == 1
-                                  ? _c(
-                                      "span",
-                                      { staticClass: "badge badge-success" },
-                                      [_vm._v("Issued")]
-                                    )
-                                  : _vm._e()
-                              ])
+                              _vm.$gate.isSubofficial()
+                                ? _c("td", [
+                                    !application.cheque
+                                      ? _c("i", {
+                                          staticClass: "fas fa-check-circle",
+                                          staticStyle: {
+                                            "font-size": "20px",
+                                            color: "purple"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.issueCheque(
+                                                application.id
+                                              )
+                                            }
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    application.cheque == 1
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass: "badge badge-success"
+                                          },
+                                          [_vm._v("Issued")]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                : _vm._e()
                             ])
                           })
                         ],
@@ -94499,7 +94507,7 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.$gate.isAdmin()
+              _vm.$gate.isAdmin() || _vm.$gate.isSubadmin()
                 ? _c("div", { staticClass: "col-lg-3 col-6" }, [
                     _c("div", { staticClass: "small-box bg-warning" }, [
                       _c("div", { staticClass: "inner" }, [
@@ -94518,7 +94526,7 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.$gate.isAdmin()
+              _vm.$gate.isAdmin() || _vm.$gate.isSubadmin()
                 ? _c("div", { staticClass: "col-lg-3 col-6" }, [
                     _c("div", { staticClass: "small-box bg-danger white" }, [
                       _c("div", { staticClass: "inner" }, [

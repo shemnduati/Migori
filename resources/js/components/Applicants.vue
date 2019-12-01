@@ -41,7 +41,7 @@
                                 <th>Polling station</th>
                                 <th>Fee balance</th>
                                 <th v-if="$gate.isOfficial() || $gate.isSubofficial()">Awarded Amount</th>
-                                <th>Cheque</th>
+                                <th v-if="$gate.isSubofficial()">Cheque</th>
                             </tr>
                             <tr v-for="application in applications" :key="application.id">
                                 <td>{{application.firstName}} {{application.lastName}}</td>
@@ -51,7 +51,7 @@
                                 <td>{{application.polling}}</td>
                                 <td>Ksh. {{application.balance }}</td>
                                 <td v-if="$gate.isOfficial() || $gate.isSubofficial()">Ksh. {{application.amount }}</td>
-                                <td>
+                                <td v-if="$gate.isSubofficial()">
                                     <i v-if="!application.cheque" class="fas fa-check-circle"
                                        style="font-size: 20px; color: purple;" @click="issueCheque(application.id)"></i>
                                     <span v-if="application.cheque == 1" class="badge badge-success">Issued</span>
