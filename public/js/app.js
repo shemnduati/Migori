@@ -1811,8 +1811,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9594,6 +9592,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -73749,8 +73762,6 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.county))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(user.ward))]),
-                            _vm._v(" "),
                             _c("td", [
                               _vm._v(_vm._s(_vm._f("myDate")(user.reg)))
                             ]),
@@ -74083,8 +74094,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Role")]),
       _vm._v(" "),
       _c("th", [_vm._v("County")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Ward")]),
       _vm._v(" "),
       _c("th", [_vm._v("Registered At")]),
       _vm._v(" "),
@@ -94601,13 +94610,32 @@ var render = function() {
                       _c("div", { staticClass: "inner" }, [
                         _c("h3", [_vm._v(_vm._s(_vm.dash["total_awarded"]))]),
                         _vm._v(" "),
-                        _c("span", [_vm._v("Recommended")]),
+                        _c("span", [_vm._v("Awarded")]),
                         _c("br"),
                         _vm._v(" "),
                         _c("span", [_vm._v("Bursaries")])
                       ]),
                       _vm._v(" "),
                       _vm._m(3)
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$gate.isSubadmin()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-danger white" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [
+                          _vm._v(_vm._s(_vm.dash["total_recommended"]))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Recommended")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Bursaries")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(4)
                     ])
                   ])
                 : _vm._e(),
@@ -94621,7 +94649,7 @@ var render = function() {
                         _c("p", [_vm._v("Ward's Budget(Ksh)")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(4)
+                      _vm._m(5)
                     ])
                   ])
                 : _vm._e(),
@@ -94635,7 +94663,7 @@ var render = function() {
                         _c("p", [_vm._v("Remaining(Ksh)")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(5)
+                      _vm._m(6)
                     ])
                   ])
                 : _vm._e(),
@@ -94655,7 +94683,7 @@ var render = function() {
                           _c("p", [_vm._v("Total county Applications")])
                         ]),
                         _vm._v(" "),
-                        _vm._m(6),
+                        _vm._m(7),
                         _vm._v(" "),
                         _c(
                           "router-link",
@@ -94693,7 +94721,7 @@ var render = function() {
                           _c("p", [_vm._v("Total Scholarship Applications")])
                         ]),
                         _vm._v(" "),
-                        _vm._m(7),
+                        _vm._m(8),
                         _vm._v(" "),
                         _c(
                           "router-link",
@@ -94723,7 +94751,7 @@ var render = function() {
                         _c("p", [_vm._v("Total Awarded Bursaries")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(8)
+                      _vm._m(9)
                     ])
                   ])
                 : _vm._e(),
@@ -94740,7 +94768,7 @@ var render = function() {
                         _c("span", [_vm._v("Recommended")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(9)
+                      _vm._m(10)
                     ])
                   ])
                 : _vm._e(),
@@ -94754,7 +94782,7 @@ var render = function() {
                         _c("p", [_vm._v("Total Awarded")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(10)
+                      _vm._m(11)
                     ])
                   ])
                 : _vm._e()
@@ -94787,6 +94815,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-file-signature white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-award white" })
     ])
   },
   function() {
