@@ -8470,7 +8470,7 @@ __webpack_require__.r(__webpack_exports__);
       wards: {},
       myward: '',
       mywardy: '',
-      mycounty: {},
+      mycounty: '',
       selectedWard: '',
       wardsCounty: '',
       form: new Form({
@@ -8501,7 +8501,7 @@ __webpack_require__.r(__webpack_exports__);
       doc.setFontSize(11);
       doc.setTextColor(100);
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         doc.setFontSize(15);
         doc.text(this.mycounty + ' County', 14, 30);
         doc.setFontSize(11);
@@ -8515,7 +8515,7 @@ __webpack_require__.r(__webpack_exports__);
         doc.setTextColor(100);
       }
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         if (this.selectedWard) {
           doc.setFontSize(14);
           doc.text(this.selectedWard + ' Ward', 14, 36);
@@ -8536,12 +8536,23 @@ __webpack_require__.r(__webpack_exports__);
         html: '#my-table',
         startY: 40
       });
-      doc.save('Week' + '.pdf');
+
+      if (this.$gate.isSubadmin()) {
+        doc.save(this.mywardy + '.pdf');
+      }
+
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
+        if (this.selectedWard) {
+          doc.save(this.mycounty + '|' + this.selectedWard + '.pdf');
+        } else {
+          doc.save(this.mycounty + '.pdf');
+        }
+      }
     },
     getApplications: function getApplications() {
       var _this2 = this;
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         axios.get('api/getApplicantz').then(function (_ref2) {
           var data = _ref2.data;
           return [_this2.applications = data['parent']];
@@ -8560,7 +8571,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedWard = "";
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         axios.get('api/sortscholarship/' + this.form.type).then(function (_ref4) {
           var data = _ref4.data;
           return [_this3.applications = data['parent']];
@@ -8585,7 +8596,7 @@ __webpack_require__.r(__webpack_exports__);
     getCounty: function getCounty() {
       var _this5 = this;
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         axios.get("api/getMyCounty").then(function (_ref7) {
           var data = _ref7.data;
           return [_this5.mycounty = data['counties']];
@@ -9583,6 +9594,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -91893,7 +91905,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$gate.isSubadminOrOfficial()
+    _vm.$gate.isSubadminOrOfficial() || _vm.$gate.isSubofficial()
       ? _c("div", { staticClass: "row mt-5" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card" }, [
@@ -91904,7 +91916,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
-                    _vm.$gate.isOfficial()
+                    _vm.$gate.isOfficial() || _vm.$gate.isSubofficial()
                       ? _c("div", { staticClass: "col-sm-6" }, [
                           _c("form", [
                             _c(
@@ -94722,7 +94734,10 @@ var render = function() {
                       _c("div", { staticClass: "inner" }, [
                         _c("h3", [_vm._v(_vm._s(_vm.dash["totalReco"]))]),
                         _vm._v(" "),
-                        _c("p", [_vm._v("Total Recommended")])
+                        _c("span", [_vm._v("Total")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Recommended")])
                       ]),
                       _vm._v(" "),
                       _vm._m(9)
@@ -94827,7 +94842,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "fas fa-dollar white" })
+      _c("i", { staticClass: "fas fa-graduation-cap white" })
     ])
   },
   function() {
@@ -94835,7 +94850,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "fas fa-dollar white" })
+      _c("i", { staticClass: "fas fa-graduation-cap white" })
     ])
   }
 ]

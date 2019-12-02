@@ -132,10 +132,11 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{dash['totalReco']}}</h3>
-                                <p>Total Recommended</p>
+                                <span>Total</span><br>
+                                <span>Recommended</span>
                             </div>
                             <div class="icon">
-                                <i class="fas fa-dollar white"></i>
+                                <i class="fas fa-graduation-cap white"></i>
                             </div>
 
                         </div>
@@ -148,7 +149,7 @@
                                 <p>Total Awarded</p>
                             </div>
                             <div class="icon">
-                                <i class="fas fa-dollar white"></i>
+                                <i class="fas fa-graduation-cap white"></i>
                             </div>
 
                         </div>

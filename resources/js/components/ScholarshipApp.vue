@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial()">
+        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial() || $gate.isSubofficial()">
 
             <div class="col-md-12">
                 <div class="card">
@@ -9,7 +9,7 @@
 
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-6" v-if="$gate.isOfficial()">
+                                <div class="col-sm-6" v-if="$gate.isOfficial() || $gate.isSubofficial()">
                                     <form>
                                         <select @change="sortScholarship" v-model="form.type" class="form-control">
                                             <option selected value="">--Sort By--</option>
@@ -79,7 +79,7 @@
                 wards:{},
                 myward:'',
                 mywardy: '',
-                mycounty: {},
+                mycounty: '',
                 selectedWard: '',
                 wardsCounty: '',
                 form: new Form({
@@ -108,7 +108,7 @@
                 doc.setFontSize(11);
                 doc.setTextColor(100);
 
-                if (this.$gate.isOfficial()) {
+                if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     doc.setFontSize(15);
                     doc.text(this.mycounty + ' County', 14, 30);
                     doc.setFontSize(11);
@@ -122,7 +122,7 @@
                     doc.setTextColor(100);
                 }
 
-                if (this.$gate.isOfficial()) {
+                if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     if (this.selectedWard) {
                         doc.setFontSize(14);
                         doc.text(this.selectedWard + ' Ward', 14, 36);
@@ -143,10 +143,19 @@
                     html: '#my-table',
                     startY: 40,
                 });
-                doc.save('Week'+ '.pdf');
+                if (this.$gate.isSubadmin()) {
+                    doc.save(this.mywardy + '.pdf');
+                }
+                if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
+                   if (this.selectedWard){
+                       doc.save(this.mycounty + '|' + this.selectedWard + '.pdf');
+                   }else {
+                       doc.save(this.mycounty + '.pdf');
+                   }
+                }
             },
             getApplications(){
-                if(this.$gate.isOfficial()) {
+                if(this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     axios.get('api/getApplicantz').then(({data}) => ([this.applications = data['parent']]));
                 }
 
@@ -156,7 +165,7 @@
             },
             sortScholarship(){
                 this.selectedWard = "";
-                if(this.$gate.isOfficial()) {
+                if(this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     axios.get('api/sortscholarship/' + this.form.type).then(({data}) => ([this.applications = data['parent']]));
 
                     if (this.form.type > 0){
@@ -169,7 +178,7 @@
             },
 
             getCounty(){
-                if (this.$gate.isOfficial()) {
+                if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     axios.get("api/getMyCounty").then(({data}) => ([this.mycounty = data['counties']]));
                 }
                 if (this.$gate.isSubadmin()) {

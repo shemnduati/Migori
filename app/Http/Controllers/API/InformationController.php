@@ -200,7 +200,7 @@ class InformationController extends Controller
     public function Applicantz()
     {
         $county_id = User::where('id', Auth::user()->id)->value('county');
-        $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('bursary_type','scholarship')->where('status', 3)->get();
+        $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('bursary_type','scholarship')->where('approved', 3)->get();
         $parent = array();
 
         foreach ($applications as $apps) {
