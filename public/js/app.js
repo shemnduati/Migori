@@ -9769,6 +9769,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -94779,10 +94794,30 @@ var render = function() {
                       _c("div", { staticClass: "inner" }, [
                         _c("h3", [_vm._v(_vm._s(_vm.dash["totalAwarded"]))]),
                         _vm._v(" "),
-                        _c("p", [_vm._v("Total Awarded")])
+                        _c("span", [_vm._v("Total Awarded")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("County Bursary")])
                       ]),
                       _vm._v(" "),
                       _vm._m(11)
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$gate.isOfficial()
+                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                    _c("div", { staticClass: "small-box bg-primary" }, [
+                      _c("div", { staticClass: "inner" }, [
+                        _c("h3", [_vm._v(_vm._s(_vm.dash["scholar"]))]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Scholarships")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Approved")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(12)
                     ])
                   ])
                 : _vm._e()
@@ -94871,6 +94906,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-user-tie white" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-graduation-cap white" })
     ])
   },
   function() {
