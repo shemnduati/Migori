@@ -117,6 +117,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </router-link>
                         </li>
                         @endcan
+
                         @can('isOfficial')
                             <li class="nav-item">
                                 <router-link to="/configuration" class="nav-link">
@@ -160,6 +161,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
+                        @endcan
+                        @can('isOfficial')
                             <li class="nav-item">
                                 <router-link to="/Applicants" class="nav-link">
                                     <i class="nav-icon fas fa-user-graduate teal"></i>
@@ -176,7 +179,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
-                        @endcan
+                            @endcan
+                        @can('isSubadmin')
+                            <li class="nav-item">
+                                <router-link to="/Applicants" class="nav-link">
+                                    <i class="nav-icon fas fa-user-graduate teal"></i>
+                                    <p>
+                                        Recommended Bursary Applicants
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/ScholarApplicants" class="nav-link">
+                                    <i class="nav-icon fas fa-user-graduate pink"></i>
+                                    <p>
+                                        Recommended Scholarship Applicants
+                                    </p>
+                                </router-link>
+                            </li>
+                            @endcan
                         @can('isSubofficial')
                             <li class="nav-item">
                                 <router-link to="/Applicants" class="nav-link">
@@ -194,6 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
+
                         @endcan
                         @can('isAdmin')
                             <li class="nav-item">
