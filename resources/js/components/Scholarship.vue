@@ -19,7 +19,8 @@
                                                         class="form-control" name="county"
                                                         :class="{ 'is-invalid': form.errors.has('county') }">
                                                     <option selected value="">--Select county--</option>
-                                                    <option v-for="count in counties" :key="count.id" :value="count.id">{{
+                                                    <option v-for="count in counties" :key="count.id" :value="count.id">
+                                                        {{
                                                         count.name}}
                                                     </option>
                                                 </select>
@@ -111,21 +112,15 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Tel/Mobile Number</label>
-                                            <input v-model="form.telephone" type="tel" placeholder="+254"
-                                                   name="telephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('telephone') }">
-                                            <has-error :form="form" field="telephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.telephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_telephone}}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Alternative /mobile No.</label>
-                                            <input v-model="form.alt_telephone" type="tel" placeholder="+254"
-                                                   name="alt_telephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('alt_telephone') }">
-                                            <has-error :form="form" field="alt_telephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.alt_telephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_alt_telephone}}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -367,19 +362,15 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Telephone</label>
-                                            <input v-model="form.ftelephone" type="tel" name="ftelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('ftelephone') }">
-                                            <has-error :form="form" field="ftelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.ftelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_ftelephone}}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Alternative Telephone</label>
-                                            <input v-model="form.alt_ftelephone" type="tel" name="alt_ftelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('alt_ftelephone') }">
-                                            <has-error :form="form" field="alt_ftelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.alt_ftelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_alt_ftelephone}}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -478,19 +469,15 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Telephone</label>
-                                            <input v-model="form.mtelephone" type="tel" name="mtelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('mtelephone') }">
-                                            <has-error :form="form" field="mtelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.mtelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_mtelephone}}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Alternative Telephone</label>
-                                            <input v-model="form.alt_mtelephone" type="tel" name="alt_mtelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('alt_mtelephone') }">
-                                            <has-error :form="form" field="alt_mtelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.alt_mtelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_alt_mtelephone}}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -574,19 +561,15 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Telephone</label>
-                                            <input v-model="form.gtelephone" type="tel" name="gtelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('gtelephone') }">
-                                            <has-error :form="form" field="gtelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.gtelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_gtelephone}}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Alternative Telephone</label>
-                                            <input v-model="form.alt_gtelephone" type="tel" name="alt_gtelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('alt_gtelephone') }">
-                                            <has-error :form="form" field="alt_gtelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.alt_gtelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_alt_gtelephone}}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1528,7 +1511,8 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Application window closed</h5>
-                            <p class="card-text">The application window for your county has been closed for now wait until the window is
+                            <p class="card-text">The application window for your county has been closed for now wait
+                                until the window is
                                 opened</p>
                             <a href="/" class="btn btn-danger">Go Back Home</a>
                         </div>
@@ -1540,7 +1524,13 @@
 </template>
 
 <script>
+    import VuePhoneNumberInput from 'vue-phone-number-input';
+    import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+
     export default {
+        components: {
+            VuePhoneNumberInput,
+        },
         data() {
             return {
                 step: 1,
@@ -1551,9 +1541,17 @@
                 info: {},
                 now: moment().format('YYYY'),
                 enable: {},
-                watch:0,
+                watch: 0,
                 loading: false,
                 attachments: [],
+                e_ftelephone: '',
+                e_alt_ftelephone: '',
+                e_mtelephone: '',
+                e_alt_mtelephone: '',
+                e_gtelephone: '',
+                e_alt_gtelephone: '',
+                e_telephone: '',
+                e_alt_telephone: '',
                 formf: new FormData(),
                 form: new Form({
                     type: 'scholarship',
@@ -1854,12 +1852,12 @@
             },
             nextStep() {
                 if (this.step == 1) {
-                    if(!this.form.county) {
+                    if (!this.form.county) {
                         this.form.errors.set({
                             county: 'This field is required'
                         })
                         return false;
-                    }else if(this.enable == 0){
+                    } else if (this.enable == 0) {
                         this.watch = 1;
                     } else {
                         this.step++;
@@ -1904,14 +1902,10 @@
                         })
                         return false;
                     } else if (!this.form.telephone) {
-                        this.form.errors.set({
-                            telephone: 'This field is required'
-                        })
+                        this.e_telephone = 'This field is required';
                         return false;
                     } else if (!this.form.alt_telephone) {
-                        this.form.errors.set({
-                            alt_telephone: 'This field is required'
-                        })
+                        this.e_alt_telephone = 'This field is required';
                         return false;
                     } else if (!this.form.county) {
                         this.form.errors.set({
@@ -2016,14 +2010,10 @@
                         })
                         return false;
                     } else if (!this.form.ftelephone) {
-                        this.form.errors.set({
-                            ftelephone: 'This field is required'
-                        })
+                        this.e_ftelephone = 'This field is required';
                         return false;
                     } else if (!this.form.alt_ftelephone) {
-                        this.form.errors.set({
-                            alt_ftelephone: 'This field is required'
-                        })
+                        this.e_alt_ftelephone = 'This field is required';
                         return false;
                     } else if (!this.form.fbox) {
                         this.form.errors.set({
@@ -2061,14 +2051,10 @@
                         })
                         return false;
                     } else if (!this.form.mtelephone) {
-                        this.form.errors.set({
-                            mtelephone: 'This field is required'
-                        })
+                        this.e_mtelephone = 'This field is required';
                         return false;
                     } else if (!this.form.alt_mtelephone) {
-                        this.form.errors.set({
-                            alt_mtelephone: 'This field is required'
-                        })
+                        this.e_alt_mtelephone = 'This field is required';
                         return false;
                     } else if (!this.form.mbox) {
                         this.form.errors.set({
@@ -2106,14 +2092,10 @@
                         })
                         return false;
                     } else if (!this.form.gtelephone) {
-                        this.form.errors.set({
-                            gtelephone: 'This field is required'
-                        })
+                        this.e_gtelephone = 'This field is required';
                         return false;
                     } else if (!this.form.alt_gtelephone) {
-                        this.form.errors.set({
-                            alt_gtelephone: 'This field is required'
-                        })
+                        this.e_alt_gtelephone = 'This field is required';
                         return false;
                     } else if (!this.form.gcounty) {
                         this.form.errors.set({
