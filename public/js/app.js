@@ -92064,7 +92064,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(application.Lname))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(application.indexNo))]),
+                              _c("td", [_vm._v(_vm._s(application.index))]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(application.school))]),
                               _vm._v(" "),
