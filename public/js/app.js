@@ -2065,7 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
       applications: {},
       wards: {},
       myward: '',
-      mycounty: {},
+      mycounty: '',
       selectedWard: '',
       wardsCounty: '',
       mywardy: '',
@@ -2108,23 +2108,23 @@ __webpack_require__.r(__webpack_exports__);
       doc.setFontSize(11);
       doc.setTextColor(100);
 
-      if (this.$gate.isOfficial()) {
-        doc.setFontSize(15);
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
+        doc.setFontSize(13);
         doc.text(this.mycounty + ' County', 14, 30);
         doc.setFontSize(11);
         doc.setTextColor(100);
       }
 
       if (this.$gate.isSubadmin()) {
-        doc.setFontSize(15);
+        doc.setFontSize(13);
         doc.text(this.wardsCounty + ' County', 14, 30);
         doc.setFontSize(11);
         doc.setTextColor(100);
       }
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         if (this.selectedWard) {
-          doc.setFontSize(14);
+          doc.setFontSize(12);
           doc.text(this.selectedWard + ' Ward', 14, 36);
           doc.setFontSize(11);
           doc.setTextColor(100);
@@ -2132,7 +2132,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.$gate.isSubadmin()) {
-        doc.setFontSize(14);
+        doc.setFontSize(12);
         doc.text(this.mywardy + ' Ward', 14, 36);
         doc.setFontSize(11);
         doc.setTextColor(100);
@@ -2143,7 +2143,18 @@ __webpack_require__.r(__webpack_exports__);
         html: '#my-table',
         startY: 40
       });
-      doc.save('Week' + '.pdf');
+
+      if (this.$gate.isSubadmin()) {
+        doc.save(this.mywardy + '.pdf');
+      }
+
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
+        if (this.selectedWard) {
+          doc.save(this.mycounty + '|' + this.selectedWard + '.pdf');
+        } else {
+          doc.save(this.mycounty + '.pdf');
+        }
+      }
     },
     getApplications: function getApplications() {
       var _this = this;
@@ -2174,7 +2185,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedWard = "";
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         axios.get('api/getWardsById/' + this.form.type).then(function (_ref4) {
           var data = _ref4.data;
           return [_this2.applications = data['parent']];
@@ -2209,7 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
     getCounty: function getCounty() {
       var _this5 = this;
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         axios.get("api/getMyCounty").then(function (_ref8) {
           var data = _ref8.data;
           return [_this5.mycounty = data['counties']];
@@ -9592,6 +9603,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -74151,7 +74177,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
-                    _vm.$gate.isOfficial()
+                    _vm.$gate.isOfficial() || _vm.$gate.isSubofficial()
                       ? _c("div", { staticClass: "col-sm-6" }, [
                           _c("form", [
                             _c(
@@ -78407,7 +78433,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "3" } }, [
-                                  _vm._v("Awarded")
+                                  _vm._v("Recommended")
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "4" } }, [

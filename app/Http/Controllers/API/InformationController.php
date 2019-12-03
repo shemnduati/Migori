@@ -618,19 +618,19 @@ class InformationController extends Controller
     public function getType($id)
     {
         if ($id == 1) {
-            $applications = Application::where('year', date('Y'))->where('county', auth()->user()->county)->whereIn('status', [0, 2, 3])->get();
+            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')->where('county', auth()->user()->county)->whereIn('status', [0, 2, 3])->get();
 
             return ['applications' => $applications];
         } elseif ($id == 2) {
-            $applications = Application::where('status', 0)->where('year', date('Y'))->where('county', auth()->user()->county)->get();
+            $applications = Application::where('status', 0)->where('bursary_type', 'County')->where('year', date('Y'))->where('county', auth()->user()->county)->get();
 
             return ['applications' => $applications];
         } elseif ($id == 3) {
-            $applications = Application::where('status', 3)->where('year', date('Y'))->where('county', auth()->user()->county)->get();
+            $applications = Application::where('status', 1)->where('bursary_type', 'County')->where('year', date('Y'))->where('county', auth()->user()->county)->get();
 
             return ['applications' => $applications];
         } elseif ($id == 4) {
-            $applications = Application::where('status', 2)->where('year', date('Y'))->where('county', auth()->user()->county)->get();
+            $applications = Application::where('status', 2)->where('bursary_type', 'County')->where('year', date('Y'))->where('county', auth()->user()->county)->get();
 
             return ['applications' => $applications];
         }
@@ -640,19 +640,19 @@ class InformationController extends Controller
     {
         $ward_id = User::where('id', Auth::user()->id)->value('ward');
         if ($id == 1) {
-            $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->get();
+            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')->where('ward_id', $ward_id)->get();
 
             return ['applications' => $applications];
         } elseif ($id == 2) {
-            $applications = Application::where('status', 0)->where('year', date('Y'))->where('ward_id', $ward_id)->get();
+            $applications = Application::where('status', 0)->where('bursary_type', 'County')->where('year', date('Y'))->where('ward_id', $ward_id)->get();
 
             return ['applications' => $applications];
         } elseif ($id == 3) {
-            $applications = Application::where('status', 1)->where('year', date('Y'))->where('ward_id', $ward_id)->get();
+            $applications = Application::where('recommendation', '!=', "")->where('bursary_type', 'County')->where('year', date('Y'))->where('ward_id', $ward_id)->get();
 
             return ['applications' => $applications];
         } elseif ($id == 4) {
-            $applications = Application::where('status', 2)->where('year', date('Y'))->where('ward_id', $ward_id)->get();
+            $applications = Application::where('status', 2)->where('bursary_type', 'County')->where('year', date('Y'))->where('ward_id', $ward_id)->get();
 
             return ['applications' => $applications];
         }

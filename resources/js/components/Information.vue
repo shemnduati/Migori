@@ -14,7 +14,7 @@
                                             <option selected value="">--Sort By--</option>
                                             <option value="1">All</option>
                                             <option value="2">Pending</option>
-                                            <option value="3">Awarded</option>
+                                            <option value="3">Recommended</option>
                                             <option value="4">Rejected</option>
                                         </select>
                                     </form>
