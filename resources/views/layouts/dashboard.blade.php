@@ -186,6 +186,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
+                            <li class="nav-item">
+                                <router-link to="/ScholarApplicants" class="nav-link">
+                                    <i class="nav-icon fas fa-user-graduate pink"></i>
+                                    <p>
+                                        Approved Scholarship Applicants
+                                    </p>
+                                </router-link>
+                            </li>
                         @endcan
                         @can('isAdmin')
                             <li class="nav-item">

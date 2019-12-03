@@ -45,8 +45,8 @@ class DashboardContoller extends Controller
             $total_student = User::where('role', 'student')->count();
             $total_subadmin = User::where('role', 'sub-admin')->count();
             $ward_id = User::where('id', Auth::user()->id)->value('ward');
-            $total_apllication = Application::where('ward_id', $ward_id)->where('bursary_type', 'County')->count();
-            $total_awarded = Application::where('recommendation', '!=', '')->where('bursary_type', 'County')->count();
+            $total_apllication = Application::where('ward_id', $ward_id)->where('year', date('Y'))->where('bursary_type', 'County')->count();
+            $total_awarded = Application::where('recommendation', '!=', '')->where('year', date('Y'))->where('bursary_type', 'County')->count();
             $budget = (int)Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('amount');
             $remaining = (int)Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('remaining');
             $data = array(
@@ -56,14 +56,15 @@ class DashboardContoller extends Controller
                 'total_awarded' => $total_awarded,
                 'budget' => $budget,
                 'remaining' => $remaining,
-                'totalReco' => (int)Application::where('ward_id', $ward_id)->where('bursary_type', 'County')->where('recommendation', '!=', '')->sum('rec_amount')
+                'totalReco' => Application::where('ward_id', $ward_id)->where('year', date('Y'))->where('bursary_type', 'County')->where('recommendation', '!=', '')->count()
             );
             return ['data' => $data];
         }
 
         if (auth()->user()->role == "official") {
             $data = array(
-                'totalAwarded' => (int)Application::where('county', auth()->user()->county)->where('bursary_type', 'County')->where('status', 3)->sum('amount')
+                'totalAwarded' => Application::where('county', auth()->user()->county)->where('year', date('Y'))->where('bursary_type', 'County')->where('status', 3)->count(),
+                'scholar' => Application::where('county', auth()->user()->county)->where('year', date('Y'))->where('bursary_type', 'scholarship')->where('approved', 3)->count()
             );
             return ['data' => $data];
         }
