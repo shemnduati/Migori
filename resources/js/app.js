@@ -40,6 +40,7 @@ const toast = swal.mixin({
 window.toast = toast;
 window.Fire =  new Vue();
 
+
 //VueRouter
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
