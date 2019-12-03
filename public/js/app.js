@@ -2065,7 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
       applications: {},
       wards: {},
       myward: '',
-      mycounty: {},
+      mycounty: '',
       selectedWard: '',
       wardsCounty: '',
       mywardy: '',
@@ -2108,23 +2108,23 @@ __webpack_require__.r(__webpack_exports__);
       doc.setFontSize(11);
       doc.setTextColor(100);
 
-      if (this.$gate.isOfficial()) {
-        doc.setFontSize(15);
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
+        doc.setFontSize(13);
         doc.text(this.mycounty + ' County', 14, 30);
         doc.setFontSize(11);
         doc.setTextColor(100);
       }
 
       if (this.$gate.isSubadmin()) {
-        doc.setFontSize(15);
+        doc.setFontSize(13);
         doc.text(this.wardsCounty + ' County', 14, 30);
         doc.setFontSize(11);
         doc.setTextColor(100);
       }
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         if (this.selectedWard) {
-          doc.setFontSize(14);
+          doc.setFontSize(12);
           doc.text(this.selectedWard + ' Ward', 14, 36);
           doc.setFontSize(11);
           doc.setTextColor(100);
@@ -2132,7 +2132,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.$gate.isSubadmin()) {
-        doc.setFontSize(14);
+        doc.setFontSize(12);
         doc.text(this.mywardy + ' Ward', 14, 36);
         doc.setFontSize(11);
         doc.setTextColor(100);
@@ -2143,7 +2143,18 @@ __webpack_require__.r(__webpack_exports__);
         html: '#my-table',
         startY: 40
       });
-      doc.save('Week' + '.pdf');
+
+      if (this.$gate.isSubadmin()) {
+        doc.save(this.mywardy + '.pdf');
+      }
+
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
+        if (this.selectedWard) {
+          doc.save(this.mycounty + '|' + this.selectedWard + '.pdf');
+        } else {
+          doc.save(this.mycounty + '.pdf');
+        }
+      }
     },
     getApplications: function getApplications() {
       var _this = this;
@@ -2174,7 +2185,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedWard = "";
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         axios.get('api/getWardsById/' + this.form.type).then(function (_ref4) {
           var data = _ref4.data;
           return [_this2.applications = data['parent']];
@@ -2209,7 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
     getCounty: function getCounty() {
       var _this5 = this;
 
-      if (this.$gate.isOfficial()) {
+      if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
         axios.get("api/getMyCounty").then(function (_ref8) {
           var data = _ref8.data;
           return [_this5.mycounty = data['counties']];
@@ -74166,7 +74177,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-tools" }, [
                   _c("div", { staticClass: "row" }, [
-                    _vm.$gate.isOfficial()
+                    _vm.$gate.isOfficial() || _vm.$gate.isSubofficial()
                       ? _c("div", { staticClass: "col-sm-6" }, [
                           _c("form", [
                             _c(
@@ -78422,7 +78433,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "3" } }, [
-                                  _vm._v("Awarded")
+                                  _vm._v("Recommended")
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "4" } }, [
@@ -94638,25 +94649,6 @@ var render = function() {
               _vm._v(" "),
               _vm.$gate.isSubadmin()
                 ? _c("div", { staticClass: "col-lg-3 col-6" }, [
-                    _c("div", { staticClass: "small-box bg-danger white" }, [
-                      _c("div", { staticClass: "inner" }, [
-                        _c("h3", [
-                          _vm._v(_vm._s(_vm.dash["total_recommended"]))
-                        ]),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Recommended")]),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Bursaries")])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(4)
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$gate.isSubadmin()
-                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
                     _c("div", { staticClass: "small-box bg-success" }, [
                       _c("div", { staticClass: "inner" }, [
                         _c("h3", [_vm._v(_vm._s(_vm.dash["budget"]))]),
@@ -94664,7 +94656,7 @@ var render = function() {
                         _c("p", [_vm._v("Ward's Budget(Ksh)")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(5)
+                      _vm._m(4)
                     ])
                   ])
                 : _vm._e(),
@@ -94678,7 +94670,7 @@ var render = function() {
                         _c("p", [_vm._v("Remaining(Ksh)")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(6)
+                      _vm._m(5)
                     ])
                   ])
                 : _vm._e(),
@@ -94698,7 +94690,7 @@ var render = function() {
                           _c("p", [_vm._v("Total county Applications")])
                         ]),
                         _vm._v(" "),
-                        _vm._m(7),
+                        _vm._m(6),
                         _vm._v(" "),
                         _c(
                           "router-link",
@@ -94736,7 +94728,7 @@ var render = function() {
                           _c("p", [_vm._v("Total Scholarship Applications")])
                         ]),
                         _vm._v(" "),
-                        _vm._m(8),
+                        _vm._m(7),
                         _vm._v(" "),
                         _c(
                           "router-link",
@@ -94766,7 +94758,7 @@ var render = function() {
                         _c("p", [_vm._v("Total Awarded Bursaries")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(9)
+                      _vm._m(8)
                     ])
                   ])
                 : _vm._e(),
@@ -94783,7 +94775,7 @@ var render = function() {
                         _c("span", [_vm._v("Recommended")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(10)
+                      _vm._m(9)
                     ])
                   ])
                 : _vm._e(),
@@ -94800,7 +94792,7 @@ var render = function() {
                         _c("span", [_vm._v("County Bursary")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(11)
+                      _vm._m(10)
                     ])
                   ])
                 : _vm._e(),
@@ -94817,7 +94809,7 @@ var render = function() {
                         _c("span", [_vm._v("Approved")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(12)
+                      _vm._m(11)
                     ])
                   ])
                 : _vm._e()
@@ -94850,14 +94842,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-file-signature white" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "fas fa-award white" })
     ])
   },
   function() {
