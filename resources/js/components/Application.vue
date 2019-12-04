@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.gender" class="form-check-input" type="radio"
-                                                   name="gender" id="gender" value="female"
+                                                   name="gender" value="female"
                                                    :class="{ 'is-invalid': form.errors.has('gender') }">
                                             <label class="form-check-label">Female</label>
                                             <has-error :form="form" field="gender"></has-error>
@@ -110,11 +110,13 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Telephone</label>
-                                            <input v-model="form.telephone" type="tel" placeholder="+254"
-                                                   name="telephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('telephone') }">
-                                            <has-error :form="form" field="telephone"></has-error>
+<!--                                            <input v-model="form.telephone" type="tel" placeholder="+254"-->
+<!--                                                   name="telephone"-->
+<!--                                                   class="form-control"-->
+<!--                                                   :class="{ 'is-invalid': form.errors.has('telephone') }">-->
+<!--                                            <has-error :form="form" field="telephone"></has-error>-->
+                                            <VuePhoneNumberInput v-model="form.telephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_telephone}}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -193,10 +195,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Telephone</label>
-                                            <input v-model="form.ftelephone" type="tel" name="ftelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('ftelephone') }">
-                                            <has-error :form="form" field="ftelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.ftelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_ftelephone}}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -260,10 +260,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Telephone</label>
-                                            <input v-model="form.mtelephone" type="tel" name="mtelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('mtelephone') }">
-                                            <has-error :form="form" field="mtelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.mtelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_mtelephone}}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -327,10 +325,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Telephone</label>
-                                            <input v-model="form.gtelephone" type="tel" name="gtelephone"
-                                                   class="form-control"
-                                                   :class="{ 'is-invalid': form.errors.has('gtelephone') }">
-                                            <has-error :form="form" field="gtelephone"></has-error>
+                                            <VuePhoneNumberInput v-model="form.gtelephone" default-country-code="KE"/>
+                                            <small style="color: red;">{{e_gtelephone}}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -651,7 +647,12 @@
 </template>
 
 <script>
+    import VuePhoneNumberInput from 'vue-phone-number-input';
+    import 'vue-phone-number-input/dist/vue-phone-number-input.css';
     export default {
+        components:{
+            VuePhoneNumberInput,
+        },
         data() {
             return {
                 step: 1,
@@ -663,6 +664,10 @@
                 loading: false,
                 watch: 0,
                 attachments: [],
+                e_telephone: '',
+                e_ftelephone: '',
+                e_mtelephone: '',
+                e_gtelephone: '',
                 formf: new FormData(),
                 form: new Form({
                     type: 'County',
@@ -981,9 +986,7 @@
                         })
                         return false;
                     } else if (!this.form.telephone) {
-                        this.form.errors.set({
-                            telephone: 'This field is required'
-                        })
+                        this.e_telephone = 'This field is required';
                         return false;
                     } else if (!this.form.regNo) {
                         this.form.errors.set({
@@ -1024,19 +1027,13 @@
                         })
                         return false;
                     } else if (!this.form.ftelephone) {
-                        this.form.errors.set({
-                            ftelephone: 'This field is required'
-                        })
+                        this.e_ftelephone = 'This field is required';
                         return false;
                     } else if (!this.form.mtelephone) {
-                        this.form.errors.set({
-                            mtelephone: 'This field is required'
-                        })
+                        this.e_mtelephone = 'This field is required';
                         return false;
                     } else if (!this.form.gtelephone) {
-                        this.form.errors.set({
-                            gtelephone: 'This field is required'
-                        })
+                        this.e_gtelephone = 'This field is required';
                         return false;
                     } else if (!this.form.mname) {
                         this.form.errors.set({
