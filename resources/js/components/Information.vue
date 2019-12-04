@@ -45,7 +45,7 @@
                                 <th>Gender</th>
                                 <th v-if="$gate.isOfficial()">Status</th>
                                 <th>Recomm.</th>
-                                <th>Recomm. Amount</th>
+                               <!-- <th>Recomm. Amount</th>-->
                                 <th>Type</th>
                                 <th>View to Send</th>
 
@@ -67,11 +67,11 @@
                                     <span class="badge badge-warning" v-if="application.recommendation == 'Partially'">Partially</span>
                                     <span class="badge badge-danger" v-if="application.recommendation == 'No'">No</span>
                                 </td>
-                                <td>
+                                <!--<td>
                                     <span v-if="application.rec_amount"> Ksh. {{application.rec_amount}}</span>
                                     <span v-if="application.status==2 && !application.rec_amount">N/A</span>
                                     <span v-if="!application.rec_amount">Not Allocated</span>
-                                </td>
+                                </td>-->
                                 <td>{{application.bursary_type}}</td>
                                 <td>
                                     <router-link :to="{path:'/informationview/'+ application.id}" type="button"

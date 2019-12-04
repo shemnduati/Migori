@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin() || $gate.isSubadmin()">
+                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin()">
                         <!-- small box -->
                         <div class="small-box bg-danger white" >
                             <div class="inner">
@@ -76,8 +76,8 @@
 <!--                        </div>-->
 <!--                    </div>-->
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
-                        <!-- small box -->
+                   <!-- <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
+                        &lt;!&ndash; small box &ndash;&gt;
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{dash['budget']}}</h3>
@@ -89,9 +89,9 @@
                             </div>
 
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
-                        <!-- small box -->
+                    </div>-->
+                   <!-- <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
+                        &lt;!&ndash; small box &ndash;&gt;
                         <div class="small-box bg-danger white">
                             <div class="inner">
                                 <h3>{{dash['remaining']}}</h3>
@@ -102,7 +102,7 @@
                                 <i class="fas fa-coins white"></i>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-lg-6 col-6" v-if="$gate.isSubofficial()">
                         <!-- small box -->
                         <div class="small-box bg-success white">

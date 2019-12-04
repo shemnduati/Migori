@@ -78555,8 +78555,6 @@ var render = function() {
                           _vm._v(" "),
                           _c("th", [_vm._v("Recomm.")]),
                           _vm._v(" "),
-                          _c("th", [_vm._v("Recomm. Amount")]),
-                          _vm._v(" "),
                           _c("th", [_vm._v("Type")]),
                           _vm._v(" "),
                           _c("th", [_vm._v("View to Send")])
@@ -78639,24 +78637,6 @@ var render = function() {
                                     { staticClass: "badge badge-danger" },
                                     [_vm._v("No")]
                                   )
-                                : _vm._e()
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              application.rec_amount
-                                ? _c("span", [
-                                    _vm._v(
-                                      " Ksh. " + _vm._s(application.rec_amount)
-                                    )
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              application.status == 2 && !application.rec_amount
-                                ? _c("span", [_vm._v("N/A")])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              !application.rec_amount
-                                ? _c("span", [_vm._v("Not Allocated")])
                                 : _vm._e()
                             ]),
                             _vm._v(" "),
@@ -94630,7 +94610,7 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.$gate.isAdmin() || _vm.$gate.isSubadmin()
+              _vm.$gate.isAdmin()
                 ? _c("div", { staticClass: "col-lg-3 col-6" }, [
                     _c("div", { staticClass: "small-box bg-danger white" }, [
                       _c("div", { staticClass: "inner" }, [
@@ -94643,34 +94623,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _vm._m(3)
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$gate.isSubadmin()
-                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
-                    _c("div", { staticClass: "small-box bg-success" }, [
-                      _c("div", { staticClass: "inner" }, [
-                        _c("h3", [_vm._v(_vm._s(_vm.dash["budget"]))]),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Ward's Budget(Ksh)")])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(4)
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$gate.isSubadmin()
-                ? _c("div", { staticClass: "col-lg-3 col-6" }, [
-                    _c("div", { staticClass: "small-box bg-danger white" }, [
-                      _c("div", { staticClass: "inner" }, [
-                        _c("h3", [_vm._v(_vm._s(_vm.dash["remaining"]))]),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Remaining(Ksh)")])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(5)
                     ])
                   ])
                 : _vm._e(),
@@ -94690,7 +94642,7 @@ var render = function() {
                           _c("p", [_vm._v("Total county Applications")])
                         ]),
                         _vm._v(" "),
-                        _vm._m(6),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c(
                           "router-link",
@@ -94728,7 +94680,7 @@ var render = function() {
                           _c("p", [_vm._v("Total Scholarship Applications")])
                         ]),
                         _vm._v(" "),
-                        _vm._m(7),
+                        _vm._m(5),
                         _vm._v(" "),
                         _c(
                           "router-link",
@@ -94758,7 +94710,7 @@ var render = function() {
                         _c("p", [_vm._v("Total Awarded Bursaries")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(8)
+                      _vm._m(6)
                     ])
                   ])
                 : _vm._e(),
@@ -94775,7 +94727,7 @@ var render = function() {
                         _c("span", [_vm._v("Recommended")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(9)
+                      _vm._m(7)
                     ])
                   ])
                 : _vm._e(),
@@ -94792,7 +94744,7 @@ var render = function() {
                         _c("span", [_vm._v("County Bursary")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(10)
+                      _vm._m(8)
                     ])
                   ])
                 : _vm._e(),
@@ -94809,7 +94761,7 @@ var render = function() {
                         _c("span", [_vm._v("Approved")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(11)
+                      _vm._m(9)
                     ])
                   ])
                 : _vm._e()
@@ -94850,22 +94802,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-award white" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "fas fa-dollar-sign white" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "fas fa-coins white" })
     ])
   },
   function() {
