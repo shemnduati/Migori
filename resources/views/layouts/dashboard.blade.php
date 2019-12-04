@@ -144,12 +144,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </router-link>
                             </li>
                         @endcan
-                        @can('isSubadminOrOfficial')
+                        @can('isSubadmin')
                             <li class="nav-item">
                                 <router-link to="/Information" class="nav-link">
                                     <i class="nav-icon fas fa-clipboard-list green"></i>
                                     <p>
-                                        County Information
+                                         Bursary Applicants
                                     </p>
                                 </router-link>
                             </li>
@@ -157,12 +157,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <router-link to="/scholarship-admin" class="nav-link">
                                     <i class="nav-icon fas fa-clipboard-list cyan"></i>
                                     <p>
-                                        Scholarship Information
+                                        Scholarship Applicants
                                     </p>
                                 </router-link>
                             </li>
                         @endcan
                         @can('isOfficial')
+                            <li class="nav-item">
+                                <router-link to="/Information" class="nav-link">
+                                    <i class="nav-icon fas fa-clipboard-list green"></i>
+                                    <p>
+                                        Recommended Bursary Applicants
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/scholarship-admin" class="nav-link">
+                                    <i class="nav-icon fas fa-clipboard-list cyan"></i>
+                                    <p>
+                                        Recommended Scholarship Applicants
+                                    </p>
+                                </router-link>
+                            </li>
                             <li class="nav-item">
                                 <router-link to="/Applicants" class="nav-link">
                                     <i class="nav-icon fas fa-user-graduate teal"></i>
