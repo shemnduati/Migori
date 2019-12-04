@@ -497,34 +497,17 @@ class InformationController extends Controller
         $application->save();
     }
 
-    public function recommendAmount(Request $request, $applicationId)
+    public function recommendApplication(Request $request, $applicationId)
     {
-        $this->validate($request, [
-            'amount' => 'required',
-            'recommendation' => 'required',
-        ]);
-
-        $ward = Application::where('id', $applicationId)->value('ward_id');
-        $remaining = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('remaining');
-
-        if ($remaining <= $request['amount']) {
-            return response()->json([
-                'status' => 'error',
-                'msg' => 'Amount exceeds the available funds',
-            ], 422);
-        } else {
-
-//            $id = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('id');
-//            $budge = Budget::findOrFail($id);
-//            $budge->remaining = $remaining - $request['amount'];
-//            $budge->update();
+        if(auth()->user()->role == "sub-admin"){
+            $this->validate($request, [
+                'recommendation' => 'required',
+            ]);
 
             $application = Application::findOrFail($applicationId);
-            $application->rec_amount = $request['amount'];
             $application->status = 1;
             $application->recommendation = $request['recommendation'];
             $application->update();
-
         }
     }
 

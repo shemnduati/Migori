@@ -209,13 +209,13 @@
                 <div class="form-check form-check-inline">
                     <input v-model="form.recommendation" class="form-check-input" type="radio" name="yes" id="yes"
                            value="Yes"
-                           :class="{ 'is-invalid': form.errors.has('yes') }" @click="recommend">
+                           :class="{ 'is-invalid': form.errors.has('yes') }" @click="recommendApplication">
                     <label class="form-check-label">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input v-model="form.recommendation" class="form-check-input" type="radio" name="partially"
                            id="partially" value="Partially"
-                           :class="{ 'is-invalid': form.errors.has('partially') }" @click="recommend">
+                           :class="{ 'is-invalid': form.errors.has('partially') }" @click="recommendApplication">
                     <label class="form-check-label">Partially</label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -277,37 +277,6 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="recommendation" tabindex="-1" role="dialog" aria-labelledby="addnewLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addnewLabel">Recommend Amount</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form @submit.prevent="award()">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Amount</label>
-                                <input v-model="form.amount" type="text" name="name"
-                                       placeholder="Amount"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('amount') }">
-                                <has-error :form="form" field="amount"></has-error>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save"></i>
-                                Save
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -327,7 +296,6 @@
                 files: '',
                 form: new Form({
                     recommendation: '',
-                    amount: ''
                 }),
                 formf: new Form({
                     amount: ''
@@ -336,13 +304,39 @@
 
         },
         methods: {
+            recommendApplication() {
+                if (this.$gate.isSubadmin()) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        //type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes!'
+                    }).then((result) => {
+                        if (result.value) {
+                            this.form.post("/api/recommendapp/" + this.application.id).then(() => {
+                                Swal.fire(
+                                    'Success!',
+                                    'Operation successful.',
+                                    'success'
+                                )
+                                Fire.$emit('entry');
+                            }).catch(() => {
+                                Swal.fire('Failed!', 'There was something wrong')
+                            });
+                        }
+                    })
+                }
+            },
             download(id, path) {
                 axios.get("/api/download/" + id, {responseType: 'blob'})
                     .then((response) => {
                         var fileURL = window.URL.createObjectURL(new Blob([response.data]));
                         var fileLink = document.createElement('a');
                         console.log(fileLink);
-                         fileLink.href = fileURL;
+                        fileLink.href = fileURL;
                         fileLink.setAttribute('download', path.substring(8));
                         document.body.appendChild(fileLink);
 
@@ -352,13 +346,9 @@
             getFiles() {
                 axios.get("/api/getfiles/" + this.applicantId).then(({data}) => ([this.files = data]));
             },
-            getMyDetails(){
+            getMyDetails() {
                 axios.get("/api/getMyWardId/").then(({data}) => ([this.myWard = data]));
                 axios.get("/api/getMyCountyId/").then(({data}) => ([this.myCounty = data]));
-            },
-            recommend() {
-                this.form.reset();
-                $('#recommendation').modal('show');
             },
             notAward() {
                 Swal.fire({
