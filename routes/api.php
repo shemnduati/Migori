@@ -67,7 +67,7 @@ Route::get('/getMyWards', 'API\InformationController@getMyWards');
 Route::get('/getbursarytype/{type}', 'API\InformationController@getBursaryType');
 Route::post('/recommend/{applicantId}', 'API\InformationController@recommend');
 Route::post('/award/{applicantId}', 'API\InformationController@award');
-Route::post('/recommendAmount/{applicantId}', 'API\InformationController@recommendAmount');
+Route::post('/recommendapp/{applicantId}', 'API\InformationController@recommendApplication');
 Route::post('/notaward/{applicantId}', 'API\InformationController@notAward');
 Route::get('/getMyWardId', 'API\InformationController@getMyWardId');
 Route::get('/getMyCountyId', 'API\InformationController@getMyCountyId');

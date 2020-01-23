@@ -726,6 +726,10 @@
             }
         },
         methods: {
+            telephonePayload(payload){
+                // return payload.isValid;
+                console.log(payload.isValid);
+            },
             sendApp() {
                 for (let i = 0; i < this.attachments.length; i++) {
                     this.formf.append('files[]', this.attachments[i]);
