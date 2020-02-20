@@ -7,7 +7,7 @@
                         <h3 class="card-title">County Bursary Application</h3>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form autocomplete="off">
                             <section v-if="step==1">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-6 justify-content-center">
@@ -23,6 +23,7 @@
                                                     </option>
                                                 </select>
                                                 <has-error :form="form" field="year"></has-error>
+                                                <small style="color: red" v-if="error && errors.year">{{ errors.year[0] }}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -39,6 +40,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('firstName') }">
                                             <has-error :form="form" field="firstName"></has-error>
+                                            <small style="color: red" v-if="error && errors.firstName">{{ errors.firstName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -48,6 +50,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('middleName') }">
                                             <has-error :form="form" field="middleName"></has-error>
+                                            <small style="color: red" v-if="error && errors.middleName">{{ errors.middleName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -57,6 +60,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('lastName') }">
                                             <has-error :form="form" field="lastName"></has-error>
+                                            <small style="color: red" v-if="error && errors.lastName">{{ errors.lastName[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -77,6 +81,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('email') }">
                                             <has-error :form="form" field="email"></has-error>
+                                            <small style="color: red" v-if="error && errors.email">{{ errors.email[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -86,6 +91,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('dob') }">
                                             <has-error :form="form" field="dob"></has-error>
+                                            <small style="color: red" v-if="error && errors.dob">{{ errors.dob[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -107,17 +113,14 @@
                                             <label class="form-check-label">Female</label>
                                             <has-error :form="form" field="gender"></has-error>
                                         </div>
+                                        <small style="color: red" v-if="error && errors.gender">{{ errors.gender[0] }}</small>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Telephone</label>
-<!--                                            <input v-model="form.telephone" type="tel" placeholder="+254"-->
-<!--                                                   name="telephone"-->
-<!--                                                   class="form-control"-->
-<!--                                                   :class="{ 'is-invalid': form.errors.has('telephone') }">-->
-<!--                                            <has-error :form="form" field="telephone"></has-error>-->
                                             <VuePhoneNumberInput v-model="form.telephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_telephone}}</small>
+                                            <small style="color: red" v-if="error && errors.telephone">{{ errors.telephone[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -130,6 +133,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('regNo') }">
                                             <has-error :form="form" field="regNo"></has-error>
+                                            <small style="color: red" v-if="error && errors.regNo">{{ errors.regNo[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -139,6 +143,7 @@
                                                    id="passport" accept="image/*"
                                                    :class="{ 'is-invalid': form.errors.has('passport') }">
                                             <has-error :form="form" field="passport"></has-error>
+                                            <small style="color: red" v-if="error && errors.passport">{{ errors.passport[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -154,32 +159,35 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fname') }">
                                             <has-error :form="form" field="fname"></has-error>
+                                            <small style="color: red" v-if="error && errors.fname">{{ errors.fname[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <label for="alive">Alive/Dead</label><br>
+                                        <label>Alive/Dead</label><br>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.fliving" class="form-check-input" type="radio"
-                                                   name="fliving" id="fliving" value="Alive"
+                                                   name="fliving" value="Alive"
                                                    :class="{ 'is-invalid': form.errors.has('fliving') }">
-                                            <label class="form-check-label" for="inlineRadio1">Alive</label>
+                                            <label class="form-check-label">Alive</label>
                                             <has-error :form="form" field="fliving"></has-error>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.fliving" class="form-check-input" type="radio"
                                                    name="fliving" id="fliving" value="Dead"
                                                    :class="{ 'is-invalid': form.errors.has('fliving') }">
-                                            <label class="form-check-label" for="inlineRadio1">Dead</label>
+                                            <label class="form-check-label">Dead</label>
                                             <has-error :form="form" field="fliving"></has-error>
                                         </div>
+                                        <small style="color: red" v-if="error && errors.fliving">{{ errors.fliving[0] }}</small>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="fpassport">Attach Father’s ID/Death Cert</label>
+                                            <label>Attach Father’s ID/Death Cert</label>
                                             <input type="file" @change="getFatherId" class="form-control-file" id="fId"
                                                    accept="image/*"
                                                    :class="{ 'is-invalid': form.errors.has('fatherId') }">
                                             <has-error :form="form" field="fatherId"></has-error>
+                                            <small style="color: red" v-if="error && errors.fatherId">{{ errors.fatherId[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -191,6 +199,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('foccupation') }">
                                             <has-error :form="form" field="foccupation"></has-error>
+                                            <small style="color: red" v-if="error && errors.foccupation">{{ errors.foccupation[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -198,6 +207,7 @@
                                             <label>Telephone</label>
                                             <VuePhoneNumberInput v-model="form.ftelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_ftelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.ftelephone">{{ errors.ftelephone[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -207,6 +217,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fincome') }">
                                             <has-error :form="form" field="fincome"></has-error>
+                                            <small style="color: red" v-if="error && errors.fincome">{{ errors.fincome[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -219,32 +230,35 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('mname') }">
                                             <has-error :form="form" field="mname"></has-error>
+                                            <small style="color: red" v-if="error && errors.mname">{{ errors.mname[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <label for="alive">Alive/Dead</label><br>
+                                        <label>Alive/Dead</label><br>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.mliving" class="form-check-input" type="radio"
-                                                   name="mliving" id="mliving" value="Alive"
+                                                   name="mliving" value="Alive"
                                                    :class="{ 'is-invalid': form.errors.has('mliving') }">
-                                            <label class="form-check-label" for="inlineRadio1">Alive</label>
+                                            <label class="form-check-label">Alive</label>
                                             <has-error :form="form" field="mliving"></has-error>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.mliving" class="form-check-input" type="radio"
                                                    name="mliving" id="mliving" value="Dead"
                                                    :class="{ 'is-invalid': form.errors.has('mliving') }">
-                                            <label class="form-check-label" for="inlineRadio1">Dead</label>
+                                            <label class="form-check-label">Dead</label>
                                             <has-error :form="form" field="mliving"></has-error>
                                         </div>
+                                        <small style="color: red" v-if="error && errors.mliving">{{ errors.mliving[0] }}</small>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="mpassport">Attach Mother’s ID/Death Cert</label>
+                                            <label>Attach Mother’s ID/Death Cert</label>
                                             <input type="file" @change="getMotherId" class="form-control-file" id="mID"
                                                    accept="image/*"
                                                    :class="{ 'is-invalid': form.errors.has('motherId') }">
                                             <has-error :form="form" field="motherId"></has-error>
+                                            <small style="color: red" v-if="error && errors.motherId">{{ errors.motherId[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -256,6 +270,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('moccupation') }">
                                             <has-error :form="form" field="moccupation"></has-error>
+                                            <small style="color: red" v-if="error && errors.moccupation">{{ errors.moccupation[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -263,6 +278,7 @@
                                             <label>Telephone</label>
                                             <VuePhoneNumberInput v-model="form.mtelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_mtelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.mtelephone">{{ errors.mtelephone[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -272,6 +288,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('mincome') }">
                                             <has-error :form="form" field="mincome"></has-error>
+                                            <small style="color: red" v-if="error && errors.mincome">{{ errors.mincome[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -284,32 +301,35 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('gname') }">
                                             <has-error :form="form" field="gname"></has-error>
+                                            <small style="color: red" v-if="error && errors.gname">{{ errors.gname[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <label for="alive">Alive/Dead</label><br>
+                                        <label>Alive/Dead</label><br>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.gliving" class="form-check-input" type="radio"
-                                                   name="gliving" id="gliving" value="Alive"
+                                                   name="gliving" value="Alive"
                                                    :class="{ 'is-invalid': form.errors.has('gliving') }">
-                                            <label class="form-check-label" for="inlineRadio1">Alive</label>
+                                            <label class="form-check-label">Alive</label>
                                             <has-error :form="form" field="gliving"></has-error>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.gliving" class="form-check-input" type="radio"
-                                                   name="gliving" id="gliving" value="Dead"
+                                                   name="gliving" value="Dead"
                                                    :class="{ 'is-invalid': form.errors.has('gliving') }">
-                                            <label class="form-check-label" for="inlineRadio1">Dead</label>
+                                            <label class="form-check-label">Dead</label>
                                             <has-error :form="form" field="gliving"></has-error>
+                                            <small style="color: red" v-if="error && errors.gliving">{{ errors.gliving[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="gpassport">Attach Guardian’s ID/Death Cert</label>
+                                            <label>Attach Guardian’s ID/Death Cert</label>
                                             <input type="file" @change="getGuardianId" class="form-control-file"
                                                    id="gId" accept="image/*"
                                                    :class="{ 'is-invalid': form.errors.has('guardianId') }">
                                             <has-error :form="form" field="guardianId"></has-error>
+                                            <small style="color: red" v-if="error && errors.guardianId">{{ errors.guardianId[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -321,6 +341,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('goccupation') }">
                                             <has-error :form="form" field="goccupation"></has-error>
+                                            <small style="color: red" v-if="error && errors.goccupation">{{ errors.goccupation[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -328,6 +349,7 @@
                                             <label>Telephone</label>
                                             <VuePhoneNumberInput v-model="form.gtelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_gtelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.gtelephone">{{ errors.gtelephone[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -337,6 +359,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('gincome') }">
                                             <has-error :form="form" field="gincome"></has-error>
+                                            <small style="color: red" v-if="error && errors.gincome">{{ errors.gincome[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -349,6 +372,7 @@
                                                    class="form-control" min="1"
                                                    :class="{ 'is-invalid': form.errors.has('tSiblings') }">
                                             <has-error :form="form" field="tSiblings"></has-error>
+                                            <small style="color: red" v-if="error && errors.tSiblings">{{ errors.tSiblings[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -358,6 +382,7 @@
                                                    class="form-control" min="1"
                                                    :class="{ 'is-invalid': form.errors.has('inSchool') }">
                                             <has-error :form="form" field="inSchool"></has-error>
+                                            <small style="color: red" v-if="error && errors.inSchool">{{ errors.inSchool[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -367,6 +392,7 @@
                                                    class="form-control" min="1"
                                                    :class="{ 'is-invalid': form.errors.has('sWorking') }">
                                             <has-error :form="form" field="sWorking"></has-error>
+                                            <small style="color: red" v-if="error && errors.sWorking">{{ errors.sWorking[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -378,6 +404,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('pFees') }">
                                             <has-error :form="form" field="pFees"></has-error>
+                                            <small style="color: red" v-if="error && errors.pFees">{{ errors.pFees[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -392,6 +419,7 @@
                                                 <option value="Guardian">Guardian</option>
                                             </select>
                                             <has-error :form="form" field="pRelationship"></has-error>
+                                            <small style="color: red" v-if="error && errors.pRelationship">{{ errors.pRelationship[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -411,6 +439,7 @@
                                                 </option>
                                             </select>
                                             <has-error :form="form" field="county"></has-error>
+                                            <small style="color: red" v-if="error && errors.county">{{ errors.county[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -424,6 +453,7 @@
                                                 </option>
                                             </select>
                                             <has-error :form="form" field="ward"></has-error>
+                                            <small style="color: red" v-if="error && errors.ward">{{ errors.ward[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -434,6 +464,7 @@
                                                        class="form-control"
                                                        :class="{ 'is-invalid': form.errors.has('constituency') }">
                                                 <has-error :form="form" field="constituency"></has-error>
+                                                <small style="color: red" v-if="error && errors.constituency">{{ errors.constituency[0] }}</small>
                                             </div>
                                         </div>
                                     </div>
@@ -446,6 +477,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('division') }">
                                             <has-error :form="form" field="division"></has-error>
+                                            <small style="color: red" v-if="error && errors.division">{{ errors.division[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -455,6 +487,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('location') }">
                                             <has-error :form="form" field="location"></has-error>
+                                            <small style="color: red" v-if="error && errors.location">{{ errors.location[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -466,6 +499,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('sublocation') }">
                                             <has-error :form="form" field="sublocation"></has-error>
+                                            <small style="color: red" v-if="error && errors.sublocation">{{ errors.sublocation[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -475,6 +509,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('village') }">
                                             <has-error :form="form" field="village"></has-error>
+                                            <small style="color: red" v-if="error && errors.village">{{ errors.village[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -484,6 +519,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('polling') }">
                                             <has-error :form="form" field="polling"></has-error>
+                                            <small style="color: red" v-if="error && errors.polling">{{ errors.polling[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -498,6 +534,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('iname') }">
                                             <has-error :form="form" field="iname"></has-error>
+                                            <small style="color: red" v-if="error && errors.iname">{{ errors.iname[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -507,24 +544,27 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('branch') }">
                                             <has-error :form="form" field="branch"></has-error>
+                                            <small style="color: red" v-if="error && errors.branch">{{ errors.branch[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Class/Course</label>
+                                            <label>Course</label>
                                             <input v-model="form.class" type="text" name="class"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('class') }">
                                             <has-error :form="form" field="class"></has-error>
+                                            <small style="color: red" v-if="error && errors.class">{{ errors.class[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Year of Study</label>
+                                            <label>Current Year of Study</label>
                                             <input v-model="form.year" type="number" name="year" min="1" max="6"
                                                    step="1" class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('year') }">
                                             <has-error :form="form" field="year"></has-error>
+                                            <small style="color: red" v-if="error && errors.year">{{ errors.year[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -536,6 +576,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('payable') }">
                                             <has-error :form="form" field="payable"></has-error>
+                                            <small style="color: red" v-if="error && errors.payable">{{ errors.payable[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -545,6 +586,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('paid') }">
                                             <has-error :form="form" field="paid"></has-error>
+                                            <small style="color: red" v-if="error && errors.paid">{{ errors.paid[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -554,6 +596,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('balance') }">
                                             <has-error :form="form" field="balance"></has-error>
+                                            <small style="color: red" v-if="error && errors.balance">{{ errors.balance[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -565,6 +608,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('bank') }">
                                             <has-error :form="form" field="bank"></has-error>
+                                            <small style="color: red" v-if="error && errors.bank">{{ errors.bank[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -574,6 +618,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('account') }">
                                             <has-error :form="form" field="account"></has-error>
+                                            <small style="color: red" v-if="error && errors.account">{{ errors.account[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -583,6 +628,7 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('bran') }">
                                             <has-error :form="form" field="bran"></has-error>
+                                            <small style="color: red" v-if="error && errors.bran">{{ errors.bran[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -597,7 +643,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <!--                                        <button class="btn btn-primary btn-sm" @click.prevent="sendOther(1)">send</button>-->
+
                                     </div>
                                 </div>
                             </section>
@@ -656,6 +702,8 @@
         },
         data() {
             return {
+                errors: {},
+                error: false,
                 step: 1,
                 totalSteps: 5,
                 counties: {},
@@ -809,11 +857,12 @@
                 })
                     .catch(error => {
                         this.loading = false;
+                        this.error = true;
                         this.errors = error.response.data.errors;
                         Swal.fire({
                             type: 'error',
                             title: 'Error!!',
-                            text: error.response.data.msg,
+                            text: "Your application contains invalid data. Please review your inputs and provide valid details.",
 
                         })
                     });
