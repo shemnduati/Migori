@@ -95,6 +95,7 @@ class ApplicationController extends Controller
             'iname' => 'required|string',
             'branch' => 'required|string',
             'year' => 'required',
+            'yearz' => 'required',
             'payable' => 'required',
             'paid' => 'required',
             'balance' => 'required',
@@ -138,6 +139,7 @@ class ApplicationController extends Controller
                 $application->id_no = $request['idNo'];
                 $application->reg_no = $request['regNo'];
                 $application->bursary_type = $request['type'];
+                $application->application_year =$request['yearz'];
                 $application->dob = $request['dob'];
                 $application->status = 0;
                 $application->gender = $request['gender'];

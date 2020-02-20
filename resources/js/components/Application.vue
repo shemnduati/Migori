@@ -17,7 +17,7 @@
                                                 <select v-model="form.yearz" class="form-control" name="yearz"
                                                         :class="{ 'is-invalid': form.errors.has('yearz') }">
                                                     <option selected value="">--Select Application Year--</option>
-                                                    <option v-for="year in yearz" :key="year.id" :value="year.id">
+                                                    <option v-for="year in yearz" :key="year.id" :value="year.year">
                                                         {{
                                                         year.year}}
                                                     </option>
