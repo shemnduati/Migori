@@ -87,6 +87,7 @@ class ScholarshipController extends Controller
             $application = new Application();
             $application->user_id = auth()->user()->id;
             $application->bursary_type = $request->type;
+            $application->application_year =$request->yearz;
             $application->firstName = $request->firstName;
             $application->middleName = $request->middleName;
             $application->lastName = $request->lastName;

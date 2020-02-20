@@ -272,6 +272,7 @@ class ApplicationController extends Controller
                 $application->id_no = $request['idNo'];
                 $application->reg_no = $request['regNo'];
                 $application->bursary_type = $request['type'];
+                $application->application_year =$request['yearz'];
                 $application->dob = $request['dob'];
                 $application->status = 2;
                 $application->gender = $request['gender'];

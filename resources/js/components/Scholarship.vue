@@ -14,17 +14,16 @@
                                     <div class="col-sm-6 justify-content-center">
                                         <div class="form-group">
                                             <div class="col">
-                                                <label>County</label>
-                                                <select v-model="form.county" @change='getCountyWards()'
-                                                        class="form-control" name="county"
-                                                        :class="{ 'is-invalid': form.errors.has('county') }">
-                                                    <option selected value="">--Select county--</option>
-                                                    <option v-for="count in counties" :key="count.id" :value="count.id">
+                                                <label>Select Application Year</label>
+                                                <select v-model="form.yearz" class="form-control" name="yearz"
+                                                        :class="{ 'is-invalid': form.errors.has('yearz') }">
+                                                    <option selected value="">--Select Application Year--</option>
+                                                    <option v-for="year in yearz" :key="year.id" :value="year.year">
                                                         {{
-                                                        count.name}}
+                                                        year.year}}
                                                     </option>
                                                 </select>
-                                                <has-error :form="form" field="county"></has-error>
+                                                <has-error :form="form" field="year"></has-error>
                                             </div>
                                         </div>
                                     </div>
@@ -1542,6 +1541,7 @@
                 now: moment().format('YYYY'),
                 enable: {},
                 watch: 0,
+                yearz:{},
                 loading: false,
                 attachments: [],
                 e_ftelephone: '',
@@ -1555,6 +1555,7 @@
                 formf: new FormData(),
                 form: new Form({
                     type: 'scholarship',
+                    yearz:'',
                     firstName: '',
                     middleName: '',
                     lastName: '',
@@ -1564,7 +1565,7 @@
                     gender: '',
                     telephone: '',
                     alt_telephone: '',
-                    county: '',
+                    county: 1,
                     ward: '',
                     subcounty: '',
                     location: '',
@@ -1852,9 +1853,9 @@
             },
             nextStep() {
                 if (this.step == 1) {
-                    if (!this.form.county) {
+                    if (!this.form.yearz) {
                         this.form.errors.set({
-                            county: 'This field is required'
+                            yearz: 'This field is required'
                         })
                         return false;
                     } else if (this.enable == 0) {
@@ -2376,12 +2377,17 @@
             },
             getStatus() {
                 axios.get("api/statuz/" + this.form.county).then(({data}) => ([this.enable = data['num']]));
-            }
+            },
+            getApplication(){
+                axios.get("api/getAppYears/" + this.form.county).then(({data}) => ([this.yearz = data['year']]));
+            },
         },
         created() {
             this.getCounties();
             this.getWards();
             this.getDetails();
+            this.getStatus();
+            this.getApplication();
 
         }
     }
