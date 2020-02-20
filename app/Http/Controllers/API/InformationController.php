@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Configuration;
 use App\County;
 use App\Institution;
 use App\Mail\BursaryEmail;
@@ -327,6 +328,11 @@ class InformationController extends Controller
         $county_id = User::where('id', Auth::user()->id)->value('county');
         $county = County::where('id', $county_id)->firstOrFail();
         return collect($county)->toJson();
+    }
+    public function getApplicationYears($id)
+    {
+        $year = Configuration::where('county', $id)->where('status', 1)->where('type', 1)->get(['year', 'id']);
+        return ['year'=> $year];
     }
 
     public function getWardsById($id)

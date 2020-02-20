@@ -2,31 +2,32 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card" v-if="watch == 0 && enable !=0">
-                    <div class="card-header">Application</div>
-
+                <div class="card" v-if="watch == 0 && enable == 1">
+                    <div class="card-header">
+                        <h3 class="card-title">County Bursary Application</h3>
+                    </div>
                     <div class="card-body">
                         <form>
-
                             <section v-if="step==1">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-6 justify-content-center">
                                         <div class="form-group">
-                                            <label for="county">Select Your County</label>
-                                            <select v-model="form.county"   @change='getCountyWards()'
-                                                    class="form-control" :required="true" name="county" id="Mycounty"
-                                                    :class="{ 'is-invalid': form.errors.has('county') }">
-                                                <option selected value="">--Select county--</option>
-                                                <option v-for="count in counties" :key="count.id" :value="count.id">{{
-                                                    count.name}}
-                                                </option>
-                                            </select>
-                                            <has-error :form="form" field="county"></has-error>
+                                            <div class="col">
+                                                <label>Select Application Year</label>
+                                                <select v-model="form.yearz" class="form-control" name="yearz"
+                                                        :class="{ 'is-invalid': form.errors.has('yearz') }">
+                                                    <option selected value="">--Select Application Year--</option>
+                                                    <option v-for="year in yearz" :key="year.id" :value="year.id">
+                                                        {{
+                                                        year.year}}
+                                                    </option>
+                                                </select>
+                                                <has-error :form="form" field="year"></has-error>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-
                             <section v-if="step==2 && enable==1">
                                 <h3>PERSONAL DETAILS</h3>
 
@@ -663,6 +664,7 @@
                 enable: {},
                 loading: false,
                 watch: 0,
+                yearz:{},
                 attachments: [],
                 e_telephone: '',
                 e_ftelephone: '',
@@ -693,7 +695,7 @@
                     fincome: '',
                     mincome: '',
                     gincome: '',
-                    county: '',
+                    county: 1,
                     ward: '',
                     constituency: '',
                     location: '',
@@ -704,6 +706,7 @@
                     iname: '',
                     branch: '',
                     year: '',
+                    yearz:'',
                     payable: '',
                     paid: '',
                     balance: '',
@@ -938,11 +941,10 @@
                 }
             },
             nextStep() {
-
                 if (this.step == 1) {
-                    if (!this.form.county) {
+                    if (!this.form.yearz) {
                         this.form.errors.set({
-                            county: 'This field is required'
+                            yearz: 'This field is required'
                         })
                         return false;
                     } else if (this.enable == 0) {
@@ -1260,12 +1262,17 @@
             getStatus() {
                 axios.get("api/status/" + this.form.county).then(({data}) => ([this.enable = data['num']]));
 
-            }
+            },
+            getApplication(){
+                axios.get("api/getApplicationYears/" + this.form.county).then(({data}) => ([this.yearz = data['year']]));
+            },
         },
         created() {
             this.getCounties();
             this.getWards();
             this.getDetails();
+            this.getStatus();
+            this.getApplication();
 
         }
     }
