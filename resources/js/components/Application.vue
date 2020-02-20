@@ -17,9 +17,9 @@
                                                 <select v-model="form.yearz" class="form-control" name="yearz"
                                                         :class="{ 'is-invalid': form.errors.has('yearz') }">
                                                     <option selected value="">--Select Application Year--</option>
-                                                    <option v-for="year in years" :key="year.id" :value="year.id">
+                                                    <option v-for="year in yearz" :key="year.id" :value="year.id">
                                                         {{
-                                                        year.name}}
+                                                        year.year}}
                                                     </option>
                                                 </select>
                                                 <has-error :form="form" field="year"></has-error>
@@ -1263,8 +1263,8 @@
                 axios.get("api/status/" + this.form.county).then(({data}) => ([this.enable = data['num']]));
 
             },
-            getApplicationYears(){
-                axios.get("api/appyear/" + this.form.count).then(({data}) => ([this.yearz = data['year']]));
+            getApplication(){
+                axios.get("api/getApplicationYears/" + this.form.county).then(({data}) => ([this.yearz = data['year']]));
             },
         },
         created() {
@@ -1272,7 +1272,7 @@
             this.getWards();
             this.getDetails();
             this.getStatus();
-            this.getApplicationYears();
+            this.getApplication();
 
         }
     }

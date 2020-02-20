@@ -331,8 +331,8 @@ class InformationController extends Controller
     }
     public function getApplicationYears($id)
     {
-        $year = Configuration::where('county', $id)->where('status', 1)->firstorfail(year);
-        return response()->json($year);
+        $year = Configuration::where('county', $id)->where('status', 1)->where('type', 1)->get(['year', 'id']);
+        return ['year'=> $year];
     }
 
     public function getWardsById($id)
