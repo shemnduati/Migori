@@ -54,7 +54,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 v-show="!editMode" class="modal-title" id="addnewLabel">Apllication Year</h5>
+                            <h5 v-show="!editMode" class="modal-title" id="addnewLabel">Application Year</h5>
                             <h5 v-show="editMode" class="modal-title" id="addnewLabel">Edit year</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -63,13 +63,14 @@
                         <form @submit.prevent="editMode ? updateConfiguration() : addConfiguration()">
                         <div class="modal-body">
                             <div class="form-group">
-                              <label>Apllication Year</label>
-                              <input v-model="form.year" type="text" name="year"
+                              <label>Application Year</label>
+                              <input v-model="form.year" type="number" name="year"
                                 placeholder="Enter Year"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('year') }">
                               <has-error :form="form" field="year"></has-error>
                             </div>
                             <div class="form-group">
+                                <label>Status</label>
                                 <select name="status" v-model="form.status" id="status" class="form-control"   :class="{ 'is-invalid': form.errors.has('status') }">
                                   <option value="">Select Status</option>
                                   <option value="1">On</option>
@@ -78,6 +79,7 @@
                                 <has-error :form="form" field="status"></has-error>
                             </div>
                             <div class="form-group">
+                                <label>Bursary Type</label>
                                 <select name="type" v-model="form.type" id="type" class="form-control"   :class="{ 'is-invalid': form.errors.has('type') }">
                                     <option value="">Select bursary type</option>
                                     <option value="1">Scholarship</option>

@@ -61,7 +61,7 @@ Route::get('/getAppnts', 'API\InformationController@getAppnts');
 Route::get('/gettype/{id}', 'API\InformationController@getType');
 Route::get('/getWardsById/{id}', 'API\InformationController@getWardsById');
 Route::get('/getWardsApp/{id}', 'API\InformationController@getWardsApp');
-Route::get('/getMyCounty', 'API\InformationController@getMyCounty');
+Route::get('/myCounty', 'API\InformationController@getMyCounty');
 Route::get('/getstatus/{id}', 'API\InformationController@getstatus');
 Route::get('/getMyWards', 'API\InformationController@getMyWards');
 Route::get('/getbursarytype/{type}', 'API\InformationController@getBursaryType');
@@ -121,3 +121,7 @@ Route::get('total', 'API\StatsController@index');
 Route::get('/MyWards', 'API\StatsController@MyWards');
 Route::get('/MyWardz', 'API\StatsController@MyWardz');
 Route::post('/issuedcheque/{applicationId}', 'API\FeatureController@issueCheque');
+
+// Validation
+
+Route::post('step-one', 'API\ApplicationValidationController@stepOne');

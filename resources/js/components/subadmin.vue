@@ -79,7 +79,7 @@
                                 <select v-model="form.county" @change='getCountyWards()' class="form-control" name="county" id="county"
                                         :class="{ 'is-invalid': form.errors.has('county') }">
                                     <option selected value="">--Select county--</option>
-                                    <option v-for="count in counties" :key="count.id" :value="count.id">{{ count.name}}</option>
+                                    <option :key="counties.id" :value="counties.id">{{ counties.name}}</option>
                                 </select>
                                 <has-error :form="form" field="county"></has-error>
                             </div>
@@ -113,7 +113,7 @@
                 editMode: false,
                 users :{},
                 wards:{},
-                counties: {},
+                counties: [],
                 form: new Form({
                     id:'',
                     name:'',
@@ -203,7 +203,7 @@
                     axios.get("api/getcounty").then(({ data }) => ([this.counties = data['counties']]));
                 }
                 if (this.$gate.isOfficial()){
-                    axios.get("api/getMyCounty").then(({ data }) => ([this.counties = data['counties']]));
+                    axios.get("api/myCounty").then(({ data }) => ([this.counties = data]));
                 }
 
             },

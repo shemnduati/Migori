@@ -31,7 +31,7 @@ class ConfigurationController extends Controller
     public function store(Request $request, $id)
     {
         $this->validate($request,[
-            'year' => 'required|string|max:25',
+            'year' => 'required|integer|min:'.date('Y'),
             'status' => 'required|boolean',
             'type' => 'required'
         ]);
