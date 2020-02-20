@@ -94,6 +94,7 @@ class ApplicationController extends Controller
             'polling' => 'required|string',
             'iname' => 'required|string',
             'branch' => 'required|string',
+            'yearz' => 'required',
             'payable' => 'required',
             'paid' => 'required',
             'balance' => 'required',
@@ -137,6 +138,7 @@ class ApplicationController extends Controller
                 $application->id_no = $request['idNo'];
                 $application->reg_no = $request['regNo'];
                 $application->bursary_type = $request['type'];
+                $application->application_year =$request['yearz'];
                 $application->dob = $request['dob'];
                 $application->status = 0;
                 $application->gender = $request['gender'];
@@ -269,6 +271,7 @@ class ApplicationController extends Controller
                 $application->id_no = $request['idNo'];
                 $application->reg_no = $request['regNo'];
                 $application->bursary_type = $request['type'];
+                $application->application_year =$request['yearz'];
                 $application->dob = $request['dob'];
                 $application->status = 2;
                 $application->gender = $request['gender'];

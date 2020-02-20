@@ -64,6 +64,7 @@ Route::get('/getWardsApp/{id}', 'API\InformationController@getWardsApp');
 Route::get('/myCounty', 'API\InformationController@getMyCounty');
 Route::get('/getstatus/{id}', 'API\InformationController@getstatus');
 Route::get('/getApplicationYears/{id}','API\InformationController@getApplicationYears');
+Route::get('/getAppYears/{id}','API\InformationController@getAppYears');
 Route::get('/getMyWards', 'API\InformationController@getMyWards');
 Route::get('/getbursarytype/{type}', 'API\InformationController@getBursaryType');
 Route::post('/recommend/{applicantId}', 'API\InformationController@recommend');
