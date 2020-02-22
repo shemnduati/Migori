@@ -3,9 +3,6 @@
         <div class="text-center pt-2">
             <h3>Student Information</h3>
         </div>
-        <div class="row pl-3">
-            <img :src="application.passport" alt="" style="width: 200px">
-        </div>
         <div class="row">
             <div class="col-md-8">
                 <h5 class=" rounded bgc p-2 mt-2 text-center">APPLICANT’S BIO</h5>
@@ -39,11 +36,34 @@
             </div>
             <div class="col-md-4 pt-5">
                 <div class="row">
-                    <div class="col-md-8">
-                        <p class="rounded p-2 mt-2 text-center bg-b">Aplicant ID/ Birth Cert</p>
-                    </div>
-                    <div class="col-md-4">
-                        <button @click="launch(application['passport'])" class="btn btn-lg bg-success">View</button>
+                    <div class="box">
+                        <div class="box" style="margin-bottom: 10px;">
+
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12" v-for="file in files"
+                                     :key="file.id">
+                                    <div class="info-box">
+                                        <div class="info-box-content">
+                                            <span class="info-box-text"><small>{{file.kind}}</small></span>
+                                            <hr>
+                                            <button type="button" class="btn btn-primary btn-sm" @click.prevent="download(file.id, file.path)">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!--                                            <button type="button" class="btn btn-primary" @click="downloadAll">Download all files</button>-->
+                            </div>
+                        </div>
+                        <div class="alert alert-warning alert-dismissible" v-if="files.length == 0">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fa fa-ban"></i> Alert!</h5>
+                            No files attached!!
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,47 +109,8 @@
                 </div>
             </div>
             <div class="col-md-4 pt-5">
-                <div class="row pt-5" v-for="fam in family" :key="fam.id">
-                    <div class="col-md-8">
-                        <p class="rounded p-2 mt-2 text-center bg-b">{{fam['relationship']}}'s ID/ Death Cert</p>
-                    </div>
-                    <div class="col-md-4">
-                        <button @click="launch(fam.cert)" class="btn btn-lg bg-success">Views</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="box">
-                        <div class="box-header">
-                            <h4 class="box-title">Letter of Recommendation (Click to download)</h4>
-                        </div>
-                        <div class="box" style="margin-bottom: 10px;">
+                <div class="row pt-5">
 
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12" v-for="file in files" :key="file.id">
-                                    <a @click.prevent="download(file.id, file.path)">
-                                        <div class="info-box">
-                                            <span class="info-box-icon" style="background-color: green;"><i
-                                                    class="fas fa-download" style="color: white;"></i></span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Download</span>
-                                            </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
-                                    </a>
-                                    <!-- /.info-box -->
-                                </div>
-                                <!--                                            <button type="button" class="btn btn-primary" @click="downloadAll">Download all files</button>-->
-                            </div>
-                        </div>
-                        <div class="alert alert-warning alert-dismissible" v-if="files.length == 0">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h5><i class="icon fa fa-ban"></i> Alert!</h5>
-                            No files attached!!
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -222,7 +203,7 @@
                     <input v-model="form.recommendation" class="form-check-input" type="radio" name="no" id="no"
                            value="No"
                            :class="{ 'is-invalid': form.errors.has('no') }" @click="recommendNo">
-                    <label class="form-check-label" for="inlineRadio1">No</label>
+                    <label class="form-check-label">No</label>
                 </div>
                 <!-- <button @click="reject()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-danger px-5 offset-md-3" >Reject</button> -->
             </div>
