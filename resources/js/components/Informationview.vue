@@ -15,6 +15,7 @@
             <div class="col-md-8">
                 <div class="row mx-2 pl-3 pt-2 border border-success rounded">
                     <div class="col-md-4">
+                        <p> Application Year</p>
                         <p> FirstName</p>
                         <p> MiddleName</p>
                         <p> LastName</p>
@@ -24,6 +25,7 @@
                         <p> Tel. </p>
                     </div>
                     <div class="col-md-4">
+                        <p> {{application['application_year']}} </p>
                         <p> {{application['firstName']}} </p>
                         <p> {{application['middleName']}} </p>
                         <p> {{application['lastName']}} </p>

@@ -340,11 +340,11 @@ class ApplicationController extends Controller
     public
     function show($applicationId)
     {
-        $application = Application::where('id', $applicationId)->where('year', date('Y'))->first();
-        $family = Family::where('applicationId', $applicationId)->where('year', date('Y'))->get();
-        $morefamily = MoreFamily::where('applicationId', $applicationId)->where('year', date('Y'))->first();
-        $institution = Institution::where('applicationId', $applicationId)->where('year', date('Y'))->first();
-        $geos = Geographical::where('applicationId', $applicationId)->where('year', date('Y'))->first();
+        $application = Application::where('id', $applicationId)->first();
+        $family = Family::where('applicationId', $applicationId)->get();
+        $morefamily = MoreFamily::where('applicationId', $applicationId)->first();
+        $institution = Institution::where('applicationId', $applicationId)->first();
+        $geos = Geographical::where('applicationId', $applicationId)->first();
 
 
         $County = County::where('id', $geos['County'])->value('name');
