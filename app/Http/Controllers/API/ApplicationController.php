@@ -102,11 +102,17 @@ class ApplicationController extends Controller
             'inSchool' => 'required|integer',
             'sWorking' => 'required|integer',
             'pFees' => 'required|string',
+            'passport' => 'required|array',
+            'passport.*' => 'mimes:jpg,jpeg,png,pdf,docx',
+            'motherId' => 'required|array',
+            'motherId.*' => 'mimes:jpg,jpeg,png,pdf,docx',
+            'fatherId' => 'required|array',
+            'fatherId.*' => 'mimes:jpg,jpeg,png,pdf,docx',
+            'guardianId' => 'required|array',
+            'guardianId.*' => 'mimes:jpg,jpeg,png,pdf,docx',
+            'files' => 'required|array',
+            'files.*' => 'mimes:jpg,jpeg,png,pdf,docx',
             'pRelationship' => 'required|string',
-            'passport' => 'required',
-            'fatherId' => 'required',
-            'motherId' => 'required',
-            'guardianId' => 'required',
             'ftelephone' => 'required|phone:KE|min:10',
             'mtelephone' => 'required|phone:KE|min:10',
             'gtelephone' => 'required|phone:KE|min:10',
@@ -115,7 +121,7 @@ class ApplicationController extends Controller
             'bran' => 'required',
         ]);
 
-        $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->where('bursary_type', $request->type)->get();
+        $check = Application::where('user_id', auth()->user()->id)->where('year', $request->yearz)->where('bursary_type', $request->type)->get();
 
         if (count($check) > 0) {
             return response()->json([
@@ -123,274 +129,204 @@ class ApplicationController extends Controller
                 'msg' => 'You already sent an application',
             ], 422);
         } else {
+            $user = auth()->user()->id;
+            $serial = auth('api')->user()->id . time();
+            $application = new Application();
+            $application->user_id = $user;
+            $application->firstName = $request->firstName;
+            $application->middleName = $request->middleName;
+            $application->lastName = $request->lastName;
+            $application->email = $request['email'];
+            $application->id_no = $request['idNo'];
+            $application->reg_no = $request['regNo'];
+            $application->bursary_type = $request['type'];
+            $application->application_year = $request['yearz'];
+            $application->dob = $request['dob'];
+            $application->status = 0;
+            $application->gender = $request['gender'];
+            $application->tel = $request['telephone'];
+            $application->county = $request['county'];
+            $application->ward_id = $request['ward'];
+            $application->year = date('Y');
+            $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
 
-            $available = User::where('ward', $request['ward'])->count();
-            if ($available > 0) {
-                $user = auth('api')->user()->id;
-                $serial = auth('api')->user()->id . time();
-                $application = new Application();
-                $application->user_id = $user;
-                $application->firstName = $request->firstName;
-                $application->middleName = $request->middleName;
-                $application->lastName = $request->lastName;
-                $application->passport = $request['passport'];
-                $application->email = $request['email'];
-                $application->id_no = $request['idNo'];
-                $application->reg_no = $request['regNo'];
-                $application->bursary_type = $request['type'];
-                $application->application_year =$request['yearz'];
-                $application->dob = $request['dob'];
-                $application->status = 0;
-                $application->gender = $request['gender'];
-                $application->tel = $request['telephone'];
-                $application->county = $request['county'];
-                $application->ward_id = $request['ward'];
-                $application->year = date('Y');
-                $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
-
-                $application->save();
-                $appId = $application->id;
+            $application->save();
+            $appId = $application->id;
 
 
-                $father = new Family();
-                $father->user_id = $user;
-                $father->name = $request['fname'];
-                $father->relationship = 'Father';
-                $father->applicationId = $appId;
-                $father->living = $request['fliving'];
-                $father->occupation = $request['foccupation'];
-                $father->income = $request['fincome'];
-                $father->tel = $request['ftelephone'];
-                $father->cert = $request->fatherId;
-                $father->status = 0;
-                $father->year = date('Y');
+            $father = new Family();
+            $father->user_id = $user;
+            $father->name = $request['fname'];
+            $father->relationship = 'Father';
+            $father->applicationId = $appId;
+            $father->living = $request['fliving'];
+            $father->occupation = $request['foccupation'];
+            $father->income = $request['fincome'];
+            $father->tel = $request['ftelephone'];
+            $father->status = 0;
+            $father->year = $request->yearz;
 
-                $father->save();
+            $father->save();
 
-                $mother = new Family();
-                $mother->user_id = $user;
-                $mother->name = $request['mname'];
-                $mother->applicationId = $appId;
-                $mother->relationship = 'Mother';
-                $mother->living = $request['mliving'];
-                $mother->occupation = $request['moccupation'];
-                $mother->income = $request['mincome'];
-                $mother->tel = $request['mtelephone'];
-                $mother->cert = $request->motherId;
-                $mother->status = 0;
-                $mother->year = date('Y');
+            $mother = new Family();
+            $mother->user_id = $user;
+            $mother->name = $request['mname'];
+            $mother->applicationId = $appId;
+            $mother->relationship = 'Mother';
+            $mother->living = $request['mliving'];
+            $mother->occupation = $request['moccupation'];
+            $mother->income = $request['mincome'];
+            $mother->tel = $request['mtelephone'];
+            $mother->status = 0;
+            $mother->year = $request->yearz;
 
-                $mother->save();
+            $mother->save();
 
-                $guardian = new Family();
-                $guardian->user_id = $user;
-                $guardian->name = $request['gname'];
-                $guardian->relationship = 'Guardian';
-                $guardian->living = $request['gliving'];
-                $guardian->occupation = $request['goccupation'];
-                $guardian->income = $request['gincome'];
-                $guardian->tel = $request['gtelephone'];
-                $guardian->cert = $request->guardianId;
-                $guardian->applicationId = $appId;
-                $guardian->status = 0;
-                $guardian->year = date('Y');
+            $guardian = new Family();
+            $guardian->user_id = $user;
+            $guardian->name = $request['gname'];
+            $guardian->relationship = 'Guardian';
+            $guardian->living = $request['gliving'];
+            $guardian->occupation = $request['goccupation'];
+            $guardian->income = $request['gincome'];
+            $guardian->tel = $request['gtelephone'];
+            $guardian->applicationId = $appId;
+            $guardian->status = 0;
+            $guardian->year = $request->yearz;
 
-                $guardian->save();
+            $guardian->save();
 
-                $more_family = new MoreFamily();
-                $more_family->user_id = $user;
-                $more_family->totalSiblings = $request['tSiblings'];
-                $more_family->workingSiblings = $request['sWorking'];
-                $more_family->schoolSiblings = $request['inSchool'];
-                $more_family->pFees = $request['pFees'];
-                $more_family->status = 0;
-                $more_family->applicationId = $appId;
-                $more_family->pFeesRelationship = $request['pRelationship'];
-                $more_family->year = date('Y');
+            $more_family = new MoreFamily();
+            $more_family->user_id = $user;
+            $more_family->totalSiblings = $request['tSiblings'];
+            $more_family->workingSiblings = $request['sWorking'];
+            $more_family->schoolSiblings = $request['inSchool'];
+            $more_family->pFees = $request['pFees'];
+            $more_family->status = 0;
+            $more_family->applicationId = $appId;
+            $more_family->pFeesRelationship = $request['pRelationship'];
+            $more_family->year = $request->yearz;
 
-                $more_family->save();
+            $more_family->save();
 
-                $geographical = new Geographical();
-                $geographical->user_id = $user;
-                $geographical->County = $request['county'];
-                $geographical->Ward = $request['ward'];
-                $geographical->Division = $request['division'];
-                $geographical->Location = $request['location'];
-                $geographical->status = 0;
-                $geographical->applicationId = $appId;
-                $geographical->Sublocation = $request['sublocation'];
-                $geographical->Village = $request['village'];
-                $geographical->year = date('Y');
-                $geographical->polling = $request['polling'];
-                $geographical->save();
+            $geographical = new Geographical();
+            $geographical->user_id = $user;
+            $geographical->County = $request['county'];
+            $geographical->Ward = $request['ward'];
+            $geographical->Division = $request['division'];
+            $geographical->Location = $request['location'];
+            $geographical->status = 0;
+            $geographical->applicationId = $appId;
+            $geographical->Sublocation = $request['sublocation'];
+            $geographical->Village = $request['village'];
+            $geographical->year = $request->yearz;
+            $geographical->polling = $request['polling'];
+            $geographical->save();
 
-                $institution = new Institution();
-                $institution->user_id = $user;
-                $institution->name = $request['iname'];
-                $institution->applicationId = $appId;
-                $institution->branch = $request['branch'];
-                $institution->class = $request['class'];
-                $institution->yearofstudy = $request['year'];
-                $institution->fees = $request['payable'];
-                $institution->status = 0;
-                $institution->amount_paid = $request['paid'];
-                $institution->balance = $request['balance'];
-                $institution->year = date('Y');
-                $institution->bank = $request['bank'];
-                $institution->account = $request['account'];
-                $institution->bank_branch = $request['bran'];
+            $institution = new Institution();
+            $institution->user_id = $user;
+            $institution->name = $request['iname'];
+            $institution->applicationId = $appId;
+            $institution->branch = $request['branch'];
+            $institution->class = $request['class'];
+            $institution->yearofstudy = $request['year'];
+            $institution->fees = $request['payable'];
+            $institution->status = 0;
+            $institution->amount_paid = $request['paid'];
+            $institution->balance = $request['balance'];
+            $institution->year = $request->yearz;
+            $institution->bank = $request['bank'];
+            $institution->account = $request['account'];
+            $institution->bank_branch = $request['bran'];
 
 
-                $institution->save();
+            $institution->save();
 
-                if ($request->hasFile('files')) {
-                    foreach ($request->file('files') as $uploadedFile) {
-                        $filename = $uploadedFile->store('uploads');
-                        // echo $filename;
+            if ($request->hasFile('files')) {
+                foreach ($request->file('files') as $uploadedFile) {
+                    $ext = $uploadedFile->getClientOriginalExtension();
+                    if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                        $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
                         $file = new File();
+                        $file->kind = "Recommendation letter";
                         $file->applicationId = $appId;
                         $file->path = $filename;
                         $file->status = 0;
                         $file->type = "county";
-                        $file->year = date('Y');
+                        $file->year = $request->yearz;
                         $file->save();
                     }
                 }
-                return response(['status' => 'success'], 200);
-            } else {
-                $user = auth('api')->user()->id;
-                $serial = auth('api')->user()->id . time();
-                $application = new Application();
-                $application->user_id = $user;
-                $application->name = $request['name'];
-                $application->passport = $request['passport'];
-                $application->firstName = $request->firstName;
-                $application->middleName = $request->middleName;
-                $application->lastName = $request->lastName;
-                $application->email = $request['email'];
-                $application->id_no = $request['idNo'];
-                $application->reg_no = $request['regNo'];
-                $application->bursary_type = $request['type'];
-                $application->application_year =$request['yearz'];
-                $application->dob = $request['dob'];
-                $application->status = 2;
-                $application->gender = $request['gender'];
-                $application->tel = $request['telephone'];
-                $application->ward_id = $request['ward'];
-                $application->county = $request['county'];
-                $application->year = date('Y');
-                $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
-
-                $application->save();
-                $appId = $application->id;
-
-
-                $father = new Family();
-                $father->user_id = $user;
-                $father->name = $request['fname'];
-                $father->relationship = 'Father';
-                $father->applicationId = $appId;
-                $father->living = $request['fliving'];
-                $father->occupation = $request['foccupation'];
-                $father->income = $request['fincome'];
-                $father->tel = $request['ftelephone'];
-                $father->cert = $request->fatherId;
-                $father->status = 2;
-                $father->year = date('Y');
-
-                $father->save();
-
-                $mother = new Family();
-                $mother->user_id = $user;
-                $mother->applicationId = $appId;
-                $mother->name = $request['mname'];
-                $mother->relationship = 'Mother';
-                $mother->living = $request['mliving'];
-                $mother->occupation = $request['moccupation'];
-                $mother->income = $request['mincome'];
-                $mother->tel = $request['mtelephone'];
-                $mother->cert = $request->motherId;
-                $mother->status = 2;
-                $mother->year = date('Y');
-
-                $mother->save();
-
-                $guardian = new Family();
-                $guardian->user_id = $user;
-                $guardian->applicationId = $appId;
-                $guardian->name = $request['gname'];
-                $guardian->relationship = 'Guardian';
-                $guardian->living = $request['gliving'];
-                $guardian->occupation = $request['goccupation'];
-                $guardian->income = $request['gincome'];
-                $guardian->tel = $request['gtelephone'];
-                $guardian->cert = $request->guardianId;
-                $guardian->status = 2;
-                $guardian->year = date('Y');
-
-                $guardian->save();
-
-                $more_family = new MoreFamily();
-                $more_family->user_id = $user;
-                $more_family->applicationId = $appId;
-                $more_family->totalSiblings = $request['tSiblings'];
-                $more_family->workingSiblings = $request['sWorking'];
-                $more_family->schoolSiblings = $request['inSchool'];
-                $more_family->pFees = $request['pFees'];
-                $more_family->status = 2;
-                $more_family->pFeesRelationship = $request['pRelationship'];
-                $more_family->year = date('Y');
-
-                $more_family->save();
-
-                $geographical = new Geographical();
-                $geographical->user_id = $user;
-                $geographical->applicationId = $appId;
-                $geographical->County = $request['county'];
-                $geographical->Ward = $request['ward'];
-                $geographical->Division = $request['division'];
-                $geographical->Location = $request['location'];
-                $geographical->Sublocation = $request['sublocation'];
-                $geographical->Village = $request['village'];
-                $geographical->status = 2;
-                $geographical->year = date('Y');
-                $geographical->polling = $request['polling'];
-
-                $geographical->save();
-
-                $institution = new Institution();
-                $institution->user_id = $user;
-                $institution->applicationId = $appId;
-                $institution->name = $request['iname'];
-                $institution->branch = $request['branch'];
-                $institution->class = $request['class'];
-                $institution->yearofstudy = $request['year'];
-                $institution->fees = $request['payable'];
-                $institution->amount_paid = $request['paid'];
-                $institution->balance = $request['balance'];
-                $institution->status = 2;
-                $institution->year = date('Y');
-                $institution->bank = $request['bank'];
-                $institution->account = $request['account'];
-                $institution->bank_branch = $request['bran'];
-                $institution->save();
-
-                if ($request->hasFile('files')) {
-                    foreach ($request->file('files') as $uploadedFile) {
-                        $filename = $uploadedFile->store('uploads');
-                        // echo $filename;
-                        $file = new File();
-                        $file->applicationId = $appId;
-                        $file->path = $filename;
-                        $file->status = 0;
-                        $file->type = "county";
-                        $file->year = date('Y');
-                        $file->save();
-                    }
-                }
-                return response(['status' => 'success'], 200);
             }
 
+            if ($request->hasFile('passport')) {
+                foreach ($request->file('passport') as $uploadedFile) {
+                    $ext = $uploadedFile->getClientOriginalExtension();
+                    if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                        $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
+                        $file = new File();
+                        $file->kind = "Passport photo";
+                        $file->applicationId = $appId;
+                        $file->path = $filename;
+                        $file->status = 0;
+                        $file->type = "county";
+                        $file->year = $request->yearz;
+                        $file->save();
+                    }
+                }
+            }
+
+            if ($request->hasFile('motherId')) {
+                foreach ($request->file('motherId') as $uploadedFile) {
+                    $ext = $uploadedFile->getClientOriginalExtension();
+                    if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                        $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
+                        $file = new File();
+                        $file->kind = "Mother’s ID/Death Cert";
+                        $file->applicationId = $appId;
+                        $file->path = $filename;
+                        $file->status = 0;
+                        $file->type = "county";
+                        $file->year = $request->yearz;
+                        $file->save();
+                    }
+                }
+            }
+
+            if ($request->hasFile('fatherId')) {
+                foreach ($request->file('fatherId') as $uploadedFile) {
+                    $ext = $uploadedFile->getClientOriginalExtension();
+                    if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                        $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
+                        $file = new File();
+                        $file->kind = "Father’s ID/Death Cert";
+                        $file->applicationId = $appId;
+                        $file->path = $filename;
+                        $file->status = 0;
+                        $file->type = "county";
+                        $file->year = $request->yearz;
+                        $file->save();
+                    }
+                }
+            }
+
+            if ($request->hasFile('guardianId')) {
+                foreach ($request->file('guardianId') as $uploadedFile) {
+                    $ext = $uploadedFile->getClientOriginalExtension();
+                    if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                        $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
+                        $file = new File();
+                        $file->kind = "Guardian’s ID/Death Cert";
+                        $file->applicationId = $appId;
+                        $file->path = $filename;
+                        $file->status = 0;
+                        $file->type = "county";
+                        $file->year = $request->yearz;
+                        $file->save();
+                    }
+                }
+            }
+            return response(['status' => 'success'], 200);
         }
 
     }
@@ -401,7 +337,8 @@ class ApplicationController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($applicationId)
+    public
+    function show($applicationId)
     {
         $application = Application::where('id', $applicationId)->where('year', date('Y'))->first();
         $family = Family::where('applicationId', $applicationId)->where('year', date('Y'))->get();
@@ -439,19 +376,22 @@ class ApplicationController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         //
     }
 
-    public function getDetails()
+    public
+    function getDetails()
     {
         $user = User::where('id', auth()->user()->id)->first();
 
         return ['user' => $user];
     }
 
-    public function accept($applicantId)
+    public
+    function accept($applicantId)
     {
         $application = Application::where('user_id', $applicantId)->where('status', 1)->first();
         $appli = Application::findOrFail($application['id']);
@@ -485,7 +425,8 @@ class ApplicationController extends Controller
 
     }
 
-    public function send($applicantId)
+    public
+    function send($applicantId)
     {
         $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
         $appli = Application::findOrFail($application['id']);
@@ -519,7 +460,8 @@ class ApplicationController extends Controller
 
     }
 
-    public function reject($applicantId)
+    public
+    function reject($applicantId)
     {
         $application = Application::where('user_id', $applicantId)->where('status', 0)->first();
         $appli = Application::findOrFail($application['id']);
@@ -555,7 +497,8 @@ class ApplicationController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }
