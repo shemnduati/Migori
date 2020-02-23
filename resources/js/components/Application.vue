@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card" v-if="watch == 0 && enable == 1">
+                <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">County Bursary Application</h3>
                     </div>
@@ -28,8 +28,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <p class="text-right">
+                                <button type="button" class="btn btn-primary"
+                                        @click.prevent="nextStep">Next Step
+                                </button>
+                                </p>
                             </section>
-                            <section v-if="step==2 && enable==1">
+                            <section v-if="step==2">
                                 <h3>PERSONAL DETAILS</h3>
 
                                 <div class="form-row ">
@@ -139,7 +145,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="passport">Attach Passport Photo</label>
-                                            <input type="file" @change="getPassport" class="form-control-file"
+                                            <input type="file" @change="fieldChange($event, 1)" class="form-control-file"
                                                    id="passport" accept="image/*"
                                                    :class="{ 'is-invalid': form.errors.has('passport') }">
                                             <has-error :form="form" field="passport"></has-error>
@@ -147,9 +153,17 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <hr>
+                                <p class="text-right">
+                                    <button type="button" class="btn btn-primary " @click.prevent="prevStep">
+                                        Previous Step
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                            @click.prevent="nextStep">Next Step
+                                    </button>
+                                </p>
                             </section>
-                            <section v-if="step==3 && enable==1">
+                            <section v-if="step==3">
                                 <h3>Family Background</h3>
                                 <div class="form-row">
                                     <div class="col">
@@ -183,7 +197,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Attach Father’s ID/Death Cert</label>
-                                            <input type="file" @change="getFatherId" class="form-control-file" id="fId"
+                                            <input type="file" @change="fieldChange($event, 2)" class="form-control-file" id="fId"
                                                    accept="image/*"
                                                    :class="{ 'is-invalid': form.errors.has('fatherId') }">
                                             <has-error :form="form" field="fatherId"></has-error>
@@ -254,7 +268,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Attach Mother’s ID/Death Cert</label>
-                                            <input type="file" @change="getMotherId" class="form-control-file" id="mID"
+                                            <input type="file" @change="fieldChange($event, 3)" class="form-control-file" id="mID"
                                                    accept="image/*"
                                                    :class="{ 'is-invalid': form.errors.has('motherId') }">
                                             <has-error :form="form" field="motherId"></has-error>
@@ -325,7 +339,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Attach Guardian’s ID/Death Cert</label>
-                                            <input type="file" @change="getGuardianId" class="form-control-file"
+                                            <input type="file" @change="fieldChange($event, 4)" class="form-control-file"
                                                    id="gId" accept="image/*"
                                                    :class="{ 'is-invalid': form.errors.has('guardianId') }">
                                             <has-error :form="form" field="guardianId"></has-error>
@@ -423,8 +437,17 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <p class="text-right">
+                                    <button type="button" class="btn btn-primary " @click.prevent="prevStep">
+                                        Previous Step
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                            @click.prevent="nextStep">Next Step
+                                    </button>
+                                </p>
                             </section>
-                            <section v-if="step==4 && enable==1">
+                            <section v-if="step==4">
                                 <h3>Geographical Details</h3>
                                 <div class="form-row">
 
@@ -509,8 +532,17 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <p class="text-right">
+                                    <button type="button" class="btn btn-primary " @click.prevent="prevStep">
+                                        Previous Step
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                            @click.prevent="nextStep">Next Step
+                                    </button>
+                                </p>
                             </section>
-                            <section v-if="step==5 && enable==1">
+                            <section v-if="step==5">
                                 <h3>INSTITUTION AND FEE DETAILS</h3>
                                 <div class="form-row">
                                     <div class="col">
@@ -624,55 +656,29 @@
                                         <div class="form-group justify-content-center">
                                             <label for="files">Attach recommendation letter by head of
                                                 institution</label>
-                                            <input type="file" class="form-control-file" @change="fieldChange"
+                                            <input type="file" class="form-control-file" @change="fieldChange($event, 5)"
                                                    id="files">
                                             <has-error :form="form" field="files"></has-error>
+                                            <small style="color: red" v-if="error && errors.files">{{ errors.files[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
 
                                     </div>
                                 </div>
+                                <hr>
+                                <p class="text-right">
+                                    <button type="button" class="btn btn-primary " @click.prevent="prevStep">
+                                        Previous Step
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-submit"
+                                            @click.prevent="sendApp()" :disabled="loading">
+                                        Submit Application
+                                    </button>
+                                </p>
                             </section>
 
-                            <button v-if="step != 1" type="button" class="btn btn-primary " @click.prevent="prevStep">
-                                Previous Step
-                            </button>
-                            <button v-if="step != totalSteps" type="button" class="btn btn-primary"
-                                    @click.prevent="nextStep">Next Step
-                            </button>
-                            <button v-if="step == 5" type="button" class="btn btn-success btn-submit"
-                                    @click.prevent="sendApp()" :disabled="loading">
-                                <div class="loader">
-                                    <div class="lds-roller" v-if="loading">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                                Submit Application
-                            </button>
-
                         </form>
-                    </div>
-                </div>
-                <div v-if="enable == 0">
-                    <div class="card">
-                        <div class="card-header">
-                            Application Form not Available
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Application window closed</h5>
-                            <p class="card-text">The application window for your County has been closed for now wait
-                                until the window is
-                                opened</p>
-                            <a href="/" class="btn btn-danger">Go Back Home</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -692,14 +698,16 @@
                 errors: {},
                 error: false,
                 step: 1,
-                totalSteps: 5,
                 counties: {},
                 wards: {},
                 info: {},
-                enable: {},
                 loading: false,
                 watch: 0,
                 yearz:{},
+                passport: [],
+                motherId: [],
+                fatherId: [],
+                guardianId: [],
                 attachments: [],
                 e_telephone: '',
                 e_ftelephone: '',
@@ -750,10 +758,6 @@
                     sWorking: '',
                     pFees: '',
                     pRelationship: '',
-                    passport: '',
-                    fatherId: '',
-                    motherId: '',
-                    guardianId: '',
                     ftelephone: '',
                     mtelephone: '',
                     gtelephone: '',
@@ -764,13 +768,25 @@
             }
         },
         methods: {
-            telephonePayload(payload){
-                // return payload.isValid;
-                console.log(payload.isValid);
-            },
             sendApp() {
                 for (let i = 0; i < this.attachments.length; i++) {
                     this.formf.append('files[]', this.attachments[i]);
+                }
+
+                for (let i = 0; i < this.passport.length; i++) {
+                    this.formf.append('passport[]', this.passport[i]);
+                }
+
+                for (let i = 0; i < this.fatherId.length; i++) {
+                    this.formf.append('fatherId[]', this.fatherId[i]);
+                }
+
+                for (let i = 0; i < this.motherId.length; i++) {
+                    this.formf.append('motherId[]', this.motherId[i]);
+                }
+
+                for (let i = 0; i < this.guardianId.length; i++) {
+                    this.formf.append('guardianId[]', this.guardianId[i]);
                 }
 
                 this.formf.append('type', this.form.type);
@@ -807,6 +823,7 @@
                 this.formf.append('iname', this.form.iname);
                 this.formf.append('branch', this.form.branch);
                 this.formf.append('year', this.form.year);
+                this.formf.append('yearz', this.form.yearz);
                 this.formf.append('payable', this.form.payable);
                 this.formf.append('paid', this.form.paid);
                 this.formf.append('balance', this.form.balance);
@@ -827,7 +844,7 @@
                 this.formf.append('bran', this.form.bran);
                 const config = {headers: {'Content-Type': 'multipart/form-data'}};
 
-                this.loading = true;
+                // this.loading = true;
                 axios.post('/api/apply', this.formf, config).then(response => {
                     this.loading = false;
                     Fire.$emit('AfterCreate');
@@ -854,16 +871,41 @@
                         })
                     });
             },
-
-            fieldChange(e) {
-                let selectedFiles = e.target.files;
+            fieldChange(event, type) {
+                let selectedFiles = event.target.files;
                 if (!selectedFiles.length) {
                     return false;
                 }
-                for (let i = 0; i < selectedFiles.length; i++) {
-                    this.attachments.push(selectedFiles[i]);
+                if (type == 1){
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        this.passport.push(selectedFiles[i]);
+                    }
                 }
-                // console.log(this.attachments);
+
+                if (type == 2){
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        this.fatherId.push(selectedFiles[i]);
+                    }
+                }
+
+                if (type == 3){
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        this.motherId.push(selectedFiles[i]);
+                    }
+                }
+
+                if (type == 4){
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        this.guardianId.push(selectedFiles[i]);
+                    }
+                }
+
+                if (type == 5){
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        this.attachments.push(selectedFiles[i]);
+                    }
+                }
+
             },
             next() {
                 this.step++;
@@ -891,89 +933,6 @@
                         type: 'error',
                         title: 'Ooops...',
                         text: 'You are not eligible to make an application',
-                    })
-                }
-            },
-            getGuardianId(e) {
-                let file = e.target.files[0];
-                var reader = new FileReader();
-                if (file['size'] < 2111775) {
-                    if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
-                        reader.onloadend = (file) => {
-                            // console.log('Result', reader.result)
-                            this.form.guardianId = reader.result;
-                        }
-
-                        reader.readAsDataURL(file);
-                    } else {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Ooops...',
-                            text: 'Only images and pdfs are allowed',
-                        })
-                    }
-
-                } else {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Ooops...',
-                        text: 'You are uploading a large file',
-                    })
-                }
-            },
-
-            getFatherId(e) {
-                console.log('Father');
-                let file = e.target.files[0];
-                var reader = new FileReader();
-                if (file['size'] < 2111775) {
-                    if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
-                        reader.onloadend = (file) => {
-                            // console.log('Result', reader.result)
-                            this.form.fatherId = reader.result;
-                        }
-
-                        reader.readAsDataURL(file);
-                    } else {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Ooops...',
-                            text: 'Only images and pdfs are allowed',
-                        })
-                    }
-
-                } else {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Ooops...',
-                        text: 'You are uploading a large file',
-                    })
-                }
-            },
-            getMotherId(e) {
-                let file = e.target.files[0];
-                var reader = new FileReader();
-                if (file['size'] < 2111775) {
-                    if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
-                        reader.onloadend = (file) => {
-                            // console.log('Result', reader.result)
-                            this.form.motherId = reader.result;
-                        }
-
-                        reader.readAsDataURL(file);
-                    } else {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Ooops...',
-                            text: 'Only images and pdfs are allowed',
-                        })
-                    }
-
-                } else {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Ooops...',
-                        text: 'You are uploading a large file',
                     })
                 }
             },
@@ -1034,11 +993,6 @@
                     } else if (!this.form.regNo) {
                         this.form.errors.set({
                             regNo: 'This field is required'
-                        })
-                        return false;
-                    } else if (!this.form.passport) {
-                        this.form.errors.set({
-                            passport: 'This field is required'
                         })
                         return false;
                     } else {
@@ -1141,21 +1095,6 @@
                     } else if (!this.form.pRelationship) {
                         this.form.errors.set({
                             pRelationship: 'This field is required'
-                        })
-                        return false;
-                    } else if (!this.form.fatherId) {
-                        this.form.errors.set({
-                            fatherId: 'This field is required'
-                        })
-                        return false;
-                    } else if (!this.form.motherId) {
-                        this.form.errors.set({
-                            motherId: 'This field is required'
-                        })
-                        return false;
-                    } else if (!this.form.guardianId) {
-                        this.form.errors.set({
-                            guardianId: 'This field is required'
                         })
                         return false;
                     } else {
@@ -1268,42 +1207,8 @@
                 this.getStatus();
                 axios.get("api/getcountywards/" + this.form.county).then(({data}) => ([this.wards = data['wards']]));
             },
-            getPassport(e) {
-                let file = e.target.files[0];
-                var reader = new FileReader();
-                console.log(file);
-
-                if (file['size'] < 2111775) {
-                    if (file['type'] == 'image/png' || file['type'] == 'image/jpg' || file['type'] == 'image/jpeg') {
-                        reader.onloadend = (file) => {
-                            // console.log('Result', reader.result)
-                            this.form.passport = reader.result;
-                        }
-
-                        reader.readAsDataURL(file);
-                    } else {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Ooops...',
-                            text: 'Only images are allowed',
-                        })
-                    }
-
-                } else {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Ooops...',
-                        text: 'You are uploading a large file',
-                    })
-                }
-
-            },
             getDetails() {
                 axios.get("api/getdetails").then(({data}) => ([this.info = data['user']]));
-            },
-            getStatus() {
-                axios.get("api/status/" + this.form.county).then(({data}) => ([this.enable = data['num']]));
-
             },
             getApplication(){
                 axios.get("api/getApplicationYears/" + this.form.county).then(({data}) => ([this.yearz = data['year']]));
@@ -1323,7 +1228,6 @@
             this.getCounties();
             this.getWards();
             this.getDetails();
-            this.getStatus();
             this.getApplication();
             this. getCountyWards();
 
