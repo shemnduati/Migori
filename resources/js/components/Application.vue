@@ -427,21 +427,7 @@
                             <section v-if="step==4 && enable==1">
                                 <h3>Geographical Details</h3>
                                 <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="county">County</label>
-                                            <select v-model="form.county" @change='getCountyWards()'
-                                                    class="form-control" name="county" id="county"
-                                                    :class="{ 'is-invalid': form.errors.has('county') }">
-                                                <option selected value="">--Select county--</option>
-                                                <option v-for="count in counties" :key="count.id" :value="count.id">{{
-                                                    count.name}}
-                                                </option>
-                                            </select>
-                                            <has-error :form="form" field="county"></has-error>
-                                            <small style="color: red" v-if="error && errors.county">{{ errors.county[0] }}</small>
-                                        </div>
-                                    </div>
+
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="ward">Ward</label>
@@ -592,8 +578,9 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Outstanding Balance</label>
-                                            <input v-model="form.balance" type="number" name="balance"
+                                            <input  type="number" name="balance" readonly
                                                    class="form-control"
+                                                   :value="total"
                                                    :class="{ 'is-invalid': form.errors.has('balance') }">
                                             <has-error :form="form" field="balance"></has-error>
                                             <small style="color: red" v-if="error && errors.balance">{{ errors.balance[0] }}</small>
@@ -867,6 +854,7 @@
                         })
                     });
             },
+
             fieldChange(e) {
                 let selectedFiles = e.target.files;
                 if (!selectedFiles.length) {
@@ -1256,6 +1244,11 @@
                             balance: 'This field is required'
                         })
                         return false;
+                    } else if (this.form.balance , '=<' , 0) {
+                        this.form.errors.set({
+                            balance: 'The Outstanding balance must be great than zero'
+                        })
+                        return false;
                     } else {
                         this.step++;
                         return false;
@@ -1315,6 +1308,16 @@
             getApplication(){
                 axios.get("api/getApplicationYears/" + this.form.county).then(({data}) => ([this.yearz = data['year']]));
             },
+
+        },
+        computed: {
+
+            total: function() {
+                let Outstanding = this.form.payable - this.form.paid;
+                this.form.balance = Outstanding;
+
+                return Outstanding;
+            }
         },
         created() {
             this.getCounties();
@@ -1322,6 +1325,7 @@
             this.getDetails();
             this.getStatus();
             this.getApplication();
+            this. getCountyWards();
 
         }
     }
