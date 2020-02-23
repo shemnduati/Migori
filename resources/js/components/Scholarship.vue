@@ -126,18 +126,6 @@
 
                                 <div class="form-row ">
                                     <div class="col">
-                                        <label>County</label>
-                                        <select v-model="form.county" @change='getCountyWards()'
-                                                class="form-control" name="county"
-                                                :class="{ 'is-invalid': form.errors.has('county') }">
-                                            <option selected value="">--Select county--</option>
-                                            <option v-for="count in counties" :key="count.id" :value="count.id">{{
-                                                count.name}}
-                                            </option>
-                                        </select>
-                                        <has-error :form="form" field="county"></has-error>
-                                    </div>
-                                    <div class="col">
                                         <div class="form-group">
                                             <label>Ward</label>
                                             <select v-model="form.ward" class="form-control" name="ward"
@@ -1908,11 +1896,6 @@
                     } else if (!this.form.alt_telephone) {
                         this.e_alt_telephone = 'This field is required';
                         return false;
-                    } else if (!this.form.county) {
-                        this.form.errors.set({
-                            county: 'This field is required'
-                        })
-                        return false;
                     } else if (!this.form.ward) {
                         this.form.errors.set({
                             ward: 'This field is required'
@@ -2331,9 +2314,6 @@
             getCounties() {
                 axios.get("api/getcounties").then(({data}) => ([this.counties = data['counties']]));
             },
-            getWards() {
-                axios.get("api/getwards").then(({data}) => ([this.wards = data['wards']]));
-            },
             getCountyWards() {
                 this.getStatus();
                 axios.get("api/getcountywards/" + this.form.county).then(({data}) => ([this.wards = data['wards']]));
@@ -2384,10 +2364,10 @@
         },
         created() {
             this.getCounties();
-            this.getWards();
             this.getDetails();
             this.getStatus();
             this.getApplication();
+            this.getCountyWards();
 
         }
     }

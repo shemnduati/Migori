@@ -1183,7 +1183,7 @@
                             balance: 'This field is required'
                         })
                         return false;
-                    } else if (this.form.balance , '=<' , 0) {
+                    } else if (this.form.balance <= 0) {
                         this.form.errors.set({
                             balance: 'The Outstanding balance must be great than zero'
                         })
@@ -1199,9 +1199,6 @@
             },
             getCounties() {
                 axios.get("api/getcounties").then(({data}) => ([this.counties = data['counties']]));
-            },
-            getWards() {
-                axios.get("api/getwards").then(({data}) => ([this.wards = data['wards']]));
             },
             getCountyWards() {
                 this.getStatus();
@@ -1226,7 +1223,6 @@
         },
         created() {
             this.getCounties();
-            this.getWards();
             this.getDetails();
             this.getApplication();
             this. getCountyWards();
