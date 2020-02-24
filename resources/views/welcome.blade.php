@@ -22,7 +22,7 @@
                 background-color: #ffffff;
             }
             .baza{
-                color: #660033;
+                color: #161266;
             }
             .a{
                 color: #7030a0;
@@ -37,7 +37,7 @@
                 color: #002060;
             }
             .grad {
-              background-image: linear-gradient(to right, #ffffe2 , #ffff9f, #ffffe2);
+              background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE);
             }
             .big{
                 font-size: 40px;
@@ -77,25 +77,34 @@
     <body>
 
 
-        <div class="container-fluid" id="app">
+        <div id="app">
 
             <div class="content">
-                <div class="grad col-md-12 pb-3">
-                    <div class="text-center pt-4 baza">
-                        <h3 class="font-weight-bold">BURSARY APPLICATION SYSTEM</h3>
-                    </div>
+            <div class="grad col-md-12 py-3">
+                    <div class="row">
+                        <div class="col-md-2 text-center">
+                            <img class="align-self-center img-fluid" src="/img/grad.jpeg" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="text-center pt-4 baza">
+                                <h3 class="font-weight-bold">MIGORI COUNTY GOVERNMENT</h3>
+                            </div>
 
 
-                    <div class="text-center pt-2">
-                        <h3 class="font-weight-bolder big"><span class="b">B </span><span class="a">A </span><span class="z">Z </span><span class="x">A</span></h3>
+                            <div class="text-center pt-2 baza">
+                                <h3 class="font-weight-bold">BURSARY AND SCHOLARSHIP APPLICATION PORTAL (BASAP)</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <img class="align-self-center img-fluid" src="/img/mig.jpeg" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="row pl-5 col-md-12">
-                    <div class="row col-md-10 logo">
-                        <img src="/img/logo.jpg" alt="">
-                        <p class="pt-5 p-1"><span class="logo1">BAZA</span><br><span class="logo2">With you every step</span></p>
+                    <div class="row col-md-8 logo">
+
                     </div>
-                    <div class="col-md-2 mt-2 pt-5">
+                    <div class="col-md-4 mt-2 pt-5">
                         @if (Route::has('login'))
                             <div class="top-right links">
                                 @auth
@@ -116,8 +125,8 @@
                                             </form>
                                         </div>
                                     </button>
-                                    <a href="/apply" class="btn btn mb-2 mt-4 px-4 pr-2">County Bursary</a>
-                                    <a href="/scholarship" class="btn btn mb-2 mt-2 px-4 pr-2">Scholarship</a>
+                                    <a href="/apply" class="btn btn px-4 pr-2">County Bursary</a>
+                                    <a href="/scholarship" class="btn btn px-4 pr-2">Scholarship</a>
 
 {{--                                    <a class="btn btn px-5" href="{{ route('logout') }}"--}}
 {{--                                       onclick="event.preventDefault();--}}

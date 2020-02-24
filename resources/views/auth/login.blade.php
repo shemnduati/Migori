@@ -21,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
         body{
-              background-image: linear-gradient(to right, #ffffe2 , #ffff9f, #ffffe2);
+            background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE);
         }
         .btn{
                 background-color: #31849b;

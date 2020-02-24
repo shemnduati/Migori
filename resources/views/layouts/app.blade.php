@@ -22,7 +22,7 @@
 
     <style>
         .grad{
-             background-image: linear-gradient(to right, #ffffe2 , #ffff9f, #ffffe2);
+            background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE);
         }
         body{
             background-color: #ffffff;
@@ -43,7 +43,7 @@
             color: #002060;
         }
         .grad {
-            background-image: linear-gradient(to right, #ffffe2 , #ffff9f, #ffffe2);
+            background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE);
         }
         .big{
             font-size: 40px;
