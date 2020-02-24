@@ -18,6 +18,7 @@
             <div class="col-md-8">
                 <div class="row mx-2 pl-3 pt-2 border border-success rounded">
                     <div class="col-md-4">
+                        <p>Year</p>
                         <p> First name </p>
                         <p> Middle name </p>
                         <p> Last name </p>
@@ -41,6 +42,7 @@
                         <p>School Classification</p>
                     </div>
                     <div class="col-md-4">
+                        <p> {{application['app']['application_year']}} </p>
                         <p> {{application['app']['firstName']}} </p>
                         <p> {{application['app']['middleName']}} </p>
                         <p> {{application['app']['lastName']}} </p>
@@ -67,12 +69,36 @@
             </div>
             <div class="col-md-4 pt-5">
                 <div class="row">
-                    <div class="col-md-8">
-                        <p class="rounded p-2 mt-2 text-center bg-b">Results Slip</p>
-                    </div>
-                    <div class="col-md-4">
-                        <button @click="launch(application['app'].resultslip)" class="btn btn-lg bg-success">View
-                        </button>
+                    <div class="box">
+                        <div class="box-header">
+                            <h4 class="box-title">Attached Files (Click to download)</h4>
+                        </div>
+                        <div class="box" style="margin-bottom: 10px;">
+
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12" v-for="file in files" :key="file.id">
+                                    <div class="info-box">
+                                        <div class="info-box-content">
+                                            <span class="info-box-text"><p>{{file.kind}}</p></span>
+                                            <hr>
+                                            <button type="button" class="btn btn-primary btn-sm" @click.prevent="download(file.id, file.path)">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!--                                            <button type="button" class="btn btn-primary" @click="downloadAll">Download all files</button>-->
+                            </div>
+                        </div>
+                        <div class="alert alert-warning alert-dismissible" v-if="files.length == 0">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fa fa-ban"></i> Alert!</h5>
+                            No files attached!!
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,47 +145,8 @@
                 </div>
             </div>
             <div class="col-md-4 pt-5">
-                <div class="row pt-5" v-for="fam in family" :key="fam.id">
-                    <div class="col-md-8" v-if="fam.cert">
-                        <p class="rounded p-2 mt-2 text-center bg-b">{{fam['who']}}'s ID/ Death Cert</p>
-                    </div>
-                    <div class="col-md-4" v-if="fam.cert">
-                        <button @click="launch(fam.cert)" class="btn btn-lg bg-success">Views</button>
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="box">
-                        <div class="box-header">
-                            <h4 class="box-title">Attached Files (Click to download)</h4>
-                        </div>
-                        <div class="box" style="margin-bottom: 10px;">
 
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12" v-for="file in files" :key="file.id">
-                                    <a @click.prevent="download(file.id, file.path)">
-                                        <div class="info-box">
-                                            <span class="info-box-icon" style="background-color: green;"><i
-                                                    class="fas fa-download" style="color: white;"></i></span>
-
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Download</span>
-                                            </div>
-                                            <!-- /.info-box-content -->
-                                        </div>
-                                    </a>
-                                    <!-- /.info-box -->
-                                </div>
-                                <!--                                            <button type="button" class="btn btn-primary" @click="downloadAll">Download all files</button>-->
-                            </div>
-                        </div>
-                        <div class="alert alert-warning alert-dismissible" v-if="files.length == 0">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h5><i class="icon fa fa-ban"></i> Alert!</h5>
-                            No files attached!!
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
