@@ -121,7 +121,7 @@ class ApplicationController extends Controller
             'bran' => 'required',
         ]);
 
-        $check = Application::where('user_id', auth()->user()->id)->where('year', $request->yearz)->where('bursary_type', $request->type)->get();
+        $check = Application::where('user_id', auth()->user()->id)->where('application_year', $request->yearz)->where('bursary_type', $request->type)->get();
 
         if (count($check) > 0) {
             return response()->json([

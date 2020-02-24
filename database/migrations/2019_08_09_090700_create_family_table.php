@@ -35,8 +35,8 @@ class CreateFamilyTable extends Migration
             $table->string('alt_tel')->nullable();
             $table->string('box')->nullable();
             $table->string('G_relationship')->nullable();
-            $table->integer('county')->nullable();
-            $table->integer('ward')->nullable();
+            $table->string('county')->nullable();
+            $table->string('ward')->nullable();
             $table->string('subcounty')->nullable();
             $table->string('location')->nullable();
             $table->string('sublocation')->nullable();

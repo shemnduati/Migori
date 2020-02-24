@@ -2,13 +2,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card" v-if="watch == 0 && enable != 0">
+                <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Scholarship Application</h3>
                     </div>
 
                     <div class="card-body">
-                        <form>
+                        <form autocomplete="off">
                             <section v-if="step==1">
                                 <div class="row justify-content-center">
                                     <div class="col-sm-6 justify-content-center">
@@ -16,20 +16,25 @@
                                             <div class="col">
                                                 <label>Select Application Year</label>
                                                 <select v-model="form.yearz" class="form-control" name="yearz"
-                                                        :class="{ 'is-invalid': form.errors.has('yearz') }">
+                                                        :class="{ 'is-invalid': form.errors.has('yearz') }"
+                                                        :disabled="!enable">
                                                     <option selected value="">--Select Application Year--</option>
                                                     <option v-for="year in yearz" :key="year.id" :value="year.year">
                                                         {{
                                                         year.year}}
                                                     </option>
                                                 </select>
-                                                <has-error :form="form" field="year"></has-error>
+                                                <has-error :form="form" field="yearz"></has-error>
+                                                <small style="color: red" v-if="error && errors.yearz">{{
+                                                    errors.yearz[0] }}</small>
+                                                <small style="color: red" v-if="!enable">There is currently no open
+                                                    application. Please try again later</small>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==2 && enable==1">
+                            <section v-if="step==2">
                                 <h3>PERSONAL DETAILS</h3>
 
                                 <div class="form-row ">
@@ -40,6 +45,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('firstName') }">
                                             <has-error :form="form" field="firstName"></has-error>
+                                            <small style="color: red" v-if="error && errors.firstName">{{
+                                                errors.firstName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -49,6 +56,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('middleName') }">
                                             <has-error :form="form" field="middleName"></has-error>
+                                            <small style="color: red" v-if="error && errors.middleName">{{
+                                                errors.middleName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -58,6 +67,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('lastName') }">
                                             <has-error :form="form" field="lastName"></has-error>
+                                            <small style="color: red" v-if="error && errors.lastName">{{
+                                                errors.lastName[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -79,6 +90,8 @@
                                             <br><br>
                                             <has-error :form="form" field="gender"></has-error>
                                         </div>
+                                        <small style="color: red" v-if="error && errors.gender">{{ errors.gender[0]
+                                            }}</small>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
@@ -87,6 +100,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('dob') }">
                                             <has-error :form="form" field="dob"></has-error>
+                                            <small style="color: red" v-if="error && errors.dob">{{ errors.dob[0]
+                                                }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -96,6 +111,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('parentName') }">
                                             <has-error :form="form" field="parentName"></has-error>
+                                            <small style="color: red" v-if="error && errors.parentName">{{
+                                                errors.parentName[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -107,19 +124,25 @@
                                                class="form-control"
                                                :class="{ 'is-invalid': form.errors.has('box') }">
                                         <has-error :form="form" field="box"></has-error>
+                                        <small style="color: red" v-if="error && errors.box">{{ errors.box[0] }}</small>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Tel/Mobile Number</label>
                                             <VuePhoneNumberInput v-model="form.telephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_telephone}}</small>
+                                            <small style="color: red" v-if="error && errors.telephone">{{
+                                                errors.telephone[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Alternative /mobile No.</label>
-                                            <VuePhoneNumberInput v-model="form.alt_telephone" default-country-code="KE"/>
+                                            <VuePhoneNumberInput v-model="form.alt_telephone"
+                                                                 default-country-code="KE"/>
                                             <small style="color: red;">{{e_alt_telephone}}</small>
+                                            <small style="color: red" v-if="error && errors.alt_telephone">{{
+                                                errors.alt_telephone[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -136,6 +159,8 @@
                                                 </option>
                                             </select>
                                             <has-error :form="form" field="ward"></has-error>
+                                            <small style="color: red" v-if="error && errors.ward">{{ errors.ward[0]
+                                                }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -145,6 +170,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('subcounty') }">
                                             <has-error :form="form" field="subcounty"></has-error>
+                                            <small style="color: red" v-if="error && errors.subcounty">{{
+                                                errors.subcounty[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -157,6 +184,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('location') }">
                                             <has-error :form="form" field="location"></has-error>
+                                            <small style="color: red" v-if="error && errors.location">{{
+                                                errors.location[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -166,6 +195,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('sublocation') }">
                                             <has-error :form="form" field="sublocation"></has-error>
+                                            <small style="color: red" v-if="error && errors.sublocation">{{
+                                                errors.sublocation[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -178,6 +209,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('indexNo') }">
                                             <has-error :form="form" field="indexNo"></has-error>
+                                            <small style="color: red" v-if="error && errors.indexNo">{{
+                                                errors.indexNo[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -187,15 +220,19 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('kcpeMarks') }">
                                             <has-error :form="form" field="kcpeMarks"></has-error>
+                                            <small style="color: red" v-if="error && errors.kcpeMarks">{{
+                                                errors.kcpeMarks[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Attach copy of results slip (Image/Photo)</label>
-                                            <input type="file" @change="getResultSlip" class="form-control-file"
-                                                   accept="image/*"
-                                                   :class="{ 'is-invalid': form.errors.has('resultslip') }">
+                                            <label>Attach copy of results slip</label>
+                                            <input type="file" @change="fieldChange($event, 1)"
+                                                   class="form-control-file"
+                                                   :class="{ 'is-invalid': form.errors.has('resultslip') }" accept="image/*, application/pdf">
                                             <has-error :form="form" field="resultslip"></has-error>
+                                            <small style="color: red" v-if="error && errors.slip">{{ errors.slip[0]
+                                                }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -209,6 +246,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('kcpeYear') }">
                                             <has-error :form="form" field="kcpeYear"></has-error>
+                                            <small style="color: red" v-if="error && errors.kcpeYear">{{
+                                                errors.kcpeYear[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -225,6 +264,8 @@
                                             <textarea v-model="form.kcpeQuiz" class="form-control" id="task" rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('kcpeQuiz') }"></textarea>
                                             <has-error :form="form" field="kcpeQuiz"></has-error>
+                                            <small style="color: red" v-if="error && errors.kcpeQuiz">{{
+                                                errors.kcpeQuiz[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -234,6 +275,8 @@
                                             <textarea v-model="form.repeatQuiz" class="form-control" rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('repeatQuiz') }"></textarea>
                                             <has-error :form="form" field="repeatQuiz"></has-error>
+                                            <small style="color: red" v-if="error && errors.repeatQuiz">{{
+                                                errors.repeatQuiz[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -246,6 +289,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('secSchoolName') }">
                                             <has-error :form="form" field="secSchoolName"></has-error>
+                                            <small style="color: red" v-if="error && errors.secSchoolName">{{
+                                                errors.secSchoolName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -264,11 +309,13 @@
                                             <label class="form-check-label">County</label>
                                             <has-error :form="form" field="classification"></has-error>
                                         </div>
+                                        <small style="color: red" v-if="error && errors.classification">{{
+                                            errors.classification[0] }}</small>
                                     </div>
                                 </div>
 
                             </section>
-                            <section v-if="step==3 && enable==1">
+                            <section v-if="step==3">
                                 <h3>PART B: APPLICANT'S FAMILY INFORMATION</h3>
                                 <div class="form-row ">
                                     <div class="col-md-4">
@@ -278,6 +325,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fatherFirstName') }">
                                             <has-error :form="form" field="fatherFirstName"></has-error>
+                                            <small style="color: red" v-if="error && errors.fatherFirstName">{{
+                                                errors.fatherFirstName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -287,6 +336,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fatherMiddleName') }">
                                             <has-error :form="form" field="fatherMiddleName"></has-error>
+                                            <small style="color: red" v-if="error && errors.fatherMiddleName">{{
+                                                errors.fatherMiddleName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -296,6 +347,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fatherLastName') }">
                                             <has-error :form="form" field="fatherLastName"></has-error>
+                                            <small style="color: red" v-if="error && errors.fatherLastName">{{
+                                                errors.fatherLastName[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -307,6 +360,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fatherIdNo') }">
                                             <has-error :form="form" field="fatherIdNo"></has-error>
+                                            <small style="color: red" v-if="error && errors.fatherIdNo">{{
+                                                errors.fatherIdNo[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -325,14 +380,19 @@
                                             <label class="form-check-label">Dead</label>
                                             <has-error :form="form" field="fliving"></has-error>
                                         </div>
+                                        <small style="color: red" v-if="error && errors.fliving">{{ errors.fliving[0]
+                                            }}</small>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Attach Father’s ID/Death Cert</label>
-                                            <input type="file" @change="getFatherId" class="form-control-file" id="fId"
-                                                   accept="image/*"
+                                            <input type="file" @change="fieldChange($event, 2)"
+                                                   class="form-control-file" id="fId"
+                                                   accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('fatherId') }">
                                             <has-error :form="form" field="fatherId"></has-error>
+                                            <small style="color: red" v-if="error && errors.fatherId">{{
+                                                errors.fatherId[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -344,6 +404,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fatherOccupation') }">
                                             <has-error :form="form" field="fatherOccupation"></has-error>
+                                            <small style="color: red" v-if="error && errors.fatherOccupation">{{
+                                                errors.fatherOccupation[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -351,13 +413,18 @@
                                             <label>Telephone</label>
                                             <VuePhoneNumberInput v-model="form.ftelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_ftelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.ftelephone">{{
+                                                errors.ftelephone[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Alternative Telephone</label>
-                                            <VuePhoneNumberInput v-model="form.alt_ftelephone" default-country-code="KE"/>
+                                            <VuePhoneNumberInput v-model="form.alt_ftelephone"
+                                                                 default-country-code="KE"/>
                                             <small style="color: red;">{{e_alt_ftelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.alt_ftelephone">{{
+                                                errors.alt_ftelephone[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -368,6 +435,8 @@
                                                class="form-control"
                                                :class="{ 'is-invalid': form.errors.has('fbox') }">
                                         <has-error :form="form" field="fbox"></has-error>
+                                        <small style="color: red" v-if="error && errors.fbox">{{ errors.fbox[0]
+                                            }}</small>
                                     </div>
                                     <div class="col">
 
@@ -385,6 +454,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('motherFirstName') }">
                                             <has-error :form="form" field="motherFirstName"></has-error>
+                                            <small style="color: red" v-if="error && errors.motherFirstName">{{
+                                                errors.motherFirstName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -394,6 +465,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('motherMiddleName') }">
                                             <has-error :form="form" field="motherMiddleName"></has-error>
+                                            <small style="color: red" v-if="error && errors.motherMiddleName">{{
+                                                errors.motherMiddleName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -403,6 +476,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('motherLastName') }">
                                             <has-error :form="form" field="motherLastName"></has-error>
+                                            <small style="color: red" v-if="error && errors.motherLastName">{{
+                                                errors.motherLastName[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -414,6 +489,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('motherIdNo') }">
                                             <has-error :form="form" field="motherIdNo"></has-error>
+                                            <small style="color: red" v-if="error && errors.motherIdNo">{{
+                                                errors.motherIdNo[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -432,14 +509,19 @@
                                             <label class="form-check-label">Dead</label>
                                             <has-error :form="form" field="mliving"></has-error>
                                         </div>
+                                        <small style="color: red" v-if="error && errors.mliving">{{ errors.mliving[0]
+                                            }}</small>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Attach Mother’s ID/Death Cert</label>
-                                            <input type="file" @change="getMotherId" class="form-control-file" id="mID"
-                                                   accept="image/*"
+                                            <input type="file" @change="fieldChange($event, 3)"
+                                                   class="form-control-file"
+                                                   accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('motherId') }">
                                             <has-error :form="form" field="motherId"></has-error>
+                                            <small style="color: red" v-if="error && errors.motherId">{{
+                                                errors.motherId[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -451,6 +533,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('motherOccupation') }">
                                             <has-error :form="form" field="motherOccupation"></has-error>
+                                            <small style="color: red" v-if="error && errors.motherOccupation">{{
+                                                errors.motherOccupation[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -458,13 +542,18 @@
                                             <label>Telephone</label>
                                             <VuePhoneNumberInput v-model="form.mtelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_mtelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.mtelephone">{{
+                                                errors.mtelephone[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Alternative Telephone</label>
-                                            <VuePhoneNumberInput v-model="form.alt_mtelephone" default-country-code="KE"/>
+                                            <VuePhoneNumberInput v-model="form.alt_mtelephone"
+                                                                 default-country-code="KE"/>
                                             <small style="color: red;">{{e_alt_mtelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.alt_mtelephone">{{
+                                                errors.alt_mtelephone[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -475,6 +564,8 @@
                                                class="form-control"
                                                :class="{ 'is-invalid': form.errors.has('mbox') }">
                                         <has-error :form="form" field="mbox"></has-error>
+                                        <small style="color: red" v-if="error && errors.mbox">{{ errors.mbox[0]
+                                            }}</small>
                                     </div>
                                     <div class="col">
 
@@ -492,6 +583,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('guardianFirstName') }">
                                             <has-error :form="form" field="guardianFirstName"></has-error>
+                                            <small style="color: red" v-if="error && errors.guardianFirstName">{{
+                                                errors.guardianFirstName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -502,6 +595,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('guardianMiddleName') }">
                                             <has-error :form="form" field="guardianMiddleName"></has-error>
+                                            <small style="color: red" v-if="error && errors.guardianMiddleName">{{
+                                                errors.guardianMiddleName[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -511,6 +606,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('guardianLastName') }">
                                             <has-error :form="form" field="guardianLastName"></has-error>
+                                            <small style="color: red" v-if="error && errors.guardianLastName">{{
+                                                errors.guardianLastName[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -522,6 +619,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('guardianIdNo') }">
                                             <has-error :form="form" field="guardianIdNo"></has-error>
+                                            <small style="color: red" v-if="error && errors.guardianIdNo">{{
+                                                errors.guardianIdNo[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -531,6 +630,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('relationship') }">
                                             <has-error :form="form" field="relationship"></has-error>
+                                            <small style="color: red" v-if="error && errors.relationship">{{
+                                                errors.relationship[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -541,6 +642,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('guardianOccupation') }">
                                             <has-error :form="form" field="guardianOccupation"></has-error>
+                                            <small style="color: red" v-if="error && errors.guardianOccupation">{{
+                                                errors.guardianOccupation[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -550,13 +653,18 @@
                                             <label>Telephone</label>
                                             <VuePhoneNumberInput v-model="form.gtelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_gtelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.gtelephone">{{
+                                                errors.gtelephone[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Alternative Telephone</label>
-                                            <VuePhoneNumberInput v-model="form.alt_gtelephone" default-country-code="KE"/>
+                                            <VuePhoneNumberInput v-model="form.alt_gtelephone"
+                                                                 default-country-code="KE"/>
                                             <small style="color: red;">{{e_alt_gtelephone}}</small>
+                                            <small style="color: red" v-if="error && errors.alt_gtelephone">{{
+                                                errors.alt_gtelephone[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -566,33 +674,77 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('gbox') }">
                                             <has-error :form="form" field="gbox"></has-error>
+                                            <small style="color: red" v-if="error && errors.gbox">{{ errors.gbox[0]
+                                                }}</small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row ">
                                     <div class="col">
-                                        <label>County</label>
-                                        <select v-model="form.gcounty" @change='getGuardianWards()'
+                                        <label>Guardian's County</label>
+                                        <select v-model="form.gcounty"
                                                 class="form-control" name="county"
                                                 :class="{ 'is-invalid': form.errors.has('gcounty') }">
                                             <option selected value="">--Select county--</option>
-                                            <option v-for="count in counties" :key="count.id" :value="count.id">{{
-                                                count.name}}
-                                            </option>
+                                            <option value='Baringo'>Baringo</option>
+                                            <option value='Bomet'>Bomet</option>
+                                            <option value='Bungoma'>Bungoma</option>
+                                            <option value='Busia'>Busia</option>
+                                            <option value='Elgeyo-Marakwet'>Elgeyo-Marakwet</option>
+                                            <option value='Embu'>Embu</option>
+                                            <option value='Garissa'>Garissa</option>
+                                            <option value='Homa Bay'>Homa Bay</option>
+                                            <option value='Isiolo'>Isiolo</option>
+                                            <option value='Kajiado'>Kajiado</option>
+                                            <option value='Kakamega'>Kakamega</option>
+                                            <option value='Kericho'>Kericho</option>
+                                            <option value='Kiambu'>Kiambu</option>
+                                            <option value='Kilifi'>Kilifi</option>
+                                            <option value='Kirinyaga'>Kirinyaga</option>
+                                            <option value='Kisii'>Kisii</option>
+                                            <option value='Kisumu'>Kisumu</option>
+                                            <option value='Kitui'>Kitui</option>
+                                            <option value='Kwale'>Kwale</option>
+                                            <option value='Laikipia'>Laikipia</option>
+                                            <option value='Lamu'>Lamu</option>
+                                            <option value='Machakos'>Machakos</option>
+                                            <option value='Makueni'>Makueni</option>
+                                            <option value='Mandera'>Mandera</option>
+                                            <option value='Marsabit'>Marsabit</option>
+                                            <option value='Meru'>Meru</option>
+                                            <option value='Migori'>Migori</option>
+                                            <option value='Mombasa'>Mombasa</option>
+                                            <option value='Muranga'>Murang'a</option>
+                                            <option value='Nairobi City'>Nairobi City</option>
+                                            <option value='Nakuru'>Nakuru</option>
+                                            <option value='Nandi'>Nandi</option>
+                                            <option value='Narok'>Narok</option>
+                                            <option value='Nyamira'>Nyamira</option>
+                                            <option value='Nyandarua'>Nyandarua</option>
+                                            <option value='Nyeri'>Nyeri</option>
+                                            <option value='Samburu'>Samburu</option>
+                                            <option value='Siaya'>Siaya</option>
+                                            <option value='Taita-Taveta'>Taita-Taveta</option>
+                                            <option value='Tana River'>Tana River</option>
+                                            <option value='Tharaka-Nithi'>Tharaka-Nithi</option>
+                                            <option value='Trans Nzoia'>Trans Nzoia</option>
+                                            <option value='Turkana'>Turkana</option>
+                                            <option value='Uasin Gishu'>Uasin Gishu</option>
+                                            <option value='Vihiga'>Vihiga</option>
+                                            <option value='West Pokot'>West Pokot</option>
+                                            <option value='Wajir'>Wajir</option>
                                         </select>
-                                        <has-error :form="form" field="gcounty"></has-error>
+                                        <small style="color: red" v-if="error && errors.gcounty">{{ errors.gcounty[0]
+                                            }}</small>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Ward</label>
-                                            <select v-model="form.gward" class="form-control" name="gward"
-                                                    :class="{ 'is-invalid': form.errors.has('gward') }">
-                                                <option selected value="">--Select Ward--</option>
-                                                <option v-for="wardy in Gwards" :key="wardy.id" :value="wardy.id">{{
-                                                    wardy.name}}
-                                                </option>
-                                            </select>
-                                            <has-error :form="form" field="gward"></has-error>
+                                            <input v-model="form.gward" type="text" name="gward"
+                                                   class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('gward') }">
+                                            <small style="color: red" v-if="error && errors.gward">{{ errors.gward[0]
+                                                }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -601,7 +753,8 @@
                                             <input v-model="form.gsubcounty" type="text" name="gsubcounty"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('gsubcounty') }">
-                                            <has-error :form="form" field="gsubcounty"></has-error>
+                                            <small style="color: red" v-if="error && errors.gsubcounty">{{
+                                                errors.gsubcounty[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -612,7 +765,8 @@
                                             <input v-model="form.glocation" type="text" name="glocation"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('glocation') }">
-                                            <has-error :form="form" field="glocation"></has-error>
+                                            <small style="color: red" v-if="error && errors.glocation">{{
+                                                errors.glocation[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -621,7 +775,8 @@
                                             <input v-model="form.gsublocation" type="text" name="gsublocation"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('gsublocation') }">
-                                            <has-error :form="form" field="gsublocation"></has-error>
+                                            <small style="color: red" v-if="error && errors.gsublocation">{{
+                                                errors.gsublocation[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -635,12 +790,13 @@
                                             <textarea v-model="form.inheritance" class="form-control" name="inheritance"
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('inheritance') }"></textarea>
-                                            <has-error :form="form" field="inheritance"></has-error>
+                                            <small style="color: red" v-if="error && errors.inheritance">{{
+                                                errors.inheritance[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==4 && enable==1">
+                            <section v-if="step==4">
                                 <h3>PART B Section ii</h3>
                                 <div class="col-sm-12">
                                     <h4>SIBLING INFORMATION</h4>
@@ -996,7 +1152,7 @@
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==5 && enable==1">
+                            <section v-if="step==5">
                                 <h3>PART C: APPLICANT'S EVIDENCE OF NEED</h3>
                                 <h4>Applicant's Information</h4>
                                 <div class="form-row">
@@ -1007,6 +1163,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('whyApply') }"></textarea>
                                             <has-error :form="form" field="whyApply"></has-error>
+                                            <small style="color: red" v-if="error && errors.whyApply">{{
+                                                errors.whyApply[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1018,6 +1176,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('finSupport') }"></textarea>
                                             <has-error :form="form" field="finSupport"></has-error>
+                                            <small style="color: red" v-if="error && errors.finSupport">{{
+                                                errors.finSupport[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1032,6 +1192,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('specialNeeds') }"></textarea>
                                             <has-error :form="form" field="specialNeeds"></has-error>
+                                            <small style="color: red" v-if="error && errors.specialNeeds">{{
+                                                errors.specialNeeds[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1042,6 +1204,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('otherSpecialNeeds') }"></textarea>
                                             <has-error :form="form" field="otherSpecialNeeds"></has-error>
+                                            <small style="color: red" v-if="error && errors.otherSpecialNeeds">{{
+                                                errors.otherSpecialNeeds[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1058,6 +1222,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fOrGAge') }">
                                             <has-error :form="form" field="fOrGAge"></has-error>
+                                            <small style="color: red" v-if="error && errors.fOrGAge">{{
+                                                errors.fOrGAge[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1067,6 +1233,8 @@
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('mOrGAge') }">
                                             <has-error :form="form" field="mOrGAge"></has-error>
+                                            <small style="color: red" v-if="error && errors.mOrGAge">{{
+                                                errors.mOrGAge[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1083,6 +1251,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('fOrGDisability') }"></textarea>
                                             <has-error :form="form" field="fOrGDisability"></has-error>
+                                            <small style="color: red" v-if="error && errors.fOrGDisability">{{
+                                                errors.fOrGDisability[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1093,6 +1263,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('mOrGDisability') }"></textarea>
                                             <has-error :form="form" field="mOrGDisability"></has-error>
+                                            <small style="color: red" v-if="error && errors.mOrGDisability">{{
+                                                errors.mOrGDisability[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1111,6 +1283,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('fOrGAilment') }"></textarea>
                                             <has-error :form="form" field="fOrGAilment"></has-error>
+                                            <small style="color: red" v-if="error && errors.fOrGAilment">{{
+                                                errors.fOrGAilment[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1121,6 +1295,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('mOrGAilment') }"></textarea>
                                             <has-error :form="form" field="mOrGAilment"></has-error>
+                                            <small style="color: red" v-if="error && errors.mOrGAilment">{{
+                                                errors.mOrGAilment[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1138,6 +1314,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('fOrGAbandon') }"></textarea>
                                             <has-error :form="form" field="fOrGAbandon"></has-error>
+                                            <small style="color: red" v-if="error && errors.fOrGAbandon">{{
+                                                errors.fOrGAbandon[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1148,6 +1326,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('mOrGAbandon') }"></textarea>
                                             <has-error :form="form" field="mOrGAbandon"></has-error>
+                                            <small style="color: red" v-if="error && errors.mOrGAbandon">{{
+                                                errors.mOrGAbandon[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1166,6 +1346,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('fOrGEmployment') }"></textarea>
                                             <has-error :form="form" field="fOrGEmployment"></has-error>
+                                            <small style="color: red" v-if="error && errors.fOrGEmployment">{{
+                                                errors.fOrGEmployment[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1176,6 +1358,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('mOrGEmployment') }"></textarea>
                                             <has-error :form="form" field="mOrGEmployment"></has-error>
+                                            <small style="color: red" v-if="error && errors.mOrGEmployment">{{
+                                                errors.mOrGEmployment[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1194,6 +1378,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('fOrGBusiness') }"></textarea>
                                             <has-error :form="form" field="fOrGBusiness"></has-error>
+                                            <small style="color: red" v-if="error && errors.fOrGBusiness">{{
+                                                errors.fOrGBusiness[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1204,6 +1390,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('mOrGBusiness') }"></textarea>
                                             <has-error :form="form" field="mOrGBusiness"></has-error>
+                                            <small style="color: red" v-if="error && errors.mOrGBusiness">{{
+                                                errors.mOrGBusiness[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1223,6 +1411,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('fOrGLand') }"></textarea>
                                             <has-error :form="form" field="fOrGLand"></has-error>
+                                            <small style="color: red" v-if="error && errors.fOrGLand">{{
+                                                errors.fOrGLand[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1233,6 +1423,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('mOrGLand') }"></textarea>
                                             <has-error :form="form" field="mOrGLand"></has-error>
+                                            <small style="color: red" v-if="error && errors.mOrGLand">{{
+                                                errors.mOrGLand[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1252,6 +1444,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('fOrGAssets') }"></textarea>
                                             <has-error :form="form" field="fOrGAssets"></has-error>
+                                            <small style="color: red" v-if="error && errors.fOrGAssets">{{
+                                                errors.fOrGAssets[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1262,6 +1456,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('mOrGAssets') }"></textarea>
                                             <has-error :form="form" field="mOrGAssets"></has-error>
+                                            <small style="color: red" v-if="error && errors.mOrGAssets">{{
+                                                errors.mOrGAssets[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1277,6 +1473,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('familyConflict') }"></textarea>
                                             <has-error :form="form" field="familyConflict"></has-error>
+                                            <small style="color: red" v-if="error && errors.familyConflict">{{
+                                                errors.familyConflict[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1286,6 +1484,8 @@
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('familyHouse') }"></textarea>
                                             <has-error :form="form" field="familyHouse"></has-error>
+                                            <small style="color: red" v-if="error && errors.familyHouse">{{
+                                                errors.familyHouse[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1298,7 +1498,8 @@
                                                       name="otherDis"
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('otherDis') }"></textarea>
-                                            <has-error :form="form" field="otherDis"></has-error>
+                                            <small style="color: red" v-if="error && errors.otherDis">{{
+                                                errors.otherDis[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1309,7 +1510,8 @@
                                                       name="siblingsInfo"
                                                       rows="3"
                                                       :class="{ 'is-invalid': form.errors.has('siblingsInfo') }"></textarea>
-                                            <has-error :form="form" field="siblingsInfo"></has-error>
+                                            <small style="color: red" v-if="error && errors.siblingsInfo">{{
+                                                errors.siblingsInfo[0] }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1320,17 +1522,18 @@
                                                 DOCUMENTS required must be provided by the applicant. Any applications
                                                 without
                                                 relevant documents will be rejected</label>
-                                            <input type="file" multiple class="form-control-file" @change="fieldChange"
-                                                   id="files">
-                                            <has-error :form="form" field="files"></has-error>
+                                            <input type="file" multiple class="form-control-file" @change="fieldChange($event, 4)"
+                                                   id="files" accept="image/*, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document(.docx)">
+                                            <small style="color: red" v-if="error && errors.attachments">{{
+                                                errors.attachments[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <!--                                        <button class="btn btn-primary btn-sm" @click.prevent="sendOther(1)">send</button>-->
+
                                     </div>
                                 </div>
                             </section>
-                            <section v-if="step==6 && enable==1">
+                            <section v-if="step==6">
                                 <h3>PART D</h3>
                                 <div class="form-row">
                                     <div class="col">
@@ -1407,6 +1610,8 @@
                                                 <label class="form-check-label">Other</label>
                                                 <has-error :form="form" field="classification"></has-error>
                                             </div>
+                                            <small style="color: red" v-if="error && errors.hear">{{ errors.hear[0]
+                                                }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1491,20 +1696,6 @@
                         </form>
                     </div>
                 </div>
-                <div v-if="enable == 0">
-                    <div class="card">
-                        <div class="card-header">
-                            Application Form not Available
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Application window closed</h5>
-                            <p class="card-text">The application window for your county has been closed for now wait
-                                until the window is
-                                opened</p>
-                            <a href="/" class="btn btn-danger">Go Back Home</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -1520,6 +1711,11 @@
         },
         data() {
             return {
+                motherId: [],
+                fatherId: [],
+                slip: [],
+                errors: {},
+                error: false,
                 step: 1,
                 totalSteps: 6,
                 counties: {},
@@ -1529,7 +1725,7 @@
                 now: moment().format('YYYY'),
                 enable: {},
                 watch: 0,
-                yearz:{},
+                yearz: {},
                 loading: false,
                 attachments: [],
                 e_ftelephone: '',
@@ -1543,7 +1739,7 @@
                 formf: new FormData(),
                 form: new Form({
                     type: 'scholarship',
-                    yearz:'',
+                    yearz: '',
                     firstName: '',
                     middleName: '',
                     lastName: '',
@@ -1560,7 +1756,6 @@
                     sublocation: '',
                     kcpeMarks: '',
                     indexNo: '',
-                    resultslip: '',
                     kcpeYear: '',
                     kcpeQuiz: '',
                     repeatQuiz: '',
@@ -1593,8 +1788,6 @@
                     fbox: '',
                     mbox: '',
                     gbox: '',
-                    fatherId: '',
-                    motherId: '',
                     relationship: '',
                     gcounty: '',
                     gward: '',
@@ -1672,20 +1865,85 @@
             printSib() {
                 console.log(this.sibling);
             },
-            fieldChange(e) {
-                let selectedFiles = e.target.files;
+            fieldChange(event, type) {
+                let selectedFiles = event.target.files;
                 if (!selectedFiles.length) {
                     return false;
                 }
-                for (let i = 0; i < selectedFiles.length; i++) {
-                    this.attachments.push(selectedFiles[i]);
+                if (type == 1) {
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        if (selectedFiles[i].size < 10000000) {
+                            this.slip.push(selectedFiles[i]);
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Ooops...',
+                                text: 'File too large. Only under 10mbs allowed',
+                            })
+                        }
+                    }
                 }
-                // console.log(this.attachments);
+
+                if (type == 2) {
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        if (selectedFiles[i].size < 10000000) {
+                            this.fatherId.push(selectedFiles[i]);
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Ooops...',
+                                text: 'File too large. Only under 10mbs allowed',
+                            })
+                        }
+                    }
+                }
+
+                if (type == 3) {
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        if (selectedFiles[i].size < 10000000) {
+                            this.motherId.push(selectedFiles[i]);
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Ooops...',
+                                text: 'File too large. Only under 10mbs allowed',
+                            })
+                        }
+                    }
+                }
+
+                if (type == 4) {
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        if (selectedFiles[i].size < 10000000) {
+                            this.attachments.push(selectedFiles[i]);
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Ooops...',
+                                text: 'File too large. Only under 10mbs allowed',
+                            })
+                        }
+                    }
+                }
             },
             sendOther(applicationId) {
                 for (let i = 0; i < this.attachments.length; i++) {
                     this.formf.append('files[]', this.attachments[i]);
                 }
+
+                for (let i = 0; i < this.slip.length; i++) {
+                    this.formf.append('slip[]', this.slip[i]);
+                }
+
+                for (let i = 0; i < this.motherId.length; i++) {
+                    this.formf.append('motherId[]', this.motherId[i]);
+                }
+
+
+                for (let i = 0; i < this.fatherId.length; i++) {
+                    this.formf.append('fatherId[]', this.fatherId[i]);
+                }
+
 
                 this.formf.append('applicationId', applicationId);
                 const config = {headers: {'Content-Type': 'multipart/form-data'}};
@@ -1740,6 +1998,7 @@
                         })
                         .catch(error => {
                             this.loading = false;
+                            this.error = true;
                             this.errors = error.response.data.errors;
                             Swal.fire({
                                 type: 'error',
@@ -1926,7 +2185,7 @@
                             indexNo: 'This field is required'
                         })
                         return false;
-                    } else if (!this.form.resultslip) {
+                    } else if (!this.slip.length) {
                         this.form.errors.set({
                             resultslip: 'This field is required'
                         })
@@ -1983,6 +2242,11 @@
                             fatherIdNo: 'This field is required'
                         })
                         return false;
+                    } else if (!this.fatherId.length) {
+                        this.form.errors.set({
+                            fatherId: 'This field is required'
+                        })
+                        return false;
                     } else if (!this.form.fliving) {
                         this.form.errors.set({
                             fliving: 'This field is required'
@@ -2032,6 +2296,11 @@
                     } else if (!this.form.motherOccupation) {
                         this.form.errors.set({
                             motherOccupation: 'This field is required'
+                        })
+                        return false;
+                    } else if (!this.motherId.length) {
+                        this.form.errors.set({
+                            motherId: 'This field is required'
                         })
                         return false;
                     } else if (!this.form.mtelephone) {
@@ -2358,7 +2627,7 @@
             getStatus() {
                 axios.get("api/statuz/" + this.form.county).then(({data}) => ([this.enable = data['num']]));
             },
-            getApplication(){
+            getApplication() {
                 axios.get("api/getAppYears/" + this.form.county).then(({data}) => ([this.yearz = data['year']]));
             },
         },

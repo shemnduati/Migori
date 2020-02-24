@@ -32,11 +32,13 @@ class ScholarshipController extends Controller
         }
     }
 
-    public function recommendedApp(){
+    public function recommendedApp()
+    {
         return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);
     }
 
-    public function rejectedApp(){
+    public function rejectedApp()
+    {
         return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 2)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);
     }
 
@@ -77,7 +79,91 @@ class ScholarshipController extends Controller
 
     public function store(Request $request)
     {
-        $check = Application::where('user_id', auth()->user()->id)->where('year', date('Y'))->where('bursary_type', $request->type)->get();
+        $this->validate($request, [
+            'yearz' => 'required',
+            'type' => 'required|string',
+            'firstName' => 'required|string',
+            'middleName' => 'required|string',
+            'lastName' => 'required|string',
+            'dob' => 'required|date',
+            'parentName' => 'required|string',
+            'box' => 'required|string',
+            'gender' => 'required|string',
+            'telephone' => 'required|phone:KE|min:10',
+            'alt_telephone' => 'required|phone:KE|min:10',
+            'county' => 'required',
+            'ward' => 'required',
+            'subcounty' => 'required|string',
+            'location' => 'required|string',
+            'sublocation' => 'required|string',
+            'kcpeMarks' => 'required|integer|min:0|max:600',
+            'indexNo' => 'required|string',
+            'kcpeYear' => 'required|max:' . (date('Y')),
+            'kcpeQuiz' => 'required|string',
+            'repeatQuiz' => 'required|string',
+            'secSchoolName' => 'required|string',
+            'classification' => 'required|string',
+            'fatherFirstName' => 'required|string',
+            'fatherMiddleName' => 'required|string',
+            'fatherLastName' => 'required|string',
+            'motherFirstName' => 'required|string',
+            'motherMiddleName' => 'required|string',
+            'motherLastName' => 'required|string',
+            'guardianFirstName' => 'required|string',
+            'guardianMiddleName' => 'required|string',
+            'guardianLastName' => 'required|string',
+            'fatherIdNo' => 'required|string',
+            'motherIdNo' => 'required|string',
+            'guardianIdNo' => 'required|string',
+            'fatherOccupation' => 'required|string',
+            'motherOccupation' => 'required|string',
+            'guardianOccupation' => 'required|string',
+            'fliving' => 'required|string',
+            'mliving' => 'required|string',
+            'ftelephone' => 'required|phone:KE|min:10',
+            'mtelephone' => 'required|phone:KE|min:10',
+            'gtelephone' => 'required|phone:KE|min:10',
+            'alt_ftelephone' => 'required|phone:KE|min:10',
+            'alt_mtelephone' => 'required|phone:KE|min:10',
+            'alt_gtelephone' => 'required|phone:KE|min:10',
+            'fbox' => 'required|string',
+            'mbox' => 'required|string',
+            'gbox' => 'required|string',
+            'relationship' => 'required|string',
+            'gcounty' => 'required|string',
+            'gward' => 'required|string',
+            'gsubcounty' => 'required|string',
+            'glocation' => 'required|string',
+            'gsublocation' => 'required|string',
+            'inheritance' => 'required|string',
+            'whyApply' => 'required|string',
+            'finSupport' => 'required|string',
+            'specialNeeds' => 'required|string',
+            'otherSpecialNeeds' => 'required|string',
+            'fOrGAge' => 'required|integer',
+            'mOrGAge' => 'required|integer',
+            'fOrGDisability' => 'required|string',
+            'mOrGDisability' => 'required|string',
+            'fOrGAilment' => 'required|string',
+            'mOrGAilment' => 'required|string',
+            'fOrGAbandon' => 'required|string',
+            'mOrGAbandon' => 'required|string',
+            'fOrGEmployment' => 'required|string',
+            'mOrGEmployment' => 'required|string',
+            'fOrGBusiness' => 'required|string',
+            'mOrGBusiness' => 'required|string',
+            'fOrGLand' => 'required|string',
+            'mOrGLand' => 'required|string',
+            'fOrGAssets' => 'required|string',
+            'mOrGAssets' => 'required|string',
+            'familyConflict' => 'required|string',
+            'familyHouse' => 'required|string',
+            'otherDis' => 'required|string',
+            'siblingsInfo' => 'required|string',
+            'hear' => 'required|string',
+        ]);
+
+        $check = Application::where('user_id', auth()->user()->id)->where('year', $request->yearz)->where('bursary_type', $request->type)->get();
         if (count($check) > 0) {
             return response()->json([
                 'status' => 'error',
@@ -87,7 +173,7 @@ class ScholarshipController extends Controller
             $application = new Application();
             $application->user_id = auth()->user()->id;
             $application->bursary_type = $request->type;
-            $application->application_year =$request->yearz;
+            $application->application_year = $request->yearz;
             $application->firstName = $request->firstName;
             $application->middleName = $request->middleName;
             $application->lastName = $request->lastName;
@@ -106,6 +192,7 @@ class ScholarshipController extends Controller
             $application->kcpeMarks = $request->kcpeMarks;
             $application->indexNo = $request->indexNo;
             $application->year = date('Y');
+            $application->application_year = $request->yearz;
             $application->resultslip = $request->resultslip;
             $application->kcpeYear = $request->kcpeYear;
             $application->kcpeQuiz = $request->kcpeQuiz;
@@ -309,18 +396,19 @@ class ScholarshipController extends Controller
         }
     }
 
-    public function recommend(Request $request, $applicationId){
-        if ($request->recommendation == 1){
+    public function recommend(Request $request, $applicationId)
+    {
+        if ($request->recommendation == 1) {
             $app = Application::findOrFail($applicationId);
             $app->status = 1;
             $app->recommendation = "high";
             $app->update();
-        }elseif ($request->recommendation == 2){
+        } elseif ($request->recommendation == 2) {
             $app = Application::findOrFail($applicationId);
             $app->status = 1;
             $app->recommendation = "partially";
             $app->update();
-        }elseif ($request->recommendation == 3){
+        } elseif ($request->recommendation == 3) {
             $app = Application::findOrFail($applicationId);
             $app->status = 2;
             $app->recommendation = "no";
@@ -328,7 +416,8 @@ class ScholarshipController extends Controller
         }
     }
 
-    public function approve($applicationId){
+    public function approve($applicationId)
+    {
         $app = Application::findOrFail($applicationId);
         $app->approved = 3;
         $app->update();
@@ -336,18 +425,71 @@ class ScholarshipController extends Controller
 
     public function complete(Request $request)
     {
+        if ($request->hasFile('slip')) {
+            foreach ($request->file('slip') as $uploadedFile) {
+                $ext = $uploadedFile->getClientOriginalExtension();
+                if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                    $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
+                    $file = new File();
+                    $file->kind = "Result Slip";
+                    $file->applicationId = $request->applicationId;
+                    $file->path = $filename;
+                    $file->status = 0;
+                    $file->type = "scholarship";
+                    $file->year = date('Y');
+                    $file->save();
+                }
+            }
+        }
+
+        if ($request->hasFile('motherId')) {
+            foreach ($request->file('motherId') as $uploadedFile) {
+                $ext = $uploadedFile->getClientOriginalExtension();
+                if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                    $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
+                    $file = new File();
+                    $file->kind = "Mother’s ID/Death Cert";
+                    $file->applicationId = $request->applicationId;
+                    $file->path = $filename;
+                    $file->status = 0;
+                    $file->type = "scholarship";
+                    $file->year = date('Y');
+                    $file->save();
+                }
+            }
+        }
+
+        if ($request->hasFile('fatherId')) {
+            foreach ($request->file('fatherId') as $uploadedFile) {
+                $ext = $uploadedFile->getClientOriginalExtension();
+                if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                    $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
+                    $file = new File();
+                    $file->kind = "Father’s ID/Death Cert";
+                    $file->applicationId = $request->applicationId;
+                    $file->path = $filename;
+                    $file->status = 0;
+                    $file->type = "scholarship";
+                    $file->year = date('Y');
+                    $file->save();
+                }
+            }
+        }
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $uploadedFile) {
-                $filename = $uploadedFile->store('uploads');
-                // echo $filename;
-                $file = new File();
-                $file->applicationId = $request->applicationId;
-                $file->path = $filename;
-                $file->status = 0;
-                $file->year = date('Y');
-                $file->type = "scholarship";
-                $file->save();
+                $ext = $uploadedFile->getClientOriginalExtension();
+                if (in_array($ext, ['jpg', 'png', 'jpeg', 'pdf', 'docx'])) {
+                    $filename = $uploadedFile->storeAs('uploads', time() . $uploadedFile->getClientOriginalName());
+                    $file = new File();
+                    $file->kind = "Other";
+                    $file->applicationId = $request->applicationId;
+                    $file->path = $filename;
+                    $file->status = 0;
+                    $file->type = "scholarship";
+                    $file->year = date('Y');
+                    $file->save();
+                }
             }
         }
         return response(['status' => 'success'], 200);
