@@ -9,7 +9,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="shortcut icon" type="image/x-icon" href="/img/logo.jpg"/>
+        <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
