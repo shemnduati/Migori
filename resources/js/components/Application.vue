@@ -15,7 +15,7 @@
                                             <div class="col">
                                                 <label>Select Application Year</label>
                                                 <select v-model="form.yearz" class="form-control" name="yearz"
-                                                        :class="{ 'is-invalid': form.errors.has('yearz') }">
+                                                        :class="{ 'is-invalid': form.errors.has('yearz') }" :disabled="!yearz.length">
                                                     <option selected value="">--Select Application Year--</option>
                                                     <option v-for="year in yearz" :key="year.id" :value="year.year">
                                                         {{
@@ -24,6 +24,8 @@
                                                 </select>
                                                 <has-error :form="form" field="year"></has-error>
                                                 <small style="color: red" v-if="error && errors.year">{{ errors.year[0] }}</small>
+                                                <small style="color: red" v-if="!yearz.length">There is currently no open
+                                                    application. Please check again later</small>
                                             </div>
                                         </div>
                                     </div>
@@ -703,7 +705,7 @@
                 info: {},
                 loading: false,
                 watch: 0,
-                yearz:{},
+                yearz:[],
                 passport: [],
                 motherId: [],
                 fatherId: [],
@@ -1201,7 +1203,6 @@
                 axios.get("api/getcounties").then(({data}) => ([this.counties = data['counties']]));
             },
             getCountyWards() {
-                this.getStatus();
                 axios.get("api/getcountywards/" + this.form.county).then(({data}) => ([this.wards = data['wards']]));
             },
             getDetails() {
@@ -1226,7 +1227,6 @@
             this.getDetails();
             this.getApplication();
             this. getCountyWards();
-
         }
     }
 </script>
