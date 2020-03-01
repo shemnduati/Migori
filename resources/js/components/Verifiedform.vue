@@ -99,7 +99,7 @@
               <th scope="col">NAME</th>
               <th scope="col">DEAD/ALIVE</th>
               <th scope="col">OCCUPATION</th>
-              <th scope="col">TELL</th>
+              <th scope="col">TEL</th>
               <th scope="col">INCOME/YEAR</th>
             </tr>
           </thead>
@@ -119,7 +119,7 @@
               <div class="col-sm-1">
                 <input type="text" v-model="morefamily.totalSiblings" readonly class="form-control" >
               </div>
-              <label for="staticEmail" class="col-sm-2 col-form-label">IN SCHOOLS</label>
+              <label for="staticEmail" class="col-sm-2 col-form-label">IN SCHOOL</label>
               <div class="col-sm-2">
                 <input type="text" v-model="morefamily.schoolSiblings" readonly class="form-control" >
               </div>
@@ -179,7 +179,7 @@
           </div>
       </div>
           <div class="row">
-            <p class="pl-3">(Kindly attach fees structure. First year to attach there calling letter duly stamped)</p>
+            <p class="pl-3">(Kindly attach fees structure. First year to attach their calling letter fully stamped)</p>
           </div>
           <div class="row">
             <p class="pl-3">FOR OFFICIAL USE ONLY. (To be filled by head of institution/Bursar/Finacial officer)</p>
@@ -207,7 +207,7 @@
       <div class="row form-group">
         <label for="staticEmail" class="col-sm-1 col-form-label">NAME</label>
         <p class="pt-2">_____________________________________</p>
-        <label for="staticEmail" class="col-sm-1 col-form-label">TELL</label>
+        <label for="staticEmail" class="col-sm-1 col-form-label">TEL</label>
         <p class="pt-2">______________________________</p>
         <label for="staticEmail" class="col-sm-1 col-form-label">SIGNATURE</label>
         <p class="pt-2 pl-4">______________________________________</p>
@@ -234,7 +234,7 @@
         <p class="pt-2">____________________________________________</p>
       </div>
       <div class="row pb-3">
-        <h5 class="pl-3"> Bursar Committee</h5>
+        <h5 class="pl-3"> Bursary Committee</h5>
       </div>
       <div class="row form-group">
         <label for="staticEmail" class="col-sm-1 col-form-label">Approved</label>
@@ -245,13 +245,13 @@
         <p class="pt-2 pl-4">___________________________</p>
       </div>
       <div class="row form-group">
-        <label for="staticEmail" class="col-sm-4 col-form-label">Bursar Awarded in Ksh:</label>
+        <label for="staticEmail" class="col-sm-4 col-form-label">Bursary Awarded in Ksh:</label>
         <div class="col-sm-8">
           <input type="text" v-model="application.amount" readonly class="form-control" >
         </div>
       </div>
       <div class="row form-group">
-        <label for="staticEmail" class="col-sm-3 col-form-label">Reasones for Disapproval</label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">Reason for Disapproval</label>
         <p class="pt-2 pl-4">___________________________________________________________________________________</p>
       </div>
       <div class="row form-group">
