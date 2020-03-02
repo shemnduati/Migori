@@ -26,13 +26,14 @@
         <h5>{{geographical.Ward}}</h5>
       </div>
     </div>
+
       <div class="row pb-3">
         <h5 class="pl-3"> 1. Applicant's Personal Information</h5>
       </div>
       <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">OFFICIAL NAME</label>
           <div class="col-sm-4">
-            <input type="text" v-model="application.firstName" readonly class="form-control" >
+            <input type="text" v-model="application.firstName +' '+application.middleName +' '+application.lastName" readonly class="form-control" >
           </div>
           <label for="staticEmail" class="col-sm-3 col-form-label">REG/ADMISSION NUMBER</label>
           <div class="col-sm-3">
