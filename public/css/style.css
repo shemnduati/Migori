@@ -1,0 +1,40 @@
+.header{
+    background-image: linear-gradient(to right, rgba(213, 245, 206, 0.6), rgba(171, 238, 152, 0.6), rgba(213, 245, 206, 0.6)), url(../images/laptop.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.banner{
+    width: auto;
+    height: 500px;
+    padding: 170px 0;
+    text-align: center;
+}
+
+.learn{
+    padding: 100px 0;
+
+}
+
+.lead{
+    font-size: 30px;
+}
+
+.no-padding{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.button{
+    padding: 8px 35px;
+}
+
+p{
+    font-size: 18px;
+}
+
+.cent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
