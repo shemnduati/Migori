@@ -44,7 +44,7 @@
                                 <td>{{application.fname}}</td>
                                 <td>{{application.Mname}}</td>
                                 <td>{{application.Lname}}</td>
-                                <td>{{application.index}}</td>
+                                <td>{{application.indexNo}}</td>
                                 <td>{{application.school}}</td>
                                 <td>{{application.reco}}</td>
                                 <td>{{application.ward}}</td>

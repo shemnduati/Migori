@@ -146,9 +146,9 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="passport">Attach Passport Photo</label>
+                                            <label for="passport">Attach Passport Photo (Images/Pdf)</label>
                                             <input type="file" @change="fieldChange($event, 1)" class="form-control-file"
-                                                   id="passport" accept="image/*, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document(.docx)"
+                                                   id="passport" accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('passport') }">
                                             <has-error :form="form" field="passport"></has-error>
                                             <small style="color: red" v-if="error && errors.passport">{{ errors.passport[0] }}</small>
@@ -200,7 +200,7 @@
                                         <div class="form-group">
                                             <label>Attach Father’s ID/Death Cert</label>
                                             <input type="file" @change="fieldChange($event, 2)" class="form-control-file" id="fId"
-                                                   accept="image/*, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document(.docx)"
+                                                   accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('fatherId') }">
                                             <has-error :form="form" field="fatherId"></has-error>
                                             <small style="color: red" v-if="error && errors.fatherId">{{ errors.fatherId[0] }}</small>
@@ -271,7 +271,7 @@
                                         <div class="form-group">
                                             <label>Attach Mother’s ID/Death Cert</label>
                                             <input type="file" @change="fieldChange($event, 3)" class="form-control-file" id="mID"
-                                                   accept="image/*, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document(.docx)"
+                                                   accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('motherId') }">
                                             <has-error :form="form" field="motherId"></has-error>
                                             <small style="color: red" v-if="error && errors.motherId">{{ errors.motherId[0] }}</small>
@@ -342,7 +342,7 @@
                                         <div class="form-group">
                                             <label>Attach Guardian’s ID/Death Cert</label>
                                             <input type="file" @change="fieldChange($event, 4)" class="form-control-file"
-                                                   id="gId" accept="image/*, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document(.docx)"
+                                                   id="gId" accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('guardianId') }">
                                             <has-error :form="form" field="guardianId"></has-error>
                                             <small style="color: red" v-if="error && errors.guardianId">{{ errors.guardianId[0] }}</small>
@@ -659,7 +659,7 @@
                                             <label for="files">Attach recommendation letter by head of
                                                 institution</label>
                                             <input type="file" class="form-control-file" @change="fieldChange($event, 5)"
-                                                   id="files">
+                                                   id="files" accept="image/*, application/pdf">
                                             <has-error :form="form" field="files"></has-error>
                                             <small style="color: red" v-if="error && errors.files">{{ errors.files[0] }}</small>
                                         </div>
@@ -675,6 +675,18 @@
                                     </button>
                                     <button type="button" class="btn btn-success btn-submit"
                                             @click.prevent="sendApp()" :disabled="loading">
+                                        <div class="loader">
+                                            <div class="lds-roller" v-if="loading">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
                                         Submit Application
                                     </button>
                                 </p>
@@ -771,6 +783,7 @@
         },
         methods: {
             sendApp() {
+                this.loading = true;
                 for (let i = 0; i < this.attachments.length; i++) {
                     this.formf.append('files[]', this.attachments[i]);
                 }
@@ -863,12 +876,13 @@
                 })
                     .catch(error => {
                         this.loading = false;
+                        this.step = 1;
                         this.error = true;
                         this.errors = error.response.data.errors;
                         Swal.fire({
                             type: 'error',
                             title: 'Error!!',
-                            text: "Your application contains invalid data. Please review your inputs and provide valid details.",
+                            text: "Your application contains invalid data. Please review your inputs to check the errors.",
 
                         })
                     });

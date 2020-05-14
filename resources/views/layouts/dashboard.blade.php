@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Baza</title>
+    <title>MIGORI</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="/" class="brand-link">
                 <img src="/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8">
-                <span class="brand-text font-weight-light">Baza</span>
+                <span class="brand-text font-weight-light">Migori County</span>
             </a>
 
             <!-- Sidebar -->
