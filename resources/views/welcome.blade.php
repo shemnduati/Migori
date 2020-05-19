@@ -27,7 +27,7 @@
                         <div class="container-fluid">
                             <img src="/img/favicon.jpeg" style="width: 50px; height: 50px" alt="">
                             <a class="navbar-brand font-weight-bolder pl-3" href="{{ url('/') }}">
-                                {{ config('app.name', 'BAZA') }}
+                                {{ config('app.name', 'BASAP') }}
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                                 <span class="navbar-toggler-icon"></span>
@@ -167,7 +167,7 @@
                         </a>
                     </div>
                     <!-- Default to the left -->
-                    <strong><a href="https://twtechnologies.africa">Copyright &copy; Baza {{date('Y')}}</a>.</strong> All rights reserved.
+                    <strong><a href="https://twtechnologies.africa">Copyright &copy; BASAP {{date('Y')}}</a>.</strong> All rights reserved.
                 </footer>
             </section>
         </div>
