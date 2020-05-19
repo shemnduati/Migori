@@ -727,7 +727,6 @@
                 e_ftelephone: '',
                 e_mtelephone: '',
                 e_gtelephone: '',
-                formf: new FormData(),
                 form: new Form({
                     type: 'County',
                     firstName: '',
@@ -783,84 +782,85 @@
         },
         methods: {
             sendApp() {
+                let formf = new FormData();
                 this.loading = true;
                 for (let i = 0; i < this.attachments.length; i++) {
-                    this.formf.append('files[]', this.attachments[i]);
+                    formf.append('files[]', this.attachments[i]);
                 }
 
                 for (let i = 0; i < this.passport.length; i++) {
-                    this.formf.append('passport[]', this.passport[i]);
+                    formf.append('passport[]', this.passport[i]);
                 }
 
                 for (let i = 0; i < this.fatherId.length; i++) {
-                    this.formf.append('fatherId[]', this.fatherId[i]);
+                    formf.append('fatherId[]', this.fatherId[i]);
                 }
 
                 for (let i = 0; i < this.motherId.length; i++) {
-                    this.formf.append('motherId[]', this.motherId[i]);
+                    formf.append('motherId[]', this.motherId[i]);
                 }
 
                 for (let i = 0; i < this.guardianId.length; i++) {
-                    this.formf.append('guardianId[]', this.guardianId[i]);
+                    formf.append('guardianId[]', this.guardianId[i]);
                 }
 
-                this.formf.append('type', this.form.type);
-                this.formf.append('firstName', this.form.firstName);
-                this.formf.append('middleName', this.form.middleName);
-                this.formf.append('lastName', this.form.lastName);
-                this.formf.append('dob', this.form.dob);
-                this.formf.append('email', this.form.email);
-                this.formf.append('gender', this.form.gender);
-                this.formf.append('telephone', this.form.telephone);
-                this.formf.append('regNo', this.form.regNo);
-                this.formf.append('class', this.form.class);
-                this.formf.append('idNo', this.form.idNo);
-                this.formf.append('fname', this.form.fname);
-                this.formf.append('fliving', this.form.fliving);
-                this.formf.append('foccupation', this.form.foccupation);
-                this.formf.append('mname', this.form.mname);
-                this.formf.append('mliving', this.form.mliving);
-                this.formf.append('moccupation', this.form.moccupation);
-                this.formf.append('gname', this.form.gname);
-                this.formf.append('gliving', this.form.gliving);
-                this.formf.append('goccupation', this.form.goccupation);
-                this.formf.append('fincome', this.form.fincome);
-                this.formf.append('mincome', this.form.mincome);
-                this.formf.append('gincome', this.form.gincome);
-                this.formf.append('county', this.form.county);
-                this.formf.append('ward', this.form.ward);
-                this.formf.append('constituency', this.form.constituency);
-                this.formf.append('location', this.form.location);
-                this.formf.append('division', this.form.division);
-                this.formf.append('sublocation', this.form.sublocation);
-                this.formf.append('village', this.form.village);
-                this.formf.append('polling', this.form.polling);
-                this.formf.append('iname', this.form.iname);
-                this.formf.append('branch', this.form.branch);
-                this.formf.append('year', this.form.year);
-                this.formf.append('yearz', this.form.yearz);
-                this.formf.append('payable', this.form.payable);
-                this.formf.append('paid', this.form.paid);
-                this.formf.append('balance', this.form.balance);
-                this.formf.append('tSiblings', this.form.tSiblings);
-                this.formf.append('inSchool', this.form.inSchool);
-                this.formf.append('sWorking', this.form.sWorking);
-                this.formf.append('pFees', this.form.pFees);
-                this.formf.append('pRelationship', this.form.pRelationship);
-                this.formf.append('passport', this.form.passport);
-                this.formf.append('fatherId', this.form.fatherId);
-                this.formf.append('motherId', this.form.motherId);
-                this.formf.append('guardianId', this.form.guardianId);
-                this.formf.append('ftelephone', this.form.ftelephone);
-                this.formf.append('mtelephone', this.form.mtelephone);
-                this.formf.append('gtelephone', this.form.gtelephone);
-                this.formf.append('bank', this.form.bank);
-                this.formf.append('account', this.form.account);
-                this.formf.append('bran', this.form.bran);
+                formf.append('type', this.form.type);
+                formf.append('firstName', this.form.firstName);
+                formf.append('middleName', this.form.middleName);
+                formf.append('lastName', this.form.lastName);
+                formf.append('dob', this.form.dob);
+                formf.append('email', this.form.email);
+                formf.append('gender', this.form.gender);
+                formf.append('telephone', this.form.telephone);
+                formf.append('regNo', this.form.regNo);
+                formf.append('class', this.form.class);
+                formf.append('idNo', this.form.idNo);
+                formf.append('fname', this.form.fname);
+                formf.append('fliving', this.form.fliving);
+                formf.append('foccupation', this.form.foccupation);
+                formf.append('mname', this.form.mname);
+                formf.append('mliving', this.form.mliving);
+                formf.append('moccupation', this.form.moccupation);
+                formf.append('gname', this.form.gname);
+                formf.append('gliving', this.form.gliving);
+                formf.append('goccupation', this.form.goccupation);
+                formf.append('fincome', this.form.fincome);
+                formf.append('mincome', this.form.mincome);
+                formf.append('gincome', this.form.gincome);
+                formf.append('county', this.form.county);
+                formf.append('ward', this.form.ward);
+                formf.append('constituency', this.form.constituency);
+                formf.append('location', this.form.location);
+                formf.append('division', this.form.division);
+                formf.append('sublocation', this.form.sublocation);
+                formf.append('village', this.form.village);
+                formf.append('polling', this.form.polling);
+                formf.append('iname', this.form.iname);
+                formf.append('branch', this.form.branch);
+                formf.append('year', this.form.year);
+                formf.append('yearz', this.form.yearz);
+                formf.append('payable', this.form.payable);
+                formf.append('paid', this.form.paid);
+                formf.append('balance', this.form.balance);
+                formf.append('tSiblings', this.form.tSiblings);
+                formf.append('inSchool', this.form.inSchool);
+                formf.append('sWorking', this.form.sWorking);
+                formf.append('pFees', this.form.pFees);
+                formf.append('pRelationship', this.form.pRelationship);
+                formf.append('passport', this.form.passport);
+                formf.append('fatherId', this.form.fatherId);
+                formf.append('motherId', this.form.motherId);
+                formf.append('guardianId', this.form.guardianId);
+                formf.append('ftelephone', this.form.ftelephone);
+                formf.append('mtelephone', this.form.mtelephone);
+                formf.append('gtelephone', this.form.gtelephone);
+                formf.append('bank', this.form.bank);
+                formf.append('account', this.form.account);
+                formf.append('bran', this.form.bran);
                 const config = {headers: {'Content-Type': 'multipart/form-data'}};
 
                 // this.loading = true;
-                axios.post('/api/apply', this.formf, config).then(response => {
+                axios.post('/api/apply', formf, config).then(response => {
                     this.loading = false;
                     Fire.$emit('AfterCreate');
                     Swal.fire({

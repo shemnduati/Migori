@@ -116,25 +116,25 @@
           </tbody>
         </table>
         <div class="row form-group">
-            <label for="staticEmail" class="col-sm-3 col-form-label">TOTAL NUMBER OF SIBLINGS</label>
+            <label class="col-sm-3 col-form-label">TOTAL NUMBER OF SIBLINGS</label>
               <div class="col-sm-1">
                 <input type="text" v-model="morefamily.totalSiblings" readonly class="form-control" >
               </div>
-              <label for="staticEmail" class="col-sm-2 col-form-label">IN SCHOOL</label>
+              <label class="col-sm-2 col-form-label">IN SCHOOL</label>
               <div class="col-sm-2">
                 <input type="text" v-model="morefamily.schoolSiblings" readonly class="form-control" >
               </div>
-              <label for="staticEmail" class="col-sm-3 col-form-label">WORKING/BUSINESS</label>
+              <label class="col-sm-3 col-form-label">WORKING/BUSINESS</label>
               <div class="col-sm-1">
                 <input type="text" v-model="morefamily.workingSiblings" readonly class="form-control" >
               </div>
           </div>
           <div class="row form-group">
-            <label for="staticEmail" class="col-sm-4 col-form-label">WHO PAYS YOUR SCHOOL FEES?</label>
+            <label class="col-sm-4 col-form-label">WHO PAYS YOUR SCHOOL FEES?</label>
               <div class="col-sm-4">
                 <input type="text" v-model="morefamily.pFees" readonly class="form-control" >
               </div>
-              <label for="staticEmail" class="col-sm-2 col-form-label">RELATIONSHIP</label>
+              <label class="col-sm-2 col-form-label">RELATIONSHIP</label>
               <div class="col-sm-2">
                 <input type="text" v-model="morefamily.pFeesRelationship" readonly class="form-control" >
               </div>
