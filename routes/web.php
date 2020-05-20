@@ -32,7 +32,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/scholarship', 'HomeController@scholarship')->name('scholarship');
 Route::get('/apply', 'HomeController@apply')->name('apply');
 Route::get('/privacy', 'TermsController@privacy')->name('privacy');
-Route::get('/print', 'HomeController@download')->name('print');
+Route::get('/print/{serial}', 'HomeController@download')->name('print');
 Route::get('/student', 'HomeController@student')->name('student');
 Route::get('/status', 'HomeController@status');
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z\d\-/_.]+)?' );

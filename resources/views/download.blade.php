@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-	<verifiedform></verifiedform>
+{{--	<verifiedform></verifiedform>--}}
 @endsection

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="geographical.show == 1">
         <div class="text-center pt-2">
             <h3>Student Information</h3>
         </div>
@@ -50,7 +50,8 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text"><small>{{file.kind}}</small></span>
                                             <hr>
-                                            <button type="button" class="btn btn-primary btn-sm" @click.prevent="download(file.id, file.path)">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                    @click.prevent="download(file.id, file.path)">
                                                 <i class="fas fa-download"></i>
                                             </button>
                                         </div>
@@ -177,7 +178,8 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <button class="btn btn-success px-5 offset-md-1"
-                        v-if="$gate.isSubadmin() && !application.recommendation">Recommendation
+                        v-if="$gate.isSubadmin() && !application.recommendation && geographical.show == 1">
+                    Recommendation
                 </button>
                 <h4 v-if="$gate.isOfficial() && !application.amount && application.status != 2">Award?</h4>
                 <h4 v-if="$gate.isOfficial() && application.amount"><b>Awarded:</b> Ksh {{application.amount}}</h4>
@@ -188,7 +190,7 @@
                         v-if="$gate.isOfficial() && !application.amount && application.status != 2">No
                 </button>
             </div>
-            <div class="col-md-6" v-if="$gate.isSubadmin() && !application.recommendation">
+            <div class="col-md-6" v-if="$gate.isSubadmin() && !application.recommendation && geographical.show == 1">
                 <div class="form-check form-check-inline">
                     <input v-model="form.recommendation" class="form-check-input" type="radio" name="yes" id="yes"
                            value="Yes"
@@ -259,6 +261,11 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div v-else>
+        <div class="container pt-4">
+            <h3 style="color: red;">Not authorized</h3>
         </div>
     </div>
 </template>
