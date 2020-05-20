@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Verify your email address</title>
+    <title>Verify</title>
     <style type="text/css" rel="stylesheet" media="all">
         /* Base ------------------------------ */
         *:not(br):not(tr):not(html) {
@@ -189,15 +189,15 @@
                                                 <div>
                                                     <h5>Hello <i>Applicant</i></h5>,
                                                     <p>This is to inform you that your bursary application has been accepted click on the link below to download your application form</p>
-                                                    <a class="btn btn-success" href="https://baza.co.ke/print">Download</a><br/>
+                                                    <a class="btn btn-success" href="https://migori.baza.co.ke/print">Download</a><br/>
                                                     Thank You,
                                                     <br/>
-                                                    <i>Regards Baza.co.ke</i>
+                                                    <i>Regards migori.co.ke</i>
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p>Thanks,<br>The Baza Team</p>
+                                    <p>Thanks,<br>The Migori Team</p>
                                     <!-- Sub copy -->
 
                                 </td>
@@ -211,8 +211,8 @@
                             <tr>
                                 <td class="content-cell">
                                     <p class="sub center" style="color: cadetblue">
-                                        Baza.co.ke.
-                                        <br> Eldoret P.O Box 30100-5253
+                                        migori.Baza.co.ke.
+                                        <br>
                                     </p>
                                 </td>
                             </tr>

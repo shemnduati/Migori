@@ -77,7 +77,7 @@
                                 <label for="county">County</label>
                                 <select v-model="form.county" @change='getCountyWards()' class="form-control" name="county" id="county"
                                         :class="{ 'is-invalid': form.errors.has('county') }">
-                                    <option selected value="">--Select county--</option>
+                                    <option selected value="">&#45;&#45;Select county&#45;&#45;</option>
                                     <option v-for="county in counties" :key="county.id" :value="county.id">{{ county.name}}</option>
                                 </select>
                                 <has-error :form="form" field="county"></has-error>
