@@ -171,7 +171,7 @@
                 <!-- Logo -->
                 <tr>
                     <td class="email-masthead">
-                        <a class="email-masthead_name">Baza Bursary</a>
+                        <a class="email-masthead_name">BASAP Bursary</a>
                     </td>
                 </tr>
                 <!-- Email Body -->
@@ -181,7 +181,7 @@
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
-                                    <h1>Baza Bursary Application</h1>
+                                    <h1>BASAP Bursary Application</h1>
                                     <!-- Action -->
                                     <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                                         <tr>

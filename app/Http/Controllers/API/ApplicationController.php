@@ -362,11 +362,18 @@ class ApplicationController extends Controller
             'Division' => $Division,
             'Location' => $Location,
             'Sublocation' => $geos['Sublocation'],
-            'Village' => $geos['Village']
+            'Village' => $geos['Village'],
+            'show' => 1
 
         );
 
-        return ['application' => $application, 'family' => $family, 'morefamily' => $morefamily, 'geographical' => $geographical, 'institution' => $institution];
+        if (auth()->user()->role == 'sub-admin' && auth()->user()->ward == $application['ward_id']) {
+            return ['application' => $application, 'family' => $family, 'morefamily' => $morefamily, 'geographical' => $geographical, 'institution' => $institution];
+        }
+
+        if (auth()->user()->role == 'official' && auth()->user()->county == $application['county']) {
+            return ['application' => $application, 'family' => $family, 'morefamily' => $morefamily, 'geographical' => $geographical, 'institution' => $institution];
+        }
     }
 
     /**
