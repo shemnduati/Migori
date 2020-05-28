@@ -12,166 +12,173 @@
         <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
         <!-- Fonts -->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+{{--        <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
     </head>
     <body>
         <div id="app">
-            <section class="header">
-                <section class="Navigation">
-                    <nav class="navbar navbar-expand-md navbar-light bg-transparent">
-                        <div class="container-fluid">
-                            <img src="/img/favicon.jpeg" style="width: 50px; height: 50px" alt="">
-                            <a class="navbar-brand font-weight-bolder pl-3" href="{{ url('/') }}">
-                                {{ config('app.name', 'BAZA') }}
-                            </a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+                <div class="container">
+                    <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="/img/favicon.jpeg" alt="" /> BAZA</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav text-uppercase ml-auto">
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Features</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+{{--                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Login</a></li>--}}
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
 
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                                <!-- Right Side Of Navbar -->
-                                <ul class="navbar-nav ml-auto">
-
-                                    <!-- Authentication Links -->
-                                    @guest
-                                        <li class="nav-item">
-                                            <a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                        </li>
-                                    @else
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ Auth::user()->name }} <span class="caret"></span>
-                                            </a>
-
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                <a href="/status" class="dropdown-item">Application Status</a>
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                                   onclick="event.preventDefault();
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a href="/status" class="dropdown-item">Application Status</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                </form>
-                                            </div>
-                                        </li>
-                                    @endguest
-                                </ul>
-                            </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Masthead-->
+            <header class="masthead" style="background-image: url('{{ asset('images/laptop.jpg')}}');">
+                <div class="container">
+                    <div class="masthead-subheading text-light">Welcome To BAZA</div>
+                    <div class="masthead-heading">BURSARY AND SCHOLARSHIP APPLICATION PORTAL <br> (BASAP)</div>
+                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger mr-3" href="/apply">Apply</a>
+                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/scholarship">Scholarship</a>
+                </div>
+            </header>
+            <!-- Services-->
+            <section class="page-section " id="services">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Features</h2>
+                        <h3 class="section-subheading text-muted">“When you want something, all the universe conspires in helping you achieve it”</h3>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-mobile-alt fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="my-3">Bursary made simple</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                         </div>
-                    </nav>
-                </section>
-
-                <div class="content container">
-                    <div class="banner">
-                        <h3 class="text-center lead font-weight-bold">MIGORI COUNTY GOVERNMENT</h3>
-                        <p class="text-center text-light">BURSARY AND SCHOLARSHIP APPLICATION PORTAL (BASAP)</p>
-                        <a href="/apply" class="btn btn-outline-dark button">APPLY</a>
-                        <a href="/scholarship" class="btn btn-outline-dark button">SCHOLARSHIP</a>
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="my-3">Secure and private</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-clock fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="my-3">Timely and convenient</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-user-friends fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="my-3">Find your mentor</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-at fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="my-3">Join our community</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-primary"></i><i class="fas fa-user-graduate fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="my-3">See career guide</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        </div>
                     </div>
                 </div>
             </section>
-            <section class="learn container">
-                <div class="row no-padding">
-                    <div class="col-md-6">
-                        <img src="images/book.jpg" alt="" style="height: 360px; width: 550px">
+            <!-- About-->
+            <section class="page-section bg-light" id="about">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">About</h2>
+                        <h3 class="section-subheading text-muted">Lets Talk about BAZA.</h3>
                     </div>
-                    <div class="col-md-6 ">
-                        <div class="row justify-content-center" style="padding: 100px 0">
-                            <div class="border border-dark" style="height: 150px; width: 400px; background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE)">
-                                <div class="pt-5 ">
-                                    <p class="text-center text-dark no-padding"><b>Applications</b></p>
-                                    <h3 class="text-center text-dark">can all be done home</h3>
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde</p></div>
+                    </div>
+                </div>
+            </section>
+            <!-- Contact-->
+            <section class="page-section" id="contact">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Contact Us</h2>
+                        <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    </div>
+                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                        <div class="row align-items-stretch mb-5">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" id="name" type="text" placeholder="Your Name *" required="required" data-validation-required-message="Please enter your name." />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="email" type="email" placeholder="Your Email *" required="required" data-validation-required-message="Please enter your email address." />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group mb-md-0">
+                                    <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required="required" data-validation-required-message="Please enter your phone number." />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-group-textarea mb-md-0">
+                                    <textarea class="form-control" id="message" placeholder="Your Message *" required="required" data-validation-required-message="Please enter a message."></textarea>
+                                    <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="text-center">
+                            <div id="success"></div>
+                            <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Send Message</button>
+                        </div>
+                    </form>
                 </div>
             </section>
-            <section class="story pb-3">
-                <div class="row no-padding justify-content-center">
-                    <div class="col-md-12">
-                        <h3 class="text-center font-weight-bold">Our Motivation</h3>
-                    </div>
-                    <div class="col-md-12 mb-4">
-                        <h4 class="text-center font-weight-bold">We're passionate about making our students grow</h4>
-                    </div>
-                    <div class="row no-padding container">
-                        <div class="col-md-6">
-                            <h4 class="text-center font-weight-bold">Informative Speech</h4>
-                            <p class="text-center">I could tell you many things about radium and radioactivity and it would take a long time. But as we can not do that, I shall only give you a short account of my early work about radium. Radium is no more a baby, it is more than twenty years old, but the conditions of the discovery were somewhat peculiar, and so it is always of interest to remember them and to explain them.We must go back to the year 1897. Professor Curie and I worked at that time in the laboratory of the school of Physics and Chemistry where Professor Curie held his lectures. </p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="text-center">I was engaged in some work on uranium rays which had been discovered two years before by Professor Becquerel.***I spent some time in studying the way of making good measurements of the uranium rays, and then I wanted to know if there were other elements, giving out rays of the same kind. So I took up a work about all known elements, and their compounds and found that uranium compounds are active and also all thorium compounds, but other elements were not found active, nor were their compounds. As for the uranium and thorium compounds, I found that they were active in proportion to their uranium or thorium content.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <section class="study pt-5">
-                <img src="images/study.jpg" alt="" style="width: 100%">
-
-                <p class="lead pt-3 text-center">“When you want something, all the universe conspires in helping you achieve it”</p>
-
+            <!-- Footer-->
+            <footer class="footer py-4">
                 <div class="container">
-                    <div class=" cent">
-                        <div class="col-md-4 cent">
-                            <div class="text-center bg-dark cent" style="border-radius: 50%; height: 200px; width: 200px ">
-                                <p>Bursary <br> made simple</p>
-                            </div>
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 text-lg-left"><a href="https://twtechnologies.africa">Copyright &copy; Baza {{date('Y')}}</a>.</strong> All rights reserved.</div>
+                        <div class="col-lg-4 my-3 my-lg-0">
+                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
                         </div>
-                        <div class="col-md-4 cent">
-                            <div class="text-center bg-dark cent" style="border-radius: 50%; height: 200px; width: 200px ">
-                                <p>Secure <br>and private</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 cent">
-                            <div class="text-center bg-dark cent" style="border-radius: 50%; height: 200px; width: 200px ">
-                                <p>Timely <br>and convenient</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="py-3 cent">
-                        <div class="col-md-4 cent">
-                            <div class="text-center bg-dark cent" style="border-radius: 50%; height: 200px; width: 200px ">
-                                <p>Find <br> your mentor</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 cent">
-                            <div class="text-center bg-dark cent" style="border-radius: 50%; height: 200px; width: 200px ">
-                                <p>Join our <br> community</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 cent">
-                            <div class="text-center bg-dark cent" style="border-radius: 50%; height: 200px; width: 200px ">
-                                <p>See career <br> guide</p>
-                            </div>
-                        </div>
+                        <div class="col-lg-4 text-lg-right"><a class="mr-3" href="{{ route('privacy') }}">Privacy Policy</a></div>
                     </div>
                 </div>
-            </section>
-            <section class="footer pt-3">
-                <footer class=" p-3 mx-3">
-                            <!-- To the right -->
-                    <div class="float-right d-none d-sm-inline">
-                        <a class="pl-2 state btn-link" href="{{ route('privacy') }}">
-                            {{ __('Terms and condition') }}
-                        </a>
-                    </div>
-                    <!-- Default to the left -->
-                    <strong><a href="https://twtechnologies.africa">Copyright &copy; Baza {{date('Y')}}</a>.</strong> All rights reserved.
-                </footer>
-            </section>
+            </footer>
         </div>
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+{{--        <script src="{{ asset('js/app.js') }}" defer></script>--}}
+        <script src="{{ asset('js/scripts.js') }}" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     </body>
 </html>
