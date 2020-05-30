@@ -9987,6 +9987,7 @@ section.story.pb-3 h3 {
 }
 
 section.study.pt-5 p.lead.pt-3.text-center {
+  margin-top: 15px;
   font-size: 23px;
   font-weight: 500;
 }
