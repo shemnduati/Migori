@@ -62,11 +62,23 @@
                 <img class="img img-fluid" src="images/book.jpg" alt="" style="height: 360px; width: 550px">
             </div>
             <div class="col-md-6 ">
-                <div class="row justify-content-center" style="padding: 100px 0">
-                    <div class="border border-dark" style="height: 150px; width: 400px; background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE)">
-                        <div class="pt-5 ">
-                            <p class="text-center text-dark no-padding"><b>Applications</b></p>
-                            <h3 class="text-center text-dark">can all be done home</h3>
+                <div class="row">
+                    <div style="border:none !important">                        
+                    <div class="pt-5">
+                            <p class="text-center text-dark no-padding">Migori County Government is committed to provide scholarships and bursaries to deserving
+students in the county.</p>
+                            <p class="text-center text-dark no-padding">The Scholarships are available to Secondary school, College and University students in
+the county.</p>
+                            <h3 class="text-center text-dark">Eligibility</h3>
+                            <p class="text-center text-dark no-padding">For one to qualify for the scholarships and bursaries for Migori county, must be of the
+following;</p>
+                            <ul class="mf-ul">
+                                <li>Applicant must be residents of Migori county</li>
+                                <li>Candidates must have admission/calling letter for secondary school or college and
+university.</li>
+                                <li>Excellent academic performance</li>
+                                <li>Evidence of being in needy</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -76,18 +88,22 @@
     <section class="story pb-3">
         <div class="row no-padding justify-content-center">
             <div class="col-md-12">
-                <h3 class="text-center font-weight-bold">Our Motivation</h3>
-            </div>
-            <div class="col-md-12 mb-4">
-                <h4 class="text-center font-weight-bold">We're passionate about making our students grow</h4>
+                <h3 class="text-center font-weight-bold">How To Apply</h3>
             </div>
             <div class="row no-padding container">
-                <div class="col-md-6">
-                    <h4 class="text-center font-weight-bold">Informative Speech</h4>
-                    <p class="text-center">I could tell you many things about radium and radioactivity and it would take a long time. But as we can not do that, I shall only give you a short account of my early work about radium. Radium is no more a baby, it is more than twenty years old, but the conditions of the discovery were somewhat peculiar, and so it is always of interest to remember them and to explain them.We must go back to the year 1897. Professor Curie and I worked at that time in the laboratory of the school of Physics and Chemistry where Professor Curie held his lectures. </p>
+                <div class="col-md-12">
+                <ol class="mf-ul">
+                    <li>Obtain Bursaries/Scholarships application Forms from the Department of Education, Youth, Sports, Cultural and Social Services or download and print out form from the Migori county government website.</li>
+                    <li>Fill the Forms accurately in capital letters</li>
+                    <li>Have the Forms signed and stamped by the relevant authorities.</li>
+                    <li>Attach all relevant documents as required.</li>     
+                    <li>Return the Duly filled Forms to the Department of Education and wait for feedback.</li>                     
+                </ol>
                 </div>
-                <div class="col-md-6">
-                    <p class="text-center">I was engaged in some work on uranium rays which had been discovered two years before by Professor Becquerel.***I spent some time in studying the way of making good measurements of the uranium rays, and then I wanted to know if there were other elements, giving out rays of the same kind. So I took up a work about all known elements, and their compounds and found that uranium compounds are active and also all thorium compounds, but other elements were not found active, nor were their compounds. As for the uranium and thorium compounds, I found that they were active in proportion to their uranium or thorium content.</p>
+                <div class="col-md-12">
+                    <p class="text-center font-weight-bold">For more information or for clarification visit <span style="color:green;"> Migori Government website ebursary section</span></p>
+                    <p style="text-align:center"> <a href="http://ebursary.migori.go.ke/login" class="text-center font-weight-bold"> APPLY NOW HERE </a> </p>
+
                 </div>
             </div>
 

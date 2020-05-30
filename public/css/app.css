@@ -10538,11 +10538,23 @@ body:not(.layout-fixed).layout-navbar-fixed.text-sm .wrapper .main-sidebar {
 body:not(.layout-fixed).layout-navbar-fixed.text-sm .wrapper .main-sidebar .sidebar  {
   margin-top: calc(2.93725rem + 1px);
 }
-
+section.learn.container .pt-5 p, section.learn.container .pt-5 h3, section.learn.container .pt-5 li {
+  color: black !important;
+  text-align: left !important;
+}
 .layout-navbar-not-fixed .wrapper .brand-link {
   position: static;
 }
+section.learn.container .pt-5 {
+  padding-top: 0px !important;
+  padding-left: 40px;
+}
 
+section.learn.container .pt-5 ul li {
+  font-size: 15px;
+  line-height: 30px;
+  font-weight: 500;
+}
 .layout-navbar-not-fixed .wrapper .sidebar,
 .layout-navbar-not-fixed .wrapper .content-wrapper {
   margin-top: 0;
