@@ -9983,6 +9983,15 @@ a.text-light:hover, a.text-light:focus {
   font-weight: 900;
 }
 
+.banner h3 {
+  color: white;
+  font-weight: 900;
+  font-size: 60px;
+}
+.banner p {
+  font-size: 25px;
+  font-weight: 700;
+}
 .text-dark {
   color: #343a40 !important;
 }
