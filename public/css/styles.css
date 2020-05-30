@@ -54,6 +54,10 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.header {
+  background-image: linear-gradient(to right, rgb(67, 98, 61), rgba(108, 164, 91, 0.9), rgba(37, 87, 26, 0.6)), url(../images/laptop.jpg) !important; 
+}
+
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
