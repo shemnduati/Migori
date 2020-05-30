@@ -91,7 +91,8 @@ university.</li>
                 <h3 class="text-center font-weight-bold">How To Apply</h3>
             </div>
             <div class="row no-padding container">
-                <div class="col-md-12">
+                <div class="col-md-1"> </div>
+                <div class="col-md-10">
                 <ol class="mf-ul">
                     <li>Obtain Bursaries/Scholarships application Forms from the Department of Education, Youth, Sports, Cultural and Social Services or download and print out form from the Migori county government website.</li>
                     <li>Fill the Forms accurately in capital letters</li>
@@ -100,6 +101,7 @@ university.</li>
                     <li>Return the Duly filled Forms to the Department of Education and wait for feedback.</li>                     
                 </ol>
                 </div>
+                <div class="col-md-1"> </div>
                 <div class="col-md-12">
                     <p class="text-center font-weight-bold">For more information or for clarification visit <span style="color:green;"> Migori Government website ebursary section</span></p>
                     <p style="text-align:center"> <a href="http://ebursary.migori.go.ke/login" class="text-center font-weight-bold"> APPLY NOW HERE </a> </p>

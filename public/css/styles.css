@@ -53,6 +53,14 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+ol.mf-ul {
+  margin-top: 10px;
+}
+
+ol.mf-ul li {
+  font-size: 16px;
+}
+
 section.learn.container .pt-5 ul li {
   font-size: 15px;
   line-height: 30px;
