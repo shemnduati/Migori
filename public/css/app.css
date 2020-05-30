@@ -9973,9 +9973,44 @@ a.text-warning:hover, a.text-warning:focus {
 a.text-danger:hover, a.text-danger:focus {
   color: #a71d2a !important;
 }
+section.story.pb-3 {
+  background-color: #89d27875;
+  padding-top: 35px;
+}
+section.study.pt-5 {
+  padding-top: 0px !important;
+}
 
+section.story.pb-3 h3 {
+  color: white !important;
+  font-size: 40px;
+}
+
+section.story.pb-3 h3:after {
+  content: '';
+  position: absolute;
+  background: #F02927;
+  width: 130px;
+  height: 3px;
+  top: 46px;
+  left: 50%;
+}
 .text-light {
   color: #f8f9fa !important;
+}
+.pt-5 h3, .pt-5 p {
+  color: white !important;
+}
+.pt-5 h3 {
+  font-size: 30px;
+  text-transform: capitalize;
+}
+.pt-5 p {
+  font-size: 20px;
+}
+
+.border.border-dark {
+  background-image: linear-gradient(to right, rgb(126, 201, 110), rgb(171, 238, 152), rgb(128, 207, 111)) !important;
 }
 
 a.text-light:hover, a.text-light:focus {
