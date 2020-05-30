@@ -6639,7 +6639,24 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: #346733 !important;
+}
+section.footer.pt-3 {
+  border-top: 1px solid #346733 !important;
+  padding-top: 0px !important;
+}
+
+.text-center.bg-dark.cent:hover {
+  background-color: #76C13E !important;
+  opacity: 0.8;
+  transform: scale(1.1);
+  transition: .3s;
+}
+
+.text-center.bg-dark.cent:hover p {font-weight: 800;transition: .3s;}
+
+.text-center.bg-dark.cent p {
+  margin-top: 10px;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -30225,13 +30242,13 @@ sup {
 }
 
 a {
-  color: #3490dc;
+  color: #F02927;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #1d68a7;
+  color: #76C13E;
   text-decoration: underline;
 }
 
@@ -33335,7 +33352,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-dark:hover {
-  color: #ffff;
+  color: #ffff !important;
   background-color: #343a40;
   border-color: #343a40;
 }
