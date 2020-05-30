@@ -3,7 +3,7 @@
         <section class="Navigation">
             <nav class="navbar navbar-expand-md navbar-light bg-transparent">
                 <div class="container-fluid">
-                    <img src="/img/favicon.jpeg" style="width: 50px; height: 50px" alt="">
+                    <img src="/img/mainlogo.jpg" style="width: 100px; height: 100px" alt="">
                     <a class="navbar-brand font-weight-bolder pl-3" href="{{ url('/') }}">
                         {{ config('app.name', 'BAZA') }}
                     </a>
