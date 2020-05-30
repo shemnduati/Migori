@@ -9986,6 +9986,15 @@ section.story.pb-3 h3 {
   font-size: 40px;
 }
 
+section.study.pt-5 p.lead.pt-3.text-center {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+section.study.pt-5 {
+  background-color: #c5e7bf;
+}
+
 section.story.pb-3 h3:after {
   content: '';
   position: absolute;
