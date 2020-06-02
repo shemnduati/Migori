@@ -15,7 +15,10 @@ use App\User;
 */
 
 Route::get('/', function () {
-    return view('dump');
+    return view('welcome');
+});
+Route::get('/test', function () {
+    return view('test');
 });
 
 // Route::get('/dashboard', function() {
