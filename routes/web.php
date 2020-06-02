@@ -17,6 +17,9 @@ use App\User;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', function () {
+    return view('test');
+});
 
 // Route::get('/dashboard', function() {
 //     $user = User::find(2);
