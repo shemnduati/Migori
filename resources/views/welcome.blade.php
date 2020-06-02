@@ -48,7 +48,7 @@
                                     <li class="current-menu-item"><a href="#">.Home</a></li>
                                     <li><a href="#">About</a></li>
                                     <li><a href="#">Contact</a></li>
-                                    <li><a href="/register">Register</a></li>
+                                    <li><a href="/login">Register</a></li>
                                     <li><a href="/login">Login</a></li>
                                 </ul>
 
@@ -89,7 +89,7 @@
                     <header class="heading">
                         <h2 class="entry-title">About BASAP</h2>
 
-                        <p>Migori County Government is committed to provide scholarships and bursaries to deserving students in the county.</p>
+                        <p>Migori County Government is committed to providing  scholarships and bursaries to deserving students in the county.</p>
                         <p>The Scholarships are available to Secondary school, College and University students in the county.</p>
                     </header><!-- .heading -->
 
@@ -167,7 +167,7 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Register to our online application system (BASAP).Fill in the registration form and submit it.</a></h2>
+                                <h2 class="entry-title">Register to our online application system (BASAP).Fill in the registration form and submit it.</h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Ms. Lara Croft </a></div>
@@ -204,7 +204,7 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Verification email will be send  to your email.verify your email by clicking the verification button.</a></h2>
+                                <h2 class="entry-title">Verification email will be send  to your email.verify your email by clicking the verification button.</h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Michelle Golden</a></div>
@@ -241,7 +241,7 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Fill in the application form by providing the required details.Ensure that you have provided the correct details then submit the application.</a></h2>
+                                <h2 class="entry-title">Fill in the application form by providing the required details.Ensure that you have provided the correct details then submit the application.</h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Ms. Lucius</a></div>
@@ -278,7 +278,7 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Your application will go through various stages of verification.County staff will counter check all the information provided then verify your application or decline if the information provided is wrong.</a></h2>
+                                <h2 class="entry-title">Your application will go through various stages of verification.County staff will counter check all the information provided then verify your application or decline if the information provided is wrong.</h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Mr. John Wick</a></div>
@@ -315,7 +315,7 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Student can follow up the application status of bursary/scholarship on their dashboard.Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.Here you can see the application status of your bursary/scholarship.You will also receive email notification when your bursary/scholarship application is approved.</a></h2>
+                                <h2 class="entry-title">Student can follow up the application status of bursary/scholarship on their dashboard.Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.Here you can see the application status of your bursary/scholarship.You will also receive email notification when your bursary/scholarship application is approved.</h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Mr. Tom Redder</a></div>
@@ -352,8 +352,8 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Once your application is approved,you will receive an email  with a file attached.You will be required to print the form and fill in the required information.
-                                    The student will then submit the form physically to the required county staff.The county staff will the sign and stamp the form,after which the student will be awarded the bursary/scholarship</a></h2>
+                                <h2 class="entry-title">Once your application is approved,you will receive an email  with a file attached.You will be required to print the form and fill in the required information.
+                                    The student will then submit the form physically to the required county staff.The county staff will then sign and stamp the form,after which the student will be awarded the bursary/scholarship</h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Russell Stephens</a></div>
@@ -428,8 +428,8 @@
                             <p>BASAP</p>
 
                             <p class="footer-copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="#" target="_blank">Migori County Goverment</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="#" target="_blank">Migori County Government</a> Developed by <a href="https://twtechnologies.africa/" target="_blank">Tw Technologies</a>
+                                </p>
                         </div><!-- .foot-about -->
                     </div><!-- .col -->
 
