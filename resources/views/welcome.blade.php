@@ -37,7 +37,7 @@
                                 <h1 class="site-title">
                                     <a href="#" rel="home" style="color: yellow;">
                                        <img src="/images/mainlogo.png" alt="Main logo" width="48px;" height="48px;" style="padding-top: 0px;">
-                                        Migori ebursary
+                                        Migori e-bursary
                                     </a></h1>
                             </div><!-- .site-branding -->
                         </div><!-- .col -->
@@ -45,7 +45,7 @@
                         <div class="col-5 col-lg-8 flex justify-content-end align-content-center">
                             <nav class="site-navigation flex justify-content-end ">
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end justify-content-md-end align-content-center">
-                                    <li class="current-menu-item"><a href="#">.Home</a></li>
+                                    <li class="current-menu-item"><a href="#">Home</a></li>
                                     <li><a href="#">About</a></li>
                                     <li><a href="#">Contact</a></li>
                                     @guest
