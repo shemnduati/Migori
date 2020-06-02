@@ -32,17 +32,17 @@
             <div class="nav-bar">
                 <div class="container">
                     <div class="row">
-                        <div class="col-8 col-lg-3">
+                        <div class="col-7 col-lg-4">
                             <div class="site-branding">
                                 <h1 class="site-title">
                                     <a href="#" rel="home" style="color: yellow;">
                                        <img src="/images/mainlogo.png" alt="Main logo" width="48px;" height="48px;" style="padding-top: 0px;">
-                                        BASAP
+                                        Migori ebursary
                                     </a></h1>
                             </div><!-- .site-branding -->
                         </div><!-- .col -->
 
-                        <div class="col-4 col-lg-9 flex justify-content-end align-content-center">
+                        <div class="col-5 col-lg-8 flex justify-content-end align-content-center">
                             <nav class="site-navigation flex justify-content-end ">
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end justify-content-md-end align-content-center">
                                     <li class="current-menu-item"><a href="#">.Home</a></li>
@@ -337,7 +337,7 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title">Student can follow up the application status of bursary/scholarship on their dashboard.Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.Here you can see the application status of your bursary/scholarship.You will also receive email notification when your bursary/scholarship application is approved.</h2>
+                                <h2 class="entry-title">Student can follow up the application status of bursary/scholarship on their dashboard.Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.Here you can see the application status of your bursary/scholarship.</h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Mr. Tom Redder</a></div>
@@ -374,8 +374,7 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title">Once your application is approved,you will receive an email  with a file attached.You will be required to print the form and fill in the required information.
-                                    The student will then submit the form physically to the required county staff.The county staff will then sign and stamp the form,after which the student will be awarded the bursary/scholarship</h2>
+                                <h2 class="entry-title">You will  receive an email notification when your bursary/scholarship application is approved.You can then pick the awarded bursary/scholarship cheque from county offices or have it sent to the school directly.   </h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Russell Stephens</a></div>
@@ -411,7 +410,7 @@
     </section><!-- .courses-wrap -->
 
 
-    <div class="clients-logo">
+    {{--<div class="clients-logo">
         <div class="container">
             <div class="row">
                 <div class="col-12 flex flex-wrap justify-content-center justify-content-lg-between align-items-center">
@@ -431,13 +430,13 @@
                         <img src="/images/mainlogo.png" alt="" width="84px;" height="84px;">
                     </div><!-- .logo-wrap -->
 
-                    {{-- <div class="logo-wrap">
-                        <img src="/images123/mainlogo.png" alt=""> --}}
+                    --}}{{-- <div class="logo-wrap">
+                        <img src="/images123/mainlogo.png" alt=""> --}}{{--
                     </div><!-- .logo-wrap -->
                 </div><!-- .col -->
             </div><!-- .row -->
         </div><!-- .container -->
-    </div><!-- .clients-logo -->
+    </div><!-- .clients-logo -->--}}
 
     <footer class="site-footer">
         <div class="footer-widgets">
