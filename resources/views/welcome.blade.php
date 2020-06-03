@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>BASAP</title>
+    <title>MCG Migori County Government</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -90,11 +90,12 @@
                     <div class="col-12">
                         <div class="hero-content-wrap flex flex-column justify-content-center align-items-start">
                             <header class="entry-header">
-                                <h3 style="color: greenyellow">Bursary And Scholarship<br/>Application Portal <br>(BASAP)</h3>
+                                <h3 style="color: greenyellow">Bursary And Scholarship<br/>Application Portal <br>(BASAP) Apply here</h3>
                             </header><!-- .entry-header -->
 
                             <footer class="entry-footer read-more">
-                                <a href="/apply">Apply Here</a>
+                                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger mr-3" href="/apply">County bursary</a><br>
+                                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/scholarship">Scholarship</a>
                             </footer><!-- .entry-footer -->
                         </div><!-- .hero-content-wrap -->
                     </div><!-- .col -->

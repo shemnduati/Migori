@@ -751,7 +751,7 @@
                     fincome: '',
                     mincome: '',
                     gincome: '',
-                    county: 1,
+                    county: 6,
                     ward: '',
                     constituency: '',
                     location: '',
