@@ -3,6 +3,11 @@
 <head>
     <title>BAZA</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,12 +29,24 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href= "{{ asset('css/style.css') }}">
+
+    <style>
+
+        /* Make the image fully responsive */
+        .carousel-inner img {
+          width: 100%;
+          height: 100%;
+        }
+        </style>
+      
 </head>
+
+
 <body>
     <div class="hero-content">
         <header class="site-header">
            
-            <div class="nav-bar">
+            <div class="nav-bar navbar-expand-lg navbar-default navbar-brand fixed-top">
                 <div class="container">
                     <div class="row">
                         <div class="col-8 col-lg-3">
@@ -66,7 +83,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="hero-content-wrap flex flex-column justify-content-center align-items-start">
+
+                        {{-- <div class="hero-content-wrap flex flex-column justify-content-center align-items-start">
                             <header class="entry-header">
                                 <h3 style="color: greenyellow">Bursary And Scholarship<br/>Application Portal <br>(BASAP)</h3>
                             </header><!-- .entry-header -->
@@ -74,11 +92,89 @@
                             <footer class="entry-footer read-more">
                                 <a href="#">Apply Here</a>
                             </footer><!-- .entry-footer -->
-                        </div><!-- .hero-content-wrap -->
+                        </div><!-- .hero-content-wrap --> --}}
                     </div><!-- .col -->
+                    
                 </div><!-- .row -->
+                
             </div><!-- .container -->
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                  <li data-target="#demo" data-slide-to="0" class="active"></li>
+                  <li data-target="#demo" data-slide-to="1"></li>
+                  <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+                
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="images/Slider2.jpg" alt="Los Angeles" width="100%" height="500">
+                    <div class="carousel-caption">
+
+                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 60%;">
+                            <header class="entry-header">
+                                <h3 style="color: #3d9a38;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
+                            </header><!-- .entry-header -->
+
+                            <footer class="entry-footer read-more" style="border-color: #3d9a38;">
+                                <a href="#">Apply Here</a>
+                            </footer><!-- .entry-footer -->
+                        </div><!-- .hero-content-wrap -->
+                        {{-- <h3>Los Angeles</h3>
+                        <p>We had such a great time in LA!</p> --}}
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/Slider1.jpg" alt="Chicago" width="100%" height="500">
+
+                    <div class="carousel-caption">
+
+                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 40%;">
+                            <header class="entry-header">
+                                <h3 style="color: #3d9a38;"></h3>
+                            </header><!-- .entry-header -->
+
+                            <footer class="entry-footer read-more">
+                                {{-- <a href="#">Apply Here</a> --}}
+                            </footer><!-- .entry-footer -->
+                        </div><!-- .hero-content-wrap -->
+                        <h3>Kid reading in a library</h3>
+                        
+                      </div>
+                    
+                  </div>
+                  <div class="carousel-item">
+                    <img src="images/Slider4.jpg" alt="New York" width="1100" height="500">
+
+                    <div class="carousel-caption">
+
+                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 40%;">
+                            <header class="entry-header">
+                                <h3 style="color: #0f150e;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
+                            </header><!-- .entry-header -->
+
+                            <footer class="entry-footer read-more">
+                                <a href="#">Apply Here</a>
+                            </footer><!-- .entry-footer -->
+                        </div><!-- .hero-content-wrap -->
+                        {{-- <h3>Los Angeles</h3>
+                        <p>We had such a great time in LA!</p> --}}
+                      </div>
+                  </div>
+                </div>
+                
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                  <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                  <span class="carousel-control-next-icon"></span>
+                </a>
+              </div>
         </div><!-- .hero-content-hero-content-overlay -->
+
     </div><!-- .hero-content -->
 
 
@@ -89,8 +185,8 @@
                     <header class="heading">
                         <h2 class="entry-title">About BASAP</h2>
 
-                        <p>Migori County Government is committed to provide scholarships and bursaries to deserving students in the county.</p>
-                        <p>The Scholarships are available to Secondary school, College and University students in the county.</p>
+                        <p style="font-weight: 800; font-size: 18px;">Migori County Government is committed to provide scholarships and bursaries to deserving students in the county.</p>
+                        <p style="font-weight: 800; font-size: 18px;">The Scholarships are available to Secondary school, College and University students in the county.</p>
                     </header><!-- .heading -->
 
                     {{-- <div class="entry-content ezuca-stats">
@@ -119,13 +215,26 @@
 
                     <header class="heading">
 
-                        <h2 class="entry-title">Eligibility :</h2>
+                        {{-- <h2 class="entry-title">Eligibility :</h2> --}}
+                        
+                        <div class="row" style="margin-top: 20%;">
 
-                        <p>
+                            <div class="col-md-4">
+                                <img src="images/Eligibility.png" alt="Eligibility" width="48px" height="48px" style="float: left">
+                                
+                            </div>
+                            <div class="col-md-2" style="margin-left: 0%;">
+                                <div style="float: right;"> <h1>Eligibility </h1></div>
+                            </div>
+
+                           
+                        </div>
+
+                        <p style="font-weight: 800; font-size: 18px;">
                             For one to qualify for the scholarships and bursaries for Migori county, must be of the following;
                         </p>
 
-                        <ol>
+                        <ol style="font-weight: 800; font-size: 18px;">
                             <li><p>Applicant must be residents of Migori county</p></li>
                             <li><p>Candidates must have admission/calling letter for secondary school or college and university.</p></li>
                             <li><p>Excellent academic performance</p></li>
@@ -158,16 +267,28 @@
                     </header><!-- .heading -->
                 </div><!-- .col -->
 
+
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
-                            {{-- <a href="#"><img src="images/1.jpg" alt=""></a> --}}
+                            <a href="#"><img src="images/icon1.png" alt=""></a>
                             <h2>Step 1</h2>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Obtain Bursaries/Scholarships application Forms from the Department of Education, Youth, Sports, Cultural and Social Services or download and print out form from the Migori county government website.</a></h2>
+
+                                <h4>
+                                    <p class="entry-title">
+                                        Obtain Bursaries/Scholarships application Forms  <a data-toggle="collapse" href="#collapseExample" aria-controls="collapseExample" style="color: green"> read more</a>
+
+                                        <div class="collapse" id="collapseExample" class="notbold" style="">
+    
+                                            <h5> from the Department of Education, Youth, Sports, Cultural and Social Services or download and print out form from the Migori county government website. </h5>
+                                            
+                                        </div>
+                                    </p>
+                                </h4>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Ms. Lara Croft </a></div>
@@ -198,13 +319,13 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
-                            {{-- <a href="#"><img src="images/2.jpg" alt=""></a> --}}
+                            <a href="#"><img src="images/icon2.png" alt=""></a>
                             <h2>Step 2</h2>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Fill the Forms accurately in capital letters</a></h2>
+                                <h2 class="entry-title"><p>Fill in the Forms accurately in capital letters.</p></h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Michelle Golden</a></div>
@@ -235,14 +356,19 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
-                            {{-- <a href="#"><img src="images/3.jpg" alt=""></a> --}}
+                            <a href="#"><img src="images/icon3.png" alt=""></a>
                             <h2>Step 3</h2>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Have the Forms signed and stamped by the relevant authorities.</a></h2>
+                                <h2 class="entry-title"><p>Have the Forms signed and stamped by the <a data-toggle="collapse" href="#collapse1" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
 
+                                <div class="collapse" id="collapse1" class="notbold" style="">
+    
+                                    <h5> relevant authorities. </h5>
+                                    
+                                </div>
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Ms. Lucius</a></div>
 
@@ -272,13 +398,13 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
-                            {{-- <a href="#"><img src="images/4.jpg" alt=""></a> --}}
+                            <a href="#"><img src="images/icon4.png" alt=""></a>
                             <h2>Step 4</h2>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Attach all relevant documents as required.</a></h2>
+                                <h2 class="entry-title"><p>Attach all relevant documents as required.</p></h2>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Mr. John Wick</a></div>
@@ -309,13 +435,19 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
-                            {{-- <a href="#"><img src="images/5.jpg" alt=""></a> --}}
+                            <a href="#"><img src="images/icon5.png" alt=""></a>
                             <h2>Step 5</h2>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">Return the Duly filled Forms to the Department of Education and wait for feedback.</a></h2>
+                                <h2 class="entry-title"><p>Return the Duly filled Forms to the <a data-toggle="collapse" href="#collapse2" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
+
+                                <div class="collapse" id="collapse1" class="notbold" style="">
+    
+                                    <h5>  Department of Education and wait for feedback. </h5>
+                                    
+                                </div>
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Mr. Tom Redder</a></div>
@@ -346,14 +478,19 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
-                            {{-- <a href="#"><img src="images/6.jpg" alt=""></a> --}}
+                            <a href="#"><img src="images/icon6.png" alt=""></a>
                             <h2>For more Information</h2>
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">For more information or for clarification visit Migori Government website ebursary section</a></h2>
+                                <h2 class="entry-title"><a href="#">For more information or clarification about  <a data-toggle="collapse" href="#collapse2" aria-controls="collapse2" style="color: green">read more</a></h2>
 
+                                <div class="collapse" id="collapse2" class="notbold" style="">
+    
+                                    <h5> visit Migori Government website ebursary section </h5>
+                                    
+                                </div>
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Russell Stephens</a></div>
 
@@ -397,7 +534,7 @@
                     </div><!-- .logo-wrap -->
 
                     <div class="logo-wrap">
-                        <img src="/images/mainlogo.png" alt="" width="84px;" height="84px;">
+                        <img src="/images/kel.png" alt="" width="84px;" height="84px;">
                     </div><!-- .logo-wrap -->
 
                     <div class="logo-wrap">
@@ -405,7 +542,7 @@
                     </div><!-- .logo-wrap -->
 
                     <div class="logo-wrap">
-                        <img src="/images/mainlogo.png" alt="" width="84px;" height="84px;">
+                        <img src="/images/kel.png" alt="" width="84px;" height="84px;">
                     </div><!-- .logo-wrap -->
 
                     {{-- <div class="logo-wrap">
@@ -422,13 +559,12 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="foot-about">
-                            <a class="foot-logo" href="#"><img src="/images/mainlogo.png" alt="" width="64px;" height="64px;"></a>
+                            <a class="foot-logo" href="#"><img src="/images/mainlogo.png" alt="" width="80%;" height="80%;"></a>
 
-                            <p>BASAP</p>
 
-                            <p class="footer-copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            {{-- <p class="footer-copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="#" target="_blank">Migori County Goverment</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p> --}}
                         </div><!-- .foot-about -->
                     </div><!-- .col -->
 

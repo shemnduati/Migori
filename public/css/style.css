@@ -176,7 +176,8 @@ a:hover, a:active {
 --------------------------------*/
 .nav-bar {
     padding: 20px 0;
-    background: rgba(255,255,255,.1);
+    /* background: rgba(255,255,255,.1); */
+    background: #3d9a38;
 }
 
 /*
@@ -333,7 +334,7 @@ a:hover, a:active {
 # Hero Section
 --------------------------------------------------------------*/
 .hero-content {
-    background: url("../images/student.jpg") no-repeat center;
+    /* background: url("../images/student.jpg") no-repeat center; */
     background-size: cover;
 }
 
@@ -380,7 +381,7 @@ a:hover, a:active {
 .hero-content-wrap .read-more a {
     display: block;
     padding: 12px 40px;
-    border: 2px solid #19c880;
+    border: 2px solid #3d9a38;
     font-size: 13px;
     font-weight: bold;
     color: #fff;
@@ -390,7 +391,7 @@ a:hover, a:active {
 }
 
 .hero-content-wrap .read-more a:hover {
-    background: #19c880;
+    background: #25c050;
 }
 
 /*--------------------------------------------------------------
@@ -541,6 +542,8 @@ a:hover, a:active {
 
 .course-thumbnail {
     width: 100%;
+    background-color: #029a3a;
+    color: #f3f3f3;
     margin: 0;
     object-fit: cover;
 }
@@ -552,9 +555,11 @@ a:hover, a:active {
 }
 
 .course-content-wrap {
+    display: block;
     padding: 26px 30px 20px;
-    border: 1px solid #ebebeb;
+    border: 1px solid #029a3a;
     border-top: 0;
+    max-height: min-content;
     background: #fff;
 }
 
