@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>BAZA</title>
+    <title>BASAP</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -45,28 +45,55 @@
 <body>
     <div class="hero-content">
         <header class="site-header">
+<<<<<<< HEAD
            
             <div class="nav-bar navbar-expand-lg navbar-default navbar-brand fixed-top">
+=======
+
+            <div class="nav-bar">
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                 <div class="container">
                     <div class="row">
-                        <div class="col-8 col-lg-3">
+                        <div class="col-7 col-lg-4">
                             <div class="site-branding">
                                 <h1 class="site-title">
                                     <a href="#" rel="home" style="color: yellow;">
                                        <img src="/images/mainlogo.png" alt="Main logo" width="48px;" height="48px;" style="padding-top: 0px;">
-                                        BAZA
+                                        Migori e-bursary
                                     </a></h1>
                             </div><!-- .site-branding -->
                         </div><!-- .col -->
 
-                        <div class="col-4 col-lg-9 flex justify-content-end align-content-center">
+                        <div class="col-5 col-lg-8 flex justify-content-end align-content-center">
                             <nav class="site-navigation flex justify-content-end ">
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end justify-content-md-end align-content-center">
-                                    <li class="current-menu-item"><a href="#">.Home</a></li>
+                                    <li class="current-menu-item"><a href="#">Home</a></li>
                                     <li><a href="#">About</a></li>
                                     <li><a href="#">Contact</a></li>
-                                    <li><a href="#">Register</a></li>
-                                    <li><a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                                    @guest
+                                        <li class="nav-item">
+                                            <a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                        </li>
+                                    @else
+                                        <li class="nav-item dropdown">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                {{ Auth::user()->name }} <span class="caret"></span>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <a href="/status" class="dropdown-item">Application Status</a>
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                        </li>
+                                    @endguest
                                 </ul>
 
                                 <div class="header-bar-cart">
@@ -90,7 +117,7 @@
                             </header><!-- .entry-header -->
 
                             <footer class="entry-footer read-more">
-                                <a href="#">Apply Here</a>
+                                <a href="/apply">Apply Here</a>
                             </footer><!-- .entry-footer -->
                         </div><!-- .hero-content-wrap --> --}}
                     </div><!-- .col -->
@@ -185,8 +212,13 @@
                     <header class="heading">
                         <h2 class="entry-title">About BASAP</h2>
 
+<<<<<<< HEAD
                         <p style="font-weight: 800; font-size: 18px;">Migori County Government is committed to provide scholarships and bursaries to deserving students in the county.</p>
                         <p style="font-weight: 800; font-size: 18px;">The Scholarships are available to Secondary school, College and University students in the county.</p>
+=======
+                        <p>Migori County Government is committed to providing  scholarships and bursaries to deserving students in the county.</p>
+                        <p>The Scholarships are available to Secondary school, College and University students in the county.</p>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                     </header><!-- .heading -->
 
                     {{-- <div class="entry-content ezuca-stats">
@@ -271,12 +303,18 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
+<<<<<<< HEAD
                             <a href="#"><img src="images/icon1.png" alt=""></a>
                             <h2>Step 1</h2>
+=======
+                            {{-- <a href="#"><img src="images/1.jpg" alt=""></a> --}}
+                            <h2>Step 1(Registration)</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
+<<<<<<< HEAD
 
                                 <h4>
                                     <p class="entry-title">
@@ -289,6 +327,9 @@
                                         </div>
                                     </p>
                                 </h4>
+=======
+                                <h2 class="entry-title">Register to our online application system (BASAP).Fill in the registration form and submit it.</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Ms. Lara Croft </a></div>
@@ -319,13 +360,22 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
+<<<<<<< HEAD
                             <a href="#"><img src="images/icon2.png" alt=""></a>
                             <h2>Step 2</h2>
+=======
+                            {{-- <a href="#"><img src="images/2.jpg" alt=""></a> --}}
+                            <h2>Step 2(verification)</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
+<<<<<<< HEAD
                                 <h2 class="entry-title"><p>Fill in the Forms accurately in capital letters.</p></h2>
+=======
+                                <h2 class="entry-title">Verification email will be send  to your email.verify your email by clicking the verification button.</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Michelle Golden</a></div>
@@ -356,13 +406,22 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
+<<<<<<< HEAD
                             <a href="#"><img src="images/icon3.png" alt=""></a>
                             <h2>Step 3</h2>
+=======
+                            {{-- <a href="#"><img src="images/3.jpg" alt=""></a> --}}
+                            <h2>Step 3(Application)</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
+<<<<<<< HEAD
                                 <h2 class="entry-title"><p>Have the Forms signed and stamped by the <a data-toggle="collapse" href="#collapse1" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
+=======
+                                <h2 class="entry-title">Fill in the application form by providing the required details.Ensure that you have provided the correct details then submit the application.</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
 
                                 <div class="collapse" id="collapse1" class="notbold" style="">
     
@@ -398,13 +457,22 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
+<<<<<<< HEAD
                             <a href="#"><img src="images/icon4.png" alt=""></a>
                             <h2>Step 4</h2>
+=======
+                            {{-- <a href="#"><img src="images/4.jpg" alt=""></a> --}}
+                            <h2>Step 4(processing)</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
+<<<<<<< HEAD
                                 <h2 class="entry-title"><p>Attach all relevant documents as required.</p></h2>
+=======
+                                <h2 class="entry-title">Your application will go through various stages of verification.County staff will counter check all the information provided then verify your application or decline if the information provided is wrong.</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Mr. John Wick</a></div>
@@ -435,12 +503,18 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
+<<<<<<< HEAD
                             <a href="#"><img src="images/icon5.png" alt=""></a>
                             <h2>Step 5</h2>
+=======
+                            {{-- <a href="#"><img src="images/5.jpg" alt=""></a> --}}
+                            <h2>Step 5(Status)</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
+<<<<<<< HEAD
                                 <h2 class="entry-title"><p>Return the Duly filled Forms to the <a data-toggle="collapse" href="#collapse2" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
 
                                 <div class="collapse" id="collapse1" class="notbold" style="">
@@ -448,6 +522,9 @@
                                     <h5>  Department of Education and wait for feedback. </h5>
                                     
                                 </div>
+=======
+                                <h2 class="entry-title">Student can follow up the application status of bursary/scholarship on their dashboard.Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.Here you can see the application status of your bursary/scholarship.</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
 
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Mr. Tom Redder</a></div>
@@ -478,13 +555,22 @@
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
                         <figure class="course-thumbnail">
+<<<<<<< HEAD
                             <a href="#"><img src="images/icon6.png" alt=""></a>
                             <h2>For more Information</h2>
+=======
+                            {{-- <a href="#"><img src="images/6.jpg" alt=""></a> --}}
+                            <h2>Awarded</h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                         </figure><!-- .course-thumbnail -->
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
+<<<<<<< HEAD
                                 <h2 class="entry-title"><a href="#">For more information or clarification about  <a data-toggle="collapse" href="#collapse2" aria-controls="collapse2" style="color: green">read more</a></h2>
+=======
+                                <h2 class="entry-title">You will  receive an email notification when your bursary/scholarship application is approved.You can then pick the awarded bursary/scholarship cheque from county offices or have it sent to the school directly.   </h2>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
 
                                 <div class="collapse" id="collapse2" class="notbold" style="">
     
@@ -524,8 +610,8 @@
         </div><!-- .container -->
     </section><!-- .courses-wrap -->
 
-    
-    <div class="clients-logo">
+
+    {{--<div class="clients-logo">
         <div class="container">
             <div class="row">
                 <div class="col-12 flex flex-wrap justify-content-center justify-content-lg-between align-items-center">
@@ -545,13 +631,13 @@
                         <img src="/images/kel.png" alt="" width="84px;" height="84px;">
                     </div><!-- .logo-wrap -->
 
-                    {{-- <div class="logo-wrap">
-                        <img src="/images123/mainlogo.png" alt=""> --}}
-                    </div><!-- .logo-wrap --> 
+                    --}}{{-- <div class="logo-wrap">
+                        <img src="/images123/mainlogo.png" alt=""> --}}{{--
+                    </div><!-- .logo-wrap -->
                 </div><!-- .col -->
             </div><!-- .row -->
         </div><!-- .container -->
-    </div><!-- .clients-logo -->
+    </div><!-- .clients-logo -->--}}
 
     <footer class="site-footer">
         <div class="footer-widgets">
@@ -562,9 +648,15 @@
                             <a class="foot-logo" href="#"><img src="/images/mainlogo.png" alt="" width="80%;" height="80%;"></a>
 
 
+<<<<<<< HEAD
                             {{-- <p class="footer-copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="#" target="_blank">Migori County Goverment</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p> --}}
+=======
+                            <p class="footer-copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="#" target="_blank">Migori County Government</a> Developed by <a href="https://twtechnologies.africa/" target="_blank">Tw Technologies</a>
+                                </p>
+>>>>>>> bfa09abeb1f9d1626f46712c03b0fb04cc3a1cfd
                         </div><!-- .foot-about -->
                     </div><!-- .col -->
 
@@ -586,17 +678,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
                             <ul class="w-50">
                                 <li><a href="#">About </a></li>
-                                <li><a href="#">Terms of Use </a></li>
-                                <li><a href="#">Privacy Policy </a></li>
+                                <li><a href="{{ route('privacy') }}">Terms of Use </a></li>
+                                <li><a href="{{ route('privacy') }}">Privacy Policy </a></li>
                                 <li><a href="#">Contact Us</a></li>
                             </ul>
 
-                            <ul class="w-50">
+                            {{--<ul class="w-50">
                                 <li><a href="#">Documentation</a></li>
                                 <li><a href="#">Forums</a></li>
-                                {{-- <li><a href="#">Language Packs</a></li> --}}
+                                --}}{{-- <li><a href="#">Language Packs</a></li> --}}{{--
                                 <li><a href="#">Release Status</a></li>
-                            </ul>
+                            </ul>--}}
                         </div><!-- .quick-links -->
                     </div><!-- .col -->
 
@@ -621,7 +713,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div><!-- .container -->
         </div><!-- .footer-bar -->
     </footer><!-- .site-footer -->
-
+    <script src="{{ asset('js/scripts.js') }}" defer></script>
 <script type='text/javascript' src='js/jquery.js'></script>
 <script type='text/javascript' src='js/swiper.min.js'></script>
 <script type='text/javascript' src='js/masonry.pkgd.min.js'></script>
