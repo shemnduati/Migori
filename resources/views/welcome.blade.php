@@ -59,7 +59,7 @@
                         <div class="col-5 col-lg-8 flex justify-content-end align-content-center">
                             <nav class="site-navigation flex justify-content-end ">
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end justify-content-md-end align-content-center">
-                                    <li class="current-menu-item"><a href="#">Home</a></li>
+                                    <li><a href="/">&nbsp;Home</a></li>
                                     <li><a href="#">About</a></li>
                                     <li><a href="#">Contact</a></li>
                                     @guest
@@ -137,8 +137,8 @@
                             <header class="entry-header">
                                 <h3 style="color: #3d9a38;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
                             </header><!-- .entry-header -->
-                            <p>Apply Here</p>
                             <footer class="entry-footer read-more" style="border-color: #3d9a38;">
+                                <p>Apply Here</p>
                                 <a  href="/apply">Bursary</a><br>
                                 <a  href="/scholarship">Scholarship</a>
                             </footer><!-- .entry-footer -->
@@ -156,8 +156,8 @@
                             <header class="entry-header">
                                 <h3 style="color: #3d9a38;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
                             </header><!-- .entry-header -->
-                            <p>Apply Here</p>
                             <footer class="entry-footer read-more">
+                                <p>Apply Here</p>
                                 <a  href="/apply">Bursary</a><br>
                                 <a  href="/scholarship">Scholarship</a>
                             </footer><!-- .entry-footer -->
@@ -175,8 +175,8 @@
                             <header class="entry-header">
                                 <h3 style="color: #3d9a38;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
                             </header><!-- .entry-header -->
-                            <p>Apply Here</p>
                             <footer class="entry-footer read-more">
+                                <p>Apply Here</p>
                                 <a  href="/apply">Bursary</a><br>
                                 <a  href="/scholarship">Scholarship</a>
                             </footer><!-- .entry-footer -->
