@@ -133,9 +133,9 @@
                     <img src="images/Slider2.jpg" alt="Los Angeles" width="100%" height="500">
                     <div class="carousel-caption">
 
-                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 40%;">
+                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 30%;">
                             <header class="entry-header">
-                                <h3 style="color: #3d9a38;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
+                                <h3 style="color: #ffff;">Bursary And Governor's Scholarship Application Portal <br>(BASAP)</h3>
                             </header><!-- .entry-header -->
                             <footer class="entry-footer read-more" style="border-color: #3d9a38;">
                                 <p>Apply Here</p>
@@ -152,9 +152,9 @@
 
                     <div class="carousel-caption">
 
-                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 30%;">
+                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 10%;">
                             <header class="entry-header">
-                                <h3 style="color: #3d9a38;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
+                                <h3 style="color: #ffffff;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
                             </header><!-- .entry-header -->
                             <footer class="entry-footer read-more">
                                 <p>Apply Here</p>
@@ -171,9 +171,9 @@
 
                     <div class="carousel-caption">
 
-                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 30%;">
+                        <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 15%;">
                             <header class="entry-header">
-                                <h3 style="color: #3d9a38;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
+                                <h3 style="color: #ffffff;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
                             </header><!-- .entry-header -->
                             <footer class="entry-footer read-more">
                                 <p>Apply Here</p>
@@ -565,9 +565,10 @@
                             <h2>Contact Us</h2>
 
                             <ul>
-                                <li>Email: </li>
-                                <li>Phone:</li>
-                                <li>Address: Migori County, Kenya</li>
+                                <li>Email:enquiries@migori.go.ke</li>
+                                <li>Phone:+254 726 319 450 / +254 770 304 976</li>
+                                <li>Address:Migori County Government, Migori Town,
+                                    Migori Kenya</li>
                             </ul>
                         </div><!-- .foot-contact -->
                     </div><!-- .col -->

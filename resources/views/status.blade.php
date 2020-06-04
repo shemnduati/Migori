@@ -8,7 +8,6 @@
 
 
         <div class="text-center pt-2">
-           
             <a href="/">
                 <button class="btn btn-primary">
                     <i class="fa fa-hand-point-left"></i>
