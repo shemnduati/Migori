@@ -9,26 +9,24 @@
                         <div class="card-tools">
                             <div class="row">
                                 <div class="col-sm-12" v-if="$gate.isSubadmin()">
-                                    <form>
-                                        <select @change="getType()" v-model="form.type" class="form-control">
-                                            <option selected value="">--Sort By--</option>
-                                            <option value="1">All</option>
-                                            <option value="2">Pending</option>
-                                            <option value="3">Recommended</option>
-                                            <option value="4">Rejected</option>
-                                        </select>
-                                    </form>
+                                    <button @click="allApp" type="button" class="btn btn-sm btn-info">
+                                        Reset
+                                    </button>
+
+                                    <button @click="filter" type="button" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-sort"></i>
+                                        Sort
+                                    </button>
                                 </div>
                                 <div class="col-sm-12" v-if="$gate.isOfficial()">
                                     <form>
-                                        <select @change="sortByWard()" v-model="formf.sWard" class="form-control" name="sWard"
-                                                :class="{ 'is-invalid': form.errors.has('sWard') }">
+                                        <select @change="sortByWard()" v-model="formf.sWard" class="form-control"
+                                                name="sWard">
                                             <option selected value="">--Sort By Ward--</option>
                                             <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
                                                 wardy.name}}
                                             </option>
                                         </select>
-                                        <has-error :form="form" field="sWard"></has-error>
                                     </form>
                                 </div>
                             </div>
@@ -55,8 +53,7 @@
                                 <td>{{application.lastName}}</td>
                                 <td>{{application.gender}}</td>
                                 <td v-if="$gate.isOfficial()">
-                                    <span v-if="application.status==1" style="color: purple;">Verified.</span>
-                                    <span v-if="application.status==0" style="color: purple;">Pending...</span>
+                                    <span v-if="application.status==1" style="color: purple;">Pending...</span>
                                     <span v-if="application.status==2" style="color: red;">Rejected</span>
                                     <span v-if="application.status==3" style="color: green;">Awarded</span>
                                 </td>
@@ -78,18 +75,109 @@
 
                             </tbody>
                         </table>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="card-footer">
-                        <!-- <pagination :data="users" @pagination-change-page="getResults"></pagination> -->
+                        <vue-good-table v-if="this.$gate.isSubadmin()"
+                                        :columns="columns"
+                                        :rows="app"
+                                        :line-numbers="true"
+                                        :pagination-options="{
+                   enabled: true,
+                   mode: 'pages',
+                   perPage: 10
+                 }"
+                                        :search-options="{
+                    enabled: true,
+                    placeholder: 'Search this table',
+                  }">
+                            <template slot="table-row" slot-scope="props">
+                <span v-if="props.column.field == 'reco'">
+                    <span class="badge badge-primary" v-if="!props.row.recommendation">Pending</span>
+                    <span class="badge badge-success" v-if="props.row.recommendation == 'Yes'">Yes / High</span>
+                    <span class="badge badge-warning" v-if="props.row.recommendation == 'Partially'">Partially</span>
+                    <span class="badge badge-danger" v-if="props.row.recommendation == 'No'">No</span>
+                </span>
+                                <span v-else-if="props.column.field == 'action'">
+                    <router-link :to="{path:'/informationview/'+ props.row.id}">
+                        <button class="btn btn-primary btn-sm m-1"><i class="fa fa-eye"></i>more</button>
+                    </router-link>
+                </span>
+                            </template>
+                        </vue-good-table>
+                        <vue-good-table v-if="this.$gate.isOfficial()"
+                                        :columns="columns2"
+                                        :rows="app"
+                                        :line-numbers="true"
+                                        :pagination-options="{
+                   enabled: true,
+                   mode: 'pages',
+                   perPage: 10
+                 }"
+                                        :search-options="{
+                    enabled: true,
+                    placeholder: 'Search this table',
+                  }">
+                            <template slot="table-row" slot-scope="props">
+                                <span v-if="props.column.field == 'statu'">
+                    <span v-if="props.row.status==1" style="color: purple;">Pending...</span>
+                    <span v-if="props.row.status==2" style="color: red;">Rejected</span>
+                    <span v-if="props.row.status==3" style="color: green;">Awarded</span>
+                </span>
+                <span v-else-if="props.column.field == 'reco'">
+                    <span class="badge badge-primary" v-if="!props.row.recommendation">Pending</span>
+                    <span class="badge badge-success" v-if="props.row.recommendation == 'Yes'">Yes / High</span>
+                    <span class="badge badge-warning" v-if="props.row.recommendation == 'Partially'">Partially</span>
+                    <span class="badge badge-danger" v-if="props.row.recommendation == 'No'">No</span>
+                </span>
+                                <span v-else-if="props.column.field == 'action'">
+                    <router-link :to="{path:'/informationview/'+ props.row.id}">
+                        <button class="btn btn-primary btn-sm m-1"><i class="fa fa-eye"></i>more</button>
+                    </router-link>
+                </span>
+                            </template>
+                        </vue-good-table>
                     </div>
                 </div>
                 <!-- /.box -->
             </div>
         </div>
-        <!-- Modal -->
-
-
+        <div id="filterModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Filter applications</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Select Year</label>
+                                <select v-model="form.year" class="form-control">
+                                    <option selected value="">--Year--</option>
+                                    <option v-for="co in conf" :key="co['year']"
+                                            :value="co['year']">{{ co.year}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Type</label>
+                                <select v-model="form.type" class="form-control">
+                                    <option selected value="">--Type--</option>
+                                    <option value="1">All</option>
+                                    <option value="2">Pending</option>
+                                    <option value="3">Recommended</option>
+                                    <option value="4">Rejected</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -97,18 +185,145 @@
     export default {
         data() {
             return {
+                columns: [
+                    {
+                        label: 'Serial',
+                        field: 'serial',
+                    },
+                    {
+                        label: 'Year',
+                        field: 'application_year',
+                    },
+                    {
+                        label: 'First Name',
+                        field: 'firstName',
+                    },
+                    {
+                        label: 'Last Name',
+                        field: 'lastName',
+                    },
+                    {
+                        label: 'Gender',
+                        field: 'gender',
+                    },
+                    {
+                        label: 'Recommendation',
+                        field: 'reco',
+                    },
+                    {
+                        label: 'Type',
+                        field: 'bursary_type',
+                    },
+                    {
+                        label: 'Action',
+                        field: 'action'
+                    }
+                ],
+                columns2: [
+                    {
+                        label: 'Serial',
+                        field: 'serial',
+                    },
+                    {
+                        label: 'Year',
+                        field: 'application_year',
+                    },
+                    {
+                        label: 'First Name',
+                        field: 'firstName',
+                    },
+                    {
+                        label: 'Last Name',
+                        field: 'lastName',
+                    },
+                    {
+                        label: 'Gender',
+                        field: 'gender',
+                    },
+                    {
+                        label: 'Status',
+                        field: 'statu',
+                    },
+                    {
+                        label: 'Recommendation',
+                        field: 'reco',
+                    },
+                    {
+                        label: 'Type',
+                        field: 'bursary_type',
+                    },
+                    {
+                        label: 'Action',
+                        field: 'action'
+                    }
+                ],
                 applications: {},
                 wards: {},
                 formf: new Form({
                     sWard: '',
                 }),
-                form: new Form({
-                    type: ''
-                })
+                form: {
+                    type: '',
+                    year: ''
+                },
+                conf: []
+            }
+        },
+        computed: {
+            app() {
+                if (this.$gate.isSubadmin()) {
+                    if (!this.form.type && !this.form.year) {
+                        return this.$store.state.bursary;
+                    }
+
+                    if (!this.form.type && this.form.year) {
+                        return this.$store.state.bursary.filter(m => m.application_year == this.form.year)
+                    }
+
+                    if (this.form.type && this.form.year) {
+                        if (this.form.type == 1) {
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year)
+                        }
+
+                        if (this.form.type == 2) {
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year && m.status == 0)
+                        }
+
+                        if (this.form.type == 3) {
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year && m.recommendation != null)
+                        }
+
+                        if (this.form.type == 4) {
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year && m.status == 2)
+                        }
+                    }
+                }
+
+                if (this.$gate.isOfficial()) {
+                    if (!this.form.year) {
+                        return this.$store.state.bursary.filter(m => m.recommendation == 'Yes' || m.recommendation == 'Partially')
+                    }
+                }
             }
         },
         methods: {
-            sortByWard(){
+            allApp() {
+                this.form = {
+                    type: '',
+                    year: ''
+                }
+            },
+            getConfYears() {
+                if (this.$gate.isSubadmin()) {
+                    axios.get('api/conf_years').then(data => {
+                        this.conf = data.data
+                    });
+                }
+            },
+            filter() {
+                $('#filterModal').modal('show');
+            },
+            sortByWard() {
                 if (this.$gate.isOfficial()) {
                     axios.get('api/getbyward/' + this.formf.sWard).then(({data}) => ([this.applications = data['applications']]));
                 }
@@ -123,10 +338,10 @@
             },
             getApplications() {
                 if (this.$gate.isSubadmin()) {
-                    axios.get('api/getbusary').then(({data}) => ([this.applications = data['applications']]));
+                    this.$store.dispatch('getBursarySub');
                 }
                 if (this.$gate.isOfficial()) {
-                    axios.get('api/getCountyBursary').then(({data}) => ([this.applications = data['applications']]));
+                    this.$store.dispatch('getBursaryOfficial');
                 }
             },
             getType() {
@@ -143,19 +358,9 @@
         },
         created() {
             this.$Progress.start();
-            Fire.$on('searching', () => {
-                this.$Progress.start();
-                let query = this.$parent.search;
-                axios.get('api/findbursary?q=' + query)
-                    .then((data) => {
-                        this.applications = data.data;
-                        this.$Progress.finish();
-                    })
-                    .catch(() => {
-                    })
-            })
             this.getApplications();
             this.getMyWards();
+            this.getConfYears();
             Fire.$on('AfterCreate', () => {
                 this.getApplications();
             })

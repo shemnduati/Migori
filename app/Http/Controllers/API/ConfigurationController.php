@@ -16,47 +16,52 @@ class ConfigurationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function index($id)
     {
-        $county =User::where('id',$id)->value('county');
-        return Configuration::where('county',$county)->get();
+        $county = User::where('id', $id)->value('county');
+        return Configuration::where('county', $county)->get();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $id)
     {
-        $this->validate($request,[
-            'year' => 'required|integer|min:'.date('Y'),
+        $this->validate($request, [
+            'year' => 'required|integer|min:' . date('Y'),
             'status' => 'required|boolean',
             'type' => 'required'
         ]);
 
-         $county =User::where('id',$id)->value('county');
-         $conf = Configuration::where('status', 1)->where('county',$county)->where('type',$request->type)->get();
-            foreach ($conf as $co) {
-                $confi = Configuration::findOrFail($co['id']);
-                $confi->status = 0;
-                $confi->craete();
-            }
+        $county = User::where('id', $id)->value('county');
+        $conf = Configuration::where('status', 1)->where('county', $county)->where('type', $request->type)->get();
+        foreach ($conf as $co) {
+            $confi = Configuration::findOrFail($co['id']);
+            $confi->status = 0;
+            $confi->craete();
+        }
 
-            return Configuration::Create([
-                'year' => $request['year'],
-                'status' => $request['status'],
-                'county' => $county,
-                'type' => $request['type'],
-            ]);
+        return Configuration::Create([
+            'year' => $request['year'],
+            'status' => $request['status'],
+            'county' => $county,
+            'type' => $request['type'],
+        ]);
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,33 +72,35 @@ class ConfigurationController extends Controller
     public function getStatus($countyId)
     {
 
-        $num = Configuration::where('county',$countyId)->where('type', 2)->where('status', 1)->count();
+        $num = Configuration::where('county', $countyId)->where('type', 2)->where('status', 1)->count();
 
-        return ['num'=>$num];
+        return ['num' => $num];
     }
+
     public function getStatuz($countyId)
     {
 
-        $num = Configuration::where('county',$countyId)->where('type', 1)->where('status', 1)->count();
+        $num = Configuration::where('county', $countyId)->where('type', 1)->where('status', 1)->count();
 
-        return ['num'=>$num];
+        return ['num' => $num];
     }
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             // 'year' => 'required|string|max:25',
         ]);
-        $user_id = Auth::user();
-        $county =User::where('id',$user_id['id'])->value('county');
+        $user_id = auth()->user()->id;
+        $county = User::where('id', $user_id)->value('county');
 
-        $conf = Configuration::where('status', 1)->where('county',$county)->where('type',$request->type)->get();
+        $conf = Configuration::where('status', 1)->where('county', $county)->where('type', $request->type)->get();
         foreach ($conf as $co) {
             $confi = Configuration::findOrFail($co['id']);
             $confi->status = 0;
@@ -108,12 +115,12 @@ class ConfigurationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-         $configuration = Configuration::findOrFail($id);
+        $configuration = Configuration::findOrFail($id);
 
         $configuration->delete();
     }

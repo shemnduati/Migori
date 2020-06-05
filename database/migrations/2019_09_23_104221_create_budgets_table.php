@@ -16,8 +16,8 @@ class CreateBudgetsTable extends Migration
         Schema::create('budgets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('ward_id')->index();
-            $table->decimal('amount', 8, 2);
-            $table->decimal('remaining', 8, 2);
+            $table->decimal('amount', 20, 2);
+            $table->decimal('remaining', 20, 2);
             $table->string('year');
             $table->timestamps();
         });

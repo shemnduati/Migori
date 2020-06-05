@@ -14,6 +14,7 @@ import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;
 import uniq from 'lodash/uniq'
 window.uniq = uniq;
+import store from "./store/store";
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component('pagination', require('laravel-vue-pagination'));
@@ -91,6 +92,12 @@ Vue.use(VueProgressBar, {
     height: '3px'
 })
 
+//vue-good-table
+import VueGoodTablePlugin from 'vue-good-table/src';
+import 'vue-good-table/dist/vue-good-table.css'
+Vue.use(VueGoodTablePlugin);
+
+
 router.beforeEach((to, from, next) => {
 
     if (to.meta.student) {
@@ -128,6 +135,7 @@ Vue.component('scholarship', require('./components/Scholarship.vue').default);
 const app = new Vue({
     el: '#app',
     router,
+    store,
     data:{
         search:''
     },

@@ -10,4 +10,8 @@ class Geographical extends Model
     use HasApiTokens;
     protected $guarded= [];
     protected $table = 'geographical';
+
+    public function ward(){
+        return $this->belongsTo(Ward::class, 'Ward');
+    }
 }

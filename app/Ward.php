@@ -15,5 +15,9 @@ class Ward extends Model
     	return $this->belongsTo(\App\County::class);
     }
 
+    public function geographical(){
+        return $this->hasOne(Geographical::class, 'Ward');
+    }
+
 
 }

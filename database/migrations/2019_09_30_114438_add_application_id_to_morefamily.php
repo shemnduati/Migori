@@ -14,7 +14,10 @@ class AddApplicationIdToMorefamily extends Migration
     public function up()
     {
         Schema::table('morefamily', function (Blueprint $table) {
-            $table->integer('applicationId')->after('id');
+            $table->unsignedBigInteger('applicationId')->after('id');
+
+            $table->foreign('applicationId')->references('id')->on('applications')
+                ->onDelete('cascade');
         });
     }
 

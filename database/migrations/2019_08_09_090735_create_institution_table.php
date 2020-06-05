@@ -15,7 +15,7 @@ class CreateInstitutionTable extends Migration
     {
         Schema::create('institution', function (Blueprint $table) {
         	$table->bigIncrements('id');
-        	$table->integer('user_id')->index();
+        	$table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('branch');
             $table->string('class');
@@ -26,6 +26,9 @@ class CreateInstitutionTable extends Migration
             $table->string('amount_paid');
             $table->string('balance');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

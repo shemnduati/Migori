@@ -147,7 +147,7 @@ class ApplicationController extends Controller
             $application->tel = $request['telephone'];
             $application->county = $request['county'];
             $application->ward_id = $request['ward'];
-            $application->year = date('Y');
+            $application->year = $request->yearz;
             $application->serial = str_pad($serial, 4, '0', STR_PAD_LEFT);
 
             $application->save();

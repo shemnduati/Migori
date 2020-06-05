@@ -15,7 +15,7 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->index();
+            $table->unsignedBigInteger('user_id');
             $table->binary('passport')->nullable();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
@@ -52,6 +52,9 @@ class CreateApplicationsTable extends Migration
             $table->string('secSchoolName')->nullable();
             $table->string('classification')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

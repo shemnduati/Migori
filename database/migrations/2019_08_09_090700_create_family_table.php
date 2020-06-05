@@ -15,17 +15,17 @@ class CreateFamilyTable extends Migration
     {
         Schema::create('family', function (Blueprint $table) {
         	$table->bigIncrements('id');
-        	$table->integer('user_id')->index();
+        	$table->unsignedBigInteger('user_id')->index();
             $table->string('name')->nullable();
             $table->string('relationship')->nullable();
             $table->string('living')->nullable();;
             $table->string('occupation')->nullable();
-            $table->decimal('income',8,2)->nullable();
+            $table->decimal('income',20,2)->nullable();
             $table->binary('cert')->nullable();
             $table->string('tel')->nullable();
             $table->year('year')->nullable();
             $table->integer('status')->nullable();
-            $table->integer('applicationId')->nullable();
+            $table->unsignedBigInteger('applicationId')->nullable();
 
             $table->string('who')->nullable();
             $table->string('firstName')->nullable();
@@ -41,6 +41,12 @@ class CreateFamilyTable extends Migration
             $table->string('location')->nullable();
             $table->string('sublocation')->nullable();
             $table->timestamps();
+
+            $table->foreign('applicationId')->references('id')->on('applications')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

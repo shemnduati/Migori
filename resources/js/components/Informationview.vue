@@ -3,6 +3,10 @@
         <div class="text-center pt-2">
             <h3>Student Information</h3>
         </div>
+        <button @click="$router.go(-1)" type="button" class="btn btn-primary">
+            <i class="fa fa-hand-point-left"></i>
+            Back
+        </button>
         <div class="row">
             <div class="col-md-8">
                 <h5 class=" rounded bgc p-2 mt-2 text-center">APPLICANT’S BIO</h5>

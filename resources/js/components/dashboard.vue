@@ -218,6 +218,13 @@
         },
         created() {
             this.loadUsers();
+            if (this.$gate.isSubadmin()) {
+                this.$store.dispatch('getBursarySub');
+            }
+
+            if (this.$gate.isOfficial()) {
+                this.$store.dispatch('getBursaryOfficial');
+            }
         }
     }
 </script>
