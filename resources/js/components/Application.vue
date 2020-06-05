@@ -23,7 +23,7 @@
                                                     </option>
                                                 </select>
                                                 <has-error :form="form" field="year"></has-error>
-                                                <small style="color: red" v-if="error && errors.year">{{ errors.year[0] }}</small>
+                                                <small style="color: red" v-if="error && errors.yearz">{{ errors.yearz[0] }}</small>
                                                 <small style="color: red" v-if="!yearz.length">There is currently no open
                                                     application. Please check again later</small>
                                             </div>
@@ -751,7 +751,7 @@
                     fincome: '',
                     mincome: '',
                     gincome: '',
-                    county: 1,
+                    county: 6,
                     ward: '',
                     constituency: '',
                     location: '',

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Baza</title>
+    <title>MCG Migori County Government</title>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
     <!-- Scripts -->
@@ -22,9 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
-        .grad{
-            background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE);
-        }
+
         body{
             background-color: #ffffff;
         }
@@ -43,9 +41,7 @@
         .x{
             color: #002060;
         }
-        .grad {
-            background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE);
-        }
+
         .big{
             font-size: 40px;
         }

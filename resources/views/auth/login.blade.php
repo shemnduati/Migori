@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Baza</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.jpg"/>
+    <title>MCG Migori County Government</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,9 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-        body{
-            background-image: linear-gradient(to right, #D5F5CE , #ABEE98, #D5F5CE);
-        }
+
         .btn{
                 background-color: #31849b;
                 color: #fff;
@@ -78,7 +76,7 @@ i{
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
                                       </div>
-                                      <input id="pwd" type="password"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"  placeholder="Password"> 
+                                      <input id="pwd" type="password"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"  placeholder="Password">
                                       <div class="input-group-text"><i class="fas fa-eye-slash" id="eye"></i></div>
                                       @error('password')
 

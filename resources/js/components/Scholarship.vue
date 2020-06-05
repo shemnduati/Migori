@@ -1749,7 +1749,7 @@
                     gender: '',
                     telephone: '',
                     alt_telephone: '',
-                    county: 1,
+                    county: 6,
                     ward: '',
                     subcounty: '',
                     location: '',
