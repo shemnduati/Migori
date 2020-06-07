@@ -284,7 +284,7 @@ class InformationController extends Controller
 
     public function getMyBursary()
     {
-        $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')->where('user_id', Auth::user()->id)->get();
+        $applications = Application::where('year', date('Y'))->where('user_id', Auth::user()->id)->get();
 
         return ['applications' => $applications];
 

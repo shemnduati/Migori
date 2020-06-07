@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -13,7 +13,7 @@
                                     <div class="col-sm-6 justify-content-center">
                                         <div class="form-group">
                                             <div class="col">
-                                                <label>Select Application Year</label>
+                                                <label>Select Application Year</label><span class="text-danger">&#42;</span>
                                                 <select v-model="form.yearz" class="form-control" name="yearz"
                                                         :class="{ 'is-invalid': form.errors.has('yearz') }" :disabled="!yearz.length">
                                                     <option selected value="">--Select Application Year--</option>
@@ -32,7 +32,7 @@
                                 </div>
                                 <hr>
                                 <p class="text-right">
-                                <button type="button" class="btn btn-primary"
+                                <button type="button" class="btn btn-success"
                                         @click.prevent="nextStep">Next Step
                                 </button>
                                 </p>
@@ -43,7 +43,7 @@
                                 <div class="form-row ">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>First/Baptismal Name</label>
+                                            <label>First/Baptismal Name</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.firstName" type="text" name="firstName"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('firstName') }">
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Middle Name</label>
+                                            <label>Middle Name</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.middleName" type="text" name="middleName"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('middleName') }">
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Surname/ Family Name</label>
+                                            <label>Surname/ Family Name</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.lastName" type="text" name="lastName"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('lastName') }">
@@ -76,7 +76,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>ID Number</label>
+                                            <label>ID Number</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.idNo" type="number" name="idNo" class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('idNo') }">
                                             <has-error :form="form" field="idNo"></has-error>
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Email</label>
+                                            <label>Email</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.email = info['email']" type="email" name="email"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('email') }">
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>DOB</label>
+                                            <label>DOB</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.dob" type="date" name="dob"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('dob') }">
@@ -106,7 +106,7 @@
 
                                 <div class="form-row">
                                     <div class="col">
-                                        <label for="gender">Gender</label><br>
+                                        <label for="gender">Gender</label><span class="text-danger">&#42;</span><br>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.gender" class="form-check-input" type="radio"
                                                    name="gender" id="gender" value="male"
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Telephone</label>
+                                            <label>Telephone</label><span class="text-danger">&#42;</span>
                                             <VuePhoneNumberInput v-model="form.telephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_telephone}}</small>
                                             <small style="color: red" v-if="error && errors.telephone">{{ errors.telephone[0] }}</small>
@@ -136,7 +136,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Reg/Admission Number</label>
+                                            <label>Reg/Admission Number</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.regNo" type="text" name="regNo"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('regNo') }">
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="passport">Attach Passport Photo (Images/Pdf)</label>
+                                            <label for="passport">Attach Passport Photo (Images/Pdf)</label><span class="text-danger">&#42;</span>
                                             <input type="file" @change="fieldChange($event, 1)" class="form-control-file"
                                                    id="passport" accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('passport') }">
@@ -157,10 +157,10 @@
                                 </div>
                                 <hr>
                                 <p class="text-right">
-                                    <button type="button" class="btn btn-primary " @click.prevent="prevStep">
+                                    <button type="button" class="btn btn-success " @click.prevent="prevStep">
                                         Previous Step
                                     </button>
-                                    <button type="button" class="btn btn-primary"
+                                    <button type="button" class="btn btn-success"
                                             @click.prevent="nextStep">Next Step
                                     </button>
                                 </p>
@@ -170,7 +170,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Father's Name</label>
+                                            <label>Father's Name</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.fname" type="text" name="name"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fname') }">
@@ -179,12 +179,12 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <label>Alive/Dead</label><br>
+                                        <label>Alive/Dead</label><span class="text-danger">&#42;</span><br>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.fliving" class="form-check-input" type="radio"
                                                    name="fliving" value="Alive"
                                                    :class="{ 'is-invalid': form.errors.has('fliving') }">
-                                            <label class="form-check-label">Alive</label>
+                                            <label class="form-check-label">Alive</label><span class="text-danger">&#42;</span>
                                             <has-error :form="form" field="fliving"></has-error>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -198,7 +198,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Attach Father’s ID/Death Cert</label>
+                                            <label>Attach Father’s ID/Death Cert</label><span class="text-danger">&#42;</span>
                                             <input type="file" @change="fieldChange($event, 2)" class="form-control-file" id="fId"
                                                    accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('fatherId') }">
@@ -210,7 +210,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Occupation</label>
+                                            <label>Occupation</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.foccupation" type="text" name="foccupation"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('foccupation') }">
@@ -220,7 +220,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Telephone</label>
+                                            <label>Telephone</label><span class="text-danger">&#42;</span>
                                             <VuePhoneNumberInput v-model="form.ftelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_ftelephone}}</small>
                                             <small style="color: red" v-if="error && errors.ftelephone">{{ errors.ftelephone[0] }}</small>
@@ -228,7 +228,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Income per Year</label>
+                                            <label>Income per Year</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.fincome" type="number" name="fincome"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('fincome') }">
@@ -241,7 +241,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Mother's Name</label>
+                                            <label>Mother's Name</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.mname" type="text" name="mname"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('mname') }">
@@ -250,7 +250,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <label>Alive/Dead</label><br>
+                                        <label>Alive/Dead</label><span class="text-danger">&#42;</span><br>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.mliving" class="form-check-input" type="radio"
                                                    name="mliving" value="Alive"
@@ -269,7 +269,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Attach Mother’s ID/Death Cert</label>
+                                            <label>Attach Mother’s ID/Death Cert</label><span class="text-danger">&#42;</span>
                                             <input type="file" @change="fieldChange($event, 3)" class="form-control-file" id="mID"
                                                    accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('motherId') }">
@@ -281,7 +281,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Occupation</label>
+                                            <label>Occupation</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.moccupation" type="text" name="moccupation"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('moccupation') }">
@@ -291,7 +291,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Telephone</label>
+                                            <label>Telephone</label><span class="text-danger">&#42;</span>
                                             <VuePhoneNumberInput v-model="form.mtelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_mtelephone}}</small>
                                             <small style="color: red" v-if="error && errors.mtelephone">{{ errors.mtelephone[0] }}</small>
@@ -299,7 +299,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Income per Year</label>
+                                            <label>Income per Year</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.mincome" type="number" name="mincome"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('mincome') }">
@@ -312,7 +312,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Guardian's Name</label>
+                                            <label>Guardian's Name</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.gname" type="text" name="gname"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('gname') }">
@@ -321,7 +321,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <label>Alive/Dead</label><br>
+                                        <label>Alive/Dead</label><span class="text-danger">&#42;</span><br>
                                         <div class="form-check form-check-inline">
                                             <input v-model="form.gliving" class="form-check-input" type="radio"
                                                    name="gliving" value="Alive"
@@ -340,7 +340,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Attach Guardian’s ID/Death Cert</label>
+                                            <label>Attach Guardian’s ID/Death Cert</label><span class="text-danger">&#42;</span>
                                             <input type="file" @change="fieldChange($event, 4)" class="form-control-file"
                                                    id="gId" accept="image/*, application/pdf"
                                                    :class="{ 'is-invalid': form.errors.has('guardianId') }">
@@ -352,7 +352,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Occupation</label>
+                                            <label>Occupation</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.goccupation" type="text" name="goccupation"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('goccupation') }">
@@ -362,7 +362,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Telephone</label>
+                                            <label>Telephone</label><span class="text-danger">&#42;</span>
                                             <VuePhoneNumberInput v-model="form.gtelephone" default-country-code="KE"/>
                                             <small style="color: red;">{{e_gtelephone}}</small>
                                             <small style="color: red" v-if="error && errors.gtelephone">{{ errors.gtelephone[0] }}</small>
@@ -370,7 +370,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Income per Year</label>
+                                            <label>Income per Year</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.gincome" type="number" name="gincome"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('gincome') }">
@@ -383,7 +383,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>TOTAL NUMBER OF SIBLING (S)</label>
+                                            <label>TOTAL NUMBER OF SIBLING (S)</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.tSiblings" type="number" name="tSiblings"
                                                    class="form-control" min="1"
                                                    :class="{ 'is-invalid': form.errors.has('tSiblings') }">
@@ -393,7 +393,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>SIBLING(S) IN SCHOOL</label>
+                                            <label>SIBLING(S) IN SCHOOL</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.inSchool" type="number" name="inSchool"
                                                    class="form-control" min="1"
                                                    :class="{ 'is-invalid': form.errors.has('inSchool') }">
@@ -403,7 +403,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>WORKING/BUSINESS</label>
+                                            <label>WORKING/BUSINESS</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.sWorking" type="number" name="sWorking"
                                                    class="form-control" min="1"
                                                    :class="{ 'is-invalid': form.errors.has('sWorking') }">
@@ -415,7 +415,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>WHO PAYS YOUR SCHOOL FEES?</label>
+                                            <label>WHO PAYS YOUR SCHOOL FEES?</label><span class="text-danger">&#42;</span>
                                             <input v-model="form.pFees" type="text" name="pFees"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('pFees') }">
@@ -425,7 +425,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Relationship</label>
+                                            <label>Relationship</label><span class="text-danger">&#42;</span>
                                             <select v-model="form.pRelationship" class="form-control"
                                                     name="pRelationship" id="pRelationship"
                                                     :class="{ 'is-invalid': form.errors.has('pRelationship') }">
@@ -441,10 +441,10 @@
                                 </div>
                                 <hr>
                                 <p class="text-right">
-                                    <button type="button" class="btn btn-primary " @click.prevent="prevStep">
+                                    <button type="button" class="btn btn-success " @click.prevent="prevStep">
                                         Previous Step
                                     </button>
-                                    <button type="button" class="btn btn-primary"
+                                    <button type="button" class="btn btn-success"
                                             @click.prevent="nextStep">Next Step
                                     </button>
                                 </p>
@@ -536,10 +536,10 @@
                                 </div>
                                 <hr>
                                 <p class="text-right">
-                                    <button type="button" class="btn btn-primary " @click.prevent="prevStep">
+                                    <button type="button" class="btn btn-success " @click.prevent="prevStep">
                                         Previous Step
                                     </button>
-                                    <button type="button" class="btn btn-primary"
+                                    <button type="button" class="btn btn-success"
                                             @click.prevent="nextStep">Next Step
                                     </button>
                                 </p>
@@ -670,7 +670,7 @@
                                 </div>
                                 <hr>
                                 <p class="text-right">
-                                    <button type="button" class="btn btn-primary " @click.prevent="prevStep">
+                                    <button type="button" class="btn btn-success " @click.prevent="prevStep">
                                         Previous Step
                                     </button>
                                     <button type="button" class="btn btn-success btn-submit"
@@ -751,7 +751,7 @@
                     fincome: '',
                     mincome: '',
                     gincome: '',
-                    county: 6,
+                    county: 1,
                     ward: '',
                     constituency: '',
                     location: '',

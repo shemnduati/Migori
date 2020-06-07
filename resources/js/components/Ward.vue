@@ -56,17 +56,23 @@
                         </button>
                     </div>
                     <form @submit.prevent="editMode ? updateWard() : addWard()">
-                    <div class="modal-body">
-
+                   <!-- <div class="modal-body">
                         <div class="form-group">
                           <label>Select County</label>
                           <select name="county_id" v-model="form.county_id" class="form-control" :class="{'is-invalid': form.errors.has('county_id')}"  id="county_id">
                             <option v-for="krymes in kryme" :key="krymes.id" :value="krymes.id"> {{krymes.name}}</option>
                           </select>
                           <has-error :form="form" field="bio"></has-error>
-                        </div>
+                        </div>-->
+                        <div class="modal-body">
+                            <div class="form-group" v-show="editMode" >
+                                <label for="county">County</label>
+                                <input v-model="form.county_id" type="county" name="county" placeholder="Email" readonly
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('county') }">
+                                <has-error :form="form" field="county"></has-error>
+                            </div>
                         <div class="form-group">
-                          <label>Ward Name</label>
+                          <label>Ward Name</label><span class="text-danger">&#42;</span>
                           <input v-model="form.name" type="text" name="name"
                             placeholder="Enter Ward"
                             class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
@@ -95,7 +101,7 @@
                 county:{},
                 form: new Form({
                     id:'',
-                    county_id: '',
+                    county_id: 1,
                     name: '',
                 })
             }
@@ -182,7 +188,6 @@
                     }
                 })
             },
-
         },
 
         created() {
