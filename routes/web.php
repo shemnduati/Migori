@@ -14,12 +14,24 @@ use App\User;
 |
 */
 
+Route::get('/faqs', function () {
+    return view('frequently_asked_quix');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 Route::get('/test', function () {
     return view('test');
 });
+
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
 
 // Route::get('/dashboard', function() {
 //     $user = User::find(2);
