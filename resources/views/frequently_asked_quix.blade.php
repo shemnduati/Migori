@@ -72,7 +72,7 @@
 
         <div class="col-md-12 col-lg-6">
             <div class="contact-form">
-                <h3>F.A.Qs</h3>
+                <h3>.</h3>
 
                 <ol start="4">
                     <li>
