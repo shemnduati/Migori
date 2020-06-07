@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin-top: 40%">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -1671,7 +1671,7 @@
                             </section>
 
                             <button v-if="step != 1" type="button" class="btn btn-primary " @click.prevent="prevStep">
-                                Previous Step
+                                Previous Step 
                             </button>
                             <button v-if="step != totalSteps" type="button" class="btn btn-primary"
                                     @click.prevent="nextStep">Next Step

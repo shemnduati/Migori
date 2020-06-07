@@ -178,6 +178,7 @@ a:hover, a:active {
     padding: 20px 0;
     /* background: rgba(255,255,255,.1); */
     background: #3d9a38;
+    max-height: 2%;
 }
 
 /*
@@ -335,7 +336,7 @@ a:hover, a:active {
 --------------------------------------------------------------*/
 .hero-content {
     /* background: url("../images/student.jpg") no-repeat center; */
-    background-size: cover;
+    background-size: auto;
 }
 
 .hero-content-overlay {
