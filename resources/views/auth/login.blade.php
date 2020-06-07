@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Baza</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.jpg"/>
+    <title>MCG Migori County Government</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

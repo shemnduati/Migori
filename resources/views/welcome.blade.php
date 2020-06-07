@@ -149,15 +149,12 @@
                             <a href="#"><img src="images/icon3.png" alt="" height="230px"></a>
                             <h2>Step 3</h2>
                         </figure><!-- .course-thumbnail -->
-
                         <div class="course-content-wrap">
                             <header class="entry-header">
                                 <h2 class="entry-title"><p>Have the Forms signed and stamped by the <a data-toggle="collapse" href="#collapse1" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
 
                                 <div class="collapse" id="collapse1" class="notbold" style="">
-    
-                                    <h5> relevant authorities. </h5>
-                                    
+                                    <h5> Ensure that you have provided the correct details then submit the application. </h5>
                                 </div>
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Ms. Lucius</a></div>
@@ -177,7 +174,6 @@
                             <a href="#"><img src="images/icon4.png" alt="" height="230px"></a>
                             <h2>Step 4</h2>
                         </figure><!-- .course-thumbnail -->
-
                         <div class="course-content-wrap">
                             <header class="entry-header">
                                 <h2 class="entry-title"><p>Attach all relevant documents as required.</p></h2>
@@ -200,9 +196,7 @@
                                 <h2 class="entry-title"><p>Return the Duly filled Forms to the <a data-toggle="collapse" href="#collapse2" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
 
                                 <div class="collapse" id="collapse1" class="notbold" style="">
-    
-                                    <h5>  Department of Education and wait for feedback. </h5>
-                                    
+                                    <h5>Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.Here you can see the application status of your bursary/scholarship. </h5>
                                 </div>
 
                                 
@@ -218,7 +212,6 @@
                             <a href="#"><img src="images/icon6.png" alt="" height="230px"></a>
                             <h2>Step 6</h2>
                         </figure><!-- .course-thumbnail -->
-
                         <div class="course-content-wrap">
                             <header class="entry-header">
                                 <h2 class="entry-title"><p>For more information or clarification about  <a data-toggle="collapse" href="#collapse2" aria-controls="collapse11" style="color: green">read more</p></h2>
