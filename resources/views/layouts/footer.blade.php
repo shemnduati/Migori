@@ -18,7 +18,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                         <h2>Contact Us</h2>
 
                         <ul>
-                            <li><a href="#">F.A.Q</a></li>
+                            <li><a href="/faqs">F.A.Q</a></li>
                             <li><a href="">ABOUT US</a></li>
                             <li><a href='/contact'>CONTACT US</a></li>
                         </ul>
