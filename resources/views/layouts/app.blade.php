@@ -112,7 +112,7 @@
         </header><!-- .site-header -->
 
 
-        <main class="py-5">
+        <main class="py-5" style="margin-top: 20%;">
             @yield('content')
             <router-view></router-view>
         </main>
