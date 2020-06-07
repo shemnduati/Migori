@@ -64,7 +64,7 @@
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
                                     <li class="current-menu-item"><a href="index.html">Home</a></li>
                                     <li><a href="#">About</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="/contact">Contact</a></li>
                                     <li><a href="#">Register</a></li>
                                     <li><a href="#">Login</a></li>
                                 </ul>
