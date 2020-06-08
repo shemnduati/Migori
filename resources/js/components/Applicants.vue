@@ -41,6 +41,7 @@
                         <table class="table table-hover" id="my-table">
                             <tbody>
                             <tr>
+                                <th>Year</th>
                                 <th>Name</th>
                                 <th>Fathers Name</th>
                                 <th>Institution</th>
@@ -51,6 +52,7 @@
                                 <th v-if="$gate.isSubofficial()">Cheque</th>
                             </tr>
                             <tr v-for="application in app" :key="application.id">
+                                <td>{{application.application_year}}</td>
                                 <td>{{application.firstName}} {{application.lastName}}</td>
                                 <td>{{application.family[0].name}}</td>
                                 <td>{{application.institution.name}}</td>
@@ -134,8 +136,8 @@
                 }
 
                 if (this.form.year) {
-                    return this.$store.state.bursary.filter(m => m.application_year == this.form.year && m.recommendation == 'Yes'
-                        || m.recommendation == 'Partially')
+                    return this.$store.state.bursary.filter(m => m.application_year == this.form.year && (m.recommendation == 'Yes'
+                        || m.recommendation == 'Partially'))
                 }
             }
         },

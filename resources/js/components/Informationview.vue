@@ -185,13 +185,13 @@
                         v-if="$gate.isSubadmin() && !application.recommendation && geographical.show == 1">
                     Recommendation
                 </button>
-                <h4 v-if="$gate.isOfficial() && !application.amount && application.status != 2">Award?</h4>
-                <h4 v-if="$gate.isOfficial() && application.amount"><b>Awarded:</b> Ksh {{application.amount}}</h4>
+                <h4 v-if="$gate.isOfficial() && application.awarded == 0">Award?</h4>
+                <h4 v-if="$gate.isOfficial() && application.awarded == 1"><b>Awarded:</b> Ksh {{application.amount}}</h4>
                 <button type="button" class="btn btn-success" @click="newModal"
-                        v-if="$gate.isOfficial() && !application.amount && application.status != 2">Yes
+                        v-if="$gate.isOfficial() && application.awarded == 0">Yes
                 </button>
                 <button type="button" class="btn btn-danger" @click="notAward"
-                        v-if="$gate.isOfficial() && !application.amount && application.status != 2">No
+                        v-if="$gate.isOfficial() && application.awarded == 0">No
                 </button>
             </div>
             <div class="col-md-6" v-if="$gate.isSubadmin() && !application.recommendation && geographical.show == 1">
@@ -214,26 +214,6 @@
                     <label class="form-check-label">No</label>
                 </div>
                 <!-- <button @click="reject()" v-if="$gate.isSubadmin() && (application['status'] == 0)" class="btn btn-danger px-5 offset-md-3" >Reject</button> -->
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="addnew" tabindex="-1" role="dialog" aria-labelledby="addnewLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- <img :src="'/uploads/' + this.photo" alt="" style="width: 400px;"> -->
-                        <img :src="this.photo" alt="" style="width: 400px;">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="addnewLabel" aria-hidden="true">
@@ -356,6 +336,7 @@
                 }).then((result) => {
                     if (result.value) {
                         this.form.post("/api/notaward/" + this.application.id).then(() => {
+                            this.$store.dispatch('getBursaryOfficial');
                             Swal.fire(
                                 'Success!',
                                 'Operation successful.',
@@ -371,6 +352,7 @@
             award() {
                 if (this.$gate.isOfficial()) {
                     this.formf.post("/api/award/" + this.application.id).then(() => {
+                        this.$store.dispatch('getBursaryOfficial');
                         Swal.fire(
                             'Success!',
                             'Successfully Awarded.',
@@ -382,28 +364,10 @@
                         Swal.fire('Failed!', 'There was something wrong')
                     });
                 }
-
-                if (this.$gate.isSubadmin()) {
-                    this.form.post("/api/recommendAmount/" + this.application.id).then(() => {
-                        Swal.fire(
-                            'Success!',
-                            'Successfully Awarded.',
-                            'success'
-                        )
-                        Fire.$emit('entry');
-                        $('#recommendation').modal('hide');
-                    }).catch(error => {
-                        this.errors = error.response.data.errors;
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error!',
-                            text: error.response.data.msg
-                        })
-                    });
-                }
             },
             newModal() {
                 this.formf.reset();
+                this.formf.clear();
                 $('#new').modal('show');
             },
             recommendNo() {
@@ -418,6 +382,7 @@
                 }).then((result) => {
                     if (result.value) {
                         this.form.post("/api/recommend/" + this.application.id).then(() => {
+                            this.$store.dispatch('getBursarySub');
                             Swal.fire(
                                 'Success!',
                                 'Operation successful.',
@@ -437,10 +402,6 @@
                 axios.get("/api/getappdetails/" + this.applicantId).then(({data}) => ([this.geographical = data['geographical']]));
                 axios.get("/api/getappdetails/" + this.applicantId).then(({data}) => ([this.institution = data['institution']]));
             },
-            launch(passport) {
-                $('#addnew').modal('show');
-                this.photo = passport;
-            },
             send() {
                 axios.put("/api/send/" + this.applicantId).then(response => {
                     Fire.$emit('AfterCreate');
@@ -448,7 +409,6 @@
                         type: 'success',
                         title: 'Success',
                         text: 'Sent!!',
-                        text: 'Sent to Admin!',
                     })
                     this.$router.push('/Information');
                 });
@@ -456,11 +416,11 @@
             accept() {
                 this.$Progress.start();
                 axios.put("/api/accept/" + this.applicantId).then(response => {
+                    this.$store.dispatch('getBursarySub');
                     Fire.$emit('AfterCreate');
                     Swal.fire({
                         type: 'success',
                         title: 'Success',
-                        text: 'Accept',
                         text: 'Accepted!',
                     })
                     this.$router.push('/Information');
@@ -470,11 +430,11 @@
             reject() {
                 this.$Progress.start();
                 axios.put("/api/reject/" + this.applicantId).then(response => {
+                    this.$store.dispatch('getBursarySub');
                     Fire.$emit('AfterCreate');
                     Swal.fire({
                         type: 'success',
-                        title: 'Success',
-                        text: 'Rejected!!',
+                        title: 'Rejected!!',
                         text: 'You rejected the application',
                     })
                     this.$router.push('/Information');
