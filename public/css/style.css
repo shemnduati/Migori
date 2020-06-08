@@ -178,17 +178,18 @@ a:hover, a:active {
     padding: 20px 0;
     /* background: rgba(255,255,255,.1); */
     background: #3d9a38;
+    max-height: 2%;
 }
 
 /*
 # Site Branding
 --------------------------------*/
 .site-title {
-    padding: 6px 0;
+    padding: 6px 1px;
     margin: 0;
-    font-size: 36px;
+    font-size: 38px;
     font-weight: 500;
-    line-height: 1;
+    line-height: 1.5;
     text-align: left !important;
 }
 
@@ -247,7 +248,7 @@ a:hover, a:active {
 .hamburger-menu.open span:nth-child(1) {
     top: 18px;
     width: 0;
-    left: 50%;
+    left: 0;
 }
 
 .hamburger-menu.open span:nth-child(2) {
@@ -261,7 +262,7 @@ a:hover, a:active {
 .hamburger-menu.open span:nth-child(4) {
     top: 18px;
     width: 0;
-    left: 50%;
+    left: 10%;
 }
 
 /*
@@ -274,7 +275,7 @@ a:hover, a:active {
     top: 0;
     left: -320px;
     z-index: 9999;
-    width: 320px;
+    width: 480px;
     max-width: calc(100% - 120px);
     height: 100%;
     overflow-x: scroll;
@@ -295,14 +296,14 @@ a:hover, a:active {
     text-transform: uppercase;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1000px) {
     .site-navigation ul {
         position: relative;
         top: auto;
-        left: auto;
+        left: 20%;
         width: 100%;
         height: auto;
-        padding: 0;
+        padding: 6px;
         overflow: auto;
         background: transparent;
     }
@@ -335,7 +336,7 @@ a:hover, a:active {
 --------------------------------------------------------------*/
 .hero-content {
     /* background: url("../images/student.jpg") no-repeat center; */
-    background-size: cover;
+    background-size: auto;
 }
 
 .hero-content-overlay {
@@ -542,6 +543,7 @@ a:hover, a:active {
 
 .course-thumbnail {
     width: 100%;
+    height: 50%;
     background-color: #029a3a;
     color: #f3f3f3;
     margin: 0;
@@ -559,7 +561,7 @@ a:hover, a:active {
     padding: 26px 30px 20px;
     border: 1px solid #029a3a;
     border-top: 0;
-    max-height: min-content;
+    max-height: 100px;
     background: #fff;
 }
 
@@ -668,9 +670,10 @@ a.btn:hover {
 --------------------------------*/
 .featured-courses.horizontal-column,
 .featured-courses.vertical-column {
-    padding: 100px 0;
+    padding: 50px 0;
     background: #fff;
 }
+
 
 .featured-courses.horizontal-column .course-thumbnail {
     width: calc(50% - 30px);
@@ -678,7 +681,7 @@ a.btn:hover {
 }
 
 .featured-courses.horizontal-column .course-thumbnail img {
-    height: 100%;
+    height: 20%;
 }
 
 .featured-courses.horizontal-column .course-content-wrap {
@@ -731,7 +734,7 @@ a.btn:hover {
 }
 
 .about-section .heading .entry-title {
-    margin: 0;
+    margin: 0px;
     font-size: 42px;
     font-weight: 400;
 }
@@ -739,8 +742,8 @@ a.btn:hover {
 .about-section .heading  p {
     margin-top: 15px;
     font-size: 16px;
-    line-height: 1.8;
-    color: #757686;
+    line-height: 2.0;
+    color: #003;
 }
 
 .ezuca-stats {
@@ -913,7 +916,7 @@ a.btn:hover {
 }
 
 .latest-news-events .heading .entry-title {
-    margin: 0 0 50px;
+    margin: 0 10px 50px;
     font-size: 42px;
     font-weight: 400;
 }
@@ -1919,12 +1922,12 @@ ul.black-doted {
     color: #757686;
 }
 
-.about-stories h3,
-.about-values h3 {
-    margin-top: 48px;
-    font-size: 24px;
-    font-weight: 400;
-    color: #383749;
+.about-stories h2,
+.about-values h2 {
+    margin-top: 6px;
+    font-size: 28px;
+    font-weight: 500;
+    color: #000111;
 }
 
 .about-stories p,

@@ -62,7 +62,7 @@
             height: 120px;
         }
         .btn{
-            background-color: #31849b;
+            background-color: #31849b; 
             color: #fff;
             font-weight: 700;
         }
@@ -78,7 +78,7 @@
 <body class="grad">
     <div id="app">
 
-        <main class="py-4">
+        <main class="py-4" style="margin-top: 20%;">
             @yield('content')
             <router-view></router-view>
         </main>
