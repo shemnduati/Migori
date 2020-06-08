@@ -309,6 +309,11 @@
                     }
 
                     if (this.form.year && this.form.ward && !this.form.type) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year
+                                && (m.recommendation == 'Yes' ||
+                                    m.recommendation == 'Partially'))
+                        }
                         return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
                             m.ward_id == this.form.ward && (m.recommendation == 'Yes' ||
                             m.recommendation == 'Partially'))
@@ -337,6 +342,101 @@
                             return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
                                 m.awarded == 2 && (m.recommendation == 'Yes' ||
                                 m.recommendation == 'Partially'))
+                        }
+                    }
+
+                    if (!this.form.year && this.form.ward && this.form.type) {
+                        if (this.form.type == 1) {
+                            if (this.form.ward == 0){
+                                return this.$store.state.bursary.filter(m => m.recommendation == 'Yes' ||
+                                        m.recommendation == 'Partially')
+                            }
+                            return this.$store.state.bursary.filter(m => m.ward_id == this.form.ward &&
+                                (m.recommendation == 'Yes' ||
+                                m.recommendation == 'Partially'))
+                        }
+
+                        if (this.form.type == 2) {
+                            if (this.form.ward == 0){
+                                return this.$store.state.bursary.filter(m => m.status == 1 && m.awarded == 0 &&
+                                    (m.recommendation == 'Yes' ||
+                                    m.recommendation == 'Partially'))
+                            }
+                            return this.$store.state.bursary.filter(m => m.ward_id == this.form.ward &&
+                                m.status == 1 && m.awarded == 0 && (m.recommendation == 'Yes' ||
+                                m.recommendation == 'Partially'))
+                        }
+
+                        if (this.form.type == 3) {
+                            if (this.form.ward == 0){
+                                return this.$store.state.bursary.filter(m => m.awarded == 1 &&
+                                    (m.recommendation == 'Yes' ||
+                                        m.recommendation == 'Partially'))
+                            }
+                            return this.$store.state.bursary.filter(m => m.ward_id == this.form.ward &&
+                                m.awarded == 1 && (m.recommendation == 'Yes' ||
+                                m.recommendation == 'Partially'))
+                        }
+
+                        if (this.form.type == 4) {
+                            if (this.form.ward == 0){
+                                return this.$store.state.bursary.filter(m => m.awarded == 2 &&
+                                    (m.recommendation == 'Yes' ||
+                                        m.recommendation == 'Partially'))
+                            }
+                            return this.$store.state.bursary.filter(m => m.ward_id == this.form.ward &&
+                                m.awarded == 2 && (m.recommendation == 'Yes' ||
+                                m.recommendation == 'Partially'))
+                        }
+                    }
+
+                    if (this.form.year && this.form.ward && this.form.type) {
+                        if (this.form.type == 1) {
+                            if (this.form.ward == 0){
+                                return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                    (m.recommendation == 'Yes' ||
+                                        m.recommendation == 'Partially'))
+                            }
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                m.ward_id == this.form.ward &&
+                                (m.recommendation == 'Yes' ||
+                                    m.recommendation == 'Partially'))
+                        }
+
+                        if (this.form.type == 2) {
+                            if (this.form.ward == 0){
+                                return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                    m.status == 1 && m.awarded == 0 && (m.recommendation == 'Yes' ||
+                                        m.recommendation == 'Partially'))
+                            }
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                m.ward_id == this.form.ward &&
+                                m.status == 1 && m.awarded == 0 && (m.recommendation == 'Yes' ||
+                                    m.recommendation == 'Partially'))
+                        }
+
+                        if (this.form.type == 3) {
+                            if (this.form.ward == 0){
+                                return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                    m.awarded == 1 && (m.recommendation == 'Yes' ||
+                                        m.recommendation == 'Partially'))
+                            }
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                m.ward_id == this.form.ward &&
+                                m.awarded == 1 && (m.recommendation == 'Yes' ||
+                                    m.recommendation == 'Partially'))
+                        }
+
+                        if (this.form.type == 4) {
+                            if (this.form.ward == 0){
+                                return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                    m.awarded == 2 && (m.recommendation == 'Yes' ||
+                                        m.recommendation == 'Partially'))
+                            }
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                m.ward_id == this.form.ward &&
+                                m.awarded == 2 && (m.recommendation == 'Yes' ||
+                                    m.recommendation == 'Partially'))
                         }
                     }
                 }
