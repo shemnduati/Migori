@@ -256,7 +256,9 @@
                         }
 
                         if (this.form.type == 3) {
-                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year && m.recommendation != null)
+                            return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                                (m.recommendation == 'Yes' ||
+                                m.recommendation == 'Partially'))
                         }
 
                         if (this.form.type == 4) {

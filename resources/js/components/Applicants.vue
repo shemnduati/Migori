@@ -9,17 +9,6 @@
 
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-6" v-if="$gate.isOfficial() || $gate.isSubofficial()">
-                                    <form>
-                                        <select @change="getType()" v-model="form.type" class="form-control">
-                                            <option selected value="">--Sort By--</option>
-                                            <option value="0">county</option>
-                                            <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
-                                                wardy.name}} ward
-                                            </option>
-                                        </select>
-                                    </form>
-                                </div>
                                 <div class="col-sm-12">
                                     <button @click="allApp" type="button" class="btn btn-sm btn-info">
                                         Reset
@@ -61,8 +50,10 @@
                                 <td>Ksh. {{application.institution.balance }}</td>
                                 <td v-if="$gate.isOfficial() || $gate.isSubofficial()">Ksh. {{application.amount }}</td>
                                 <td v-if="$gate.isSubofficial()">
-                                    <i v-if="!application.cheque" class="fas fa-check-circle"
-                                       style="font-size: 20px; color: purple;" @click="issueCheque(application.id)"></i>
+                                    <button @click="issueCheque(application.id)" type="button" class="btn btn-dark btn-sm" v-if="!application.cheque">
+                                        <i class="fas fa-check-circle"
+                                           style="font-size: 15px;"></i>
+                                    </button>
                                     <span v-if="application.cheque == 1" class="badge badge-success">Issued</span>
                                 </td>
                             </tr>
@@ -100,6 +91,25 @@
                                     </option>
                                 </select>
                             </div>
+                            <div class="form-group" v-if="$gate.isOfficial() || $gate.isSubofficial()">
+                                <label>Ward</label>
+                                <select v-model="form.ward" class="form-control">
+                                    <option selected value="">--Sort By--</option>
+                                    <option value="0">All</option>
+                                    <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
+                                        wardy.name}} ward
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-if="$gate.isSubofficial()">
+                                <label>Cheque</label>
+                                <select v-model="form.cheque" class="form-control">
+                                    <option selected value="">--Sort By--</option>
+                                    <option value="0">All</option>
+                                    <option value="1">Issued</option>
+                                    <option value="2">Not issued</option>
+                                </select>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -124,31 +134,171 @@
                 wardsCounty: '',
                 mywardy: '',
                 form: {
-                    year: ''
+                    year: '',
+                    ward: '',
+                    cheque: ''
                 },
                 conf: []
             }
         },
         computed: {
             app() {
-                if (!this.form.year) {
-                    return this.$store.state.bursary.filter(m => m.recommendation == 'Yes' || m.recommendation == 'Partially')
+                if (this.$gate.isSubadmin()) {
+                    if (!this.form.year) {
+                        return this.$store.state.bursary.filter(m => m.recommendation == 'Yes' || m.recommendation == 'Partially')
+                    }
+
+                    if (this.form.year) {
+                        return this.$store.state.bursary.filter(m => m.application_year == this.form.year && (m.recommendation == 'Yes'
+                            || m.recommendation == 'Partially'))
+                    }
                 }
 
-                if (this.form.year) {
-                    return this.$store.state.bursary.filter(m => m.application_year == this.form.year && (m.recommendation == 'Yes'
-                        || m.recommendation == 'Partially'))
+                if (this.$gate.isOfficial()) {
+                    if (!this.form.year && !this.form.ward) {
+                        return this.$store.state.bursary.filter(m => m.awarded == 1)
+                    }
+
+                    if (this.form.year && !this.form.ward) {
+                        return this.$store.state.bursary.filter(m => m.awarded == 1 && m.application_year == this.form.year)
+                    }
+
+                    if (!this.form.year && this.form.ward) {
+                        if (this.form.ward == 0) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1)
+                        }
+                        return this.$store.state.bursary.filter(m => m.awarded == 1 && m.ward_id == this.form.ward)
+                    }
+
+                    if (this.form.year && this.form.ward) {
+                        if (this.form.ward == 0) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.application_year == this.form.year)
+                        }
+                        return this.$store.state.bursary.filter(m => m.awarded == 1 && m.ward_id == this.form.ward
+                            && m.application_year == this.form.year)
+                    }
+                }
+
+                if (this.$gate.isSubofficial()) {
+                    if (!this.form.year && !this.form.ward && !this.form.cheque) {
+                        return this.$store.state.bursary.filter(m => m.awarded == 1)
+                    }
+
+                    if (this.form.year && !this.form.ward && !this.form.cheque) {
+                        return this.$store.state.bursary.filter(m => m.awarded == 1 && m.application_year == this.form.year)
+                    }
+
+                    if (!this.form.year && this.form.ward && !this.form.cheque) {
+                        if (this.form.ward == 0) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1)
+                        }
+                        return this.$store.state.bursary.filter(m => m.awarded == 1 && m.ward_id == this.form.ward)
+                    }
+
+                    if (!this.form.year && !this.form.ward && this.form.cheque) {
+                        if (this.form.cheque == 0) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1)
+                        }
+
+                        if (this.form.cheque == 1) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == 1)
+                        }
+
+                        if (this.form.cheque == 2) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == null)
+                        }
+                    }
+
+                    if (this.form.year && this.form.ward && !this.form.cheque) {
+                        if (this.form.ward == 0) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.application_year == this.form.year)
+                        }
+                        return this.$store.state.bursary.filter(m => m.awarded == 1 && m.ward_id == this.form.ward
+                            && m.application_year == this.form.year)
+                    }
+
+                    if (this.form.year && !this.form.ward && this.form.cheque) {
+                        if (this.form.cheque == 0) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.application_year == this.form.year)
+                        }
+
+                        if (this.form.cheque == 1) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == 1
+                                && m.application_year == this.form.year)
+                        }
+
+                        if (this.form.cheque == 2) {
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == null
+                                && m.application_year == this.form.year)
+                        }
+                    }
+
+                    if (!this.form.year && this.form.ward && this.form.cheque) {
+                        if (this.form.cheque == 0) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.bursary.filter(m => m.awarded == 1)
+                            }
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.ward_id == this.form.ward)
+                        }
+
+                        if (this.form.cheque == 1) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == 1)
+                            }
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == 1
+                                && m.ward_id == this.form.ward)
+                        }
+
+                        if (this.form.cheque == 2) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == null)
+                            }
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == null
+                                && m.ward_id == this.form.ward)
+                        }
+                    }
+
+                    if (this.form.year && this.form.ward && this.form.cheque) {
+                        if (this.form.cheque == 0) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.bursary.filter(m => m.awarded == 1 &&
+                                    m.application_year == this.form.year)
+                            }
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.ward_id == this.form.ward
+                                && m.application_year == this.form.year)
+                        }
+
+                        if (this.form.cheque == 1) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == 1
+                                    && m.application_year == this.form.year)
+                            }
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == 1
+                                && m.ward_id == this.form.ward && m.application_year == this.form.year)
+                        }
+
+                        if (this.form.cheque == 2) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == null &&
+                                    m.application_year == this.form.year)
+                            }
+                            return this.$store.state.bursary.filter(m => m.awarded == 1 && m.cheque == null
+                                && m.ward_id == this.form.ward && m.application_year == this.form.year)
+                        }
+                    }
                 }
             }
         },
         methods: {
             allApp() {
                 this.form = {
-                    year: ''
+                    year: '',
+                    ward: '',
+                    cheque: ''
                 }
             },
             getConfYears() {
-                if (this.$gate.isSubadmin()) {
+                if (this.$gate.isSubadmin() || this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     axios.get('api/conf_years').then(data => {
                         this.conf = data.data
                     });
@@ -169,6 +319,9 @@
                 }).then((result) => {
                     if (result.value) {
                         axios.post("/api/issuedcheque/" + applicationId).then(() => {
+                            if (this.$gate.isSubofficial()) {
+                                this.$store.dispatch('getAwarded');
+                            }
                             Swal.fire(
                                 'Success!',
                                 'Operation successful.',
@@ -194,7 +347,7 @@
                     doc.setFontSize(18);
                     if (this.form.year) {
                         doc.text('Recommended Bursary Applications(' + this.form.year + ')', 14, 22);
-                    }else{
+                    } else {
                         doc.text('Recommended Bursary Applications', 14, 22);
                     }
                     doc.setFontSize(11);
@@ -205,7 +358,7 @@
                     doc.setFontSize(18);
                     if (this.form.year) {
                         doc.text('Approved Bursary Applications(' + this.form.year + ')', 14, 22);
-                    }else{
+                    } else {
                         doc.text('Approved Bursary Applications', 14, 22);
                     }
                     doc.setFontSize(11);
@@ -251,23 +404,11 @@
                     doc.save(this.mywardy + '.pdf');
                 }
                 if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
-                    if (this.selectedWard){
+                    if (this.selectedWard) {
                         doc.save(this.mycounty + '|' + this.selectedWard + '.pdf');
-                    }else {
+                    } else {
                         doc.save(this.mycounty + '.pdf');
                     }
-                }
-            },
-            getApplications() {
-                if (this.$gate.isOfficial()) {
-                    axios.get('api/getApplicants').then(({data}) => ([this.applications = data['parent']]));
-                }
-                if (this.$gate.isSubadmin()) {
-                    axios.get('api/getApp').then(({data}) => ([this.applications = data['parent']]));
-                }
-
-                if (this.$gate.isSubofficial()) {
-                    axios.get('api/getApp').then(({data}) => ([this.applications = data['parent']]));
                 }
             },
             getType() {
@@ -314,7 +455,9 @@
 
                     })
             })
-            this.getApplications();
+            if (this.$gate.isSubofficial()) {
+                this.$store.dispatch('getAwarded');
+            }
             this.getWards();
             this.getCounty();
             this.subWard();

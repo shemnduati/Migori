@@ -23,6 +23,16 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        getAwarded({commit}) {
+            try {
+                axios.get('/api/getApp').then(data =>{
+                    commit('SET_BURSARY', data.data);
+                    commit('SAVE_BURSARY_DATA')
+                })
+            }catch (e) {
+                throw new Error(e);
+            }
+        },
         getBursarySub({commit}) {
             try {
                 axios.get('/api/getbusary').then(data =>{
