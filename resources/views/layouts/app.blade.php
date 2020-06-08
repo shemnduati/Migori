@@ -53,38 +53,31 @@
             <div class="nav-bar">
                 <div class="container">
                     <div class="row">
-                        <div class="col-7 col-lg-4">
+                        <div class="col-8 col-lg-4">
                             <div class="site-branding">
-                                <h1 class="site-title">
-                                    <a href="#" rel="home" style="color: yellow;">
-                                        <img src="/images/mainlogo.png" alt="Main logo" width="48px;" height="48px;"
-                                             style="padding-top: 0px;">
-                                        Migori e-bursary
-                                    </a></h1>
+                                <h1 class="site-title"><a href="#" rel="home" style="color: gold">
+                                        <img src="/images/mainlogo.png" alt="Main logo" width="34px;" height="34px;" style="padding-top: 0px;">
+                                        Migori e-Bursary</a></h1>
                             </div><!-- .site-branding -->
                         </div><!-- .col -->
 
-                        <div class="col-5 col-lg-8 flex justify-content-end align-content-center">
-                            <nav class="site-navigation flex justify-content-end ">
-                                <ul class="flex flex-column flex-lg-row justify-content-lg-end justify-content-md-end align-content-center">
-                                    <li><a href="/">&nbsp;Home</a></li>
+                        <div class="col-4 col-lg-8 flex justify-content-end align-content-center">
+                            <nav class="site-navigation flex justify-content-end align-items-center">
+                                <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
+                                    <li class="current-menu-item"><a href="/">Home</a></li>
                                     <li><a href="#">About</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="/contact">Contact</a></li>
                                     @guest
                                         <li class="nav-item">
-                                            <a class="nav-link btn btn-outline-dark text-light button px-4"
-                                               href="{{ route('login') }}">{{ __('Login') }}</a>
+                                            <a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
                                         </li>
                                     @else
                                         <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#"
-                                               role="button" data-toggle="dropdown" aria-haspopup="true"
-                                               aria-expanded="false" v-pre>
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                 {{ Auth::user()->name }} <span class="caret"></span>
                                             </a>
 
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                 aria-labelledby="navbarDropdown">
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                 <a href="/status" class="dropdown-item">Application Status</a>
                                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                                    onclick="event.preventDefault();
@@ -92,8 +85,7 @@
                                                     {{ __('Logout') }}
                                                 </a>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                      style="display: none;">
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                     @csrf
                                                 </form>
                                             </div>
@@ -101,8 +93,15 @@
                                     @endguest
                                 </ul>
 
+                                <div class="hamburger-menu d-lg-none">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div><!-- .hamburger-menu -->
+
                                 <div class="header-bar-cart">
-                                    <a href="#" class="flex justify-content-center align-items-center"></a>
+                                    <a href="#" class="flex justify-content-center align-items-center"><span aria-hidden="false" class=""></span></a>
                                 </div><!-- .header-bar-search -->
                             </nav><!-- .site-navigation -->
                         </div><!-- .col -->
@@ -112,7 +111,7 @@
         </header><!-- .site-header -->
 
 
-        <main class="py-5" style="margin-top: 20%;">
+        <main class="py-4" style="margin-top: 10%;">
             @yield('content')
             <router-view></router-view>
         </main>
@@ -133,11 +132,9 @@
                                 <h2>Contact Us</h2>
 
                                 <ul>
-                                    <li>Email:enquiries@migori.go.ke</li>
-                                    <li>Phone:+254 726 319 450 / +254 770 304 976</li>
-                                    <li>Address:Migori County Government, Migori Town,
-                                        Migori Kenya
-                                    </li>
+                                    <li><a href="/faqs">F.A.Q</a></li>
+                                    <li><a href="">ABOUT US</a></li>
+                                    <li><a href='/contact'>CONTACT US</a></li>
                                 </ul>
                             </div><!-- .foot-contact -->
                         </div><!-- .col -->
@@ -147,10 +144,8 @@
                                 <h2 class="w-100">Quick Links</h2>
 
                                 <ul class="w-50">
-                                    <li><a href="#">About </a></li>
-                                    <li><a href="{{ route('privacy') }}">Terms of Use </a></li>
-                                    <li><a href="{{ route('privacy') }}">Privacy Policy </a></li>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="{{ route('privacy') }}">TERMS OF USE </a></li>
+                                    <li><a href="{{ route('privacy') }}">PRIVACY POLICY </a></li>
                                 </ul>
 
                                 {{--<ul class="w-50">
@@ -181,9 +176,9 @@
 
             <div class="footer-bar">
                 <div class="container">
-                    {{-- <p class="footer-copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                   <p class="footer-copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="#" target="_blank">Migori County Government</a> Developed by <a href="https://twtechnologies.africa/" target="_blank">Tw Technologies</a>
-                     </p>--}}
+                     </p>
                 </div><!-- .container -->
             </div><!-- .footer-bar -->
         </footer><!-- .site-footer -->
