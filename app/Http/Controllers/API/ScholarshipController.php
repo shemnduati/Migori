@@ -26,9 +26,9 @@ class ScholarshipController extends Controller
     public function index()
     {
         if (auth()->user()->role == "sub-admin") {
-            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 0)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 0)->where('ward_id', auth()->user()->ward)->latest()->get();
         } elseif (auth()->user()->role == "official") {
-            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('county', auth()->user()->county)->latest()->paginate(10);
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('county', auth()->user()->county)->latest()->get();
         }
     }
 

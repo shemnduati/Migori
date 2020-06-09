@@ -228,6 +228,10 @@
             if (this.$gate.isOfficial()) {
                 this.$store.dispatch('getBursaryOfficial');
             }
+
+            if (this.$gate.isSubofficial()) {
+                this.$store.dispatch('getAwarded');
+            }
         }
     }
 </script>

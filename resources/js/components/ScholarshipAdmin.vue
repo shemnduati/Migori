@@ -128,6 +128,34 @@
                 <!-- /.box -->
             </div>
         </div>
+        <div id="filterModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Filter applications</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group" >
+                                <label>Select Type</label>
+                                <select v-model="form.type" class="form-control">
+                                    <option selected value="">--Type--</option>
+                                    <option value="3">Recommended</option>
+                                    <option value="4">Rejected</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -188,6 +216,9 @@
                 if (this.$gate.isOfficial()) {
                     axios.get('api/getbywardscholarship/' + this.form.sWard).then(({data}) => ([this.applications = data]));
                 }
+            },
+            filter() {
+                $('#filterModal').modal('show');
             },
             getMyWards() {
                 if (this.$gate.isOfficial()) {
