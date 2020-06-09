@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MCG Migori County Government</title>
-
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
+    <title>BASAP</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -30,6 +28,9 @@
     <link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}">
 
     <!-- Styles -->
+    <link rel="stylesheet" href= "{{ asset('css/styles.css') }}">
+
+    <!-- Styles -->
     <link rel="stylesheet" href= "{{ asset('css/style.css') }}">
 
     <style>
@@ -40,7 +41,7 @@
           height: 100%;
         }
         </style>
-
+      
 </head>
 
 
@@ -49,61 +50,61 @@
     <div class="hero-content">
 
         <header class="site-header">
-
+           
             <div class="nav-bar">
                 <div class="container">
                     <div class="row">
                         <div class="col-8 col-lg-4">
                             <div class="site-branding">
                                 <h1 class="site-title"><a href="#" rel="home" style="color: gold">
-                                    <img src="/images/mainlogo.png" alt="Main logo" width="34px;" height="34px;" style="padding-top: 0px;">
-                                    Migori e-Bursary</a></h1>
+                                    {{-- <img src="/images/mainlogo.png" alt="Main logo" width="34px;" height="34px;" style="padding-top: 0px;"> --}}
+                                    </a></h1>
                             </div><!-- .site-branding -->
                         </div><!-- .col -->
 
                         <div class="col-4 col-lg-8 flex justify-content-end align-content-center">
-                            <nav class="site-navigation flex justify-content-end align-items-center">
-                                <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                    <li class="current-menu-item"><a href="/">Home</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="/contact">Contact</a></li>
-                                    @guest
-                                        <li class="nav-item">
-                                            <a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                        </li>
-                                    @else
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ Auth::user()->name }} <span class="caret"></span>
-                                            </a>
 
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                <a href="/status" class="dropdown-item">Application Status</a>
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                                   onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
+                            <nav class="navbar navbar-expand-lg navbar-default fixed-top" id="mainNav" style="background-color: green;">
+                                <div class="container">
+                                    <a class="navbar-brand js-scroll-trigger" href="#page-top"> <img src="/images/mainlogo.png" alt="Main logo" width="48px;" height="48px;" style="margin-top: 3px; margin-left: 2px;">Migori e-Bursary</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
+                                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                                        <ul class="navbar-nav text-uppercase ml-auto">
+                                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Home</a></li>
+                                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Register</a></li>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                </form>
-                                            </div>
-                                        </li>
-                                    @endguest
-                                </ul>
-
-                                <div class="hamburger-menu d-lg-none">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div><!-- .hamburger-menu -->
-
-                                <div class="header-bar-cart">
-                                    <a href="#" class="flex justify-content-center align-items-center"><span aria-hidden="false" class=""></span></a>
-                                </div><!-- .header-bar-search -->
-                            </nav><!-- .site-navigation -->
+                {{--                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Login</a></li>--}}
+                                            @guest
+                                                <li class="nav-item">
+                                                    <a class="nav-link js-scroll-trigger" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                                    {{-- <a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a> --}}
+                                                </li>
+                                            @else
+                                                <li class="nav-item dropdown">
+                                                    <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                                    </a>
+                
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                        <a href="/status" class="dropdown-item">Application Status</a>
+                                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                                           onclick="event.preventDefault();
+                                                                         document.getElementById('logout-form').submit();">
+                                                            {{ __('Logout') }}
+                                                        </a>
+                
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
+                                                    </div>
+                                                </li>
+                                            @endguest
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            
                         </div><!-- .col -->
                     </div><!-- .row -->
                 </div><!-- .container -->
