@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>BASAP</title>
+    <title>MCG Migori County Government</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -38,7 +40,7 @@
           height: 100%;
         }
         </style>
-      
+
 </head>
 
 
@@ -47,7 +49,7 @@
     <div class="hero-content">
 
         <header class="site-header">
-           
+
             <div class="nav-bar">
                 <div class="container">
                     <div class="row">
@@ -62,11 +64,33 @@
                         <div class="col-4 col-lg-8 flex justify-content-end align-content-center">
                             <nav class="site-navigation flex justify-content-end align-items-center">
                                 <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                    <li class="current-menu-item"><a href="index.html">Home</a></li>
+                                    <li class="current-menu-item"><a href="/">Home</a></li>
                                     <li><a href="#">About</a></li>
                                     <li><a href="/contact">Contact</a></li>
-                                    <li><a href="#">Register</a></li>
-                                    <li><a href="#">Login</a></li>
+                                    @guest
+                                        <li class="nav-item">
+                                            <a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                        </li>
+                                    @else
+                                        <li class="nav-item dropdown">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                {{ Auth::user()->name }} <span class="caret"></span>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <a href="/status" class="dropdown-item">Application Status</a>
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                        </li>
+                                    @endguest
                                 </ul>
 
                                 <div class="hamburger-menu d-lg-none">

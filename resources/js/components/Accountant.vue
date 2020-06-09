@@ -62,23 +62,22 @@
                     </div>
                     <form @submit.prevent="editMode ? updateUser() :createUser()">
                         <div class="modal-body">
+                            <label for="Name">Full Name</label><span class="text-danger">&#42;</span>
                             <div class="form-group">
                                 <input v-model="form.name" type="text" name="name" placeholder="Name"
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
                                 <has-error :form="form" field="name"></has-error>
                             </div>
                             <div class="form-group">
+                                <label for="Name">Email</label><span class="text-danger">&#42;</span>
                                 <input v-model="form.email" type="email" name="email" placeholder="Email"
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
                                 <has-error :form="form" field="email"></has-error>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" v-show="editMode" >
                                 <label for="county">County</label>
-                                <select v-model="form.county"  class="form-control" name="county" id="county"
-                                        :class="{ 'is-invalid': form.errors.has('county') }">
-                                    <option selected value="">--Select county--</option>
-                                    <option v-for="count in counties" :key="count.id" :value="count.id">{{ count.name}}</option>
-                                </select>
+                                <input v-model="form.county" type="county" name="county" placeholder="Email" readonly
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('county') }">
                                 <has-error :form="form" field="county"></has-error>
                             </div>
                         </div>
@@ -107,7 +106,7 @@
                     id:'',
                     name:'',
                     email: '',
-                    county:'',
+                    county:1,
                 })
 
 

@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         bursary: sessionStorage.getItem('bursary') ? JSON.parse(sessionStorage.getItem('bursary')) : [],
         orders: sessionStorage.getItem('orders') ? JSON.parse(sessionStorage.getItem('orders')) : [],
+        user: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : [],
     },
     mutations: {
         SET_BURSARY(state, bursary){
@@ -20,7 +21,19 @@ export default new Vuex.Store({
         },
         SAVE_ORDERS_DATA(state){
             window.sessionStorage.setItem('orders', JSON.stringify(state.orders));
-        }
+        },
+        SET_USERS(state, user){
+            state.user = user
+        },
+        SAVE_USER_DATA(state){
+            window.sessionStorage.setItem('user', JSON.stringify(state.user));
+        },
+        SET_SCHOLARSHIP(state, scholar){
+            state.scholar = scholar
+        },
+        SAVE_SCHOLARSHIP_DATA(state){
+            window.sessionStorage.setItem('scholar', JSON.stringify(state.scholar));
+        },
     },
     actions: {
         getAwarded({commit}) {
@@ -38,6 +51,26 @@ export default new Vuex.Store({
                 axios.get('/api/getbusary').then(data =>{
                     commit('SET_BURSARY', data.data);
                     commit('SAVE_BURSARY_DATA')
+                })
+            }catch (e) {
+                throw new Error(e);
+            }
+        },
+        getUsers({commit}) {
+            try {
+                axios.get('/api/user').then(data =>{
+                    commit('SET_USERS', data.data);
+                    commit('SAVE_USER_DATA')
+                })
+            }catch (e) {
+                throw new Error(e);
+            }
+        },
+        getScholarshipSub({commit}) {
+            try {
+                axios.get('/api/scholarshipApps').then(data =>{
+                    commit('SET_SCHOLARSHIP', data.data);
+                    commit('SAVE_SCHOLARSHIP_DATA')
                 })
             }catch (e) {
                 throw new Error(e);

@@ -103,7 +103,7 @@ i{
 
                               <div class="form-group row mb-0">
                                   <div class="">
-                                      <button type="submit" class="btn btn px-5">
+                                      <button  type="submit" class="btn btn px-5">
                                           {{ __('Login') }}
                                       </button>
 
@@ -123,30 +123,68 @@ i{
                               @csrf
 
                               <div class="form-group row">
-
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-user"></i></div>
                                       </div>
-                                      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Username">
-                                      @error('name')
+                                      <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="name" autofocus placeholder="First name">
+                                      @error('fname')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
                                       @enderror
                                  </div>
                               </div>
-
                               <div class="form-group row">
-
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                                          <div class="input-group-text"><i class="fas fa-user"></i></div>
+                                      </div>
+                                      <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required autocomplete="name" autofocus placeholder="last name">
+                                      @error('lname')
+                                      <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                      @enderror
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="input-group mb-2 mr-sm-2">
+                                      <div class="input-group-prepend">
+                                          <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                                       </div>
                                       <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Enter Email" required autocomplete="email">
 
                                       @error('email')
-                                          <span class="invalid-feedback" role="alert">
+                                      <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                      @enderror
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="input-group mb-2 mr-sm-2">
+                                      <div class="input-group-prepend">
+                                          <div class="input-group-text"><i class="fas fa-id-card-alt"></i></div>
+                                      </div>
+                                      <input id="ID" type="number" class="form-control @error('ID') is-invalid @enderror" name="ID" value="{{ old('ID') }}" placeholder="ID Number/Birth certificate" required>
+
+                                      @error('ID')
+                                      <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                      @enderror
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="input-group mb-2 mr-sm-2">
+                                      <div class="input-group-prepend">
+                                          <div class="input-group-text"><i class="fas fa-phone"></i></div>
+                                      </div>
+                                      <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" placeholder="0700000000" required autocomplete="phone">
+
+                                      @error('phone')
+                                      <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
                                       @enderror
@@ -154,7 +192,21 @@ i{
                               </div>
 
                               <div class="form-group row">
+                                      <div class="input-group mb-2 mr-sm-2">
+                                          <div class="input-group-prepend">
+                                              <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                                          </div>
+                                          <input id="place" type="text" class="form-control @error('place') is-invalid @enderror" name="place" value="{{ old('place') }}" placeholder="place of residence" required>
 
+                                          @error('place')
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                      </div>
+                              </div>
+
+                              <div class="form-group row">
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>

@@ -22,4 +22,12 @@ class Application extends Model
     public function geographical(){
         return $this->hasOne(Geographical::class, 'applicationId');
     }
+
+    public function evidence(){
+        return $this->hasOne(Evidence::class, 'applicationId');
+    }
+
+    public function moreEvidence(){
+        return $this->hasMany(MoreEvidence::class, 'applicationId');
+    }
 }
