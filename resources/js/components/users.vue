@@ -5,39 +5,34 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">User Table</h3>
+                        <h3 class="card-title">Users</h3>
                         <div class="card-tools">
+
                         </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody><tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Type</th>
-                                <th>Registered At</th>
-                                <th>Modify</th>
-                            </tr>
-                            <tr v-for="user in users.data" :key="user.id">
-                                <td>{{user.id}}</td>
-                                <td>{{user.name}}</td>
-                                <td>{{user.email}}</td>
-                                <td>{{user.role | upText}}</td>
-                                <td>{{user.created_at | myDate}}</td>
-                                <td>
-                                    <a href="#" @click="deleteUser(user.id)">
+                        <vue-good-table
+                                        :columns="columns"
+                                        :rows="app"
+                                        :line-numbers="true"
+                                        :pagination-options="{
+                   enabled: true,
+                   mode: 'pages',
+                   perPage: 10
+                 }"
+                                        :search-options="{
+                    enabled: true,
+                    placeholder: 'Search this table',
+                  }">
+                            <template slot="table-row" slot-scope="props">
+                                <span v-if="props.column.field == 'action'">
+                    <a href="#" @click="deleteUser(user.id)">
                                         <i class="fa fa-trash red"></i>
                                     </a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="card-footer">
-                        <pagination :data="users" @pagination-change-page="getResults"></pagination>
+                </span>
+                            </template>
+                        </vue-good-table>
                     </div>
                 </div>
                 <!-- /.box -->
@@ -50,6 +45,40 @@
     export default {
         data(){
             return{
+                columns: [
+                    {
+                        label: 'First Name',
+                        field: 'name',
+                    },
+                    {
+                        label: 'Last Name',
+                        field: 'last_name',
+                    },
+                    {
+                        label: 'Email',
+                        field: 'email',
+                    },
+                    {
+                        label: 'Phone',
+                        field: 'phone',
+                    },
+                    {
+                        label: 'ID Number',
+                        field: 'ID_number',
+                    },
+                    {
+                        label: 'Area of residence',
+                        field: 'place',
+                    },
+                    {
+                        label: 'Role',
+                        field: 'role',
+                    },
+                    {
+                        label: 'Action',
+                        field: 'action',
+                    },
+                ],
                 editMode: false,
                 users :{},
                 form: new Form({
@@ -64,6 +93,11 @@
                 })
 
 
+            }
+        },
+        computed: {
+            app() {
+                    return this.$store.state.user.filter(m => m.role == 'student')
             }
         },
         methods:{
@@ -134,6 +168,9 @@
                 }
 
             },
+            getUsers(){
+                this.$store.dispatch('getUsers');
+            },
             createUser(){
                 this.$Progress.start();
                 this.form.post('api/user')
@@ -163,6 +200,7 @@
 
                     })
             })
+            this.getUsers();
             this.loadUsers();
             Fire.$on('AfterCreate', () =>{
                 this.loadUsers();

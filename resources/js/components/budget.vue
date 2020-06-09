@@ -65,6 +65,7 @@
                             <div class="form-group">
                                 <label for="ward">Ward</label>
                                 <select name="ward" v-model="form.ward" class="form-control"  id="ward" :class="{ 'is-invalid': form.errors.has('ward') }">
+                                    <option selected value="">--Ward--</option>
                                     <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}}</option>
                                 </select>
                                 <has-error :form="form" field="ward"></has-error>
@@ -74,6 +75,16 @@
                                 <input v-model="form.amount" type="text" name="amount" placeholder="Budget Amount"
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('amount') }">
                                 <has-error :form="form" field="amount"></has-error>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Year</label>
+                                <select v-model="form.year" class="form-control" :class="{ 'is-invalid': form.errors.has('year') }">
+                                    <option selected value="">--Year--</option>
+                                    <option v-for="co in conf" :key="co['year']"
+                                            :value="co['year']">{{ co.year}}
+                                    </option>
+                                </select>
+                                <has-error :form="form" field="year"></has-error>
                             </div>
                         </div>
 
@@ -96,16 +107,23 @@
                 editMode: false,
                 wards:{},
                 budgets:{},
+                conf: [],
                 form: new Form({
                     id:'',
                     ward:'',
                     amount:'',
+                    year: ''
                 })
-
-
             }
         },
         methods:{
+            getConfYears() {
+                if (this.$gate.isSubadmin() || this.$gate.isOfficial()) {
+                    axios.get('api/conf_years').then(data => {
+                        this.conf = data.data
+                    });
+                }
+            },
             updateBudget(){
                 this.$Progress.start();
                 this.form.put('api/budget/'+this.form.id)
@@ -133,6 +151,7 @@
             newModal(){
                 this.editMode = false;
                 this.form.reset();
+                this.form.clear();
                 $('#addnew').modal('show');
             },
             deleteUser(id){
@@ -182,16 +201,9 @@
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error!',
-                            text: error.response.data.msg
-                        })
                     });
             }
         },
-
-
         created() {
             Fire.$on('searching', ()=>{
                 let query = this.$parent.search;
@@ -205,6 +217,7 @@
             })
             this.getMyWards();
             this.getBudget();
+            this.getConfYears();
             Fire.$on('AfterCreate', () =>{
                 this.getMyWards();
                 this.getBudget();

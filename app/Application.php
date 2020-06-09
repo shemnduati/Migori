@@ -10,4 +10,24 @@ class Application extends Model
     use HasApiTokens;
     protected $guarded = [];
     protected $table = 'applications';
+
+    public function family(){
+        return $this->hasMany(Family::class, 'applicationId');
+    }
+
+    public function institution(){
+        return $this->hasOne(Institution::class, 'applicationId');
+    }
+
+    public function geographical(){
+        return $this->hasOne(Geographical::class, 'applicationId');
+    }
+
+    public function evidence(){
+        return $this->hasOne(Evidence::class, 'applicationId');
+    }
+
+    public function moreEvidence(){
+        return $this->hasMany(MoreEvidence::class, 'applicationId');
+    }
 }

@@ -15,6 +15,7 @@ class CreateEvidenceTable extends Migration
     {
         Schema::create('evidence', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->text('inheritance');
             $table->text('whyApply');
             $table->text('finSupport');
@@ -30,6 +31,11 @@ class CreateEvidenceTable extends Migration
             $table->unsignedBigInteger('applicationId');
             $table->year('year');
             $table->timestamps();
+            $table->foreign('applicationId')->references('id')->on('applications')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

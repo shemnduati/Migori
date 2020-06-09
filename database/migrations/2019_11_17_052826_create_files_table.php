@@ -20,6 +20,9 @@ class CreateFilesTable extends Migration
             $table->unsignedInteger('status');
             $table->year('year');
             $table->timestamps();
+
+            $table->foreign('applicationId')->references('id')->on('applications')
+                ->onDelete('cascade');
         });
     }
 

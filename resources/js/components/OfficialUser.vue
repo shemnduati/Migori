@@ -115,7 +115,7 @@
                     id:'',
                     name:'',
                     email: '',
-                    county:'',
+                    county:1,
                 })
 
 

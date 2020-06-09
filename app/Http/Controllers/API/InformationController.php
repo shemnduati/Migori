@@ -46,20 +46,23 @@ class InformationController extends Controller
         return ['applications' => $applications];
 
     }
+
     public function getApp()
     {
 
         if (auth()->user()->role == "sub-admin") {
             $userId = Auth::user()->id;
             $ward_id = User::where('id', $userId)->value('ward');
-            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')->where('ward_id', $ward_id)->where('recommendation','!=', '')->get();
+            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')
+                ->where('ward_id', $ward_id)->where('recommendation', '!=', '')->get();
             $parent = array();
 
             foreach ($applications as $apps) {
                 $id = $apps['id'];
                 $firstName = $apps['firstName'];
                 $lastName = $apps['lastName'];
-                $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])->where('relationship', 'Father')->value('name');
+                $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])
+                    ->where('relationship', 'Father')->value('name');
                 $reg = $apps['reg_no'];
                 $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
                 $institution = Institution::where('user_id', $apps['user_id'])->value('name');
@@ -86,14 +89,16 @@ class InformationController extends Controller
         }
 
         if (auth()->user()->role == "sub-official") {
-            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')->where('county', auth()->user()->county)->where('status', 3)->get();
+            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')
+                ->where('county', auth()->user()->county)->where('status', 3)->get();
             $parent = array();
 
             foreach ($applications as $apps) {
                 $id = $apps['id'];
                 $firstName = $apps['firstName'];
                 $lastName = $apps['lastName'];
-                $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])->where('relationship', 'Father')->value('name');
+                $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])
+                    ->where('relationship', 'Father')->value('name');
                 $reg = $apps['reg_no'];
                 $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
                 $institution = Institution::where('user_id', $apps['user_id'])->value('name');
@@ -121,12 +126,14 @@ class InformationController extends Controller
         }
 
     }
+
     public function getAppnts()
     {
         if (auth()->user()->role == "sub-admin") {
             $userId = Auth::user()->id;
             $ward_id = User::where('id', $userId)->value('ward');
-            $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->where('bursary_type', 'scholarship')->where('recommendation','!=', '')->get();
+            $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)
+                ->where('bursary_type', 'scholarship')->where('recommendation', '!=', '')->get();
             $parent = array();
 
             foreach ($applications as $apps) {
@@ -159,7 +166,8 @@ class InformationController extends Controller
         if (auth()->user()->role == "sub-official") {
             $userId = Auth::user()->id;
             $ward_id = User::where('id', $userId)->value('ward');
-            $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->where('bursary_type', 'scholarship')->where('status', 3)->get();
+            $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)
+                ->where('bursary_type', 'scholarship')->where('status', 3)->get();
             $parent = array();
 
             foreach ($applications as $apps) {
@@ -193,16 +201,17 @@ class InformationController extends Controller
     public function getCountyBursary()
     {
         $county_id = User::where('id', Auth::user()->id)->value('county');
-        $applications = Application::latest()->where('year', date('Y'))->where('bursary_type','County')->where('status', 1)->where('county', $county_id)->get();
-
-        return ['applications' => $applications];
+        return Application::latest()->where('bursary_type', 'County')->where('status', 1)->where('county',
+            $county_id)->with('family')
+            ->with('institution')->with('geographical.ward')->get();
 
     }
 
     public function Applicants()
     {
         $county_id = User::where('id', Auth::user()->id)->value('county');
-        $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('bursary_type','County')->where('status', 3)->get();
+        $applications = Application::where('year', date('Y'))->where('county', $county_id)
+            ->where('bursary_type', 'County')->where('status', 3)->get();
         $parent = array();
 
         foreach ($applications as $apps) {
@@ -210,21 +219,22 @@ class InformationController extends Controller
             $firstName = $apps['firstName'];
             $lastName = $apps['lastName'];
             $reg = $apps['reg_no'];
-            $father = Family::where('applicationId',$id)->where('user_id', $apps['user_id'])->where('relationship','Father')->value('name');
+            $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])
+                ->where('relationship', 'Father')->value('name');
             $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
             $institution = Institution::where('user_id', $apps['user_id'])->value('name');
-            $polling =Geographical::where('applicationId',$id)->value('polling');
-            $balance = Institution::where('applicationId',$id)->value('balance');
+            $polling = Geographical::where('applicationId', $id)->value('polling');
+            $balance = Institution::where('applicationId', $id)->value('balance');
             $amount = $apps['amount'];
             $date = $apps['updated_at'];
             $child = array(
                 'id' => $id,
                 'firstName' => $firstName,
-                'lastName'=>  $lastName,
+                'lastName' => $lastName,
                 'ward' => $ward_name,
                 'amount' => $amount,
-                'polling'=>$polling,
-                'balance'=>$balance,
+                'polling' => $polling,
+                'balance' => $balance,
                 'father' => $father,
                 'reg' => $reg,
                 'date' => $date,
@@ -234,10 +244,12 @@ class InformationController extends Controller
         }
         return ['parent' => $parent];
     }
+
     public function Applicantz()
     {
         $county_id = User::where('id', Auth::user()->id)->value('county');
-        $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('bursary_type','scholarship')->where('approved', 3)->get();
+        $applications = Application::where('year', date('Y'))->where('county', $county_id)
+            ->where('bursary_type', 'scholarship')->where('approved', 3)->get();
         $parent = array();
 
         foreach ($applications as $apps) {
@@ -263,13 +275,12 @@ class InformationController extends Controller
         }
         return ['parent' => $parent];
     }
+
     public function getbusary()
     {
         $ward_id = auth()->user()->ward;
-        $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('ward_id', $ward_id)->get();
-
-        return ['applications' => $applications];
-
+        return Application::latest()->where('bursary_type', 'County')->where('ward_id', $ward_id)->with('family')
+            ->with('institution')->with('geographical.ward')->get();
     }
 
     public function getMyCountyId()
@@ -317,8 +328,9 @@ class InformationController extends Controller
         return ['wards' => $wards];
     }
 
-    public function subAdminWard(){
-        if (auth()->user()->role == "sub-admin"){
+    public function subAdminWard()
+    {
+        if (auth()->user()->role == "sub-admin") {
             return Ward::where('id', auth()->user()->ward)->value('name');
         }
     }
@@ -329,21 +341,25 @@ class InformationController extends Controller
         $county = County::where('id', $county_id)->firstOrFail();
         return collect($county)->toJson();
     }
+
     public function getApplicationYears($id)
     {
         $year = Configuration::where('county', $id)->where('status', 1)->where('type', 2)->get(['year', 'id']);
-        return ['year'=> $year];
+        return ['year' => $year];
     }
+
     public function getAppYears($id)
     {
         $year = Configuration::where('county', $id)->where('status', 1)->where('type', 1)->get(['year', 'id']);
-        return ['year'=> $year];
+        return ['year' => $year];
     }
+
     public function getWardsById($id)
     {
         if ($id == 0) {
             $county_id = User::where('id', Auth::user()->id)->value('county');
-            $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('county', $county_id)->where('status', 3)->get();
+            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')
+                ->where('county', $county_id)->where('status', 3)->get();
             $parent = array();
 
             foreach ($applications as $apps) {
@@ -351,21 +367,22 @@ class InformationController extends Controller
                 $firstName = $apps['firstName'];
                 $lastName = $apps['lastName'];
                 $reg = $apps['reg_no'];
-                $father = Family::where('applicationId',$id)->where('user_id', $apps['user_id'])->where('relationship','Father')->value('name');
+                $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])
+                    ->where('relationship', 'Father')->value('name');
                 $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
                 $institution = Institution::where('user_id', $apps['user_id'])->value('name');
-                $polling =Geographical::where('applicationId',$id)->value('polling');
-                $balance = Institution::where('applicationId',$id)->value('balance');
+                $polling = Geographical::where('applicationId', $id)->value('polling');
+                $balance = Institution::where('applicationId', $id)->value('balance');
                 $amount = $apps['amount'];
                 $date = $apps['updated_at'];
                 $child = array(
                     'id' => $id,
                     'firstName' => $firstName,
-                    'lastName'=>  $lastName,
+                    'lastName' => $lastName,
                     'ward' => $ward_name,
                     'amount' => $amount,
-                    'polling'=>$polling,
-                    'balance'=>$balance,
+                    'polling' => $polling,
+                    'balance' => $balance,
                     'father' => $father,
                     'reg' => $reg,
                     'date' => $date,
@@ -376,30 +393,32 @@ class InformationController extends Controller
             return ['parent' => $parent];
         } elseif ($id != 0) {
 
-            $applications = Application::where('year', date('Y'))->where('bursary_type','County')->where('ward_id', $id)->where('status', 3)->get();
+            $applications = Application::where('year', date('Y'))->where('bursary_type', 'County')
+                ->where('ward_id', $id)->where('status', 3)->get();
             $parent = array();
 
             foreach ($applications as $apps) {
                 $id = $apps['id'];
                 $firstName = $apps['firstName'];
                 $lastName = $apps['lastName'];
-                $father = Family::where('applicationId',$id)->where('user_id', $apps['user_id'])->where('relationship','Father')->value('name');
+                $father = Family::where('applicationId', $id)->where('user_id', $apps['user_id'])->where('relationship',
+                    'Father')->value('name');
                 $reg = $apps['reg_no'];
                 $ward_name = Ward::where('id', $apps['ward_id'])->value('name');
                 $institution = Institution::where('user_id', $apps['user_id'])->value('name');
-                $polling =Geographical::where('applicationId',$id)->value('polling');
-                $balance = Institution::where('applicationId',$id)->value('balance');
+                $polling = Geographical::where('applicationId', $id)->value('polling');
+                $balance = Institution::where('applicationId', $id)->value('balance');
                 $amount = $apps['amount'];
                 $date = $apps['updated_at'];
                 $child = array(
                     'id' => $id,
                     'firstName' => $firstName,
-                    'lastName'=>  $lastName,
+                    'lastName' => $lastName,
                     'ward' => $ward_name,
                     'amount' => $amount,
-                    'balance'=>$balance,
+                    'balance' => $balance,
                     'father' => $father,
-                    'polling'=>$polling,
+                    'polling' => $polling,
                     'reg' => $reg,
                     'date' => $date,
                     'institution' => $institution,
@@ -409,12 +428,14 @@ class InformationController extends Controller
             return ['parent' => $parent];
         }
     }
+
     public function getWardsApp($id)
     {
         if ($id == 0) {
 
             $county_id = User::where('id', Auth::user()->id)->value('county');
-            $applications = Application::where('year', date('Y'))->where('county', $county_id)->where('bursary_type','scholarship')->where('status', 3)->get();
+            $applications = Application::where('year', date('Y'))->where('county', $county_id)
+                ->where('bursary_type', 'scholarship')->where('status', 3)->get();
             $parent = array();
 
             foreach ($applications as $apps) {
@@ -430,11 +451,11 @@ class InformationController extends Controller
                 $child = array(
                     'id' => $id,
                     'fname' => $fname,
-                    'Mname'=>$Mname,
-                    'Lname'=>$Lname,
-                    'reco'=>$reco,
-                    'index' =>$index,
-                    'school'=>$school,
+                    'Mname' => $Mname,
+                    'Lname' => $Lname,
+                    'reco' => $reco,
+                    'index' => $index,
+                    'school' => $school,
                     'ward' => $ward_name,
                     'date' => $date,
 
@@ -444,7 +465,8 @@ class InformationController extends Controller
             return ['parent' => $parent];
         } elseif ($id != 0) {
 
-            $applications = Application::where('year', date('Y'))->where('ward_id', $id)->where('bursary_type','scholarship')->where('status', 3)->get();
+            $applications = Application::where('year', date('Y'))->where('ward_id', $id)->where('bursary_type',
+                'scholarship')->where('status', 3)->get();
             $parent = array();
 
             foreach ($applications as $apps) {
@@ -460,11 +482,11 @@ class InformationController extends Controller
                 $child = array(
                     'id' => $id,
                     'fname' => $fname,
-                    'Mname'=>$Mname,
-                    'Lname'=>$Lname,
-                    'reco'=>$reco,
-                    'index' =>$index,
-                    'school'=>$school,
+                    'Mname' => $Mname,
+                    'Lname' => $Lname,
+                    'reco' => $reco,
+                    'index' => $index,
+                    'school' => $school,
                     'ward' => $ward_name,
                     'date' => $date,
 
@@ -474,10 +496,12 @@ class InformationController extends Controller
             return ['parent' => $parent];
         }
     }
+
     public function getBursaryType($type)
     {
         $ward_id = User::where('id', Auth::user()->id)->value('ward');
-        $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->where('bursary_type', $type)->get();
+        $applications = Application::where('year', date('Y'))->where('ward_id', $ward_id)->where('bursary_type',
+            $type)->get();
 
         return ['applications' => $applications];
     }
@@ -509,7 +533,7 @@ class InformationController extends Controller
 
     public function recommendApplication(Request $request, $applicationId)
     {
-        if(auth()->user()->role == "sub-admin"){
+        if (auth()->user()->role == "sub-admin") {
             $this->validate($request, [
                 'recommendation' => 'required',
             ]);
@@ -523,57 +547,48 @@ class InformationController extends Controller
 
     public function award(Request $request, $applicationId)
     {
-        $this->validate($request, [
-            'amount' => 'required',
-        ]);
-
-        $ward = Application::where('id', $applicationId)->value('ward_id');
-        $remaining = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('remaining');
-
-        if ($remaining <= $request['amount']) {
-            return response()->json([
-                'status' => 'error',
-                'msg' => 'Amount exceeds the available funds',
-            ], 422);
-        }else {
-            $id = Budget::where('ward_id', $ward)->where('year', date('Y'))->value('id');
-            $budge = Budget::findOrFail($id);
-            $budge->remaining = $remaining - $request['amount'];
-            $budge->update();
+        if (auth()->user()->role == 'official') {
+            $this->validate($request, [
+                'amount' => 'required',
+            ]);
 
             $application = Application::findOrFail($applicationId);
-            $application->amount = $request['amount'];
-            $application->update();
+            $remaining = Budget::where('ward_id', $application->ward_id)->where('year', $application->application_year)->
+            value('remaining');
 
-            $appli = Application::findOrFail($applicationId);
-            $appli->status = 3;
-            $appli->update();
+            if ($remaining <= $request['amount']) {
+                return response()->json([
+                    'status' => 'error',
+                    'msg' => 'Amount exceeds the available funds',
+                ], 422);
+            } else {
+                if ($application->awarded == 0 && ($application->recommendation == 'Yes' ||
+                        $application->recommendation == 'Partially')) {
 
-            $applicantId = Application::where('id', $applicationId)->value('user_id');
-            $family = Family::where('user_id', $applicantId)->where('year', date('Y'))->get();
-            foreach ($family as $fam) {
-                $fami = Family::findOrFail($fam['id']);
-                $fami->status = 3;
-                $fami->update();
+                    \DB::transaction(function () use ($application, $remaining, $request) {
+                        $id = Budget::where('ward_id', $application->ward_id)->where('year', $application->application_year)
+                            ->value('id');
+                        $budge = Budget::findOrFail($id);
+                        $budge->remaining = $remaining - $request['amount'];
+                        $budge->update();
+
+                        $application->amount = $request['amount'];
+                        $application->awarded = 1;
+                        $application->update();
+                    });
+
+//                    $email = User::where('id', $application->user_id)->value('email');
+//                    Mail::to($email)->send(new BursaryEmail());
+                } else {
+                    return response()->json([
+                        'message' => 'there was a problem'
+                    ], 422);
+                }
             }
-
-            $morefamily = MoreFamily::where('user_id', $applicantId)->where('year', date('Y'))->first();
-            $more = MoreFamily::findOrFail($morefamily['id']);
-            $more->status = 3;
-            $more->update();
-
-            $institution = Institution::where('user_id', $applicantId)->where('year', date('Y'))->first();
-            $insti = Institution::findOrFail($institution['id']);
-            $insti->status = 3;
-            $insti->update();
-
-            $geographical = Geographical::where('user_id', $applicantId)->where('year', date('Y'))->first();
-            $geo = Geographical::findOrFail($geographical['id']);
-            $geo->status = 3;
-            $geo->update();
-
-            $email = User::where('id', $applicantId)->value('email');
-            Mail::to($email)->send(new BursaryEmail());
+        } else {
+            return response()->json([
+                'message' => 'unauthorised'
+            ], 401);
         }
     }
 
@@ -581,31 +596,8 @@ class InformationController extends Controller
     {
 
         $appli = Application::findOrFail($applicationId);
-        $appli->status = 2;
+        $appli->awarded = 2;
         $appli->update();
-
-        $applicantId = Application::where('id', $applicationId)->value('user_id');
-        $family = Family::where('user_id', $applicantId)->where('year', date('Y'))->get();
-        foreach ($family as $fam) {
-            $fami = Family::findOrFail($fam['id']);
-            $fami->status = 2;
-            $fami->update();
-        }
-
-        $morefamily = MoreFamily::where('user_id', $applicantId)->where('year', date('Y'))->first();
-        $more = MoreFamily::findOrFail($morefamily['id']);
-        $more->status = 2;
-        $more->update();
-
-        $institution = Institution::where('user_id', $applicantId)->where('year', date('Y'))->first();
-        $insti = Institution::findOrFail($institution['id']);
-        $insti->status = 2;
-        $insti->update();
-
-        $geographical = Geographical::where('user_id', $applicantId)->where('year', date('Y'))->first();
-        $geo = Geographical::findOrFail($geographical['id']);
-        $geo->status = 2;
-        $geo->update();
     }
 
     public function getType($id)
@@ -700,5 +692,16 @@ class InformationController extends Controller
 
         }
         return $bursary;
+    }
+
+    public function conf()
+    {
+        if (auth()->user()->role == 'sub-admin' || auth()->user()->role == 'official') {
+            return Configuration::latest()->where('type', 2)->get();
+        } else {
+            return response()->json([
+                'message' => 'unauthorised'
+            ], 401);
+        }
     }
 }

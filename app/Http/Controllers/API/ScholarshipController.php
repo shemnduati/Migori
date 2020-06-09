@@ -170,6 +170,7 @@ class ScholarshipController extends Controller
                 'msg' => 'You already sent an application',
             ], 422);
         } else {
+            $user = auth()->user()->id;
             $application = new Application();
             $application->user_id = auth()->user()->id;
             $application->bursary_type = $request->type;
@@ -264,6 +265,7 @@ class ScholarshipController extends Controller
             $guardian->save();
 
             $evidence = new Evidence();
+            $evidence-> user_id =$user;
             $evidence->inheritance = $request->inheritance;
             $evidence->whyApply = $request->whyApply;
             $evidence->finSupport = $request->finSupport;
@@ -281,6 +283,7 @@ class ScholarshipController extends Controller
             $evidence->save();
 
             $males = new MoreEvidence();
+            $males-> user_id =$user;
             $males->who = "Father/Male Guardian";
             $males->age = $request->fOrGAge;
             $males->disability = $request->fOrGDisability;
@@ -296,6 +299,7 @@ class ScholarshipController extends Controller
             $males->save();
 
             $females = new MoreEvidence();
+            $females-> user_id =$user;
             $females->who = "Mother/Female Guardian";
             $females->age = $request->mOrGAge;
             $females->disability = $request->mOrGDisability;
@@ -313,6 +317,7 @@ class ScholarshipController extends Controller
 
             if ($request->firstSibName) {
                 $first = new Sibling();
+                $first-> user_id =$user;
                 $first->name = $request->firstSibName;
                 $first->age = $request->firstSibAge;
                 $first->schoolOrEmployer = $request->firstSibSchoolOrEmployer;
@@ -326,6 +331,7 @@ class ScholarshipController extends Controller
 
             if ($request->secondSibName) {
                 $second = new Sibling();
+                $second-> user_id =$user;
                 $second->name = $request->secondSibName;
                 $second->age = $request->secondSibAge;
                 $second->schoolOrEmployer = $request->secondSibSchoolOrEmployer;
@@ -339,6 +345,7 @@ class ScholarshipController extends Controller
 
             if ($request->thirdSibName) {
                 $third = new Sibling();
+                $third-> user_id =$user;
                 $third->name = $request->thirdSibName;
                 $third->age = $request->thirdSibAge;
                 $third->schoolOrEmployer = $request->thirdSibSchoolOrEmployer;
@@ -352,6 +359,7 @@ class ScholarshipController extends Controller
 
             if ($request->forthSibName) {
                 $forth = new Sibling();
+                $forth-> user_id =$user;
                 $forth->name = $request->forthSibName;
                 $forth->age = $request->forthSibAge;
                 $forth->schoolOrEmployer = $request->forthSibSchoolOrEmployer;
@@ -365,6 +373,7 @@ class ScholarshipController extends Controller
 
             if ($request->fifthSibName) {
                 $fifth = new Sibling();
+                $fifth-> user_id =$user;
                 $fifth->name = $request->fifthSibName;
                 $fifth->age = $request->fifthSibAge;
                 $fifth->schoolOrEmployer = $request->fifthSibSchoolOrEmployer;
@@ -378,6 +387,7 @@ class ScholarshipController extends Controller
 
             if ($request->sixthSibName) {
                 $sixth = new Sibling();
+                $sixth-> user_id =$user;
                 $sixth->name = $request->sixthSibName;
                 $sixth->age = $request->sixthSibAge;
                 $sixth->schoolOrEmployer = $request->sixthSibSchoolOrEmployer;

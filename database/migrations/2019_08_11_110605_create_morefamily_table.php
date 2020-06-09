@@ -15,7 +15,7 @@ class CreateMorefamilyTable extends Migration
     {
         Schema::create('morefamily', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->index();
+            $table->unsignedBigInteger('user_id');
             $table->integer('totalSiblings');
             $table->integer('schoolSiblings');
             $table->integer('workingSiblings');
@@ -24,6 +24,9 @@ class CreateMorefamilyTable extends Migration
             $table->integer('status');
             $table->year('year');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

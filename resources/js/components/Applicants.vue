@@ -20,8 +20,15 @@
                                         </select>
                                     </form>
                                 </div>
-                                <div class="col-sm-6">
-                                    <button type="button" class="btn btn-primary btn-sm" @click="createPDF">
+                                <div class="col-sm-12">
+                                    <button @click="allApp" type="button" class="btn btn-sm btn-info">
+                                        Reset
+                                    </button>
+                                    <button @click="filter" type="button" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-sort"></i>
+                                        Sort
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-sm" @click="createPDF">
                                         <i class="fas fa-download"></i>
                                         Download
                                     </button>
@@ -34,6 +41,7 @@
                         <table class="table table-hover" id="my-table">
                             <tbody>
                             <tr>
+                                <th>Year</th>
                                 <th>Name</th>
                                 <th>Fathers Name</th>
                                 <th>Institution</th>
@@ -43,13 +51,14 @@
                                 <th v-if="$gate.isOfficial() || $gate.isSubofficial()">Awarded Amount</th>
                                 <th v-if="$gate.isSubofficial()">Cheque</th>
                             </tr>
-                            <tr v-for="application in applications" :key="application.id">
+                            <tr v-for="application in app" :key="application.id">
+                                <td>{{application.application_year}}</td>
                                 <td>{{application.firstName}} {{application.lastName}}</td>
-                                <td>{{application.father}}</td>
-                                <td>{{application.institution}}</td>
-                                <td>{{application.ward}}</td>
-                                <td>{{application.polling}}</td>
-                                <td>Ksh. {{application.balance }}</td>
+                                <td>{{application.family[0].name}}</td>
+                                <td>{{application.institution.name}}</td>
+                                <td>{{application.geographical.ward.name}}</td>
+                                <td>{{application.geographical.polling}}</td>
+                                <td>Ksh. {{application.institution.balance }}</td>
                                 <td v-if="$gate.isOfficial() || $gate.isSubofficial()">Ksh. {{application.amount }}</td>
                                 <td v-if="$gate.isSubofficial()">
                                     <i v-if="!application.cheque" class="fas fa-check-circle"
@@ -70,8 +79,35 @@
                 <!-- /.box -->
             </div>
         </div>
-        <!-- Modal -->
-
+        <div id="filterModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Filter applications</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Select Year</label>
+                                <select v-model="form.year" class="form-control">
+                                    <option selected value="">--Year--</option>
+                                    <option v-for="co in conf" :key="co['year']"
+                                            :value="co['year']">{{ co.year}}
+                                    </option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -87,14 +123,40 @@
                 selectedWard: '',
                 wardsCounty: '',
                 mywardy: '',
-                form: new Form({
-                    type: ''
-                })
+                form: {
+                    year: ''
+                },
+                conf: []
+            }
+        },
+        computed: {
+            app() {
+                if (!this.form.year) {
+                    return this.$store.state.bursary.filter(m => m.recommendation == 'Yes' || m.recommendation == 'Partially')
+                }
 
-
+                if (this.form.year) {
+                    return this.$store.state.bursary.filter(m => m.application_year == this.form.year && (m.recommendation == 'Yes'
+                        || m.recommendation == 'Partially'))
+                }
             }
         },
         methods: {
+            allApp() {
+                this.form = {
+                    year: ''
+                }
+            },
+            getConfYears() {
+                if (this.$gate.isSubadmin()) {
+                    axios.get('api/conf_years').then(data => {
+                        this.conf = data.data
+                    });
+                }
+            },
+            filter() {
+                $('#filterModal').modal('show');
+            },
             issueCheque(applicationId) {
                 Swal.fire({
                     title: 'Are you sure?',
@@ -128,10 +190,27 @@
                 }
                 var doc = new jsPDF();
 
-                doc.setFontSize(18);
-                doc.text('Approved Bursary Applications', 14, 22);
-                doc.setFontSize(11);
-                doc.setTextColor(100);
+                if (this.$gate.isSubadmin()) {
+                    doc.setFontSize(18);
+                    if (this.form.year) {
+                        doc.text('Recommended Bursary Applications(' + this.form.year + ')', 14, 22);
+                    }else{
+                        doc.text('Recommended Bursary Applications', 14, 22);
+                    }
+                    doc.setFontSize(11);
+                    doc.setTextColor(100);
+                }
+
+                if (!this.$gate.isSubadmin()) {
+                    doc.setFontSize(18);
+                    if (this.form.year) {
+                        doc.text('Approved Bursary Applications(' + this.form.year + ')', 14, 22);
+                    }else{
+                        doc.text('Approved Bursary Applications', 14, 22);
+                    }
+                    doc.setFontSize(11);
+                    doc.setTextColor(100);
+                }
 
                 if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     doc.setFontSize(13);
@@ -239,6 +318,7 @@
             this.getWards();
             this.getCounty();
             this.subWard();
+            this.getConfYears();
             Fire.$on('AfterCreate', () => {
                 this.getApplications();
                 this.getWards();

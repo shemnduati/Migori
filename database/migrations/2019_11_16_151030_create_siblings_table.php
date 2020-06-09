@@ -15,6 +15,7 @@ class CreateSiblingsTable extends Migration
     {
         Schema::create('siblings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->index();
             $table->string('name');
             $table->unsignedInteger('age');
             $table->string('schoolOrEmployer');
@@ -24,6 +25,14 @@ class CreateSiblingsTable extends Migration
             $table->unsignedBigInteger('applicationId');
             $table->year('year');
             $table->timestamps();
+
+            $table->foreign('applicationId')->references('id')->on('applications')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
+
+
         });
     }
 

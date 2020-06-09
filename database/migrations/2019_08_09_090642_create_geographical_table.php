@@ -15,9 +15,9 @@ class CreateGeographicalTable extends Migration
     {
         Schema::create('geographical', function (Blueprint $table) {
             $table->bigIncrements('id');
-        	$table->integer('user_id')->index();
+        	$table->unsignedBigInteger('user_id');
             $table->integer('County');
-            $table->integer('Ward');
+            $table->unsignedBigInteger('Ward');
             $table->integer('status');
             $table->string('Division');
             $table->string('Location');
@@ -25,6 +25,12 @@ class CreateGeographicalTable extends Migration
             $table->year('year');
             $table->string('Village');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('Ward')->references('id')->on('wards')
+                ->onDelete('cascade');
         });
     }
 

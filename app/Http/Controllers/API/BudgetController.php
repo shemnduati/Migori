@@ -59,9 +59,10 @@ class BudgetController extends Controller
     {
         $this->validate($request, [
             'amount' => 'required|integer',
-            'ward' => 'required'
+            'ward' => 'required',
+            'year' => 'required'
         ]);
-        $exist = Budget::where('ward_id', $request->ward)->where('year', date('Y'))->count();
+        $exist = Budget::where('ward_id', $request->ward)->where('year', $request->year)->count();
 
         if ($exist > 0) {
             return response()->json([
@@ -75,7 +76,7 @@ class BudgetController extends Controller
                 'ward_id' => $request['ward'],
                 'amount' => $request['amount'],
                 'remaining' => $request['amount'],
-                'year' => date('Y'),
+                'year' => $request->year,
             ]);
         }
     }
