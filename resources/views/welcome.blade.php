@@ -62,49 +62,25 @@
                     <div class="course-content">
                         <figure class="course-thumbnail">
                             <a href="#"><img src="images/icon1.png" alt="" height="230px"></a>
-                            <h2>Step 1(Registration)</h2>
+                            <h2>Step 1</h2>
                         </figure><!-- .course-thumbnail -->
-
                         <div class="course-content-wrap">
                             <header class="entry-header">
+                                <h2 class="entry-title"><p>Obtain Bursaries/Scholarships application Forms  <a data-toggle="collapse" href="#collapse1" aria-controls="collapseExample" style="color: green"> read more</a></p></h2>
 
-                                <h4>
-                                    <p class="entry-title">
-                                        Obtain Bursaries/Scholarships application Forms  <a data-toggle="collapse" href="#collapseExample" aria-controls="collapseExample" style="color: green"> read more</a>
-
-                                        <div class="collapse" id="collapseExample" class="notbold" style="">
-    
-                                            <h5> from the Department of Education, Youth, Sports, Cultural and Social Services or download and print out form from the Migori county government website. </h5>
-                                            
-                                        </div>
-                                    </p>
-                                </h4>
-
-                                {{-- <div class="entry-meta flex align-items-center">
-                                    <div class="course-author"><a href="#">Ms. Lara Croft </a></div>
-
-                                    <div class="course-date">July 21, 2018</div>
-                                </div><!-- .course-date --> --}}
+                                <div class="collapse" id="collapse1" class="notbold" style="">
+                                    <h5> from the Department of Education, Youth, Sports, Cultural and Social Services or download and print out form from the Migori county government website. </h5>
+                                </div>
+                                
                             </header><!-- .entry-header -->
 
-                            {{-- <footer class="entry-footer flex justify-content-between align-items-center">
-                                <div class="course-cost">
-                                    $45 <span class="price-drop">$68</span>
-                                </div><!-- .course-cost -->
-
-                                <div class="course-ratings flex justify-content-end align-items-center">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star-o"></span>
-
-                                    <span class="course-ratings-count">(4 votes)</span>
-                                </div><!-- .course-ratings -->
-                            </footer><!-- .entry-footer --> --}}
+                        
                         </div><!-- .course-content-wrap -->
                     </div><!-- .course-content -->
                 </div><!-- .col -->
+
+                
+
 
                 <div class="col-12 col-md-6 col-lg-4 px-25">
                     <div class="course-content">
@@ -117,28 +93,9 @@
                             <header class="entry-header">
                                 <h2 class="entry-title"><p>Fill in the Forms accurately in capital letters.</p></h2>
 
-                                {{-- <div class="entry-meta flex align-items-center">
-                                    <div class="course-author"><a href="#">Michelle Golden</a></div>
-
-                                    <div class="course-date">Mar 14, 2018</div>
-                                </div><!-- .course-date --> --}}
+                                
                             </header><!-- .entry-header -->
 
-                            {{-- <footer class="entry-footer flex justify-content-between align-items-center">
-                                <div class="course-cost">
-                                    <span class="free-cost">Free</span>
-                                </div><!-- .price-drop -->
-
-                                <div class="course-ratings flex justify-content-end align-items-center">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star-o"></span>
-
-                                    <span class="course-ratings-count">(4 votes)</span>
-                                </div><!-- .course-ratings -->
-                            </footer><!-- .entry-footer --> --}}
                         </div><!-- .course-content-wrap -->
                     </div><!-- .course-content -->
                 </div><!-- .col -->
@@ -151,10 +108,10 @@
                         </figure><!-- .course-thumbnail -->
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><p>Have the Forms signed and stamped by the <a data-toggle="collapse" href="#collapse1" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
+                                <h2 class="entry-title"><p>Have the Forms signed and stamped by the <a data-toggle="collapse" href="#collapse2" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
 
-                                <div class="collapse" id="collapse1" class="notbold" style="">
-                                    <h5> Ensure that you have provided the correct details then submit the application. </h5>
+                                <div class="collapse" id="collapse2" class="notbold" style="">
+                                    <h5> by the relevant authorities. </h5>
                                 </div>
                                 {{-- <div class="entry-meta flex align-items-center">
                                     <div class="course-author"><a href="#">Ms. Lucius</a></div>
@@ -193,9 +150,17 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><p>Return the Duly filled Forms to the <a data-toggle="collapse" href="#collapse2" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
+                                <h2 class="entry-title">
+                                    
+                                    <p>
+                                        
+                                        Return the Duly filled Forms to the <a data-toggle="collapse" href="#collapse3" aria-controls="collapseExample" style="color: green">read more</a>
+                                    
+                                    </p>
+                                    
+                                </h2>
 
-                                <div class="collapse" id="collapse1" class="notbold" style="">
+                                <div class="collapse" id="collapse3" class="notbold" style="">
                                     <h5>Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.Here you can see the application status of your bursary/scholarship. </h5>
                                 </div>
 
@@ -214,9 +179,15 @@
                         </figure><!-- .course-thumbnail -->
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><p>For more information or clarification about  <a data-toggle="collapse" href="#collapse2" aria-controls="collapse11" style="color: green">read more</p></h2>
+                                <h2 class="entry-title">
+                                    
+                                    <p>
+                                        For more information or clarification about <a data-toggle="collapse" href="#collapse6" aria-controls="collapseExample" style="color: green">read more</a>
+                                        
+                                    </p>
+                                </h2>
 
-                                <div class="collapse" id="collapse11" class="notbold" style="">
+                                <div class="collapse" id="collapse6" class="notbold" style="">
     
                                     <h5> visit Migori Government website ebursary section </h5>
     

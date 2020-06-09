@@ -547,7 +547,7 @@ a:hover, a:active {
     background-color: #029a3a;
     color: #f3f3f3;
     margin: 0;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .course-thumbnail img {
@@ -561,7 +561,7 @@ a:hover, a:active {
     padding: 26px 30px 20px;
     border: 1px solid #029a3a;
     border-top: 0;
-    max-height: 100px;
+    max-height: max-content;
     background: #fff;
 }
 
