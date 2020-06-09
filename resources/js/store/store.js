@@ -8,6 +8,7 @@ export default new Vuex.Store({
         bursary: sessionStorage.getItem('bursary') ? JSON.parse(sessionStorage.getItem('bursary')) : [],
         orders: sessionStorage.getItem('orders') ? JSON.parse(sessionStorage.getItem('orders')) : [],
         user: sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : [],
+        scholar: sessionStorage.getItem('scholar') ? JSON.parse(sessionStorage.getItem('scholar')) : [],
     },
     mutations: {
         SET_BURSARY(state, bursary){

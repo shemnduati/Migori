@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Application;
+use App\Configuration;
 use App\County;
 use App\Evidence;
 use App\Family;
@@ -26,7 +27,7 @@ class ScholarshipController extends Controller
     public function index()
     {
         if (auth()->user()->role == "sub-admin") {
-            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 0)->where('ward_id', auth()->user()->ward)->latest()->get();
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('ward_id', auth()->user()->ward)->latest()->get();
         } elseif (auth()->user()->role == "official") {
             return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('county', auth()->user()->county)->latest()->get();
         }
@@ -36,7 +37,16 @@ class ScholarshipController extends Controller
     {
         return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);
     }
-
+    public function conf()
+    {
+        if (auth()->user()->role == 'sub-admin' || auth()->user()->role == 'official' || auth()->user()->role == 'sub-official') {
+            return Configuration::latest()->where('type', 1)->get();
+        } else {
+            return response()->json([
+                'message' => 'unauthorised'
+            ], 401);
+        }
+    }
     public function rejectedApp()
     {
         return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 2)->where('ward_id', auth()->user()->ward)->latest()->paginate(10);

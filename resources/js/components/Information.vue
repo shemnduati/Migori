@@ -265,6 +265,7 @@
                             return this.$store.state.bursary.filter(m => m.application_year == this.form.year && m.status == 2)
                         }
                     }
+
                 }
 
                 if (this.$gate.isOfficial()) {

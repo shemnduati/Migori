@@ -291,6 +291,9 @@
                 <button type="button" class="btn btn-success" @click="approve"
                         v-if="$gate.isOfficial() && !application['app']['approved']">Approve
                 </button>
+                <button type="button" class="btn btn-danger" @click="approve"
+                        v-if="$gate.isOfficial() && !application['app']['reject']">Reject
+                </button>
             </div>
         </div>
         <div class="modal fade" id="addnew" tabindex="-1" role="dialog" aria-labelledby="addnewLabel"

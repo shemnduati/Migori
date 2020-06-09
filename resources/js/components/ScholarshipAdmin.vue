@@ -78,7 +78,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">County bursary Information Table</h3>
+                        <h3 class="card-title">County Scholarships Information Table</h3>
                         <div class="card-tools">
                             <div class="row">
                                 <div class="col-sm-12" v-if="$gate.isSubadmin() || $gate.isOfficial()">
@@ -111,18 +111,50 @@
                   }">
                             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'status'">
-                    <span v-if="props.row.status==1" style="color: purple;">Recommended.({{application.recommendation}})</span>
+                        <span v-if="props.row.status==1"  style="color: purple;">Recommended.({{props.row.recommendation}})</span>
+                                    <span v-if="props.row.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="props.row.status==2" style="color: red;">Rejected</span>
-                                    <span v-if="props.row.status==3" style="color: green;">Approved</span>
+                                    <span   v-if="props.row.approved==3" style="color: green;">Approved</span>
                 </span>
                                 <span v-else-if="props.column.field == 'action'">
-                   <router-link :to="{path:'/scholarship-admin-details/'+ application.id}" type="button"
+                   <router-link :to="{path:'/scholarship-admin-details/'+ props.row.id}" type="button"
                                 class="btn btn-primary btn-sm">view
                                     </router-link>
                 </span>
                             </template>
                         </vue-good-table>
-
+                        <vue-good-table v-if="this.$gate.isOfficial()"
+                                        :columns="columns2"
+                                        :rows="app"
+                                        :line-numbers="true"
+                                        :pagination-options="{
+                   enabled: true,
+                   mode: 'pages',
+                   perPage: 10
+                 }"
+                                        :search-options="{
+                    enabled: true,
+                    placeholder: 'Search this table',
+                  }">
+                            <template slot="table-row" slot-scope="props">
+                                <span v-if="props.column.field == 'statu'">
+                    <span v-if="props.row.approved==null" style="color: purple;">Pending...</span>
+                    <span v-if="props.row.approved==2" style="color: red;">Rejected</span>
+                    <span v-if="props.row.approved==3" style="color: green;">Awarded</span>
+                </span>
+                                <span v-else-if="props.column.field == 'reco'">
+                    <span class="badge badge-primary" v-if="!props.row.recommendation">Pending</span>
+                    <span class="badge badge-success" v-if="props.row.recommendation == 'high'"> High</span>
+                    <span class="badge badge-warning" v-if="props.row.recommendation == 'partially'">Partially</span>
+                    <span class="badge badge-danger" v-if="props.row.recommendation == 'No'">No</span>
+                </span>
+                                <span v-else-if="props.column.field == 'action'">
+                     <router-link :to="{path:'/scholarship-admin-details/'+ props.row.id}" >
+                          <button class="btn btn-success btn-sm m-1"><i class="fa fa-eye"></i>more</button>
+                                    </router-link>
+                </span>
+                            </template>
+                        </vue-good-table>
                     </div>
                 </div>
                 <!-- /.box -->
@@ -140,12 +172,43 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group" >
+                            <div class="form-group">
+                                <label>Select Year</label>
+                                <select v-model="form.year" class="form-control">
+                                    <option selected value="">--Year--</option>
+                                    <option v-for="co in conf" :key="co['year']"
+                                            :value="co['year']">{{ co.year}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-if="$gate.isSubadmin()" >
                                 <label>Select Type</label>
                                 <select v-model="form.type" class="form-control">
                                     <option selected value="">--Type--</option>
+                                    <option value="1">All</option>
+                                    <option value="2">Pending</option>
                                     <option value="3">Recommended</option>
                                     <option value="4">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-if="$gate.isOfficial()" >
+                                <label>Select Type</label>
+                                <select v-model="form.type" class="form-control">
+                                    <option selected value="">--Type--</option>
+                                    <option value="1">All</option>
+                                    <option value="2">Pending</option>
+                                    <option value="3">Awarded</option>
+                                    <option value="4">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-if="$gate.isOfficial()">
+                                <label>Select Ward</label>
+                                <select v-model="form.ward" class="form-control">
+                                    <option selected value="">--Sort By Ward--</option>
+                                    <option value="0">All</option>
+                                    <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
+                                        wardy.name}}
+                                    </option>
                                 </select>
                             </div>
                         </form>
@@ -195,26 +258,255 @@
                         field: 'action'
                     }
                 ],
+                columns2: [
+                    {
+                        label: 'Serial',
+                        field: 'serial',
+                    },
+                    {
+                        label: 'Year',
+                        field: 'application_year',
+                    },
+                    {
+                        label: 'First Name',
+                        field: 'firstName',
+                    },
+                    {
+                        label: 'Last Name',
+                        field: 'lastName',
+                    },
+                    {
+                        label: 'Gender',
+                        field: 'gender',
+                    },
+                    {
+                        label: 'Status',
+                        field: 'statu',
+                    },
+                    {
+                        label: 'Recommendation',
+                        field: 'reco',
+                    },
+                    {
+                        label: 'Type',
+                        field: 'bursary_type',
+                    },
+                    {
+                        label: 'Action',
+                        field: 'action'
+                    }
+                ],
                 applications: {},
                 wards: {},
-                form: new Form({
-                    sWard: '',
-                }),
+                form: {
+                    type: '',
+                    year: '',
+                    ward:'',
+                },
+                conf: [],
             }
         },
         computed: {
             app() {
-                return this.$store.state.scholar;
-                if (this.$gate.isOfficial()) {
+                if (this.$gate.isSubadmin()) {
+                    if (!this.form.type && !this.form.year) {
+                        return this.$store.state.scholar;
+                    }
+                    if (!this.form.type && this.form.year) {
+                        return this.$store.state.scholar.filter(m => m.application_year == this.form.year)
+                    }
+                    if (this.form.type && this.form.year) {
+                        if (this.form.type == 1) {
+                            return this.$store.state.scholar.filter(m => m.application_year == this.form.year)
+                        }
 
+                        if (this.form.type == 2) {
+                            return this.$store.state.scholar.filter(m => m.application_year == this.form.year && m.status == 0)
+                        }
+
+                        if (this.form.type == 3) {
+                            return this.$store.state.scholar.filter(m => m.application_year == this.form.year && (m.recommendation == 'high' ||
+                                m.recommendation == 'partially'))
+                        }
+
+                        if (this.form.type == 4) {
+                            return this.$store.state.scholar.filter(m => m.application_year == this.form.year && m.status == 2)
+                        }
+                    }
+                    if (this.form.type && !this.form.year) {
+                        if (this.form.type == 1) {
+                            return this.$store.state.scholar
+                        }
+
+                        if (this.form.type == 2) {
+                            return this.$store.state.scholar.filter(m =>  m.status == 0)
+                        }
+
+                        if (this.form.type == 3) {
+                            return this.$store.state.scholar.filter(m => (m.recommendation == 'high' || m.recommendation == 'partially'))
+                        }
+
+                        if (this.form.type == 4) {
+                            return this.$store.state.scholar.filter(m =>  m.status == 2)
+                        }
+                    }
+                }
+                if (this.$gate.isOfficial()) {
+                    if (!this.form.year && !this.form.ward && !this.form.type) {
+                        return this.$store.state.scholar.filter(m => m.recommendation == 'high' || m.recommendation == 'partially')
+                    }
+                }
+                if (this.form.year && !this.form.ward && !this.form.type) {
+                    return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&
+                        (m.recommendation == 'high' || m.recommendation == 'partially'))
+                }
+                if (!this.form.year && this.form.ward && !this.form.type) {
+                    if (this.form.ward == 0) {
+                        return this.$store.state.scholar.filter(m => (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    } else {
+                        return this.$store.state.scholar.filter(m => m.ward_id == this.form.ward && (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+                }
+                if (!this.form.year && !this.form.ward && this.form.type) {
+                    if (this.form.type == 1) {
+                        return this.$store.state.scholar.filter(m => m.recommendation == 'high' || m.recommendation == 'partially')
+                    }
+
+                    if (this.form.type == 2) {
+                        return this.$store.state.scholar.filter(m => m.status == 1 && m.approved == null && (m.recommendation == 'high' ||
+                            m.recommendation == 'partially'))
+                    }
+
+                    if (this.form.type == 3) {
+                        return this.$store.state.scholar.filter(m => m.approved == 3 && (m.recommendation == 'high' ||
+                            m.recommendation == 'partially'))
+                    }
+
+                    if (this.form.type == 4) {
+                        return this.$store.state.scholar.filter(m => m => m.approved == 2 && (m.recommendation == 'high' ||
+                            m.recommendation == 'partially'))
+                    }
+                }
+                if (this.form.year && this.form.ward && !this.form.type) {
+                    if (this.form.ward == 0){
+                        return this.$store.state.scholar.filter(m => m.application_year == this.form.year
+                            && (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+                    return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&
+                        m.ward_id == this.form.ward && (m.recommendation == 'high' || m.recommendation == 'partially'))
+                }
+
+                if (this.form.year && !this.form.ward && this.form.type) {
+                    if (this.form.type == 1) {
+                        return this.$store.state.scholar.filter(m =>  m.application_year == this.form.year &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+
+                    if (this.form.type == 2) {
+                        return this.$store.state.scholar.filter(m =>  m.application_year == this.form.year && m.status == 1 && m.approved == null &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+
+                    if (this.form.type == 3) {
+                        return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&  m.approved == 3 &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+                    if (this.form.type == 3) {
+                        return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&  m.approved == 2 &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+
+                }
+                if (!this.form.year && this.form.ward && this.form.type) {
+                    if (this.form.type == 1) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.scholar.filter(m =>  m.recommendation == 'high' || m.recommendation == 'partially')
+                        }
+                        return this.$store.state.scholar.filter(m => m.ward_id == this.form.ward &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+                    if (this.form.type == 2) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.scholar.filter(m =>m.status == 1 && m.approved ==null && m.recommendation == 'high' || m.recommendation == 'partially')
+                        }
+                        return this.$store.state.scholar.filter(m => m.status == 1 && m.approved ==null && m.ward_id == this.form.ward &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially') )
+                    }
+
+                    if (this.form.type == 3) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && (m.recommendation == 'high' || m.recommendation == 'partially'))
+                        }
+                        return this.$store.state.scholar.filter(m => m.ward_id == this.form.ward && m.approved == 3 &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+                    if (this.form.type == 4) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.scholar.filter(m => m.approved == 2 && (m.recommendation == 'high' || m.recommendation == 'partially'))
+                        }
+                        return this.$store.state.scholar.filter(m => m.ward_id == this.form.ward && m.approved == 2 &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+
+                }
+                if (this.form.year && this.form.ward && this.form.type) {
+                    if (this.form.type == 1) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&
+                                (m.recommendation == 'high' || m.recommendation == 'partially'))
+                        }
+                        return this.$store.state.bursary.filter(m => m.application_year == this.form.year &&
+                            m.ward_id == this.form.ward &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+
+                    if (this.form.type == 2) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.scholar.filter(m =>  m.status == 1 && m.approved == null && m.application_year == this.form.year && m.status == 2)
+                        }
+                        return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&
+                            m.ward_id == this.form.ward &&
+                            (m.recommendation == 'high' || m.recommendation == 'partially') )
+                    }
+
+                    if (this.form.type == 3) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.application_year == this.form.year &&
+                                (m.recommendation == 'high' || m.recommendation == 'partially'))
+                        }
+                        return this.$store.state.scholar.filter(m => m.approved == 3 && m.application_year == this.form.year &&
+                            m.ward_id == this.form.ward &&  (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
+                    if (this.form.type == 4) {
+                        if (this.form.ward == 0){
+                            return this.$store.state.scholar.filter(m => m.approved == 2 && m.application_year == this.form.year &&
+                                (m.recommendation == 'high' || m.recommendation == 'partially'))
+                        }
+                        return this.$store.state.scholar.filter(m => m.approved == 2 && m.application_year == this.form.year &&
+                            m.ward_id == this.form.ward &&  (m.recommendation == 'high' || m.recommendation == 'partially'))
+                    }
                 }
             }
 
+
             },
         methods:{
+            allApp() {
+                this.form = {
+                    type: '',
+                    year:'',
+                }
+            },
             sortByWard(){
                 if (this.$gate.isOfficial()) {
                     axios.get('api/getbywardscholarship/' + this.form.sWard).then(({data}) => ([this.applications = data]));
+                }
+            },
+            getConfYears() {
+                if (this.$gate.isSubadmin() || this.$gate.isOfficial()) {
+                    axios.get('api/sconf_years').then(data => {
+                        this.conf = data.data
+                    });
                 }
             },
             filter() {
@@ -241,13 +533,14 @@
                 }
             },
             getApps(){
-                this.$store.dispatch(' getScholarshipSub');
+                this.$store.dispatch('getScholarshipSub');
             }
         },
         created() {
            this.getApplications();
            this.getApps();
            this.getMyWards();
+           this.getConfYears();
         }
     }
 </script>

@@ -129,3 +129,4 @@ Route::post('/issuedcheque/{applicationId}', 'API\FeatureController@issueCheque'
 Route::post('step-one', 'API\ApplicationValidationController@stepOne');
 
 Route::get('conf_years', 'API\InformationController@conf');
+Route::get('sconf_years', 'API\ScholarshipController@conf');
