@@ -6,9 +6,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -36,84 +36,87 @@
 
         /* Make the image fully responsive */
         .carousel-inner img {
-          width: 100%;
-          height: 100%;
+            width: 100%;
+            height: 100%;
         }
-        </style>
+        .txtWhite{
+            color: white !important;
+            font-size: 18px !important;
+            padding-right: 20px !important;
+        }
+
+        .middle{
+            vertical-align:middle;
+        }
+    </style>
 
 </head>
 
 
 <body>
 
-    <div class="hero-content">
+<div class="hero-content">
 
-        <header class="site-header">
+    <header class="site-header">
 
-            <div class="nav-bar">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-8 col-lg-4">
-                            <div class="site-branding">
-                                <h1 class="site-title"><a href="#" rel="home" style="color: gold">
-                                    <img src="/images/mainlogo.png" alt="Main logo" width="34px;" height="34px;" style="padding-top: 0px;">
-                                    Migori e-Bursary</a></h1>
-                            </div><!-- .site-branding -->
-                        </div><!-- .col -->
+        <div class="nav-bar">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light" style="margin: 0px; padding: 0px">
+                    <a class="navbar-brand " href="#" rel="home" style="color: gold">
+                            <img class="middle" src="/images/mainlogo.png" alt="Main logo" width="44px;" height="44px;">
+                            <span class="middle" style="font-size: 30px">Migori e-Bursary</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <div class="col-4 col-lg-8 flex justify-content-end align-content-center">
-                            <nav class="site-navigation flex justify-content-end align-items-center">
-                                <ul class="flex flex-column flex-lg-row justify-content-lg-end align-content-center">
-                                    <li class="current-menu-item"><a href="/">Home</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="/contact">Contact</a></li>
-                                    @guest
-                                        <li class="nav-item">
-                                            <a class="nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                        </li>
-                                    @else
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ Auth::user()->name }} <span class="caret"></span>
-                                            </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto" >
+                            <li  class="nav-item active">
+                                <a class="txtWhite nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="txtWhite nav-link" href="#">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="txtWhite nav-link" href="/contact">Contact</a>
+                            </li>
+                            @guest
+                                <li class="nav-item">
+                                    <a class="txtWhite nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="txtWhite nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
 
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                <a href="/status" class="dropdown-item">Application Status</a>
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                                   onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a href="/status" class="dropdown-item">Application Status</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                </form>
-                                            </div>
-                                        </li>
-                                    @endguest
-                                </ul>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
 
-                                <div class="hamburger-menu d-lg-none">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div><!-- .hamburger-menu -->
-
-                                <div class="header-bar-cart">
-                                    <a href="#" class="flex justify-content-center align-items-center"><span aria-hidden="false" class=""></span></a>
-                                </div><!-- .header-bar-search -->
-                            </nav><!-- .site-navigation -->
-                        </div><!-- .col -->
-                    </div><!-- .row -->
-                </div><!-- .container -->
-            </div><!-- .nav-bar -->
-        </header><!-- .site-header -->
+                        </ul>
+                    </div>
+                </nav>
+            </div><!-- .container -->
+        </div><!-- .nav-bar -->
+    </header><!-- .site-header -->
 
 
-{{-- CAROUSEL SECTION --}}
+    {{-- CAROUSEL SECTION --}}
 
-    </div><!-- .hero-content -->
+</div><!-- .hero-content -->
 
 {{-- yield the econtent section --}}
 @yield('content')
