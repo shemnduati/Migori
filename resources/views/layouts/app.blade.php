@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>BASAP</title>
+    <title>MCG Migori County Government</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
@@ -30,10 +30,15 @@
     <link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}">
 
     <!-- Styles -->
-    <link rel="stylesheet" href= "{{ asset('css/styles.css') }}">
+    {{--<link rel="stylesheet" href= "{{ asset('css/styles.css') }}">--}}
 
     <!-- Styles -->
     <link rel="stylesheet" href= "{{ asset('css/style.css') }}">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.13.0/moment.min.js"></script>
+    <!-- Styles -->
+
 
     <style>
 
@@ -121,7 +126,20 @@
     </div><!-- .hero-content -->
 
 {{-- yield the econtent section --}}
-@yield('content')
+    <body class="grad">
+    <div id="app">
+
+        <main class="py-5">
+            @yield('content')
+            <router-view></router-view>
+        </main>
+    </div>
+</body>
+@auth
+    <script>
+        window.user = @json(auth()->user())
+    </script>
+@endauth
 
 {{-- Footer section --}}
 @include('layouts.footer')

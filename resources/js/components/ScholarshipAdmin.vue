@@ -383,7 +383,7 @@
                     }
 
                     if (this.form.type == 4) {
-                        return this.$store.state.scholar.filter(m => m => m.approved == 2 && (m.recommendation == 'high' ||
+                        return this.$store.state.scholar.filter(m => m.status == 2 && (m.recommendation == 'high' ||
                             m.recommendation == 'partially'))
                     }
                 }
@@ -411,8 +411,8 @@
                         return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&  m.approved == 3 &&
                             (m.recommendation == 'high' || m.recommendation == 'partially'))
                     }
-                    if (this.form.type == 3) {
-                        return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&  m.approved == 2 &&
+                    if (this.form.type == 4) {
+                        return this.$store.state.scholar.filter(m => m.application_year == this.form.year &&  m.status == 2 &&
                             (m.recommendation == 'high' || m.recommendation == 'partially'))
                     }
 

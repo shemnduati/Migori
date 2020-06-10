@@ -29,7 +29,7 @@ class ScholarshipController extends Controller
         if (auth()->user()->role == "sub-admin") {
             return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('ward_id', auth()->user()->ward)->latest()->get();
         } elseif (auth()->user()->role == "official") {
-            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('status', 1)->where('county', auth()->user()->county)->latest()->get();
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('county', auth()->user()->county)->latest()->get();
         }
     }
 
@@ -83,8 +83,12 @@ class ScholarshipController extends Controller
             'app' => $app
 
         );
-
-        return ['application' => $application, 'family' => $family, 'evidence' => $evidence, 'moreEvidence' => $moreEvidence, 'siblings' => $siblings];
+        if (auth()->user()->role == 'sub-admin' && auth()->user()->ward == $app['ward_id']) {
+            return ['application' => $application, 'family' => $family, 'evidence' => $evidence, 'moreEvidence' => $moreEvidence, 'siblings' => $siblings];
+        }
+        if (auth()->user()->role == 'official' && auth()->user()->county == $app['county']) {
+            return ['application' => $application, 'family' => $family, 'evidence' => $evidence, 'moreEvidence' => $moreEvidence, 'siblings' => $siblings];
+        }
     }
 
     public function store(Request $request)
