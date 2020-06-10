@@ -32,6 +32,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href= "{{ asset('css/style.css') }}">
 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+
     <style>
 
         /* Make the image fully responsive */
