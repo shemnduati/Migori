@@ -2724,3 +2724,55 @@ p.footer-copyright {
 .footer-bar-nav ul li a:hover {
     color: #34d986;
 }
+
+/*--------------------------------------------------------------
+James css themeing
+--------------------------------------------------------------*/
+.headingHome{
+    color: red;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.steps{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 30px;
+    grid-column-gap: 30px;
+
+}
+
+.step{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 10px;
+}
+
+.stepDescription span:nth-child(odd){
+    display: block;
+    padding-bottom: 20px;
+    font-size: 20px;
+    color: black;
+}
+.stepDescription span:nth-child(even){
+    color: gray;
+}
+.CircleBorder{
+    background: green;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0px;
+    line-height: 25px;
+    color: white;
+
+}
+
+
+@media only screen and (max-width: 600px) {
+    .steps{
+        grid-template-columns: auto;
+
+    }
+}

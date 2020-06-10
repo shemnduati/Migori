@@ -48,164 +48,73 @@
 
 
     <section class="featured-courses vertical-column courses-wrap">
-        <div class="container">
-            <div class="row mx-m-25">
-                <div class="col-12 px-25">
-                    <header class="heading flex flex-wrap justify-content-between align-items-center">
-                        <h2 class="entry-title">How To Apply</h2>
-
-                    </header><!-- .heading -->
-                </div><!-- .col -->
-
-
-                <div class="col-12 col-md-6 col-lg-4 px-25">
-                    <div class="course-content">
-                        <figure class="course-thumbnail">
-                            <a href="#"><img src="images/icon1.png" alt="" height="230px"></a>
-                            <h2>Step 1</h2>
-                        </figure><!-- .course-thumbnail -->
-                        <div class="course-content-wrap">
-                            <header class="entry-header">
-                                <h2 class="entry-title"><p>Obtain Bursaries/Scholarships application Forms  <a data-toggle="collapse" href="#collapse1" aria-controls="collapseExample" style="color: green"> read more</a></p></h2>
-
-                                <div class="collapse" id="collapse1" class="notbold" style="">
-                                    <h5> from the Department of Education, Youth, Sports, Cultural and Social Services or download and print out form from the Migori county government website. </h5>
-                                </div>
-                                
-                            </header><!-- .entry-header -->
-
-                        
-                        </div><!-- .course-content-wrap -->
-                    </div><!-- .course-content -->
-                </div><!-- .col -->
-
-                
-
-
-                <div class="col-12 col-md-6 col-lg-4 px-25">
-                    <div class="course-content">
-                        <figure class="course-thumbnail">
-                            <a href="#"><img src="images/icon2.png" alt="" height="230px"></a>
-                            <h2>Step 2</h2>
-                        </figure><!-- .course-thumbnail -->
-
-                        <div class="course-content-wrap">
-                            <header class="entry-header">
-                                <h2 class="entry-title"><p>Fill in the Forms accurately in capital letters.</p></h2>
-
-                                
-                            </header><!-- .entry-header -->
-
-                        </div><!-- .course-content-wrap -->
-                    </div><!-- .course-content -->
-                </div><!-- .col -->
-
-                <div class="col-12 col-md-6 col-lg-4 px-25">
-                    <div class="course-content">
-                        <figure class="course-thumbnail">
-                            <a href="#"><img src="images/icon3.png" alt="" height="230px"></a>
-                            <h2>Step 3</h2>
-                        </figure><!-- .course-thumbnail -->
-                        <div class="course-content-wrap">
-                            <header class="entry-header">
-                                <h2 class="entry-title"><p>Have the Forms signed and stamped by the <a data-toggle="collapse" href="#collapse2" aria-controls="collapseExample" style="color: green">read more</a></p></h2>
-
-                                <div class="collapse" id="collapse2" class="notbold" style="">
-                                    <h5> by the relevant authorities. </h5>
-                                </div>
-                                {{-- <div class="entry-meta flex align-items-center">
-                                    <div class="course-author"><a href="#">Ms. Lucius</a></div>
-
-                                    <div class="course-date">Dec 18, 2018</div>
-                                </div><!-- .course-date --> --}}
-                            </header><!-- .entry-header -->
-
-                           
-                        </div><!-- .course-content-wrap -->
-                    </div><!-- .course-content -->
-                </div><!-- .col -->
-
-                <div class="col-12 col-md-6 col-lg-4 px-25">
-                    <div class="course-content">
-                        <figure class="course-thumbnail">
-                            <a href="#"><img src="images/icon4.png" alt="" height="230px"></a>
-                            <h2>Step 4</h2>
-                        </figure><!-- .course-thumbnail -->
-                        <div class="course-content-wrap">
-                            <header class="entry-header">
-                                <h2 class="entry-title"><p>Attach all relevant documents as required.</p></h2>
-
-                            </header><!-- .entry-header -->
-
-                        </div><!-- .course-content-wrap -->
-                    </div><!-- .course-content -->
-                </div><!-- .col -->
-
-                <div class="col-12 col-md-6 col-lg-4 px-25">
-                    <div class="course-content">
-                        <figure class="course-thumbnail">
-                            <a href="#"><img src="images/icon5.png" alt="" height="230px"></a>
-                            <h2>Step 5</h2>
-                        </figure><!-- .course-thumbnail -->
-
-                        <div class="course-content-wrap">
-                            <header class="entry-header">
-                                <h2 class="entry-title">
-                                    
-                                    <p>
-                                        
-                                        Return the Duly filled Forms to the <a data-toggle="collapse" href="#collapse3" aria-controls="collapseExample" style="color: green">read more</a>
-                                    
-                                    </p>
-                                    
-                                </h2>
-
-                                <div class="collapse" id="collapse3" class="notbold" style="">
-                                    <h5>Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.Here you can see the application status of your bursary/scholarship. </h5>
-                                </div>
-
-                                
-                            </header><!-- .entry-header -->
-
-                        </div><!-- .course-content-wrap -->
-                    </div><!-- .course-content -->
-                </div><!-- .col -->
-
-                <div class="col-12 col-md-6 col-lg-4 px-25">
-                    <div class="course-content">
-                        <figure class="course-thumbnail">
-                            <a href="#"><img src="images/icon6.png" alt="" height="230px"></a>
-                            <h2>Step 6</h2>
-                        </figure><!-- .course-thumbnail -->
-                        <div class="course-content-wrap">
-                            <header class="entry-header">
-                                <h2 class="entry-title">
-                                    
-                                    <p>
-                                        For more information or clarification about <a data-toggle="collapse" href="#collapse6" aria-controls="collapseExample" style="color: green">read more</a>
-                                        
-                                    </p>
-                                </h2>
-
-                                <div class="collapse" id="collapse6" class="notbold" style="">
-    
-                                    <h5> visit Migori Government website ebursary section </h5>
-    
-                                    
-                                </div>
-
-                                
-                            </header><!-- .entry-header -->
-
-                        </div><!-- .course-content-wrap -->
-                    </div><!-- .course-content -->
-                </div><!-- .col -->
-
-                
-                <div class="col-12 px-25 flex justify-content-center">
-                    {{-- <a class="btn" href="#">view all courses</a> --}}
-                </div><!-- .col -->
-            </div><!-- .row -->
+        <div class="container" style="font-family: 'Raleway', sans-serif;">
+            <h3 class="headingHome">How to apply</h3>
+            <div class="steps">
+                <div class="step">
+                    <div>
+                        <p class="CircleBorder"> 1 </p>
+                    </div>
+                    <div class="stepDescription">
+                        <span>Step 1 (Registration)</span>
+                        <span>Register to our online application system.Fill in the registration form and submit it.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div>
+                        <p class="CircleBorder"> 2 </p>
+                    </div>
+                    <div class="stepDescription">
+                        <span>Step 2 (Verification)</span>
+                        <span>Verification email will be send to your email.verify your email by clicking the verification button.</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div>
+                        <p class="CircleBorder"> 3 </p>
+                    </div>
+                    <div class="stepDescription">
+                        <span>Step 3 (Application)</span>
+                        <span>To apply, click on scholarship or bursary button.Fill in the application form by providing the required details.
+                            Ensure that you have provided the correct details then submit the application.
+                        </span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div>
+                        <p class="CircleBorder"> 4 </p>
+                    </div>
+                    <div class="stepDescription">
+                        <span>Step 4 (Processing)</span>
+                        <span>Your application will go through various stages of verification.County staff will counter check all
+                            the information provided then verify your application or decline if the information provided is wrong.
+                        </span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div>
+                        <p class="CircleBorder"> 5 </p>
+                    </div>
+                    <div class="stepDescription">
+                        <span>Step 5 (Status)</span>
+                        <span>Student can follow up the application status of bursary/scholarship on their dashboard.read more
+                            Login into your account,then on the dropdown where your name appears on the navigation tab, select my profile.
+                            Here you can see the application status of your bursary/scholarship.
+                        </span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div>
+                        <p class="CircleBorder"> 6 </p>
+                    </div>
+                    <div class="stepDescription">
+                        <span>Awarded</span>
+                        <span>You will receive an email notification when your bursary/scholarship application is approved.
+                            You can then pick the awarded bursary/scholarship cheque from county offices or have it sent to the school directly.
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div><!-- .container -->
     </section><!-- .courses-wrap -->
 
