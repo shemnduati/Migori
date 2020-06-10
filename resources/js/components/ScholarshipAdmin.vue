@@ -442,9 +442,9 @@
                     }
                     if (this.form.type == 4) {
                         if (this.form.ward == 0){
-                            return this.$store.state.scholar.filter(m => m.approved == 2 && (m.recommendation == 'high' || m.recommendation == 'partially'))
+                            return this.$store.state.scholar.filter(m => m.status == 2 && (m.recommendation == 'high' || m.recommendation == 'partially'))
                         }
-                        return this.$store.state.scholar.filter(m => m.ward_id == this.form.ward && m.approved == 2 &&
+                        return this.$store.state.scholar.filter(m => m.ward_id == this.form.ward && m.status == 2 &&
                             (m.recommendation == 'high' || m.recommendation == 'partially'))
                     }
 
@@ -479,10 +479,10 @@
                     }
                     if (this.form.type == 4) {
                         if (this.form.ward == 0){
-                            return this.$store.state.scholar.filter(m => m.approved == 2 && m.application_year == this.form.year &&
+                            return this.$store.state.scholar.filter(m => m.status == 2 && m.application_year == this.form.year &&
                                 (m.recommendation == 'high' || m.recommendation == 'partially'))
                         }
-                        return this.$store.state.scholar.filter(m => m.approved == 2 && m.application_year == this.form.year &&
+                        return this.$store.state.scholar.filter(m => m.status == 2 && m.application_year == this.form.year &&
                             m.ward_id == this.form.ward &&  (m.recommendation == 'high' || m.recommendation == 'partially'))
                     }
                 }

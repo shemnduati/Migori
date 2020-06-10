@@ -435,7 +435,14 @@ class ScholarshipController extends Controller
             $app->update();
         }
     }
+    public function reject(Request $request, $applicationId)
+    {
 
+            $app = Application::findOrFail($applicationId);
+            $app->status = 2;
+            $app->update();
+
+    }
     public function approve($applicationId)
     {
         $app = Application::findOrFail($applicationId);

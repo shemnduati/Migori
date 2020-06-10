@@ -291,7 +291,7 @@
                 <button type="button" class="btn btn-success" @click="approve"
                         v-if="$gate.isOfficial() && !application['app']['approved']">Approve
                 </button>
-                <button type="button" class="btn btn-danger" @click="approve"
+                <button type="button" class="btn btn-danger" @click="rejected"
                         v-if="$gate.isOfficial() && !application['app']['reject']">Reject
                 </button>
             </div>
@@ -373,7 +373,7 @@
                     confirmButtonText: 'Yes!'
                 }).then((result) => {
                     if (result.value) {
-                        this.form.post("/api/recommendIt/" + this.applicationId).then(() => {
+                        this.post("/api/rejectIt/" + this.applicationId).then(() => {
                             Swal.fire(
                                 'Success!',
                                 'Operation successful.',
@@ -413,6 +413,31 @@
                 axios.get("/api/scholarshipdetails/" + this.applicationId).then(({data}) => ([this.moreEvidence = data['moreEvidence']]));
                 axios.get("/api/scholarshipdetails/" + this.applicationId).then(({data}) => ([this.siblings = data['siblings']]));
             },
+        },
+        rejected(){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                //type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes!'
+            }).then((result) => {
+                if (result.value) {
+                    this.form.post("/api/recommendIt/" + this.applicationId).then(() => {
+                        Swal.fire(
+                            'Success!',
+                            'Operation successful.',
+                            'success'
+                        )
+                        Fire.$emit('entry');
+                    }).catch(() => {
+                        Swal.fire('Failed!', 'There was something wrong')
+                    });
+                }
+            })
+
         },
         created() {
             this.getApplications();

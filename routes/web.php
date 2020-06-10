@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\TestAmazonSes;
 use App\Notifications\ApplicationSent;
 use App\User;
 
@@ -26,11 +27,13 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return view('test');
 });
-
-
+Route::get('test', function () {
+    Mail::to('nduatishem@gmail.com')->send(new TestAmazonSes('It works!'));
+});
 Route::get('/contact', function () {
     return view('contact');
 });
+
 
 
 // Route::get('/dashboard', function() {
