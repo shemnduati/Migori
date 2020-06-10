@@ -12,17 +12,36 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+
+    <!-- ElegantFonts CSS -->
+    <link rel="stylesheet" href="{{ asset('css/elegant-fonts.css') }}">
+
+    <!-- themify-icons CSS -->
+    <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href= "{{ asset('css/style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <style>
 
         .btn{
-                background-color: #31849b;
+                background-color: forestgreen;
                 color: #fff;
                 font-weight: 700;
             }
@@ -35,6 +54,8 @@ i{
     </style>
 </head>
 <body>
+<div class="hero-content" style="margin-bottom: 10%;">
+
 <div class="container pt-5">
     <div class="row justify-content-center pt-5">
         <div class="col-md-4 pt-5">

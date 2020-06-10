@@ -882,7 +882,7 @@
                         Swal.fire({
                             type: 'error',
                             title: 'Error!!',
-                            text: error.response.data.msg,
+                            text: "Your application contains invalid data. Please review your inputs to check the errors.",
 
                         });
                         this.loading = false;
@@ -946,7 +946,6 @@
                             })
                         })
                 } else {
-                    this.loading = false;
                     Swal.fire({
                         type: 'error',
                         title: 'Ooops...',

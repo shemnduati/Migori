@@ -171,7 +171,7 @@
                 <!-- Logo -->
                 <tr>
                     <td class="email-masthead">
-                        <a class="email-masthead_name">BASAP Bursary</a>
+                        <a class="email-masthead_name">Migori County Bursary</a>
                     </td>
                 </tr>
                 <!-- Email Body -->
@@ -181,15 +181,15 @@
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
-                                    <h1>BASAP Bursary Application</h1>
+                                    <h1>Migori County Bursary Application</h1>
                                     <!-- Action -->
                                     <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td align="center">
                                                 <div>
                                                     <h5>Hello <i>Applicant</i></h5>,
-                                                    <p>This is to inform you that your bursary application has been accepted click on the link below to download your application form</p>
-                                                    <a class="btn btn-success" href="https://migori.baza.co.ke/print">Download</a><br/>
+                                                    <p>This is to inform you that your bursary application has been accepted </p>
+                                                    <P>Please Report to our offices to collect your bursary Cheque</P>
                                                     Thank You,
                                                     <br/>
                                                     <i>Regards migori.co.ke</i>
@@ -211,7 +211,7 @@
                             <tr>
                                 <td class="content-cell">
                                     <p class="sub center" style="color: cadetblue">
-                                        migori.Baza.co.ke.
+                                        https://ebursary.migori.go.ke/
                                         <br>
                                     </p>
                                 </td>

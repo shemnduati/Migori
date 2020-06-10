@@ -81,6 +81,7 @@ class InformationController extends Controller
                     'fname' => $fname,
                     'Mname' => $Mname,
                     'Lname' => $Lname,
+                    'indexNo'=>$index,
                     'reco' => $reco,
                     'index' => $index,
                     'school' => $school,
