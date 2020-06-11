@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="foot-about">
-                        <a class="foot-logo" href="#"><img src="/images/mainlogo.png" alt="" width="80%;"
-                                                           height="80%;"></a>
+                        <a class="foot-logo" href="#"><img src="/images/mainlogo.png" alt="" width="150px"
+                                                           ></a>
                     </div><!-- .foot-about -->
                 </div><!-- .col -->
 
@@ -40,7 +40,7 @@
                 </div><!-- .col -->
 
                 <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
-                    <div class="follow-us">
+                    <div class="follow-us ">
                         <h2>Follow Us</h2>
 
                         <ul class="follow-us flex flex-wrap align-items-center">
