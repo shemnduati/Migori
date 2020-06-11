@@ -291,6 +291,8 @@
                     }).then((result) => {
                         if (result.value) {
                             this.form.post("/api/recommendapp/" + this.application.id).then(() => {
+                                this.$store.dispatch('getBursarySub');
+                                this.getApplications();
                                 Swal.fire(
                                     'Success!',
                                     'Operation successful.',
@@ -313,7 +315,6 @@
                         fileLink.href = fileURL;
                         fileLink.setAttribute('download', path.substring(8));
                         document.body.appendChild(fileLink);
-
                         fileLink.click();
                     });
             },
