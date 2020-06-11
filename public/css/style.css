@@ -2769,10 +2769,44 @@ James css themeing
 
 }
 
+.captionCar{
+    margin-bottom: 30px;
+    background-color: rgba(27, 85, 87, 0.79);
+    max-width: 300px;
+    padding: 30px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.captionCar p{
+    font-size: 20px;
+}
+
+.jamesBtn{
+    display: block;
+    margin: 20px;
+    padding:10px;
+    color: #43b843 !important;
+}
+
+.jamesBtn:hover{
+    text-decoration: none;
+    color: #005200 !important;
+}
+
+
+
 
 @media only screen and (max-width: 600px) {
     .steps{
         grid-template-columns: auto;
+    }
+    .captionCar{
+        margin-bottom: 0px;
+        max-width: 300px;
+        padding: 10px;
+    }
 
+    .captionCar p{
+        font-size: 17px;
     }
 }

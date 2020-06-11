@@ -29,18 +29,18 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="images/Slider2.jpg" alt="Los Angeles" width="100%" height="500">
+            <img src="images/Slider2.jpg" alt="Los Angeles" width="100%">
             <div class="carousel-caption">
 
-                <div class="hero-content-wrap flex flex-column align-items-start" style="padding-top: 40%;">
-                    <header class="entry-header">
-                        <h3 style="color: #3d9a38;">Bursary And Scholarship Application Portal <br>(BASAP)</h3>
+                <div class="captionCar">
+                    <header class="">
+                        <p style="color: #ffffff;"><b>Bursary And Scholarship Application Portal</b>  <br>(BASAP)</p>
                     </header><!-- .entry-header -->
 
-                    <footer class="entry-footer read-more" style="border-color: #3d9a38;">
-                        <h3>Apply Here</h3>
-                        <a class="btn btn-success btn-xl text-uppercase js-scroll-trigger mr-3" href="/apply">Bursary</a><br>
-                        <a class="btn btn-success btn-xl text-uppercase js-scroll-trigger" href="/scholarship">Scholarship</a>
+                    <footer class="" style="border-color: #3d9a38;">
+                        <h5>Apply Here</h5>
+                        <a class="jamesBtn btn btn-outline-success" href="/apply">Bursary</a>
+                        <a class="jamesBtn btn btn-outline-success" href="/scholarship">Scholarship</a>
                     </footer><!-- .entry-footer -->
                 </div><!-- .hero-content-wrap -->
                 {{-- <h3>Los Angeles</h3>
