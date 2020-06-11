@@ -20,11 +20,11 @@
     <div id="demo" class="carousel slide" data-ride="carousel">
 
         <!-- Indicators -->
-        <ul class="carousel-indicators">
+        {{--<ul class="carousel-indicators">
           <li data-target="#student1" data-slide-to="0" class="active"></li>
           <li data-target="#student2" data-slide-to="1"></li>
           <li data-target="#student3" data-slide-to="2"></li>
-        </ul>
+        </ul>--}}
 
         <!-- The slideshow -->
         <div class="carousel-inner">
@@ -47,7 +47,7 @@
                 <p>We had such a great time in LA!</p> --}}
               </div>
           </div>
-        <div class="carousel-item">
+        {{--<div class="carousel-item">
             <img src="images/Slider1.jpg" alt="Chicago" width="100%" height="500">
 
             <div class="carousel-caption">
@@ -58,7 +58,7 @@
                     </header><!-- .entry-header -->
 
                     <footer class="entry-footer read-more">
-                       {{-- <a href="#">Apply Here</a> --}}
+                       --}}{{-- <a href="#">Apply Here</a> --}}{{--
                     </footer><!-- .entry-footer -->
                 </div><!-- .hero-content-wrap -->
                 <h3>Kid reading in a library</h3>
@@ -79,19 +79,14 @@
                     <footer class="entry-footer read-more">
                         <a href="#">Apply Here</a>
                     </footer><!-- .entry-footer -->
-                </div><!-- .hero-content-wrap -->
-                --}}{{-- <h3>Los Angeles</h3>
+                </div>--}}<!-- .hero-content-wrap -->
+               {{-- <h3>Los Angeles</h3>
                 <p>We had such a great time in LA!</p> --}}{{--
               </div>
           </div>
         </div>
 
         <!-- Left and right controls -->
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
+
       </div>
 </div><!-- .hero-content-hero-content-overlay -->
