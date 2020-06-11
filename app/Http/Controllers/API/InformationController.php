@@ -470,8 +470,8 @@ class InformationController extends Controller
                         $application->update();
                     });
 
-//                    $email = User::where('id', $application->user_id)->value('email');
-//                    Mail::to($email)->send(new BursaryEmail());
+                 $email = User::where('id', $application->user_id)->value('email');
+                    Mail::to($email)->send(new BursaryEmail());
                 } else {
                     return response()->json([
                         'message' => 'there was a problem'
