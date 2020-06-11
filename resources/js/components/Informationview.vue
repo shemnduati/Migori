@@ -292,6 +292,7 @@
                         if (result.value) {
                             this.form.post("/api/recommendapp/" + this.application.id).then(() => {
                                 this.$store.dispatch('getBursarySub');
+                                this.getApplications();
                                 Swal.fire(
                                     'Success!',
                                     'Operation successful.',
