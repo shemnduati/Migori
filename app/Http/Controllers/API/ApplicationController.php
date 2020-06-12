@@ -129,6 +129,7 @@ class ApplicationController extends Controller
                 'msg' => 'You already sent an application',
             ], 422);
         } else {
+            \DB::transaction(function () use ($request) {
             $user = auth()->user()->id;
             $serial = auth('api')->user()->id . time();
             $application = new Application();
@@ -327,6 +328,7 @@ class ApplicationController extends Controller
                 }
             }
             return response(['status' => 'success'], 200);
+            });
         }
 
     }
