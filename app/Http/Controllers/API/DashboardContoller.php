@@ -25,13 +25,19 @@ class DashboardContoller extends Controller
     {
         $total_student = User::where('role', 'student')->count();
         $total_subadmin = User::where('role', 'sub-admin')->count();
+        $total_official = User::where('role', 'official')->count();
+        $total_subofficial = User::where('role', 'sub-official')->count();
         $total_apllication = Application::where('bursary_type', 'County')->count();
         $total_awarded = Application::where('recommendation', '!=', '')->where('bursary_type', 'County')->count();
-        $totalAwarded = Application::where('status', 3)->where('bursary_type', 'County')->count();
+        $total_county = Application::where('bursary_type', 'County')->count();
+        $totalAwarded = Application::where('recommendation', '!=', '')->where('approved', 3)->where('bursary_type', 'County')->count();
         $data = array(
             'total_student' => $total_student,
             'total_subadmin' => $total_subadmin,
+            'total_official'=> $total_official,
+            'total_subofficial'=> $total_subofficial,
             'total_application' => $total_apllication,
+            'total_county' => $total_county,
             'total_awarded' => $total_awarded,
             'totalAwarded' => $totalAwarded
         );
