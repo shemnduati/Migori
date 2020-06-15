@@ -284,7 +284,7 @@ class UserController extends Controller
             'ward' => 'sometimes|required',
             'county' => 'sometimes|required',
         ]);
-        $user->update($request->all());
+        $user->update($request->only(['name','email','ward']));
         /* $user->role = $request['role'];
          $user->update();*/
         return ['message' => 'user information updated'];

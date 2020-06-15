@@ -54,7 +54,7 @@ class DashboardContoller extends Controller
             $total_apllication = Application::where('ward_id', $ward_id)->where('year', date('Y'))->where('bursary_type', 'County')->count();
             $total_awarded = Application::where('recommendation', '!=', '')->where('year', date('Y'))->where('bursary_type', 'County')->count();
             $total_county = Application::where('ward_id', auth()->user()->ward)->where('bursary_type', 'scholarship')->count();
-            $totalAwarded = Application::where('ward_id', auth()->user()->ward)->where('recommendation', '!=', '')->where('bursary_type', 'scholarship')->count();
+            $totalAwarded = Application::where('ward_id', auth()->user()->ward)->where('recommendation', '!=', '')->where('approved', 3)->where('bursary_type', 'scholarship')->count();
             $budget = (int)Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('amount');
             $remaining = (int)Budget::where('ward_id', auth()->user()->ward)->where('year', date('Y'))->value('remaining');
             $data = array(
