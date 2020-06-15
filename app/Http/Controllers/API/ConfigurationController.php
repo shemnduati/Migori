@@ -37,6 +37,7 @@ class ConfigurationController extends Controller
     {
         $this->validate($request, [
             'year' => 'required|integer|min:' . date('Y'),
+            'yearEnd' => 'required|integer|min:' . date('Y'),
             'status' => 'required|boolean',
             'type' => 'required'
         ]);
@@ -51,6 +52,7 @@ class ConfigurationController extends Controller
 
         return Configuration::Create([
             'year' => $request['year'],
+            'yearEnd' => $request['yearEnd'],
             'status' => $request['status'],
             'county' => $county,
             'type' => $request['type'],
