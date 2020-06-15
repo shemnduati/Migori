@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin()">
+                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin() || $gate.isSubadmin() ">
                         <!-- small box -->
                         <div class="small-box bg-warning white" >
                             <div class="inner">
@@ -111,7 +111,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger white" >
                             <div class="inner">
-                                <h3>{{dash['total_awarded']}}</h3>
+                                <h3>{{dash['totalAwarded']}}</h3>
 
                                 <span>Awarded</span><br>
                                 <span>Scholarship</span>
