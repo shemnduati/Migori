@@ -9,13 +9,13 @@
             <div class="row">
                 <div class="col-12 col-lg-6 align-content-lg-stretch">
                     <header class="heading">
-                        <h2 class="entry-title">About B.A.S.A.P</h2>
+                        <h3 class="entry-title">About B.A.S.A.P</h3>
 
                         <p>Migori County Government is committed to provide scholarships and bursaries to deserving students in the county. The Scholarships are available to Secondary school, College and University students in the county.</p>
                     </header><!-- .heading -->
 
                     <header class="heading">
-                        <h2 class="entry-title">Eligibility</h2>
+                        <h3 class="entry-title">Eligibility</h3>
 
                         <p>
                             For one to qualify for the scholarships and bursaries for Migori county, must be of the following:

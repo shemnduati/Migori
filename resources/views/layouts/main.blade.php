@@ -64,16 +64,19 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light" style="margin: 0px; padding: 0px">
                     <a class="navbar-brand site-title" href="#" rel="home" style="color: gold">
-                        <img class="middle" src="/images/mainlogo.png" alt="Main logo" width="50px;" height="50px;" style="padding-top: 0px;">
+                        <img class="middle" src="/images/mainlogo.png" alt="Main logo" width="50px;" height="50px;"
+                             style="padding-top: 0px;">
                         <span class="middle">Migori e-Bursary</span>
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto" >
-                            <li  class="nav-item active">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
                                 <a class="txtWhite nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
@@ -82,13 +85,19 @@
                             <li class="nav-item">
                                 <a class="txtWhite nav-link" href="/contact">Contact</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="txtWhite nav-link" href="/faqs">FAQ</a>
+                            </li>
                             @guest
                                 <li class="nav-item">
-                                    <a class="txtWhite nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="txtWhite nav-link btn btn-outline-dark text-light button px-4"
+                                       href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @else
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="txtWhite nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarDropdown" class="txtWhite nav-link dropdown-toggle " href="#"
+                                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                       v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
@@ -100,7 +109,8 @@ document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
                                             @csrf
                                         </form>
                                     </div>

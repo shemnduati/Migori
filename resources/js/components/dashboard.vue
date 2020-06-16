@@ -32,9 +32,39 @@
                         </div>
                     </div>
                     <!-- ./col -->
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin()">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>{{dash['total_official']}}</h3>
+                                <p>Officials</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-user-tie white"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin()">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{dash['total_subofficial']}}</h3>
+                                <p>Sub-official</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-user-tie white"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
                     <div class="col-lg-3 col-6" v-if="$gate.isAdmin() || $gate.isSubadmin()" >
                         <!-- small box -->
-                        <div class="small-box bg-warning"  >
+                        <div class="small-box bg-info"  >
                             <div class="inner">
                                 <h3>{{dash['total_application']}}</h3>
                                 <span>Bursary</span><br>
@@ -46,14 +76,45 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin()">
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin() || $gate.isSubadmin()" >
                         <!-- small box -->
-                        <div class="small-box bg-danger white" >
+                        <div class="small-box bg-success"  >
+                            <div class="inner">
+                                <h3>{{dash['total_county']}}</h3>
+                                <span>Scholarship</span><br>
+                                <span>Applications</span>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-file-signature white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin() || $gate.isSubadmin() ">
+                        <!-- small box -->
+                        <div class="small-box bg-warning white" >
                             <div class="inner">
                                 <h3>{{dash['total_awarded']}}</h3>
 
                                 <span>Awarded</span><br>
                                 <span>Bursaries</span>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-award white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin()">
+                        <!-- small box -->
+                        <div class="small-box bg-danger white" >
+                            <div class="inner">
+                                <h3>{{dash['totalAwarded']}}</h3>
+
+                                <span>Awarded</span><br>
+                                <span>Scholarship</span>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-award white"></i>
@@ -129,7 +190,7 @@
                             <router-link to="/ScholarshipApps" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-6" v-if="$gate.isAdmin()">
+                    <div class="col-lg-3 col-6" v-if="$gate.isSubofficial()">
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">

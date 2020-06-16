@@ -81,7 +81,7 @@
                         <h3 class="card-title">County Scholarships Information Table</h3>
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-12" v-if="$gate.isSubadmin() || $gate.isOfficial()">
+                                <div class="col-sm-12" v-if="$gate.isSubadmin()">
                                     <button @click="allApp" type="button" class="btn btn-sm btn-info">
                                         Reset
                                     </button>
@@ -114,7 +114,7 @@
                         <span v-if="props.row.status==1"  style="color: purple;">Recommended.({{props.row.recommendation}})</span>
                                     <span v-if="props.row.status==0" style="color: purple;">Pending...</span>
                                     <span v-if="props.row.status==2" style="color: red;">Rejected</span>
-                                    <span   v-if="props.row.approved==3" style="color: green;">Approved</span>
+
                 </span>
                                 <span v-else-if="props.column.field == 'action'">
                    <router-link :to="{path:'/scholarship-admin-details/'+ props.row.id}" type="button"

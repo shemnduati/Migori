@@ -21,7 +21,8 @@
                                                     <option selected value="">--Select Application Year--</option>
                                                     <option v-for="year in yearz" :key="year.id" :value="year.year">
                                                         {{
-                                                        year.year}}
+                                                        year.year}}-{{
+                                                        year.yearEnd}}
                                                     </option>
                                                 </select>
                                                 <has-error :form="form" field="yearz"></has-error>

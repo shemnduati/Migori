@@ -16,6 +16,7 @@
                       <thead>
                         <tr>
                           <th>Application Year</th>
+                            <th>Application End Year</th>
                           <th>OFF/ON</th>
                             <th>Bursary type</th>
                           <th>Action</th>
@@ -24,6 +25,7 @@
                       <tbody>
                         <tr v-for="configurations in configuration" :key="configuration.id">
                           <td>{{configurations.year}}</td>
+                            <td>{{configurations.yearEnd}}</td>
                             <td>
                             <span class="text-danger font-weight-bolder" v-if="configurations.status == 0">OFF</span>
                             <span class="text-success font-weight-bolder" v-if="configurations.status == 1">ON</span>
@@ -68,6 +70,13 @@
                                 placeholder="Enter Year"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('year') }">
                               <has-error :form="form" field="year"></has-error>
+                            </div>
+                            <div class="form-group">
+                                <label>Application End Year</label>
+                                <input v-model="form.yearEnd" type="number" name="yearEnd"
+                                       placeholder="Enter End Year"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('yearEnd') }">
+                                <has-error :form="form" field="yearEnd"></has-error>
                             </div>
                             <div class="form-group">
                                 <label>Status</label>
@@ -116,6 +125,7 @@
                 form: new Form({
                   id:'',
                   year: '',
+                    yearEnd:'',
                   status: '',
                     type:'',
                 })

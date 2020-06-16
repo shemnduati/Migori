@@ -117,6 +117,9 @@
                                         <li class="nav-item">
                                             <a class="txtWhite nav-link" href="/contact">Contact</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="txtWhite nav-link" href="/faqs">FAQ</a>
+                                        </li>
                                         @guest
                                             <li class="nav-item">
                                                 <a class="txtWhite nav-link btn btn-outline-dark text-light button px-4" href="{{ route('login') }}">{{ __('Login') }}</a>

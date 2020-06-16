@@ -237,13 +237,13 @@ class InformationController extends Controller
 
     public function getApplicationYears($id)
     {
-        $year = Configuration::where('county', $id)->where('status', 1)->where('type', 2)->get(['year', 'id']);
+        $year = Configuration::where('county', $id)->where('status', 1)->where('type', 2)->get(['year','yearEnd', 'id']);
         return ['year' => $year];
     }
 
     public function getAppYears($id)
     {
-        $year = Configuration::where('county', $id)->where('status', 1)->where('type', 1)->get(['year', 'id']);
+        $year = Configuration::where('county', $id)->where('status', 1)->where('type', 1)->get(['year','yearEnd','id']);
         return ['year' => $year];
     }
 
