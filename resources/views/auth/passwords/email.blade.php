@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Baza</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.jpg"/>
+    <title>MCG Migori County Government</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpeg"/>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,11 +20,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-        body{
-              background-image: linear-gradient(to right, #ffffe2 , #ffff9f, #ffffe2);
-        }
+
         .btn{
-                background-color: #31849b;
+                background-color: #00c054;
                 color: #fff;
                 font-weight: 700;
             }
@@ -33,8 +31,8 @@
                 font-weight: 700;
             }
         .state{
-                color: #1db5b5;
-            }    
+                color: #00c054;
+            }
     </style>
 </head>
 <body>
@@ -76,7 +74,6 @@
                                               <strong>{{ $message }}</strong>
                                           </span>
                                       @enderror
-                                  </div>
                             </div>
                         </div>
 
