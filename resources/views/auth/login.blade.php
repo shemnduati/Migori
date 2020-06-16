@@ -58,7 +58,7 @@ i{
 
 <div class="container pt-5">
     <div class="row justify-content-center pt-5">
-        <div class="col-md-4 pt-5">
+        <div class="col-md-8 pt-5">
             <div class="card">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
@@ -71,12 +71,12 @@ i{
                 </ul>
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                      <div class="card-body">
+                      <div class="card-body col-md-7 mr-auto ml-auto">
                           <form method="POST" class="col-md-12" action="{{ route('login') }}">
                               @csrf
 
                               <div class="form-group row">
-
+                                  <label for="email">Email <span style="color: red">*</span></label>
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-envelope"></i></div>
@@ -92,7 +92,7 @@ i{
                               </div>
 
                               <div class="form-group row">
-
+                                  <label for="password">Password <span style="color: red">*</span></label>
                                   <div class="input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
@@ -139,12 +139,12 @@ i{
                       </div>
                   </div>
                   <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                      <div class="card-body">
-                          <form method="POST" class="col-md-12" action="{{ route('register') }}">
+                      <div class="card-body ">
+                          <form method="POST" class="col-md-12 " action="{{ route('register') }}">
                               @csrf
 
                               <div class="form-group row">
-                                  <div class="input-group mb-2 mr-sm-2">
+                                  <div class="col-md-5 input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-user"></i></div>
                                       </div>
@@ -155,9 +155,7 @@ i{
                                           </span>
                                       @enderror
                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <div class="input-group mb-2 mr-sm-2">
+                                  <div class="col-md-5 input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                           <div class="input-group-text"><i class="fas fa-user"></i></div>
                                       </div>
@@ -170,7 +168,7 @@ i{
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="input-group mb-2 mr-sm-2">
+                                  <div class="col-md-5 input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                           <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                                       </div>
@@ -182,9 +180,7 @@ i{
                                           </span>
                                       @enderror
                                   </div>
-                              </div>
-                              <div class="form-group row">
-                                  <div class="input-group mb-2 mr-sm-2">
+                                  <div class="col-md-5 input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                           <div class="input-group-text"><i class="fas fa-id-card-alt"></i></div>
                                       </div>
@@ -198,7 +194,7 @@ i{
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="input-group mb-2 mr-sm-2">
+                                  <div class="col-md-5 input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                           <div class="input-group-text"><i class="fas fa-phone"></i></div>
                                       </div>
@@ -210,25 +206,22 @@ i{
                                           </span>
                                       @enderror
                                   </div>
-                              </div>
+                                  <div class="col-md-5 input-group mb-2 mr-sm-2">
+                                      <div class="input-group-prepend">
+                                          <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                                      </div>
+                                      <input id="place" type="text" class="form-control @error('place') is-invalid @enderror" name="place" value="{{ old('place') }}" placeholder="place of residence" required>
 
-                              <div class="form-group row">
-                                      <div class="input-group mb-2 mr-sm-2">
-                                          <div class="input-group-prepend">
-                                              <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
-                                          </div>
-                                          <input id="place" type="text" class="form-control @error('place') is-invalid @enderror" name="place" value="{{ old('place') }}" placeholder="place of residence" required>
-
-                                          @error('place')
-                                          <span class="invalid-feedback" role="alert">
+                                      @error('place')
+                                      <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
-                                          @enderror
-                                      </div>
+                                      @enderror
+                                  </div>
                               </div>
 
                               <div class="form-group row">
-                                  <div class="input-group mb-2 mr-sm-2">
+                                  <div class="col-md-5 input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-unlock"></i></div>
                                       </div>
@@ -239,19 +232,15 @@ i{
                                           </span>
                                       @enderror
                                   </div>
-                              </div>
-
-                              <div class="form-group row">
-
-                                  <div class="input-group mb-2 mr-sm-2">
+                                  <div class="col-md-5 input-group mb-2 mr-sm-2">
                                       <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fas fa-unlock"></i></div>
+                                          <div class="input-group-text"><i class="fas fa-unlock"></i></div>
                                       </div>
                                       <input id="password-confirm" placeholder="Confirm Password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                   </div>
                               </div>
                               <div class="form-group row">
-                                  <div class="">
+                                  <div class="col-md-10">
                                       <div class="form-check">
                                           <input class="form-check-input @error('terms') is-invalid @enderror" type="checkbox" name="terms" id="terms" value="1">
 
