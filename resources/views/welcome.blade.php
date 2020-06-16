@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <section style="font-family: 'Raleway', sans-serif;" class="about-section">
+    <section style="font-family: 'Raleway', sans-serif; G" class="about-section">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6 align-content-lg-stretch">
