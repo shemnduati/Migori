@@ -9,7 +9,7 @@
 
         <div class="text-center pt-2">
             <a href="/">
-                <button class="btn btn-primary">
+                <button class="btn btn-success">
                     <i class="fa fa-hand-point-left"></i>
                     Back to Home
                 </button>
