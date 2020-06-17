@@ -7,13 +7,13 @@
             <i class="fa fa-hand-point-left"></i>
             Back
         </button>
-        <button @click="print()" id="print" type="button" class="btn btn-primary">
+        <button @click="print()" id="print" type="button" class="btn btn-dark">
             <i class="fa fa-print"></i>
             Print
         </button>
-
+        <hr>
         <div class="row mt-3">
-            <div class="col-lg-8">
+            <div class="container col-lg-8" id="printSection">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -116,31 +116,60 @@
                                 </tr>
                                 <tr>
                                     <th>Branch</th>
-                                    <td>{{application['firstName']}}</td>
+                                    <td>{{institution['branch']}}</td>
                                 </tr>
                                 <tr>
                                     <th>Year of study</th>
-                                    <td>{{application['middleName']}}</td>
+                                    <td>{{institution['yearofstudy']}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Last Name</th>
-                                    <td>{{application['lastName']}}</td>
+                                    <th>Annual Fees</th>
+                                    <td>Ksh. {{institution['fees']}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Date of Birth</th>
-                                    <td>{{application['dob']}}</td>
+                                    <th>Amount Paid</th>
+                                    <td>Ksh. {{institution['amount_paid']}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Gender</th>
-                                    <td>{{application['gender']}}</td>
+                                    <th>Outstanding Balance</th>
+                                    <td>Ksh. {{institution['balance']}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <h5 class=" rounded bg-yellow p-2 mt-2 text-center">GEOGRAPHICAL INFORMATION</h5>
+                            </div>
+                            <table class="table mb-0 table-borderless">
+                                <tbody>
+                                <tr>
+                                    <th>County</th>
+                                    <td>{{geographical['County']}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Reg No.</th>
-                                    <td>{{application['reg_no']}}</td>
+                                    <th>Division</th>
+                                    <td>{{geographical['Division']}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Phone</th>
-                                    <td>{{application['tel']}}</td>
+                                    <th>Location</th>
+                                    <td>{{geographical['Location']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Sub Location</th>
+                                    <td>{{geographical['Sublocation']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ward</th>
+                                    <td>{{geographical['Ward']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Village</th>
+                                    <td>{{geographical['Village']}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -164,6 +193,7 @@
                                         <button type="button" class="btn btn-primary btn-sm"
                                                 @click.prevent="download(file.id, file.path)">
                                             <i class="fas fa-download"></i>
+                                            download
                                         </button>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -181,66 +211,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-8">
-                <h5 class=" rounded bg-blue p-2 mt-2 text-center">INSTITUTION INFORMATION</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row mx-2 pl-3 pt-2 border border-success rounded">
-                    <div class="col-md-4">
-                        <p>Institution</p>
-                        <p> Branch </p>
-                        <p> Year of Study </p>
-                        <p>Annual Fees </p>
-                        <p> Amount Paid </p>
-                        <p>Outstanding Balance</p>
-
-                    </div>
-                    <div class="col-md-4">
-                        <p> {{institution['name']}} </p>
-                        <p> {{institution['branch']}} </p>
-                        <p> {{institution['yearofstudy']}} </p>
-                        <p> {{institution['fees']}} </p>
-                        <p> {{institution['amount_paid']}} </p>
-                        <p> {{institution['balance']}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <hr>
-        <div class="row">
-            <div class="col-md-8">
-                <h5 class=" rounded bg-yellow p-2 mt-2 text-center">GEOGRAPHICAL INFORMATION</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row mx-2 pl-3 pt-2 border border-success rounded">
-                    <div class="col-md-4">
-                        <p>County</p>
-                        <p> Division </p>
-                        <p> Location </p>
-                        <p>Sub-Location </p>
-                        <p> Ward </p>
-                        <p>Village</p>
-
-                    </div>
-                    <div class="col-md-4">
-                        <p> {{geographical['County']}} </p>
-                        <p> {{geographical['Division']}} </p>
-                        <p> {{geographical['Location']}} </p>
-                        <p> {{geographical['Sublocation']}} </p>
-                        <p> {{geographical['Ward']}} </p>
-                        <p> {{geographical['Village']}} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row mb-3">
+        <div class="row mb-3 bg-white p-3">
             <div class="col-md-6">
                 <button class="btn btn-success px-5 offset-md-1"
                         v-if="$gate.isSubadmin() && !application.recommendation && geographical.show == 1">
@@ -340,7 +312,7 @@
         },
         methods: {
             print(){
-                window.print();
+                this.$htmlToPaper("printSection");
             },
             recommendApplication() {
                 if (this.$gate.isSubadmin()) {

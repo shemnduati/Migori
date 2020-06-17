@@ -97,6 +97,17 @@ import VueGoodTablePlugin from 'vue-good-table/src';
 import 'vue-good-table/dist/vue-good-table.css'
 Vue.use(VueGoodTablePlugin);
 
+import VueHtmlToPaper from "vue-html-to-paper";
+const options = {
+    name: "_blank",
+    specs: ["fullscreen=yes", "titlebar=yes", "scrollbars=yes"],
+    styles: [
+        "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+        "https://unpkg.com/kidlat-css/css/kidlat.css"
+    ]
+};
+Vue.use(VueHtmlToPaper, options);
+
 
 router.beforeEach((to, from, next) => {
 
