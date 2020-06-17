@@ -6,9 +6,9 @@
               <div class="card-header">
                 <h3 class="card-title">County</h3>
 
-               <!-- <div class="card-tools">
-					         <button class="btn btn-sm btn-primary" @click="newModal">Add County</button>
-                </div>-->
+<!--               <div class="card-tools">-->
+<!--					         <button class="btn btn-sm btn-primary" @click="newModal">Add County</button>-->
+<!--                </div>-->
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">

@@ -39,7 +39,7 @@
                     <footer class="" style="border-color: #3d9a38;">
                         <h6>Register Now</h6>
 
-                        <a class="jamesBtn btn btn-outline-success" href="/login">Register</a>
+                        <a class="jamesBtn btn btn-outline-success" href="/register">Register</a>
                     </footer><!-- .entry-footer -->
                     @else
                         <header class="">
