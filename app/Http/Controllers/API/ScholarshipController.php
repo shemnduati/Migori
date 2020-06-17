@@ -184,7 +184,7 @@ class ScholarshipController extends Controller
                 'msg' => 'You already sent an application',
             ], 422);
         } else {
-            \DB::transaction(function () use ($request) {
+            return \DB::transaction(function () use ($request) {
                 $user = auth()->user()->id;
                 $application = new Application();
                 $application->user_id = auth()->user()->id;
@@ -413,7 +413,6 @@ class ScholarshipController extends Controller
                     $sixth->year = date('Y');
                     $sixth->save();
                 }
-
 
                 return $applicationId;
             });

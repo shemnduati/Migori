@@ -74,10 +74,10 @@
                                     </div>
                                 </div>
 
-                                <div class="form-row ">
+                                <div class="form-row">
                                     <div class="col">
                                         <label>Gender</label><span class="text-danger">&#42;</span><br>
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check">
                                             <input v-model="form.gender" class="form-check-input" type="radio"
                                                    name="gender" value="male"
                                                    :class="{ 'is-invalid': form.errors.has('gender') }">
@@ -1527,6 +1527,7 @@
                                                    id="files" accept="image/*, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document(.docx)">
                                             <small style="color: red" v-if="error && errors.attachments">{{
                                                 errors.attachments[0] }}</small>
+                                            <small style="color: red">{{error_attachments }}</small>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -1737,6 +1738,7 @@
                 e_alt_gtelephone: '',
                 e_telephone: '',
                 e_alt_telephone: '',
+                error_attachments: '',
                 formf: new FormData(),
                 form: new Form({
                     type: 'scholarship',
@@ -1956,11 +1958,20 @@
                         type: 'success',
                         title: 'Submited!!',
                         text: 'Application Submitted Successfully',
-
+                        showCancelButton: true,
+                        confirmButtonText: 'view Status',
+                        cancelButtonText: 'Dismiss',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "/status";
+                        }else if(!result.value){
+                            window.location.href = "/student";
+                        }
                     })
                     this.form.reset();
                     this.$Progress.finish();
-                    window.location.href = "/student"
 
                 })
                     .catch(error => {
@@ -1995,22 +2006,6 @@
                     this.form.post('api/applyScholarship')
                         .then(({data}) => {
                             this.sendOther(data);
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Submited!!',
-                                text: 'Application Submitted Successfully',
-                                showCancelButton: true,
-                                confirmButtonText: 'view Status',
-                                cancelButtonText: 'Dismiss',
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                            }).then((result) => {
-                                if (result.value) {
-                                    window.location.href = "/status";
-                                }else if(!result.value){
-                                    window.location.href = "/student";
-                                }
-                            })
                         })
                         .catch(error => {
                             this.loading = false;
@@ -2538,6 +2533,9 @@
                         this.form.errors.set({
                             siblingsInfo: 'This field is required'
                         })
+                        return false;
+                    }else if (!this.attachments.length) {
+                        this.error_attachments = "Please attach neccessary files";
                         return false;
                     } else {
                         this.step++;
