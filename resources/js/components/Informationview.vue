@@ -7,120 +7,181 @@
             <i class="fa fa-hand-point-left"></i>
             Back
         </button>
-        <div class="row">
-            <div class="col-md-8">
-                <h5 class=" rounded bgc p-2 mt-2 text-center">APPLICANT’S BIO</h5>
-            </div>
-            <div class="col-md-4">
-                <h5 class="rounded p-2 mt-2 text-center bg-a">Attachments</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row mx-2 pl-3 pt-2 border border-success rounded">
-                    <div class="col-md-4">
-                        <p> Application Year</p>
-                        <p> FirstName</p>
-                        <p> MiddleName</p>
-                        <p> LastName</p>
-                        <p> DOB </p>
-                        <p> Gender </p>
-                        <p> Reg/Adm No. </p>
-                        <p> Tel. </p>
-                    </div>
-                    <div class="col-md-4">
-                        <p> {{application['application_year']}} </p>
-                        <p> {{application['firstName']}} </p>
-                        <p> {{application['middleName']}} </p>
-                        <p> {{application['lastName']}} </p>
-                        <p> {{application['dob']}} </p>
-                        <p> {{application['gender']}} </p>
-                        <p> {{application['reg_no']}} </p>
-                        <p> {{application['tel']}} </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 pt-5">
-                <div class="row">
-                    <div class="box">
-                        <div class="box" style="margin-bottom: 10px;">
+        <button @click="print()" id="print" type="button" class="btn btn-primary">
+            <i class="fa fa-print"></i>
+            Print
+        </button>
 
-                        </div>
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12" v-for="file in files"
-                                     :key="file.id">
-                                    <div class="info-box">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text"><small>{{file.kind}}</small></span>
-                                            <hr>
-                                            <button type="button" class="btn btn-primary btn-sm"
-                                                    @click.prevent="download(file.id, file.path)">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                        </div>
-                                        <!-- /.info-box-content -->
-                                    </div>
-                                    <!-- /.info-box -->
-                                </div>
-                                <!--                                            <button type="button" class="btn btn-primary" @click="downloadAll">Download all files</button>-->
-                            </div>
-                        </div>
-                        <div class="alert alert-warning alert-dismissible" v-if="files.length == 0">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h5><i class="icon fa fa-ban"></i> Alert!</h5>
-                            No files attached!!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row col-md-12">
-            <div class="col-md-8">
-                <h5 class=" rounded bg-success p-2 mt-2 text-center">FAMILY STATUS</h5>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="row mx-2 pl-3 pt-2 border border-success rounded">
-                    <div class="col-md-12" v-for="fam in family" :key="fam.id">
-                        <span>Name: </span> <span>{{fam['name']}}</span><br>
-                        <span>Relationship: </span> <span>{{fam['relationship']}}</span><br>
-                        <span>Status: </span> <span>{{fam['living']}}</span><br>
-                        <span>Telephone: </span> <span>{{fam['tel']}}</span><br>
-                        <span>Occupation: </span> <span>{{fam['occupation']}}</span><br>
-                        <span>Income per Year: </span> <span>{{fam['income']}}</span><br>
-                        <hr>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row col-md-12">
+        <div class="row mt-3">
+            <div class="col-lg-8">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
                             <div class="col-md-12">
-                                <h5 class=" rounded bg-success p-2 mt-2 text-center">MORE</h5>
+                                <h5 class=" rounded bgc p-2 mt-2 text-center">APPLICANT’S BIO</h5>
                             </div>
-                            <div class="col-sm-4">
-                                <p>Total No. Siblings </p>
-                                <p>Siblings in School </p>
-                                <p>Working Siblings </p>
-                                <p>Fees Payer </p>
-                                <p>Relationship </p>
+                            <table class="table mb-0 table-borderless">
+                                <tbody>
+                                <tr>
+                                    <th>Application Year</th>
+                                    <td>{{application['application_year']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>First Name</th>
+                                    <td>{{application['firstName']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Middle Name</th>
+                                    <td>{{application['middleName']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Last Name</th>
+                                    <td>{{application['lastName']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date of Birth</th>
+                                    <td>{{application['dob']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Gender</th>
+                                    <td>{{application['gender']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Reg No.</th>
+                                    <td>{{application['reg_no']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone</th>
+                                    <td>{{application['tel']}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <h5 class=" rounded bg-success p-2 mt-2 text-center">FAMILY STATUS</h5>
                             </div>
-                            <div class="col-sm-4">
-                                <p>{{morefamily['totalSiblings']}}</p>
-                                <p>{{morefamily['schoolSiblings']}}</p>
-                                <p>{{morefamily['workingSiblings']}}</p>
-                                <p>{{morefamily['pFees']}}</p>
-                                <p>{{morefamily['pFeesRelationship']}}</p>
+                           <div class="row">
+                               <div class="col-sm-6" v-for="fam in family" :key="fam.id">
+                                   <div class="card table-responsive">
+                                       <table class="table mb-0 table-borderless">
+                                           <tbody>
+                                           <tr>
+                                               <th>Name</th>
+                                               <td>{{fam['name']}}</td>
+                                           </tr>
+                                           <tr>
+                                               <th>Relationship</th>
+                                               <td>{{fam['relationship']}}</td>
+                                           </tr>
+                                           <tr>
+                                               <th>Status</th>
+                                               <td>{{fam['living']}}</td>
+                                           </tr>
+                                           <tr>
+                                               <th>Telephone</th>
+                                               <td>{{fam['tel']}}</td>
+                                           </tr>
+                                           <tr>
+                                               <th>Occupation</th>
+                                               <td>{{fam['occupation']}}</td>
+                                           </tr>
+                                           <tr>
+                                               <th>Income per Year</th>
+                                               <td>Ksh. {{fam['income']}}</td>
+                                           </tr>
+                                           </tbody>
+                                       </table>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <h5 class=" rounded bg-blue p-2 mt-2 text-center">INSTITUTION INFORMATION</h5>
                             </div>
+                            <table class="table mb-0 table-borderless">
+                                <tbody>
+                                <tr>
+                                    <th>Institution</th>
+                                    <td>{{institution['name']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Branch</th>
+                                    <td>{{application['firstName']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Year of study</th>
+                                    <td>{{application['middleName']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Last Name</th>
+                                    <td>{{application['lastName']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date of Birth</th>
+                                    <td>{{application['dob']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Gender</th>
+                                    <td>{{application['gender']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Reg No.</th>
+                                    <td>{{application['reg_no']}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone</th>
+                                    <td>{{application['tel']}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 pt-5">
-                <div class="row pt-5">
-
+            <div class="col-lg-4">
+                <div class="col-md-12">
+                    <h5 class="rounded p-2 mt-2 text-center bg-a">Attachments</h5>
+                </div>
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12" v-for="file in files"
+                                 :key="file.id">
+                                <div class="info-box">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text"><small>{{file.kind}}</small></span>
+                                        <hr>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                                @click.prevent="download(file.id, file.path)">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!--                                            <button type="button" class="btn btn-primary" @click="downloadAll">Download all files</button>-->
+                        </div>
+                    </div>
+                    <div class="alert alert-warning alert-dismissible" v-if="files.length == 0">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fa fa-ban"></i> Alert!</h5>
+                        No files attached!!
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-8">
                 <h5 class=" rounded bg-blue p-2 mt-2 text-center">INSTITUTION INFORMATION</h5>
@@ -278,6 +339,9 @@
 
         },
         methods: {
+            print(){
+                window.print();
+            },
             recommendApplication() {
                 if (this.$gate.isSubadmin()) {
                     Swal.fire({

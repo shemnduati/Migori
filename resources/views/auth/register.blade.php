@@ -60,8 +60,10 @@
                 <div class="card">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab"
-                               aria-controls="register" aria-selected="true">Register</a>
+                            <a class="nav-link active" href="/register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
                         </li>
                     </ul>
                     <div class="card-body text-center">
@@ -89,7 +91,7 @@
                                     <input id="lname" type="text"
                                            class="form-control @error('lname') is-invalid @enderror"
                                            name="lname" value="{{ old('lname') }}" required autocomplete="name"
-                                           autofocus placeholder="last name">
+                                           autofocus placeholder="Last name">
                                     @error('lname')
                                     <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -153,7 +155,7 @@
                                     <input id="place" type="text"
                                            class="form-control @error('place') is-invalid @enderror"
                                            name="place" value="{{ old('place') }}"
-                                           placeholder="place of residence" required>
+                                           placeholder="Place of residence" required>
 
                                     @error('place')
                                     <span class="invalid-feedback" role="alert">
@@ -206,11 +208,9 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-0 justify-content-center">
-                                <div class="col-md-6 offset-md-2">
-                                    <button type="submit" class="btn btn px-5">
-                                        {{ __('Register') }}
-                                    </button>
-                                </div>
+                                <button type="submit" class="btn btn px-5">
+                                    {{ __('Register') }}
+                                </button>
                             </div>
                         </form>
                     </div>

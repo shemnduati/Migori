@@ -23,7 +23,7 @@
                 <form id="contactForm" name="sentMessage" novalidate="novalidate">
                     <div class="row align-items-stretch mb-12">
                         <div class="col-md-12">
-                            
+
                             <div class="form-group mb-md-0">
                                 <input class="form-control" id="name" type="text" placeholder="Your Name *" required="required" data-validation-required-message="Please enter your name." />
                                 <p class="help-block text-danger"></p>
@@ -71,5 +71,5 @@
     </div><!-- .row -->
 </div><!-- .container -->
 
-    
+
 @endsection
