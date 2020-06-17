@@ -60,7 +60,6 @@
                 <div class="card">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-
                             <a class="nav-link active" href="/login">Login</a>
                         </li>
                         <li class="nav-item">
