@@ -9,17 +9,24 @@
 
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-6" v-if="$gate.isOfficial() || $gate.isSubofficial()">
+                                <!--<div class="col-sm-6" v-if="$gate.isOfficial() || $gate.isSubofficial()">
                                     <form>
                                         <select @change="sortScholarship" v-model="form.type" class="form-control">
-                                            <option selected value="">--Sort By--</option>
+                                            <option selected value="">&#45;&#45;Sort By&#45;&#45;</option>
                                             <option value="0">county</option>
                                             <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{ wardy.name}} ward</option>
                                         </select>
                                     </form>
-                                </div>
-                                <div class="col-sm-6">
-                                    <button type="button" class="btn btn-primary btn-sm" @click="createPDF">
+                                </div>-->
+                                <div class="col-sm-12">
+                                    <button @click="allApp" type="button" class="btn btn-sm btn-info">
+                                        Reset
+                                    </button>
+                                    <button @click="filter" type="button" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-sort"></i>
+                                        Sort
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-sm" @click="createPDF">
                                         <i class="fas fa-download"></i>
                                         Download
                                     </button>
@@ -64,10 +71,54 @@
             </div>
         </div>
         <!-- Modal -->
-
-
-
-
+        <div id="filterModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+             aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Filter applications</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Select Year</label>
+                                <select v-model="form.year" class="form-control">
+                                    <option selected value="">--Year--</option>
+                                    <option v-for="co in conf" :key="co['year']"
+                                            :value="co['year']">{{ co.year}}-{{ co.yearEnd}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-if="$gate.isOfficial() || $gate.isSubofficial()">
+                                <label>Ward</label>
+                                <select v-model="form.ward" class="form-control">
+                                    <option selected value="">--Sort By--</option>
+                                    <option value="0">All</option>
+                                    <option v-for="wardy in wards" :key="wardy.id" :value="wardy.id">{{
+                                        wardy.name}} ward
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-if="$gate.isSubofficial()">
+                                <label>Cheque</label>
+                                <select v-model="form.cheque" class="form-control">
+                                    <option selected value="">--Sort By--</option>
+                                    <option value="0">All</option>
+                                    <option value="1">Issued</option>
+                                    <option value="2">Not issued</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -89,10 +140,175 @@
 
             }
         },
+        computed: {
+            app() {
+                if (this.$gate.isSubadmin()) {
+                    if (!this.form.year) {
+                        return this.$store.state.scholar.filter(m => m.recommendation == 'high' || m.recommendation == 'partially')
+                    }
+
+                    if (this.form.year) {
+                        return this.$store.state.scholar.filter(m => m.application_year == this.form.year && (m.recommendation == 'high'
+                            || m.recommendation == 'partially'))
+                    }
+                }
+
+                if (this.$gate.isOfficial()) {
+                    if (!this.form.year && !this.form.ward) {
+                        return this.$store.state.scholar.filter(m => m.approved == 3)
+                    }
+
+                    if (this.form.year && !this.form.ward) {
+                        return this.$store.state.scholar.filter(m => m.approved == 3 && m.application_year == this.form.year)
+                    }
+
+                    if (!this.form.year && this.form.ward) {
+                        if (this.form.ward == 0) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3)
+                        }
+                        return this.$store.state.scholar.filter(m => m.approved == 3 && m.ward_id == this.form.ward)
+                    }
+
+                    if (this.form.year && this.form.ward) {
+                        if (this.form.ward == 0) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.application_year == this.form.year)
+                        }
+                        return this.$store.state.scholar.filter(m => m.approved == 3 && m.ward_id == this.form.ward
+                            && m.application_year == this.form.year)
+                    }
+                }
+
+                if (this.$gate.isSubofficial()) {
+                    if (!this.form.year && !this.form.ward && !this.form.cheque) {
+                        return this.$store.state.scholar.filter(m => m.approved == 3)
+                    }
+
+                    if (this.form.year && !this.form.ward && !this.form.cheque) {
+                        return this.$store.state.scholar.filter(m =>m.approved == 3 && m.application_year == this.form.year)
+                    }
+
+                    if (!this.form.year && this.form.ward && !this.form.cheque) {
+                        if (this.form.ward == 0) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3)
+                        }
+                        return this.$store.state.bursary.filter(m =>m.approved == 3 && m.ward_id == this.form.ward)
+                    }
+
+                    if (!this.form.year && !this.form.ward && this.form.cheque) {
+                        if (this.form.cheque == 0) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3)
+                        }
+
+                        if (this.form.cheque == 1) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1)
+                        }
+
+                        if (this.form.cheque == 2) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null)
+                        }
+                    }
+
+                    if (this.form.year && this.form.ward && !this.form.cheque) {
+                        if (this.form.ward == 0) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.application_year == this.form.year)
+                        }
+                        return this.$store.state.scholar.filter(m => m.approved == 3 && m.ward_id == this.form.ward
+                            && m.application_year == this.form.year)
+                    }
+
+                    if (this.form.year && !this.form.ward && this.form.cheque) {
+                        if (this.form.cheque == 0) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.application_year == this.form.year)
+                        }
+
+                        if (this.form.cheque == 1) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1
+                                && m.application_year == this.form.year)
+                        }
+
+                        if (this.form.cheque == 2) {
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null
+                                && m.application_year == this.form.year)
+                        }
+                    }
+
+                    if (!this.form.year && this.form.ward && this.form.cheque) {
+                        if (this.form.cheque == 0) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.scholar.filter(m => m.approved == 3)
+                            }
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.ward_id == this.form.ward)
+                        }
+
+                        if (this.form.cheque == 1) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1)
+                            }
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1
+                                && m.ward_id == this.form.ward)
+                        }
+
+                        if (this.form.cheque == 2) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null)
+                            }
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null
+                                && m.ward_id == this.form.ward)
+                        }
+                    }
+
+                    if (this.form.year && this.form.ward && this.form.cheque) {
+                        if (this.form.cheque == 0) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.scholar.filter(m => m.approved == 3 &&
+                                    m.application_year == this.form.year)
+                            }
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.ward_id == this.form.ward
+                                && m.application_year == this.form.year)
+                        }
+
+                        if (this.form.cheque == 1) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.scholar.filter(m =>m.approved == 3 && m.cheque == 1
+                                    && m.application_year == this.form.year)
+                            }
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1
+                                && m.ward_id == this.form.ward && m.application_year == this.form.year)
+                        }
+
+                        if (this.form.cheque == 2) {
+                            if (this.form.ward == 0) {
+                                return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null &&
+                                    m.application_year == this.form.year)
+                            }
+                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null
+                                && m.ward_id == this.form.ward && m.application_year == this.form.year)
+                        }
+                    }
+                }
+            }
+        },
         methods:{
+            allApp() {
+                this.form = {
+                    year: '',
+                    ward: '',
+                    cheque: ''
+                }
+            },
             subWard() {
                 if (this.$gate.isSubadmin()) {
                     axios.get("api/subAdminWard").then(({data}) => ([this.mywardy = data]));
+                }
+            },
+            filter() {
+                $('#filterModal').modal('show');
+            },
+            getConfYears() {
+                if (this.$gate.isSubadmin() || this.$gate.isOfficial() || this.$gate.isSubofficial()) {
+                    axios.get('api/zconf_years').then(data => {
+                        this.conf = data.data
+                    });
                 }
             },
             createPDF(){
@@ -206,6 +422,7 @@
             this.getApplications();
             this.getWards();
             this.getCounty();
+            this.getConfYears();
             this.subWard();
             Fire.$on('AfterCreate', () =>{
                 this.getApplications();

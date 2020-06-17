@@ -54,7 +54,6 @@
 <body>
 <div class="hero-content" style="margin-bottom: 10%;">
 
-<<<<<<< HEAD
 <div class="container pt-5">
     <div class="row justify-content-center pt-5">
         <div class="col-md-8 pt-5">
@@ -84,40 +83,6 @@
 
                                       @error('email')
                                           <span class="invalid-feedback" role="alert">
-=======
-    <div class="container pt-5">
-        <div class="row justify-content-center pt-5">
-            <div class="col-md-8 pt-5">
-                <div class="card">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-
-                            <a class="nav-link active" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/register">Register</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                            <div class="card-body col-md-7 mr-auto ml-auto">
-                                <form method="POST" class="col-md-12" action="{{ route('login') }}">
-                                    @csrf
-
-                                    <div class="form-group row">
-                                        <label for="email">Email <span style="color: red">*</span></label>
-                                        <div class="input-group mb-2 mr-sm-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fas fa-envelope"></i></div>
-                                            </div>
-                                            <input id="email" type="email"
-                                                   class="form-control @error('email') is-invalid @enderror"
-                                                   name="email" value="{{ old('email') }}" placeholder="Enter Email"
-                                                   required autocomplete="email" autofocus>
-
-                                            @error('email')
-                                            <span class="invalid-feedback" role="alert">
->>>>>>> 028a28a7013c4eb3e1296dd2f653a359f46f0be1
                                               <strong>{{ $message }}</strong>
                                           </span>
                                             @enderror

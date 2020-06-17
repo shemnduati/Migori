@@ -559,4 +559,14 @@ class InformationController extends Controller
             ], 401);
         }
     }
+    public function zconf()
+    {
+        if (auth()->user()->role == 'sub-admin' || auth()->user()->role == 'official' || auth()->user()->role == 'sub-official') {
+            return Configuration::latest()->where('type', 1)->get();
+        } else {
+            return response()->json([
+                'message' => 'unauthorised'
+            ], 401);
+        }
+    }
 }

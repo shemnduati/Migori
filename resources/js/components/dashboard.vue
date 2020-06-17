@@ -190,7 +190,7 @@
                             <router-link to="/ScholarshipApps" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-6" v-if="$gate.isSubofficial()">
+                    <div class="col-lg-3 col-6" v-if="$gate.isOfficial()">
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
@@ -208,8 +208,8 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{dash['totalReco']}}</h3>
-                                <span>Total</span><br>
-                                <span>Recommended</span>
+                                <span>Total Recommended</span><br>
+                                <span>Scholarship</span>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-graduation-cap white"></i>
