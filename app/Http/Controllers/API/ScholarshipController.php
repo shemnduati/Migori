@@ -14,6 +14,7 @@ use App\Mail\BursaryEmail;
 use App\MoreEvidence;
 use App\MoreFamily;
 use App\Sibling;
+use App\User;
 use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

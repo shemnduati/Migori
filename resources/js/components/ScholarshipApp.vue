@@ -102,15 +102,6 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-group" v-if="$gate.isSubofficial()">
-                                <label>Cheque</label>
-                                <select v-model="form.cheque" class="form-control">
-                                    <option selected value="">--Sort By--</option>
-                                    <option value="0">All</option>
-                                    <option value="1">Issued</option>
-                                    <option value="2">Not issued</option>
-                                </select>
-                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -133,10 +124,11 @@
                 mycounty: '',
                 selectedWard: '',
                 wardsCounty: '',
-                form: new Form({
-                    type: ''
-                })
-
+                form: {
+                    year: '',
+                    ward: '',
+                },
+                conf: []
 
             }
         },
@@ -183,32 +175,18 @@
                         return this.$store.state.scholar.filter(m => m.approved == 3)
                     }
 
-                    if (this.form.year && !this.form.ward && !this.form.cheque) {
+                    if (this.form.year && !this.form.ward) {
                         return this.$store.state.scholar.filter(m =>m.approved == 3 && m.application_year == this.form.year)
                     }
 
-                    if (!this.form.year && this.form.ward && !this.form.cheque) {
+                    if (!this.form.year && this.form.ward) {
                         if (this.form.ward == 0) {
                             return this.$store.state.scholar.filter(m => m.approved == 3)
                         }
                         return this.$store.state.bursary.filter(m =>m.approved == 3 && m.ward_id == this.form.ward)
                     }
 
-                    if (!this.form.year && !this.form.ward && this.form.cheque) {
-                        if (this.form.cheque == 0) {
-                            return this.$store.state.scholar.filter(m => m.approved == 3)
-                        }
-
-                        if (this.form.cheque == 1) {
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1)
-                        }
-
-                        if (this.form.cheque == 2) {
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null)
-                        }
-                    }
-
-                    if (this.form.year && this.form.ward && !this.form.cheque) {
+                    if (this.form.year && this.form.ward ) {
                         if (this.form.ward == 0) {
                             return this.$store.state.scholar.filter(m => m.approved == 3 && m.application_year == this.form.year)
                         }
@@ -216,75 +194,6 @@
                             && m.application_year == this.form.year)
                     }
 
-                    if (this.form.year && !this.form.ward && this.form.cheque) {
-                        if (this.form.cheque == 0) {
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.application_year == this.form.year)
-                        }
-
-                        if (this.form.cheque == 1) {
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1
-                                && m.application_year == this.form.year)
-                        }
-
-                        if (this.form.cheque == 2) {
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null
-                                && m.application_year == this.form.year)
-                        }
-                    }
-
-                    if (!this.form.year && this.form.ward && this.form.cheque) {
-                        if (this.form.cheque == 0) {
-                            if (this.form.ward == 0) {
-                                return this.$store.state.scholar.filter(m => m.approved == 3)
-                            }
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.ward_id == this.form.ward)
-                        }
-
-                        if (this.form.cheque == 1) {
-                            if (this.form.ward == 0) {
-                                return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1)
-                            }
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1
-                                && m.ward_id == this.form.ward)
-                        }
-
-                        if (this.form.cheque == 2) {
-                            if (this.form.ward == 0) {
-                                return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null)
-                            }
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null
-                                && m.ward_id == this.form.ward)
-                        }
-                    }
-
-                    if (this.form.year && this.form.ward && this.form.cheque) {
-                        if (this.form.cheque == 0) {
-                            if (this.form.ward == 0) {
-                                return this.$store.state.scholar.filter(m => m.approved == 3 &&
-                                    m.application_year == this.form.year)
-                            }
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.ward_id == this.form.ward
-                                && m.application_year == this.form.year)
-                        }
-
-                        if (this.form.cheque == 1) {
-                            if (this.form.ward == 0) {
-                                return this.$store.state.scholar.filter(m =>m.approved == 3 && m.cheque == 1
-                                    && m.application_year == this.form.year)
-                            }
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == 1
-                                && m.ward_id == this.form.ward && m.application_year == this.form.year)
-                        }
-
-                        if (this.form.cheque == 2) {
-                            if (this.form.ward == 0) {
-                                return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null &&
-                                    m.application_year == this.form.year)
-                            }
-                            return this.$store.state.scholar.filter(m => m.approved == 3 && m.cheque == null
-                                && m.ward_id == this.form.ward && m.application_year == this.form.year)
-                        }
-                    }
                 }
             }
         },
@@ -293,7 +202,6 @@
                 this.form = {
                     year: '',
                     ward: '',
-                    cheque: ''
                 }
             },
             subWard() {

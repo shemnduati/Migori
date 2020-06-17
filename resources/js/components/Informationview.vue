@@ -472,7 +472,7 @@
                         text: 'You rejected the application',
                     })
                     this.$router.push('/Information');
-                    his.$Progress.finish();
+                    this.$Progress.finish();
                 });
             }
         },

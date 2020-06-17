@@ -190,8 +190,8 @@
                             <router-link to="/ScholarshipApps" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-6" v-if="$gate.isOfficial()">
-                        <!-- small box -->
+                    <!--<div class="col-lg-3 col-6" >
+                        &lt;!&ndash; small box &ndash;&gt;
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{dash['totalAwarded']}}</h3>
@@ -202,7 +202,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-lg-3 col-6" v-if="$gate.isSubadmin()">
                         <!-- small box -->
                         <div class="small-box bg-success">
