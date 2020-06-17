@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\Mail\sendContact;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -25,6 +28,24 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    Public function contact(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'message' => 'required',
+            'phone'=>'required',
+        ]);
+        $email = User::where('role','admin')->value('email');
+        $data = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message'=>$request->message,
+        );
+        Mail::to('nduatishem@gmail.com')->send(new sendContact($data));
+        return view('contact')->with('successMsg','Message sent Successfully');
     }
 
     public function status()

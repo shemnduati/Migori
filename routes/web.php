@@ -55,4 +55,5 @@ Route::get('/privacy', 'TermsController@privacy')->name('privacy');
 Route::get('/print/{serial}', 'HomeController@download')->name('print');
 Route::get('/student', 'HomeController@student')->name('student');
 Route::get('/status', 'HomeController@status');
+Route::post('/contact', 'HomeController@contact')->name('contact');
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z\d\-/_.]+)?' );

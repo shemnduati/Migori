@@ -19,31 +19,42 @@
         <div class="col-12 col-lg-6">
             <div class="contact-form">
                 <h3>Get In Touch</h3>
-
-                <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                @if(!empty($successMsg))
+                    <div class="alert alert-success"> {{ $successMsg }}</div>
+                @endif
+                <form id="contactForm" method="POST"action="{{ url('/contact') }}" name="sentMessage" enctype="multipart/form-data" novalidate="novalidate">
+                    {{ csrf_field() }}
                     <div class="row align-items-stretch mb-12">
                         <div class="col-md-12">
-                            
+
                             <div class="form-group mb-md-0">
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" required="required" data-validation-required-message="Please enter your name." />
-                                <p class="help-block text-danger"></p>
+                                <input class="form-control" id="name" type="text"  name="name" placeholder="Your Name *" required="required" data-validation-required-message="Please enter your name." />
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
 
                             <div class="form-group mb-md-0">
-                                <input class="form-control" id="email" type="email" placeholder="Your Email*" required="required" data-validation-required-message="Please enter your email address." />
-                                <p class="help-block text-danger"></p>
+                                <input class="form-control" id="email"  name="email" type="email" placeholder="Your Email*" required="required" data-validation-required-message="Please enter your email address." />
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
                             </div>
 
                             <div class="form-group mb-md-0">
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required="required" data-validation-required-message="Please enter your phone number." />
-                                <p class="help-block text-danger"></p>
+                                <input class="form-control" id="phone" type="tel"  name="phone" placeholder="Your Phone *" required="required" data-validation-required-message="Please enter your phone number." />
+                                @if ($errors->has('phone'))
+                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                @endif
                             </div>
 
                         </div>
                         <div class="col-md-12 mb-md-0">
                             <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" id="message" placeholder="Your Message *" required="required" data-validation-required-message="Please enter a message." rows="8"></textarea>
-                                <p class="help-block text-danger"></p>
+                                <textarea class="form-control"  name="message" id="message" placeholder="Your Message *" required="required" data-validation-required-message="Please enter a message." rows="8"></textarea>
+                                @if ($errors->has('message'))
+                                    <span class="text-danger">{{ $errors->first('message') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -71,5 +82,5 @@
     </div><!-- .row -->
 </div><!-- .container -->
 
-    
+
 @endsection

@@ -60,7 +60,7 @@ i{
     <div class="row justify-content-center pt-5">
         <div class="col-md-8 pt-5">
             <div class="card">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs"   role="tablist">
                   <li class="nav-item">
 
                     <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
