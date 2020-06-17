@@ -119,12 +119,12 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-id-card-alt"></i></div>
                                     </div>
-                                    <input id="ID" type="number"
-                                           class="form-control @error('ID') is-invalid @enderror" name="ID"
-                                           value="{{ old('ID') }}" placeholder="ID Number/Birth certificate"
+                                    <input id="id_number" type="number"
+                                           class="form-control @error('id_number') is-invalid @enderror" name="id_number"
+                                           value="{{ old('id_number') }}" placeholder="ID Number/Birth certificate"
                                            required>
 
-                                    @error('ID')
+                                    @error('id_number')
                                     <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
                                           </span>
