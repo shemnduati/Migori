@@ -10,12 +10,14 @@ use App\Family;
 use App\File;
 use App\Geographical;
 use App\Institution;
+use App\Mail\BursaryEmail;
 use App\MoreEvidence;
 use App\MoreFamily;
 use App\Sibling;
 use App\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class ScholarshipController extends Controller
 {
@@ -452,6 +454,14 @@ class ScholarshipController extends Controller
         $app = Application::findOrFail($applicationId);
         $app->approved = 3;
         $app->update();
+
+        $userId = Application::where('id',$applicationId)->value('user_id');
+        $email = User::where('id', $userId)->value('email');
+        $data = array(
+            'name' => User::where('id', $userId)->value('name'),
+            'lname' => User::where('id', $userId)->value('last_name'),
+        );
+        Mail::to( $email)->send(new BursaryEmail($data));
     }
 
     public function complete(Request $request)

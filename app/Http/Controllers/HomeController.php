@@ -44,7 +44,7 @@ class HomeController extends Controller
             'phone' => $request->phone,
             'message'=>$request->message,
         );
-        Mail::to('nduatishem@gmail.com')->send(new sendContact($data));
+        Mail::to($email)->send(new sendContact($data));
         return view('contact')->with('successMsg','Message sent Successfully');
     }
 

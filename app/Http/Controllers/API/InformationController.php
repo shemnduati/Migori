@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Configuration;
 use App\County;
 use App\Institution;
+use App\Mail\AwardedNotification;
 use App\Mail\BursaryEmail;
 use App\User;
 use App\Ward;
@@ -470,8 +471,12 @@ class InformationController extends Controller
                         $application->update();
                     });
 
-                 $email = User::where('id', $application->user_id)->value('email');
-                    Mail::to($email)->send(new BursaryEmail());
+                    $email = User::where('id', $application->user_id)->value('email');
+                    $data = array(
+                        'name' => User::where('id',  $application->user_id)->value('name'),
+                        'lname' => User::where('id',  $application->user_id)->value('last_name'),
+                    );
+                    Mail::to( $email)->send(new AwardedNotification($data));
                 } else {
                     return response()->json([
                         'message' => 'there was a problem'
