@@ -16,15 +16,15 @@
                   <thead>
                     <tr>
                       <th>County</th>
-                      <th>Ward</th>
                         <th>Constituency</th>
+                      <th>Ward</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="wards in ward.data">
-                      <td>{{wards.county.name}}</td>
                         <td>{{wards.Constituency}}</td>
+                      <td>{{wards.county.name}}</td>
                       <td>{{wards.name}}</td>
                       <td>
                           <a href="#" @click="editModal(wards)">
