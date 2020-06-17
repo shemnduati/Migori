@@ -31,22 +31,34 @@
           <div class="carousel-item active">
             <img src="images/Slider2.jpg" alt="Los Angeles" width="100%">
             <div class="carousel-caption">
-
                 <div class="captionCar">
+                    @guest
                     <header class="">
                         <p style="color: #ffffff;"><b>Bursary And Scholarship Application Portal</b>  <br>(BASAP)</p>
                     </header><!-- .entry-header -->
-
                     <footer class="" style="border-color: #3d9a38;">
-                        <h5>Apply Here</h5>
-                        <a class="jamesBtn btn btn-outline-success" href="/apply">Bursary</a>
-                        <a class="jamesBtn btn btn-outline-success" href="/scholarship">Scholarship</a>
+                        <h6>Register Now</h6>
+
+                        <a class="jamesBtn btn btn-outline-success" href="/login">Register</a>
                     </footer><!-- .entry-footer -->
+                    @else
+                        <header class="">
+                            <p style="color: #ffffff;"><b>Bursary And Scholarship Application Portal</b>  <br>(BASAP)</p>
+                        </header><!-- .entry-header -->
+                        <footer class="" style="border-color: #3d9a38;">
+                            <h5>Apply Here</h5>
+                            <a class="jamesBtn btn btn-outline-success" href="/apply">Bursary</a>
+                            <a class="jamesBtn btn btn-outline-success" href="/scholarship">Scholarship</a>
+                        </footer><!-- .entry-footer -->
+                    @endguest
                 </div><!-- .hero-content-wrap -->
                 {{-- <h3>Los Angeles</h3>
                 <p>We had such a great time in LA!</p> --}}
               </div>
-          </div>
+        </div>
+
+
+
         {{--<div class="carousel-item">
             <img src="images/Slider1.jpg" alt="Chicago" width="100%" height="500">
 

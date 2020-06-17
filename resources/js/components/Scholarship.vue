@@ -1995,7 +1995,22 @@
                     this.form.post('api/applyScholarship')
                         .then(({data}) => {
                             this.sendOther(data);
-
+                            Swal.fire({
+                                type: 'success',
+                                title: 'Submited!!',
+                                text: 'Application Submitted Successfully',
+                                showCancelButton: true,
+                                confirmButtonText: 'view Status',
+                                cancelButtonText: 'Dismiss',
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                            }).then((result) => {
+                                if (result.value) {
+                                    window.location.href = "/status";
+                                }else if(!result.value){
+                                    window.location.href = "/student";
+                                }
+                            })
                         })
                         .catch(error => {
                             this.loading = false;
