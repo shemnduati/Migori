@@ -340,7 +340,6 @@
             approve(){
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
                     //type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -351,7 +350,7 @@
                         this.form.post("/api/approveIt/" + this.applicationId).then(() => {
                             Swal.fire(
                                 'Success!',
-                                'Operation successful.',
+                                'Approval successful.',
                                 'success'
                             )
                             Fire.$emit('entry');
@@ -365,7 +364,6 @@
                 this.form.recommendation = rec;
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
                     //type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

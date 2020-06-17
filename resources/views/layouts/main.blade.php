@@ -76,6 +76,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
+                            @guest
                             <li class="nav-item active">
                                 <a class="txtWhite nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                             </li>
@@ -88,7 +89,7 @@
                             <li class="nav-item">
                                 <a class="txtWhite nav-link" href="/faqs">FAQ</a>
                             </li>
-                            @guest
+
                                 <li class="nav-item">
                                     <a class="txtWhite nav-link btn btn-outline-dark text-light button px-4"
                                        href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -98,7 +99,7 @@
                                     <a id="navbarDropdown" class="txtWhite nav-link dropdown-toggle " href="#"
                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                        v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                         <span class="caret">{{ Auth::user()->name }}&nbsp;{{ Auth::user()->last_name }}</span>
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

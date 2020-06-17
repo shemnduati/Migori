@@ -130,3 +130,4 @@ Route::post('step-one', 'API\ApplicationValidationController@stepOne');
 
 Route::get('conf_years', 'API\InformationController@conf');
 Route::get('sconf_years', 'API\ScholarshipController@conf');
+Route::get('zconf_years', 'API\InformationController@zconf');

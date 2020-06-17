@@ -187,12 +187,12 @@
                                         <tr>
                                             <td align="center">
                                                 <div>
-                                                    <h5>Hello <i>Applicant</i></h5>,
-                                                    <p>This is to inform you that your bursary application has been accepted </p>
-                                                    <P>Please Report to our offices to collect your bursary Cheque</P>
+                                                    <h5>Hello <i>{{ $data['name'] }}&nbsp;{{ $data['lname'] }}</i></h5>,
+                                                    <p>This is to inform you that your Scholarship application has been accepted </p>
+                                                    <P>Please Report to our offices to collect your Scholarship Cheque</P>
                                                     Thank You,
                                                     <br/>
-                                                    <i>Regards migori.co.ke</i>
+                                                    <i>Regards ebursary.migori.go.ke</i>
                                                 </div>
                                             </td>
                                         </tr>

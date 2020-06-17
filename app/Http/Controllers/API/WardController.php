@@ -42,10 +42,12 @@ class WardController extends Controller
         $this->validate($request,[
             'name' => 'required|string|max:25|unique:counties',
             'county_id' => 'required|integer|max:25',
+            'Constituency' => 'required|String',
         ]);
         return Ward::Create([
             'name' => $request['name'],
             'county_id' => $request['county_id'],
+            'Constituency'=> $request['Constituency'],
         ]);
     }
 
@@ -72,11 +74,13 @@ class WardController extends Controller
         $this->validate($request,[
             'name' => 'required|string|max:25',
             'county_id' => 'required|integer|max:25',
+            'Constituency' => 'required|String',
         ]);
         $ward = Ward::findOrFail($id);
         $ward->update([
             'name' => $request['name'],
             'county_id' => $request['county_id'],
+            'Constituency'=> $request['Constituency'],
         ]);
         return ['message' => 'ward is updated'];
     }

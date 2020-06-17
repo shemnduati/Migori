@@ -7,7 +7,7 @@
                 <h3 class="card-title">Add wards to each county</h3>
 
                 <div class="card-tools">
-                  <button class="btn btn-sm btn-primary" @click="newModal">Add Ward</button>
+                  <button class="btn btn-sm btn-success" @click="newModal">Add Ward</button>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -17,12 +17,14 @@
                     <tr>
                       <th>County</th>
                       <th>Ward</th>
+                        <th>Constituency</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="wards in ward.data">
                       <td>{{wards.county.name}}</td>
+                        <td>{{wards.Constituency}}</td>
                       <td>{{wards.name}}</td>
                       <td>
                           <a href="#" @click="editModal(wards)">
@@ -65,11 +67,22 @@
                           <has-error :form="form" field="bio"></has-error>
                         </div>-->
                         <div class="modal-body">
-                            <div class="form-group" v-show="editMode" >
-                                <label for="county">County</label>
-                                <input v-model="form.county_id" type="county" name="county" placeholder="Email" readonly
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('county') }">
-                                <has-error :form="form" field="county"></has-error>
+                            <div class="form-group">
+                                <label>Constituency Name</label><span class="text-danger">&#42;</span>
+                                <select v-model="form.Constituency"
+                                        class="form-control" name="Constituency"
+                                        :class="{ 'is-invalid': form.errors.has('Constituency') }">
+                                    <option selected value="">--Select Constituency--</option>
+                                    <option selected value="Rongo">Rongo</option>
+                                    <option selected value="Awendo">Awendo</option>
+                                    <option selected value="Suna East">Suna East</option>
+                                    <option selected value="Suna West">Suna West</option>
+                                    <option selected value="Uriri">Uriri</option>
+                                    <option selected value="Nyatike">Nyatike</option>
+                                    <option selected value="Kuria East">Kuria East</option>
+                                    <option selected value="Kuria West">Kuria West</option>
+                                </select>
+                                <has-error :form="form" field="Constituency"></has-error>
                             </div>
                         <div class="form-group">
                           <label>Ward Name</label><span class="text-danger">&#42;</span>
@@ -103,6 +116,7 @@
                     id:'',
                     county_id: 1,
                     name: '',
+                    constituency:'',
                 })
             }
         },
