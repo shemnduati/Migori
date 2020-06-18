@@ -87,7 +87,8 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text"><small>{{file.kind}}</small></span>
                                             <hr>
-                                            <button type="button" class="btn btn-primary btn-sm" @click.prevent="download(file.id, file.path)">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                    @click.prevent="download(file.id, file.path)">
                                                 <i class="fas fa-download"></i>
                                             </button>
                                         </div>
@@ -130,7 +131,7 @@
                         <p v-if="fam.sublocation">Sub-Location: {{fam.sublocation}}</p>
                         <hr>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" v-if="siblings.length">
                         <div class="col-md-12">
                             <h5 class=" rounded bg-success p-2 mt-2 text-center">SIBLINGS</h5>
                         </div>
@@ -332,7 +333,7 @@
                 family: {},
                 evidence: {},
                 moreEvidence: {},
-                siblings: {},
+                siblings: [],
                 photo: {},
                 files: {},
                 form: new Form({
@@ -341,10 +342,10 @@
             }
         },
         methods: {
-            print(){
+            print() {
                 this.$htmlToPaper("printSection");
             },
-            approve(){
+            approve() {
                 Swal.fire({
                     title: 'Are you sure?',
                     //type: 'warning',
@@ -378,7 +379,7 @@
                     confirmButtonText: 'Yes!'
                 }).then((result) => {
                     if (result.value) {
-                        this.post("/api/rejectIt/" + this.applicationId).then(() => {
+                        this.form.post("/api/recommendIt/" + this.applicationId).then(() => {
                             Swal.fire(
                                 'Success!',
                                 'Operation successful.',
@@ -418,31 +419,30 @@
                 axios.get("/api/scholarshipdetails/" + this.applicationId).then(({data}) => ([this.moreEvidence = data['moreEvidence']]));
                 axios.get("/api/scholarshipdetails/" + this.applicationId).then(({data}) => ([this.siblings = data['siblings']]));
             },
-        },
-        rejected(){
-            Swal.fire({
-                title: 'Are you sure?',
+            rejected() {
+                Swal.fire({
+                    title: 'Are you sure?',
 
-                //type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes!'
-            }).then((result) => {
-                if (result.value) {
-                    this.form.post("/api/recommendIt/" + this.applicationId).then(() => {
-                        Swal.fire(
-                            'Success!',
-                            'Operation successful.',
-                            'success'
-                        )
-                        Fire.$emit('entry');
-                    }).catch(() => {
-                        Swal.fire('Failed!', 'There was something wrong')
-                    });
-                }
-            })
-
+                    //type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!'
+                }).then((result) => {
+                    if (result.value) {
+                        this.form.post("/api/recommendIt/" + this.applicationId).then(() => {
+                            Swal.fire(
+                                'Success!',
+                                'Operation successful.',
+                                'success'
+                            )
+                            Fire.$emit('entry');
+                        }).catch(() => {
+                            Swal.fire('Failed!', 'There was something wrong')
+                        });
+                    }
+                })
+            },
         },
         created() {
             this.getApplications();

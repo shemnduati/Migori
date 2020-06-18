@@ -129,7 +129,6 @@
                     ward: '',
                 },
                 conf: []
-
             }
         },
         computed: {
