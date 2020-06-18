@@ -73,7 +73,7 @@ class DashboardContoller extends Controller
 
         if (auth()->user()->role == "official") {
             $data = array(
-                'totalAwarded' => Application::where('county', auth()->user()->county)->where('year', date('Y'))->where('bursary_type', 'County')->where('status', 3)->count(),
+                'totalAwarded' => Application::where('county', auth()->user()->county)->where('year', date('Y'))->where('bursary_type', 'County')->where('awarded', 1)->count(),
                 'scholar' => Application::where('county', auth()->user()->county)->where('year', date('Y'))->where('bursary_type', 'scholarship')->where('approved', 3)->count()
             );
             return ['data' => $data];
