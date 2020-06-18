@@ -91,13 +91,29 @@
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin() || $gate.isSubadmin() ">
+                    <div class="col-lg-3 col-6"  v-if="$gate.isAdmin()">
                         <!-- small box -->
                         <div class="small-box bg-warning white" >
                             <div class="inner">
                                 <h3>{{dash['total_awarded']}}</h3>
 
                                 <span>Awarded</span><br>
+                                <span>Bursaries</span>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-award white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6"  v-if="$gate.isSubadmin() ">
+                        <!-- small box -->
+                        <div class="small-box bg-warning white" >
+                            <div class="inner">
+                                <h3>{{dash['total_awarded']}}</h3>
+
+                                <span>Reccomended</span><br>
                                 <span>Bursaries</span>
                             </div>
                             <div class="icon">
