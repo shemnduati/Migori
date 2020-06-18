@@ -26,7 +26,7 @@
                                 <td>Ksh. {{budget.amount}}</td>
                                 <td>Ksh. {{budget.remaining}}</td>
                                 <td>Ksh. {{budget.amount - budget.remaining}}</td>
-                                <td>{{budget.year}}</td>
+                                <td>{{budget.year}}-{{budget.yearEnd}}</td>
                                 <td>
                                     <a href="#" @click="editModal(budget)" >
                                         <i class="fa fa-edit teal"></i>
@@ -81,7 +81,7 @@
                                 <select v-model="form.year" class="form-control" :class="{ 'is-invalid': form.errors.has('year') }">
                                     <option selected value="">--Year--</option>
                                     <option v-for="co in conf" :key="co['year']"
-                                            :value="co['year']">{{ co.year}}
+                                            :value="co['year']">{{ co.year}}-{{ co.yearEnd}}
                                     </option>
                                 </select>
                                 <has-error :form="form" field="year"></has-error>

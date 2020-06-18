@@ -3,6 +3,10 @@
         <div class="text-center pt-2">
             <h3>Student Information</h3>
         </div>
+        <button @click="print()" id="print" type="button" class="btn btn-dark">
+            <i class="fa fa-print"></i>
+            Print
+        </button>
         <div class="row pl-3">
             <!--            <img :src="application['app'].resultslip" alt="" style="width: 200px">-->
         </div>
@@ -15,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="container col-md-8" id="printSection">
                 <div class="row mx-2 pl-3 pt-2 border border-success rounded">
                     <div class="col-md-4">
                         <p>Year</p>
@@ -78,12 +82,13 @@
                         </div>
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12" v-for="file in files" :key="file.id">
+                                <div class="col-md-6 col-sm-6 col-xs-12" v-for="file in files" :key="file.id">
                                     <div class="info-box">
                                         <div class="info-box-content">
-                                            <span class="info-box-text"><p>{{file.kind}}</p></span>
+                                            <span class="info-box-text"><small>{{file.kind}}</small></span>
                                             <hr>
-                                            <button type="button" class="btn btn-primary btn-sm" @click.prevent="download(file.id, file.path)">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                    @click.prevent="download(file.id, file.path)">
                                                 <i class="fas fa-download"></i>
                                             </button>
                                         </div>
@@ -337,7 +342,10 @@
             }
         },
         methods: {
-            approve(){
+            print() {
+                this.$htmlToPaper("printSection");
+            },
+            approve() {
                 Swal.fire({
                     title: 'Are you sure?',
                     //type: 'warning',
@@ -411,10 +419,10 @@
                 axios.get("/api/scholarshipdetails/" + this.applicationId).then(({data}) => ([this.moreEvidence = data['moreEvidence']]));
                 axios.get("/api/scholarshipdetails/" + this.applicationId).then(({data}) => ([this.siblings = data['siblings']]));
             },
-            rejected(){
+            rejected() {
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+
                     //type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -434,7 +442,6 @@
                         });
                     }
                 })
-
             },
         },
         created() {
