@@ -133,6 +133,7 @@
                 mycounty: '',
                 selectedWard: '',
                 wardsCounty: '',
+                conf: [],
                 form: new Form({
                     type: ''
                 })
