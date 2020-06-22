@@ -72,7 +72,7 @@ class ApplicationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'year' => 'required|digits_between:1,7',
+            'year' => 'required',
             'type' => 'required',
             'firstName' => 'required|string',
             'middleName' => 'required|string',
@@ -82,7 +82,6 @@ class ApplicationController extends Controller
             'gender' => 'required',
             'telephone' => 'required|phone:KE|min:10',
             'regNo' => 'required',
-            'class' => 'required',
             'idNo' => 'required',
             'fname' => 'required|string',
             'fliving' => 'required',
@@ -105,7 +104,6 @@ class ApplicationController extends Controller
             'village' => 'required|string',
             'polling' => 'required|string',
             'iname' => 'required|string',
-            'branch' => 'required|string',
             'yearz' => 'required',
             'payable' => 'required',
             'paid' => 'required',

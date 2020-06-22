@@ -556,7 +556,7 @@ class InformationController extends Controller
 
     public function conf()
     {
-        if (auth()->user()->role == 'sub-admin' || auth()->user()->role == 'official' || auth()->user()->role == 'sub-official') {
+        if (auth()->user()->role == 'sub-admin' || auth()->user()->role == 'official' || auth()->user()->role == 'admin' || auth()->user()->role == 'sub-official') {
             return Configuration::latest()->where('type', 2)->get();
         } else {
             return response()->json([

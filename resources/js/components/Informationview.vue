@@ -272,7 +272,7 @@
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-success">
                                 <i class="fas fa-save"></i>
-                                Save
+                               Award
                             </button>
                         </div>
                     </form>
@@ -385,7 +385,7 @@
                 })
             },
             award() {
-                if (this.$gate.isOfficial()) {
+                if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     this.formf.post("/api/award/" + this.application.id).then(() => {
                         this.$store.dispatch('getBursaryOfficial');
                         Swal.fire(

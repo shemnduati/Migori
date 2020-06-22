@@ -26,7 +26,8 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        $budgs = Budget::where('county', auth()->user()->county)->get();
+        $id = 1;
+        $budgs = Budget::where('county', $id)->get();
         $parent = array();
 
         foreach ($budgs as $budg) {
@@ -36,6 +37,7 @@ class BudgetController extends Controller
             $amount = $budg['amount'];
             $remaining = $budg['remaining'];
             $year = $budg['year'];
+            $yearEnd = $budg['yearEnd'];
             $child = array(
                 'id' => $id,
                 'ward' => $budg['ward_id'],
@@ -43,6 +45,7 @@ class BudgetController extends Controller
                 'amount' => $amount,
                 'remaining' => $remaining,
                 'year' => $year,
+                'yearEnd'=>$yearEnd,
             );
             array_push($parent, $child);
         }
@@ -94,7 +97,7 @@ class BudgetController extends Controller
 
     public function getMyWards()
     {
-        $county_id = User::where('id', Auth::user()->id)->value('county');
+        $county_id = 1;
         $wards = Ward::where('county_id', $county_id)->get();
         return ['wards' => $wards];
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">
-        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial()">
+        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial() || $gate.isSubofficial() ">
 
             <!--<div class="col-md-12">
                 <div class="card">
@@ -81,7 +81,7 @@
                         <h3 class="card-title">County Scholarships Information Table</h3>
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-12" v-if="$gate.isSubadmin()">
+                                <div class="col-sm-12" v-if="$gate.isSubadmin() || $gate.isOfficial() || $gate.isSubofficial()">
                                     <button @click="allApp" type="button" class="btn btn-sm btn-info">
                                         Reset
                                     </button>
@@ -123,7 +123,7 @@
                 </span>
                             </template>
                         </vue-good-table>
-                        <vue-good-table v-if="this.$gate.isOfficial()"
+                        <vue-good-table v-if="this.$gate.isOfficial() || this.$gate.isSubofficial()"
                                         :columns="columns2"
                                         :rows="app"
                                         :line-numbers="true"
@@ -191,7 +191,7 @@
                                     <option value="4">Rejected</option>
                                 </select>
                             </div>
-                            <div class="form-group" v-if="$gate.isOfficial()" >
+                            <div class="form-group" v-if="$gate.isOfficial() || $gate.isSubofficial()" >
                                 <label>Select Type</label>
                                 <select v-model="form.type" class="form-control">
                                     <option selected value="">--Type--</option>
@@ -201,7 +201,7 @@
                                     <option value="4">Rejected</option>
                                 </select>
                             </div>
-                            <div class="form-group" v-if="$gate.isOfficial()">
+                            <div class="form-group" v-if="$gate.isOfficial() || $gate.isSubofficial()">
                                 <label>Select Ward</label>
                                 <select v-model="form.ward" class="form-control">
                                     <option selected value="">--Sort By Ward--</option>
@@ -351,7 +351,7 @@
                         }
                     }
                 }
-                if (this.$gate.isOfficial()) {
+                if (this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     if (!this.form.year && !this.form.ward && !this.form.type) {
                         return this.$store.state.scholar.filter(m => m.recommendation == 'high' || m.recommendation == 'partially')
                     }
@@ -503,7 +503,7 @@
                 }
             },
             getConfYears() {
-                if (this.$gate.isSubadmin() || this.$gate.isOfficial()) {
+                if (this.$gate.isSubadmin() || this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     axios.get('api/sconf_years').then(data => {
                         this.conf = data.data
                     });
@@ -514,7 +514,10 @@
             },
             getMyWards() {
                 if (this.$gate.isOfficial()) {
-                    axios.get('api/mywards/').then(({data}) => ([this.wards = data]));
+                    axios.get('api/mywards').then(({data}) => ([this.wards = data]));
+                }
+                if (this.$gate.isSubofficial()) {
+                    axios.get('api/mywards').then(({data}) => ([this.wards = data]));
                 }
             },
             rejected(){
@@ -529,6 +532,9 @@
             },
             getApplications(){
                 if (this.$gate.isSubadminOrOfficial()) {
+                    axios.get('api/scholarshipApps').then(({data}) => ([this.applications = data]));
+                }
+                if (this.$gate.isSubofficial()) {
                     axios.get('api/scholarshipApps').then(({data}) => ([this.applications = data]));
                 }
             },

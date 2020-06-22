@@ -90,7 +90,7 @@ Route::get('/getMyWard', 'API\UserController@getMyWard');
 Route::get('/getcountyward/{countyId}', 'API\UserController@getCountyWards');
 
 Route::apiResources(['budget' => 'API\BudgetController']);
-Route::get('/getMyWard', 'API\BudgetController@getMyWards');
+Route::get('/getMyWardy', 'API\BudgetController@getMyWards');
 // Route::apiResources(['form' => 'API\FormController']);
 Route::get('/form/{serial}', 'API\FormController@getDetails');
 

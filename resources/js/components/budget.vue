@@ -1,12 +1,12 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isOfficial()">
+        <div class="row mt-5" v-if="$gate.isAdmin() || $gate.isOfficial()">
 
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Wards Budget table</h3>
-                        <div class="card-tools">
+                        <div class="card-tools" v-if="$gate.isAdmin()">
                             <button class="btn btn-success" @click="newModal">Add Budget &nbsp;<i class="fas fa-donate"></i></button>
                         </div>
                     </div>
@@ -19,15 +19,15 @@
                                 <th>Current Balance</th>
                                 <th>Awarded Amount</th>
                                 <th>Budget year</th>
-                                <th>Modify</th>
+                                <th v-if="$gate.isAdmin()">Modify</th>
                             </tr>
                             <tr v-for="budget in budgets" :key="budget.id">
                                 <td>{{budget.name}}</td>
                                 <td>Ksh. {{budget.amount}}</td>
                                 <td>Ksh. {{budget.remaining}}</td>
                                 <td>Ksh. {{budget.amount - budget.remaining}}</td>
-                                <td>{{budget.year}}-{{budget.yearEnd}}</td>
-                                <td>
+                                <td>{{budget.year}}</td>
+                                <td v-if="$gate.isAdmin()">
                                     <a href="#" @click="editModal(budget)" >
                                         <i class="fa fa-edit teal"></i>
                                     </a>
@@ -118,7 +118,7 @@
         },
         methods:{
             getConfYears() {
-                if (this.$gate.isSubadmin() || this.$gate.isOfficial()) {
+                if (this.$gate.isSubadmin() || this.$gate.isAdmin()) {
                     axios.get('api/conf_years').then(data => {
                         this.conf = data.data
                     });
@@ -182,7 +182,7 @@
                 })
             },
             getMyWards(){
-                axios.get("api/getMyWard").then(({ data }) => ([this.wards = data['wards']]));
+                axios.get("api/getMyWardy").then(({ data }) => ([this.wards = data['wards']]));
             },
             getBudget(){
                axios.get("api/budget").then(({data})=>([this.budgets = data['parent']]));

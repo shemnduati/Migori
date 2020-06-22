@@ -33,6 +33,8 @@ class ScholarshipController extends Controller
             return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('ward_id', auth()->user()->ward)->latest()->get();
         } elseif (auth()->user()->role == "official") {
             return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('county', auth()->user()->county)->latest()->get();
+        }elseif (auth()->user()->role == "sub-official") {
+            return Application::where('bursary_type', "scholarship")->where('year', date('Y'))->where('county', auth()->user()->county)->latest()->get();
         }
     }
 

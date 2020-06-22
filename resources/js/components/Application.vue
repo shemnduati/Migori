@@ -31,20 +31,7 @@
                                                     open
                                                     application. Please check again later</small>
                                             </div>
-                                            <div class="col">
-                                                <label>Select Level of Education</label><span
-                                                class="text-danger">&#42;</span>
-                                                <select v-model="form.edu" class="form-control" name="edu"
-                                                        :class="{ 'is-invalid': form.errors.has('edu') }">
-                                                    <option selected value="">--Select Level of Education--</option>
-                                                    <option value="1">Secondary</option>
-                                                    <option value="2">University</option>
-                                                </select>
-                                                <has-error :form="form" field="year"></has-error>
-                                                <small style="color: red" v-if="error && errors.edu">{{
-                                                    errors.edu[0] }}</small>
 
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -609,6 +596,20 @@
                             </section>
                             <section v-if="step==5">
                                 <h3>INSTITUTION AND FEE DETAILS</h3>
+                                <div class="col-md-4">
+                                    <label>Select Level of Education</label><span
+                                    class="text-danger">&#42;</span>
+                                    <select v-model="form.edu" class="form-control" name="edu"
+                                            :class="{ 'is-invalid': form.errors.has('edu') }">
+                                        <option selected value="">--Select Level of Education--</option>
+                                        <option value="1">Secondary</option>
+                                        <option value="2">University</option>
+                                    </select>
+                                    <has-error :form="form" field="year"></has-error>
+                                    <small style="color: red" v-if="error && errors.edu">{{
+                                        errors.edu[0] }}</small>
+
+                                </div>
                                 <div class="form-row" v-if="this.form.edu == 2">
                                     <div class="col">
                                         <div class="form-group">
@@ -1079,11 +1080,6 @@
                             yearz: 'This field is required'
                         })
                         return false;
-                    } else if (!this.form.edu) {
-                        this.form.errors.set({
-                            edu: 'This field is required'
-                        })
-                        return false;
                     } else if (this.enable == 0) {
                         this.watch = 1;
                     } else {
@@ -1304,20 +1300,16 @@
                 }
 
                 if (this.step == 5) {
-                    if (!this.form.iname) {
+                 if (!this.form.edu) {
+                     this.form.errors.set({
+                         edu: 'This field is required'
+                     })
+                     return false;
+
+                 }else if (!this.form.iname) {
                         // set(type, 'required');
                         this.form.errors.set({
                             iname: 'This field is required'
-                        })
-                        return false;
-                    } else if (!this.form.branch) {
-                        this.form.errors.set({
-                            branch: 'This field is required'
-                        })
-                        return false;
-                    } else if (!this.form.class) {
-                        this.form.errors.set({
-                            class: 'This field is required'
                         })
                         return false;
                     } else if (!this.form.year) {

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial()">
+        <div class="row mt-5" v-if="$gate.isSubadminOrOfficial() || $gate.isSubofficial()">
 
             <div class="col-md-12">
                 <div class="card">
@@ -8,7 +8,7 @@
                         <h3 class="card-title">County bursary Information Table</h3>
                         <div class="card-tools">
                             <div class="row">
-                                <div class="col-sm-12" v-if="$gate.isSubadmin() || $gate.isOfficial()">
+                                <div class="col-sm-12" v-if="$gate.isSubadmin() || $gate.isOfficial() || $gate.isSubofficial()">
                                     <button @click="allApp" type="button" class="btn btn-sm btn-info">
                                         Reset
                                     </button>
@@ -50,7 +50,7 @@
                 </span>
                             </template>
                         </vue-good-table>
-                        <vue-good-table v-if="this.$gate.isOfficial()"
+                        <vue-good-table v-if="this.$gate.isOfficial() || this.$gate.isSubofficial() "
                                         :columns="columns2"
                                         :rows="app"
                                         :line-numbers="true"
@@ -118,7 +118,7 @@
                                     <option value="4">Rejected</option>
                                 </select>
                             </div>
-                            <div class="form-group" v-if="$gate.isOfficial()">
+                            <div class="form-group" v-if="$gate.isOfficial() || $gate.isSubofficial() ">
                                 <label>Select Ward</label>
                                 <select v-model="form.ward" class="form-control">
                                     <option selected value="">--Sort By Ward--</option>
@@ -128,7 +128,7 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-group" v-if="$gate.isOfficial()">
+                            <div class="form-group" v-if="$gate.isOfficial()  || $gate.isSubofficial()">
                                 <label>Select Type</label>
                                 <select v-model="form.type" class="form-control">
                                     <option selected value="">--Type--</option>
@@ -268,7 +268,7 @@
 
                 }
 
-                if (this.$gate.isOfficial()) {
+                if (this.$gate.isOfficial() || this.$gate.isSubofficial() ) {
                     if (!this.form.year && !this.form.ward && !this.form.type) {
                         return this.$store.state.bursary.filter(m => m.recommendation == 'Yes' ||
                             m.recommendation == 'Partially')
@@ -454,7 +454,7 @@
                 }
             },
             getConfYears() {
-                if (this.$gate.isSubadmin() || this.$gate.isOfficial()) {
+                if (this.$gate.isSubadmin() || this.$gate.isOfficial() || this.$gate.isSubofficial()) {
                     axios.get('api/conf_years').then(data => {
                         this.conf = data.data
                     });
@@ -465,7 +465,10 @@
             },
             getMyWards() {
                 if (this.$gate.isOfficial()) {
-                    axios.get('api/mywards/').then(({data}) => ([this.wards = data]));
+                    axios.get('api/mywards').then(({data}) => ([this.wards = data]));
+                }
+                if (this.$gate.isSubofficial()) {
+                    axios.get('api/mywards').then(({data}) => ([this.wards = data]));
                 }
             },
             getBursary(type) {
@@ -478,6 +481,9 @@
                 if (this.$gate.isOfficial()) {
                     this.$store.dispatch('getBursaryOfficial');
                 }
+                if (this.$gate.isSubofficial()) {
+                    this.$store.dispatch('getBursaryOfficial');
+                }
             },
             getType() {
                 if (this.$gate.isOfficial()) {
@@ -487,6 +493,9 @@
                     axios.get('api/getstatus/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
                 }
                 if (this.$gate.isOfficial()) {
+                    axios.get('api/gettype/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
+                }
+                if (this.$gate.isSubofficial()) {
                     axios.get('api/gettype/' + this.form.type).then(({data}) => ([this.applications = data['applications']]));
                 }
             }

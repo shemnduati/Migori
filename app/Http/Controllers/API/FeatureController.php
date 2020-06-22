@@ -92,6 +92,9 @@ class FeatureController extends Controller
         if (auth()->user()->role == "official") {
             return Ward::where('county_id', auth()->user()->county)->get();
         }
+        if (auth()->user()->role == "sub-official") {
+            return Ward::where('county_id', auth()->user()->county)->get();
+        }
     }
 
     public function getByWard($id)
