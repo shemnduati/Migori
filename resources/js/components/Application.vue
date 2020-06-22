@@ -31,6 +31,20 @@
                                                     open
                                                     application. Please check again later</small>
                                             </div>
+                                            <div class="col">
+                                                <label>Select Level of Education</label><span
+                                                class="text-danger">&#42;</span>
+                                                <select v-model="form.edu" class="form-control" name="edu"
+                                                        :class="{ 'is-invalid': form.errors.has('edu') }">
+                                                    <option selected value="">--Select Level of Education--</option>
+                                                    <option value="1">Secondary</option>
+                                                    <option value="2">University</option>
+                                                </select>
+                                                <has-error :form="form" field="year"></has-error>
+                                                <small style="color: red" v-if="error && errors.edu">{{
+                                                    errors.edu[0] }}</small>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -490,7 +504,23 @@
                             <section v-if="step==4">
                                 <h3>Geographical Details</h3>
                                 <div class="form-row">
-
+                                    <div class="col">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Constituency</label>
+                                                <select v-model="form.constituency" class="form-control" name="constituency" id="constituency"
+                                                        :class="{ 'is-invalid': form.errors.has('ward') }" @change="getMywards()">
+                                                    <option selected value="">--Select Constituency--</option>
+                                                    <option v-for="con in constituency" :key="con.id" :value="con.id">{{
+                                                        con.Constituency }}
+                                                    </option>
+                                                </select>
+                                                <has-error :form="form" field="constituency"></has-error>
+                                                <small style="color: red" v-if="error && errors.constituency">{{
+                                                    errors.constituency[0] }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="ward">Ward</label>
@@ -506,19 +536,7 @@
                                                 }}</small>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Constituency</label>
-                                                <input v-model="form.constituency" type="text" name="constituency"
-                                                       class="form-control"
-                                                       :class="{ 'is-invalid': form.errors.has('constituency') }">
-                                                <has-error :form="form" field="constituency"></has-error>
-                                                <small style="color: red" v-if="error && errors.constituency">{{
-                                                    errors.constituency[0] }}</small>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
@@ -591,7 +609,7 @@
                             </section>
                             <section v-if="step==5">
                                 <h3>INSTITUTION AND FEE DETAILS</h3>
-                                <div class="form-row">
+                                <div class="form-row" v-if="this.form.edu == 2">
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Name of Institution</label><span class="text-danger">&#42;</span>
@@ -631,6 +649,30 @@
                                             <input v-model="form.year" type="number" name="year" min="1" max="6"
                                                    step="1" class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('year') }">
+                                            <has-error :form="form" field="year"></has-error>
+                                            <small style="color: red" v-if="error && errors.year">{{ errors.year[0]
+                                                }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row" v-if="this.form.edu ==1">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Name of Secondary School</label><span class="text-danger">&#42;</span>
+                                            <input v-model="form.iname" type="text" name="iname"
+                                                   class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('iname') }">
+                                            <has-error :form="form" field="iname"></has-error>
+                                            <small style="color: red" v-if="error && errors.iname">{{ errors.iname[0]
+                                                }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Current Class</label><span class="text-danger">&#42;</span>
+                                            <input v-model="form.year" type="text" name="class" min="1" max="6"
+                                                   step="1" class="form-control"
+                                                   :class="{ 'is-invalid': form.errors.has('class') }">
                                             <has-error :form="form" field="year"></has-error>
                                             <small style="color: red" v-if="error && errors.year">{{ errors.year[0]
                                                 }}</small>
@@ -770,9 +812,11 @@
                 step: 1,
                 counties: {},
                 wards: {},
+                constituency:{},
                 info: {},
                 loading: false,
                 watch: 0,
+                school:0,
                 yearz: [],
                 passport: [],
                 motherId: [],
@@ -791,6 +835,7 @@
                 form: new Form({
                     type: 'County',
                     firstName: '',
+                    edu:'',
                     middleName: '',
                     lastName: '',
                     dob: '',
@@ -1032,6 +1077,11 @@
                     if (!this.form.yearz) {
                         this.form.errors.set({
                             yearz: 'This field is required'
+                        })
+                        return false;
+                    } else if (!this.form.edu) {
+                        this.form.errors.set({
+                            edu: 'This field is required'
                         })
                         return false;
                     } else if (this.enable == 0) {
@@ -1310,11 +1360,17 @@
             getCountyWards() {
                 axios.get("api/getcountywards/" + this.form.county).then(({data}) => ([this.wards = data['wards']]));
             },
+            getCountyConstituency() {
+                axios.get("api/getcountyCon/" + this.form.county).then(({data}) => ([this.constituency = data['constituency']]));
+            },
             getDetails() {
                 axios.get("api/getdetails").then(({data}) => ([this.info = data['user']]));
             },
             getApplication() {
                 axios.get("api/getApplicationYears/" + this.form.county).then(({data}) => ([this.yearz = data['year']]));
+            },
+            getMywards(){
+                axios.get("api/getWards/" + this.form.constituency).then(({data}) => ([this.wards = data['wards']]));
             },
 
         },
@@ -1331,7 +1387,7 @@
             this.getCounties();
             this.getDetails();
             this.getApplication();
-            this.getCountyWards();
+            this.getCountyConstituency();
         }
     }
 </script>

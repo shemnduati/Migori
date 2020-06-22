@@ -50,7 +50,19 @@ class ApplicationController extends Controller
 
         return ['wards' => $wards];
     }
+    public function getConWards($countyId)
+    {
+        $con = Ward::where('id', $countyId)->value('Constituency');
+        $wards = Ward::where('Constituency',$con)->get();
+        return ['wards' => $wards];
+    }
+    public function getcountyCon($countyId)
+    {
+        $wards = Ward::where('county_id', $countyId)->get();
+        $constituency = $wards->unique('Constituency');
 
+        return ['constituency' =>  $constituency];
+    }
     /**
      * Store a newly created resource in storage.
      *

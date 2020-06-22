@@ -238,8 +238,8 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{dash['totalAwarded']}}</h3>
-                                <span>Total Awarded</span><br>
-                                <span>County Bursary</span>
+                                <span>Total Reccomended</span><br>
+                                <span>Bursary</span>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-graduation-cap white"></i>

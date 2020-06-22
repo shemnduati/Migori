@@ -42,6 +42,8 @@ Route::get('/getwards', 'API\ApplicationController@getWards');
 Route::get('/getdetails', 'API\ApplicationController@getDetails');
 Route::get('/getappdetails/{applicationId}', 'API\ApplicationController@show');
 Route::get('/getcountywards/{countyId}', 'API\ApplicationController@getCountyWards');
+Route::get('/getWards/{countyId}', 'API\ApplicationController@getConWards');
+Route::get('/getcountyCon/{countyId}', 'API\ApplicationController@getcountyCon');
 Route::put('/accept/{applicantId}', 'API\ApplicationController@accept');
 Route::put('/reject/{applicantId}', 'API\ApplicationController@reject');
 Route::put('/send/{applicantId}', 'API\ApplicationController@send');
