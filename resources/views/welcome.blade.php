@@ -35,10 +35,10 @@
                 <div class="col-12 col-lg-6 flex align-content-center mt-5 mt-lg-0">
                     <div class="ezuca-video position-relative">
                         <div class="video-play-btn position-absolute">
-                            {{-- <img src="images/happy.jpg" alt=""> --}}
+                            {{-- <img src="images/happy.jpg" alt="" style="border-radius: 8px;"> --}}
                         </div><!-- .video-play-btn -->
 
-                        <img src="images/happy.jpg" alt="">
+                        <img src="images/happy.jpg" alt="" style="border-radius: 8px;" >
                     </div><!-- .ezuca-video -->
                 </div><!-- .col -->
             </div><!-- .row -->

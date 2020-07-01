@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Middle Name</label><span class="text-danger">&#42;</span>
+                                            <label>Middle Name</label>
                                             <input v-model="form.middleName" type="text" name="middleName"
                                                    class="form-control"
                                                    :class="{ 'is-invalid': form.errors.has('middleName') }">
@@ -1092,11 +1092,6 @@
                     if (!this.form.firstName) {
                         this.form.errors.set({
                             firstName: 'This field is required'
-                        })
-                        return false;
-                    } else if (!this.form.middleName) {
-                        this.form.errors.set({
-                            middleName: 'This field is required'
                         })
                         return false;
                     } else if (!this.form.lastName) {

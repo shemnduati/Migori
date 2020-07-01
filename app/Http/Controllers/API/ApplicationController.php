@@ -75,7 +75,6 @@ class ApplicationController extends Controller
             'year' => 'required',
             'type' => 'required',
             'firstName' => 'required|string',
-            'middleName' => 'required|string',
             'lastName' => 'required|string',
             'dob' => 'required|date',
             'email' => 'required|email',
