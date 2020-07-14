@@ -29,13 +29,6 @@
                             <li><a href="{{ route('privacy') }}">TERMS OF USE </a></li>
                             <li><a href="{{ route('privacy') }}">PRIVACY POLICY </a></li>
                         </ul>
-
-                        {{--<ul class="w-50">
-                            <li><a href="#">Documentation</a></li>
-                            <li><a href="#">Forums</a></li>
-                            --}}{{-- <li><a href="#">Language Packs</a></li> --}}{{--
-                            <li><a href="#">Release Status</a></li>
-                        </ul>--}}
                     </div><!-- .quick-links -->
                 </div><!-- .col -->
 
@@ -57,6 +50,7 @@
 
     <div class="footer-bar">
         <div class="container">
+            © 2020 Migori County Government.
         </div><!-- .container -->
     </div><!-- .footer-bar -->
 </footer><!-- .site-footer -->
